@@ -73,6 +73,8 @@ def main() -> int:
         return 1
     header = ("-- İstanbul pilot listesi: proje sahibinin onayladığı yerler (2026-11-19).\n"
               "-- Üreten: data-pipeline/content/build_istanbul.py — elle düzenleme; script'i yeniden çalıştır.\n")
+    # Migration'lar zaten işlem bloğunda çalışır; iç begin/commit kaldırılır.
+    sql = "\n".join(line for line in sql.splitlines() if line.strip() not in ("begin;", "commit;")) + "\n"
     OUT.write_text(header + sql, encoding="utf-8")
     print(f"{stats['written']} yer ({stats['publishable']} yayında), {len(areas)} alan -> {OUT.relative_to(ROOT)}")
     return 0
