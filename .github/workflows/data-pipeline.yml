@@ -1,0 +1,56 @@
+# Veri hattını GitHub'ın sunucularında çalıştırır; kimsenin bilgisayarına Python kurması gerekmez.
+# Tetikleme: data-pipeline/run-request.txt dosyası değişip main'e yüklendiğinde
+# ya da GitHub'da Actions -> "Veri hattı" -> "Run workflow" ile.
+# Sonuç: data-pipeline/results/ klasörüne candidates.csv ve areas.json olarak commit'lenir.
+name: Veri hattı
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [data-pipeline/run-request.txt]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: data-pipeline
+  cancel-in-progress: false
+
+jobs:
+  candidates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Testler
+        run: python -m unittest discover -s data-pipeline/tests
+
+      - name: OSM ve Wikidata'dan indir
+        run: python data-pipeline/pipeline.py --out data-pipeline/output fetch
+
+      - name: Aday listesini üret
+        run: python data-pipeline/pipeline.py --out data-pipeline/output candidates
+
+      - name: Sonuçları kaydet
+        run: |
+          mkdir -p data-pipeline/results
+          cp data-pipeline/output/candidates.csv data-pipeline/output/areas.json data-pipeline/results/
+          python - <<'PY'
+          import json, pathlib
+          osm = json.loads(pathlib.Path("data-pipeline/output/osm_raw.json").read_text(encoding="utf-8"))
+          wd = json.loads(pathlib.Path("data-pipeline/output/wikidata.json").read_text(encoding="utf-8"))
+          pathlib.Path("data-pipeline/results/run-info.txt").write_text(
+              f"osm_elements={len(osm.get('elements', []))}\nwikidata_entities={len(wd)}\n", encoding="utf-8")
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data-pipeline/results
+          git commit -m "Veri hattı: aday listesi güncellendi" || echo "Değişiklik yok"
+          git pull --rebase
+          git push

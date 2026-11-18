@@ -4,7 +4,15 @@ Sahibi: Claude. İstanbul'daki tarihi-kültürel ve doğa/manzara yerlerini Open
 
 Yalnızca Python gerekir (3.9 veya üstü), başka kurulum yok. İnternete eriştiği için **kendi bilgisayarında** çalıştırılır.
 
-## Adımlar
+## Kod bilmeden: GitHub'da çalıştırma
+
+Hiçbir şey kurmana gerek yok. Veri hattı GitHub'ın sunucularında çalışır (`.github/workflows/data-pipeline.yml`):
+
+- Claude `run-request.txt` dosyasını güncelleyip yüklediğinde ya da sen GitHub'da **Actions → Veri hattı → Run workflow** butonuna bastığında başlar.
+- 5-10 dakika sonra sonuç `data-pipeline/results/candidates.csv` olarak depoya eklenir.
+- Onay işini sohbette Claude ile birlikte yaparsın. SQL'i Claude üretir, sen yalnızca Supabase'e yapıştırırsın.
+
+## Adımlar (kendi bilgisayarında çalıştırmak istersen)
 
 Bu klasörde bir terminal aç. Windows'ta `python` yerine `py` yazman gerekebilir.
 
