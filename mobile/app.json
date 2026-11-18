@@ -12,6 +12,7 @@
       "package": "app.gezi.kesif"
     },
     "plugins": [
+      ["expo-sensors", {"motionPermission":"Telefonu eğdiğinde tarihi yer etiketlerini kamera görüntüsünde hizala."}],
       ["expo-camera", {"cameraPermission":"Çevrendeki tarihi yerlerin yönünü kamera görüntüsünde göster.", "recordAudioAndroid":false}],
       [
         "expo-location",

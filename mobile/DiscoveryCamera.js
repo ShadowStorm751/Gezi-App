@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {AppState, BackHandler, Linking, Pressable, StyleSheet, Text, View} from 'react-native';
 import {CameraView, useCameraPermissions} from 'expo-camera';
+import {DeviceMotion} from 'expo-sensors';
 import * as Location from 'expo-location';
-import {cameraMarkers, cameraTargets} from './geo';
+import {cameraMarkers, cameraTargets, rearCameraPitch, edgeHints, edgeArrows} from './geo';
 
 function Control({children, onPress}) {
   return <Pressable accessibilityRole="button" onPress={onPress} style={styles.control}>
@@ -18,7 +19,25 @@ export default function DiscoveryCamera({places, trackedId, onStopTracking, onSe
   const [issue, setIssue] = useState('');
   const [lensError, setLensError] = useState(false);
   const [retry, setRetry] = useState(0);
-  const [width, setWidth] = useState(0);
+  const [{width,height}, setSize] = useState({width:0,height:0});
+  const [pitch, setPitch] = useState(null);
+  const motionEnabled = active && permission?.granted && !!coords && !lensError;
+  useEffect(() => {
+    let closed = false;
+    let subscription;
+    setPitch(null);
+    async function watchTilt() {
+      if (!motionEnabled || !(await DeviceMotion.isAvailableAsync()) || closed) return;
+      const access = await DeviceMotion.requestPermissionsAsync();
+      if (closed || !access.granted) return;
+      DeviceMotion.setUpdateInterval(80);
+      subscription = DeviceMotion.addListener(({rotation}) => {
+        if (!closed) setPitch(rearCameraPitch(rotation));
+      });
+    }
+    watchTilt().catch(() => { if (!closed) setPitch(null); });
+    return () => { closed = true; subscription?.remove(); };
+  }, [motionEnabled]);
 
   useEffect(() => {
     const sub = AppState.addEventListener('change', state => setActive(state === 'active'));
@@ -61,7 +80,8 @@ export default function DiscoveryCamera({places, trackedId, onStopTracking, onSe
   }, [active, permission?.granted, retry]);
 
   const targets = cameraTargets(places, coords, heading);
-  const visible = cameraMarkers(targets, trackedId);
+  const aspect = height > 0 ? width / height : 0.6;
+  const visible = cameraMarkers(targets, trackedId, pitch ?? 0, aspect);
   const trackedPlace = places.find(place => place.id === trackedId);
   const closest = targets[0];
   let hint = 'Baloncuğa dokunarak yerin hikâyesini aç.';
@@ -70,11 +90,14 @@ export default function DiscoveryCamera({places, trackedId, onStopTracking, onSe
   else if (!coords) hint = 'Konum bekleniyor…';
   else if (heading === null) hint = 'Pusula bekleniyor. Telefonu dik tutup yavaşça çevir.';
   else if (trackedPlace && !visible.length) hint = trackedPlace.name + ' 2 km’lik keşif alanının dışında.';
-  else if (visible[0]?.edge) hint = visible[0].edge === 'left' ? 'Hedefi görmek için sola dön.' : 'Hedefi görmek için sağa dön.';
+  else if (visible[0]?.edge) hint = 'Hedefi görmek için ' + edgeHints[visible[0].edge] + '.';
   else if (!closest) hint = '2 km içinde pilot yer bulunamadı. İlk iki durak Galata’da.';
-  else if (!visible.length) hint = closest.name + ' için ' + (closest.angle < 0 ? 'sola' : 'sağa') + ' dön.';
+  else if (!visible.length) {
+    const [guide] = cameraMarkers(targets, closest.id, pitch ?? 0, aspect);
+    hint = closest.name + ' için ' + edgeHints[guide.edge] + '.';
+  }
   const bubbleWidth = Math.min(208, Math.max(0, width - 24));
-  return <View style={styles.screen} onLayout={e => setWidth(e.nativeEvent.layout.width)}>
+  return <View style={styles.screen} onLayout={e => setSize(e.nativeEvent.layout)}>
     {active && permission?.granted && !lensError &&
       <CameraView style={StyleSheet.absoluteFill} facing="back" onMountError={() => setLensError(true)}/>}
     <View style={styles.top}>
@@ -91,13 +114,15 @@ export default function DiscoveryCamera({places, trackedId, onStopTracking, onSe
       {width > 0 && visible.map((place, i) => {
         const left = Math.max(8, Math.min(width - bubbleWidth - 8, width * place.fraction - bubbleWidth / 2));
         return <Pressable accessibilityRole="button" key={place.id} onPress={() => onSelect(place)}
-          style={[styles.bubble, {left, width:bubbleWidth, top:i === 0 ? '39%' : '56%'}]}>
-          <Text style={styles.place}>{place.edge === 'left' ? '‹ ' : ''}{place.name}{place.edge === 'right' ? ' ›' : ''}</Text>
+          style={[styles.bubble, {left, width:bubbleWidth,
+            top: (17 + 43 * place.vertical + (visible.length > 1 ? i * 13 : 0)) + '%'}]}>
+          <Text style={styles.place}>{place.edge ? edgeArrows[place.edge] + ' ' : ''}{place.name}</Text>
           <Text style={styles.light}>{Math.round(place.distance)} m</Text>
         </Pressable>;
       })}
       <View style={styles.bottom}>
         <Text style={styles.light}>{hint}</Text>
+        {pitch === null && !!coords && <Text style={styles.light}>Eğim verisi yok · Yatay takip açık</Text>}
         {!!trackedId && <Control onPress={onStopTracking}>Takibi bırak</Control>}
         {!!issue && <Control onPress={() => setRetry(n => n + 1)}>Yeniden dene</Control>}
         {!!issue && <Control onPress={() => Linking.openSettings()}>Ayarları aç</Control>}

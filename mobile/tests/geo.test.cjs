@@ -2,8 +2,29 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const {distanceMeters, bearingDegrees, relativeDirection} = require('../geo');
 const tower = require('../places.json')[0].coordinate;
-const {cameraMarkers, cameraTargets} = require('../geo');
+const {cameraMarkers, cameraTargets, rearCameraPitch} = require('../geo');
 const places = require('../places.json');
+
+test('Arka kamera dik tutulduğunda ufka, ekran yukarı bakarken yere yönelir', () => {
+  assert.ok(Math.abs(rearCameraPitch({beta:Math.PI / 2, gamma:0})) < 1e-8);
+  assert.equal(rearCameraPitch({beta:0, gamma:0}), -90);
+  assert.equal(rearCameraPitch({beta:0, gamma:Math.PI}), 90);
+  assert.equal(rearCameraPitch(null), null);
+  assert.equal(rearCameraPitch({beta:NaN, gamma:0}), null);
+});
+
+test('Eğim, yön ve mesafe sabitken baloncuğu kaydırır ve dikey kenar takibini korur', () => {
+  const origin = {latitude:tower.latitude - 0.009, longitude:tower.longitude};
+  const targets = cameraTargets(places, origin, 0);
+  const at = pitch => cameraMarkers(targets, places[0].id, pitch, 0.55)[0];
+  assert.ok(at(-15).vertical < at(0).vertical && at(15).vertical > at(0).vertical);
+  assert.equal(at(0).vertical, 0.5);
+  assert.equal(at(80).edge, 'bottom');
+  assert.equal(at(-80).edge, 'top');
+  assert.equal(at(80).distance, at(0).distance);
+  assert.deepEqual(cameraMarkers(targets, null, 80, 0.55), []);
+  assert.equal(at(0).edge, null);
+});
 
 test('Takip edilen ikinci yer kadraj dışındayken doğru kenarda kalır', () => {
   const street = {latitude:tower.latitude - 0.009, longitude:tower.longitude};

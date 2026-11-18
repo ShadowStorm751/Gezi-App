@@ -39,15 +39,42 @@ function cameraTargets(places, origin, heading, radius = 2000, fieldOfView = 60)
 
 // Free exploration shows every visible place. A tracked place keeps its own
 // marker at the nearest screen edge when the user looks away.
-function cameraMarkers(targets, trackedId) {
+function rearCameraPitch(rotation) {
+  if (!Number.isFinite(rotation?.beta) || !Number.isFinite(rotation?.gamma)) return null;
+  // Rear lens looks along -Z. The vertical component is independent of yaw.
+  const vertical = -Math.cos(rotation.beta) * Math.cos(rotation.gamma);
+  return Math.asin(Math.max(-1, Math.min(1, vertical))) * 180 / Math.PI;
+}
+
+const edgeHints = {
+  left: 'sola dön', right: 'sağa dön', top: 'telefonu yukarı kaldır', bottom: 'telefonu aşağı indir'
+};
+const edgeArrows = {left: '‹', right: '›', top: '↑', bottom: '↓'};
+
+function cameraMarkers(targets, trackedId, pitch = 0, aspect = 0.6) {
+  // Places have no altitude yet. Their directional anchors lie on the horizon.
+  const tilt = radians(Math.max(-90, Math.min(90, pitch)));
+  const scale = 2 * Math.tan(radians(30));
+  const horizon = 0.5 + Math.tan(tilt) * aspect / scale;
   return targets.flatMap(target => {
     const tracked = target.id === trackedId;
     if (trackedId && !tracked) return [];
-    if (target.visible) return [{...target, edge: null}];
-    if (!tracked) return [];
-    const left = target.angle < 0;
-    return [{...target, edge: left ? 'left' : 'right', fraction: left ? 0 : 1}];
+    let x = target.fraction;
+    let edge = null;
+    if (!target.visible) {
+      edge = target.angle < 0 ? 'left' : 'right';
+      x = target.angle < 0 ? 0 : 1;
+    } else {
+      x = 0.5 + (x - 0.5) / Math.max(0.0001, Math.cos(tilt));
+      if (horizon < 0) edge = 'top';
+      else if (horizon > 1) edge = 'bottom';
+      else if (x < 0 || x > 1) edge = x < 0 ? 'left' : 'right';
+    }
+    if (edge && !tracked) return [];
+    return [{...target, edge, fraction: Math.max(0, Math.min(1, x)),
+      vertical: Math.max(0, Math.min(1, horizon))}];
   });
 }
 
-module.exports = { distanceMeters, bearingDegrees, relativeDirection, cameraTargets, cameraMarkers };
+module.exports = { distanceMeters, bearingDegrees, relativeDirection, cameraTargets, cameraMarkers,
+  rearCameraPitch, edgeHints, edgeArrows };

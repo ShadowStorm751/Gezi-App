@@ -10,9 +10,9 @@ Node.js 22 ve npm bulunan bir ortamda `mobile` dizininde `npm install`, ardında
 
 ## Kamera ve tarayıcı denemesi
 
-Bilgisayarda Gezi-Test.html dosyasını açıp **Kamera demosunu aç** düğmesine bas. Başlangıç noktası kulenin yaklaşık 1 km güneyinde. Bakış yönü sürgüsüyle iki hedefi kadraja al, bir baloncuğa basıp yer kartını aç. **Kuleye yönel** bakış yönünü sıfırlar. Bu deneme kamera veya konum izni istemez.
+Bilgisayarda Gezi-Test.html dosyasını açıp **Kamera demosunu aç** düğmesine bas. Başlangıç noktası kulenin yaklaşık 1 km güneyinde. Bakış yönü ve telefon eğimi sürgüleriyle iki hedefi kadraja al, bir baloncuğa basıp yer kartını aç. **Kuleye yönel** bakış yönünü sıfırlar. Bu deneme kamera veya konum izni istemez.
 
-Mobil uygulamada **Kamerayla keşfet** arka kamerayı açar. Canlı mod cihaz konumunu ve pusulayı kullanır. Pilot kataloğundaki 2 km içindeki yerlerin yatay yönü, başlangıçta varsayılan 60° yatay görüş açısıyla hesaplanır. Hedefin görünürlüğünü binalar engellemez. Etiketler iki ayrı yükseklikte yerleştirilir. Dikey eğim ve gerçek lens görüş açısı saha kalibrasyonuna bırakıldı. Konum ve pusula takibi kamera ekranı kapanınca durur. Fiziksel cihazda izin verme, izin reddi, kuzey geçişi, arka plana alma ve dar sokakta yön sapması kontrol edilmelidir.
+Mobil uygulamada **Kamerayla keşfet** arka kamerayı açar. Canlı mod cihaz konumunu ve pusulayı kullanır. Pilot kataloğundaki 2 km içindeki yerlerin yatay yönü, başlangıçta varsayılan 60° yatay görüş açısıyla hesaplanır. Hedefin görünürlüğünü binalar engellemez. Etiketler iki ayrı yükseklikte yerleştirilir. Dikey takip için telefonun hareket sensörü kullanılır. Yer yükseklikleri henüz katalogda bulunmadığından baloncuklar yaklaşık ufuk hizasını izler. Kamera düzeltmeleri gerçek cihazda kalibre edilecek. Konum ve pusula takibi kamera ekranı kapanınca durur. Fiziksel cihazda izin verme, izin reddi, kuzey geçişi, arka plana alma ve dar sokakta yön sapması kontrol edilmelidir.
 
 ## Pilot verisi
 
