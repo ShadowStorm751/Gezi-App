@@ -1,0 +1,39 @@
+# Onaylı yerlerin Wikimedia Commons fotoğraf bilgilerini (adres, yazar, lisans) toplar.
+# Tetikleme: data-pipeline/photos-request.txt değişip main'e yüklenince ya da elle.
+# Sonuç: data-pipeline/results/photos.json olarak commit'lenir.
+name: Yer fotoğrafları
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [data-pipeline/photos-request.txt]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: data-pipeline
+  cancel-in-progress: false
+
+jobs:
+  photos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Testler
+        run: python -m unittest discover -s data-pipeline/tests
+      - name: Fotoğraf bilgilerini topla
+        run: python data-pipeline/photos.py
+      - name: Sonucu kaydet
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data-pipeline/results/photos.json
+          git commit -m "Veri hattı: yer fotoğrafları güncellendi" || echo "Değişiklik yok"
+          git pull --rebase
+          git push
