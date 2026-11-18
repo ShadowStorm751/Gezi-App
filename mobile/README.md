@@ -1,23 +1,16 @@
-# Mobil uygulama (React Native)
+# Gezi App mobil
 
-Sahibi: ChatGPT. Henüz boş; uygulama bu klasörde kurulacak.
+React Native / Expo ile İstanbul keşfi. Harita ve kamera aynı WGS84 koordinatlarını kullanır. Dil, cihazın diline göre TR veya EN olur.
 
-## Backend'e bağlanmak için bilmen gerekenler
+## Çalıştırma
 
-- Sözleşme: [`../docs/API.md`](../docs/API.md). Fonksiyon adları ve parametreleri birebir oradaki gibi.
-- İstemci: `@supabase/supabase-js` v2, oturum için `@react-native-async-storage/async-storage`.
-- Ortam değişkenleri (`mobile/.env`, repoya girmez):
+Node 22.13 veya üzeri ve npm ile bu klasörde `npm install`, ardından `npx expo start` çalıştır. SDK 54 uyumlu istemci veya geliştirme derlemesi kullan. Kamera ve pusula testi fiziksel cihaz gerektirir. `npm test` konum hesaplarını ve API yanıtlarının işlenmesini sınar.
 
-  ```
-  EXPO_PUBLIC_SUPABASE_URL=https://<proje-ref>.supabase.co
-  EXPO_PUBLIC_SUPABASE_ANON_KEY=<anon public key>
-  ```
+## Veri kaynağı
 
-  Değerleri proje sahibi verecek. Örnek dosya olarak `.env.example` ekleyebilirsin (değerler boş).
-- Her çağrıda `lang: "tr" | "en"` gönder (cihaz dili).
-- Açılışta `city_pack` ile şehrin yerlerini indir ve sakla; harita ve geo-AR bu yerel veriyle çalışsın.
-- Geo-AR: `nearby_places` her yer için `bearing_deg` (kuzeyden saat yönünde) ve `distance_m` verir. Yerel pakette çalışıyorsan aynı hesabı cihazda yap.
-- Check-in: `supabase.functions.invoke("checkin", ...)`. Beklenen retler HTTP 200 + `ok: false` ile gelir; hata kodları ve önerilen mesajlar API.md'de.
-- OSM tabanlı harita kullanırsan ekranda "© OpenStreetMap katkıcıları" atfı zorunlu.
+İki ortam değişkeni de boşken iki yerlik Galata demosu açılır. Supabase için `.env.example` dosyasını `.env` olarak kopyala, proje URL’sini ve public anon key’i kendi cihazında girip Expo’yu yeniden başlat. Telefon yerel Supabase kullanıyorsa URL bilgisayarın telefondan erişilebilen ağ adresi olmalıdır. Şema ve seed hazırlığı için [backend kurulumuna](../backend/README.md) bak.
 
-Backend'den bir şey lazım olursa [`../docs/REQUESTS.md`](../docs/REQUESTS.md) dosyasına yaz.
+- Açılışta kayıtlı İstanbul paketi hemen gösterilir. `city_pack` yanıtı proje ve dile göre ayrı saklanır. İlk çevrimiçi yüklemeden sonra harita ve kamera yerleri çevrimdışı kullanabilir. Harita karolarının çevrimdışı indirilmesi ayrı bir özelliktir.
+- **Konumumu kullan** cihaz konumunu alır ve 2 km içindeki yerleri `nearby_places` ile günceller. Hata olursa ekran kayıtlı katalogdan mesafeleri hesaplar. Kamera dönerken RPC çağrılmaz.
+- Haritadan veya baloncuktan seçim aynı `place_detail` isteğini açar. Bağlantı kesilirse kısa açıklama erişilebilir kalır.
+- Giriş ve ziyaret kaydetme sonraki adımdır. Check-in doğrulaması [API sözleşmesindeki](../docs/API.md) Edge Function’a aittir.

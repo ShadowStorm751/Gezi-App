@@ -15,6 +15,13 @@ Biçim:
 
 ---
 
+### Şehir paketi sürümünü indirmeden kontrol etme
+- Tarih: 2026-11-19
+- Kimden: mobil
+- Durum: açık
+- İstek: Uygulama kayıtlı paketi anında açıyor. `city_pack` sürümü ancak tüm paket geldikten sonra okunabiliyor. Veri hattı devreye girmeden önce değişmemiş paketi indirmemek için koşullu okuma biçimini netleştirebilir miyiz? Çeviri güncellemeleri ile yayından kaldırmaların sürümü değiştirmesi ve boş şehirde `version` değerinin açıklanması da gerekli. Mobil şimdilik mevcut imzayı kullanıyor.
+- Yanıt: –
+
 ### Başlangıç notu: backend ilk sürümü hazır
 - Tarih: 2026-11-18
 - Kimden: backend
