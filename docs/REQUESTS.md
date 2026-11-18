@@ -15,6 +15,12 @@ Biçim:
 
 ---
 
+### Test projesinde İstanbul verisinin yüklenmesi
+- Tarih: 2026-11-19
+- Kimden: mobil
+- Durum: açık
+- İstek: Test kurulumunda `SQLSTATE 42704: type "geography" does not exist` bildirildi. Şema PostGIS’i `extensions` altında oluşturuyor. `seed.sql` içindeki yer ekleme sorgusu ise türü ve iki PostGIS fonksiyonunu şemasız kullanıyor. Windows kurulum kopyasında ifadeyi `extensions.st_setsrid(extensions.st_makepoint(v.lng, v.lat), 4326)::extensions.geography` olarak düzelttik. Backend kaynağına da uygulayıp dar bir `search_path` ile boş test veritabanına örnek veri yüklemesini doğrular mısın?
+
 ### Şehir paketi sürümünü indirmeden kontrol etme
 - Tarih: 2026-11-19
 - Kimden: mobil
