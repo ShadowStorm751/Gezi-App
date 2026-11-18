@@ -1,0 +1,271 @@
+{
+ "elements": [
+  {
+   "type": "node",
+   "id": 1,
+   "lat": 41.0162,
+   "lon": 28.9639,
+   "tags": {
+    "amenity": "place_of_worship",
+    "religion": "muslim",
+    "name": "Süleymaniye Camii",
+    "name:en": "Süleymaniye Mosque",
+    "wikidata": "Q900001"
+   }
+  },
+  {
+   "type": "way",
+   "id": 2,
+   "bounds": {
+    "minlat": 41.0155,
+    "minlon": 28.963,
+    "maxlat": 41.017,
+    "maxlon": 28.9648
+   },
+   "geometry": [
+    {
+     "lat": 41.0154,
+     "lon": 28.963099999999997
+    },
+    {
+     "lat": 41.0154,
+     "lon": 28.9647
+    },
+    {
+     "lat": 41.016999999999996,
+     "lon": 28.9647
+    },
+    {
+     "lat": 41.016999999999996,
+     "lon": 28.963099999999997
+    },
+    {
+     "lat": 41.0154,
+     "lon": 28.963099999999997
+    }
+   ],
+   "tags": {
+    "amenity": "place_of_worship",
+    "religion": "muslim",
+    "name": "Süleymaniye Camii",
+    "wikidata": "Q900001"
+   }
+  },
+  {
+   "type": "way",
+   "id": 3,
+   "geometry": [
+    {
+     "lat": 41.15,
+     "lon": 28.945
+    },
+    {
+     "lat": 41.15,
+     "lon": 29.005000000000003
+    },
+    {
+     "lat": 41.21,
+     "lon": 29.005000000000003
+    },
+    {
+     "lat": 41.21,
+     "lon": 28.945
+    },
+    {
+     "lat": 41.15,
+     "lon": 28.945
+    }
+   ],
+   "tags": {
+    "landuse": "forest",
+    "name": "Belgrad Ormanı",
+    "wikidata": "Q900003"
+   }
+  },
+  {
+   "type": "relation",
+   "id": 4,
+   "bounds": {
+    "minlat": 40.84,
+    "minlon": 29.1,
+    "maxlat": 40.88,
+    "maxlon": 29.14
+   },
+   "tags": {
+    "place": "island",
+    "name": "Büyükada",
+    "wikidata": "Q900004"
+   },
+   "members": [
+    {
+     "type": "way",
+     "ref": 41,
+     "role": "outer",
+     "geometry": [
+      {
+       "lat": 40.839999999999996,
+       "lon": 29.1
+      },
+      {
+       "lat": 40.839999999999996,
+       "lon": 29.14
+      },
+      {
+       "lat": 40.88,
+       "lon": 29.14
+      },
+      {
+       "lat": 40.88,
+       "lon": 29.1
+      },
+      {
+       "lat": 40.839999999999996,
+       "lon": 29.1
+      }
+     ]
+    },
+    {
+     "type": "way",
+     "ref": 42,
+     "role": "inner",
+     "geometry": [
+      {
+       "lat": 40.859,
+       "lon": 29.119
+      },
+      {
+       "lat": 40.859,
+       "lon": 29.121000000000002
+      },
+      {
+       "lat": 40.861,
+       "lon": 29.121000000000002
+      },
+      {
+       "lat": 40.861,
+       "lon": 29.119
+      },
+      {
+       "lat": 40.859,
+       "lon": 29.119
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "type": "node",
+   "id": 5,
+   "lat": 41.0536,
+   "lon": 28.9337,
+   "tags": {
+    "tourism": "viewpoint",
+    "name": "Pierre Loti Tepesi"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6,
+   "lat": 41.01,
+   "lon": 28.97,
+   "tags": {
+    "historic": "fountain",
+    "name": "Örnek Çeşmesi"
+   }
+  },
+  {
+   "type": "node",
+   "id": 7,
+   "lat": 41.02,
+   "lon": 28.98,
+   "tags": {
+    "tourism": "viewpoint"
+   }
+  },
+  {
+   "type": "node",
+   "id": 8,
+   "lat": 41.0086,
+   "lon": 28.9733,
+   "tags": {
+    "historic": "building",
+    "name": "Şerefiye Sarnıcı"
+   }
+  },
+  {
+   "type": "node",
+   "id": 9,
+   "lat": 41.03,
+   "lon": 28.99,
+   "tags": {
+    "historic": "monument",
+    "name": "Örnek Anıtı"
+   }
+  },
+  {
+   "type": "node",
+   "id": 10,
+   "lat": 41.0302,
+   "lon": 28.9902,
+   "tags": {
+    "historic": "memorial",
+    "name": "Örnek Anıtı"
+   }
+  },
+  {
+   "type": "relation",
+   "id": 11,
+   "bounds": {
+    "minlat": 41.08,
+    "minlon": 29.05,
+    "maxlat": 41.09,
+    "maxlon": 29.06
+   },
+   "tags": {
+    "historic": "castle",
+    "name": "Rumeli Hisarı",
+    "name:en": "Rumelian Castle",
+    "wikidata": "Q900011"
+   },
+   "members": [
+    {
+     "type": "way",
+     "ref": 111,
+     "role": "outer",
+     "geometry": [
+      {
+       "lat": 41.08,
+       "lon": 29.05
+      },
+      {
+       "lat": 41.09,
+       "lon": 29.06
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "type": "node",
+   "id": 12,
+   "lat": 41.0115,
+   "lon": 28.9834,
+   "tags": {
+    "tourism": "museum",
+    "historic": "palace",
+    "name": "Topkapı Sarayı",
+    "wikidata": "Q900012"
+   }
+  },
+  {
+   "type": "node",
+   "id": 13,
+   "lat": 41.0,
+   "lon": 29.0,
+   "tags": {
+    "shop": "bakery",
+    "name": "Fırın"
+   }
+  }
+ ]
+}

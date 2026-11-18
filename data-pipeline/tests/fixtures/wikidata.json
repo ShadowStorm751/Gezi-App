@@ -1,0 +1,896 @@
+{
+ "Q900001": {
+  "id": "Q900001",
+  "labels": {
+   "tr": {
+    "value": "Süleymaniye Camii"
+   },
+   "en": {
+    "value": "Süleymaniye Mosque"
+   }
+  },
+  "descriptions": {
+   "tr": {
+    "value": "İstanbul'da cami"
+   },
+   "en": {
+    "value": "mosque in Istanbul"
+   }
+  },
+  "sitelinks": {
+   "x0wiki": {
+    "title": "x"
+   },
+   "x1wiki": {
+    "title": "x"
+   },
+   "x2wiki": {
+    "title": "x"
+   },
+   "x3wiki": {
+    "title": "x"
+   },
+   "x4wiki": {
+    "title": "x"
+   },
+   "x5wiki": {
+    "title": "x"
+   },
+   "x6wiki": {
+    "title": "x"
+   },
+   "x7wiki": {
+    "title": "x"
+   },
+   "x8wiki": {
+    "title": "x"
+   },
+   "x9wiki": {
+    "title": "x"
+   },
+   "x10wiki": {
+    "title": "x"
+   },
+   "x11wiki": {
+    "title": "x"
+   },
+   "x12wiki": {
+    "title": "x"
+   },
+   "x13wiki": {
+    "title": "x"
+   },
+   "x14wiki": {
+    "title": "x"
+   },
+   "x15wiki": {
+    "title": "x"
+   },
+   "x16wiki": {
+    "title": "x"
+   },
+   "x17wiki": {
+    "title": "x"
+   },
+   "x18wiki": {
+    "title": "x"
+   },
+   "x19wiki": {
+    "title": "x"
+   },
+   "x20wiki": {
+    "title": "x"
+   },
+   "x21wiki": {
+    "title": "x"
+   },
+   "x22wiki": {
+    "title": "x"
+   },
+   "x23wiki": {
+    "title": "x"
+   },
+   "x24wiki": {
+    "title": "x"
+   },
+   "x25wiki": {
+    "title": "x"
+   },
+   "x26wiki": {
+    "title": "x"
+   },
+   "x27wiki": {
+    "title": "x"
+   },
+   "x28wiki": {
+    "title": "x"
+   },
+   "x29wiki": {
+    "title": "x"
+   },
+   "x30wiki": {
+    "title": "x"
+   },
+   "x31wiki": {
+    "title": "x"
+   },
+   "x32wiki": {
+    "title": "x"
+   },
+   "x33wiki": {
+    "title": "x"
+   },
+   "x34wiki": {
+    "title": "x"
+   },
+   "x35wiki": {
+    "title": "x"
+   },
+   "x36wiki": {
+    "title": "x"
+   },
+   "x37wiki": {
+    "title": "x"
+   },
+   "x38wiki": {
+    "title": "x"
+   },
+   "x39wiki": {
+    "title": "x"
+   },
+   "x40wiki": {
+    "title": "x"
+   },
+   "x41wiki": {
+    "title": "x"
+   },
+   "x42wiki": {
+    "title": "x"
+   },
+   "x43wiki": {
+    "title": "x"
+   },
+   "x44wiki": {
+    "title": "x"
+   },
+   "x45wiki": {
+    "title": "x"
+   },
+   "x46wiki": {
+    "title": "x"
+   },
+   "x47wiki": {
+    "title": "x"
+   },
+   "x48wiki": {
+    "title": "x"
+   },
+   "x49wiki": {
+    "title": "x"
+   },
+   "trwiki": {
+    "title": "Süleymaniye Camii"
+   },
+   "enwiki": {
+    "title": "Süleymaniye Mosque"
+   }
+  },
+  "claims": {
+   "P571": [
+    {
+     "mainsnak": {
+      "datavalue": {
+       "value": {
+        "time": "+1557-00-00T00:00:00Z"
+       }
+      }
+     }
+    }
+   ],
+   "P18": [
+    {
+     "mainsnak": {
+      "datavalue": {
+       "value": "Suleymaniye.jpg"
+      }
+     }
+    }
+   ],
+   "P1435": [
+    {
+     "mainsnak": {}
+    }
+   ]
+  }
+ },
+ "Q900003": {
+  "id": "Q900003",
+  "labels": {
+   "tr": {
+    "value": "Belgrad Ormanı"
+   },
+   "en": {
+    "value": "Belgrad Forest"
+   }
+  },
+  "descriptions": {
+   "tr": {
+    "value": "İstanbul'da orman"
+   },
+   "en": {
+    "value": "forest in Istanbul"
+   }
+  },
+  "sitelinks": {
+   "x0wiki": {
+    "title": "x"
+   },
+   "x1wiki": {
+    "title": "x"
+   },
+   "x2wiki": {
+    "title": "x"
+   },
+   "x3wiki": {
+    "title": "x"
+   },
+   "x4wiki": {
+    "title": "x"
+   },
+   "x5wiki": {
+    "title": "x"
+   },
+   "x6wiki": {
+    "title": "x"
+   },
+   "x7wiki": {
+    "title": "x"
+   },
+   "x8wiki": {
+    "title": "x"
+   },
+   "x9wiki": {
+    "title": "x"
+   },
+   "x10wiki": {
+    "title": "x"
+   },
+   "x11wiki": {
+    "title": "x"
+   },
+   "trwiki": {
+    "title": "Belgrad Ormanı"
+   },
+   "enwiki": {
+    "title": "Belgrad Forest"
+   }
+  },
+  "claims": {}
+ },
+ "Q900004": {
+  "id": "Q900004",
+  "labels": {
+   "tr": {
+    "value": "Büyükada"
+   },
+   "en": {
+    "value": "Büyükada"
+   }
+  },
+  "descriptions": {
+   "tr": {
+    "value": "Adalar'da ada"
+   },
+   "en": {
+    "value": "island in the Sea of Marmara"
+   }
+  },
+  "sitelinks": {
+   "x0wiki": {
+    "title": "x"
+   },
+   "x1wiki": {
+    "title": "x"
+   },
+   "x2wiki": {
+    "title": "x"
+   },
+   "x3wiki": {
+    "title": "x"
+   },
+   "x4wiki": {
+    "title": "x"
+   },
+   "x5wiki": {
+    "title": "x"
+   },
+   "x6wiki": {
+    "title": "x"
+   },
+   "x7wiki": {
+    "title": "x"
+   },
+   "x8wiki": {
+    "title": "x"
+   },
+   "x9wiki": {
+    "title": "x"
+   },
+   "x10wiki": {
+    "title": "x"
+   },
+   "x11wiki": {
+    "title": "x"
+   },
+   "x12wiki": {
+    "title": "x"
+   },
+   "x13wiki": {
+    "title": "x"
+   },
+   "x14wiki": {
+    "title": "x"
+   },
+   "x15wiki": {
+    "title": "x"
+   },
+   "x16wiki": {
+    "title": "x"
+   },
+   "x17wiki": {
+    "title": "x"
+   },
+   "x18wiki": {
+    "title": "x"
+   },
+   "x19wiki": {
+    "title": "x"
+   },
+   "x20wiki": {
+    "title": "x"
+   },
+   "x21wiki": {
+    "title": "x"
+   },
+   "x22wiki": {
+    "title": "x"
+   },
+   "x23wiki": {
+    "title": "x"
+   },
+   "x24wiki": {
+    "title": "x"
+   },
+   "x25wiki": {
+    "title": "x"
+   },
+   "x26wiki": {
+    "title": "x"
+   },
+   "x27wiki": {
+    "title": "x"
+   },
+   "x28wiki": {
+    "title": "x"
+   },
+   "x29wiki": {
+    "title": "x"
+   },
+   "trwiki": {
+    "title": "Büyükada"
+   },
+   "enwiki": {
+    "title": "Büyükada"
+   }
+  },
+  "claims": {
+   "P18": [
+    {
+     "mainsnak": {
+      "datavalue": {
+       "value": "Buyukada.jpg"
+      }
+     }
+    }
+   ]
+  }
+ },
+ "Q900011": {
+  "id": "Q900011",
+  "labels": {
+   "tr": {
+    "value": "Rumeli Hisarı"
+   },
+   "en": {
+    "value": "Rumelihisarı"
+   }
+  },
+  "descriptions": {
+   "tr": {
+    "value": "İstanbul'da hisar"
+   },
+   "en": {
+    "value": "fortress in Istanbul"
+   }
+  },
+  "sitelinks": {
+   "x0wiki": {
+    "title": "x"
+   },
+   "x1wiki": {
+    "title": "x"
+   },
+   "x2wiki": {
+    "title": "x"
+   },
+   "x3wiki": {
+    "title": "x"
+   },
+   "x4wiki": {
+    "title": "x"
+   },
+   "x5wiki": {
+    "title": "x"
+   },
+   "x6wiki": {
+    "title": "x"
+   },
+   "x7wiki": {
+    "title": "x"
+   },
+   "x8wiki": {
+    "title": "x"
+   },
+   "x9wiki": {
+    "title": "x"
+   },
+   "x10wiki": {
+    "title": "x"
+   },
+   "x11wiki": {
+    "title": "x"
+   },
+   "x12wiki": {
+    "title": "x"
+   },
+   "x13wiki": {
+    "title": "x"
+   },
+   "x14wiki": {
+    "title": "x"
+   },
+   "x15wiki": {
+    "title": "x"
+   },
+   "x16wiki": {
+    "title": "x"
+   },
+   "x17wiki": {
+    "title": "x"
+   },
+   "x18wiki": {
+    "title": "x"
+   },
+   "x19wiki": {
+    "title": "x"
+   },
+   "x20wiki": {
+    "title": "x"
+   },
+   "x21wiki": {
+    "title": "x"
+   },
+   "x22wiki": {
+    "title": "x"
+   },
+   "x23wiki": {
+    "title": "x"
+   },
+   "x24wiki": {
+    "title": "x"
+   },
+   "x25wiki": {
+    "title": "x"
+   },
+   "x26wiki": {
+    "title": "x"
+   },
+   "x27wiki": {
+    "title": "x"
+   },
+   "x28wiki": {
+    "title": "x"
+   },
+   "x29wiki": {
+    "title": "x"
+   },
+   "x30wiki": {
+    "title": "x"
+   },
+   "x31wiki": {
+    "title": "x"
+   },
+   "x32wiki": {
+    "title": "x"
+   },
+   "x33wiki": {
+    "title": "x"
+   },
+   "x34wiki": {
+    "title": "x"
+   },
+   "x35wiki": {
+    "title": "x"
+   },
+   "x36wiki": {
+    "title": "x"
+   },
+   "x37wiki": {
+    "title": "x"
+   },
+   "x38wiki": {
+    "title": "x"
+   },
+   "x39wiki": {
+    "title": "x"
+   },
+   "trwiki": {
+    "title": "Rumeli Hisarı"
+   },
+   "enwiki": {
+    "title": "Rumelihisarı"
+   }
+  },
+  "claims": {
+   "P571": [
+    {
+     "mainsnak": {
+      "datavalue": {
+       "value": {
+        "time": "+1452-00-00T00:00:00Z"
+       }
+      }
+     }
+    }
+   ],
+   "P18": [
+    {
+     "mainsnak": {
+      "datavalue": {
+       "value": "Rumeli.jpg"
+      }
+     }
+    }
+   ],
+   "P1435": [
+    {
+     "mainsnak": {}
+    }
+   ]
+  }
+ },
+ "Q900012": {
+  "id": "Q900012",
+  "labels": {
+   "tr": {
+    "value": "Topkapı Sarayı"
+   },
+   "en": {
+    "value": "Topkapı Palace"
+   }
+  },
+  "descriptions": {
+   "tr": {
+    "value": "İstanbul'da saray"
+   },
+   "en": {
+    "value": "palace in Istanbul"
+   }
+  },
+  "sitelinks": {
+   "x0wiki": {
+    "title": "x"
+   },
+   "x1wiki": {
+    "title": "x"
+   },
+   "x2wiki": {
+    "title": "x"
+   },
+   "x3wiki": {
+    "title": "x"
+   },
+   "x4wiki": {
+    "title": "x"
+   },
+   "x5wiki": {
+    "title": "x"
+   },
+   "x6wiki": {
+    "title": "x"
+   },
+   "x7wiki": {
+    "title": "x"
+   },
+   "x8wiki": {
+    "title": "x"
+   },
+   "x9wiki": {
+    "title": "x"
+   },
+   "x10wiki": {
+    "title": "x"
+   },
+   "x11wiki": {
+    "title": "x"
+   },
+   "x12wiki": {
+    "title": "x"
+   },
+   "x13wiki": {
+    "title": "x"
+   },
+   "x14wiki": {
+    "title": "x"
+   },
+   "x15wiki": {
+    "title": "x"
+   },
+   "x16wiki": {
+    "title": "x"
+   },
+   "x17wiki": {
+    "title": "x"
+   },
+   "x18wiki": {
+    "title": "x"
+   },
+   "x19wiki": {
+    "title": "x"
+   },
+   "x20wiki": {
+    "title": "x"
+   },
+   "x21wiki": {
+    "title": "x"
+   },
+   "x22wiki": {
+    "title": "x"
+   },
+   "x23wiki": {
+    "title": "x"
+   },
+   "x24wiki": {
+    "title": "x"
+   },
+   "x25wiki": {
+    "title": "x"
+   },
+   "x26wiki": {
+    "title": "x"
+   },
+   "x27wiki": {
+    "title": "x"
+   },
+   "x28wiki": {
+    "title": "x"
+   },
+   "x29wiki": {
+    "title": "x"
+   },
+   "x30wiki": {
+    "title": "x"
+   },
+   "x31wiki": {
+    "title": "x"
+   },
+   "x32wiki": {
+    "title": "x"
+   },
+   "x33wiki": {
+    "title": "x"
+   },
+   "x34wiki": {
+    "title": "x"
+   },
+   "x35wiki": {
+    "title": "x"
+   },
+   "x36wiki": {
+    "title": "x"
+   },
+   "x37wiki": {
+    "title": "x"
+   },
+   "x38wiki": {
+    "title": "x"
+   },
+   "x39wiki": {
+    "title": "x"
+   },
+   "x40wiki": {
+    "title": "x"
+   },
+   "x41wiki": {
+    "title": "x"
+   },
+   "x42wiki": {
+    "title": "x"
+   },
+   "x43wiki": {
+    "title": "x"
+   },
+   "x44wiki": {
+    "title": "x"
+   },
+   "x45wiki": {
+    "title": "x"
+   },
+   "x46wiki": {
+    "title": "x"
+   },
+   "x47wiki": {
+    "title": "x"
+   },
+   "x48wiki": {
+    "title": "x"
+   },
+   "x49wiki": {
+    "title": "x"
+   },
+   "x50wiki": {
+    "title": "x"
+   },
+   "x51wiki": {
+    "title": "x"
+   },
+   "x52wiki": {
+    "title": "x"
+   },
+   "x53wiki": {
+    "title": "x"
+   },
+   "x54wiki": {
+    "title": "x"
+   },
+   "x55wiki": {
+    "title": "x"
+   },
+   "x56wiki": {
+    "title": "x"
+   },
+   "x57wiki": {
+    "title": "x"
+   },
+   "x58wiki": {
+    "title": "x"
+   },
+   "x59wiki": {
+    "title": "x"
+   },
+   "x60wiki": {
+    "title": "x"
+   },
+   "x61wiki": {
+    "title": "x"
+   },
+   "x62wiki": {
+    "title": "x"
+   },
+   "x63wiki": {
+    "title": "x"
+   },
+   "x64wiki": {
+    "title": "x"
+   },
+   "x65wiki": {
+    "title": "x"
+   },
+   "x66wiki": {
+    "title": "x"
+   },
+   "x67wiki": {
+    "title": "x"
+   },
+   "x68wiki": {
+    "title": "x"
+   },
+   "x69wiki": {
+    "title": "x"
+   },
+   "x70wiki": {
+    "title": "x"
+   },
+   "x71wiki": {
+    "title": "x"
+   },
+   "x72wiki": {
+    "title": "x"
+   },
+   "x73wiki": {
+    "title": "x"
+   },
+   "x74wiki": {
+    "title": "x"
+   },
+   "x75wiki": {
+    "title": "x"
+   },
+   "x76wiki": {
+    "title": "x"
+   },
+   "x77wiki": {
+    "title": "x"
+   },
+   "x78wiki": {
+    "title": "x"
+   },
+   "x79wiki": {
+    "title": "x"
+   },
+   "x80wiki": {
+    "title": "x"
+   },
+   "x81wiki": {
+    "title": "x"
+   },
+   "x82wiki": {
+    "title": "x"
+   },
+   "x83wiki": {
+    "title": "x"
+   },
+   "x84wiki": {
+    "title": "x"
+   },
+   "x85wiki": {
+    "title": "x"
+   },
+   "x86wiki": {
+    "title": "x"
+   },
+   "x87wiki": {
+    "title": "x"
+   },
+   "x88wiki": {
+    "title": "x"
+   },
+   "x89wiki": {
+    "title": "x"
+   },
+   "trwiki": {
+    "title": "Topkapı Sarayı"
+   },
+   "enwiki": {
+    "title": "Topkapı Palace"
+   }
+  },
+  "claims": {
+   "P571": [
+    {
+     "mainsnak": {
+      "datavalue": {
+       "value": {
+        "time": "+1478-00-00T00:00:00Z"
+       }
+      }
+     }
+    }
+   ],
+   "P18": [
+    {
+     "mainsnak": {
+      "datavalue": {
+       "value": "Topkapi.jpg"
+      }
+     }
+    }
+   ],
+   "P1435": [
+    {
+     "mainsnak": {}
+    }
+   ]
+  }
+ }
+}
