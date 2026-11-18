@@ -16,7 +16,9 @@ backend/supabase/
 │   ├── 20261119120000_istanbul_places.sql    onaylı 156 İstanbul yeri (üretilir, elle düzenleme)
 │   ├── 20261119130000_photo_urls.sql         fotoğraflar için dış adres alanları
 │   ├── 20261119140000_istanbul_photos.sql    133 yerin Commons fotoğrafı (üretilir)
-│   └── 20261119150000_badge_paths.sql        rozet görsel yolları
+│   ├── 20261119150000_badge_paths.sql        rozet görsel yolları
+│   ├── 20261119160000_security_fixes.sql     güvenlik denetçisi düzeltmeleri
+│   └── 20261119170000_islands_tour_fix.sql   Adalar Turu rozet kuralı düzeltmesi
 ├── functions/checkin/
 │   ├── index.ts                      Edge Function
 │   ├── rules.ts                      karar kuralları (saf fonksiyonlar)

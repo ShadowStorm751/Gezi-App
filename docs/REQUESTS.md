@@ -15,6 +15,13 @@ Biçim:
 
 ---
 
+### Canlı Supabase projesi güncel
+- Tarih: 2026-11-19
+- Kimden: backend
+- Durum: bilgi
+- İstek: –
+- Yanıt: `20261119170000`'e kadar bütün migration'lar canlı projeye uygulandı. Canlıda şu an: 156 yayında yer (TR+EN), 133 fotoğraf, 17 kategori, 21 rozet (hepsinin `badge_path` değeri dolu). Eski örnek yerler (`buyuk-camlica`, `pierre-loti`) silindi. `islands-tour` rozeti düzeltildi: kural `burgazada` yerine `burgaz-adasi` diyor; önceden kazanılamıyordu. API sözleşmesi değişmedi.
+
 ### Rozet görselleri hazır
 - Tarih: 2026-11-19
 - Kimden: backend
@@ -23,7 +30,7 @@ Biçim:
   - Görselleri uygulama paketine koy; `my_achievements` dönen `slug` ile eşleştir. Pakette yoksa `badge_path` ile `supabase.storage.from("badges").getPublicUrl(badge_path)`, o da yoksa yer tutucu.
   - **Kazanılmamış rozet** için ayrı görsel yok: aynı görseli gri tonlamalı + yarı saydam (~%40) göster, altında `progress/target` (ör. 3/5). Kazanılınca tam renk ve küçük bir kutlama animasyonu.
   - Görsellerde yazı yok; rozet adı ve açıklaması `my_achievements` içinden, cihaz diline göre gelir.
-  - `badge_path` migration'ı (`20261119150000_badge_paths.sql`) ve Storage yüklemesi proje sahibinin onayıyla yapılacak; o zamana kadar `badge_path` null gelebilir, paketteki görseller yeterli.
+  - `badge_path` canlıda dolu (`<slug>.webp`). Storage'a yükleme proje sahibinde; yüklenene kadar URL 404 dönebilir, paketteki görseller yeterli.
 - Yanıt: –
 
 ### Yer fotoğrafları geldi (atıf zorunlu)
@@ -54,8 +61,9 @@ Biçim:
 ### Test projesinde İstanbul verisinin yüklenmesi
 - Tarih: 2026-11-19
 - Kimden: mobil
-- Durum: açık
+- Durum: tamamlandı
 - İstek: Test kurulumunda `SQLSTATE 42704: type "geography" does not exist` bildirildi. Şema PostGIS’i `extensions` altında oluşturuyor. `seed.sql` içindeki yer ekleme sorgusu ise türü ve iki PostGIS fonksiyonunu şemasız kullanıyor. Windows kurulum kopyasında ifadeyi `extensions.st_setsrid(extensions.st_makepoint(v.lng, v.lat), 4326)::extensions.geography` olarak düzelttik. Backend kaynağına da uygulayıp dar bir `search_path` ile boş test veritabanına örnek veri yüklemesini doğrular mısın?
+- Yanıt (backend, 2026-11-19): `seed.sql` artık boş; yer verisi migration'lardan geliyor (`20261119120000_istanbul_places.sql`). Bu migration Supabase'in varsayılan `search_path`'ine (`extensions` dahil) dayanıyor; canlı projede ve `supabase db push`/`db reset` ile sorunsuz. Dar `search_path` ile elle çalıştırılırsa aynı hata çıkar; test kurulumunda migration'ları Supabase CLI ile uygulayın. Windows kopyasındaki seed düzeltmesine artık gerek yok.
 
 ### Şehir paketi sürümünü indirmeden kontrol etme
 - Tarih: 2026-11-19
