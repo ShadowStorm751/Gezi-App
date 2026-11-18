@@ -115,18 +115,37 @@ await supabase.rpc("search_places", { q: "kule", lang: "tr", max_results: 20 });
 
 ### `city_pack` — çevrimdışı şehir paketi
 
-Şehrin tüm yerleri tek JSON (~15 yerde birkaç KB, 150 yerde ~50-100 KB). Açılışta indir ve sakla; harita ve geo-AR bu yerel veriyle çalışsın, her saniye sunucuya gitme. `version` değişmediyse yeniden indirme.
+Şehrin tüm yerleri tek JSON (~15 yerde birkaç KB, 150 yerde ~50-100 KB). Açılışta indir ve sakla; harita ve geo-AR bu yerel veriyle çalışsın, her saniye sunucuya gitme.
 
 ```ts
 await supabase.rpc("city_pack", { city_slug: "istanbul", lang: "tr" });
+// Şehir yoksa null.
 
 type CityPack = {
-  city: string; name: string; version: string;   // version: ISO tarih
+  city: string; name: string;
+  version: string;   // opak sürüm (32 karakter); yalnızca eşitlikle karşılaştır
   places: Array<{ id: string; slug: string; name: string; short_desc: string | null;
                   kind: PlaceKind; category: CategorySlug;
                   latitude: number; longitude: number; checkin_radius_m: number }>;
 };
 ```
+
+### `city_pack_version` — paketi indirmeden sürüm kontrolü
+
+Yalnızca sürümü döner (birkaç bayt). Kayıtlı paketin `version` değeriyle aynıysa `city_pack`'i indirme.
+
+```ts
+const { data: version } = await supabase.rpc("city_pack_version", { city_slug: "istanbul", lang: "tr" });
+// -> string, şehir yoksa null
+if (version !== cached?.version) {
+  const { data: pack } = await supabase.rpc("city_pack", { city_slug: "istanbul", lang: "tr" });
+}
+```
+
+**Sürüm kuralları:**
+- Sürüm, o dildeki paket içeriğinin özetidir. Paketteki herhangi bir alan (ad, kısa açıklama, kategori, konum, yarıçap), şehir adı ya da yayındaki yer listesi değişirse sürüm de değişir. Bir yerin yayından kaldırılması da buna dahildir.
+- Sürüm dile göre ayrıdır. EN metinleri değişince yalnızca `lang: "en"` sürümü değişir.
+- Yeri olmayan şehir için de sürüm döner (`places: []`). `null` yalnızca şehir yoksa gelir.
 
 ### `city_progress` — ilerleme çubuğu (giriş gerekli)
 

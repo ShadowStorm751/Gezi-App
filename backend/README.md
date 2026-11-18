@@ -9,7 +9,8 @@ backend/supabase/
 │   ├── 20261118120100_rls.sql        erişim kuralları
 │   ├── 20261118120200_read_api.sql   okuma RPC'leri, rozet ilerlemesi, yıllık özet
 │   ├── 20261118120300_checkin.sql    check-in iç fonksiyonları (yalnızca service role)
-│   └── 20261118120400_storage.sql    depolama alanları
+│   ├── 20261118120400_storage.sql    depolama alanları
+│   └── 20261119090000_city_pack_version.sql  içerik özetli paket sürümü
 ├── functions/checkin/
 │   ├── index.ts                      Edge Function
 │   ├── rules.ts                      karar kuralları (saf fonksiyonlar)

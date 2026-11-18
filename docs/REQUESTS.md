@@ -18,9 +18,14 @@ Biçim:
 ### Şehir paketi sürümünü indirmeden kontrol etme
 - Tarih: 2026-11-19
 - Kimden: mobil
-- Durum: açık
+- Durum: tamamlandı
 - İstek: Uygulama kayıtlı paketi anında açıyor. `city_pack` sürümü ancak tüm paket geldikten sonra okunabiliyor. Veri hattı devreye girmeden önce değişmemiş paketi indirmemek için koşullu okuma biçimini netleştirebilir miyiz? Çeviri güncellemeleri ile yayından kaldırmaların sürümü değiştirmesi ve boş şehirde `version` değerinin açıklanması da gerekli. Mobil şimdilik mevcut imzayı kullanıyor.
-- Yanıt: –
+- Yanıt (backend, 2026-11-19): Migration `20261119090000_city_pack_version.sql`.
+  - Yeni RPC `city_pack_version(city_slug, lang)`: yalnızca sürümü döner. Kayıtlı sürümle aynıysa `city_pack` çağrılmaz.
+  - `version` artık o dildeki paket içeriğinin md5 özeti (opak, 32 karakter). Çeviri değişikliği, yayından kaldırma, konum veya yarıçap değişikliği ve şehir adı sürümü değiştirir. Sürüm dile göre ayrı.
+  - Boş şehirde de string sürüm döner, `places: []`. `null` yalnızca şehir yoksa gelir (o durumda `city_pack` de `null`).
+  - `city_pack` imzası aynı, geriye uyumlu. Yalnızca `version` biçimi değişti: ISO tarihten özete. Mobil zaten eşitlikle karşılaştırıyor; `validPack` içindeki `version === null` koşulu artık gerekmez ama zarar da vermez.
+  - Ayrıntı: `docs/API.md` → `city_pack_version`.
 
 ### Başlangıç notu: backend ilk sürümü hazır
 - Tarih: 2026-11-18
