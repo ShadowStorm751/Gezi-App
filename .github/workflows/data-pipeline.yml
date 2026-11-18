@@ -41,6 +41,9 @@ jobs:
         run: |
           mkdir -p data-pipeline/results
           cp data-pipeline/output/candidates.csv data-pipeline/output/areas.json data-pipeline/results/
+          mkdir -p data-pipeline/results/raw
+          gzip -c data-pipeline/output/osm_raw.json > data-pipeline/results/raw/osm_raw.json.gz
+          gzip -c data-pipeline/output/wikidata.json > data-pipeline/results/raw/wikidata.json.gz
           python - <<'PY'
           import json, pathlib
           osm = json.loads(pathlib.Path("data-pipeline/output/osm_raw.json").read_text(encoding="utf-8"))

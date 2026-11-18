@@ -1,2 +1,2 @@
 Bu dosya değişip main'e yüklenince GitHub veri hattını çalıştırır (.github/workflows/data-pipeline.yml).
-Son istek: 2026-11-19 00:25 — ilk İstanbul aday listesi
+Son istek: 2026-11-19 00:35 — türbe, ada alanı, kategori dengesi düzeltmeleri

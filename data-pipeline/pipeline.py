@@ -79,8 +79,12 @@ AREA_CATEGORIES = {"forest", "park", "island", "beach", "archaeological_site"}
 # Onay listesine girecek en fazla aday sayısı (tür başına).
 QUOTAS = {"historical": 200, "nature": 100}
 
+# Tek bir kategori listeyi doldurmasın (ör. 76 cami).
+CATEGORY_CAP = {"mosque": 40, "monument": 25, "museum": 30, "park": 25, "viewpoint": 20, "island": 12}
+
 MAX_RING_POINTS = 150
 DUPLICATE_DISTANCE_M = 100
+DUPLICATE_DISTANCE_AREA_M = 2000  # ada, orman, park gibi büyük yerler
 
 CSV_COLUMNS = [
     "onay", "puan", "aile", "kategori", "ad_tr", "ad_en",
@@ -109,6 +113,13 @@ def fold(text: str) -> str:
     text = text.translate(_TR_MAP)
     text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode("ascii")
     return text.lower()
+
+
+def clean_name(text: str) -> str:
+    """Görünmez karakterleri ve sondaki '(Istanbul)' gibi açıklamaları atar."""
+    text = "".join(ch for ch in text if unicodedata.category(ch) != "Cf")
+    text = re.sub(r"\s*\((istanbul|İstanbul|turkey|türkiye)\)\s*$", "", text, flags=re.I)
+    return re.sub(r"\s+", " ", text).strip()
 
 
 def slugify(text: str, max_len: int = 60) -> str:
@@ -274,12 +285,12 @@ def element_geometry(el: Dict[str, Any]) -> Tuple[Optional[float], Optional[floa
         return lat, lng, ring
 
     if el.get("type") == "relation":
-        rings = []
-        for m in el.get("members", []):
-            if m.get("type") == "way" and m.get("role") in ("outer", "") and m.get("geometry"):
-                ring = closed_ring(m["geometry"])
-                if ring:
-                    rings.append(ring)
+        segments = [
+            [(g["lon"], g["lat"]) for g in m["geometry"] if g]
+            for m in el.get("members", [])
+            if m.get("type") == "way" and m.get("role") in ("outer", "") and m.get("geometry")
+        ]
+        rings = stitch_rings(segments)
 
         def bbox_area(r: List[Tuple[float, float]]) -> float:
             xs, ys = [p[0] for p in r], [p[1] for p in r]
@@ -295,6 +306,34 @@ def element_geometry(el: Dict[str, Any]) -> Tuple[Optional[float], Optional[floa
     return None, None, None
 
 
+def stitch_rings(segments: List[List[Tuple[float, float]]]) -> List[List[Tuple[float, float]]]:
+    """Uç uca eklenen yol parçalarını kapalı halkalara birleştirir (OSM multipolygon)."""
+    segs = [list(sg) for sg in segments if len(sg) >= 2]
+    rings: List[List[Tuple[float, float]]] = []
+    while segs:
+        cur = segs.pop(0)
+        changed = True
+        while cur[0] != cur[-1] and changed:
+            changed = False
+            for i, sg in enumerate(segs):
+                if sg[0] == cur[-1]:
+                    cur = cur + sg[1:]
+                elif sg[-1] == cur[-1]:
+                    cur = cur + sg[::-1][1:]
+                elif sg[-1] == cur[0]:
+                    cur = sg + cur[1:]
+                elif sg[0] == cur[0]:
+                    cur = sg[::-1] + cur[1:]
+                else:
+                    continue
+                segs.pop(i)
+                changed = True
+                break
+        if len(cur) >= 4 and cur[0] == cur[-1]:
+            rings.append(cur)
+    return rings
+
+
 def simplify_ring(ring: List[Tuple[float, float]], max_points: int = MAX_RING_POINTS) -> List[Tuple[float, float]]:
     body = ring[:-1]
     if len(body) <= max_points:
@@ -305,7 +344,8 @@ def simplify_ring(ring: List[Tuple[float, float]], max_points: int = MAX_RING_PO
 
 
 def parse_inception_year(claims: Dict[str, Any]) -> Optional[int]:
-    """Wikidata P571 (yapım/kuruluş tarihi) -> yıl. MÖ yıllar negatif."""
+    """Wikidata P571 (yapım/kuruluş tarihi) -> en erken yıl. MÖ yıllar negatif."""
+    years = []
     for claim in claims.get("P571", []):
         try:
             t = claim["mainsnak"]["datavalue"]["value"]["time"]
@@ -314,8 +354,8 @@ def parse_inception_year(claims: Dict[str, Any]) -> Optional[int]:
         m = re.match(r"([+-])(\d+)-", t)
         if m:
             year = int(m.group(2))
-            return -year if m.group(1) == "-" else year
-    return None
+            years.append(-year if m.group(1) == "-" else year)
+    return min(years) if years else None
 
 
 def guess_period(year: Optional[int]) -> str:
@@ -334,18 +374,24 @@ def guess_period(year: Optional[int]) -> str:
 def wikidata_info(entity: Optional[Dict[str, Any]]) -> Dict[str, Any]:
     if not entity or "missing" in entity:
         return {}
+    claims = entity.get("claims", {})
+    instance_of = {
+        c.get("mainsnak", {}).get("datavalue", {}).get("value", {}).get("id")
+        for c in claims.get("P31", [])
+    }
+    if "Q5" in instance_of:  # yere değil kişiye bağlanmış (ör. türbelerde padişah)
+        return {}
     labels = entity.get("labels", {})
     descs = entity.get("descriptions", {})
     sitelinks = entity.get("sitelinks", {})
-    claims = entity.get("claims", {})
     image = ""
     for c in claims.get("P18", []):
         image = c.get("mainsnak", {}).get("datavalue", {}).get("value", "") or ""
         if image:
             break
     return {
-        "label_tr": labels.get("tr", {}).get("value", ""),
-        "label_en": labels.get("en", {}).get("value", ""),
+        "label_tr": clean_name(labels.get("tr", {}).get("value", "")),
+        "label_en": clean_name(labels.get("en", {}).get("value", "")),
         "desc_tr": descs.get("tr", {}).get("value", ""),
         "desc_en": descs.get("en", {}).get("value", ""),
         "sitelinks": len(sitelinks),
@@ -363,8 +409,16 @@ CATEGORY_BONUS = {
 }
 
 
+GENERIC_NAME = re.compile(
+    r"^(plaj|beach|cesme|çeşme|cami|manzara|seyir|seyir noktasi|seyir terasi|view|viewpoint|teras)$", re.I)
+
+
 def score(cand: Dict[str, Any], wd: Dict[str, Any]) -> int:
     s = CATEGORY_BONUS.get(cand["kategori"], 0)
+    if cand["kategori"] == "viewpoint":
+        name = fold(cand["ad_tr"])
+        if GENERIC_NAME.match(name) or len(name) < 5 or not re.search(r"[çğıöşü]|tepe|seyir|koru|park|kule|ada|kale|sahil|cami", cand["ad_tr"].lower()):
+            s -= CATEGORY_BONUS["viewpoint"]
     if wd:
         s += min(wd.get("sitelinks", 0), 60)
         s += 15 if wd.get("enwiki") else 0
@@ -382,9 +436,11 @@ def build_candidates(osm: Dict[str, Any], wikidata: Dict[str, Any]) -> List[Dict
     raw: List[Dict[str, Any]] = []
     for el in osm.get("elements", []):
         tags = el.get("tags", {})
-        name = (tags.get("name:tr") or tags.get("name") or "").strip()
+        name = clean_name(tags.get("name:tr") or tags.get("name") or "")
         if not name:
             continue
+        if tags.get("historic") == "tomb" and not re.search(r"türbe|turbe|tomb|mezar", name, re.I):
+            name = f"{name} Türbesi"
         category = classify(tags)
         if not category:
             continue
@@ -398,8 +454,8 @@ def build_candidates(osm: Dict[str, Any], wikidata: Dict[str, Any]) -> List[Dict
         cand = {
             "aile": CATEGORY_KIND[category],
             "kategori": category,
-            "ad_tr": wd.get("label_tr") or name,
-            "ad_en": tags.get("name:en") or wd.get("label_en") or "",
+            "ad_tr": name if tags.get("historic") == "tomb" else (wd.get("label_tr") or name),
+            "ad_en": clean_name(tags.get("name:en", "")) or wd.get("label_en") or "",
             "donem": guess_period(year) if CATEGORY_KIND[category] == "historical" else "",
             "yapim_yili": "" if year is None else str(year),
             "wikidata_ipucu_tr": wd.get("desc_tr", ""),
@@ -423,7 +479,17 @@ def build_candidates(osm: Dict[str, Any], wikidata: Dict[str, Any]) -> List[Dict
     for kind, quota in QUOTAS.items():
         group = sorted((c for c in merged if c["aile"] == kind),
                        key=lambda c: (-c["puan"], c["ad_tr"]))
-        out.extend(group[:quota])
+        per_cat: Dict[str, int] = {}
+        picked: List[Dict[str, Any]] = []
+        for c in group:
+            if len(picked) >= quota:
+                break
+            n = per_cat.get(c["kategori"], 0)
+            if n >= CATEGORY_CAP.get(c["kategori"], quota):
+                continue
+            per_cat[c["kategori"]] = n + 1
+            picked.append(c)
+        out.extend(picked)
 
     # Slug'lar benzersiz olsun.
     used: Dict[str, int] = {}
@@ -460,15 +526,21 @@ def _dedupe(cands: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         else:
             rest.append(c)
 
-    # 2) Aynı ad, birbirine 100 m'den yakın
-    result = list(by_qid.values())
-    for c in rest:
+    # 2) Aynı ad, birbirine yakın (büyük yerlerde 2 km)
+    result: List[Dict[str, Any]] = []
+    for c in sorted(list(by_qid.values()) + rest, key=lambda c: -c["puan"]):
+        limit = DUPLICATE_DISTANCE_AREA_M if c["kategori"] in AREA_CATEGORIES else DUPLICATE_DISTANCE_M
         dup = next((r for r in result
                     if fold(r["ad_tr"]) == fold(c["ad_tr"])
-                    and haversine_m(r["enlem"], r["boylam"], c["enlem"], c["boylam"]) < DUPLICATE_DISTANCE_M),
+                    and haversine_m(r["enlem"], r["boylam"], c["enlem"], c["boylam"]) < limit),
                    None)
         if dup:
-            dup["osm"] = ";".join(sorted(set(dup["osm"].split(";") + [c["osm"]])))
+            dup["osm"] = ";".join(sorted(set(dup["osm"].split(";") + c["osm"].split(";"))))
+            if dup.get("_ring") is None and c.get("_ring") is not None:
+                dup["_ring"] = c["_ring"]
+            for k in ("ad_en", "yapim_yili", "fotograf", "wikipedia_tr", "wikipedia_en"):
+                if not dup.get(k) and c.get(k):
+                    dup[k] = c[k]
         else:
             result.append(c)
     return result

@@ -57,6 +57,26 @@ class HelperTests(unittest.TestCase):
         self.assertEqual(p.guess_period(1950), "Cumhuriyet")
         self.assertEqual(p.guess_period(None), "")
 
+    def test_clean_name(self):
+        self.assertEqual(p.clean_name("‪Fındıklı Parkı"), "Fındıklı Parkı")
+        self.assertEqual(p.clean_name("Tavşan Adası (Istanbul)"), "Tavşan Adası")
+        self.assertEqual(p.clean_name("  Moda   Sahili "), "Moda Sahili")
+
+    def test_stitch_rings(self):
+        a = [(0.0, 0.0), (1.0, 0.0)]
+        b = [(1.0, 1.0), (1.0, 0.0)]          # ters yönde
+        c = [(1.0, 1.0), (0.0, 1.0), (0.0, 0.0)]
+        rings = p.stitch_rings([a, b, c])
+        self.assertEqual(len(rings), 1)
+        self.assertEqual(rings[0][0], rings[0][-1])
+        self.assertEqual(len(rings[0]), 5)
+        self.assertEqual(p.stitch_rings([a]), [])  # kapanmayan parça
+
+    def test_person_wikidata_ignored(self):
+        person = {"labels": {"tr": {"value": "Abdülaziz"}}, "sitelinks": {"enwiki": {"title": "x"}},
+                  "claims": {"P31": [{"mainsnak": {"datavalue": {"value": {"id": "Q5"}}}}]}}
+        self.assertEqual(p.wikidata_info(person), {})
+
     def test_simplify_ring_keeps_closed(self):
         ring = [(float(i), 0.0) for i in range(400)] + [(0.0, 0.0)]
         s = p.simplify_ring(ring, 100)
@@ -100,6 +120,39 @@ class CandidatesTests(unittest.TestCase):
         self.assertEqual(hist[-1]["puan"], 0)
         self.assertEqual(self.by_slug["pierre-loti-tepesi"]["yaricap_m"], 50)
         self.assertEqual(self.by_slug["buyukada"]["yaricap_m"], 1500)
+
+
+class RealWorldQuirksTests(unittest.TestCase):
+    def test_tomb_with_person_wikidata(self):
+        osm = {"elements": [
+            {"type": "node", "id": 1, "lat": 41.0, "lon": 28.9,
+             "tags": {"historic": "tomb", "name": "II. Selim", "wikidata": "Q1"}},
+        ]}
+        wd = {"Q1": {"labels": {"tr": {"value": "II. Selim"}}, "sitelinks": {f"w{i}": {} for i in range(90)},
+                     "claims": {"P31": [{"mainsnak": {"datavalue": {"value": {"id": "Q5"}}}}]}}}
+        c = p.build_candidates(osm, wd)[0]
+        self.assertEqual(c["ad_tr"], "II. Selim Türbesi")
+        self.assertEqual(c["puan"], 0)  # padişahın ünü türbeye puan vermez
+
+    def test_category_cap(self):
+        els = [{"type": "node", "id": i, "lat": 41 + i / 100, "lon": 29.0,
+                "tags": {"amenity": "place_of_worship", "religion": "muslim", "name": f"Cami {i}", "heritage": "2"}}
+               for i in range(60)]
+        cands = p.build_candidates({"elements": els}, {})
+        self.assertEqual(len(cands), p.CATEGORY_CAP["mosque"])
+
+    def test_same_island_merged_with_area(self):
+        ring = [{"lat": 40.86, "lon": 29.0}, {"lat": 40.86, "lon": 29.01}, {"lat": 40.87, "lon": 29.01},
+                {"lat": 40.86, "lon": 29.0}]
+        osm = {"elements": [
+            {"type": "node", "id": 1, "lat": 40.865, "lon": 29.005,
+             "tags": {"place": "island", "name": "Bahariye Adaları", "name:en": "Bahariye Islands"}},
+            {"type": "way", "id": 2, "geometry": ring, "tags": {"place": "island", "name": "Bahariye Adaları"}},
+        ]}
+        cands = p.build_candidates(osm, {})
+        self.assertEqual(len(cands), 1)
+        self.assertEqual(cands[0]["alan_var"], "evet")
+        self.assertEqual(cands[0]["ad_en"], "Bahariye Islands")
 
 
 class BuildTests(unittest.TestCase):
