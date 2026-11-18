@@ -118,7 +118,9 @@ Fotoğraf adresi: `photo.url` (dolu ise doğrudan kullan). `url` boş ve `storag
 
 ### `search_places` — arama
 
-TR ve EN adların ikisinde de arar, sonucu istenen dilde döner. En az 2 karakter.
+TR ve EN adların ikisinde de arar, sonucu istenen dilde döner. En az 2 karakter. Türkçe harfe duyarsız ("kiz kulesi" → Kız Kulesi), büyük/küçük harf fark etmez.
+
+Sıralama: tam eşleşme → adın başında → bir kelimenin başında → adın içinde; eşitlikte daha tanınmış yer önce (ör. "galata" → Galata Kulesi ilk). Mobil sonucu yeniden sıralamasın.
 
 ```ts
 await supabase.rpc("search_places", { q: "kule", lang: "tr", max_results: 20 });
