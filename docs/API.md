@@ -95,14 +95,26 @@ type PlaceDetail = {
   latitude: number; longitude: number;
   checkin_radius_m: number;
   has_area: boolean;                // true: orman/ada gibi alan; içindeyken check-in yapılabilir
-  photos: Array<{ storage_path: string; width: number | null; height: number | null;
-                  license: string | null; author: string | null; source_url: string | null }>;
+  photos: Array<{
+    url: string | null;           // tam boy (≤1280 px), dış adres (Wikimedia)
+    thumb_url: string | null;     // küçük resim (500 px)
+    storage_path: string | null;  // kendi Storage'ımızdaki fotoğraflar için (şimdilik yok)
+    width: number | null; height: number | null;
+    author: string;               // fotoğrafın altında gösterilmeli
+    license: string;              // ör. "CC BY-SA 4.0", "CC0", "FAL"; author ile birlikte gösterilmeli
+    license_url: string | null;   // lisans metni bağlantısı
+    source_url: string | null;    // Commons sayfası
+  }>;
   visited_at: string | null;        // ISO tarih; giriş yapılmamışsa ya da gezilmemişse null
 };
 ```
 
-Fotoğraf URL'si: `supabase.storage.from("place-photos").getPublicUrl(photo.storage_path).data.publicUrl`.
-Fotoğrafın altında `author` ve `license` gösterilmesi lisans gereğidir.
+Fotoğraf adresi: `photo.url` (dolu ise doğrudan kullan). `url` boş ve `storage_path` dolu ise:
+`supabase.storage.from("place-photos").getPublicUrl(photo.storage_path).data.publicUrl`.
+
+**Lisans koşulu (zorunlu):** Fotoğrafın altında ya da üstüne dokununca açılan bir satırda `author` ve `license` görünmeli, örn. "Foto: A.Savin · FAL". `license_url` doluysa lisans adına, `source_url` doluysa yazar adına bağlantı verilmeli. CC BY-SA ve FAL fotoğraflarda bu atıf yapılmazsa fotoğraf kullanılamaz.
+
+156 yerin 133'ünde fotoğraf var; olmayanlarda kategoriye göre bir yer tutucu göster.
 
 ### `search_places` — arama
 
@@ -126,9 +138,12 @@ type CityPack = {
   version: string;   // opak sürüm (32 karakter); yalnızca eşitlikle karşılaştır
   places: Array<{ id: string; slug: string; name: string; short_desc: string | null;
                   kind: PlaceKind; category: CategorySlug;
-                  latitude: number; longitude: number; checkin_radius_m: number }>;
+                  latitude: number; longitude: number; checkin_radius_m: number;
+                  thumb_url: string | null }>;   // ilk fotoğrafın küçük resmi (liste/harita kartı)
 };
 ```
+
+`thumb_url` gösterilen her yerde atıf da gerekir: kartta küçük bir "Foto: Wikimedia Commons" yazısı yeterli, tam yazar ve lisans detay sayfasında (`place_detail.photos`) görünür.
 
 ### `city_pack_version` — paketi indirmeden sürüm kontrolü
 
