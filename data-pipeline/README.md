@@ -58,6 +58,12 @@ python pipeline.py build
 
 `output/places_import.sql` dosyasını yazar. Supabase panelinde **SQL Editor**'a yapıştırıp çalıştır. Dosya tekrar çalıştırılabilir: aynı yer ikinci kez eklenmez, güncellenir. Boş bıraktığın açıklamalar veritabanındaki mevcut açıklamayı silmez.
 
+## İstanbul listesi (onaylandı, 2026-11-19)
+
+- `results/shortlist.json`: proje sahibinin onayladığı yerler (koordinat ve alan sınırlarıyla).
+- `content/istanbul_descriptions.py`: TR/EN kısa açıklamalar, en iyi ziyaret zamanı, dönem ve yapım yılı; listeden çıkarılanlar ve nedenleri.
+- `content/build_istanbul.py`: ikisinden `backend/supabase/migrations/20261119120000_istanbul_places.sql` dosyasını üretir. Açıklama ya da yer değişirse migration'ı elle düzenleme; script'i çalıştır, çıkan dosyayı yeni bir migration olarak ekle.
+
 ## Notlar
 
 - `output/` klasörü repoya girmez (`.gitignore`). Onaylı CSV'yi paylaşmak istersen Claude'a ayrıca gönder.
