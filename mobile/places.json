@@ -1,0 +1,28 @@
+[
+  {
+    "id": "galata-kulesi",
+    "name": "Galata Kulesi",
+    "category": "Kule",
+    "period": "Ceneviz dönemi",
+    "coordinate": {
+      "latitude": 41.0256556,
+      "longitude": 28.9741556
+    },
+    "description": "Cenevizliler 14. yüzyılda Galata surlarının bir parçası olarak bu kuleyi inşa etti. Bugün semtin sokakları kulenin çevresinde birleşiyor.",
+    "source": "https://www.muze.gov.tr/muze-detay?DistId=MRK&SectionId=GLT04",
+    "coordinateSource": "https://en.wikipedia.org/wiki/Galata_Tower"
+  },
+  {
+    "id": "galata-mevlevihanesi",
+    "name": "Galata Mevlevihanesi Müzesi",
+    "category": "Müze",
+    "period": "Osmanlı dönemi",
+    "coordinate": {
+      "latitude": 41.028198,
+      "longitude": 28.974489
+    },
+    "description": "Galip Dede Caddesi’ndeki bu eski tekke, Kulekapısı Mevlevihanesi adıyla da anılır. Müze, Beyoğlu’nda Mevlevi kültürünün izini sürmek için bir durak.",
+    "source": "https://muze.gov.tr/muze-detay?distId=MRK&sectionId=GLT01",
+    "coordinateSource": "https://www.haritamap.com/yer/galata-mevlevihanesi-muzesi-beyoglu"
+  }
+]
