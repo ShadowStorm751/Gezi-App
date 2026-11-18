@@ -1,0 +1,25 @@
+# Gizli bilgiler
+.env
+.env.*
+!.env.example
+
+# Supabase yerel dosyaları
+backend/supabase/.branches/
+backend/supabase/.temp/
+
+# Node / React Native
+node_modules/
+.expo/
+dist/
+build/
+*.log
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+data-pipeline/output/
+
+# Sistem
+.DS_Store
+Thumbs.db
