@@ -1,0 +1,25 @@
+{
+  "expo": {
+    "name": "Gezi App",
+    "slug": "gezi-app",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "bundleIdentifier": "app.gezi.kesif"
+    },
+    "android": {
+      "package": "app.gezi.kesif"
+    },
+    "plugins": [
+      ["expo-sensors", {"motionPermission":"Telefonu eğdiğinde tarihi yer etiketlerini kamera görüntüsünde hizala."}],
+      ["expo-camera", {"cameraPermission":"Çevrendeki tarihi yerlerin yönünü kamera görüntüsünde göster.", "recordAudioAndroid":false}],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Yakınındaki tarihi yerlerin mesafesini hesaplamak için konumunu kullan."
+        }
+      ]
+    ]
+  }
+}
