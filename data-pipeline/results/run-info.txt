@@ -1,0 +1,2 @@
+osm_elements=2105
+wikidata_entities=1014
