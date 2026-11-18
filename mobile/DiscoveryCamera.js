@@ -1,3 +1,4 @@
+import {lang,t} from './client';
 import React, {useEffect, useState} from 'react';
 import {AppState, BackHandler, Linking, Pressable, StyleSheet, Text, View} from 'react-native';
 import {CameraView, useCameraPermissions} from 'expo-camera';
@@ -62,7 +63,7 @@ export default function DiscoveryCamera({places, trackedId, onStopTracking, onSe
     async function start() {
       const access = await Location.requestForegroundPermissionsAsync();
       if (cancelled) return;
-      if (!access.granted) { setIssue('Baloncukların yönü için konum iznini aç.'); return; }
+      if (!access.granted) { setIssue(t("Baloncukların yönü için konum iznini aç.","Enable location to see nearby places.")); return; }
       const position = await Location.watchPositionAsync(
         {accuracy:Location.Accuracy.High, distanceInterval:3, timeInterval:1500},
         fix => { if (!cancelled) setCoords(fix.coords); }
@@ -75,43 +76,44 @@ export default function DiscoveryCamera({places, trackedId, onStopTracking, onSe
         setHeading(reading.accuracy > 0 && degrees >= 0 ? degrees : null);
       }));
     }
-    start().catch(() => { if (!cancelled) setIssue('Konum veya pusula okunamadı. Cihaz ayarlarını kontrol et.'); });
+    start().catch(() => { if (!cancelled) setIssue(t("Konum veya pusula okunamadı. Cihaz ayarlarını kontrol et.","Location or compass unavailable. Check device settings.")); });
     return () => { cancelled = true; subscriptions.forEach(sub => sub.remove()); };
   }, [active, permission?.granted, retry]);
 
   const targets = cameraTargets(places, coords, heading);
   const aspect = height > 0 ? width / height : 0.6;
   const visible = cameraMarkers(targets, trackedId, pitch ?? 0, aspect);
+  const directions = lang === 'tr' ? edgeHints : {left:'turn left',right:'turn right',top:'tilt up',bottom:'tilt down'};
   const trackedPlace = places.find(place => place.id === trackedId);
   const closest = targets[0];
-  let hint = 'Baloncuğa dokunarak yerin hikâyesini aç.';
+  let hint = t("Baloncuğa dokunarak yerin hikâyesini aç.","Tap a marker to read its story.");
   if (!active) hint = '';
   else if (issue) hint = issue;
-  else if (!coords) hint = 'Konum bekleniyor…';
-  else if (heading === null) hint = 'Pusula bekleniyor. Telefonu dik tutup yavaşça çevir.';
-  else if (trackedPlace && !visible.length) hint = trackedPlace.name + ' 2 km’lik keşif alanının dışında.';
-  else if (visible[0]?.edge) hint = 'Hedefi görmek için ' + edgeHints[visible[0].edge] + '.';
-  else if (!closest) hint = '2 km içinde pilot yer bulunamadı. İlk iki durak Galata’da.';
+  else if (!coords) hint = t("Konum bekleniyor…","Waiting for location…");
+  else if (heading === null) hint = t("Pusula bekleniyor. Telefonu dik tutup yavaşça çevir.","Waiting for compass. Hold your phone upright and turn slowly.");
+  else if (trackedPlace && !visible.length) hint = trackedPlace.name + t(" 2 km’lik keşif alanının dışında."," is outside the 2 km discovery area.");
+  else if (visible[0]?.edge) hint = t('Hedefi görmek için ', 'To see the place, ') + directions[visible[0].edge] + '.';
+  else if (!closest) hint = t('2 km içinde yer bulunamadı.', 'No places within 2 km.');
   else if (!visible.length) {
     const [guide] = cameraMarkers(targets, closest.id, pitch ?? 0, aspect);
-    hint = closest.name + ' için ' + edgeHints[guide.edge] + '.';
+    hint = closest.name + ' · ' + directions[guide.edge] + '.';
   }
   const bubbleWidth = Math.min(208, Math.max(0, width - 24));
   return <View style={styles.screen} onLayout={e => setSize(e.nativeEvent.layout)}>
     {active && permission?.granted && !lensError &&
       <CameraView style={StyleSheet.absoluteFill} facing="back" onMountError={() => setLensError(true)}/>}
     <View style={styles.top}>
-      <Control onPress={onBack}>Keşfet’e dön</Control>
+      <Control onPress={onBack}>{t("Keşfet’e dön","Back to Explore")}</Control>
       {heading !== null && permission?.granted && <Text style={styles.chip}>{Math.round(heading) % 360}°</Text>}
     </View>
     {!permission?.granted || lensError ? <View style={styles.center}>
-      <Text style={styles.title}>Kamerayla keşfet</Text>
-      <Text style={styles.light}>{lensError ? 'Arka kamera açılamadı.' : 'Tarihi yerlerin yönünü canlı görüntü üzerinde görmek için kameraya izin ver.'}</Text>
+      <Text style={styles.title}>{t("Kamerayla keşfet","Explore with camera")}</Text>
+      <Text style={styles.light}>{lensError ? t("Arka kamera açılamadı.","Could not open the rear camera.") : t("Tarihi yerlerin yönünü canlı görüntü üzerinde görmek için kameraya izin ver.","Allow camera access to see nearby places in the live view.")}</Text>
       <Control onPress={() => lensError ? setLensError(false) : permission?.canAskAgain === false ? Linking.openSettings() : requestCamera()}>
-        {lensError ? 'Tekrar dene' : permission?.canAskAgain === false ? 'Ayarları aç' : 'Kamera izni ver'}
+        {lensError ? t("Tekrar dene","Try again") : permission?.canAskAgain === false ? t("Ayarları aç","Open settings") : t("Kamera izni ver","Allow camera")}
       </Control>
     </View> : <>
-      {width > 0 && visible.map((place, i) => {
+      {width > 0 && visible.slice(0,3).map((place, i) => {
         const left = Math.max(8, Math.min(width - bubbleWidth - 8, width * place.fraction - bubbleWidth / 2));
         return <Pressable accessibilityRole="button" key={place.id} onPress={() => onSelect(place)}
           style={[styles.bubble, {left, width:bubbleWidth,
@@ -122,10 +124,10 @@ export default function DiscoveryCamera({places, trackedId, onStopTracking, onSe
       })}
       <View style={styles.bottom}>
         <Text style={styles.light}>{hint}</Text>
-        {pitch === null && !!coords && <Text style={styles.light}>Eğim verisi yok · Yatay takip açık</Text>}
-        {!!trackedId && <Control onPress={onStopTracking}>Takibi bırak</Control>}
-        {!!issue && <Control onPress={() => setRetry(n => n + 1)}>Yeniden dene</Control>}
-        {!!issue && <Control onPress={() => Linking.openSettings()}>Ayarları aç</Control>}
+        {pitch === null && !!coords && <Text style={styles.light}>{t("Eğim verisi yok · Yatay takip açık","Tilt unavailable · Horizontal tracking active")}</Text>}
+        {!!trackedId && <Control onPress={onStopTracking}>{t("Takibi bırak","Stop tracking")}</Control>}
+        {!!issue && <Control onPress={() => setRetry(n => n + 1)}>{t("Yeniden dene","Retry")}</Control>}
+        {!!issue && <Control onPress={() => Linking.openSettings()}>{t("Ayarları aç","Open settings")}</Control>}
       </View>
     </>}
   </View>;

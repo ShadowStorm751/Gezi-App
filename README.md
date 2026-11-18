@@ -1,32 +1,38 @@
-# Gezi App · İstanbul pilotu
+# Gezi App
 
-İlk saha bölgesi Galata. Kullanıcı bir sokakta durup çevresini tarayarak göremediği tarihi yerlerin yönünü ve kuş uçuşu mesafesini öğrenir. Yerinde döndüğünde baloncuk ekranda kayar, mesafe sabit kalır. Baloncuğa dokunarak yerin hikâyesini açar. Ziyaret kaydı ayrı bir yakınlık kontrolü gerektirir.
+İstanbul'dan başlayarak tarihi-kültürel yerleri ve doğa/manzara noktalarını keşfettiren mobil uygulama. Kullanıcı yerlerin yakınında GPS ile check-in yapar, rozet kazanır, şehri tamamlamaya çalışır ve yıl sonunda paylaşılabilir bir özet alır. Kamerayı çevirince yakındaki yerler ekranda etiket olarak görünür (geo-AR).
 
-## İlk mobil teslim
+## Klasörler
 
-React Native ve Expo ile iki mobil platform için ortak bir ön yüz seçildi. Haritadaki işarete veya listedeki satıra dokunmak aynı yer kartını açar. Kartta kısa tarihçe ve kurumun ziyaret bilgilerine bağlantı bulunur. Başlangıç mesafeleri açıkça belirtilen Galata örnek konumundan hesaplanır. Kullanıcı isterse cihaz konumunu bir defalık alıp uzaklıkları günceller. Yer kataloğu şimdilik Galata ile sınırlıdır.
+| Klasör | İçerik | Sorumlu |
+| --- | --- | --- |
+| [`docs/`](docs/) | [Teknik plan](docs/TECHNICAL_PLAN.md), [API sözleşmesi](docs/API.md), [istekler](docs/REQUESTS.md) | Ortak |
+| [`backend/`](backend/) | Supabase: veritabanı şeması, SQL fonksiyonları, check-in Edge Function'ı | Claude |
+| [`mobile/`](mobile/) | React Native (TypeScript) uygulaması | ChatGPT |
+| [`data-pipeline/`](data-pipeline/) | OSM + Wikidata'dan yer verisini toplayan script'ler | Claude |
 
-Node.js 22 ve npm bulunan bir ortamda `mobile` dizininde `npm install`, ardından `npm start` komutuyla Metro'yu başlat. SDK 54 uyumlu Expo Go veya geliştirme derlemesi kullan. Android bağımsız derlemesinde harita sağlayıcısının API anahtarı gerekir. Mesafe ve yön kontrolleri bağımsız olarak `node --test tests/geo.test.cjs` komutuyla çalışır.
+## Galata pilotunu dene
 
-## Kamera ve tarayıcı denemesi
+[Gezi-Test.html](Gezi-Test.html) dosyasını indirip tarayıcıda aç. **Kamera demosunu aç** düğmesine bas. Örnek konum Galata Kulesi’nin yaklaşık 1 km güneyinde. Bakış yönünü ve telefon eğimini sürgülerle değiştirip bir baloncuğa dokunarak yer kartını açabilirsin. Bu deneme kamera veya konum izni istemez.
 
-Bilgisayarda Gezi-Test.html dosyasını açıp **Kamera demosunu aç** düğmesine bas. Başlangıç noktası kulenin yaklaşık 1 km güneyinde. Bakış yönü ve telefon eğimi sürgüleriyle iki hedefi kadraja al, bir baloncuğa basıp yer kartını aç. **Kuleye yönel** bakış yönünü sıfırlar. Bu deneme kamera veya konum izni istemez.
+Telefonda canlı kamera ve pusulayla denemek için [mobil kurulum adımlarını](mobile/README.md) izle. [İstanbul pilot listesi](istanbul-pilot.csv) değerlendirmeye alınan 50 yer adayını ve kaynaklarını içerir.
 
-Mobil uygulamada **Kamerayla keşfet** arka kamerayı açar. Canlı mod cihaz konumunu ve pusulayı kullanır. Pilot kataloğundaki 2 km içindeki yerlerin yatay yönü, başlangıçta varsayılan 60° yatay görüş açısıyla hesaplanır. Hedefin görünürlüğünü binalar engellemez. Etiketler iki ayrı yükseklikte yerleştirilir. Dikey takip için telefonun hareket sensörü kullanılır. Yer yükseklikleri henüz katalogda bulunmadığından baloncuklar yaklaşık ufuk hizasını izler. Kamera düzeltmeleri gerçek cihazda kalibre edilecek. Konum ve pusula takibi kamera ekranı kapanınca durur. Fiziksel cihazda izin verme, izin reddi, kuzey geçişi, arka plana alma ve dar sokakta yön sapması kontrol edilmelidir.
+## Birlikte çalışma kuralları
 
-## Pilot verisi
+1. **Sözleşme `docs/API.md`.** Mobil yalnızca orada yazan fonksiyonları kullanır. Backend bir imzayı değiştirirse API.md'yi aynı commit'te günceller.
+2. **Herkes kendi klasöründe.** Diğer tarafın klasöründe değişiklik gerekiyorsa `docs/REQUESTS.md`'ye yazılır.
+3. **Gizli bilgi repo'ya girmez.** Supabase anahtarları `.env` dosyalarında kalır (`.gitignore`'da).
+4. **Küçük ve açıklamalı commit'ler.** Commit mesajı ne değiştiğini söyler.
 
-`istanbul-pilot.csv` resmî kataloglarla eşleştirilmiş 50 yer adayı içerir. Her satırda kaynak bulunur. `mobile/places.json` içinde yalnızca ilk iki yerin koordinatları ve açıklamaları vardır. Koordinatlar yapı konumudur. Saha gezisinde giriş noktasını ayrıca ölçerek ziyaret doğrulaması için uygun merkezi belirle. Açılış durumunu, saati ve fotoğraf kullanım hakkını yer kaydı yayına alınırken kontrol et.
+Yapay zekâ asistanları için ayrıntılı kurallar: [`AGENTS.md`](AGENTS.md).
 
-## Claude ile ilk bağlantı
+## Durum
 
-Önerilen okuma uç noktası `GET /places/nearby?lat=…&lng=…&radius_m=…`. Yanıt için `{ "places": [...] }` kullan. Her öğe için `mobile/places.json` içindeki id, name, category, period, coordinate, description ve source alanlarını koru. `coordinate` nesnesi latitude ve longitude içerir. Kimlik kalıcıdır. Yakında sonuç yoksa boş dizi döner. İstemci, hata durumunu boş sonuçtan ayrı gösterir. İlk entegrasyon denemesi Galata Kulesi'ni 1 km uzaktan içeren bir sorgudur.
-
-Sonraki fazda ziyaret kaydını sunucu doğrular. Aynı kullanıcının aynı yeri tekrar kaydetmesi koleksiyon sayısını artırmamalı. Uzak konumdaki yer detayları okunabilir. Ziyaret alanına giriş, kamera baloncuğunun görünmesinden bağımsızdır.
-
-## Sıradaki cihaz denemesi
-
-1. Örnek konumla aç, iki işareti ve mesafe sırasını kontrol et. Her işaretten ve her liste satırından doğru kartı aç.
-2. Konum iznini reddet, örnek konumun açıkça belirtildiğini ve yer kartlarının kullanılabildiğini doğrula.
-3. Galata'da konumu al, mesafeleri saha ölçümüyle karşılaştır. Sonraki geliştirme yer fotoğrafları ve backend bağlantısıdır.
-4. Kamera fazında kule yaklaşık 1 km uzaktayken dar sokakta dön. Yön kuzeyi geçtiğinde baloncuk sıçramadan kaymalı, dokununca aynı yer kartını açmalı. Gerçek pusula, görüş açısı ve eğim cihazda kalibre edilecek.
+- [x] Teknik plan ve API sözleşmesi
+- [x] Veritabanı şeması, erişim kuralları, okuma fonksiyonları
+- [x] Check-in Edge Function'ı ve rozet motoru
+- [x] Geliştirme verisi: İstanbul'dan 15 yer, 20 rozet
+- [ ] Supabase projesinin açılması
+- [x] Veri hattı: OSM + Wikidata → onay listesi → SQL
+- [ ] Gerçek İstanbul listesi (100-150 yer, proje sahibinin onayıyla)
+- [ ] Mobil uygulama
