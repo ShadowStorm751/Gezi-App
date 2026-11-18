@@ -45,6 +45,11 @@ class HelperTests(unittest.TestCase):
         self.assertEqual(c({"natural": "peak", "name": "Aydos Tepesi"}), "hill")
         self.assertEqual(c({"leisure": "park", "name": "Gülhane Parkı"}), "park")
         self.assertIsNone(c({"shop": "bakery", "name": "Fırın"}))
+        # turistik yer olarak etiketlenmiş meşhur yapılar
+        self.assertEqual(c({"tourism": "attraction", "name": "Yerebatan Sarnıcı"}), "cistern")
+        self.assertEqual(c({"tourism": "attraction", "man_made": "lighthouse", "name": "Kız Kulesi"}), "tower")
+        self.assertEqual(c({"tourism": "attraction", "name": "Kapalıçarşı"}), "monument")
+        self.assertIsNone(c({"tourism": "attraction", "name": "Vialand"}))
 
     def test_inception_and_period(self):
         claim = lambda t: {"P571": [{"mainsnak": {"datavalue": {"value": {"time": t}}}}]}  # noqa: E731

@@ -53,6 +53,9 @@ area["boundary"="administrative"]["admin_level"="4"]["name"="İstanbul"]->.ist;
   nwr["natural"="beach"]["name"](area.ist);
   nwr["waterway"="waterfall"]["name"](area.ist);
   nwr["place"~"^(island|islet)$"]["name"](area.ist);
+  nwr["tourism"="attraction"]["name"]["wikidata"](area.ist);
+  nwr["man_made"="lighthouse"]["name"](area.ist);
+  nwr["place"="square"]["name"]["wikidata"](area.ist);
 );
 out geom;
 """
@@ -233,7 +236,9 @@ def classify(tags: Dict[str, str]) -> Optional[str]:
     if historic in ("castle", "fort", "citywalls", "city_gate") \
             or re.search(r"\b(hisari|kalesi|surlari)\b", name):
         return "fortress"
-    if historic == "tower" or (historic and re.search(r"\bkulesi\b", name)):
+    landmark = bool(historic) or tags.get("tourism") == "attraction" \
+        or tags.get("man_made") in ("tower", "lighthouse")
+    if historic == "tower" or (landmark and re.search(r"\bkulesi\b", name)):
         return "tower"
     if tags.get("amenity") == "place_of_worship":
         religion = tags.get("religion", "")
@@ -252,6 +257,11 @@ def classify(tags: Dict[str, str]) -> Optional[str]:
         return "monument"
     if tags.get("leisure") in ("park", "garden"):
         return "park"
+    # Turistik yer / meydan / fener: yalnızca tarihi bir ipucu varsa
+    if tags.get("tourism") == "attraction" or tags.get("place") == "square" \
+            or tags.get("man_made") == "lighthouse":
+        if re.search(r"carsi|hipodrom|meydani|feneri|bedesten|han\b|hamam|kemer|sutun|kule", name):
+            return "monument"
     return None
 
 
