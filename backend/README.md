@@ -11,12 +11,14 @@ backend/supabase/
 │   ├── 20261118120300_checkin.sql    check-in iç fonksiyonları (yalnızca service role)
 │   ├── 20261118120400_storage.sql    depolama alanları
 │   ├── 20261119090000_city_pack_version.sql  içerik özetli paket sürümü
-│   └── 20261119100000_tomb_category.sql      türbe kategorisi ve rozeti
+│   ├── 20261119100000_tomb_category.sql      türbe kategorisi ve rozeti
+│   ├── 20261119110000_reference_data.sql     şehir, kategoriler, rozetler (kalıcı)
+│   └── 20261119120000_istanbul_places.sql    onaylı 156 İstanbul yeri (üretilir, elle düzenleme)
 ├── functions/checkin/
 │   ├── index.ts                      Edge Function
 │   ├── rules.ts                      karar kuralları (saf fonksiyonlar)
 │   └── rules.test.ts                 kural testleri
-└── seed.sql                          geliştirme verisi: 15 İstanbul yeri, 20 rozet
+└── seed.sql                          yalnızca yerel deneme verisi (şimdilik boş)
 ```
 
 ## İlk kurulum (proje sahibi)
@@ -34,7 +36,7 @@ backend/supabase/
    supabase functions deploy checkin
    ```
 
-4. Geliştirme verisini yüklemek için Supabase panelindeki SQL Editor'da `seed.sql` içeriğini çalıştır.
+4. `supabase db push` İstanbul'un 156 yerini, kategorileri ve rozetleri de yükler; ayrıca bir şey çalıştırmaya gerek yok.
 5. Panelden **Project URL** ve **anon public key** değerlerini mobil tarafa ver (`mobile/.env`). `service_role` key kimseyle paylaşılmaz, repoya girmez.
 6. Kendini admin yapmak için SQL Editor'da:
 
@@ -50,7 +52,7 @@ Docker gerekir.
 ```bash
 cd backend
 supabase start          # yerel Postgres + Auth + Storage
-supabase db reset       # migration'lar + seed.sql
+supabase db reset       # migration'lar (156 İstanbul yeri dahil)
 supabase functions serve checkin
 ```
 

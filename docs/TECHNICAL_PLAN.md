@@ -127,7 +127,7 @@ Seed'de 20 rozet var (6 genel, 8 tarihi, 6 doğa); türbe migration'ı ile 21.
 
 | Faz | Süre | Backend işleri | Durum |
 | --- | --- | --- | --- |
-| 0 – Hazırlık | 1-2 hf | Supabase projesi, repo ve migration yapısı, veri hattı script'i, yer onayı | Repo ve şema hazır |
+| 0 – Hazırlık | 1-2 hf | Supabase projesi, repo ve migration yapısı, veri hattı script'i, yer onayı | Tamam; yalnızca Supabase projesi açılacak |
 | 1 – Altyapı | 3-4 hf | Şema, seed, okuma RPC'leri, RLS, testler, TS tipleri | İlk sürüm hazır |
 | 2 – Ziyaret ve başarım | 3-4 hf | Auth, `checkin`, rozet motoru, ilerleme | İlk sürüm hazır |
 | 3 – Geo-AR | 3-4 hf | `city_pack` (hazır); asıl iş mobilde | – |
@@ -137,6 +137,6 @@ Seed'de 20 rozet var (6 genel, 8 tarihi, 6 doğa); türbe migration'ı ile 21.
 ## Açık konular
 
 - Supabase projesinin açılması (proje sahibi; anahtarlar repo'ya konmaz).
-- Gerçek İstanbul listesi: veri hattı hazır (`data-pipeline/`); proje sahibinin bilgisayarında çalıştırılıp aday listesi onaylanacak.
+- ~~Gerçek İstanbul listesi~~: 156 yer onaylandı ve migration olarak eklendi (113 tarihi, 43 doğa; TR+EN açıklamalı).
 - Rozet görselleri ve yer fotoğrafları.
 - Harita sağlayıcısı (mobil tarafla).

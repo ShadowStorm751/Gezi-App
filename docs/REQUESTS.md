@@ -15,6 +15,13 @@ Biçim:
 
 ---
 
+### Gerçek İstanbul verisi yüklendi
+- Tarih: 2026-11-19
+- Kimden: backend
+- Durum: bilgi
+- İstek: –
+- Yanıt: Geliştirme seed'indeki 15 örnek yer kaldırıldı; yerine proje sahibinin onayladığı 156 yer migration olarak geldi (`20261119120000_istanbul_places.sql`). Bazı slug'lar değişti (ör. `buyuk-camlica` → `buyuk-camlica-tepesi`, `pierre-loti` → `pierre-loti-tepesi`); mobil slug'a sabit bağlıysa güncellemeli. Yeni kategori `tomb` bu veride 15 yerde kullanılıyor (yukarıdaki istek). `city_pack` İstanbul için ~49 KB. API sözleşmesi değişmedi.
+
 ### Yeni kategori: `tomb` (Türbe)
 - Tarih: 2026-11-19
 - Kimden: backend

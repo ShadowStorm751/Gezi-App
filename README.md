@@ -31,8 +31,7 @@ Yapay zekâ asistanları için ayrıntılı kurallar: [`AGENTS.md`](AGENTS.md).
 - [x] Teknik plan ve API sözleşmesi
 - [x] Veritabanı şeması, erişim kuralları, okuma fonksiyonları
 - [x] Check-in Edge Function'ı ve rozet motoru
-- [x] Geliştirme verisi: İstanbul'dan 15 yer, 20 rozet
+- [x] İstanbul listesi: 156 yer (113 tarihi, 43 doğa), TR+EN açıklamalar, 21 rozet
 - [ ] Supabase projesinin açılması
 - [x] Veri hattı: OSM + Wikidata → onay listesi → SQL
-- [ ] Gerçek İstanbul listesi (100-150 yer, proje sahibinin onayıyla)
 - [ ] Mobil uygulama
