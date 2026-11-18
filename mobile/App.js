@@ -27,6 +27,7 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [detail, setDetail] = useState(null);
   const [cameraOpen, setCameraOpen] = useState(false);
+  const [trackedId, setTrackedId] = useState(null);
   const [locationMessage, setLocationMessage] = useState('');
   const nearby = places.map(place => ({
     ...place, distance: distanceMeters(origin ?? pilot, place.coordinate)
@@ -64,7 +65,9 @@ export default function App() {
   return (
     <SafeAreaView style={styles.page}>
       <StatusBar barStyle="dark-content" backgroundColor={paper}/>
-      {cameraOpen ? <DiscoveryCamera places={places} onBack={() => setCameraOpen(false)} onSelect={setDetail}/> : <>
+      {cameraOpen ? <DiscoveryCamera places={places} trackedId={trackedId}
+        onStopTracking={() => setTrackedId(null)} onSelect={setDetail}
+        onBack={() => { setCameraOpen(false); setTrackedId(null); }}/> : <>
       <View style={styles.header}>
         <Text style={styles.eyebrow}>İSTANBUL  /  BEYOĞLU</Text>
         <Text accessibilityRole="header" style={styles.title}>Keşfet</Text>
@@ -105,6 +108,13 @@ export default function App() {
               <Text style={styles.eyebrow}>{detail.period.toLocaleUpperCase('tr-TR')}  ·  {formatDistance(detail.distance)}</Text>
               <Text style={styles.title} accessibilityRole="header">{detail.name}</Text>
               <Text style={styles.story}>{detail.description}</Text>
+              <Pressable accessibilityRole="button" style={styles.action} onPress={() => {
+                setTrackedId(detail.id);
+                setDetail(null);
+                setCameraOpen(true);
+              }}>
+                <Text style={styles.actionLabel}>Kamerada takip et</Text>
+              </Pressable>
               <Pressable accessibilityRole="link" style={styles.action} onPress={() => openOfficialPage(detail.source)}>
                 <Text style={styles.actionLabel}>Resmî ziyaret bilgileri ↗</Text>
               </Pressable>

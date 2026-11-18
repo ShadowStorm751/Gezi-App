@@ -37,4 +37,17 @@ function cameraTargets(places, origin, heading, radius = 2000, fieldOfView = 60)
   }).filter(place => place.distance <= radius).sort((a, b) => a.distance - b.distance);
 }
 
-module.exports = { distanceMeters, bearingDegrees, relativeDirection, cameraTargets };
+// Free exploration shows every visible place. A tracked place keeps its own
+// marker at the nearest screen edge when the user looks away.
+function cameraMarkers(targets, trackedId) {
+  return targets.flatMap(target => {
+    const tracked = target.id === trackedId;
+    if (trackedId && !tracked) return [];
+    if (target.visible) return [{...target, edge: null}];
+    if (!tracked) return [];
+    const left = target.angle < 0;
+    return [{...target, edge: left ? 'left' : 'right', fraction: left ? 0 : 1}];
+  });
+}
+
+module.exports = { distanceMeters, bearingDegrees, relativeDirection, cameraTargets, cameraMarkers };

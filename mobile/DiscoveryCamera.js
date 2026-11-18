@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {AppState, BackHandler, Linking, Pressable, StyleSheet, Text, View} from 'react-native';
 import {CameraView, useCameraPermissions} from 'expo-camera';
 import * as Location from 'expo-location';
-import {cameraTargets} from './geo';
+import {cameraMarkers, cameraTargets} from './geo';
 
 function Control({children, onPress}) {
   return <Pressable accessibilityRole="button" onPress={onPress} style={styles.control}>
@@ -10,7 +10,7 @@ function Control({children, onPress}) {
   </Pressable>;
 }
 
-export default function DiscoveryCamera({places, onSelect, onBack}) {
+export default function DiscoveryCamera({places, trackedId, onStopTracking, onSelect, onBack}) {
   const [permission, requestCamera] = useCameraPermissions();
   const [active, setActive] = useState(AppState.currentState !== 'background');
   const [coords, setCoords] = useState(null);
@@ -61,13 +61,16 @@ export default function DiscoveryCamera({places, onSelect, onBack}) {
   }, [active, permission?.granted, retry]);
 
   const targets = cameraTargets(places, coords, heading);
-  const visible = targets.filter(place => place.visible);
+  const visible = cameraMarkers(targets, trackedId);
+  const trackedPlace = places.find(place => place.id === trackedId);
   const closest = targets[0];
   let hint = 'Baloncuğa dokunarak yerin hikâyesini aç.';
   if (!active) hint = '';
   else if (issue) hint = issue;
   else if (!coords) hint = 'Konum bekleniyor…';
   else if (heading === null) hint = 'Pusula bekleniyor. Telefonu dik tutup yavaşça çevir.';
+  else if (trackedPlace && !visible.length) hint = trackedPlace.name + ' 2 km’lik keşif alanının dışında.';
+  else if (visible[0]?.edge) hint = visible[0].edge === 'left' ? 'Hedefi görmek için sola dön.' : 'Hedefi görmek için sağa dön.';
   else if (!closest) hint = '2 km içinde pilot yer bulunamadı. İlk iki durak Galata’da.';
   else if (!visible.length) hint = closest.name + ' için ' + (closest.angle < 0 ? 'sola' : 'sağa') + ' dön.';
   const bubbleWidth = Math.min(208, Math.max(0, width - 24));
@@ -89,12 +92,13 @@ export default function DiscoveryCamera({places, onSelect, onBack}) {
         const left = Math.max(8, Math.min(width - bubbleWidth - 8, width * place.fraction - bubbleWidth / 2));
         return <Pressable accessibilityRole="button" key={place.id} onPress={() => onSelect(place)}
           style={[styles.bubble, {left, width:bubbleWidth, top:i === 0 ? '39%' : '56%'}]}>
-          <Text style={styles.place}>{place.name}</Text>
+          <Text style={styles.place}>{place.edge === 'left' ? '‹ ' : ''}{place.name}{place.edge === 'right' ? ' ›' : ''}</Text>
           <Text style={styles.light}>{Math.round(place.distance)} m</Text>
         </Pressable>;
       })}
       <View style={styles.bottom}>
         <Text style={styles.light}>{hint}</Text>
+        {!!trackedId && <Control onPress={onStopTracking}>Takibi bırak</Control>}
         {!!issue && <Control onPress={() => setRetry(n => n + 1)}>Yeniden dene</Control>}
         {!!issue && <Control onPress={() => Linking.openSettings()}>Ayarları aç</Control>}
       </View>

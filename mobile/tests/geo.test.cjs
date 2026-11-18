@@ -2,8 +2,21 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const {distanceMeters, bearingDegrees, relativeDirection} = require('../geo');
 const tower = require('../places.json')[0].coordinate;
-const {cameraTargets} = require('../geo');
+const {cameraMarkers, cameraTargets} = require('../geo');
 const places = require('../places.json');
+
+test('Takip edilen ikinci yer kadraj dışındayken doğru kenarda kalır', () => {
+  const street = {latitude:tower.latitude - 0.009, longitude:tower.longitude};
+  const tracked = places[1].id;
+  const markers = heading => cameraMarkers(cameraTargets(places, street, heading), tracked);
+  assert.equal(markers(90)[0].edge, 'left');
+  assert.equal(markers(270)[0].edge, 'right');
+  assert.equal(markers(0)[0].edge, null);
+  assert.equal(markers(90)[0].id, tracked);
+  assert.equal(markers(90)[0].distance, markers(0)[0].distance);
+  assert.deepEqual(cameraMarkers(cameraTargets(places, street, 90), null), []);
+  assert.deepEqual(cameraMarkers([], tracked), []);
+});
 
 test('Dar sokak demosunda iki yer görünür, dönünce kadrajdan çıkar', () => {
   const street = {latitude:tower.latitude - 0.009, longitude:tower.longitude};

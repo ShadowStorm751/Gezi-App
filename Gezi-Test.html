@@ -2,7 +2,7 @@
 <html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#123e36"><title>Gezi App · Galata</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#eae8df;color:#173d34;font:16px/1.5 system-ui,sans-serif}main{max-width:1050px;margin:clamp(0px,4vw,54px) auto;background:#faf8f0;border-radius:24px;overflow:hidden;box-shadow:0 16px 64px #25372c25}header{padding:24px 30px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px}h1,h2,h3{font-family:Georgia,serif;font-weight:500;line-height:1.08}h1{font-size:clamp(38px,5vw,64px);margin:2px 0}.area{font-size:13px;letter-spacing:.1em;font-weight:700}.layout{display:grid;grid-template-columns:1.4fr 1fr}.map{height:520px;position:relative;isolation:isolate;overflow:hidden;background:#e4eadd;background-image:linear-gradient(#9eb8ad33 1px,transparent 1px),linear-gradient(90deg,#9eb8ad33 1px,transparent 1px);background-size:32px 32px}.tiles,.markers{position:absolute;inset:0;overflow:hidden}.tiles img{position:absolute;width:256px;height:256px}.markers{pointer-events:none}.pin{pointer-events:auto;border:3px solid white;background:#a84222;border-radius:50%;color:white;width:40px;height:40px;position:absolute;transform:translate(-50%,-50%);display:grid;place-items:center;box-shadow:0 2px 9px #0004;font:600 18px Georgia}.pin:after{content:attr(data-short);color:#193d35;background:#fffaf0eb;border-radius:5px;font:600 13px system-ui;white-space:nowrap;position:absolute;top:39px;padding:3px 7px}.dot{position:absolute;transform:translate(-50%,-50%);width:16px;height:16px;border:3px solid white;border-radius:100%;background:#367da3;box-shadow:0 0 0 7px #4387a432}.north,.zoom,.credit{position:absolute;background:#fffffff2;border-radius:8px;padding:5px 9px}.north{top:15px;left:15px;font-weight:600}.zoom{right:15px;top:15px;display:grid;padding:2px}.zoom button{font-size:20px;width:42px;height:40px;border:0;background:transparent}.credit{bottom:4px;right:4px;font-size:12px;color:#294d43}aside{padding:26px}h2{font-size:30px;margin:0 0 6px}p{margin:.4em 0 1em}.muted{font-size:14px;color:#51665c}button,a{color:inherit}button{cursor:pointer;font:inherit}button:focus-visible,a:focus-visible{outline:3px solid #4c8682;outline-offset:3px}.row{display:flex;background:none;border:0;border-bottom:1px solid #d6d8c9;padding:18px 0;width:100%;align-items:center;text-align:left;gap:12px}.row strong{display:block;font:500 23px Georgia}.row span:last-child{margin-left:auto;white-space:nowrap;font-size:14px}.primary,.plain{display:inline-block;border:0;border-radius:12px;padding:12px 16px;text-decoration:none;font-weight:600}.primary{background:#16463c;color:white}.plain{background:#e4eadf}#loc{margin-top:16px}dialog{border:0;background:#fffaf0;border-radius:18px;color:inherit;padding:27px;width:min(92vw,460px);box-shadow:0 14px 55px #0004}dialog::backdrop{background:#142b2599}dialog h2{margin:14px 0}dialog .plain{margin:6px 0}footer{padding:13px 28px;color:#52665e;font-size:13px;border-top:1px solid #dadcd1}@media(max-width:690px){main{margin:0;border-radius:0;min-height:100vh}.layout{display:block}.map{height:40vh;min-height:245px}aside,header{padding:18px 20px}.row{padding:12px 0}}
-[hidden]{display:none!important}#cameraOpen{margin-top:3px}.scan{background:#103b39;color:#f5f4e9}.scanbar,.scancontrols{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 24px;flex-wrap:wrap}.scanbar h2{color:#fff;font-size:27px;margin:0}.scan .plain{background:#dceae2;color:#124136}.scene{position:relative;height:clamp(300px,47vh,490px);overflow:hidden;background:linear-gradient(#406564,#c9c7aa 65%,#69756d);isolation:isolate}.facades{position:absolute;inset:24% -300px 0;background-image:repeating-linear-gradient(90deg,transparent 0 95px,#52665c77 96px 99px),repeating-linear-gradient(0deg,transparent 0 43px,#e7dfbd88 44px 46px),repeating-linear-gradient(90deg,#8a988a 0 96px,#adb09a 97px 194px,#839689 195px 290px);clip-path:polygon(0 10%,10% 10%,10% 20%,19% 20%,19% 12%,28% 12%,28% 0,40% 0,40% 14%,55% 14%,55% 4%,64% 4%,64% 18%,78% 18%,78% 3%,90% 3%,90% 10%,100% 10%,100% 100%,0 100%)}.facades:before{content:"";position:absolute;inset:22% 0 0;background-image:linear-gradient(90deg,transparent 12px,#243e3988 12px 23px,transparent 23px 31px,#243e3988 31px 42px,transparent 42px);background-size:97px 46px;mask-image:repeating-linear-gradient(0deg,black 0 26px,transparent 26px 46px)}.axis{position:absolute;left:50%;top:0;bottom:0;border-left:1px dashed #fff6}.bubble{position:absolute;display:grid;gap:1px;text-align:left;transform:translateX(-50%);color:#fffbea;background:#163e3df0;border:1px solid #a9eed8;border-radius:26px;padding:9px 15px;min-height:52px;max-width:47%;box-shadow:0 2px 12px #102d3040}.bubble b{font-family:Georgia,serif;font-size:17px}.bubble small{font-size:13px;color:#bcdfd1}.scancontrols label{display:grid;gap:4px;flex:1;min-width:180px}.scancontrols input{width:100%;accent-color:#a6dec8}.scancontrols output{font-variant-numeric:tabular-nums}.scanhint{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);max-width:95%;width:max-content;text-align:center;background:#102e2ce0;color:white;border-radius:12px;padding:6px 12px;font-size:14px}.context{position:absolute;top:12px;left:16px;color:#fff;background:#16413bd9;padding:5px 10px;border-radius:8px;font-size:13px}.scancontrols .plain{color:#13382e}</style></head><body><main><header><div><div class="area">İSTANBUL / BEYOĞLU</div><h1>Keşfet</h1></div><span>Gezi App</span></header><div class="layout"><section class="map" aria-label="Galata haritası"><div class="tiles"></div><div class="markers"></div><div class="north">↑ K</div><div class="zoom"><button id="plus" aria-label="Yakınlaştır">+</button><button id="minus" aria-label="Uzaklaştır">−</button></div><a class="credit" href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap</a></section><aside><h2>Galata çevresinde</h2><p class="muted" id="mode">Örnek konumdan kuş uçuşu uzaklık</p><button class="primary" id="cameraOpen">Kamera demosunu aç</button><div id="list"></div><button class="primary" id="loc">Konumumu kullan</button><p class="muted" id="status" role="status"></p></aside></div><section class="scan" id="scan" hidden aria-label="Kamera yön simülasyonu"><div class="scanbar"><h2>Kamerayla keşfet</h2><button class="plain" id="mapBack">Haritaya dön</button></div><div class="scene"><div class="facades"></div><div class="axis"></div><span class="context">Galata · Örnek sokak görünümü</span><div id="bubbles"></div><p class="scanhint" id="scanHint"></p></div><div class="scancontrols"><label for="rotation">Bakış yönü · <output id="degrees" for="rotation">0°</output><input type="range" id="rotation" min="-180" max="180" value="0" step="1"></label><button class="plain" id="centerTower">Kuleye yönel</button></div></section><footer>Galata pilotu · Tarayıcı önizlemesi</footer></main><dialog id="detail"><span class="area" id="period"></span><h2 id="name"></h2><p id="story"></p><a class="primary" id="official" target="_blank" rel="noopener">Resmî ziyaret bilgileri</a> <button class="plain" id="close">Haritaya dön</button></dialog><script>
+[hidden]{display:none!important}#cameraOpen{margin-top:3px}.scan{background:#103b39;color:#f5f4e9}.scanbar,.scancontrols{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 24px;flex-wrap:wrap}.scanbar h2{color:#fff;font-size:27px;margin:0}.scan .plain{background:#dceae2;color:#124136}.scene{position:relative;height:clamp(300px,47vh,490px);overflow:hidden;background:linear-gradient(#406564,#c9c7aa 65%,#69756d);isolation:isolate}.facades{position:absolute;inset:24% -300px 0;background-image:repeating-linear-gradient(90deg,transparent 0 95px,#52665c77 96px 99px),repeating-linear-gradient(0deg,transparent 0 43px,#e7dfbd88 44px 46px),repeating-linear-gradient(90deg,#8a988a 0 96px,#adb09a 97px 194px,#839689 195px 290px);clip-path:polygon(0 10%,10% 10%,10% 20%,19% 20%,19% 12%,28% 12%,28% 0,40% 0,40% 14%,55% 14%,55% 4%,64% 4%,64% 18%,78% 18%,78% 3%,90% 3%,90% 10%,100% 10%,100% 100%,0 100%)}.facades:before{content:"";position:absolute;inset:22% 0 0;background-image:linear-gradient(90deg,transparent 12px,#243e3988 12px 23px,transparent 23px 31px,#243e3988 31px 42px,transparent 42px);background-size:97px 46px;mask-image:repeating-linear-gradient(0deg,black 0 26px,transparent 26px 46px)}.axis{position:absolute;left:50%;top:0;bottom:0;border-left:1px dashed #fff6}.bubble{position:absolute;display:grid;gap:1px;text-align:left;transform:translateX(-50%);color:#fffbea;background:#163e3df0;border:1px solid #a9eed8;border-radius:26px;padding:9px 15px;min-height:52px;max-width:47%;box-shadow:0 2px 12px #102d3040}.bubble b{font-family:Georgia,serif;font-size:17px}.bubble small{font-size:13px;color:#bcdfd1}.scancontrols label{display:grid;gap:4px;flex:1;min-width:180px}.scancontrols input{width:100%;accent-color:#a6dec8}.scancontrols output{font-variant-numeric:tabular-nums}.scanhint{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);max-width:95%;width:max-content;text-align:center;background:#102e2ce0;color:white;border-radius:12px;padding:6px 12px;font-size:14px}.context{position:absolute;top:12px;left:16px;color:#fff;background:#16413bd9;padding:5px 10px;border-radius:8px;font-size:13px}.scancontrols .plain{color:#13382e}</style></head><body><main><header><div><div class="area">İSTANBUL / BEYOĞLU</div><h1>Keşfet</h1></div><span>Gezi App</span></header><div class="layout"><section class="map" aria-label="Galata haritası"><div class="tiles"></div><div class="markers"></div><div class="north">↑ K</div><div class="zoom"><button id="plus" aria-label="Yakınlaştır">+</button><button id="minus" aria-label="Uzaklaştır">−</button></div><a class="credit" href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap</a></section><aside><h2>Galata çevresinde</h2><p class="muted" id="mode">Örnek konumdan kuş uçuşu uzaklık</p><button class="primary" id="cameraOpen">Kamera demosunu aç</button><div id="list"></div><button class="primary" id="loc">Konumumu kullan</button><p class="muted" id="status" role="status"></p></aside></div><section class="scan" id="scan" hidden aria-label="Kamera yön simülasyonu"><div class="scanbar"><h2>Kamerayla keşfet</h2><button class="plain" id="mapBack">Haritaya dön</button></div><div class="scene"><div class="facades"></div><div class="axis"></div><span class="context">Galata · Örnek sokak görünümü</span><div id="bubbles"></div><p class="scanhint" id="scanHint"></p></div><div class="scancontrols"><label for="rotation">Bakış yönü · <output id="degrees" for="rotation">0°</output><input type="range" id="rotation" min="-180" max="180" value="0" step="1"></label><button class="plain" id="stopTracking" hidden>Takibi bırak</button><button class="plain" id="centerTower">Kuleye yönel</button></div></section><footer>Galata pilotu · Tarayıcı önizlemesi</footer></main><dialog id="detail"><span class="area" id="period"></span><h2 id="name"></h2><p id="story"></p><button class="primary" id="trackPlace">Kamerada takip et</button> <a class="plain" id="official" target="_blank" rel="noopener">Resmî ziyaret bilgileri</a> <button class="plain" id="close">Haritaya dön</button></dialog><script>
 const places = [
   {
     "id": "galata-kulesi",
@@ -71,12 +71,32 @@ function cameraTargets(places, origin, heading, radius = 2000, fieldOfView = 60)
   }).filter(place => place.distance <= radius).sort((a, b) => a.distance - b.distance);
 }
 
+// Free exploration shows every visible place. A tracked place keeps its own
+// marker at the nearest screen edge when the user looks away.
+function cameraMarkers(targets, trackedId) {
+  return targets.flatMap(target => {
+    const tracked = target.id === trackedId;
+    if (trackedId && !tracked) return [];
+    if (target.visible) return [{...target, edge: null}];
+    if (!tracked) return [];
+    const left = target.angle < 0;
+    return [{...target, edge: left ? 'left' : 'right', fraction: left ? 0 : 1}];
+  });
+}
+
 const $=s=>document.querySelector(s);
 const pilot={latitude:41.0266,longitude:28.9736};
 const center={latitude:41.02695,longitude:28.97435};
 let origin=pilot, zoom=16;
 function distance(p){const m=distanceMeters(origin,p.coordinate);return m<1000?Math.round(m)+' m':(m/1000).toLocaleString('tr-TR',{maximumFractionDigits:1})+' km'}
-function show(p,label=distance(p)){$('#period').textContent=p.period+' · '+label;$('#name').textContent=p.name;$('#story').textContent=p.description;$('#official').href=p.source;$('#close').textContent=$('#scan').hidden?'Haritaya dön':'Kameraya dön';$('#detail').showModal()}
+function show(p,label=distance(p)){
+  $('#trackPlace').onclick = () => {
+    trackedId = p.id;
+    $('#detail').close();
+    if (scan.hidden) beginScan();
+    else {drawScan();rotation.focus()}
+  };
+$('#period').textContent=p.period+' · '+label;$('#name').textContent=p.name;$('#story').textContent=p.description;$('#official').href=p.source;$('#close').textContent=$('#scan').hidden?'Haritaya dön':'Kameraya dön';$('#detail').showModal()}
 function drawList(){const list=$('#list');list.replaceChildren();[...places].sort((a,b)=>distanceMeters(origin,a.coordinate)-distanceMeters(origin,b.coordinate)).forEach(p=>{const row=document.createElement('button');row.className='row';row.innerHTML='<span><small></small><strong></strong></span><span></span>';row.querySelector('small').textContent=p.category;row.querySelector('strong').textContent=p.name;row.lastElementChild.textContent=distance(p)+' ›';row.onclick=()=>show(p);list.append(row)})}
 function project(p){const n=256*2**zoom;const y=Math.sin(p.latitude*Math.PI/180);return [(p.longitude+180)/360*n,(.5-Math.log((1+y)/(1-y))/(4*Math.PI))*n]}
 function drawMap(){const map=$('.map'),tiles=$('.tiles'),markers=$('.markers'),[cx,cy]=project(center);const left=cx-map.clientWidth/2,top=cy-map.clientHeight/2;tiles.replaceChildren();markers.replaceChildren();
@@ -93,6 +113,7 @@ const demoOrigin = {latitude:places[0].coordinate.latitude - 0.009, longitude:pl
 const scan = $('#scan');
 const rotation = $('#rotation');
 const targetButtons = new Map();
+let trackedId = null;
 function beginScan() {
   $('.layout').hidden = true;
   scan.hidden = false;
@@ -101,6 +122,7 @@ function beginScan() {
   rotation.focus();
 }
 function endScan() {
+  trackedId = null;
   scan.hidden = true;
   $('.layout').hidden = false;
   $('#cameraOpen').focus();
@@ -111,7 +133,9 @@ function drawScan() {
   $('.facades').style.transform = 'translateX(' + (-Number(rotation.value) * 0.9) + 'px)';
   const targets = cameraTargets(places, demoOrigin, heading);
   const sceneWidth = $('.scene').clientWidth;
-  const visible = targets.filter(p => p.visible);
+  const visible = cameraMarkers(targets, trackedId);
+  $('#stopTracking').hidden = !trackedId;
+  $('#centerTower').textContent = trackedId ? 'Hedefe yönel' : 'Kuleye yönel';
   targetButtons.forEach(button => {button.hidden = true});
   visible.forEach((p,index) => {
     let button = targetButtons.get(p.id);
@@ -124,13 +148,18 @@ function drawScan() {
     }
     const label = (p.distance / 1000).toLocaleString('tr-TR',{minimumFractionDigits:1,maximumFractionDigits:1})+' km';
     button.hidden = false;
-    button.firstElementChild.textContent = p.name;
+    button.firstElementChild.textContent = (p.edge === 'left' ? '‹ ' : '') + p.name + (p.edge === 'right' ? ' ›' : '');
     button.lastElementChild.textContent = label;
     button.onclick = () => show(p,label);
     const half = button.offsetWidth / 2 + 6;
     button.style.left = Math.max(half, Math.min(sceneWidth-half, p.fraction*sceneWidth))+'px';
     button.style.top = index === 0 ? '30%' : '58%';
   });
+  const marker = visible[0];
+  if (marker?.edge) {
+    $('#scanHint').textContent = marker.name + ' için ' + (marker.edge === 'left' ? 'sola' : 'sağa') + ' dön.';
+    return;
+  }
   const nearest = targets[0];
   $('#scanHint').textContent = visible.length ? 'Baloncuğa dokunarak yeri incele.' :
     'Galata Kulesi için ' + (nearest.angle < 0 ? 'sola' : 'sağa') + ' dön.';
@@ -138,7 +167,12 @@ function drawScan() {
 $('#cameraOpen').onclick = beginScan;
 $('#mapBack').onclick = endScan;
 rotation.oninput = drawScan;
-$('#centerTower').onclick = () => {rotation.value='0';drawScan()};
+$('#centerTower').onclick = () => {
+  const target = places.find(p => p.id === trackedId) ?? places[0];
+  rotation.value = Math.round(relativeDirection(bearingDegrees(demoOrigin,target.coordinate),0));
+  drawScan();
+};
+$('#stopTracking').onclick = () => {trackedId=null;drawScan();rotation.focus()};
 new ResizeObserver(() => {if(!scan.hidden) drawScan()}).observe($('.scene'));
 drawList();new ResizeObserver(drawMap).observe($('.map'));
 </script></body></html>
