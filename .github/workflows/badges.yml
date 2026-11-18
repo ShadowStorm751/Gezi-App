@@ -1,0 +1,51 @@
+# Rozet görsellerini (assets/badges/*.webp) Supabase Storage'daki 'badges' bucket'ına yükler.
+# Gizli anahtar kullanmaz: badge-upload Edge Function'ı yalnızca bilinen 21 dosyayı
+# (içerik özeti birebir aynıysa) kabul eder.
+# Tetikleme: assets/badges/ değişip main'e yüklenince ya da elle.
+# Sonuç: data-pipeline/results/badges-upload.txt olarak commit'lenir.
+name: Rozet görselleri
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [assets/badges/*.webp, .github/workflows/badges.yml]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: data-pipeline
+  cancel-in-progress: false
+
+env:
+  FUNCTION_URL: https://oxzypxygluqnwvtvqpil.supabase.co/functions/v1/badge-upload
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Yükle
+        run: |
+          out=data-pipeline/results/badges-upload.txt
+          echo "# Rozet yüklemesi $(date -u +%FT%TZ)" > "$out"
+          fail=0
+          for f in assets/badges/*.webp; do
+            n=$(basename "$f")
+            code=$(curl -sS -o /tmp/resp -w '%{http_code}' -X POST \
+              -H 'content-type: image/webp' --data-binary "@$f" "$FUNCTION_URL?name=$n")
+            echo "$code $n $(head -c 200 /tmp/resp)" | tee -a "$out"
+            [ "$code" = "200" ] || fail=1
+          done
+          echo "fail=$fail" >> "$out"
+      - name: Sonucu kaydet
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data-pipeline/results/badges-upload.txt
+          git commit -m "Rozet görselleri Storage'a yüklendi (sonuç)" || echo "Değişiklik yok"
+          git pull --rebase
+          git push
