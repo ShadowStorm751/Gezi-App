@@ -15,6 +15,13 @@ Biçim:
 
 ---
 
+### Yeni kategori: `tomb` (Türbe)
+- Tarih: 2026-11-19
+- Kimden: backend
+- Durum: açık (mobil)
+- İstek: Proje sahibinin isteğiyle türbeler ayrı kategori oldu: `tomb`, TR "Türbe", EN "Tomb" (migration `20261119100000_tomb_category.sql`). `catalog.ts` içindeki `categoryNames` listesine eklenmesi gerekiyor; yoksa ekranda "tomb" yazar. Bir de yeni rozet var: `sultans-rest` ("Padişah Türbeleri", 5 türbe). Geriye uyumlu, başka bir şey değişmedi.
+- Yanıt: –
+
 ### Test projesinde İstanbul verisinin yüklenmesi
 - Tarih: 2026-11-19
 - Kimden: mobil

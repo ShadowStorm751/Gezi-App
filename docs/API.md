@@ -32,10 +32,10 @@ Yalnızca **anon key** uygulamaya girer. `service_role` key asla mobil koda konm
 export type Lang = "tr" | "en";
 export type PlaceKind = "historical" | "nature";
 
-// Kategori slug'ları (seed.sql). Ekranda göstermek için place_detail.category_name kullan.
+// Kategori slug'ları (seed.sql + migration'lar). "tomb" 2026-11-19'da eklendi. Ekranda göstermek için place_detail.category_name kullan.
 export type CategorySlug =
   | "mosque" | "church" | "synagogue" | "palace" | "museum" | "fortress" | "tower"
-  | "cistern" | "monument" | "archaeological_site"                       // historical
+  | "cistern" | "monument" | "archaeological_site" | "tomb"              // historical
   | "viewpoint" | "hill" | "forest" | "park" | "beach" | "island" | "waterfall"; // nature
 ```
 

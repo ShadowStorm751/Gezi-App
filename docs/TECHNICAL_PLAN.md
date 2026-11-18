@@ -6,7 +6,7 @@ Son güncelleme: 18 Kasım 2026. Bu dosya projenin ortak referansıdır; Claude,
 
 MVP, İstanbul'da 100-150 yeri (yaklaşık %65 tarihi-kültürel, %35 doğa ve manzara) Supabase + PostGIS üzerinde sunar. Check-in, rozet ve özet mantığı tamamen sunucuda çalışır.
 
-- **Tarihi ve kültürel:** müze, cami, kilise, sinagog, saray, köşk, sur ve kale, kule, sarnıç, ören yeri, anıt.
+- **Tarihi ve kültürel:** müze, cami, kilise, sinagog, saray, köşk, sur ve kale, kule, sarnıç, türbe, ören yeri, anıt.
 - **Doğa ve manzara:** seyir noktası, tepe, koru ve orman, park ve bahçe, sahil ve plaj, ada, şelale.
 
 ### Kararlar
@@ -95,7 +95,7 @@ Rozetler `achievements.rule` JSON'u ile tanımlanır; yeni rozet için uygulama 
 | `time_of_day` | `{"type":"time_of_day","category":"viewpoint","from":"17:00","to":"20:00","n":3}` | Belirli saatlerde n check-in (yerel saat) |
 | `streak_weeks` | `{"type":"streak_weeks","n":4}` | Art arda n hafta, her hafta en az bir yer |
 
-Seed'de 20 rozet var: 6 genel, 8 tarihi, 6 doğa.
+Seed'de 20 rozet var (6 genel, 8 tarihi, 6 doğa); türbe migration'ı ile 21.
 
 ## Yıllık özet
 

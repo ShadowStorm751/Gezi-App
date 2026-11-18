@@ -64,13 +64,13 @@ CATEGORY_KIND = {
     "mosque": "historical", "church": "historical", "synagogue": "historical",
     "palace": "historical", "museum": "historical", "fortress": "historical",
     "tower": "historical", "cistern": "historical", "monument": "historical",
-    "archaeological_site": "historical",
+    "archaeological_site": "historical", "tomb": "historical",
     "viewpoint": "nature", "hill": "nature", "forest": "nature", "park": "nature",
     "beach": "nature", "island": "nature", "waterfall": "nature",
 }
 
 DEFAULT_RADIUS_M = {
-    "viewpoint": 50, "tower": 60, "cistern": 60, "monument": 60,
+    "viewpoint": 50, "tower": 60, "cistern": 60, "monument": 60, "tomb": 60,
     "mosque": 100, "church": 100, "synagogue": 100, "museum": 100, "hill": 100,
     "palace": 150, "fortress": 150, "archaeological_site": 150, "beach": 150,
     "park": 200, "waterfall": 100, "forest": 500, "island": 1500,
@@ -83,7 +83,7 @@ AREA_CATEGORIES = {"forest", "park", "island", "beach", "archaeological_site"}
 QUOTAS = {"historical": 200, "nature": 100}
 
 # Tek bir kategori listeyi doldurmasın (ör. 76 cami).
-CATEGORY_CAP = {"mosque": 40, "monument": 25, "museum": 30, "park": 25, "viewpoint": 20, "island": 12}
+CATEGORY_CAP = {"tomb": 20, "mosque": 40, "monument": 25, "museum": 30, "park": 25, "viewpoint": 20, "island": 12}
 
 MAX_RING_POINTS = 150
 DUPLICATE_DISTANCE_M = 100
@@ -251,9 +251,11 @@ def classify(tags: Dict[str, str]) -> Optional[str]:
         return "monument"
     if tags.get("tourism") == "museum":
         return "museum"
+    if historic == "tomb":
+        return "tomb"
     if historic in ("ruins", "archaeological_site"):
         return "archaeological_site"
-    if historic in ("monument", "memorial", "aqueduct", "tomb", "fountain", "building"):
+    if historic in ("monument", "memorial", "aqueduct", "fountain", "building"):
         return "monument"
     if tags.get("leisure") in ("park", "garden"):
         return "park"

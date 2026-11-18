@@ -137,6 +137,7 @@ class RealWorldQuirksTests(unittest.TestCase):
                      "claims": {"P31": [{"mainsnak": {"datavalue": {"value": {"id": "Q5"}}}}]}}}
         c = p.build_candidates(osm, wd)[0]
         self.assertEqual(c["ad_tr"], "II. Selim Türbesi")
+        self.assertEqual(c["kategori"], "tomb")
         self.assertEqual(c["puan"], 0)  # padişahın ünü türbeye puan vermez
 
     def test_category_cap(self):
