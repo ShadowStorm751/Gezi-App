@@ -30,7 +30,7 @@ Biçim:
   - Görselleri uygulama paketine koy; `my_achievements` dönen `slug` ile eşleştir. Pakette yoksa `badge_path` ile `supabase.storage.from("badges").getPublicUrl(badge_path)`, o da yoksa yer tutucu.
   - **Kazanılmamış rozet** için ayrı görsel yok: aynı görseli gri tonlamalı + yarı saydam (~%40) göster, altında `progress/target` (ör. 3/5). Kazanılınca tam renk ve küçük bir kutlama animasyonu.
   - Görsellerde yazı yok; rozet adı ve açıklaması `my_achievements` içinden, cihaz diline göre gelir.
-  - `badge_path` canlıda dolu (`<slug>.webp`). Storage'a yükleme proje sahibinde; yüklenene kadar URL 404 dönebilir, paketteki görseller yeterli.
+  - `badge_path` canlıda dolu (`<slug>.webp`) ve 21 görselin hepsi `badges` bucket'ında (herkese açık). `getPublicUrl(badge_path)` çalışır.
 - Yanıt: –
 
 ### Yer fotoğrafları geldi (atıf zorunlu)
