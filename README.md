@@ -27,5 +27,6 @@ Yapay zekâ asistanları için ayrıntılı kurallar: [`AGENTS.md`](AGENTS.md).
 - [x] Check-in Edge Function'ı ve rozet motoru
 - [x] Geliştirme verisi: İstanbul'dan 15 yer, 20 rozet
 - [ ] Supabase projesinin açılması
-- [ ] Veri hattı ve gerçek İstanbul listesi (100-150 yer)
+- [x] Veri hattı: OSM + Wikidata → onay listesi → SQL
+- [ ] Gerçek İstanbul listesi (100-150 yer, proje sahibinin onayıyla)
 - [ ] Mobil uygulama

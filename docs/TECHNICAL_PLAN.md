@@ -137,6 +137,6 @@ Seed'de 20 rozet var: 6 genel, 8 tarihi, 6 doğa.
 ## Açık konular
 
 - Supabase projesinin açılması (proje sahibi; anahtarlar repo'ya konmaz).
-- Gerçek İstanbul listesi: veri hattı script'i yazılacak, proje sahibinin bilgisayarında çalıştırılacak.
+- Gerçek İstanbul listesi: veri hattı hazır (`data-pipeline/`); proje sahibinin bilgisayarında çalıştırılıp aday listesi onaylanacak.
 - Rozet görselleri ve yer fotoğrafları.
 - Harita sağlayıcısı (mobil tarafla).
