@@ -28,7 +28,7 @@ def page(license_short, artist='<a href="//commons.wikimedia.org/wiki/User:X">Al
 
 class LicenseTests(unittest.TestCase):
     def test_free_licenses_accepted(self):
-        for lic in ["CC BY-SA 4.0", "CC BY 2.0", "CC-BY-SA-3.0", "CC0", "Public domain", "PD-old", "CC BY-SA 3.0 de"]:
+        for lic in ["CC BY-SA 4.0", "CC BY 2.0", "CC-BY-SA-3.0", "CC0", "Public domain", "PD-old", "CC BY-SA 3.0 de", "FAL"]:
             self.assertTrue(ph.license_ok(lic), lic)
 
     def test_restricted_licenses_rejected(self):
@@ -54,6 +54,14 @@ class ParseTests(unittest.TestCase):
     def test_small_original_keeps_url(self):
         url = "https://upload.wikimedia.org/wikipedia/commons/a/ab/Small.jpg"
         self.assertEqual(ph.thumb_from(url, 500), url)
+
+    def test_cleanup(self):
+        url = ("https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/B.JPG/1280px-B.JPG"
+               "?utm_source=commons.wikimedia.org&utm_campaign=imageinfo")
+        info = ph.parse_imageinfo(page("CC0", artist="My another account ( talk )", thumb=url))
+        self.assertEqual(info["url"], "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/B.JPG/1280px-B.JPG")
+        self.assertTrue(info["thumb_url"].endswith("/500px-B.JPG"))
+        self.assertEqual(info["author"], "My another account")
 
     def test_missing_artist(self):
         self.assertEqual(ph.parse_imageinfo(page("CC0", artist=""))["author"], "Bilinmiyor / Unknown")

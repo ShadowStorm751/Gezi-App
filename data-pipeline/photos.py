@@ -48,7 +48,7 @@ def strip_html(text: str, max_len: int = 200) -> str:
 
 
 def license_ok(short_name: str) -> bool:
-    """Serbest lisans mı? CC0, kamu malı, CC BY, CC BY-SA kabul; NC/ND ve diğerleri değil."""
+    """Serbest lisans mı? CC0, kamu malı, CC BY, CC BY-SA, FAL kabul; NC/ND ve diğerleri değil."""
     s = (short_name or "").strip().lower()
     if not s:
         return False
@@ -56,7 +56,23 @@ def license_ok(short_name: str) -> bool:
         return False
     if s.startswith("cc0") or s.startswith("public domain") or s.startswith("pd") or s == "no restrictions":
         return True
+    if s in ("fal", "free art license", "licence art libre") or s.startswith("free art license"):
+        return True  # Free Art License: ticari kullanıma ve değiştirmeye izin verir (CC BY-SA benzeri)
     return bool(re.match(r"^cc[ -]by(-sa)?([ -]\d(\.\d)?)?(\s|$|[a-z ]*)", s))
+
+
+def clean_url(url: str) -> str:
+    """Wikimedia'nın eklediği utm_ takip parametrelerini atar."""
+    if not url or "?" not in url:
+        return url
+    base, query = url.split("?", 1)
+    keep = [kv for kv in query.split("&") if not kv.startswith("utm_")]
+    return base + ("?" + "&".join(keep) if keep else "")
+
+
+def clean_author(text: str) -> str:
+    text = re.sub(r"\(\s*(talk|discussion|tartışma|contribs?)\s*\)", "", text, flags=re.I)
+    return re.sub(r"\s+", " ", text).strip(" ,;")
 
 
 def thumb_from(url: str, width: int) -> str:
@@ -77,8 +93,8 @@ def parse_imageinfo(page: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         return None
     if not str(ii.get("mime", "image/jpeg")).startswith("image/"):
         return None
-    url = ii.get("thumburl") or ii.get("url")
-    author = strip_html(get("Artist")) or strip_html(get("Credit")) or "Bilinmiyor / Unknown"
+    url = clean_url(ii.get("thumburl") or ii.get("url"))
+    author = clean_author(strip_html(get("Artist"))) or clean_author(strip_html(get("Credit"))) or "Bilinmiyor / Unknown"
     return {
         "file": page.get("title", "").removeprefix("File:"),
         "url": url,
@@ -88,7 +104,7 @@ def parse_imageinfo(page: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         "author": author,
         "license": lic,
         "license_url": strip_html(get("LicenseUrl"), 300) or None,
-        "source_url": ii.get("descriptionurl"),
+        "source_url": clean_url(ii.get("descriptionurl")),
     }
 
 

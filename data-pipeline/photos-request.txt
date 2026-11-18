@@ -1,2 +1,2 @@
 Bu dosya değişip main'e yüklenince GitHub fotoğraf bilgilerini toplar (.github/workflows/photos.yml).
-Son istek: 2026-11-19 01:15 — ilk İstanbul fotoğrafları
+Son istek: 2026-11-19 01:20 — FAL lisansı kabul, adres ve yazar temizliği
