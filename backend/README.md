@@ -15,7 +15,8 @@ backend/supabase/
 │   ├── 20261119110000_reference_data.sql     şehir, kategoriler, rozetler (kalıcı)
 │   ├── 20261119120000_istanbul_places.sql    onaylı 156 İstanbul yeri (üretilir, elle düzenleme)
 │   ├── 20261119130000_photo_urls.sql         fotoğraflar için dış adres alanları
-│   └── 20261119140000_istanbul_photos.sql    133 yerin Commons fotoğrafı (üretilir)
+│   ├── 20261119140000_istanbul_photos.sql    133 yerin Commons fotoğrafı (üretilir)
+│   └── 20261119150000_badge_paths.sql        rozet görsel yolları
 ├── functions/checkin/
 │   ├── index.ts                      Edge Function
 │   ├── rules.ts                      karar kuralları (saf fonksiyonlar)
@@ -66,6 +67,16 @@ node --experimental-strip-types --test supabase/functions/checkin/rules.test.ts
 ```
 
 SQL fonksiyonları 18 Kasım 2026'da Postgres 16 üzerinde, PostGIS fonksiyonları basit taklitlerle (haversine mesafe, yön) değiştirilerek senaryo testlerinden geçirildi: yakındaki yerler, arama, check-in akışı, rozetler, yıllık özet, RLS ve yetki retleri. Gerçek PostGIS ile ilk `supabase db reset` sonrası bir kez daha doğrulanmalı.
+
+## Rozet görselleri
+
+Kaynak: `assets/badges/*.webp`. Storage'a yükleme (bir kez, ve rozet eklenince):
+
+```bash
+supabase storage cp -r ../assets/badges ss:///badges --experimental
+```
+
+ya da Supabase panelinde **Storage → badges** içine dosyaları sürükle-bırak.
 
 ## Yeni rozet eklemek
 

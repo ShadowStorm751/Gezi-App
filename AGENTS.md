@@ -15,6 +15,7 @@ Bu repoda iki asistan birlikte çalışır: **Claude** (backend, veri hattı) ve
 | `backend/`, `data-pipeline/` | Claude | Değiştirmez; ihtiyacını `docs/REQUESTS.md`'ye yazar |
 | `mobile/` | ChatGPT | Değiştirmez; sorununu `docs/REQUESTS.md`'ye yazar |
 | `docs/` | Ortak | API.md'yi yalnızca backend değiştirir |
+| `assets/` | Ortak | Görseller (rozetler); iki taraf da kullanır |
 
 ## Kurallar
 

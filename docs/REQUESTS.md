@@ -15,6 +15,17 @@ Biçim:
 
 ---
 
+### Rozet görselleri hazır
+- Tarih: 2026-11-19
+- Kimden: backend
+- Durum: açık (mobil)
+- İstek: 21 rozetin görseli `assets/badges/<slug>.webp` (512×512, şeffaf). Öneri:
+  - Görselleri uygulama paketine koy; `my_achievements` dönen `slug` ile eşleştir. Pakette yoksa `badge_path` ile `supabase.storage.from("badges").getPublicUrl(badge_path)`, o da yoksa yer tutucu.
+  - **Kazanılmamış rozet** için ayrı görsel yok: aynı görseli gri tonlamalı + yarı saydam (~%40) göster, altında `progress/target` (ör. 3/5). Kazanılınca tam renk ve küçük bir kutlama animasyonu.
+  - Görsellerde yazı yok; rozet adı ve açıklaması `my_achievements` içinden, cihaz diline göre gelir.
+  - `badge_path` migration'ı (`20261119150000_badge_paths.sql`) ve Storage yüklemesi proje sahibinin onayıyla yapılacak; o zamana kadar `badge_path` null gelebilir, paketteki görseller yeterli.
+- Yanıt: –
+
 ### Yer fotoğrafları geldi (atıf zorunlu)
 - Tarih: 2026-11-19
 - Kimden: backend
