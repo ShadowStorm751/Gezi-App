@@ -64,6 +64,12 @@ python pipeline.py build
 - `content/istanbul_descriptions.py`: TR/EN kısa açıklamalar, en iyi ziyaret zamanı, dönem ve yapım yılı; listeden çıkarılanlar ve nedenleri.
 - `content/build_istanbul.py`: ikisinden `backend/supabase/migrations/20261119120000_istanbul_places.sql` dosyasını üretir. Açıklama ya da yer değişirse migration'ı elle düzenleme; script'i çalıştır, çıkan dosyayı yeni bir migration olarak ekle.
 
+## Fotoğraflar
+
+- `photos.py` (GitHub Actions: `photos.yml`, tetik: `photos-request.txt`): her onaylı yerin Wikidata görselini bulur, Commons'tan yazar ve lisans bilgisini alır. Yalnızca CC0, kamu malı, CC BY, CC BY-SA ve FAL kabul edilir. Sonuç: `results/photos.json`.
+- `content/build_photos.py`: `results/photos.json` → `backend/supabase/migrations/20261119140000_istanbul_photos.sql`. Yanlış eşleşen kayıtlar `EXCLUDE` ile elenir.
+- Fotoğraflar Wikimedia'nın adresinden gösterilir (kopyalanmaz); atıf mobilde zorunlu.
+
 ## Notlar
 
 - `output/` klasörü repoya girmez (`.gitignore`). Onaylı CSV'yi paylaşmak istersen Claude'a ayrıca gönder.

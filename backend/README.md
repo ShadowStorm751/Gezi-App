@@ -13,7 +13,9 @@ backend/supabase/
 │   ├── 20261119090000_city_pack_version.sql  içerik özetli paket sürümü
 │   ├── 20261119100000_tomb_category.sql      türbe kategorisi ve rozeti
 │   ├── 20261119110000_reference_data.sql     şehir, kategoriler, rozetler (kalıcı)
-│   └── 20261119120000_istanbul_places.sql    onaylı 156 İstanbul yeri (üretilir, elle düzenleme)
+│   ├── 20261119120000_istanbul_places.sql    onaylı 156 İstanbul yeri (üretilir, elle düzenleme)
+│   ├── 20261119130000_photo_urls.sql         fotoğraflar için dış adres alanları
+│   └── 20261119140000_istanbul_photos.sql    133 yerin Commons fotoğrafı (üretilir)
 ├── functions/checkin/
 │   ├── index.ts                      Edge Function
 │   ├── rules.ts                      karar kuralları (saf fonksiyonlar)

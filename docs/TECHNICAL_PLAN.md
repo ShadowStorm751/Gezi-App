@@ -138,5 +138,5 @@ Seed'de 20 rozet var (6 genel, 8 tarihi, 6 doğa); türbe migration'ı ile 21.
 
 - Supabase projesinin açılması (proje sahibi; anahtarlar repo'ya konmaz).
 - ~~Gerçek İstanbul listesi~~: 156 yer onaylandı ve migration olarak eklendi (113 tarihi, 43 doğa; TR+EN açıklamalı).
-- Rozet görselleri ve yer fotoğrafları.
+- Rozet görselleri. (Yer fotoğrafları: 156 yerin 133'ünde Wikimedia Commons fotoğrafı var.)
 - Harita sağlayıcısı (mobil tarafla).
