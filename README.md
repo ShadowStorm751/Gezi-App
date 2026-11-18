@@ -11,6 +11,12 @@
 | [`mobile/`](mobile/) | React Native (TypeScript) uygulaması | ChatGPT |
 | [`data-pipeline/`](data-pipeline/) | OSM + Wikidata'dan yer verisini toplayan script'ler | Claude |
 
+## Galata pilotunu dene
+
+[Gezi-Test.html](Gezi-Test.html) dosyasını indirip tarayıcıda aç. **Kamera demosunu aç** düğmesine bas. Örnek konum Galata Kulesi’nin yaklaşık 1 km güneyinde. Bakış yönünü ve telefon eğimini sürgülerle değiştirip bir baloncuğa dokunarak yer kartını açabilirsin. Bu deneme kamera veya konum izni istemez.
+
+Telefonda canlı kamera ve pusulayla denemek için [mobil kurulum adımlarını](mobile/README.md) izle. [İstanbul pilot listesi](istanbul-pilot.csv) değerlendirmeye alınan 50 yer adayını ve kaynaklarını içerir.
+
 ## Birlikte çalışma kuralları
 
 1. **Sözleşme `docs/API.md`.** Mobil yalnızca orada yazan fonksiyonları kullanır. Backend bir imzayı değiştirirse API.md'yi aynı commit'te günceller.
