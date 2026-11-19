@@ -1,0 +1,191 @@
+# Kapadokya yerleri için kısa açıklamalar (TR, EN), doğa yerlerinde en iyi ziyaret zamanı.
+# Claude tarafından yazıldı (2026-11-19). Wikipedia metni kopyalanmadı; kısa, kendi cümlelerimizle.
+# Biçim: slug: (tr, en) ya da (tr, en, en_iyi_zaman_tr, en_iyi_zaman_en)
+
+D = {
+# --- Cami, kilise, manastır ----------------------------------------------------
+"karamanoglu-camii": ("Ürgüp'te, Karamanoğulları döneminden kalan tarihi cami.",
+                      "A historic mosque in Ürgüp dating from the Karamanid period."),
+"karsi-kilise": ("Gülşehir'de, 13. yüzyıl fresklerini koruyan kaya oyma kilise.",
+                 "A rock-cut church in Gülşehir preserving 13th-century frescoes."),
+"aziz-nikolas-manastiri": ("Mustafapaşa'da, kayaya oyulmuş Aziz Nikolas Manastırı; bugün kültür merkezi olarak kullanılıyor.",
+                           "The rock-cut Monastery of St Nicholas in Mustafapaşa, now used as a cultural centre."),
+"agacalti-kilisesi": ("Ihlara Vadisi'nde, haç planlı ve freskleriyle tanınan kaya kilisesi.",
+                      "A cross-shaped rock church in the Ihlara Valley, known for its frescoes."),
+"karanlik-kilise": ("Göreme Açık Hava Müzesi'nde, az ışık aldığı için renkleri canlı kalmış fresklerle dolu kilise.",
+                    "A church in the Göreme Open-Air Museum whose frescoes stayed vivid because so little light gets in."),
+"kokar-kilise-aksaray": ("Ihlara Vadisi'nde, İncil sahneleriyle süslü kaya kilisesi.",
+                         "A rock church in the Ihlara Valley decorated with Gospel scenes."),
+"yilanli-kilise-aksaray": ("Ihlara Vadisi'nde, günahkârların yılanlarla cezalandırıldığı freskiyle bilinen kilise.",
+                           "A church in the Ihlara Valley known for its fresco of sinners punished by snakes."),
+"aciksaray": ("Gülşehir'de, kayaya oyulmuş saray benzeri yapılar ve peribacalarından oluşan ören yeri.",
+              "A site in Gülşehir of palace-like buildings carved into the rock among fairy chimneys."),
+"aziz-yuhanna-vaftizci-kilisesi-cavusin": ("Çavuşin'de kayalığın tepesine oyulmuş, bölgenin en eski kiliselerinden Vaftizci Yahya Kilisesi.",
+                                           "The Church of St John the Baptist carved high in the cliff at Çavuşin, one of the oldest in the region."),
+"keslik-manastiri": ("Cemil köyü yakınında, kayaya oyulmuş manastır ve kiliselerden oluşan yapı topluluğu.",
+                     "A complex of rock-cut monastery buildings and churches near the village of Cemil."),
+"tokali-kilise": ("Göreme Açık Hava Müzesi'nin girişinde, bölgenin en büyük ve en zengin freskli kilisesi.",
+                  "At the entrance of the Göreme Open-Air Museum, the largest church in the area with the richest frescoes."),
+"selime-katedrali": ("Ihlara Vadisi'nin kuzey ucunda, kayaya oyulmuş büyük katedral ve manastır yapıları.",
+                     "A large cathedral and monastery complex carved into the rock at the northern end of the Ihlara Valley."),
+"sumbullu-kilise": ("Ihlara Vadisi'nde, cephesi süslü kaya kilisesi.",
+                    "A rock church in the Ihlara Valley with a decorated façade."),
+"purenli-seki-kilisesi": ("Ihlara Vadisi'nde, vadinin yamacındaki kaya kilisesi.",
+                          "A rock church on the valley side in the Ihlara Valley."),
+"azize-barbara-kilisesi": ("Göreme Açık Hava Müzesi'nde, kırmızı aşı boyalı süslemeleriyle küçük kilise.",
+                           "A small church in the Göreme Open-Air Museum decorated with red ochre patterns."),
+"azize-catherine-sapeli": ("Göreme Açık Hava Müzesi'nde, Azize Catherine'e adanmış küçük şapel.",
+                           "A small chapel in the Göreme Open-Air Museum dedicated to St Catherine."),
+"basil-sapeli": ("Göreme Açık Hava Müzesi'nde, Aziz Basil'e adanmış şapel.",
+                 "A chapel in the Göreme Open-Air Museum dedicated to St Basil."),
+"elmali-kilise": ("Göreme Açık Hava Müzesi'nde, kubbeli ve fresklerle kaplı Elmalı Kilise.",
+                  "The domed Apple Church in the Göreme Open-Air Museum, covered in frescoes."),
+"pantokrator-kilisesi": ("Göreme Açık Hava Müzesi'nde, Pantokrator İsa tasvirine adanmış kilise.",
+                         "A church in the Göreme Open-Air Museum dedicated to Christ Pantocrator."),
+"yilanli-kilise": ("Göreme Açık Hava Müzesi'nde, Aziz Georgios'un ejderhayla savaştığı freskiyle bilinen kilise.",
+                   "A church in the Göreme Open-Air Museum known for its fresco of St George fighting the dragon."),
+"carikli-kilise": ("Göreme Açık Hava Müzesi'nde, zemindeki ayak izi oyukları nedeniyle 'Çarıklı' adını alan kilise.",
+                   "A church in the Göreme Open-Air Museum named 'with Sandals' after footprint-shaped hollows in its floor."),
+# --- Müzeler -----------------------------------------------------------------
+"haci-bektas-i-veli-turbesi": ("Hacıbektaş'ta, Hacı Bektaş Veli'nin türbesinin bulunduğu dergâh; bugün müze.",
+                               "The lodge in Hacıbektaş containing the tomb of Haji Bektash Veli; now a museum."),
+"goreme-deki-kiliseler-listesi": ("Kayaya oyulmuş onlarca kilise ve şapelden oluşan, UNESCO listesindeki Göreme Açık Hava Müzesi.",
+                                  "The Göreme Open-Air Museum, a UNESCO-listed group of dozens of rock-cut churches and chapels."),
+"nevsehir-muzesi": ("Nevşehir'de, Kapadokya'nın arkeolojisini ve kültürünü anlatan müze.",
+                    "A museum in Nevşehir covering the archaeology and culture of Cappadocia."),
+"guray-muze": ("Avanos'ta, yeraltına oyulmuş galerilerde seramik sergileyen müze.",
+               "A museum in Avanos displaying ceramics in galleries carved underground."),
+"zelve-acik-hava-muzesi": ("Zelve'de, terk edilmiş kaya köyü, kiliseleri ve peribacalarından oluşan açık hava müzesi.",
+                           "An open-air museum at Zelve: an abandoned rock-cut village with churches and fairy chimneys."),
+# --- Kaleler -----------------------------------------------------------------
+"nevsehir-kalesi": ("Nevşehir'in tepesinde, Selçuklu dönemine uzanan kale.",
+                    "The castle on the hill above Nevşehir, with origins in the Seljuk period."),
+"ortahisar-kalesi": ("Ortahisar'da, içi oyulmuş dev bir kaya kütlesinden oluşan kale.",
+                     "The castle at Ortahisar: a huge rock mass hollowed out into rooms."),
+"uchisar-kalesi": ("Bölgenin en yüksek noktası; içi odalarla oyulmuş dev kaya kütlesi ve Göreme manzarası.",
+                   "The highest point in the area: a huge rock riddled with rooms, with views over Göreme.",
+                   "Gün batımı", "Sunset"),
+"cavusin-kalesi": ("Çavuşin'de, kayaya oyulmuş evlerle dolu eski köy yamacı.",
+                   "The old cliffside of Çavuşin, honeycombed with rock-cut houses."),
+# --- Anıt ve ören yerleri ------------------------------------------------------
+"sarihan-kervansarayi": ("Avanos yakınında, 13. yüzyılda yapılan Selçuklu kervansarayı.",
+                         "A 13th-century Seljuk caravanserai near Avanos."),
+"bahattin-in-samanligi-kilise": ("Ihlara Vadisi'nde, köylülerin samanlık olarak kullandığı için bu adı alan kaya kilisesi.",
+                                 "A rock church in the Ihlara Valley named after its later use as a hay store."),
+"derinkuyu-yeralti-sehri": ("Bölgenin en derin yeraltı şehri; taş kapıları ve havalandırma bacalarıyla çok katlı sığınak.",
+                            "The deepest underground city in the region, a many-levelled refuge with rolling stone doors and air shafts."),
+"kaymakli": ("Kaymaklı'da, dar tünellerle bağlanan katları gezilebilen yeraltı şehri.",
+             "The underground city at Kaymaklı, with levels linked by narrow tunnels open to visitors."),
+"ozkonak": ("Avanos yakınında Özkonak'ta, yeraltı şehri ve sığınak.",
+            "The underground city and refuge at Özkonak near Avanos."),
+"mazi-yeralti-sehri": ("Mazı köyünde, kayalığa açılan girişleriyle yeraltı şehri.",
+                       "The underground city in the village of Mazı, entered through openings in the rock face."),
+"sobesos-antik-kenti": ("Şahinefendi'de, mozaikli Roma hamamı ve şapeliyle antik Sobesos kenti.",
+                        "The ancient town of Sobesos at Şahinefendi, with a Roman bath and chapel with mosaics."),
+"mutfak-ve-kiler": ("Göreme Açık Hava Müzesi'nde, manastırın kayaya oyulmuş mutfak ve kiler bölümleri.",
+                    "The rock-cut kitchen and storerooms of the monastery in the Göreme Open-Air Museum."),
+"altikapi-turbesi": ("Ürgüp'te, 13. yüzyıldan kalan Selçuklu türbesi.",
+                     "A 13th-century Seljuk tomb in Ürgüp."),
+# --- Tarihi köyler -------------------------------------------------------------
+"mustafapasa": ("Ürgüp'e bağlı, taş işçiliğiyle süslü Rum konaklarıyla tanınan eski Sinasos.",
+                "Old Sinasos near Ürgüp, known for Greek mansions with carved stone façades."),
+"cavusin": ("Göreme ile Avanos arasında, kayalığa oyulmuş eski köyü ve yeni yerleşimiyle Çavuşin.",
+            "Çavuşin, between Göreme and Avanos, with its old cliffside village and newer settlement."),
+"guzelyurt": ("Aksaray'da, Ihlara Vadisi yakınında, kaya kiliseleri ve taş evleriyle eski Rum kasabası.",
+              "A former Greek town in Aksaray near the Ihlara Valley, with rock churches and stone houses."),
+# --- Doğa ---------------------------------------------------------------------
+"aktepe-hill-sunset-point": ("Göreme'nin üzerinde, gün batımında ve sabah balonlarında en kalabalık seyir noktası.",
+                             "The viewpoint above Göreme, busiest at sunset and when the morning balloons rise.",
+                             "Gün doğumu (balonlar) ve gün batımı", "Sunrise (balloons) and sunset"),
+"temenni-tepe": ("Ürgüp'ün ortasında, kasabaya ve vadilere bakan tepe.",
+                 "A hill in the middle of Ürgüp overlooking the town and valleys.", "Gün batımı", "Sunset"),
+"uc-guzeller": ("Ürgüp yakınında, şapkalı üç peribacasından oluşan Kapadokya'nın simgelerinden.",
+                "Three capped fairy chimneys near Ürgüp, one of Cappadocia's symbols.", "Gün batımı", "Sunset"),
+"ihlara-cam-teras": ("Ihlara Vadisi'nin başında, kanyona bakan cam seyir terası.",
+                     "A glass viewing terrace at the head of the Ihlara Valley, looking down into the canyon."),
+"goreme-tarihi-milli-parki": ("Peribacaları, vadiler ve kaya yerleşimlerini koruyan, UNESCO listesindeki milli park.",
+                              "The UNESCO-listed national park protecting fairy chimneys, valleys and rock-cut settlements.",
+                              "İlkbahar ve sonbahar", "Spring and autumn"),
+"bagildere-vadisi": ("Uzun ve ince peribacalarıyla tanınan, Aşk Vadisi olarak da bilinen vadi.",
+                     "The valley known for its tall, slender fairy chimneys, also called Love Valley.",
+                     "Sabah (balonlar)", "Morning (balloons)"),
+"devrent-vadisi": ("Kayaların hayvan biçimlerine benzediği, Hayal Vadisi olarak da bilinen vadi; ünlü 'deve' kayası burada.",
+                   "The Valley of Imagination, where rocks resemble animals; home to the famous 'camel' rock."),
+"gul-vadisi": ("Göreme ile Çavuşin arasında, gün batımında pembeleşen kayalarıyla bilinen yürüyüş vadisi.",
+               "A hiking valley between Göreme and Çavuşin, known for its rocks that turn pink at sunset.",
+               "Gün batımı", "Sunset"),
+"guvercinlik-vadisi": ("Göreme ile Uçhisar arasında, kayalara oyulmuş güvercinlikleriyle tanınan vadi.",
+                       "A valley between Göreme and Uçhisar known for its pigeon houses carved into the rock."),
+"passabag-vadisi": ("Çok başlı peribacaları ve keşiş hücreleriyle tanınan Paşabağları.",
+                    "Paşabağ, known for its multi-capped fairy chimneys and hermits' cells."),
+"meskendir-valley-entrance": ("Göreme yakınında, peribacaları arasında yürüyüş yolu olan vadi.",
+                              "A valley near Göreme with a hiking path among the fairy chimneys."),
+"ihlara-vadisi": ("Melendiz Çayı'nın oyduğu, yamaçlarında kaya kiliseleri bulunan 14 km'lik kanyon.",
+                  "A 14 km canyon carved by the Melendiz stream, with rock churches in its walls.",
+                  "İlkbahar ve sonbahar", "Spring and autumn"),
+"kizilcukur-vadisi": ("Ortahisar yakınında, kırmızı tonlu kayaları ve gün batımı manzarasıyla Kızılçukur.",
+                      "The Red Valley near Ortahisar, with reddish rocks and sunset views.", "Gün batımı", "Sunset"),
+"soganli-vadisi": ("Kayseri'de, kayaya oyulmuş kiliseleri ve sakin köyüyle Soğanlı Vadisi.",
+                   "The Soğanlı Valley in Kayseri, with rock-cut churches and a quiet village."),
+}
+
+DROPPED: dict = {}
+
+NAMES = {
+    "kokar-kilise-aksaray": ("Kokar Kilise", "Kokar Church"),
+    "yilanli-kilise-aksaray": ("Yılanlı Kilise (Ihlara)", "Snake Church (Ihlara)"),
+    "yilanli-kilise": ("Yılanlı Kilise (Göreme)", "Snake Church (Göreme)"),
+    "aziz-yuhanna-vaftizci-kilisesi-cavusin": ("Vaftizci Yahya Kilisesi", "Church of St John the Baptist"),
+    "agacalti-kilisesi": (None, "Ağaçaltı Church"),
+    "aziz-nikolas-manastiri": (None, "Monastery of St Nicholas"),
+    "mutfak-ve-kiler": ("Mutfak ve Kiler (Göreme)", "Kitchen and Storerooms (Göreme)"),
+    "goreme-tarihi-milli-parki": ("Göreme Tarihî Millî Parkı", "Göreme Historical National Park"),
+}
+
+PERIOD_DEFAULT_HISTORICAL = None
+PERIOD = {
+    **{s: "Bizans" for s in (
+        "karsi-kilise", "aziz-nikolas-manastiri", "agacalti-kilisesi", "karanlik-kilise", "kokar-kilise-aksaray",
+        "yilanli-kilise-aksaray", "aciksaray", "aziz-yuhanna-vaftizci-kilisesi-cavusin", "keslik-manastiri",
+        "tokali-kilise", "selime-katedrali", "sumbullu-kilise", "purenli-seki-kilisesi", "azize-barbara-kilisesi",
+        "azize-catherine-sapeli", "basil-sapeli", "elmali-kilise", "pantokrator-kilisesi", "yilanli-kilise",
+        "carikli-kilise", "goreme-deki-kiliseler-listesi", "zelve-acik-hava-muzesi", "bahattin-in-samanligi-kilise",
+        "mutfak-ve-kiler", "derinkuyu-yeralti-sehri", "kaymakli", "ozkonak", "mazi-yeralti-sehri", "cavusin-kalesi")},
+    **{s: "Selçuklu" for s in ("sarihan-kervansarayi", "altikapi-turbesi", "nevsehir-kalesi")},
+    **{s: "Beylikler" for s in ("karamanoglu-camii",)},
+    **{s: "Osmanlı" for s in ("haci-bektas-i-veli-turbesi", "mustafapasa", "guzelyurt")},
+    **{s: "Antik" for s in ("sobesos-antik-kenti",)},
+    **{s: "Cumhuriyet" for s in ("nevsehir-muzesi", "guray-muze")},
+    "ortahisar-kalesi": None, "uchisar-kalesi": None, "cavusin": None,
+}
+
+BUILT: dict = {}
+
+RADIUS = {
+    "goreme-deki-kiliseler-listesi": 250, "ihlara-vadisi": 1500, "soganli-vadisi": 800,
+    "karanlik-kilise": 25, "tokali-kilise": 30, "elmali-kilise": 20, "carikli-kilise": 20, "yilanli-kilise": 20,
+    "azize-barbara-kilisesi": 20, "azize-catherine-sapeli": 20, "basil-sapeli": 20, "pantokrator-kilisesi": 20,
+    "mutfak-ve-kiler": 20,
+    "agacalti-kilisesi": 60, "kokar-kilise-aksaray": 60, "yilanli-kilise-aksaray": 60, "sumbullu-kilise": 60,
+    "purenli-seki-kilisesi": 100, "bahattin-in-samanligi-kilise": 60, "selime-katedrali": 150, "ihlara-cam-teras": 50,
+    "aziz-yuhanna-vaftizci-kilisesi-cavusin": 50, "cavusin-kalesi": 80, "aziz-nikolas-manastiri": 50,
+    "mustafapasa": 500, "cavusin": 400, "guzelyurt": 500,
+    "derinkuyu-yeralti-sehri": 80, "kaymakli": 80, "ozkonak": 80, "mazi-yeralti-sehri": 80,
+    "uchisar-kalesi": 120, "ortahisar-kalesi": 100, "devrent-vadisi": 400, "passabag-vadisi": 250,
+    "bagildere-vadisi": 500, "gul-vadisi": 600, "guvercinlik-vadisi": 400, "meskendir-valley-entrance": 400,
+    "kizilcukur-vadisi": 600,
+}
+
+# Koordinat kontrolü (coords.json, 2026-11-19)
+COORD_FIX = {
+    "mustafapasa": (38.577500, 34.896000, 600),        # eski köy merkezi (Aziz Nikolas ve Konstantin-Helena yanı)
+    "kizilcukur-vadisi": (38.658000, 34.865000, 700),  # Wikidata'da bulunamadı; yaklaşık, sahada doğrulanmalı
+    "soganli-vadisi": (38.345000, 35.075000, 900),     # Wikidata'da bulunamadı; yaklaşık, sahada doğrulanmalı
+}
+COORD_OK = {
+    "aziz-nikolas-manastiri", "kokar-kilise-aksaray", "yilanli-kilise-aksaray", "purenli-seki-kilisesi",
+    "basil-sapeli", "elmali-kilise",                   # OSM yapı konumu; Wikidata ile 29-177 m fark
+    "kaymakli", "ozkonak",                             # Wikidata kasaba merkezini veriyor; OSM giriş noktası doğru
+    "goreme-tarihi-milli-parki", "guvercinlik-vadisi",
+}
+RADIUS["yilanli-kilise-aksaray"] = 100
