@@ -125,14 +125,15 @@ export default function App() {
           const found = await loadNearby(rpc,fix.coords,lang);
           if (request === locationRequest.current) setNearbyResponse({userId,places:found});
         }
-        catch { setLocationMessage(t('Yakındaki yerler güncellenemedi. Mevcut katalog kullanılıyor.',
+        catch { if (request === locationRequest.current) setLocationMessage(t('Yakındaki yerler güncellenemedi. Mevcut katalog kullanılıyor.',
           'Nearby places could not be refreshed. Using the current catalog.')); }
       }
     } catch {
+      if (request !== locationRequest.current) return;
       setOrigin(null);
       setLocationMessage(t("Konum alınamadı. Örnek konumu kullanıyorsun.","Location unavailable. Using the sample location."));
     } finally {
-      setLoading(false);
+      if (request === locationRequest.current) setLoading(false);
     }
   }
 
@@ -237,6 +238,8 @@ export default function App() {
       <Text accessibilityRole="link" style={{color:ink,paddingHorizontal:12,paddingVertical:4}}
         onPress={() => openOfficialPage('https://www.openstreetmap.org/copyright')}>{t('© OpenStreetMap katkıcıları','© OpenStreetMap contributors')}</Text>
       <ScrollView style={styles.sheet} contentContainerStyle={styles.content}>
+        {!!client && <><Feedback query={cities}/><Recommendations origin={origin} userId={visits.userId} revision={visits.revision}
+          onPlace={showStop} onRoute={slug => openRoute(slug,'home')}/></>}
         <Text style={styles.heading} accessibilityRole="header">{t('Yakındaki yerler','Nearby places')}</Text>
         {catalogState !== 'ready' && <Text style={styles.muted}>{{
           demo:t('Galata örnek kataloğu','Galata sample catalog'),
@@ -266,8 +269,6 @@ export default function App() {
           {loading ? <ActivityIndicator color={paper}/> : <Text style={styles.actionLabel}>{origin ? t("Konumumu güncelle","Update my location") : t("Konumumu kullan","Use my location")}</Text>}
         </Pressable>
         {!!locationMessage && <Text accessibilityLiveRegion="polite" style={styles.muted}>{locationMessage}</Text>}
-        {!!client && <><Feedback query={cities}/><Recommendations origin={origin} userId={visits.userId} revision={visits.revision}
-          onPlace={showStop} onRoute={slug => openRoute(slug,'home')}/></>}
       </ScrollView>
       </>}
       {badgesOpen && <Badges visitRevision={visits.revision} onClose={() => setBadgesOpen(false)}/>}

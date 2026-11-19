@@ -59,8 +59,10 @@ export default function useVisits() {
     setRevision(n => n+1);
   }
   async function clearLocal(id) {
-    epoch.current++;
-    setHistory(null);
+    if (owner.current === id) {
+      epoch.current++;
+      setHistory(current => current?.userId === id ? null : current);
+    }
     await writes.current;
     await AsyncStorage.multiRemove(['gezi:visits:'+project+':'+id,'gezi:earned:'+project+':'+id]);
   }
