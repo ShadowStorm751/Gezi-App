@@ -1,9 +1,9 @@
 {
  "ozet": {
-  "uyumlu": 28,
-  "kontrol": 10,
+  "uyumlu": 30,
+  "kontrol": 13,
   "yaklasik_duzeltildi": 6,
-  "wikidata_yok": 11,
+  "wikidata_yok": 12,
   "yaklasik_dogrulanamadi": 1
  },
  "yerler": {
@@ -778,6 +778,87 @@
     38.339166666666664,
     34.98083333333334
    ]
+  },
+  "soganli-karabas-kilisesi": {
+   "osm": [
+    38.348221,
+    34.970274
+   ],
+   "qid": "Q139437320",
+   "wikidata": [
+    38.3483254,
+    34.9702489
+   ],
+   "arama_ile": true,
+   "mesafe_m": 12,
+   "durum": "uyumlu"
+  },
+  "soganli-kubbeli-kilise": {
+   "osm": [
+    38.348032,
+    34.968502
+   ],
+   "qid": "Q139437321",
+   "wikidata": [
+    38.3480078,
+    34.9686154
+   ],
+   "arama_ile": true,
+   "mesafe_m": 10,
+   "durum": "uyumlu"
+  },
+  "soganli-sakli-kilise": {
+   "osm": [
+    38.347703,
+    34.968801
+   ],
+   "qid": "Q139437329",
+   "wikidata": [
+    38.3477617,
+    34.9691465
+   ],
+   "arama_ile": true,
+   "mesafe_m": 31,
+   "durum": "kontrol"
+  },
+  "soganli-yilanli-kilise": {
+   "osm": [
+    38.350922,
+    34.966764
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "wikidata_yok"
+  },
+  "soganli-tahtali-kilise": {
+   "osm": [
+    38.345168,
+    34.962599
+   ],
+   "qid": "Q139437319",
+   "wikidata": [
+    38.3462745,
+    34.9629504
+   ],
+   "arama_ile": true,
+   "mesafe_m": 127,
+   "durum": "kontrol"
+  },
+  "soganli-geyikli-kilise": {
+   "osm": [
+    38.34492,
+    34.965489
+   ],
+   "qid": "Q139437318",
+   "wikidata": [
+    38.3447431,
+    34.9651659
+   ],
+   "arama_ile": true,
+   "mesafe_m": 34,
+   "durum": "kontrol"
   }
  }
 }

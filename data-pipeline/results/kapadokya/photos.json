@@ -580,6 +580,32 @@
    "source_url": "https://commons.wikimedia.org/wiki/File:Rose_Valley,_Cappadocia_-_K%C4%B1z%C4%B1l%C3%A7ukur_Vadisi,_Kapadokya_06.jpg",
    "kaynak": "commons-yakin",
    "dosya": "Rose Valley, Cappadocia - Kızılçukur Vadisi, Kapadokya 06.jpg"
+  },
+  "soganli-kubbeli-kilise": {
+   "file": "Kubbeli Kilise 03.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Kubbeli_Kilise_03.jpg/1280px-Kubbeli_Kilise_03.jpg",
+   "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Kubbeli_Kilise_03.jpg/500px-Kubbeli_Kilise_03.jpg",
+   "width": 1280,
+   "height": 1920,
+   "author": "Bernard Gagnon",
+   "license": "CC BY-SA 3.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Kubbeli_Kilise_03.jpg",
+   "kaynak": "commons-yakin",
+   "dosya": "Kubbeli Kilise 03.jpg"
+  },
+  "soganli-yilanli-kilise": {
+   "file": "38800 Soğanlı-Yeşilhisar-Kayseri, Turkey - panoramio (9).jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/38800_So%C4%9Fanl%C4%B1-Ye%C5%9Filhisar-Kayseri%2C_Turkey_-_panoramio_%289%29.jpg/1280px-38800_So%C4%9Fanl%C4%B1-Ye%C5%9Filhisar-Kayseri%2C_Turkey_-_panoramio_%289%29.jpg",
+   "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/38800_So%C4%9Fanl%C4%B1-Ye%C5%9Filhisar-Kayseri%2C_Turkey_-_panoramio_%289%29.jpg/500px-38800_So%C4%9Fanl%C4%B1-Ye%C5%9Filhisar-Kayseri%2C_Turkey_-_panoramio_%289%29.jpg",
+   "width": 1280,
+   "height": 720,
+   "author": "izvarin",
+   "license": "CC BY-SA 3.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "source_url": "https://commons.wikimedia.org/wiki/File:38800_So%C4%9Fanl%C4%B1-Ye%C5%9Filhisar-Kayseri,_Turkey_-_panoramio_(9).jpg",
+   "kaynak": "commons-yakin",
+   "dosya": "38800 Soğanlı-Yeşilhisar-Kayseri, Turkey - panoramio (9).jpg"
   }
  },
  "wikidata_found_by_search": {
@@ -591,7 +617,12 @@
   "guvercinlik-vadisi": "Q104596490",
   "passabag-vadisi": "Q133612406",
   "ihlara-vadisi": "Q1366229",
-  "soganli-vadisi": "Q25424230"
+  "soganli-vadisi": "Q25424230",
+  "soganli-karabas-kilisesi": "Q139437320",
+  "soganli-kubbeli-kilise": "Q139437321",
+  "soganli-sakli-kilise": "Q139437329",
+  "soganli-tahtali-kilise": "Q139437319",
+  "soganli-geyikli-kilise": "Q139437318"
  },
  "rejected_license": {},
  "commons_fallback": {
@@ -604,13 +635,19 @@
   "devrent-vadisi": "commons-yakin: Camel rock,Devrent,デヴレントのラクダ岩 - panoramio.jpg",
   "gul-vadisi": "commons-yakin: Mouth of Rose Valley - 2014.10 - panoramio.jpg",
   "meskendir-valley-entrance": "commons-yakin: Dovecotes in Meskendir Valley - 2014.10 - panoramio.jpg",
-  "kizilcukur-vadisi": "commons-yakin: Rose Valley, Cappadocia - Kızılçukur Vadisi, Kapadokya 06.jpg"
+  "kizilcukur-vadisi": "commons-yakin: Rose Valley, Cappadocia - Kızılçukur Vadisi, Kapadokya 06.jpg",
+  "soganli-kubbeli-kilise": "commons-yakin: Kubbeli Kilise 03.jpg",
+  "soganli-yilanli-kilise": "commons-yakin: 38800 Soğanlı-Yeşilhisar-Kayseri, Turkey - panoramio (9).jpg"
  },
  "missing": [
   "aktepe-hill-sunset-point",
   "bahattin-in-samanligi-kilise",
   "guray-muze",
   "ihlara-cam-teras",
-  "mazi-yeralti-sehri"
+  "mazi-yeralti-sehri",
+  "soganli-geyikli-kilise",
+  "soganli-karabas-kilisesi",
+  "soganli-sakli-kilise",
+  "soganli-tahtali-kilise"
  ]
 }
