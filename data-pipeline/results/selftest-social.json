@@ -1,26 +1,10 @@
 {
- "summary": "HATA: search_anon_blocked, list_routes_anon",
+ "summary": "hepsi geçti",
  "username_required": "ok",
  "search_public_prefix": "ok",
  "search_private_prefix_hidden": "ok",
  "search_private_exact_found": "ok",
- "search_anon_blocked": {
-  "HATA": {
-   "ok": true,
-   "users": [
-    {
-     "relation": "none",
-     "username": "sta11422d42",
-     "avatar_path": null
-    },
-    {
-     "relation": "none",
-     "username": "stb11422d42",
-     "avatar_path": null
-    }
-   ]
-  }
- },
+ "search_anon_blocked": "ok",
  "request_sent": "ok",
  "request_duplicate": "ok",
  "request_self": "ok",
@@ -34,9 +18,7 @@
  "checkin_last_stop": "ok",
  "checkin_route_badge": "ok",
  "route_completed": "ok",
- "list_routes_anon": {
-  "HATA": 11
- },
+ "list_routes_anon": "ok",
  "list_cities_visited": "ok",
  "leaderboard_a": "ok",
  "leaderboard_b_sees_only_friends": "ok",
