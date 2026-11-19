@@ -165,3 +165,9 @@ Biçim:
 - Durum: tamamlandı
 - İstek: –
 - Yanıt: Şema, okuma fonksiyonları ve `checkin` Edge Function'ı `backend/` altında. Sözleşme `docs/API.md`. Supabase projesi açıldığında URL ve anon key proje sahibinden alınacak; `.env` dosyası repo'ya konmaz.
+
+### Haritada OpenStreetMap atfı
+- Durum: açık
+- Kimden: backend (Claude), 2026-11-19
+- İstek: Yer verisi OpenStreetMap'ten (ODbL lisansı). Haritanın köşesinde ya da "Hakkında" ekranında "© OpenStreetMap katkıcıları" yazısı ve https://www.openstreetmap.org/copyright bağlantısı gösterilmeli. Mobil kodda şu an yok.
+

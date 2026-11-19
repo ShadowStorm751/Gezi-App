@@ -98,7 +98,7 @@ Rozetler `achievements.rule` JSON'u ile tanımlanır; yeni rozet için uygulama 
 | `time_of_day` | `{"type":"time_of_day","category":"viewpoint","from":"17:00","to":"20:00","n":3}` | Belirli saatlerde n check-in (yerel saat) |
 | `streak_weeks` | `{"type":"streak_weeks","n":4}` | Art arda n hafta, her hafta en az bir yer |
 
-Seed'de 20 rozet var (6 genel, 8 tarihi, 6 doğa); türbe migration'ı ile 21.
+Seed'de 20 rozet var (6 genel, 8 tarihi, 6 doğa); türbe ile 21, 'Şehir Gönüllüsü' ile 22.
 
 ## Yıllık özet
 
@@ -131,19 +131,20 @@ Seed'de 20 rozet var (6 genel, 8 tarihi, 6 doğa); türbe migration'ı ile 21.
 | Faz | Süre | Backend işleri | Durum |
 | --- | --- | --- | --- |
 | 0 – Hazırlık | 1-2 hf | Supabase projesi, repo ve migration yapısı, veri hattı, yer onayı | Tamam |
-| 1 – Altyapı | 3-4 hf | Şema, okuma RPC'leri, RLS, testler, İstanbul verisi | Tamam; canlıda 156 yer, 133 fotoğraf |
+| 1 – Altyapı | 3-4 hf | Şema, okuma RPC'leri, RLS, testler, İstanbul verisi | Tamam; canlıda 156 yer, 151 fotoğraf |
 | 2 – Ziyaret ve başarım | 3-4 hf | Auth (e-posta), `checkin`, rozet motoru, ilerleme | Tamam; canlı uçtan uca test geçti. Apple/Google girişi bekliyor |
 | 3 – Geo-AR | 3-4 hf | `city_pack` (+ `has_area`, `thumb_url`) | Backend tamam; mobil kamera ekranı var, saha testi bekliyor |
 | 4 – Paylaşım ve özet | 2-3 hf | `my_summary`, hesap silme, avatar yükleme | Backend tamam; mobil ekranlar bekliyor |
 | 5 – Kapalı beta | 3-4 hf | Hata takibi, analitik, kullanıcı bildirimleri (tamam), ayrı canlı (production) proje | Bildirim akışı tamam; diğerleri yapılacak |
 
-## Canlıdaki durum (19 Kasım 2026)
+## Canlıdaki durum (19 Kasım 2026, akşam denetimi)
 
-- Supabase projesi `gezi-app-test` (Frankfurt). 16 migration uygulandı; depodaki `backend/supabase/migrations/` ile birebir aynı. Güvenlik taramasında uyarı yok.
-- 156 İstanbul yeri (113 tarihi, 43 doğa, 15'i türbe), TR+EN açıklamalı; 133'ünde fotoğraf; 21 rozet, görselleri Storage'da.
+- Supabase projesi `gezi-app-test` (Frankfurt). 21 migration uygulandı; depodaki `backend/supabase/migrations/` ile birebir aynı.
+- 156 İstanbul yeri (113 tarihi, 43 doğa, 15'i türbe), TR+EN açıklamalı; 151'inde fotoğraf; 22 rozet, görselleri Storage'da.
 - `checkin` Edge Function'ı yayında; canlı test: girişsiz 401, uzak 'too_far', zayıf GPS 'low_accuracy', doğru konumda kabul + 'first-step' rozeti.
 - Arama tanınırlığa göre sıralı ve Türkçe harfe duyarsız.
-- Hesap silme, avatar yükleme ve kullanıcı bildirim/öneri akışı canlıda; canlı test geçti (19 Kasım akşamı). 22 rozet.
+- Hesap silme, avatar yükleme ve kullanıcı bildirim/öneri akışı canlıda; canlı test geçti.
+- Sertleştirme (migration `20261119240000`): gereksiz tablo yetkileri kaldırıldı, profil yazımı 4 sütunla sınırlı, RLS ilkeleri hızlandırıldı. Performans denetçisinde uyarı yok; güvenlik denetçisinde yalnızca bilinçli 4 SECURITY DEFINER uyarısı var (`backend/README.md`).
 
 ## Yayına kadar kalanlar
 
@@ -153,11 +154,16 @@ Backend (Claude):
 - [x] Kullanıcı katkısı: hata bildirimi ve yeni yer önerisi, yönetici onay akışı, 'Şehir Gönüllüsü' rozeti (canlıda, test edildi)
 - [ ] Çok şehir: şehir listesi RPC'si (`cities`), yeni şehir migration'larının gözden geçirilip uygulanması
 - [ ] Ayrı canlı (production) Supabase projesi; migration'ların GitHub Actions ile uygulanması
+- [x] Yayın öncesi güvenlik/performans denetimi ve sertleştirme
+- [ ] E-posta gönderimi için özel SMTP (Supabase'in yerleşik e-postası saatte birkaç iletiyle sınırlı; beta öncesi şart)
+- [ ] Apple/Google ile giriş: anahtarlar gelince Supabase Auth sağlayıcı ayarı
+- [ ] Hata takibi ve analitik (kapalı beta için; araç seçimi açık konu)
 - [x] Fotoğrafı olmayan 23 yerin 18'ine elle seçilmiş Commons fotoğrafı (151/156). Kalan 5 yerde (Aydos Ormanı, Hacılı Şelalesi, Beykoz Korusu, Telli Baba Türbesi, Yeniköy Seyir Terası) uygun serbest lisanslı fotoğraf yok; ileride kendi çekimimiz ya da kullanıcı fotoğrafı
 
 Mobil (ChatGPT):
 - [ ] Expo SDK 54 → 58 (`docs/REQUESTS.md`)
 - [ ] Hesap silme, avatar, "Bir sorun mu var?", "Yer öner" ve "Katkılarım" ekranları (`docs/REQUESTS.md`)
+- [ ] Haritada "© OpenStreetMap katkıcıları" atfı (ODbL lisans şartı; `docs/REQUESTS.md`)
 
 Proje sahibi:
 - [ ] Apple Developer hesabı ve Google Cloud ayarı (Apple/Google ile giriş, mağaza yayını)
@@ -169,4 +175,5 @@ Proje sahibi:
 
 - Kapalı beta için kullanıcı sayısı ve tarih (plan: pilot şehirde 20-50 kişi).
 - Harita karolarının çevrimdışı indirilmesi gerekli mi?
+- Hata takibi/analitik aracı: Sentry + PostHog (AB sunucusu) önerisi; KVKK metnine de girmeli.
 - Rozetlerin kazanılmamış hâli: ayrı görsel yok, gri ve yarı saydam gösteriliyor; yeterli mi?
