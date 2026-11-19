@@ -1,9 +1,10 @@
-# Rozet yüklemesi 2026-11-19T18:15:14Z
+# Rozet yüklemesi 2026-11-19T18:36:53Z
 200 byzantine-traveler.webp {"ok":true,"name":"byzantine-traveler.webp"}
 200 city-helper.webp {"ok":true,"name":"city-helper.webp"}
 200 explorer-10.webp {"ok":true,"name":"explorer-10.webp"}
 200 explorer-25.webp {"ok":true,"name":"explorer-25.webp"}
 200 explorer-50.webp {"ok":true,"name":"explorer-50.webp"}
+200 first-friend.webp {"ok":true,"name":"first-friend.webp"}
 200 first-step.webp {"ok":true,"name":"first-step.webp"}
 200 first-view.webp {"ok":true,"name":"first-view.webp"}
 200 forest-walker.webp {"ok":true,"name":"forest-walker.webp"}
@@ -21,6 +22,7 @@
 200 streak-4-weeks.webp {"ok":true,"name":"streak-4-weeks.webp"}
 200 sultans-rest.webp {"ok":true,"name":"sultans-rest.webp"}
 200 sunset-collector.webp {"ok":true,"name":"sunset-collector.webp"}
+200 travel-crew.webp {"ok":true,"name":"travel-crew.webp"}
 200 view-hunter.webp {"ok":true,"name":"view-hunter.webp"}
 200 wall-keeper.webp {"ok":true,"name":"wall-keeper.webp"}
 fail=0
