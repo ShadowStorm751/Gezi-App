@@ -43,6 +43,19 @@ export type CategorySlug =
 
 ## Okuma fonksiyonları
 
+### `list_cities` — şehir listesi (şehir seçici)
+
+```ts
+const { data } = await supabase.rpc("list_cities", { lang: "tr" });
+// -> [{ slug, name, timezone, place_count, historical_count, nature_count,
+//       center: { lat, lng }, bbox: { min_lat, min_lng, max_lat, max_lng },
+//       visited_count }]   // visited_count: girişsizse null
+```
+
+- Yalnızca yayında yeri olan şehirler döner, en çok yeri olan önce. Şimdilik yalnızca `istanbul`.
+- `center`/`bbox` haritayı şehre odaklamak için. Seçilen şehrin paketi `city_pack(slug)` ile iner.
+- Tek şehir varken şehir seçici gizlenebilir; liste 2+ olunca gösterilir.
+
 ### `nearby_places` — harita, liste ve geo-AR
 
 Yakından uzağa sıralı. Geo-AR için `bearing_deg` hazır gelir: kullanıcıdan yere pusula açısı (0 = kuzey, 90 = doğu, saat yönünde). Telefonun pusula yönüyle karşılaştırıp etiketi ekranda konumlandır.

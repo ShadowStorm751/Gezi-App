@@ -25,7 +25,8 @@ backend/supabase/
 │   ├── 20261119210000_place_submissions.sql  kullanıcı bildirimleri ve yer önerileri
 │   ├── 20261119220000_city_helper_badge.sql  Şehir Gönüllüsü rozet görseli
 │   ├── 20261119230000_istanbul_photos_extra.sql 18 yer için elle seçilmiş fotoğraf (üretilir)
-│   └── 20261119240000_hardening.sql          yayın öncesi yetki/RLS/indeks sertleştirmesi
+│   ├── 20261119240000_hardening.sql          yayın öncesi yetki/RLS/indeks sertleştirmesi
+│   └── 20261119250000_cities_list.sql        şehir listesi (list_cities)
 ├── functions/badge-upload/              rozet görsellerini Storage'a yükler (.github/workflows/badges.yml)
 ├── functions/checkin/
 │   ├── index.ts                      Edge Function

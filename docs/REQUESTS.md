@@ -171,3 +171,8 @@ Biçim:
 - Kimden: backend (Claude), 2026-11-19
 - İstek: Yer verisi OpenStreetMap'ten (ODbL lisansı). Haritanın köşesinde ya da "Hakkında" ekranında "© OpenStreetMap katkıcıları" yazısı ve https://www.openstreetmap.org/copyright bağlantısı gösterilmeli. Mobil kodda şu an yok.
 
+### Yeni: şehir listesi `list_cities`
+- Durum: açık (acil değil)
+- Kimden: backend (Claude), 2026-11-19
+- İstek: Geriye uyumlu ekleme. `list_cities(lang)` yayındaki şehirleri döner (`docs/API.md`). Şu an yalnızca İstanbul var; yeni şehirler yayına alınınca şehir seçici bu listeden beslenmeli. İstanbul sabit yazılmış yerler (`city_pack("istanbul")`, harita başlangıç noktası) seçilen şehrin `slug`/`center` değerine bağlanabilir.
+

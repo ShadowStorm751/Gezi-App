@@ -139,7 +139,7 @@ Seed'de 20 rozet var (6 genel, 8 tarihi, 6 doğa); türbe ile 21, 'Şehir Gönü
 
 ## Canlıdaki durum (19 Kasım 2026, akşam denetimi)
 
-- Supabase projesi `gezi-app-test` (Frankfurt). 21 migration uygulandı; depodaki `backend/supabase/migrations/` ile birebir aynı.
+- Supabase projesi `gezi-app-test` (Frankfurt). 22 migration uygulandı; depodaki `backend/supabase/migrations/` ile birebir aynı.
 - 156 İstanbul yeri (113 tarihi, 43 doğa, 15'i türbe), TR+EN açıklamalı; 151'inde fotoğraf; 22 rozet, görselleri Storage'da.
 - `checkin` Edge Function'ı yayında; canlı test: girişsiz 401, uzak 'too_far', zayıf GPS 'low_accuracy', doğru konumda kabul + 'first-step' rozeti.
 - Arama tanınırlığa göre sıralı ve Türkçe harfe duyarsız.
@@ -152,7 +152,8 @@ Backend (Claude):
 - [x] Hesap silme: `delete-account` Edge Function (canlıda, test edildi)
 - [x] Avatar yükleme: yalnızca kendi klasörü, 2 MB, JPEG/PNG/WebP (canlıda, test edildi)
 - [x] Kullanıcı katkısı: hata bildirimi ve yeni yer önerisi, yönetici onay akışı, 'Şehir Gönüllüsü' rozeti (canlıda, test edildi)
-- [ ] Çok şehir: şehir listesi RPC'si (`cities`), yeni şehir migration'larının gözden geçirilip uygulanması
+- [x] Şehir listesi: `list_cities` (canlıda)
+- [ ] Yeni şehir migration'larının gözden geçirilip uygulanması (`data/yeni-sehirler` dalı bitince)
 - [ ] Ayrı canlı (production) Supabase projesi; migration'ların GitHub Actions ile uygulanması
 - [x] Yayın öncesi güvenlik/performans denetimi ve sertleştirme
 - [ ] E-posta gönderimi için özel SMTP (Supabase'in yerleşik e-postası saatte birkaç iletiyle sınırlı; beta öncesi şart)
