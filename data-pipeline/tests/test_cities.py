@@ -61,13 +61,45 @@ class FetchTests(unittest.TestCase):
 
 class ChunkPlanTests(unittest.TestCase):
     def test_plan_covers_all_selectors_with_light_output(self):
-        plan = dict(cities.chunk_plan(IZMIR))
+        full = cities.chunk_plan(IZMIR)
+        plan = {sel: out for sel, out, _ in full}
         self.assertEqual(len(plan), len(cities.selectors(IZMIR)) + 1)  # historic ikiye bölündü
+        tiles = [t for sel, _, t in full if sel == 'nwr["natural"="wood"]["name"]']
+        self.assertEqual(len(tiles), IZMIR.tiles ** 2)                  # sınırı gereken gruplar kare kare
+        self.assertEqual(tiles[0][:2], IZMIR.bbox[:2])
+        self.assertEqual(tiles[-1][2:], IZMIR.bbox[2:])
         self.assertEqual(plan['nwr["tourism"="museum"]["name"]'], "center")
         self.assertEqual(plan['nwr["natural"="wood"]["name"]'], "geom")
         self.assertEqual(plan['nwr["historic"~"^(ruins|archaeological_site)$"]["name"]'], "geom")
         self.assertEqual(plan['nwr["place"~"^(island|islet)$"]["name"]'], "geom")
         self.assertIn("out center;", cities.overpass_query(IZMIR, ['nwr["tourism"="museum"]["name"]'], out="center"))
+
+    def test_tile_query(self):
+        t = (38.25, 34.05, 38.8, 34.625)
+        q = cities.overpass_query(CAPPADOCIA, ['nwr["natural"="valley"]["name"]'], tile=t)
+        self.assertIn('nwr["natural"="valley"]["name"](area.nev)(38.25,34.05,38.8,34.625);', q)
+        self.assertIn('(38.20,34.20,38.33,34.34);', q)       # Ihlara kutusu bu kareyle kesişiyor
+        self.assertNotIn('(38.32,35.04,38.37,35.13);', q)    # Soğanlı kesişmiyor
+
+    def test_cache_resumes(self):
+        import json, tempfile
+        calls = []
+
+        def ok(url, data, timeout):
+            calls.append(1)
+            return json.dumps({"elements": [{"type": "node", "id": len(calls), "lat": 38.4, "lon": 27.1,
+                                             "tags": {"name": "X"}}]}).encode()
+        orig_req, orig_sleep = p._request, p.time.sleep
+        p._request, p.time.sleep = ok, lambda s: None
+        try:
+            with tempfile.TemporaryDirectory() as d:
+                first = p.fetch_osm_chunked(IZMIR, Path(d))
+                n = len(calls)
+                second = p.fetch_osm_chunked(IZMIR, Path(d))
+                self.assertEqual(len(calls), n)  # ikinci çalıştırma tamamen önbellekten
+                self.assertEqual(len(first["elements"]), len(second["elements"]))
+        finally:
+            p._request, p.time.sleep = orig_req, orig_sleep
 
     def test_center_geometry(self):
         el = {"type": "way", "id": 1, "center": {"lat": 38.4, "lon": 27.1}}

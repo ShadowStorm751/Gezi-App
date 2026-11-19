@@ -55,6 +55,8 @@ class City:
     note: str = ""
     timeout_s: int = 300                  # Overpass sunucu zaman aşımı
     chunked: bool = False                 # True: her etiket grubu ayrı sorgu (büyük iller, yoğun sunucu)
+    bbox: Optional[Tuple[float, float, float, float]] = None  # il sınırını kapsayan kutu (güney, batı, kuzey, doğu)
+    tiles: int = 3                        # sınırı gereken gruplar bbox'ın tiles x tiles karelerine bölünür
 
 
 def _province(name: str, var: str) -> str:
@@ -85,6 +87,7 @@ CITIES: Dict[str, City] = {
         # Bizans'tan sonra Aydınoğulları (Selçuk, Birgi); Osmanlı 1426'dan itibaren.
         periods=((330, "Antik"), (1300, "Bizans"), (1426, "Beylikler"), (1923, "Osmanlı")),
         note="İzmir ili (Efes/Selçuk, Bergama, Çeşme dahil).",
+        bbox=(37.75, 26.20, 39.40, 28.50),
         timeout_s=600,
         chunked=True,
     ),
@@ -101,6 +104,7 @@ CITIES: Dict[str, City] = {
         # Bursa 1326'da Osmanlı'nın oldu (ilk başkent).
         periods=((330, "Antik"), (1326, "Bizans"), (1923, "Osmanlı")),
         note="Bursa ili (Uludağ, İznik, Cumalıkızık çevresi dahil).",
+        bbox=(39.55, 28.10, 40.70, 30.05),
         timeout_s=600,
         chunked=True,
     ),
@@ -126,6 +130,8 @@ CITIES: Dict[str, City] = {
         periods=((330, "Antik"), (1071, "Bizans"), (1308, "Selçuklu"), (1466, "Beylikler"), (1923, "Osmanlı")),
         timezone="Europe/Istanbul",
         note="Nevşehir ili + Ihlara Vadisi/Selime (Aksaray) + Soğanlı (Kayseri).",
+        bbox=(38.25, 34.05, 39.35, 35.20),
+        tiles=2,
         timeout_s=600,
         chunked=True,
     ),
@@ -141,6 +147,10 @@ def get_city(slug: Optional[str]) -> City:
     return CITIES[slug]
 
 
+def _intersects(a: Tuple[float, ...], b: Tuple[float, ...]) -> bool:
+    return not (a[2] < b[0] or b[2] < a[0] or a[3] < b[1] or b[3] < a[1])
+
+
 def selectors(city: City) -> List[str]:
     return list(BASE_SELECTORS) + list(city.extra_selectors)
 
@@ -154,23 +164,45 @@ _GEOM_MARKERS = ('"natural"="wood"', '"landuse"="forest"', '"leisure"~"^(park|ga
                  '"natural"="beach"', '"place"~"^(island|islet)$"', '"natural"="valley"', 'ruins|archaeological_site')
 
 
-def chunk_plan(city: City) -> List[Tuple[str, str]]:
-    """Parça sorgu planı: (seçici, çıktı biçimi 'geom' | 'center'). Birleşimi selectors(city) ile aynı öğeleri verir."""
-    plan: List[Tuple[str, str]] = []
+Tile = Optional[Tuple[float, float, float, float]]
+
+
+def tile_boxes(bbox: Tuple[float, float, float, float], n: int) -> List[Tuple[float, float, float, float]]:
+    s, w, no, e = bbox
+    dy, dx = (no - s) / n, (e - w) / n
+    return [(round(s + i * dy, 4), round(w + j * dx, 4), round(s + (i + 1) * dy, 4), round(w + (j + 1) * dx, 4))
+            for i in range(n) for j in range(n)]
+
+
+def chunk_plan(city: City) -> List[Tuple[str, str, Tile]]:
+    """Parça sorgu planı: (seçici, çıktı 'geom' | 'center', kare ya da None).
+    Birleşimi selectors(city) ile aynı öğeleri verir. Sınırı gereken (geom) gruplar ağır olduğu için
+    il kutusunun karelerine bölünür; kareye taşan öğe birden çok karede gelir, kimliğe göre tekilleşir."""
+    plan: List[Tuple[str, str, Tile]] = []
     for sel in selectors(city):
         parts = [_HISTORIC_AREA, _HISTORIC_POINT] if sel == BASE_SELECTORS[1] else [sel]
         for part in parts:
-            plan.append((part, "geom" if any(m in part for m in _GEOM_MARKERS) else "center"))
+            geom = any(m in part for m in _GEOM_MARKERS)
+            if geom and city.bbox and city.tiles > 1:
+                plan.extend((part, "geom", t) for t in tile_boxes(city.bbox, city.tiles))
+            else:
+                plan.append((part, "geom" if geom else "center", None))
     return plan
 
 
 def overpass_query(city: City, only: Optional[List[str]] = None, out: str = "geom",
-                   timeout_s: Optional[int] = None) -> str:
-    """Şehrin Overpass sorgusu. only: yalnızca bu seçiciler (sorgu parçalara bölünürken)."""
+                   timeout_s: Optional[int] = None, tile: Tile = None) -> str:
+    """Şehrin Overpass sorgusu. only: yalnızca bu seçiciler (sorgu parçalara bölünürken).
+    tile: il bölgesini (area.*) bu kareyle sınırla; kutu bölgeleri (Ihlara gibi) yalnızca kareyle kesişirse eklenir."""
     lines = []
     for sel in (only if only is not None else selectors(city)):
         for region in city.regions:
-            lines.append(f"  {sel}({region});")
+            if tile is None:
+                lines.append(f"  {sel}({region});")
+            elif region.startswith("area."):
+                lines.append(f"  {sel}({region})({tile[0]},{tile[1]},{tile[2]},{tile[3]});")
+            elif _intersects(tile, tuple(float(x) for x in region.split(","))):
+                lines.append(f"  {sel}({region});")
     return (
         f"\n[out:json][timeout:{timeout_s or city.timeout_s}];\n"
         f"{city.area_defs}\n"
