@@ -147,23 +147,53 @@ def _with_retries(fn, attempts: int = 3, wait_s: int = 20):
             time.sleep(wait_s)
 
 
-def fetch_osm(out_dir: Path, city: Optional[City] = None) -> Path:
-    query = overpass_query(city) if city else OVERPASS_QUERY
+def _overpass(query: str, timeout_s: int) -> Dict[str, Any]:
+    """Sorguyu sırayla sunuculara gönderir. Sunucu zaman aşımı ('remark') da hata sayılır."""
     body = urllib.parse.urlencode({"data": query}).encode()
     last_error: Optional[Exception] = None
     for url in OVERPASS_URLS:
         log(f"Overpass sorgusu: {url} (birkaç dakika sürebilir)")
         try:
-            raw = _with_retries(lambda: _request(url, body, timeout=360))
+            raw = _with_retries(lambda: _request(url, body, timeout=timeout_s + 60))
             data = json.loads(raw)
-            path = out_dir / "osm_raw.json"
-            path.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
-            log(f"  {len(data.get('elements', []))} OSM öğesi -> {path}")
-            return path
+            remark = data.get("remark", "")
+            if re.search(r"error|timed out|out of memory", remark, re.I):
+                raise RuntimeError(f"sunucu yanıtı eksik: {remark}")
+            return data
         except Exception as exc:  # bir sonraki sunucuyu dene
             last_error = exc
             log(f"  başarısız: {exc}")
     raise RuntimeError(f"Overpass sunucularına ulaşılamadı: {last_error}")
+
+
+def fetch_osm(out_dir: Path, city: Optional[City] = None) -> Path:
+    city = city or CITIES[DEFAULT_CITY]
+    query = OVERPASS_QUERY if city.slug == DEFAULT_CITY else overpass_query(city)
+    try:
+        if city.chunked:
+            raise RuntimeError("şehir ayarı: parça parça sorgu")
+        data = _overpass(query, city.timeout_s)
+    except RuntimeError as exc:
+        # Büyük il ya da yoğun sunucu: her etiket grubunu ayrı sorgula, sonuçları birleştir.
+        log(f"Tek sorgu olmadı ({exc}); etiket grupları tek tek sorgulanacak")
+        data = fetch_osm_chunked(city)
+    path = out_dir / "osm_raw.json"
+    path.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+    log(f"  {len(data.get('elements', []))} OSM öğesi -> {path}")
+    return path
+
+
+def fetch_osm_chunked(city: City) -> Dict[str, Any]:
+    from cities import selectors
+    seen: Dict[Tuple[str, int], Dict[str, Any]] = {}
+    sels = selectors(city)
+    for i, sel in enumerate(sels, start=1):
+        log(f"  [{i}/{len(sels)}] {sel}")
+        part = _overpass(overpass_query(city, [sel]), city.timeout_s)
+        for el in part.get("elements", []):
+            seen.setdefault((el["type"], el["id"]), el)
+        time.sleep(5)
+    return {"elements": list(seen.values()), "chunked": True}
 
 
 def fetch_wikidata(out_dir: Path, batch_size: int = 50) -> Path:

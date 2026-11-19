@@ -35,6 +35,30 @@ class QueryTests(unittest.TestCase):
             cities.get_city("ankara-yok")
 
 
+class FetchTests(unittest.TestCase):
+    def test_timeout_remark_is_error_and_chunks_merge(self):
+        import json
+        calls = []
+
+        def fake_request(url, data, timeout):
+            calls.append(url)
+            if len(calls) == 1:  # ilk yanıt: sunucu zaman aşımı, boş liste
+                return json.dumps({"elements": [], "remark": "runtime error: Query timed out"}).encode()
+            el = {"type": "node", "id": 7, "lat": 38.4, "lon": 27.1, "tags": {"name": "X"}}
+            return json.dumps({"elements": [el]}).encode()
+
+        orig_req, orig_sleep = p._request, p.time.sleep
+        p._request, p.time.sleep = fake_request, lambda s: None
+        try:
+            data = p._overpass("q", 10)
+            self.assertEqual(len(calls), 2)  # ikinci sunucuya geçti
+            self.assertEqual(len(data["elements"]), 1)
+            merged = p.fetch_osm_chunked(IZMIR)
+            self.assertEqual(len(merged["elements"]), 1)  # aynı öğe tek kez
+        finally:
+            p._request, p.time.sleep = orig_req, orig_sleep
+
+
 class ClassifyTests(unittest.TestCase):
     def test_extras_only_when_enabled(self):
         valley = {"natural": "valley", "name": "Güvercinlik Vadisi"}

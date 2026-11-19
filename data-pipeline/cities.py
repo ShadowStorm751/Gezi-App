@@ -53,6 +53,8 @@ class City:
     name_suffixes: Tuple[str, ...] = ("istanbul", "İstanbul", "turkey", "türkiye")
     periods: Tuple[Tuple[int, str], ...] = ISTANBUL_PERIODS
     note: str = ""
+    timeout_s: int = 300                  # Overpass sunucu zaman aşımı
+    chunked: bool = False                 # True: her etiket grubu ayrı sorgu (büyük iller, yoğun sunucu)
 
 
 def _province(name: str, var: str) -> str:
@@ -83,6 +85,8 @@ CITIES: Dict[str, City] = {
         # Bizans'tan sonra Aydınoğulları (Selçuk, Birgi); Osmanlı 1426'dan itibaren.
         periods=((330, "Antik"), (1300, "Bizans"), (1426, "Beylikler"), (1923, "Osmanlı")),
         note="İzmir ili (Efes/Selçuk, Bergama, Çeşme dahil).",
+        timeout_s=600,
+        chunked=True,
     ),
     "bursa": City(
         slug="bursa",
@@ -97,6 +101,8 @@ CITIES: Dict[str, City] = {
         # Bursa 1326'da Osmanlı'nın oldu (ilk başkent).
         periods=((330, "Antik"), (1326, "Bizans"), (1923, "Osmanlı")),
         note="Bursa ili (Uludağ, İznik, Cumalıkızık çevresi dahil).",
+        timeout_s=600,
+        chunked=True,
     ),
     "kapadokya": City(
         slug="kapadokya",
@@ -120,6 +126,8 @@ CITIES: Dict[str, City] = {
         periods=((330, "Antik"), (1071, "Bizans"), (1308, "Selçuklu"), (1466, "Beylikler"), (1923, "Osmanlı")),
         timezone="Europe/Istanbul",
         note="Nevşehir ili + Ihlara Vadisi/Selime (Aksaray) + Soğanlı (Kayseri).",
+        timeout_s=600,
+        chunked=True,
     ),
 }
 
@@ -133,13 +141,18 @@ def get_city(slug: Optional[str]) -> City:
     return CITIES[slug]
 
 
-def overpass_query(city: City) -> str:
+def selectors(city: City) -> List[str]:
+    return list(BASE_SELECTORS) + list(city.extra_selectors)
+
+
+def overpass_query(city: City, only: Optional[List[str]] = None) -> str:
+    """Şehrin Overpass sorgusu. only: yalnızca bu seçiciler (sorgu parçalara bölünürken)."""
     lines = []
-    for sel in list(BASE_SELECTORS) + list(city.extra_selectors):
+    for sel in (only if only is not None else selectors(city)):
         for region in city.regions:
             lines.append(f"  {sel}({region});")
     return (
-        "\n[out:json][timeout:300];\n"
+        f"\n[out:json][timeout:{city.timeout_s}];\n"
         f"{city.area_defs}\n"
         "(\n" + "\n".join(lines) + "\n);\nout geom;\n"
     )
