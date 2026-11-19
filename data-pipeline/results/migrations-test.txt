@@ -1,6 +1,6 @@
 ok
-zaman: 2026-11-19T22:22:47Z
-çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44627992395
+zaman: 2026-11-19T22:41:48Z
+çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44630953228
 ---
 CREATE DATABASE
 ALTER DATABASE
@@ -10,7 +10,7 @@ ALTER DATABASE
  bursa     |       0 |     70 |     19 |         54
  istanbul  |     156 |    156 |      0 |        133
  izmir     |       0 |    123 |     32 |        108
- kapadokya |       0 |     56 |     21 |         51
+ kapadokya |       0 |     62 |     27 |         53
 (4 rows)
 
 == TR+EN adı ve kısa açıklaması eksik yer (0 olmalı)
@@ -37,9 +37,10 @@ ALTER DATABASE
  merinos-parki                 |      2
  mustafapasa                   |      1
  pergamon                      |      5
+ soganli-vadisi                |      6
  teos                          |      1
  tirilye                       |      2
-(18 rows)
+(19 rows)
 
 == Yeni kategoriler ve keşif rozetleri
   slug   |    kind    |    name    
@@ -63,8 +64,9 @@ ALTER DATABASE
  kulturpark-kesif                    |   3 | Kültürpark Kâşifi
  merinos-parki-kesif                 |   3 | Merinos Parkı Kâşifi
  pergamon-kesif                      |   6 | Pergamon Kâşifi
+ soganli-vadisi-kesif                |   7 | Soğanlı Vadisi Kâşifi
  tirilye-kesif                       |   3 | Tirilye Kâşifi
-(14 rows)
+(15 rows)
 
 == Rozet kurallarındaki slug'lar var mı (0 olmalı)
  slug | eksik 
@@ -73,7 +75,7 @@ ALTER DATABASE
 
 == Yayınlama denemesi (geri alınır): place_detail ve city_pack
 BEGIN
-UPDATE 249
+UPDATE 255
  efes_ic_yer | efes_children |   ad    
 -------------+---------------+---------
  11          |            11 | Ephesus
@@ -81,7 +83,7 @@ UPDATE 249
 
                                  celsus_ana_yer                                 
 --------------------------------------------------------------------------------
- {"id": "be0a8f47-c512-4df8-8bf7-29a66356c39e", "name": "Efes", "slug": "efes"}
+ {"id": "aaf1a32c-1996-4581-9f0d-d94a006b033b", "name": "Efes", "slug": "efes"}
 (1 row)
 
    slug    | paket_yer | paket_ana_yer 
@@ -89,7 +91,7 @@ UPDATE 249
  bursa     |        70 |             7
  istanbul  |       156 |             0
  izmir     |       123 |             7
- kapadokya |        56 |             4
+ kapadokya |        62 |             5
 (4 rows)
 
 ROLLBACK
