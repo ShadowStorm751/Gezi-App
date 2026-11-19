@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Gezi App veri hattı: İstanbul'daki tarihi-kültürel ve doğa/manzara yerleri.
+"""Gezi App veri hattı: bir şehirdeki tarihi-kültürel ve doğa/manzara yerleri.
+
+Şehir --city ile seçilir (varsayılan: istanbul); ayarlar cities.py içinde.
 
 Üç adım:
   1. fetch       OpenStreetMap (Overpass) ve Wikidata'dan ham veriyi indirir.
@@ -23,7 +25,10 @@ import urllib.parse
 import urllib.request
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional, Tuple
+from typing import Any, Dict, FrozenSet, Iterable, List, Optional, Sequence, Tuple
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from cities import CITIES, DEFAULT_CITY, ISTANBUL_PERIODS, City, get_city, overpass_query  # noqa: E402
 
 USER_AGENT = "GeziApp-DataPipeline/0.1 (https://github.com/ShadowStorm751/Gezi-App)"
 OVERPASS_URLS = [
@@ -34,37 +39,15 @@ WIKIDATA_API = "https://www.wikidata.org/w/api.php"
 DEFAULT_OUT = Path(__file__).resolve().parent / "output"
 CITY_SLUG = "istanbul"
 
-# İstanbul ili (admin_level=4) içindeki adı olan yerler.
-OVERPASS_QUERY = """
-[out:json][timeout:300];
-area["boundary"="administrative"]["admin_level"="4"]["name"="İstanbul"]->.ist;
-(
-  nwr["tourism"="museum"]["name"](area.ist);
-  nwr["historic"~"^(castle|fort|citywalls|city_gate|tower|monument|memorial|ruins|archaeological_site|aqueduct|palace|manor|tomb|fountain|building)$"]["name"](area.ist);
-  nwr["amenity"="place_of_worship"]["name"]["wikidata"](area.ist);
-  nwr["amenity"="place_of_worship"]["name"]["heritage"](area.ist);
-  nwr["building"="palace"]["name"](area.ist);
-  nwr["tourism"="viewpoint"]["name"](area.ist);
-  nwr["natural"="peak"]["name"](area.ist);
-  nwr["natural"="wood"]["name"](area.ist);
-  nwr["landuse"="forest"]["name"](area.ist);
-  nwr["leisure"~"^(park|garden)$"]["name"]["wikidata"](area.ist);
-  nwr["leisure"="nature_reserve"]["name"](area.ist);
-  nwr["natural"="beach"]["name"](area.ist);
-  nwr["waterway"="waterfall"]["name"](area.ist);
-  nwr["place"~"^(island|islet)$"]["name"](area.ist);
-  nwr["tourism"="attraction"]["name"]["wikidata"](area.ist);
-  nwr["man_made"="lighthouse"]["name"](area.ist);
-  nwr["place"="square"]["name"]["wikidata"](area.ist);
-);
-out geom;
-"""
+# İstanbul ili (admin_level=4) içindeki adı olan yerler. Diğer şehirler: cities.overpass_query.
+OVERPASS_QUERY = overpass_query(CITIES["istanbul"])
 
 CATEGORY_KIND = {
     "mosque": "historical", "church": "historical", "synagogue": "historical",
     "palace": "historical", "museum": "historical", "fortress": "historical",
     "tower": "historical", "cistern": "historical", "monument": "historical",
     "archaeological_site": "historical", "tomb": "historical",
+    "valley": "nature",
     "viewpoint": "nature", "hill": "nature", "forest": "nature", "park": "nature",
     "beach": "nature", "island": "nature", "waterfall": "nature",
 }
@@ -73,17 +56,17 @@ DEFAULT_RADIUS_M = {
     "viewpoint": 50, "tower": 60, "cistern": 60, "monument": 60, "tomb": 60,
     "mosque": 100, "church": 100, "synagogue": 100, "museum": 100, "hill": 100,
     "palace": 150, "fortress": 150, "archaeological_site": 150, "beach": 150,
-    "park": 200, "waterfall": 100, "forest": 500, "island": 1500,
+    "park": 200, "waterfall": 100, "forest": 500, "island": 1500, "valley": 300,
 }
 
 # Bu kategorilerde poligon varsa "alanın içinde olmak" check-in için yeterli olur.
-AREA_CATEGORIES = {"forest", "park", "island", "beach", "archaeological_site"}
+AREA_CATEGORIES = {"forest", "park", "island", "beach", "archaeological_site", "valley"}
 
-# Onay listesine girecek en fazla aday sayısı (tür başına).
-QUOTAS = {"historical": 200, "nature": 100}
+# Onay listesine girecek en fazla aday sayısı (tür başına). İstanbul; diğer şehirler cities.py.
+QUOTAS = CITIES["istanbul"].quotas
 
 # Tek bir kategori listeyi doldurmasın (ör. 76 cami).
-CATEGORY_CAP = {"tomb": 20, "mosque": 40, "monument": 25, "museum": 30, "park": 25, "viewpoint": 20, "island": 12}
+CATEGORY_CAP = CITIES["istanbul"].category_cap
 
 MAX_RING_POINTS = 150
 DUPLICATE_DISTANCE_M = 100
@@ -118,10 +101,11 @@ def fold(text: str) -> str:
     return text.lower()
 
 
-def clean_name(text: str) -> str:
+def clean_name(text: str, suffixes: Sequence[str] = CITIES["istanbul"].name_suffixes) -> str:
     """Görünmez karakterleri ve sondaki '(Istanbul)' gibi açıklamaları atar."""
     text = "".join(ch for ch in text if unicodedata.category(ch) != "Cf")
-    text = re.sub(r"\s*\((istanbul|İstanbul|turkey|türkiye)\)\s*$", "", text, flags=re.I)
+    pattern = "|".join(re.escape(x) for x in suffixes)
+    text = re.sub(rf"\s*\(({pattern})\)\s*$", "", text, flags=re.I)
     return re.sub(r"\s+", " ", text).strip()
 
 
@@ -163,8 +147,9 @@ def _with_retries(fn, attempts: int = 3, wait_s: int = 20):
             time.sleep(wait_s)
 
 
-def fetch_osm(out_dir: Path) -> Path:
-    body = urllib.parse.urlencode({"data": OVERPASS_QUERY}).encode()
+def fetch_osm(out_dir: Path, city: Optional[City] = None) -> Path:
+    query = overpass_query(city) if city else OVERPASS_QUERY
+    body = urllib.parse.urlencode({"data": query}).encode()
     last_error: Optional[Exception] = None
     for url in OVERPASS_URLS:
         log(f"Overpass sorgusu: {url} (birkaç dakika sürebilir)")
@@ -209,8 +194,39 @@ def fetch_wikidata(out_dir: Path, batch_size: int = 50) -> Path:
 # 2. candidates
 # ---------------------------------------------------------------------------
 
-def classify(tags: Dict[str, str]) -> Optional[str]:
-    """OSM etiketlerinden kategori slug'ı. Uygun değilse None."""
+def classify(tags: Dict[str, str], extra_rules: FrozenSet[str] = frozenset()) -> Optional[str]:
+    """OSM etiketlerinden kategori slug'ı. Uygun değilse None.
+
+    extra_rules yalnızca temel kuralların reddettiği öğelere uygulanır (şehre özgü, cities.py).
+    """
+    cat = _classify_base(tags)
+    if cat is None and extra_rules:
+        cat = classify_extra(tags, extra_rules)
+    return cat
+
+
+def classify_extra(tags: Dict[str, str], rules: FrozenSet[str]) -> Optional[str]:
+    """Şehre özgü ek kurallar (temel kurallardan sonra, yalnızca reddedilenler için)."""
+    name = fold(tags.get("name", ""))
+    if "bath" in rules and tags.get("amenity") == "public_bath" and re.search(r"hamam|kaplica|bath", name):
+        return "monument"
+    if "cappadocia" in rules:
+        if tags.get("natural") == "valley" or re.search(r"\bvadisi?\b|\bvalley\b", name):
+            return "valley"
+        if re.search(r"yer ?alti|underground", name):
+            return "archaeological_site"
+        if re.search(r"kilise|church|manastir|monastery|sapel|chapel", name) \
+                or tags.get("historic") in ("church", "monastery"):
+            return "church"
+        if re.search(r"kervansaray|caravanserai|\bhani\b", name):
+            return "monument"
+        if re.search(r"peri ?baca|bacalar|guzeller|pasabag|devrent|kaya|rock|ask vadisi|kale", name) \
+                or tags.get("natural") in ("rock", "stone", "cliff"):
+            return "viewpoint"
+    return None
+
+
+def _classify_base(tags: Dict[str, str]) -> Optional[str]:
     name = fold(tags.get("name", ""))
     historic = tags.get("historic", "")
 
@@ -370,20 +386,17 @@ def parse_inception_year(claims: Dict[str, Any]) -> Optional[int]:
     return min(years) if years else None
 
 
-def guess_period(year: Optional[int]) -> str:
-    """Yapım yılından dönem tahmini. Onay sırasında elle düzeltilebilir."""
+def guess_period(year: Optional[int], periods: Sequence[Tuple[int, str]] = ISTANBUL_PERIODS) -> str:
+    """Yapım yılından dönem tahmini (şehre göre eşikler). Onay sırasında elle düzeltilebilir."""
     if year is None:
         return ""
-    if year < 330:
-        return "Antik"
-    if year < 1453:
-        return "Bizans"
-    if year < 1923:
-        return "Osmanlı"
+    for before, name in periods:
+        if year < before:
+            return name
     return "Cumhuriyet"
 
 
-def wikidata_info(entity: Optional[Dict[str, Any]]) -> Dict[str, Any]:
+def wikidata_info(entity: Optional[Dict[str, Any]], city: Optional[City] = None) -> Dict[str, Any]:
     if not entity or "missing" in entity:
         return {}
     claims = entity.get("claims", {})
@@ -402,8 +415,8 @@ def wikidata_info(entity: Optional[Dict[str, Any]]) -> Dict[str, Any]:
         if image:
             break
     return {
-        "label_tr": clean_name(labels.get("tr", {}).get("value", "")),
-        "label_en": clean_name(labels.get("en", {}).get("value", "")),
+        "label_tr": clean_name(labels.get("tr", {}).get("value", ""), _suffixes(city)),
+        "label_en": clean_name(labels.get("en", {}).get("value", ""), _suffixes(city)),
         "desc_tr": descs.get("tr", {}).get("value", ""),
         "desc_en": descs.get("en", {}).get("value", ""),
         "sitelinks": len(sitelinks),
@@ -415,7 +428,12 @@ def wikidata_info(entity: Optional[Dict[str, Any]]) -> Dict[str, Any]:
     }
 
 
+def _suffixes(city: Optional[City]) -> Sequence[str]:
+    return (city or CITIES[DEFAULT_CITY]).name_suffixes
+
+
 CATEGORY_BONUS = {
+    "valley": 15,
     "viewpoint": 20, "island": 15, "hill": 10, "waterfall": 10, "palace": 10,
     "beach": 5, "museum": 5, "fortress": 5, "forest": 5,
 }
@@ -444,16 +462,18 @@ def score(cand: Dict[str, Any], wd: Dict[str, Any]) -> int:
     return s
 
 
-def build_candidates(osm: Dict[str, Any], wikidata: Dict[str, Any]) -> List[Dict[str, Any]]:
+def build_candidates(osm: Dict[str, Any], wikidata: Dict[str, Any],
+                     city: Optional[City] = None) -> List[Dict[str, Any]]:
+    city = city or CITIES[DEFAULT_CITY]
     raw: List[Dict[str, Any]] = []
     for el in osm.get("elements", []):
         tags = el.get("tags", {})
-        name = clean_name(tags.get("name:tr") or tags.get("name") or "")
+        name = clean_name(tags.get("name:tr") or tags.get("name") or "", city.name_suffixes)
         if not name:
             continue
         if tags.get("historic") == "tomb" and not re.search(r"türbe|turbe|tomb|mezar", name, re.I):
             name = f"{name} Türbesi"
-        category = classify(tags)
+        category = classify(tags, city.extra_rules)
         if not category:
             continue
         lat, lng, ring = element_geometry(el)
@@ -461,14 +481,14 @@ def build_candidates(osm: Dict[str, Any], wikidata: Dict[str, Any]) -> List[Dict
             continue
         qid = tags.get("wikidata", "").strip()
         qid = qid if re.fullmatch(r"Q\d+", qid) else ""
-        wd = wikidata_info(wikidata.get(qid)) if qid else {}
+        wd = wikidata_info(wikidata.get(qid), city) if qid else {}
         year = wd.get("year")
         cand = {
             "aile": CATEGORY_KIND[category],
             "kategori": category,
             "ad_tr": name if tags.get("historic") == "tomb" else (wd.get("label_tr") or name),
-            "ad_en": clean_name(tags.get("name:en", "")) or wd.get("label_en") or "",
-            "donem": guess_period(year) if CATEGORY_KIND[category] == "historical" else "",
+            "ad_en": clean_name(tags.get("name:en", ""), city.name_suffixes) or wd.get("label_en") or "",
+            "donem": guess_period(year, city.periods) if CATEGORY_KIND[category] == "historical" else "",
             "yapim_yili": "" if year is None else str(year),
             "wikidata_ipucu_tr": wd.get("desc_tr", ""),
             "wikidata_ipucu_en": wd.get("desc_en", ""),
@@ -488,7 +508,7 @@ def build_candidates(osm: Dict[str, Any], wikidata: Dict[str, Any]) -> List[Dict
 
     # Tür başına kota, puana göre.
     out: List[Dict[str, Any]] = []
-    for kind, quota in QUOTAS.items():
+    for kind, quota in city.quotas.items():
         group = sorted((c for c in merged if c["aile"] == kind),
                        key=lambda c: (-c["puan"], c["ad_tr"]))
         per_cat: Dict[str, int] = {}
@@ -497,7 +517,7 @@ def build_candidates(osm: Dict[str, Any], wikidata: Dict[str, Any]) -> List[Dict
             if len(picked) >= quota:
                 break
             n = per_cat.get(c["kategori"], 0)
-            if n >= CATEGORY_CAP.get(c["kategori"], quota):
+            if n >= city.category_cap.get(c["kategori"], quota):
                 continue
             per_cat[c["kategori"]] = n + 1
             picked.append(c)
@@ -602,7 +622,9 @@ def ring_wkt(ring: List[List[float]]) -> str:
     return f"SRID=4326;POLYGON(({coords}))"
 
 
-def build_sql(rows: List[Dict[str, str]], areas: Dict[str, Any]) -> Tuple[str, Dict[str, Any]]:
+def build_sql(rows: List[Dict[str, str]], areas: Dict[str, Any],
+              city_slug: str = CITY_SLUG, publish: bool = True) -> Tuple[str, Dict[str, Any]]:
+    """Onaylı satırlar -> SQL. publish=False ise açıklaması dolu yerler de gizli kalır."""
     approved = [r for r in rows if r.get("onay", "").strip().lower() in APPROVE_VALUES]
     errors: List[str] = []
     places, translations, ready = [], [], []
@@ -648,7 +670,7 @@ def build_sql(rows: List[Dict[str, str]], areas: Dict[str, Any]) -> Tuple[str, D
 
     now = datetime.now().strftime("%Y-%m-%d %H:%M")
     sql = f"""-- Otomatik üretildi: data-pipeline/pipeline.py build ({now})
--- {len(places)} yer; {len(ready)} tanesi TR+EN kısa açıklaması dolu olduğu için yayına alınır.
+-- {len(places)} yer; {_publish_note(len(ready), publish)}
 -- Tekrar çalıştırılabilir: aynı slug'lı yerler güncellenir, kopya oluşmaz.
 begin;
 
@@ -661,7 +683,7 @@ select ci.id, c.id, v.slug,
 from (values
 {(","+chr(10)).join(places)}
 ) v(slug, category, lat, lng, radius, period, built_year, wikidata_id, osm_id, area_wkt)
-join public.cities ci on ci.slug = '{CITY_SLUG}'
+join public.cities ci on ci.slug = {_sql_str(city_slug)}
 join public.categories c on c.slug = v.category
 on conflict (slug) do update set
   category_id = excluded.category_id,
@@ -684,7 +706,7 @@ on conflict (place_id, lang) do update set
   short_desc = coalesce(excluded.short_desc, public.place_translations.short_desc),
   best_time = coalesce(excluded.best_time, public.place_translations.best_time);
 """
-    if ready:
+    if ready and publish:
         sql += "\nupdate public.places set is_published = true\nwhere slug in (" + \
                ", ".join(_sql_str(s) for s in ready) + ");\n"
     sql += "\ncommit;\n"
@@ -694,6 +716,12 @@ on conflict (place_id, lang) do update set
 # ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
+
+def _publish_note(ready: int, publish: bool) -> str:
+    if publish:
+        return f"{ready} tanesi TR+EN kısa açıklaması dolu olduğu için yayına alınır."
+    return f"hepsi gizli (is_published = false); {ready} tanesinin TR+EN kısa açıklaması dolu."
+
 
 def summarize(cands: Iterable[Dict[str, Any]]) -> str:
     counts: Dict[str, int] = {}
@@ -707,7 +735,9 @@ def summarize(cands: Iterable[Dict[str, Any]]) -> str:
 
 def main(argv: Optional[List[str]] = None) -> int:
     ap = argparse.ArgumentParser(description="Gezi App veri hattı")
-    ap.add_argument("--out", type=Path, default=DEFAULT_OUT, help="çıktı klasörü (varsayılan: output/)")
+    ap.add_argument("--out", type=Path, default=None,
+                    help="çıktı klasörü (varsayılan: output/, İstanbul dışı şehirlerde output/<şehir>/)")
+    ap.add_argument("--city", default=DEFAULT_CITY, choices=sorted(CITIES), help="şehir (varsayılan: istanbul)")
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("fetch", help="OSM ve Wikidata verisini indir")
     sub.add_parser("candidates", help="onay için candidates.csv üret")
@@ -715,11 +745,13 @@ def main(argv: Optional[List[str]] = None) -> int:
     b.add_argument("csv", type=Path, nargs="?", help="onaylanmış CSV (varsayılan: output/candidates.csv)")
     args = ap.parse_args(argv)
 
-    out: Path = args.out
+    city = get_city(args.city)
+    out: Path = args.out or (DEFAULT_OUT if city.slug == DEFAULT_CITY else DEFAULT_OUT / city.slug)
     out.mkdir(parents=True, exist_ok=True)
 
     if args.cmd == "fetch":
-        fetch_osm(out)
+        log(f"Şehir: {city.names['tr']}")
+        fetch_osm(out, city)
         fetch_wikidata(out)
         log("Tamam. Sıradaki adım: python pipeline.py candidates")
         return 0
@@ -728,7 +760,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         osm = json.loads((out / "osm_raw.json").read_text(encoding="utf-8"))
         wd_path = out / "wikidata.json"
         wd = json.loads(wd_path.read_text(encoding="utf-8")) if wd_path.exists() else {}
-        cands = build_candidates(osm, wd)
+        cands = build_candidates(osm, wd, city)
         csv_path, _ = write_candidates(cands, out)
         log(f"{len(cands)} aday -> {csv_path}\n{summarize(cands)}")
         log("Onaylamak istediğin satırların 'onay' sütununa x yaz, kısa açıklamaları doldur, kaydet.")
@@ -739,7 +771,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         csv_path = args.csv or out / "candidates.csv"
         areas_path = out / "areas.json"
         areas = json.loads(areas_path.read_text(encoding="utf-8")) if areas_path.exists() else {}
-        sql, stats = build_sql(read_csv(csv_path), areas)
+        sql, stats = build_sql(read_csv(csv_path), areas, city.slug)
         for e in stats["errors"]:
             log(f"  atlandı: {e}")
         if not sql:
