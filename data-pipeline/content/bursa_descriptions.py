@@ -222,6 +222,8 @@ COORD_OK = {
 # Misi: Wikidata'daki Gümüştepe kaydı; OSM'deki köy noktasıyla aynı (osm_lookup.json, node/4430860411).
 PHOTO_EXCLUDE = {
     "cumalikizik-etnografya-muzesi": "fotoğraf köyün kendisi (Cumalıkızık ile aynı)",
+    "tofas-anadolu-araclari-muzesi": "yakındaki fotoğraflar başka bir parka ait",
+    "hacivat-karagoz-anit-mezari": "yakındaki fotoğraflar Karagöz Müzesi'ne ait",
 }
 
 # Commons yedek aramasında bulunup elle bakınca yanlış çıkan dosyalar (photos.py bir sonrakini dener)

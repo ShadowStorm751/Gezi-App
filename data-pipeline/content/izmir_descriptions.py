@@ -334,6 +334,7 @@ COORD_OK = {
 # Yanlış eşleşen fotoğraflar
 PHOTO_EXCLUDE = {
     "bergama-zeus-sunagi": "fotoğraf Berlin'deki sunağı gösteriyor; burada yalnızca temeli var",
+    "ekmeksiz-plaji": "Commons kategorisinde yalnızca ağaç dalı fotoğrafları var",
 }
 
 # Commons yedek aramasında bulunup elle bakınca yanlış çıkan dosyalar (photos.py bir sonrakini dener)
