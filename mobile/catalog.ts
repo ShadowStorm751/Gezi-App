@@ -1,7 +1,7 @@
 export type Lang = 'tr' | 'en';
 type PackPlace = {
   id: string; slug: string; name: string; kind: 'historical' | 'nature'; category: string;
-  latitude: number; longitude: number; short_desc: string | null; checkin_radius_m: number; thumb_url?: string | null;
+  latitude: number; longitude: number; short_desc: string | null; checkin_radius_m?: number; has_area?: boolean; thumb_url?: string | null;
 };
 export type Pack = {city:string; name:string; version:string|null; places:PackPlace[]};
 type Store = {getItem(key:string): Promise<string|null>; setItem(key:string,value:string):Promise<void>};
@@ -40,9 +40,10 @@ const categoryNames:Record<string,[string,string]> = {
   viewpoint:['Seyir noktası','Viewpoint'], hill:['Tepe','Hill'], forest:['Orman','Forest'], park:['Park','Park'],
   beach:['Plaj','Beach'], island:['Ada','Island'], waterfall:['Şelale','Waterfall']
 };
-export function mapPlace(row:Omit<PackPlace,'checkin_radius_m'>, lang:Lang) {
+export function mapPlace(row:PackPlace, lang:Lang) {
   const categoryLabel = categoryNames[row.category]?.[lang === 'en' ? 1 : 0] ?? row.category;
   return {id:row.id, name:row.name, kind:row.kind, category:row.category, categoryLabel, description:row.short_desc,
+    radius:row.checkin_radius_m, hasArea:row.has_area,
     thumbnail: webUrl(row.thumb_url), coordinate:{latitude:row.latitude,longitude:row.longitude}};
 }
 

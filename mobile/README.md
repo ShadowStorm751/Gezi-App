@@ -14,4 +14,5 @@ Node 22.13 veya üzeri ve npm ile bu klasörde `npm install`, ardından `npx exp
 - **Konumumu kullan** cihaz konumunu alır ve 2 km içindeki yerleri `nearby_places` ile günceller. Hata olursa ekran kayıtlı katalogdan mesafeleri hesaplar. Kamera dönerken RPC çağrılmaz.
 - Haritadan veya baloncuktan seçim aynı `place_detail` isteğini açar. Bağlantı kesilirse kısa açıklama erişilebilir kalır.
 - Fotoğraflı kartlarda Wikimedia Commons atfı bulunur. Yer detayında her fotoğrafın yazarı ve lisansı görselin altında yer alır.
-- **Rozetler** bölümünde e-posta ve parolayla giriş yapılır. Ad, açıklama ve ilerleme `my_achievements` üzerinden kullanıcının dilinde yüklenir. Kazanılan rozetler tam renkli görünür. Ziyaret kaydetme sonraki adımdır.
+- **Buradayım** yer kartından yeni bir GPS ölçümü alır ve ziyareti `checkin` ile doğrulatır. Giriş gerekirse aynı karttan giriş yapılınca istek devam eder. Alanı tanımlı yerlerde merkez mesafesi ipucu gösterilmez. Ziyaret tarihleri hesap bazında cihazda saklanır.
+- **Rozetler** bölümünde e-posta ve parolayla giriş yapılır. Ad, açıklama ve ilerleme `my_achievements` üzerinden kullanıcının dilinde yüklenir. Kazanılan rozetler tam renkli görünür.

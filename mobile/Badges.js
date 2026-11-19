@@ -10,7 +10,7 @@ function Button({label,onPress,disabled}) {
     <Text style={styles.link}>{label}</Text></Pressable>;
 }
 
-function Login() {
+export function Login({onSignedIn, prompt}) {
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
   const [busy,setBusy] = useState(false);
@@ -23,6 +23,7 @@ function Login() {
       const result = register ? await client.auth.signUp(credentials) : await client.auth.signInWithPassword(credentials);
       if (result.error) throw result.error;
       setPassword('');
+      if (result.data.session) onSignedIn?.(result.data.session.user.id);
       if (register && !result.data.session) setMessage(t('E-postandaki bağlantıyı onayladıktan sonra giriş yap.',
         'Confirm the link in your email, then sign in.'));
     } catch {
@@ -32,7 +33,7 @@ function Login() {
   }
   const disabled = busy || !email.trim() || !password;
   return <View style={styles.stack}>
-    <Text style={styles.body}>{t('Rozetlerini ve ilerlemeni görmek için giriş yap.','Sign in to see your badges and progress.')}</Text>
+    <Text style={styles.body}>{prompt || t('Rozetlerini ve ilerlemeni görmek için giriş yap.','Sign in to see your badges and progress.')}</Text>
     <TextInput value={email} onChangeText={setEmail} placeholder={t('E-posta','Email')} accessibilityLabel={t('E-posta','Email')}
       keyboardType="email-address" autoCapitalize="none" autoCorrect={false} autoComplete="email" style={styles.input}/>
     <TextInput value={password} onChangeText={setPassword} placeholder={t('Parola','Password')} accessibilityLabel={t('Parola','Password')}
@@ -44,7 +45,7 @@ function Login() {
   </View>;
 }
 
-function BadgeArt({badge}) {
+export function BadgeArt({badge}) {
   const local = badgeImages[badge.slug];
   const remote = badge.badge_path && client.storage.from('badges').getPublicUrl(badge.badge_path).data.publicUrl;
   const source = local || remote;
@@ -83,7 +84,7 @@ function BadgeRow({badge,celebrate}) {
   </View>;
 }
 
-function Collection({userId}) {
+function Collection({userId,visitRevision}) {
   const [version,setVersion] = useState(0);
   const [result,setResult] = useState(null);
   const [failed,setFailed] = useState(false);
@@ -106,7 +107,7 @@ function Collection({userId}) {
     }
     load().catch(() => { if (active) setFailed(true); });
     return () => { active=false; };
-  },[userId,version]);
+  },[userId,version,visitRevision]);
   async function logout() {
     try { const {error} = await client.auth.signOut({scope:'local'}); setLogoutError(!!error); }
     catch { setLogoutError(true); }
@@ -122,7 +123,7 @@ function Collection({userId}) {
   </>;
 }
 
-export default function Badges({onClose}) {
+export default function Badges({onClose,visitRevision}) {
   const [user,setUser] = useState(undefined);
   useEffect(() => {
     if (!client) return;
@@ -135,7 +136,7 @@ export default function Badges({onClose}) {
     <KeyboardAvoidingView style={{flex:1}} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={styles.stack}>
         {!client ? <Text>{t('Rozetler için Supabase bağlantısı gerekiyor.','Connect to Supabase to view badges.')}</Text> :
-          user === undefined ? <ActivityIndicator/> : user ? <Collection key={user} userId={user}/> : <Login/>}
+          user === undefined ? <ActivityIndicator/> : user ? <Collection key={user} userId={user} visitRevision={visitRevision}/> : <Login/>}
       </ScrollView>
     </KeyboardAvoidingView>
   </SafeAreaView></Modal>;

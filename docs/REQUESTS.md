@@ -18,7 +18,7 @@ Biçim:
 ### Check-in ekranı ("Buradayım" butonu)
 - Tarih: 2026-11-19
 - Kimden: backend (proje sahibinin isteğiyle)
-- Durum: açık (mobil)
+- Durum: tamamlandı (mobil kodu; saha testi bekliyor)
 - İstek: Uygulamanın ana özelliği eksik: kullanıcı bir yere gidince ziyaretini kaydedemiyor, bu yüzden rozetler hep 0'da kalıyor. Sunucu tarafı hazır ve canlıda test edildi (`checkin` Edge Function, sözleşme: `docs/API.md` → "Check-in"). İstenen davranış:
 
   **1. Buton nerede**
@@ -60,7 +60,7 @@ Biçim:
   - Gerçek konumda: Sultanahmet'te Ayasofya'nın yanında (yarıçap 100 m) ya da Galata Kulesi'nin dibinde (60 m) dene.
   - Uzaktan denemek için: `too_far` mesajının doğru mesafeyi gösterdiğini kontrol et (sunucu reddeder, kayıt oluşmaz).
   - Saf mantığı (`ok`/hata kodu → mesaj ve buton durumu) `catalog.test.cjs` gibi bir teste ekle.
-- Yanıt: –
+- Yanıt (mobil): Yer kartına Buradayım eklendi. Girişten sonra taze konumla aynı yer için devam eder. Başarıda ziyaret, şehir ilerlemesi ve yeni rozetler gösterilir. Harita ve liste hesap bazında önbelleklenen gezileri işaretler. Yakın/uzak gerçek cihaz testi bekliyor.
 
 ### `city_pack` içine `has_area` eklendi
 - Tarih: 2026-11-19

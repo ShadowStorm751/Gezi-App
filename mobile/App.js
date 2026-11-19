@@ -10,7 +10,9 @@ import {AsyncStorage, client, demo, lang, project, t} from './client';
 import {loadCity, loadDetail, loadNearby, mapPlace} from './catalog';
 import DiscoveryCamera from './DiscoveryCamera';
 import {PlaceGallery, PlaceThumbnail} from './PlaceMedia';
-import Badges from './Badges';
+import Badges, {BadgeArt} from './Badges';
+import CheckIn from './CheckInPanel';
+import useVisits from './useVisits';
 import {distanceMeters} from './geo';
 
 const paper = '#FAF7F0';
@@ -32,6 +34,9 @@ function formatDistance(meters) {
 
 export default function App() {
   const map = useRef(null);
+  const visits = useVisits();
+  const [celebration,setCelebration] = useState(null);
+  const award = celebration?.userId === visits.userId ? celebration?.awards[0] : null;
   const [origin, setOrigin] = useState(null);
   const [loading, setLoading] = useState(false);
   const [detail, setDetail] = useState(null);
@@ -40,7 +45,8 @@ export default function App() {
   const [trackedId, setTrackedId] = useState(null);
   const [locationMessage, setLocationMessage] = useState('');
   const [packPlaces,setPlaces] = useState(demo ? demoPlaces : []);
-  const [serverNearby,setServerNearby] = useState(null);
+  const [nearbyResponse,setNearbyResponse] = useState(null);
+  const serverNearby = nearbyResponse?.places ?? null;
   const [catalogState,setCatalogState] = useState(demo ? 'demo' : 'loading');
   const [refresh,setRefresh] = useState(0);
   const [detailState,setDetailState] = useState('');
@@ -62,7 +68,14 @@ export default function App() {
     return () => { active = false; };
   }, [refresh]);
   const byId = new Map(packPlaces.map(p => [p.id,p]));
-  serverNearby?.forEach(p => byId.set(p.id,{...p,thumbnail:p.thumbnail ?? byId.get(p.id)?.thumbnail}));
+  serverNearby?.forEach(p => {
+    const packed = byId.get(p.id);
+    byId.set(p.id,{...p,thumbnail:p.thumbnail ?? packed?.thumbnail, radius:packed?.radius,hasArea:packed?.hasArea});
+  });
+  function wasVisited(id) {
+    return !!visits.userId && (Object.prototype.hasOwnProperty.call(visits.dates,id) ||
+      (nearbyResponse?.userId === visits.userId && byId.get(id)?.visited === true));
+  }
   const places = Array.from(byId.values());
   const nearby = places.map(place => ({
     ...place, distance: distanceMeters(origin ?? pilot, place.coordinate)
@@ -71,7 +84,7 @@ export default function App() {
 
   async function useLocation() {
     setLoading(true);
-    setServerNearby(null);
+    setNearbyResponse(null);
     try {
       const permission = await Location.requestForegroundPermissionsAsync();
       if (!permission.granted) {
@@ -84,7 +97,8 @@ export default function App() {
       map.current?.animateCamera({center:{latitude:fix.coords.latitude,longitude:fix.coords.longitude}}, {duration:300});
       setLocationMessage('');
       if (client) {
-        try { setServerNearby(await loadNearby(rpc,fix.coords,lang)); }
+        const userId = visits.owner.current;
+        try { setNearbyResponse({userId,places:await loadNearby(rpc,fix.coords,lang)}); }
         catch { setLocationMessage(t('Yakındaki yerler güncellenemedi. Mevcut katalog kullanılıyor.',
           'Nearby places could not be refreshed. Using the current catalog.')); }
       }
@@ -98,7 +112,12 @@ export default function App() {
 
   function closeDetail() {
     detailToken.current++;
+    setCelebration(null);
     setDetail(null);
+  }
+
+  function nextAward() {
+    setCelebration(current => current?.awards.length > 1 ? {...current,awards:current.awards.slice(1)} : null);
   }
   async function openPlace(place) {
     const token = ++detailToken.current;
@@ -139,8 +158,9 @@ export default function App() {
       <MapView ref={map} style={styles.map} initialRegion={region} showsUserLocation={!!origin}
         toolbarEnabled={false} showsMyLocationButton={false}>
         {nearby.map(place => (
-          <Marker key={place.id} coordinate={place.coordinate} title={place.name}
-            accessibilityLabel={place.name} pinColor={red} onPress={() => openPlace(place)}/>
+          <Marker key={place.id} coordinate={place.coordinate} title={place.name + (wasVisited(place.id) ? ' ✓' : '')}
+            accessibilityLabel={place.name + (wasVisited(place.id) ? t(', gezildi',', visited') : '')}
+            pinColor={wasVisited(place.id) ? ink : red} onPress={() => openPlace(place)}/>
         ))}
       </MapView>
       <ScrollView style={styles.sheet} contentContainerStyle={styles.content}>
@@ -164,7 +184,7 @@ export default function App() {
             <PlaceThumbnail place={place}/>
             <View style={styles.rowMain}>
               <Text style={styles.eyebrow}>{(place.categoryLabel || place.category).toLocaleUpperCase(lang)}</Text>
-              <Text style={styles.place}>{place.name}</Text>
+              <Text style={styles.place}>{place.name}{wasVisited(place.id) ? ' ✓' : ''}</Text>
             </View>
             <Text style={styles.distance}>{formatDistance(place.distance)}  ›</Text>
           </Pressable>
@@ -175,16 +195,19 @@ export default function App() {
         {!!locationMessage && <Text accessibilityLiveRegion="polite" style={styles.muted}>{locationMessage}</Text>}
       </ScrollView>
       </>}
-      {badgesOpen && <Badges onClose={() => setBadgesOpen(false)}/>}
-      <Modal visible={!!detail} transparent animationType="slide" onRequestClose={closeDetail}>
+      {badgesOpen && <Badges visitRevision={visits.revision} onClose={() => setBadgesOpen(false)}/>}
+      <Modal visible={!!detail} transparent animationType="slide" onRequestClose={award ? nextAward : closeDetail}>
         {detail && <View style={styles.overlay}>
           <Pressable accessibilityLabel={t("Yer detayını kapat","Close place details")} accessibilityRole="button" style={styles.backdrop} onPress={closeDetail}/>
-          <SafeAreaView style={styles.card}>
-            <ScrollView contentContainerStyle={styles.detail}>
-              <Text style={styles.eyebrow}>{(detail.period || detail.categoryLabel || detail.category).toLocaleUpperCase(lang)}  ·  {formatDistance(detail.distance)}</Text>
+          <SafeAreaView style={styles.card} accessibilityElementsHidden={!!award} importantForAccessibility={award ? 'no-hide-descendants' : 'auto'}>
+            <ScrollView contentContainerStyle={styles.detail} keyboardShouldPersistTaps="handled">
+              <Text style={styles.eyebrow}>{(detail.period || detail.categoryLabel || detail.category).toLocaleUpperCase(lang)}{detail.hasArea ? '' : '  ·  '+formatDistance(detail.distance)}</Text>
               <Text style={styles.title} accessibilityRole="header">{detail.name}</Text>
               {detailState !== 'loading' && <PlaceGallery place={detail}/>}
               <Text style={styles.story}>{detail.description}</Text>
+              {!demo && detailState !== 'missing' && <CheckIn key={detail.id} place={detail} origin={origin} visits={visits}
+                visited={wasVisited(detail.id)} onMissing={() => setRefresh(n => n+1)}
+                onAwards={(awards,userId) => setCelebration({awards,userId})}/>}
               {!!detail.bestTime && <Text style={styles.muted}>{t('Önerilen zaman','Best time')} · {detail.bestTime}</Text>}
               {detailState === 'loading' && <ActivityIndicator color={ink}/>}
               {detailState === 'missing' && <Text>{t('Bu yer artık yayında değil.','This place is no longer published.')}</Text>}
@@ -205,6 +228,15 @@ export default function App() {
               </Pressable>
             </ScrollView>
           </SafeAreaView>
+          {award && <SafeAreaView accessibilityViewIsModal style={styles.celebration}>
+            <Text style={styles.eyebrow}>{t('YENİ ROZET','NEW BADGE')}</Text>
+            <BadgeArt key={award.slug} badge={{...award,earned_at:true}}/>
+            <Text accessibilityRole="header" style={styles.title}>{award.name}</Text>
+            {!!award.description && <Text style={styles.story}>{award.description}</Text>}
+            <Pressable accessibilityRole="button" style={styles.action} onPress={nextAward}><Text style={styles.actionLabel}>
+              {celebration.awards.length > 1 ? t('Sıradaki rozet','Next badge') : t('Yer kartına dön','Back to place')}
+            </Text></Pressable>
+          </SafeAreaView>}
         </View>}
       </Modal>
     </SafeAreaView>
@@ -225,6 +257,7 @@ const styles = StyleSheet.create({
   action:{padding:14, borderRadius:13, backgroundColor:ink, alignItems:'center', marginTop:8, minHeight:48},
   actionLabel:{fontSize:16, fontWeight:'600', color:paper},
   overlay:{flex:1, justifyContent:'flex-end'}, backdrop:{...StyleSheet.absoluteFillObject, backgroundColor:'#11262166'},
+  celebration:{...StyleSheet.absoluteFillObject,backgroundColor:paper,justifyContent:'center',alignItems:'center',gap:18,padding:28},
   card:{maxHeight:'85%', backgroundColor:paper, borderTopLeftRadius:24, borderTopRightRadius:24},
   detail:{padding:24, gap:12}, story:{fontSize:17, lineHeight:26, color:'#304A43'},
   close:{padding:14, alignItems:'center'}
