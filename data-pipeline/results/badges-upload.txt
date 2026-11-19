@@ -1,5 +1,6 @@
-# Rozet yüklemesi 2026-11-18T23:01:53Z
+# Rozet yüklemesi 2026-11-19T17:16:14Z
 200 byzantine-traveler.webp {"ok":true,"name":"byzantine-traveler.webp"}
+200 city-helper.webp {"ok":true,"name":"city-helper.webp"}
 200 explorer-10.webp {"ok":true,"name":"explorer-10.webp"}
 200 explorer-25.webp {"ok":true,"name":"explorer-25.webp"}
 200 explorer-50.webp {"ok":true,"name":"explorer-50.webp"}
