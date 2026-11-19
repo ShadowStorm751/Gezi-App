@@ -1,3 +1,4 @@
 200 20261120050000_istanbul_long_desc_1.sql {"ok":true,"skipped":true,"name":"20261120050000_istanbul_long_desc_1.sql"}
 200 20261120060000_istanbul_long_desc_2.sql {"ok":true,"skipped":true,"name":"20261120060000_istanbul_long_desc_2.sql"}
-200 20261120070000_istanbul_long_desc_3.sql {"ok":true,"applied":"20261120070000_istanbul_long_desc_3.sql"}
+200 20261120070000_istanbul_long_desc_3.sql {"ok":true,"skipped":true,"name":"20261120070000_istanbul_long_desc_3.sql"}
+200 20261120080000_istanbul_long_desc_4.sql {"ok":true,"applied":"20261120080000_istanbul_long_desc_4.sql"}
