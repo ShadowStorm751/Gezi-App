@@ -95,6 +95,7 @@ const { data: route } = await supabase.rpc("route_detail", { route_slug: "adalar
 //       latitude, longitude, thumb_url, leg_m, visited }] }   // bulunamazsa null
 ```
 
+- `thumb_url`: rotadaki fotoğrafı olan en tanınmış durağın küçük resmi (kapak). Duraklarda ayrıca `popularity` (0-100+) var.
 - `kind`: `historical` | `nature` | `mixed`. `travel_mode`: `walking` | `mixed` (yürüyüş + toplu taşıma) | `ferry` | `driving`.
 - `est_minutes`: gezme dahil yaklaşık toplam süre. `distance_m` ve `leg_m` duraklar arası **kuş uçuşu** mesafe (yol değil); ilk durakta `leg_m = 0`. Ekranda "~3 km" gibi yuvarlak gösterin.
 - `visited_count`, `completed`, `stops[].visited`: girişsizse `null`.
@@ -148,7 +149,8 @@ type PlaceDetail = {
   city: string;                     // "istanbul"
   name: string; short_desc: string | null; long_desc: string | null;
   best_time: string | null;         // doğa yerleri: "Sunset", "April (tulip season)"
-  period: string | null;            // tarihi yerler: "Bizans", "Osmanlı", "Ceneviz"
+  period: string | null;            // dönem, istenen dilde: "Osmanlı" / "Ottoman", "Bizans" / "Byzantine"
+  period_code: string | null;       // ham değer (her zaman Türkçe): "Osmanlı", "Bizans", "Ceneviz"
   built_year: number | null;
   opening_hours: unknown | null;    // biçimi henüz sabit değil; MVP'de gösterme
   latitude: number; longitude: number;

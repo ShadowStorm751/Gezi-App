@@ -35,7 +35,8 @@ backend/supabase/
 │   ├── 20261119310000_social_badge_paths.sql sosyal rozetlerin görsel yolları
 │   ├── 20261119320000_recommendations.sql    kişisel öneriler (recommendations)
 │   ├── 20261119330000_user_photos.sql        kullanıcı fotoğrafları, onay, 'Gezi Fotoğrafçısı' rozeti
-│   └── 20261120010000_photographer_badge_path.sql rozet görsel yolu
+│   ├── 20261120010000_photographer_badge_path.sql rozet görsel yolu
+│   └── 20261120020000_period_labels_route_covers.sql dönem adı dile göre, rota kapağı en tanınmış duraktan
 ├── functions/badge-upload/              rozet görsellerini Storage'a yükler (.github/workflows/badges.yml)
 ├── functions/checkin/
 │   ├── index.ts                      Edge Function

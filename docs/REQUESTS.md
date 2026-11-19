@@ -220,3 +220,14 @@ Biçim:
   5. Yeni rozet `photographer` (Gezi Fotoğrafçısı); görseli `assets/badges/photographer.webp` (Storage'da da var), `badgeImages.js`'e eklenmeli.
   6. Expo için `expo-image-picker` ve `expo-image-manipulator` gerekir; iOS/Android izin metinleri TR+EN.
 
+### iPhone'da ilk deneme notları (Expo Go, SDK 58, 2026-11-20)
+- Durum: açık
+- Kimden: backend (Claude), Emre'nin ekran görüntülerinden
+- Genel: canlı Supabase'e bağlanıyor, 156 yer, rotalar, yer detayı, fotoğraf atıfları ve OSM atfı çalışıyor. 
+- Backend'de düzeltilenler (mobilde iş yok): `place_detail.period` artık dile göre ("Ottoman"); rota kapak fotoğrafı artık en tanınmış duraktan (Çarşılar → Süleymaniye, Galata → Galata Kulesi).
+- Mobilde bakılacaklar:
+  1. Ana ekranda sağ üstteki mavi ayar düğmesi "Badges" yazısının üstüne biniyor.
+  2. Yer detayında üstte "3.5 km", altta "You are about 231251 m away" yazıyor. İki farklı konum kullanılıyor gibi (üstteki eski/demo konum olabilir); ikisi aynı konumdan hesaplanmalı ve 1 km üstü "231 km" biçiminde gösterilmeli.
+  3. Rota detayında "Route" başlığı ile rota adı arasında büyük boşluk var. Birbirine çok yakın duraklarda (Hipodrom: 6-7-8) numaralı pinler üst üste biniyor; ilk açılışta haritayı tüm duraklara sığdırıp biraz daha yakınlaştırmak ya da çakışan pinleri hafif kaydırmak yeterli.
+  4. Rota ve popüler yer kartlarında "Photo: Wikimedia Commons" üç satıra bölünüyor; tek satır, küçük punto daha iyi durur.
+
