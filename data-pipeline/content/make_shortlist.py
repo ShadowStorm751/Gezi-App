@@ -25,6 +25,7 @@ from cities import get_city  # noqa: E402
 
 # Aday listesinde olmayan yerler: slug -> (enlem, boylam, aramada kullanılacak ad, OSM kimliği ya da "")
 # Konumlar yaklaşık (± birkaç yüz metre); coords.py Wikidata'daki koordinatla değiştirir ve raporlar.
+# Arama adı '|' ile ayrılmış birden çok ad olabilir; sırayla denenir.
 ADDED: Dict[str, Dict[str, Any]] = {
     "izmir": {
         "kemeralti-carsisi": (38.4189, 27.1310, "Kemeraltı", ""),
@@ -38,18 +39,18 @@ ADDED: Dict[str, Dict[str, Any]] = {
         # OSM'de var; Wikidata bağlantısı padişahın kendisine gidiyor, o yüzden aday listesine girmedi.
         "orhan-gazi-turbesi": (40.186771, 29.057694, "Orhan Gazi Türbesi", "way/325992024"),
         "tophane-saat-kulesi": (40.18785, 29.05747, "Tophane Saat Kulesi", "node/1786762169"),
-        "bursa-kapalicarsi": (40.1840, 29.0640, "Bursa Kapalıçarşı", ""),
+        "bursa-kapalicarsi": (40.1840, 29.0640, "Bursa Bedesteni|Bedesten Bursa|Kapalıçarşı Bursa|Bursa Kapalıçarşı", ""),
         "irgandi-koprusu": (40.1838, 29.0710, "Irgandı Köprüsü", ""),
         "iznik-surlari": (40.4357, 29.7208, "İznik surları", ""),
         "cumalikizik": (40.1750, 29.1720, "Cumalıkızık", ""),
-        "misi": (40.1630, 28.9760, "Misi", ""),
+        "misi": (40.1630, 28.9760, "Gümüştepe|Misi, Nilüfer|Misi köyü", ""),
         "tirilye": (40.3920, 28.7950, "Tirilye", ""),
     },
     "kapadokya": {
         "ihlara-vadisi": (38.2450, 34.3000, "Ihlara Vadisi", ""),
         "selime-katedrali": (38.2990, 34.2650, "Selime Katedrali", ""),
-        "soganli-vadisi": (38.3450, 35.0750, "Soğanlı", ""),
-        "kizilcukur-vadisi": (38.6580, 34.8650, "Kızılçukur Vadisi", ""),
+        "soganli-vadisi": (38.3450, 35.0750, "Soğanlı Vadisi|Soğanlı, Yeşilhisar|Soğanlı", ""),
+        "kizilcukur-vadisi": (38.6580, 34.8650, "Kızılçukur|Red Valley Cappadocia|Kızılçukur Vadisi", ""),
         "mustafapasa": (38.5770, 34.8970, "Mustafapaşa", ""),
         "cavusin": (38.6700, 34.8400, "Çavuşin", ""),
         "guzelyurt": (38.2770, 34.3700, "Güzelyurt", ""),

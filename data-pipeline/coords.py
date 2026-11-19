@@ -64,7 +64,11 @@ def main(argv: Optional[List[str]] = None) -> int:
         ent = entities.get(qid) if qid else None
         if not ent:
             lat, lng = float(it["enlem"]), float(it["boylam"])
-            hit = ph.search_entity(it.get("arama_adi") or it["ad_tr"], lat, lng, SEARCH_MAX_M)
+            hit = None
+            for name in (it.get("arama_adi") or it["ad_tr"]).split("|"):
+                hit = ph.search_entity(name.strip(), lat, lng, SEARCH_MAX_M)
+                if hit:
+                    break
             if hit:
                 ent, qid, by_search = hit, hit["id"], True
         wd = ph.entity_coord(ent) if ent else None
