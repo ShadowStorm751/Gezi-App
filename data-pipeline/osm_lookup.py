@@ -22,15 +22,11 @@ sys.path.insert(0, str(HERE))
 import osm_pbf  # noqa: E402
 import pipeline as p  # noqa: E402
 
-# slug -> (şehir, tahmini enlem, boylam, aranan sözcükler [katlanmış, ör. "kizilcukur"])
+# slug -> (şehir, tahmini enlem, boylam, aranan sözcükler [katlanmış, ör. "kizilcukur"], kutu yarı genişliği (derece))
+# Sonuçları işlenen yerler (2026-11-20): misi, bursa-kapalicarsi, iznik-surlari, kizilcukur-vadisi, mustafapasa,
+# tarihi-asansor. Kalan: soganli-vadisi (ilk aramada ± 0,04° içinde bulunamadı).
 TARGETS: Dict[str, tuple] = {
-    "misi": ("bursa", 40.163, 28.976, ["misi", "gumustepe"]),
-    "bursa-kapalicarsi": ("bursa", 40.184, 29.063, ["bedesten", "kapalicarsi", "kapali carsi"]),
-    "iznik-surlari": ("bursa", 40.429, 29.719, ["istanbul kapi", "lefke kapi", "yenisehir kapi", "goller kapi", "sur"]),
-    "kizilcukur-vadisi": ("kapadokya", 38.658, 34.865, ["kizilcukur", "red valley", "kizil vadi"]),
-    "soganli-vadisi": ("kapadokya", 38.345, 35.075, ["soganli"]),
-    "mustafapasa": ("kapadokya", 38.577, 34.896, ["mustafapasa", "sinasos", "konstantin"]),
-    "tarihi-asansor": ("izmir", 38.4088, 27.1190, ["asansor", "elevator"]),
+    "soganli-vadisi": ("kapadokya", 38.345, 35.075, ["soganli"], 0.15),
 }
 BOX_DEG = 0.04
 
@@ -43,10 +39,11 @@ def main(argv: List[str] | None = None) -> int:
     args.work.mkdir(parents=True, exist_ok=True)
 
     out: Dict[str, List[Dict[str, Any]]] = {}
-    for slug, (city, lat, lng, words) in TARGETS.items():
+    for slug, (city, lat, lng, words, *box) in TARGETS.items():
+        deg = box[0] if box else BOX_DEG
         part, named, gj = (args.work / f"{slug}.osm.pbf", args.work / f"{slug}.named.osm.pbf",
                            args.work / f"{slug}.geojsonseq")
-        b = f"{lng - BOX_DEG},{lat - BOX_DEG},{lng + BOX_DEG},{lat + BOX_DEG}"
+        b = f"{lng - deg},{lat - deg},{lng + deg},{lat + deg}"
         osm_pbf._osmium("extract", "-s", "smart", "-b", b, str(args.pbf), "-o", str(part), "--overwrite")
         osm_pbf._osmium("tags-filter", str(part), "nwr/name", "-o", str(named), "--overwrite")
         osm_pbf._export(named, gj)
@@ -70,6 +67,9 @@ def main(argv: List[str] | None = None) -> int:
         out[slug] = hits[:25]
         p.log(f"{slug}: {len(hits)} eşleşme")
     path = HERE / "results" / "osm_lookup.json"
+    old = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+    old.update(out)
+    out = old
     path.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
     p.log(f"-> {path}")
     return 0
