@@ -104,3 +104,30 @@ class FallbackTests(unittest.TestCase):
         e = {"claims": {"P373": [{"mainsnak": {"datavalue": {"value": "Şirince"}}}]}}
         self.assertEqual(ph.entity_commons_category(e), "Şirince")
         self.assertIsNone(ph.entity_commons_category({}))
+
+
+class FallbackFlowTests(unittest.TestCase):
+    def test_fallback_uses_names_without_prefix(self):
+        seen = {}
+
+        def fake_info(files):
+            seen["files"] = files
+            return {f: {"title": "File:" + f, "imageinfo": [{
+                "url": "https://upload.wikimedia.org/a.jpg", "thumburl": "https://upload.wikimedia.org/a.jpg",
+                "thumbwidth": 1280, "thumbheight": 853, "mime": "image/jpeg",
+                "descriptionurl": "https://commons.wikimedia.org/wiki/File:" + f,
+                "extmetadata": {"LicenseShortName": {"value": "CC BY-SA 4.0"}, "Artist": {"value": "X"}}}]}
+                for f in files}
+
+        orig = (ph.fetch_imageinfo, ph.commons_geosearch, ph.commons_category_files)
+        ph.fetch_imageinfo = fake_info
+        ph.commons_geosearch = lambda lat, lng, r, limit=50: [
+            {"title": "File:Sirince village 2019.jpg", "dist": 50}, {"title": "File:Selcuk.jpg", "dist": 10}]
+        ph.commons_category_files = lambda c, limit=30: []
+        try:
+            info = ph.commons_fallback({"ad_tr": "Şirince", "ad_en": "Şirince", "kategori": "village",
+                                        "enlem": "37.94", "boylam": "27.43"}, None)
+        finally:
+            ph.fetch_imageinfo, ph.commons_geosearch, ph.commons_category_files = orig
+        self.assertEqual(seen["files"], ["Sirince village 2019.jpg"])   # önek yok, adı uymayan elendi
+        self.assertEqual((info["kaynak"], info["dosya"]), ("commons-yakin", "Sirince village 2019.jpg"))

@@ -253,11 +253,15 @@ def commons_fallback(s: Dict[str, Any], entity: Optional[Dict[str, Any]]) -> Opt
         hits = sorted(commons_geosearch(float(s["enlem"]), float(s["boylam"]), radius), key=lambda h: h.get("dist", 0))
         candidates += [("commons-yakin", h["title"]) for h in hits
                        if is_photo_file(h["title"]) and title_matches(h["title"], kw)]
+    p.log(f"  yedek yol {s['ad_tr']}: kategori={cat or '-'} aday={len(candidates)} sözcük={kw}")
     if not candidates:
         return None
-    infos = fetch_imageinfo([t for _, t in candidates[:40]])
-    for source, title in candidates[:40]:
-        info = parse_imageinfo(infos.get(title, {}))
+    # fetch_imageinfo dosya adlarını "File:" öneki olmadan alır ve öyle döndürür
+    names = [t.removeprefix("File:") for _, t in candidates[:40]]
+    infos = fetch_imageinfo(names)
+    for (source, _), name in zip(candidates[:40], names):
+        title = name
+        info = parse_imageinfo(infos.get(name, {}))
         if info and (info.get("width") or 0) >= 800:
             info.update(kaynak=source, dosya=title)
             return info
