@@ -15,6 +15,24 @@ Biçim:
 
 ---
 
+### Ana yer ve içindeki keşfedilecek yerler; yeni kategoriler; yeni şehirler
+- Tarih: 2026-11-19
+- Kimden: backend (proje sahibinin isteğiyle)
+- Durum: açık (mobil)
+- İstek: Proje sahibinin kararı: Efes gibi büyük yerler bir **ana yer** olarak görünecek, içindeki yapılar ("içinde 11 keşfedilecek yer") tek tek işaretlenip check-in alabilecek. Sunucu tarafı hazır (migration `20261119200000_place_hierarchy.sql`, `docs/API.md` → `place_detail`, `city_pack`). Geriye uyumlu eklemeler:
+  - `city_pack.places[]`: `parent_id`, `child_count`. Paket içeriği değiştiği için `version` bir kez değişir (İstanbul dahil).
+  - `place_detail`: `parent`, `children[]` (her biri `visited` ile), `children_total`, `children_visited`.
+  - İstenen davranış:
+    - Liste ve haritada ana yerin kartında "İçinde N keşfedilecek yer / N places to explore inside" rozeti.
+    - Ana yer detayında içteki yerlerin listesi (küçük resim, ad, ✓ gezildiyse) ve ilerleme çubuğu "4 / 11".
+    - İçteki yerin detayında üstte "Efes'in içinde / Inside Ephesus" bağlantısı (ana yere gider).
+    - Haritada içteki yerler ana yere yakınlaşınca görünsün (uzaktan bakınca yalnızca ana yer), yoksa Efes'te 12 iğne üst üste biner.
+    - İçteki yerlerin check-in yarıçapı küçük (20-60 m). Buradayım butonu her yer için ayrı çalışır; ana yere check-in, içtekileri gezilmiş saymaz.
+  - Yeni kategoriler: `village` (TR "Tarihi Köy", EN "Historic Village", historical) ve `valley` (TR "Vadi", EN "Valley", nature). `catalog.ts` → `categoryNames` ve kategori simgeleri eklenmeli; yoksa ekranda slug görünür.
+  - Yeni rozetler: her ana yer için `<ana-yer-slug>-kesif` ("Efes Kâşifi / Ephesus Explorer"). Görselleri henüz yok; yer tutucu gösterilmeli.
+  - Yeni şehirler (`izmir`, `bursa`, `kapadokya`) migration olarak geliyor ama yerler **gizli** (`is_published = false`); yayına alınınca `city_pack` ile gelir. Şehir seçici şimdilik gerekmez.
+- Yanıt: –
+
 ### Expo SDK yükseltmesi (iPhone'da Expo Go ile test için)
 - Tarih: 2026-11-19
 - Kimden: backend (proje sahibinin isteğiyle)

@@ -32,11 +32,12 @@ Yalnızca **anon key** uygulamaya girer. `service_role` key asla mobil koda konm
 export type Lang = "tr" | "en";
 export type PlaceKind = "historical" | "nature";
 
-// Kategori slug'ları (seed.sql + migration'lar). "tomb" 2026-11-19'da eklendi. Ekranda göstermek için place_detail.category_name kullan.
+// Kategori slug'ları (seed.sql + migration'lar). "tomb" 2026-11-19'da eklendi; "village" (Tarihi Köy / Historic Village)
+// ve "valley" (Vadi / Valley) yeni şehirlerle geldi. Ekranda göstermek için place_detail.category_name kullan.
 export type CategorySlug =
   | "mosque" | "church" | "synagogue" | "palace" | "museum" | "fortress" | "tower"
-  | "cistern" | "monument" | "archaeological_site" | "tomb"              // historical
-  | "viewpoint" | "hill" | "forest" | "park" | "beach" | "island" | "waterfall"; // nature
+  | "cistern" | "monument" | "archaeological_site" | "tomb" | "village"   // historical
+  | "viewpoint" | "hill" | "forest" | "park" | "beach" | "island" | "waterfall" | "valley"; // nature
 ```
 
 ---
@@ -106,8 +107,20 @@ type PlaceDetail = {
     source_url: string | null;    // Commons sayfası
   }>;
   visited_at: string | null;        // ISO tarih; giriş yapılmamışsa ya da gezilmemişse null
+  // Ana yer ve içindeki yerler (migration 20261119200000_place_hierarchy.sql). Ör. Efes'in içinde 11 yer.
+  parent: { id: string; slug: string; name: string } | null;   // bu yer bir ana yerin içindeyse
+  children: Array<{                  // bu yer bir ana yerse içindeki yerler (ada göre sıralı); değilse []
+    id: string; slug: string; name: string; category: CategorySlug;
+    latitude: number; longitude: number; checkin_radius_m: number;
+    thumb_url: string | null;
+    visited: boolean;                // giriş yapılmamışsa false
+  }>;
+  children_total: number;            // yayındaki iç yer sayısı ("içinde 11 keşfedilecek yer")
+  children_visited: number;          // kullanıcının gezdiği (işaretlenmemiş) iç yer sayısı: "11'de 4"
 };
 ```
+
+**Ana yer ve içindeki yerler:** İçteki her yer ayrı bir yerdir; ayrı check-in alır, kendi `place_detail`'i vardır. Ana yerin kartında `children_total` ile "İçinde N keşfedilecek yer", detayda `children` listesi ve `children_visited / children_total` ilerlemesi gösterilir. İçteki yerin detayında `parent` ile ana yere dönüş bağlantısı verilir. Tek seviye: içteki bir yerin kendi içinde yeri olmaz. Her ana yer için bir "keşif" rozeti vardır (`<ana-yer-slug>-kesif`, kural `place_set`).
 
 Fotoğraf adresi: `photo.url` (dolu ise doğrudan kullan). `url` boş ve `storage_path` dolu ise:
 `supabase.storage.from("place-photos").getPublicUrl(photo.storage_path).data.publicUrl`.
@@ -142,6 +155,8 @@ type CityPack = {
                   kind: PlaceKind; category: CategorySlug;
                   latitude: number; longitude: number; checkin_radius_m: number;
                   has_area: boolean;              // true: ada/orman gibi alan; check-in için sınırın içinde olmak yeterli
+                  parent_id: string | null;       // ana yerin id'si (ör. Celsus Kütüphanesi -> Efes); bağımsızsa null
+                  child_count: number;            // ana yerse içindeki yer sayısı, değilse 0
                   thumb_url: string | null }>;   // ilk fotoğrafın küçük resmi (liste/harita kartı)
 };
 ```
