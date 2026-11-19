@@ -58,5 +58,11 @@ export default function useVisits() {
     });
     setRevision(n => n+1);
   }
-  return {userId,owner,revision,record,dates:history?.userId === userId ? history.dates : {}};
+  async function clearLocal(id) {
+    epoch.current++;
+    setHistory(null);
+    await writes.current;
+    await AsyncStorage.multiRemove(['gezi:visits:'+project+':'+id,'gezi:earned:'+project+':'+id]);
+  }
+  return {userId,owner,revision,record,clearLocal,dates:history?.userId === userId ? history.dates : {}};
 }

@@ -7,33 +7,33 @@ export type Pack = {city:string; name:string; version:string|null; places:PackPl
 type Store = {getItem(key:string): Promise<string|null>; setItem(key:string,value:string):Promise<void>};
 type Rpc = (name:string, args:Record<string,string|number|null>) => PromiseLike<{data:unknown; error:unknown}>;
 
-function validPack(value: unknown): value is Pack {
+function validPack(value: unknown, city:string): value is Pack {
   const p = value as Partial<Pack> | null;
-  return p?.city === 'istanbul' && Array.isArray(p.places) &&
+  return p?.city === city && Array.isArray(p.places) &&
     (typeof p.version === 'string' || (p.version === null && !p.places.length)) &&
     p.places.every(row => row && typeof row.id === 'string' && typeof row.name === 'string' &&
       typeof row.category === 'string' && Number.isFinite(row.latitude) && Math.abs(row.latitude) <= 90 &&
       Number.isFinite(row.longitude) && Math.abs(row.longitude) <= 180);
 }
 
-export async function loadCity(rpc:Rpc, store:Store, project:string, lang:Lang, showCached:(p:Pack)=>void) {
-  const key = 'gezi:city:v1:' + project + ':istanbul:' + lang;
+export async function loadCity(rpc:Rpc, store:Store, project:string, lang:Lang, showCached:(p:Pack)=>void, city = 'istanbul') {
+  const key = 'gezi:city:v1:' + project + ':' + city + ':' + lang;
   let cached: Pack | null = null;
   try {
     const stored = await store.getItem(key);
     const parsed = stored ? JSON.parse(stored) : null;
-    if (validPack(parsed)) cached = parsed;
+    if (validPack(parsed,city)) cached = parsed;
   } catch { /* An unreadable cache can be rebuilt from the service. */ }
   if (cached) showCached(cached);
-  const {data,error} = await rpc('city_pack',{city_slug:'istanbul',lang});
-  if (error || !validPack(data)) throw new Error('city_pack');
+  const {data,error} = await rpc('city_pack',{city_slug:city,lang});
+  if (error || !validPack(data,city)) throw new Error('city_pack');
   if (!cached || cached.version !== data.version || JSON.stringify(cached.places) !== JSON.stringify(data.places)) {
     try { await store.setItem(key, JSON.stringify(data)); } catch { /* In-memory use still works. */ }
   }
   return data;
 }
 
-const categoryNames:Record<string,[string,string]> = {
+export const categoryNames:Record<string,[string,string]> = {
   mosque:['Cami','Mosque'], church:['Kilise','Church'], synagogue:['Sinagog','Synagogue'], tomb:['Türbe','Tomb'],
   palace:['Saray','Palace'], museum:['Müze','Museum'], fortress:['Kale','Fortress'], tower:['Kule','Tower'],
   cistern:['Sarnıç','Cistern'], monument:['Anıt','Monument'], archaeological_site:['Ören yeri','Archaeological site'],

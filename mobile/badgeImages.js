@@ -1,5 +1,10 @@
 // Metro resolves packaged images from literal require paths.
 export const badgeImages = Object.freeze({
+  'city-helper': require('./assets/badges/city-helper.webp'),
+  'first-friend': require('./assets/badges/first-friend.webp'),
+  'travel-crew': require('./assets/badges/travel-crew.webp'),
+  'route-first': require('./assets/badges/route-first.webp'),
+  'route-master': require('./assets/badges/route-master.webp'),
   'byzantine-traveler': require('./assets/badges/byzantine-traveler.webp'),
   'explorer-10': require('./assets/badges/explorer-10.webp'),
   'explorer-25': require('./assets/badges/explorer-25.webp'),

@@ -18,7 +18,7 @@ Biçim:
 ### Hesap silme, avatar ve kullanıcı katkısı ekranları
 - Tarih: 2026-11-19
 - Kimden: backend
-- Durum: açık (mobil)
+- Durum: mobil kodu tamamlandı; cihaz testi bekliyor
 - İstek: Backend canlıda ve test edildi (migration `20261119200000`, `20261119210000`, fonksiyon `delete-account`). Mobilde gerekenler (ayrıntı `docs/API.md`):
   1. **Hesabımı sil** (Ayarlar/Profil): onay penceresi → `delete-account` (`confirm: "DELETE"`) → `signOut` + yerel önbelleği temizle. Mağaza zorunluluğu, yayından önce şart.
   2. **Avatar**: galeriden seç → 512 px'e küçült → `avatars/<user_id>/...` yükle → `update_profile({ avatar_path })`.
@@ -27,19 +27,19 @@ Biçim:
   5. **Katkılarım** (profil): `my_submissions` ile durumlar (bekliyor / kabul edildi / reddedildi) ve varsa yönetici notu.
   6. Yeni rozet `city-helper` (Şehir Gönüllüsü): görseli `assets/badges/city-helper.webp` (22. rozet); `badgeImages.js` listesine eklenmeli.
   - SDK 58 yükseltmesinden sonra yapılabilir.
-- Yanıt: –
+- Yanıt (mobil): Profil, hesap silme, 512 px avatar, yer bildirimi, haritada öneri ve Katkılarım ekranları eklendi.
 
 ### Expo SDK yükseltmesi (iPhone'da Expo Go ile test için)
 - Tarih: 2026-11-19
 - Kimden: backend (proje sahibinin isteğiyle)
-- Durum: açık (mobil)
+- Durum: SDK 58 main üzerinde; iPhone testi bekliyor
 - İstek: Proje sahibi uygulamayı **iPhone'da App Store Expo Go** ile deneyecek. Mobil proje Expo SDK 54'te (`expo ~54.0.37`), App Store'daki Expo Go ise yalnızca en son SDK'yı açıyor (Kasım 2026: 57, 58'e geçiş haftalar içinde). iOS'ta eski Expo Go kurulamıyor, bu yüzden projenin yükseltilmesi gerekiyor:
   - **Hedef: SDK 58** (proje sahibinin iPhone'undaki Expo Go SDK 58 destekliyor, 2026-11-19).
   - Expo'nun önerisiyle bir seferde bir sürüm: `npx expo install expo@^55.0.0 --fix` → `npx expo-doctor` → test, sonra 56, 57 ve 58.
   - Dikkat: `react-native-maps`, `react-native-svg`, `expo-camera`, `expo-sensors`, `expo-location` sürümleri `--fix` ile hizalanmalı. SDK 58 iOS 27 için scene life cycle değişikliği getiriyor.
   - `npm test` geçmeli; uygulama Expo Go'da açılmalı (harita, kamera, Buradayım, Rozetler).
   - Backend tarafında değişiklik gerekmiyor.
-- Yanıt: –
+- Yanıt (mobil): SDK 58 yükseltmesi #5 ile birleşti. iPhone üzerinde harita, kamera ve check-in kabul testi bekliyor.
 
 ### Check-in ekranı ("Buradayım" butonu)
 - Tarih: 2026-11-19
@@ -167,26 +167,29 @@ Biçim:
 - Yanıt: Şema, okuma fonksiyonları ve `checkin` Edge Function'ı `backend/` altında. Sözleşme `docs/API.md`. Supabase projesi açıldığında URL ve anon key proje sahibinden alınacak; `.env` dosyası repo'ya konmaz.
 
 ### Haritada OpenStreetMap atfı
-- Durum: açık
+- Durum: tamamlandı (mobil kodu)
 - Kimden: backend (Claude), 2026-11-19
 - İstek: Yer verisi OpenStreetMap'ten (ODbL lisansı). Haritanın köşesinde ya da "Hakkında" ekranında "© OpenStreetMap katkıcıları" yazısı ve https://www.openstreetmap.org/copyright bağlantısı gösterilmeli. Mobil kodda şu an yok.
+- Yanıt (mobil): Ana haritanın altında iki dilde bağlantılı kaynak gösteriliyor.
 
 ### Yeni: şehir listesi `list_cities`
-- Durum: açık (acil değil)
+- Durum: tamamlandı (mobil kodu)
 - Kimden: backend (Claude), 2026-11-19
 - İstek: Geriye uyumlu ekleme. `list_cities(lang)` yayındaki şehirleri döner (`docs/API.md`). Şu an yalnızca İstanbul var; yeni şehirler yayına alınınca şehir seçici bu listeden beslenmeli. İstanbul sabit yazılmış yerler (`city_pack("istanbul")`, harita başlangıç noktası) seçilen şehrin `slug`/`center` değerine bağlanabilir.
+- Yanıt (mobil): Yayındaki şehirler, harita merkezi ve şehre özel çevrimdışı paket ana ekrana bağlandı.
 
 ### Yeni: hazır rotalar (`list_routes`, `route_detail`)
-- Durum: açık
+- Durum: tamamlandı (mobil kodu; cihaz testi bekliyor)
 - Kimden: backend (Claude), 2026-11-19
 - İstek: Geriye uyumlu ekleme, canlıda. İstanbul için 11 hazır rota (Sultanahmet Klasikleri, Adalar, Boğaz Manzaraları vb.). Ayrıntı `docs/API.md`.
   1. **Rotalar listesi:** kart başına kapak fotoğrafı (`thumb_url`), başlık, süre (`est_minutes` → "4 saat"), mesafe, durak sayısı, ulaşım simgesi (`travel_mode`). Girişliyse ilerleme ("3/8 durak") ve tamamlandı işareti.
   2. **Rota detayı:** özet, haritada durakları sırayla bağlayan çizgi ve numaralı pinler, altında sıralı durak listesi (gezilen durak işaretli). Durağa dokununca mevcut yer detayı açılır.
   3. "Yol tarifi" düğmesi bir sonraki gezilmemiş durağı Apple/Google Haritalar'da açabilir.
   4. Yeni rozetler `route-first` (Rotacı) ve `route-master` (Rota Ustası). Görselleri `assets/badges/route-first.webp` ve `route-master.webp` (Storage'da da var); `badgeImages.js` listesine eklenmeli.
+- Yanıt (mobil): Rotalar, numaralı durak haritası, gezilen duraklar, yer detayı ve sıradaki durağa yol tarifi eklendi.
 
 ### Yeni: arkadaşlar ve sıralama
-- Durum: açık
+- Durum: tamamlandı (mobil kodu; iki hesapla cihaz testi bekliyor)
 - Kimden: backend (Claude), 2026-11-19
 - İstek: Geriye uyumlu ekleme, canlıda. Ayrıntı ve hata kodları `docs/API.md` → "Arkadaşlar ve sıralama".
   1. **Arkadaşlar ekranı:** kullanıcı adıyla arama (`search_users`), sonuçta duruma göre düğme (Ekle / İstek gönderildi / Kabul et / Arkadaş). Üstte gelen istekler (Kabul / Reddet), altta arkadaş listesi (gezilen yer ve rozet sayısıyla).
@@ -194,13 +197,15 @@ Biçim:
   3. Kullanıcı adı olmayan kullanıcıya önce kullanıcı adı seçtirin (`username_required`).
   4. Kabul yanıtındaki `new_achievements` için rozet kutlaması. Yeni rozetler `first-friend` (Gezi Arkadaşı) ve `travel-crew` (Gezi Ekibi); görselleri `assets/badges/first-friend.webp` ve `travel-crew.webp` (Storage'da da var), `badgeImages.js` listesine eklenmeli.
   5. Profil ayarlarındaki "Profilim herkese açık" (`is_public`) açıklaması: kapalıysa başkaları seni yalnızca tam kullanıcı adınla bulabilir.
+- Yanıt (mobil): Arkadaş arama, gelen/giden istekler, dört dönemli sıralama, profil görünürlüğü ve rozet kutlaması eklendi.
 
 ### Yeni: kişisel öneriler `recommendations`
-- Durum: açık
+- Durum: tamamlandı (mobil kodu)
 - Kimden: backend (Claude), 2026-11-19
 - İstek: Geriye uyumlu ekleme, canlıda. Ayrıntı `docs/API.md` → `recommendations`.
   1. Ana sayfada (ya da Keşfet sekmesinde) "Sana önerilenler" yatay kart listesi: fotoğraf, ad, mesafe ve `reason` metni ("Sultanahmet Klasikleri rotanın sıradaki durağı" gibi). Karta dokununca yer detayı.
   2. "Yarım kalan rotaların" kartı: "Sultanahmet Klasikleri 3/11 · sıradaki: Ayasofya Türbeleri, 85 m". Dokununca rota detayı.
   3. "Rozete az kaldı" şeridi: rozet görseli + ilerleme çubuğu ("Kâşif 7/10").
   4. Konum izni yoksa `lat/lng` göndermeden çağırın; öneriler tanınırlığa göre gelir.
+- Yanıt (mobil): Keşfet ekranında yer önerileri, yarım kalan rotalar ve ilerleme çubuklu rozetler gösteriliyor.
 
