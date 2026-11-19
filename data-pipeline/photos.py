@@ -7,7 +7,7 @@
 3. Yalnızca serbest lisanslar kabul edilir: CC0, kamu malı, CC BY, CC BY-SA
    (NC/ND ve diğerleri elenir).
 
-Çıktı: results/photos.json   (slug -> fotoğraf bilgisi)
+Çıktı: results/photos.json   (slug -> fotoğraf bilgisi); --city ile results/<şehir>/photos.json
 İnternet gerekir; GitHub Actions'ta çalışır (.github/workflows/photos.yml).
 Yalnızca standart kütüphane.
 """
@@ -27,6 +27,7 @@ sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(HERE / "content"))
 
 import pipeline as p  # noqa: E402
+from cities import CITIES, DEFAULT_CITY  # noqa: E402
 
 WIKIDATA_API = "https://www.wikidata.org/w/api.php"
 COMMONS_API = "https://commons.wikimedia.org/w/api.php"
@@ -188,10 +189,22 @@ def fetch_imageinfo(files: List[str]) -> Dict[str, Dict[str, Any]]:
 
 # ---------------------------------------------------------------------------
 
-def main() -> int:
-    from istanbul_descriptions import DROPPED
+def city_results(slug: str) -> Path:
+    """İstanbul: results/, diğer şehirler: results/<şehir>/."""
+    return HERE / "results" if slug == DEFAULT_CITY else HERE / "results" / slug
 
-    shortlist = json.loads((HERE / "results/shortlist.json").read_text(encoding="utf-8"))
+
+def main(argv: Optional[List[str]] = None) -> int:
+    import argparse
+    import importlib
+
+    ap = argparse.ArgumentParser(description="Onaylı yerlerin Commons fotoğrafları")
+    ap.add_argument("--city", default=DEFAULT_CITY, choices=sorted(CITIES))
+    args = ap.parse_args(argv)
+    DROPPED = importlib.import_module(f"{args.city}_descriptions").DROPPED
+    rdir = city_results(args.city)
+
+    shortlist = json.loads((rdir / "shortlist.json").read_text(encoding="utf-8"))
     places = [s for s in shortlist if p.slugify(s["ad_tr"]) not in DROPPED]
 
     # 1) Wikidata kaydı
@@ -237,7 +250,7 @@ def main() -> int:
         "rejected_license": rejected,
         "missing": missing,
     }
-    out = HERE / "results/photos.json"
+    out = rdir / "photos.json"
     out.write_text(json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")
     p.log(f"{len(photos)}/{len(places)} yerin fotoğrafı var; lisans nedeniyle elenen {len(rejected)}; eksik {len(missing)}")
     return 0
