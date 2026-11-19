@@ -830,5 +830,81 @@
    "boylam": 27.116961,
    "mesafe_m": 205
   }
+ ],
+ "soganli-kiliseleri": [
+  {
+   "osm": "node/4629821776",
+   "etiketler": {
+    "name": "Soğanlı Tahtalı Kilise",
+    "natural": "yes"
+   },
+   "enlem": 38.345398,
+   "boylam": 34.962457,
+   "mesafe_m": 402
+  },
+  {
+   "osm": "node/6734771286",
+   "etiketler": {
+    "amenity": "place_of_worship",
+    "name": "Tahtali Kilise"
+   },
+   "enlem": 38.345168,
+   "boylam": 34.962599,
+   "mesafe_m": 429
+  },
+  {
+   "osm": "node/3251854185",
+   "etiketler": {
+    "amenity": "place_of_worship",
+    "name": "Yılanlı Kilise",
+    "name:en": "The Church of the Snakes"
+   },
+   "enlem": 38.350922,
+   "boylam": 34.966764,
+   "mesafe_m": 467
+  },
+  {
+   "osm": "node/6734775385",
+   "etiketler": {
+    "amenity": "place_of_worship",
+    "name": "Geyik Kilise"
+   },
+   "enlem": 38.34492,
+   "boylam": 34.965489,
+   "mesafe_m": 546
+  },
+  {
+   "osm": "node/5188164524",
+   "etiketler": {
+    "name": "Kubbeli kilise",
+    "name:en": "The Domed church",
+    "tourism": "attraction"
+   },
+   "enlem": 38.348032,
+   "boylam": 34.968502,
+   "mesafe_m": 577
+  },
+  {
+   "osm": "node/5188151823",
+   "etiketler": {
+    "name": "Sakli kilise",
+    "name:en": "Hidden church",
+    "tourism": "attraction"
+   },
+   "enlem": 38.347703,
+   "boylam": 34.968801,
+   "mesafe_m": 610
+  },
+  {
+   "osm": "node/5188164523",
+   "etiketler": {
+    "name": "Karabaş Kilise",
+    "name:en": "Karabas Church",
+    "tourism": "attraction"
+   },
+   "enlem": 38.348221,
+   "boylam": 34.970274,
+   "mesafe_m": 727
+  }
  ]
 }
