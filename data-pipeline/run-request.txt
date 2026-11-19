@@ -1,4 +1,4 @@
 Bu dosya değişip main'e (ya da data/* dalına) yüklenince GitHub veri hattını çalıştırır (.github/workflows/data-pipeline.yml).
-Şehirler: izmir
+Şehirler: bursa kapadokya
 Kaynak: pbf
-Son istek: 2026-11-19 21:40 — İzmir, Geofabrik dosyasından (Overpass yoğun)
+Son istek: 2026-11-19 21:50 — Bursa ve Kapadokya, Geofabrik dosyasından
