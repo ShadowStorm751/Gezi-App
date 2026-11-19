@@ -1,0 +1,2 @@
+Bu dosya değişip main'e yüklenince fotoğrafı olmayan yerler için aday fotoğraflar toplanır (.github/workflows/photo-candidates.yml).
+Son istek: 2026-11-19 20:25 — 23 yer
