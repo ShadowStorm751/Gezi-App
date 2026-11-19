@@ -1,2 +1,3 @@
-Bu dosya değişip main'e yüklenince GitHub veri hattını çalıştırır (.github/workflows/data-pipeline.yml).
-Son istek: 2026-11-19 00:40 — turistik yer, meydan ve fener etiketleri eklendi
+Bu dosya değişip main'e (ya da data/* dalına) yüklenince GitHub veri hattını çalıştırır (.github/workflows/data-pipeline.yml).
+Şehirler: izmir bursa kapadokya
+Son istek: 2026-11-19 17:10 — İzmir, Bursa, Kapadokya aday listeleri
