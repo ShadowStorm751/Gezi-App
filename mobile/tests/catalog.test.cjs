@@ -26,6 +26,19 @@ function memory(){
   const values=new Map();
   return {getItem:async key=>values.get(key)??null,setItem:async(key,value)=>values.set(key,value),values};
 }
+test('İki şehir ayrı saklanır ve başka şehrin paketi kabul edilmez',async()=>{
+  const store=memory();
+  const other={...pack,city:'bursa',name:'Bursa',places:[]};
+  await loadCity(async()=>({data:pack}),store,'project','tr',()=>{});
+  const result=await loadCity(async(_name,args)=>{
+    assert.equal(args.city_slug,'bursa');return {data:other};
+  },store,'project','tr',()=>assert.fail('İstanbul önbelleği gösterildi'),'bursa');
+  assert.equal(result.city,'bursa');
+  assert.equal(store.values.size,2);
+  let cached;
+  await assert.rejects(loadCity(async()=>({data:pack}),store,'project','tr',v=>cached=v,'bursa'));
+  assert.deepEqual(cached,other);
+});
 test('Şehir paketi şeması haritaya ve 1 km kamera hedefine aynı kimliği verir',async()=>{
   const store=memory();
   const p=await loadCity(async(name,args)=>{

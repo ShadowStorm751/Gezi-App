@@ -5,7 +5,7 @@ import {client,lang,t} from './client';
 import {Login} from './Badges';
 import {checkinOutcome,distanceHint,sendCheckin} from './visitLogic';
 
-export default function CheckIn({place,origin,visits,visited,onMissing,onAwards}) {
+export default function CheckIn({place,origin,visits,visited,onMissing,onAwards,cities}) {
   const [permission,setPermission] = useState(null);
   const [fix,setFix] = useState(null);
   const [busy,setBusy] = useState(false);
@@ -117,7 +117,7 @@ export default function CheckIn({place,origin,visits,visited,onMissing,onAwards}
       {t('Yaklaşık '+hint+' m uzaktasın.','You are about '+hint+' m away.')}
     </Text>}
     {!!result?.message && <Text accessibilityLiveRegion="polite" style={styles.note}>{result.message}</Text>}
-    {!!result?.progress && <Text style={styles.visited}>{t('İstanbul','Istanbul')} · {result.progress.visited} / {result.progress.total}</Text>}
+    {!!result?.progress && <Text style={styles.visited}>{cities?.find(c => c.slug === result.progress.city)?.name || t('Şehir ilerlemesi','City progress')} · {result.progress.visited} / {result.progress.total}</Text>}
   </View>;
 }
 
