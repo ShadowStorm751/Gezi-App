@@ -1,0 +1,5 @@
+ok
+bitti: 2026-11-19T18:36:38Z
+kaynak: pbf
+osm_elements=401 wikidata=71 adaylar=176
+çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44587645611
