@@ -1,9 +1,8 @@
 {
  "ozet": {
   "uyumlu": 46,
-  "yaklasik_duzeltildi": 5,
+  "yaklasik_duzeltildi": 7,
   "wikidata_yok": 13,
-  "yaklasik_dogrulanamadi": 2,
   "kontrol": 4
  },
  "yerler": {
@@ -473,11 +472,18 @@
     40.184,
     29.064
    ],
-   "qid": null,
-   "wikidata": null,
-   "arama_ile": false,
-   "mesafe_m": null,
-   "durum": "yaklasik_dogrulanamadi"
+   "qid": "Q139436543",
+   "wikidata": [
+    40.185173,
+    29.0620251
+   ],
+   "arama_ile": true,
+   "mesafe_m": 213,
+   "durum": "yaklasik_duzeltildi",
+   "onerilen": [
+    40.185173,
+    29.0620251
+   ]
   },
   "irgandi-koprusu": {
    "osm": [
@@ -774,11 +780,18 @@
     40.163,
     28.976
    ],
-   "qid": null,
-   "wikidata": null,
-   "arama_ile": false,
-   "mesafe_m": null,
-   "durum": "yaklasik_dogrulanamadi"
+   "qid": "Q31189684",
+   "wikidata": [
+    40.17912,
+    28.97039
+   ],
+   "arama_ile": true,
+   "mesafe_m": 1855,
+   "durum": "yaklasik_duzeltildi",
+   "onerilen": [
+    40.17912,
+    28.97039
+   ]
   },
   "tirilye": {
    "osm": [
