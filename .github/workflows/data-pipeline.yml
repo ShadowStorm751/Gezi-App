@@ -70,7 +70,7 @@ jobs:
             mkdir -p "$out" "$res/raw"
             printf 'running\nbaşladı: %s\nçalıştırma: %s\n' "$(now)" "$RUN_URL" > "$res/status.txt"
             echo "::group::$city"
-            if python data-pipeline/pipeline.py --city "$city" --out "$out" fetch --budget-min 22 2>&1 | tee "$out/log.txt" \
+            if python data-pipeline/pipeline.py --city "$city" --out "$out" fetch --budget-min 22 --cache-dir "$res/raw/osm_chunks" 2>&1 | tee "$out/log.txt" \
                && python data-pipeline/pipeline.py --city "$city" --out "$out" candidates 2>&1 | tee -a "$out/log.txt"; then
               cp "$out/candidates.csv" "$out/areas.json" "$res/"
               gzip -c "$out/osm_raw.json" > "$res/raw/osm_raw.json.gz"
