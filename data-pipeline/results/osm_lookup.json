@@ -1,0 +1,727 @@
+{
+ "misi": [
+  {
+   "osm": "way/594190340",
+   "etiketler": {
+    "admin_level": "8",
+    "boundary": "administrative",
+    "name": "Dağyenice-Gümüştepe Mahalle sınırı"
+   },
+   "enlem": 40.169549,
+   "boylam": 28.966146,
+   "mesafe_m": 1110
+  },
+  {
+   "osm": "way/55379360",
+   "etiketler": {
+    "highway": "tertiary",
+    "name": "Dağyenice-Misi"
+   },
+   "enlem": 40.168319,
+   "boylam": 28.959155,
+   "mesafe_m": 1549
+  },
+  {
+   "osm": "way/55380174",
+   "etiketler": {
+    "highway": "tertiary",
+    "name": "Misi Caddesi"
+   },
+   "enlem": 40.176447,
+   "boylam": 28.969842,
+   "mesafe_m": 1584
+  },
+  {
+   "osm": "way/1159137934",
+   "etiketler": {
+    "amenity": "restaurant",
+    "building": "yes",
+    "name": "Misi Orkide"
+   },
+   "enlem": 40.176978,
+   "boylam": 28.97048,
+   "mesafe_m": 1624
+  },
+  {
+   "osm": "way/1159137934",
+   "etiketler": {
+    "amenity": "restaurant",
+    "building": "yes",
+    "name": "Misi Orkide"
+   },
+   "enlem": 40.176978,
+   "boylam": 28.97048,
+   "mesafe_m": 1624
+  },
+  {
+   "osm": "node/4430860411",
+   "etiketler": {
+    "name": "Gümüştepe",
+    "place": "village",
+    "wikidata": "Q31189684"
+   },
+   "enlem": 40.176884,
+   "boylam": 28.969747,
+   "mesafe_m": 1633
+  },
+  {
+   "osm": "way/1035758499",
+   "etiketler": {
+    "building": "mosque",
+    "name": "Gümüştepe Mahallesi Camii"
+   },
+   "enlem": 40.177037,
+   "boylam": 28.969835,
+   "mesafe_m": 1646
+  },
+  {
+   "osm": "way/1035758499",
+   "etiketler": {
+    "building": "mosque",
+    "name": "Gümüştepe Mahallesi Camii"
+   },
+   "enlem": 40.177037,
+   "boylam": 28.969835,
+   "mesafe_m": 1646
+  },
+  {
+   "osm": "way/1159137932",
+   "etiketler": {
+    "amenity": "restaurant",
+    "building": "yes",
+    "name": "Misili Orhan"
+   },
+   "enlem": 40.177168,
+   "boylam": 28.970064,
+   "mesafe_m": 1654
+  },
+  {
+   "osm": "way/1159137932",
+   "etiketler": {
+    "amenity": "restaurant",
+    "building": "yes",
+    "name": "Misili Orhan"
+   },
+   "enlem": 40.177168,
+   "boylam": 28.970064,
+   "mesafe_m": 1654
+  },
+  {
+   "osm": "relation/8339627",
+   "etiketler": {
+    "admin_level": "8",
+    "boundary": "administrative",
+    "name": "Gümüştepe Mahallesi",
+    "wikidata": "Q31189684"
+   },
+   "enlem": 40.181671,
+   "boylam": 28.975328,
+   "mesafe_m": 2077
+  },
+  {
+   "osm": "way/591572002",
+   "etiketler": {
+    "admin_level": "8",
+    "boundary": "administrative",
+    "name": "Odunluk-Gümüştepe Mahelle sınırı"
+   },
+   "enlem": 40.187544,
+   "boylam": 28.984409,
+   "mesafe_m": 2821
+  },
+  {
+   "osm": "way/592562069",
+   "etiketler": {
+    "admin_level": "8",
+    "boundary": "administrative",
+    "name": "Üçavler-Gümüştepe Mahalle sınırı"
+   },
+   "enlem": 40.189253,
+   "boylam": 28.959544,
+   "mesafe_m": 3237
+  },
+  {
+   "osm": "way/1035591256",
+   "etiketler": {
+    "highway": "service",
+    "name": "Gümüştepe Sokak"
+   },
+   "enlem": 40.192584,
+   "boylam": 28.973359,
+   "mesafe_m": 3297
+  },
+  {
+   "osm": "way/591577749",
+   "etiketler": {
+    "admin_level": "8",
+    "boundary": "administrative",
+    "name": "Çamlıca-Gümüştepe Mahalle sınırı"
+   },
+   "enlem": 40.193034,
+   "boylam": 28.974308,
+   "mesafe_m": 3343
+  },
+  {
+   "osm": "way/592562070",
+   "etiketler": {
+    "admin_level": "8",
+    "boundary": "administrative",
+    "name": "Kültür-Gümüştepe Mahalle sınırı"
+   },
+   "enlem": 40.196461,
+   "boylam": 28.961888,
+   "mesafe_m": 3909
+  },
+  {
+   "osm": "way/591577747",
+   "etiketler": {
+    "admin_level": "8",
+    "boundary": "administrative",
+    "name": "Odunluk-Gümüştepe Mahelle sınırı"
+   },
+   "enlem": 40.202396,
+   "boylam": 28.981824,
+   "mesafe_m": 4408
+  }
+ ],
+ "bursa-kapalicarsi": [
+  {
+   "osm": "way/1156644736",
+   "etiketler": {
+    "building": "roof",
+    "name": "Kapalı Çarşı"
+   },
+   "enlem": 40.184715,
+   "boylam": 29.062375,
+   "mesafe_m": 96
+  },
+  {
+   "osm": "way/1156644736",
+   "etiketler": {
+    "building": "roof",
+    "name": "Kapalı Çarşı"
+   },
+   "enlem": 40.184715,
+   "boylam": 29.062375,
+   "mesafe_m": 96
+  },
+  {
+   "osm": "way/26456016",
+   "etiketler": {
+    "highway": "pedestrian",
+    "name": "Kapalı Çarşı Cadde"
+   },
+   "enlem": 40.184815,
+   "boylam": 29.062236,
+   "mesafe_m": 111
+  },
+  {
+   "osm": "way/1063228547",
+   "etiketler": {
+    "landuse": "retail",
+    "name": "Bedesten"
+   },
+   "enlem": 40.18515,
+   "boylam": 29.062124,
+   "mesafe_m": 148
+  },
+  {
+   "osm": "way/1063228547",
+   "etiketler": {
+    "landuse": "retail",
+    "name": "Bedesten"
+   },
+   "enlem": 40.18515,
+   "boylam": 29.062124,
+   "mesafe_m": 148
+  },
+  {
+   "osm": "way/1058573537",
+   "etiketler": {
+    "highway": "pedestrian",
+    "name": "İç Bedesten Sokak"
+   },
+   "enlem": 40.185159,
+   "boylam": 29.062117,
+   "mesafe_m": 149
+  },
+  {
+   "osm": "way/1058573537",
+   "etiketler": {
+    "highway": "pedestrian",
+    "name": "İç Bedesten Sokak"
+   },
+   "enlem": 40.185159,
+   "boylam": 29.062117,
+   "mesafe_m": 149
+  },
+  {
+   "osm": "way/1058573538",
+   "etiketler": {
+    "highway": "pedestrian",
+    "name": "Dış Bedesten Sokak"
+   },
+   "enlem": 40.185175,
+   "boylam": 29.062097,
+   "mesafe_m": 151
+  },
+  {
+   "osm": "way/1058573538",
+   "etiketler": {
+    "highway": "pedestrian",
+    "name": "Dış Bedesten Sokak"
+   },
+   "enlem": 40.185175,
+   "boylam": 29.062097,
+   "mesafe_m": 151
+  },
+  {
+   "osm": "way/1271703554",
+   "etiketler": {
+    "highway": "pedestrian",
+    "name": "Kapalı Çarşı Cadde"
+   },
+   "enlem": 40.184856,
+   "boylam": 29.061415,
+   "mesafe_m": 165
+  }
+ ],
+ "iznik-surlari": [
+  {
+   "osm": "way/839036439",
+   "etiketler": {
+    "highway": "residential",
+    "name": "Süreyya Sokak"
+   },
+   "enlem": 40.427671,
+   "boylam": 29.71783,
+   "mesafe_m": 178
+  },
+  {
+   "osm": "way/218991114",
+   "etiketler": {
+    "highway": "residential",
+    "name": "Sürücü Sokak"
+   },
+   "enlem": 40.42509,
+   "boylam": 29.721635,
+   "mesafe_m": 489
+  },
+  {
+   "osm": "way/349837883",
+   "etiketler": {
+    "barrier": "gate",
+    "name": "Yenişehir Kapısı",
+    "name:en": "Yenişehir Gate"
+   },
+   "enlem": 40.423353,
+   "boylam": 29.719279,
+   "mesafe_m": 628
+  },
+  {
+   "osm": "way/349837883",
+   "etiketler": {
+    "barrier": "gate",
+    "name": "Yenişehir Kapısı",
+    "name:en": "Yenişehir Gate"
+   },
+   "enlem": 40.423353,
+   "boylam": 29.719279,
+   "mesafe_m": 628
+  },
+  {
+   "osm": "way/837000673",
+   "etiketler": {
+    "highway": "living_street",
+    "name": "Surdibi Çıkmazı Sokak"
+   },
+   "enlem": 40.422975,
+   "boylam": 29.717777,
+   "mesafe_m": 678
+  },
+  {
+   "osm": "way/218990965",
+   "etiketler": {
+    "highway": "tertiary",
+    "name": "Aziz Sürük Sokak"
+   },
+   "enlem": 40.435129,
+   "boylam": 29.718049,
+   "mesafe_m": 686
+  },
+  {
+   "osm": "way/317468460",
+   "etiketler": {
+    "highway": "residential",
+    "name": "Sur Sokak"
+   },
+   "enlem": 40.424783,
+   "boylam": 29.726057,
+   "mesafe_m": 759
+  },
+  {
+   "osm": "way/349838952",
+   "etiketler": {
+    "barrier": "gate",
+    "name": "Lefke Kapı",
+    "name:en": "Lefke Gate"
+   },
+   "enlem": 40.428898,
+   "boylam": 29.729101,
+   "mesafe_m": 855
+  },
+  {
+   "osm": "way/349838952",
+   "etiketler": {
+    "barrier": "gate",
+    "name": "Lefke Kapı",
+    "name:en": "Lefke Gate"
+   },
+   "enlem": 40.428898,
+   "boylam": 29.729101,
+   "mesafe_m": 855
+  },
+  {
+   "osm": "way/349838985",
+   "etiketler": {
+    "barrier": "gate",
+    "name": "İstanbul Kapı"
+   },
+   "enlem": 40.436779,
+   "boylam": 29.720551,
+   "mesafe_m": 875
+  },
+  {
+   "osm": "way/349838985",
+   "etiketler": {
+    "barrier": "gate",
+    "name": "İstanbul Kapı"
+   },
+   "enlem": 40.436779,
+   "boylam": 29.720551,
+   "mesafe_m": 875
+  },
+  {
+   "osm": "node/1915077869",
+   "etiketler": {
+    "name": "Abdulvahap",
+    "name:en": "earthquake measuring station"
+   },
+   "enlem": 40.433683,
+   "boylam": 29.737485,
+   "mesafe_m": 1649
+  }
+ ],
+ "kizilcukur-vadisi": [
+  {
+   "osm": "way/32859044",
+   "etiketler": {
+    "highway": "path",
+    "name": "Kızılçukur Vadisi",
+    "name:en": "Red Valley"
+   },
+   "enlem": 38.652844,
+   "boylam": 34.861366,
+   "mesafe_m": 654
+  },
+  {
+   "osm": "way/32859445",
+   "etiketler": {
+    "highway": "track",
+    "name": "Kızılçukur Vadisi",
+    "name:en": "Red Valley"
+   },
+   "enlem": 38.65146,
+   "boylam": 34.859722,
+   "mesafe_m": 860
+  },
+  {
+   "osm": "node/2402627649",
+   "etiketler": {
+    "name": "Kızılçukur Vadisi",
+    "name:en": "Red Valley",
+    "place": "locality"
+   },
+   "enlem": 38.650992,
+   "boylam": 34.853594,
+   "mesafe_m": 1260
+  }
+ ],
+ "soganli-vadisi": [
+  {
+   "osm": "node/8572050911",
+   "etiketler": {
+    "name": "Soğanlıyolu Sırtı",
+    "place": "locality"
+   },
+   "enlem": 38.325641,
+   "boylam": 35.045496,
+   "mesafe_m": 3355
+  }
+ ],
+ "mustafapasa": [
+  {
+   "osm": "way/1355282077",
+   "etiketler": {
+    "building": "hotel",
+    "name": "Sinasos Evleri",
+    "tourism": "hotel"
+   },
+   "enlem": 38.582298,
+   "boylam": 34.898246,
+   "mesafe_m": 621
+  },
+  {
+   "osm": "way/1355282077",
+   "etiketler": {
+    "building": "hotel",
+    "name": "Sinasos Evleri",
+    "tourism": "hotel"
+   },
+   "enlem": 38.582298,
+   "boylam": 34.898246,
+   "mesafe_m": 621
+  },
+  {
+   "osm": "way/262807387",
+   "etiketler": {
+    "building": "university",
+    "name": "Kapadokya Üniversitesi Mustafapaşa Köy ve Konuk Odası"
+   },
+   "enlem": 38.583317,
+   "boylam": 34.896954,
+   "mesafe_m": 707
+  },
+  {
+   "osm": "way/262807387",
+   "etiketler": {
+    "building": "university",
+    "name": "Kapadokya Üniversitesi Mustafapaşa Köy ve Konuk Odası"
+   },
+   "enlem": 38.583317,
+   "boylam": 34.896954,
+   "mesafe_m": 707
+  },
+  {
+   "osm": "node/213138728",
+   "etiketler": {
+    "name": "Mustafapaşa",
+    "place": "village",
+    "wikidata": "Q1377935"
+   },
+   "enlem": 38.583396,
+   "boylam": 34.896916,
+   "mesafe_m": 716
+  },
+  {
+   "osm": "node/2684661562",
+   "etiketler": {
+    "amenity": "place_of_worship",
+    "name": "Konstantin-Eleni Kilisesi",
+    "name:en": "Agios Konstantinos Eleni Church"
+   },
+   "enlem": 38.583471,
+   "boylam": 34.897262,
+   "mesafe_m": 728
+  },
+  {
+   "osm": "way/169247697",
+   "etiketler": {
+    "amenity": "school",
+    "building": "yes",
+    "name": "Mustafapaşa İ.Ö.O."
+   },
+   "enlem": 38.58462,
+   "boylam": 34.89991,
+   "mesafe_m": 913
+  },
+  {
+   "osm": "way/169247697",
+   "etiketler": {
+    "amenity": "school",
+    "building": "yes",
+    "name": "Mustafapaşa İ.Ö.O."
+   },
+   "enlem": 38.58462,
+   "boylam": 34.89991,
+   "mesafe_m": 913
+  },
+  {
+   "osm": "way/1244923557",
+   "etiketler": {
+    "amenity": "place_of_worship",
+    "building": "mosque",
+    "name": "Mustafapaşa Yeni Camii"
+   },
+   "enlem": 38.586936,
+   "boylam": 34.897515,
+   "mesafe_m": 1113
+  },
+  {
+   "osm": "way/1244923557",
+   "etiketler": {
+    "amenity": "place_of_worship",
+    "building": "mosque",
+    "name": "Mustafapaşa Yeni Camii"
+   },
+   "enlem": 38.586936,
+   "boylam": 34.897515,
+   "mesafe_m": 1113
+  },
+  {
+   "osm": "node/773941347",
+   "etiketler": {
+    "name": "Mustafapaşa"
+   },
+   "enlem": 38.588061,
+   "boylam": 34.901307,
+   "mesafe_m": 1314
+  },
+  {
+   "osm": "way/52390101",
+   "etiketler": {
+    "highway": "secondary",
+    "name": "Mustafapaşa-Şahinefendi yolu"
+   },
+   "enlem": 38.578911,
+   "boylam": 34.911,
+   "mesafe_m": 1321
+  },
+  {
+   "osm": "way/52390109",
+   "etiketler": {
+    "highway": "secondary",
+    "name": "Mustafapaşa-Şahinefendi yolu"
+   },
+   "enlem": 38.57398,
+   "boylam": 34.915522,
+   "mesafe_m": 1730
+  },
+  {
+   "osm": "way/37911512",
+   "etiketler": {
+    "highway": "secondary",
+    "name": "Mustafapaşa-Ürgüp yolu"
+   },
+   "enlem": 38.593912,
+   "boylam": 34.904761,
+   "mesafe_m": 2029
+  },
+  {
+   "osm": "way/29240537",
+   "etiketler": {
+    "highway": "secondary",
+    "name": "Mustafapaşa yolu"
+   },
+   "enlem": 38.602145,
+   "boylam": 34.906976,
+   "mesafe_m": 2954
+  },
+  {
+   "osm": "way/42136489",
+   "etiketler": {
+    "admin_level": "7",
+    "boundary": "administrative",
+    "name": "Ürgüp - Mustafapaşa sınırı"
+   },
+   "enlem": 38.604568,
+   "boylam": 34.91616,
+   "mesafe_m": 3531
+  },
+  {
+   "osm": "way/29240538",
+   "etiketler": {
+    "highway": "secondary",
+    "name": "Mustafapaşa yolu"
+   },
+   "enlem": 38.609327,
+   "boylam": 34.910295,
+   "mesafe_m": 3803
+  },
+  {
+   "osm": "way/37436911",
+   "etiketler": {
+    "highway": "secondary",
+    "name": "Mustafapaşa-Şahinefendi yolu"
+   },
+   "enlem": 38.545924,
+   "boylam": 34.928717,
+   "mesafe_m": 4476
+  }
+ ],
+ "tarihi-asansor": [
+  {
+   "osm": "way/882072895",
+   "etiketler": {
+    "building": "yes",
+    "name": "Asansör",
+    "tourism": "attraction",
+    "wikidata": "Q4803558"
+   },
+   "enlem": 38.408786,
+   "boylam": 27.117476,
+   "mesafe_m": 133
+  },
+  {
+   "osm": "way/882072895",
+   "etiketler": {
+    "building": "yes",
+    "name": "Asansör",
+    "tourism": "attraction",
+    "wikidata": "Q4803558"
+   },
+   "enlem": 38.408786,
+   "boylam": 27.117476,
+   "mesafe_m": 133
+  },
+  {
+   "osm": "node/1721924509",
+   "etiketler": {
+    "amenity": "cafe",
+    "name": "Tarihi Asansör Kafe"
+   },
+   "enlem": 38.408629,
+   "boylam": 27.117479,
+   "mesafe_m": 134
+  },
+  {
+   "osm": "node/1721931435",
+   "etiketler": {
+    "name": "Asansör fırını"
+   },
+   "enlem": 38.408121,
+   "boylam": 27.117687,
+   "mesafe_m": 137
+  },
+  {
+   "osm": "node/11425139970",
+   "etiketler": {
+    "amenity": "pharmacy",
+    "name": "Yeni Asansör Eczanesi"
+   },
+   "enlem": 38.407983,
+   "boylam": 27.117295,
+   "mesafe_m": 174
+  },
+  {
+   "osm": "way/883902743",
+   "etiketler": {
+    "building": "yes",
+    "name": "Asansör Camii"
+   },
+   "enlem": 38.407884,
+   "boylam": 27.116961,
+   "mesafe_m": 205
+  },
+  {
+   "osm": "way/883902743",
+   "etiketler": {
+    "building": "yes",
+    "name": "Asansör Camii"
+   },
+   "enlem": 38.407884,
+   "boylam": 27.116961,
+   "mesafe_m": 205
+  }
+ ]
+}
