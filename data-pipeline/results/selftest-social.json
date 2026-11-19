@@ -1,0 +1,51 @@
+{
+ "summary": "HATA: search_anon_blocked, list_routes_anon",
+ "username_required": "ok",
+ "search_public_prefix": "ok",
+ "search_private_prefix_hidden": "ok",
+ "search_private_exact_found": "ok",
+ "search_anon_blocked": {
+  "HATA": {
+   "ok": true,
+   "users": [
+    {
+     "relation": "none",
+     "username": "sta11422d42",
+     "avatar_path": null
+    },
+    {
+     "relation": "none",
+     "username": "stb11422d42",
+     "avatar_path": null
+    }
+   ]
+  }
+ },
+ "request_sent": "ok",
+ "request_duplicate": "ok",
+ "request_self": "ok",
+ "incoming_visible": "ok",
+ "accept_with_badge": "ok",
+ "requester_badge_too": "ok",
+ "mutual_request_auto_accept": "ok",
+ "direct_insert_blocked": "ok",
+ "rls_only_own_rows": "ok",
+ "route_progress_3_of_4": "ok",
+ "checkin_last_stop": "ok",
+ "checkin_route_badge": "ok",
+ "route_completed": "ok",
+ "list_routes_anon": {
+  "HATA": 11
+ },
+ "list_cities_visited": "ok",
+ "leaderboard_a": "ok",
+ "leaderboard_b_sees_only_friends": "ok",
+ "leaderboard_bad_period": "ok",
+ "friend_stats": "ok",
+ "export_friendships": "ok",
+ "remove_friend": "ok",
+ "leaderboard_after_remove": "ok",
+ "decline": "ok",
+ "cleanup": "ok",
+ "cleanup_users": 3
+}
