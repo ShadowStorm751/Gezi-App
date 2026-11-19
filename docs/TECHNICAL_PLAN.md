@@ -144,6 +144,7 @@ Seed'de 20 rozet var (6 genel, 8 tarihi, 6 doğa); türbe ile 21, 'Şehir Gönü
 - `checkin` Edge Function'ı yayında; canlı test: girişsiz 401, uzak 'too_far', zayıf GPS 'low_accuracy', doğru konumda kabul + 'first-step' rozeti.
 - Arama tanınırlığa göre sıralı ve Türkçe harfe duyarsız.
 - Hesap silme, avatar yükleme ve kullanıcı bildirim/öneri akışı canlıda; canlı test geçti.
+- Canlı sosyal ve rota testi (19 Kasım 22:45): 3 geçici kullanıcıyla arkadaşlık, arama, sıralama, sosyal rozetler, rota tamamlama (son durak gerçek check-in) ve KVKK dışa aktarımı; 29 kontrolün hepsi geçti, test verisi silindi.
 - Sertleştirme (migration `20261119240000`): gereksiz tablo yetkileri kaldırıldı, profil yazımı 4 sütunla sınırlı, RLS ilkeleri hızlandırıldı. Performans denetçisinde uyarı yok; güvenlik denetçisinde yalnızca bilinçli 4 SECURITY DEFINER uyarısı var (`backend/README.md`).
 
 ## Yayına kadar kalanlar
