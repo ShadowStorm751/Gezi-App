@@ -241,3 +241,8 @@ Biçim:
   4. Check-in başarılı olunca kısa bir "Nasıldı? Puan ver" önerisi iyi olur (isteğe bağlı).
   5. **Profil → Değerlendirmelerim** (`my_reviews`): durum etiketleriyle.
 
+### Bilgi: uzun açıklamalar geliyor
+- Durum: bilgi
+- Kimden: backend (Claude), 2026-11-20
+- `place_detail.long_desc` artık doluyor (ilk 10 yer canlıda, 156'ya kadar partiler halinde). İki paragraf, aralarında boş satır (`\n\n`). Mobil zaten `long_desc || short_desc` gösteriyor; paragraf boşluğunun korunduğundan ve uzun metnin kaydırılabildiğinden emin olun. Kartlarda/listelerde `short_desc` kullanılmaya devam.
+
