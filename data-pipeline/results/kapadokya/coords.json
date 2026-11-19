@@ -1,0 +1,776 @@
+{
+ "ozet": {
+  "uyumlu": 28,
+  "kontrol": 10,
+  "yaklasik_duzeltildi": 5,
+  "wikidata_yok": 11,
+  "yaklasik_dogrulanamadi": 2
+ },
+ "yerler": {
+  "karamanoglu-camii": {
+   "osm": [
+    38.632585,
+    34.910199
+   ],
+   "qid": "Q98091589",
+   "wikidata": [
+    38.63263888888889,
+    34.91019444444444
+   ],
+   "arama_ile": false,
+   "mesafe_m": 6,
+   "durum": "uyumlu"
+  },
+  "karsi-kilise": {
+   "osm": [
+    38.740714,
+    34.634741
+   ],
+   "qid": "Q1297810",
+   "wikidata": [
+    38.740699,
+    34.634764
+   ],
+   "arama_ile": false,
+   "mesafe_m": 3,
+   "durum": "uyumlu"
+  },
+  "aziz-nikolas-manastiri": {
+   "osm": [
+    38.577092,
+    34.895605
+   ],
+   "qid": "Q131523702",
+   "wikidata": [
+    38.576889,
+    34.895396
+   ],
+   "arama_ile": false,
+   "mesafe_m": 29,
+   "durum": "kontrol"
+  },
+  "agacalti-kilisesi": {
+   "osm": [
+    38.253225,
+    34.303657
+   ],
+   "qid": "Q6040759",
+   "wikidata": [
+    38.2532097,
+    34.303657
+   ],
+   "arama_ile": false,
+   "mesafe_m": 2,
+   "durum": "uyumlu"
+  },
+  "karanlik-kilise": {
+   "osm": [
+    38.638704,
+    34.846265
+   ],
+   "qid": "Q114383869",
+   "wikidata": [
+    38.6387,
+    34.846267
+   ],
+   "arama_ile": false,
+   "mesafe_m": 0,
+   "durum": "uyumlu"
+  },
+  "kokar-kilise-aksaray": {
+   "osm": [
+    38.25337,
+    34.307899
+   ],
+   "qid": "Q6038736",
+   "wikidata": [
+    38.2529284,
+    34.307889
+   ],
+   "arama_ile": false,
+   "mesafe_m": 49,
+   "durum": "kontrol"
+  },
+  "yilanli-kilise-aksaray": {
+   "osm": [
+    38.255427,
+    34.302572
+   ],
+   "qid": "Q6049420",
+   "wikidata": [
+    38.255788,
+    34.301636
+   ],
+   "arama_ile": false,
+   "mesafe_m": 91,
+   "durum": "kontrol"
+  },
+  "aciksaray": {
+   "osm": [
+    38.737984,
+    34.662412
+   ],
+   "qid": "Q289015",
+   "wikidata": [
+    38.7375,
+    34.66305556
+   ],
+   "arama_ile": false,
+   "mesafe_m": 78,
+   "durum": "uyumlu"
+  },
+  "aziz-yuhanna-vaftizci-kilisesi-cavusin": {
+   "osm": [
+    38.667544,
+    34.843172
+   ],
+   "qid": "Q56245348",
+   "wikidata": [
+    38.6675235,
+    34.8431262
+   ],
+   "arama_ile": false,
+   "mesafe_m": 5,
+   "durum": "uyumlu"
+  },
+  "keslik-manastiri": {
+   "osm": [
+    38.514395,
+    34.942363
+   ],
+   "qid": "Q56245523",
+   "wikidata": [
+    38.5144196,
+    34.9426537
+   ],
+   "arama_ile": false,
+   "mesafe_m": 25,
+   "durum": "uyumlu"
+  },
+  "tokali-kilise": {
+   "osm": [
+    38.6411,
+    34.844674
+   ],
+   "qid": "Q115456380",
+   "wikidata": [
+    38.6411058,
+    34.8446297
+   ],
+   "arama_ile": false,
+   "mesafe_m": 4,
+   "durum": "uyumlu"
+  },
+  "selime-katedrali": {
+   "osm": [
+    38.299,
+    34.265
+   ],
+   "qid": "Q5996572",
+   "wikidata": [
+    38.301198,
+    34.2594329999999
+   ],
+   "arama_ile": true,
+   "mesafe_m": 544,
+   "durum": "yaklasik_duzeltildi",
+   "onerilen": [
+    38.301198,
+    34.2594329999999
+   ]
+  },
+  "sumbullu-kilise": {
+   "osm": [
+    38.254164,
+    34.302972
+   ],
+   "qid": "Q6000139",
+   "wikidata": [
+    38.2541495,
+    34.3029988
+   ],
+   "arama_ile": false,
+   "mesafe_m": 3,
+   "durum": "uyumlu"
+  },
+  "purenli-seki-kilisesi": {
+   "osm": [
+    38.253707,
+    34.307129
+   ],
+   "qid": "Q6009237",
+   "wikidata": [
+    38.2529397,
+    34.3053543
+   ],
+   "arama_ile": false,
+   "mesafe_m": 177,
+   "durum": "kontrol"
+  },
+  "azize-barbara-kilisesi": {
+   "osm": [
+    38.638732,
+    34.845129
+   ],
+   "qid": "Q73249333",
+   "wikidata": [
+    38.6387322,
+    34.8451292
+   ],
+   "arama_ile": false,
+   "mesafe_m": 0,
+   "durum": "uyumlu"
+  },
+  "azize-catherine-sapeli": {
+   "osm": [
+    38.638761,
+    34.846032
+   ],
+   "qid": "Q115445879",
+   "wikidata": [
+    38.6387425,
+    34.8460344
+   ],
+   "arama_ile": false,
+   "mesafe_m": 2,
+   "durum": "uyumlu"
+  },
+  "basil-sapeli": {
+   "osm": [
+    38.639173,
+    34.84508
+   ],
+   "qid": "Q115456531",
+   "wikidata": [
+    38.6395575,
+    34.8450167
+   ],
+   "arama_ile": false,
+   "mesafe_m": 43,
+   "durum": "kontrol"
+  },
+  "elmali-kilise": {
+   "osm": [
+    38.638719,
+    34.845005
+   ],
+   "qid": "Q115454836",
+   "wikidata": [
+    38.6391928,
+    34.8452208
+   ],
+   "arama_ile": false,
+   "mesafe_m": 56,
+   "durum": "kontrol"
+  },
+  "pantokrator-kilisesi": {
+   "osm": [
+    38.638248,
+    34.845373
+   ],
+   "qid": "Q115456669",
+   "wikidata": [
+    38.6382477,
+    34.8453726
+   ],
+   "arama_ile": false,
+   "mesafe_m": 0,
+   "durum": "uyumlu"
+  },
+  "yilanli-kilise": {
+   "osm": [
+    38.638305,
+    34.845264
+   ],
+   "qid": "Q115455275",
+   "wikidata": [
+    38.6383311,
+    34.8453511
+   ],
+   "arama_ile": false,
+   "mesafe_m": 8,
+   "durum": "uyumlu"
+  },
+  "carikli-kilise": {
+   "osm": [
+    38.638837,
+    34.846264
+   ],
+   "qid": "Q115446076",
+   "wikidata": [
+    38.6389208,
+    34.8463672
+   ],
+   "arama_ile": false,
+   "mesafe_m": 13,
+   "durum": "uyumlu"
+  },
+  "haci-bektas-i-veli-turbesi": {
+   "osm": [
+    38.942825,
+    34.562843
+   ],
+   "qid": "Q20474091",
+   "wikidata": [
+    38.94277778,
+    34.56222222
+   ],
+   "arama_ile": false,
+   "mesafe_m": 54,
+   "durum": "uyumlu"
+  },
+  "goreme-deki-kiliseler-listesi": {
+   "osm": [
+    38.639277,
+    34.845632
+   ],
+   "qid": "Q15210336",
+   "wikidata": [
+    38.6390825,
+    34.8455349
+   ],
+   "arama_ile": false,
+   "mesafe_m": 23,
+   "durum": "uyumlu"
+  },
+  "nevsehir-muzesi": {
+   "osm": [
+    38.6279,
+    34.725167
+   ],
+   "qid": "Q28221127",
+   "wikidata": [
+    38.628055555556,
+    34.725
+   ],
+   "arama_ile": false,
+   "mesafe_m": 23,
+   "durum": "uyumlu"
+  },
+  "guray-muze": {
+   "osm": [
+    38.709994,
+    34.834683
+   ],
+   "qid": "Q125797576",
+   "wikidata": [
+    38.71043778162503,
+    34.83492382526562
+   ],
+   "arama_ile": false,
+   "mesafe_m": 54,
+   "durum": "uyumlu"
+  },
+  "zelve-acik-hava-muzesi": {
+   "osm": [
+    38.668128,
+    34.86479
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "wikidata_yok"
+  },
+  "nevsehir-kalesi": {
+   "osm": [
+    38.619891,
+    34.713054
+   ],
+   "qid": "Q115801729",
+   "wikidata": [
+    38.6199022,
+    34.7130512
+   ],
+   "arama_ile": false,
+   "mesafe_m": 1,
+   "durum": "uyumlu"
+  },
+  "ortahisar-kalesi": {
+   "osm": [
+    38.619809,
+    34.864431
+   ],
+   "qid": "Q95640040",
+   "wikidata": [
+    38.61993536591743,
+    34.864329046040154
+   ],
+   "arama_ile": false,
+   "mesafe_m": 17,
+   "durum": "uyumlu"
+  },
+  "uchisar-kalesi": {
+   "osm": [
+    38.630443,
+    34.805323
+   ],
+   "qid": "Q112865630",
+   "wikidata": [
+    38.63033333333333,
+    34.80555555555556
+   ],
+   "arama_ile": false,
+   "mesafe_m": 24,
+   "durum": "uyumlu"
+  },
+  "cavusin-kalesi": {
+   "osm": [
+    38.667765,
+    34.842511
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "wikidata_yok"
+  },
+  "sarihan-kervansarayi": {
+   "osm": [
+    38.711806,
+    34.909386
+   ],
+   "qid": "Q2225271",
+   "wikidata": [
+    38.71166667,
+    34.90888889
+   ],
+   "arama_ile": false,
+   "mesafe_m": 46,
+   "durum": "uyumlu"
+  },
+  "bahattin-in-samanligi-kilise": {
+   "osm": [
+    38.265285,
+    34.28971
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "wikidata_yok"
+  },
+  "derinkuyu-yeralti-sehri": {
+   "osm": [
+    38.373576,
+    34.735122
+   ],
+   "qid": "Q1328958",
+   "wikidata": [
+    38.373403,
+    34.735034
+   ],
+   "arama_ile": false,
+   "mesafe_m": 21,
+   "durum": "uyumlu"
+  },
+  "kaymakli": {
+   "osm": [
+    38.459927,
+    34.752488
+   ],
+   "qid": "Q1013468",
+   "wikidata": [
+    38.465686,
+    34.750443
+   ],
+   "arama_ile": false,
+   "mesafe_m": 665,
+   "durum": "kontrol"
+  },
+  "ozkonak": {
+   "osm": [
+    38.806865,
+    34.840731
+   ],
+   "qid": "Q307912",
+   "wikidata": [
+    38.81305556,
+    34.83944444
+   ],
+   "arama_ile": false,
+   "mesafe_m": 697,
+   "durum": "kontrol"
+  },
+  "mazi-yeralti-sehri": {
+   "osm": [
+    38.469991,
+    34.838911
+   ],
+   "qid": "Q16889342",
+   "wikidata": [
+    38.4699909,
+    34.8389111
+   ],
+   "arama_ile": false,
+   "mesafe_m": 0,
+   "durum": "uyumlu"
+  },
+  "sobesos-antik-kenti": {
+   "osm": [
+    38.464093,
+    34.966015
+   ],
+   "qid": "Q124519571",
+   "wikidata": [
+    38.4641,
+    34.9661
+   ],
+   "arama_ile": false,
+   "mesafe_m": 7,
+   "durum": "uyumlu"
+  },
+  "mutfak-ve-kiler": {
+   "osm": [
+    38.638398,
+    34.846098
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "wikidata_yok"
+  },
+  "altikapi-turbesi": {
+   "osm": [
+    38.633178,
+    34.912546
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "wikidata_yok"
+  },
+  "mustafapasa": {
+   "osm": [
+    38.577,
+    34.897
+   ],
+   "qid": "Q1377935",
+   "wikidata": [
+    38.584194444444,
+    34.896897222222
+   ],
+   "arama_ile": true,
+   "mesafe_m": 800,
+   "durum": "yaklasik_duzeltildi",
+   "onerilen": [
+    38.584194444444,
+    34.896897222222
+   ]
+  },
+  "cavusin": {
+   "osm": [
+    38.67,
+    34.84
+   ],
+   "qid": "Q272689",
+   "wikidata": [
+    38.67277778,
+    34.83944444
+   ],
+   "arama_ile": true,
+   "mesafe_m": 313,
+   "durum": "yaklasik_duzeltildi",
+   "onerilen": [
+    38.67277778,
+    34.83944444
+   ]
+  },
+  "guzelyurt": {
+   "osm": [
+    38.277,
+    34.37
+   ],
+   "qid": "Q1004503",
+   "wikidata": [
+    38.277222222222,
+    34.371944444444
+   ],
+   "arama_ile": true,
+   "mesafe_m": 172,
+   "durum": "yaklasik_duzeltildi",
+   "onerilen": [
+    38.277222222222,
+    34.371944444444
+   ]
+  },
+  "aktepe-hill-sunset-point": {
+   "osm": [
+    38.65332,
+    34.863243
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "wikidata_yok"
+  },
+  "temenni-tepe": {
+   "osm": [
+    38.631264,
+    34.910514
+   ],
+   "qid": "Q136897368",
+   "wikidata": [
+    38.6313,
+    34.9108
+   ],
+   "arama_ile": true,
+   "mesafe_m": 25,
+   "durum": "uyumlu"
+  },
+  "uc-guzeller": {
+   "osm": [
+    38.63547,
+    34.89036
+   ],
+   "qid": "Q136915104",
+   "wikidata": [
+    38.6353,
+    34.8908
+   ],
+   "arama_ile": true,
+   "mesafe_m": 43,
+   "durum": "uyumlu"
+  },
+  "ihlara-cam-teras": {
+   "osm": [
+    38.245182,
+    34.313197
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "wikidata_yok"
+  },
+  "goreme-tarihi-milli-parki": {
+   "osm": [
+    38.650219,
+    34.852105
+   ],
+   "qid": "Q620593",
+   "wikidata": [
+    38.652777777778,
+    34.863055555556
+   ],
+   "arama_ile": false,
+   "mesafe_m": 993,
+   "durum": "kontrol"
+  },
+  "bagildere-vadisi": {
+   "osm": [
+    38.658938,
+    34.823656
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "wikidata_yok"
+  },
+  "devrent-vadisi": {
+   "osm": [
+    38.672619,
+    34.885509
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "wikidata_yok"
+  },
+  "gul-vadisi": {
+   "osm": [
+    38.655325,
+    34.846839
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "wikidata_yok"
+  },
+  "guvercinlik-vadisi": {
+   "osm": [
+    38.639691,
+    34.822437
+   ],
+   "qid": "Q104596490",
+   "wikidata": [
+    38.632777777777775,
+    34.81611111111111
+   ],
+   "arama_ile": true,
+   "mesafe_m": 945,
+   "durum": "kontrol"
+  },
+  "passabag-vadisi": {
+   "osm": [
+    38.677005,
+    34.854906
+   ],
+   "qid": "Q133612406",
+   "wikidata": [
+    38.67708,
+    34.85581
+   ],
+   "arama_ile": true,
+   "mesafe_m": 79,
+   "durum": "uyumlu"
+  },
+  "meskendir-valley-entrance": {
+   "osm": [
+    38.636738,
+    34.861173
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "wikidata_yok"
+  },
+  "ihlara-vadisi": {
+   "osm": [
+    38.245,
+    34.3
+   ],
+   "qid": "Q1366229",
+   "wikidata": [
+    38.240833333333335,
+    34.306111111111115
+   ],
+   "arama_ile": true,
+   "mesafe_m": 707,
+   "durum": "yaklasik_duzeltildi",
+   "onerilen": [
+    38.240833333333335,
+    34.306111111111115
+   ]
+  },
+  "kizilcukur-vadisi": {
+   "osm": [
+    38.658,
+    34.865
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "yaklasik_dogrulanamadi"
+  },
+  "soganli-vadisi": {
+   "osm": [
+    38.345,
+    35.075
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "yaklasik_dogrulanamadi"
+  }
+ }
+}

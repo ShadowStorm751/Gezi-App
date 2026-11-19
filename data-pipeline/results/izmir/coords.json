@@ -1,0 +1,1713 @@
+{
+ "ozet": {
+  "uyumlu": 92,
+  "wikidata_yok": 13,
+  "kontrol": 13,
+  "yaklasik_duzeltildi": 5
+ },
+ "yerler": {
+  "isa-bey-camii": {
+   "osm": [
+    37.952139,
+    27.36588
+   ],
+   "qid": "Q1673689",
+   "wikidata": [
+    37.952222222222,
+    27.365833333333
+   ],
+   "arama_ile": false,
+   "mesafe_m": 10,
+   "durum": "uyumlu"
+  },
+  "hisar-camii": {
+   "osm": [
+    38.421463,
+    27.133587
+   ],
+   "qid": "Q5772358",
+   "wikidata": [
+    38.421472222222,
+    27.133583333333
+   ],
+   "arama_ile": false,
+   "mesafe_m": 1,
+   "durum": "uyumlu"
+  },
+  "konak-camii": {
+   "osm": [
+    38.419071,
+    27.129319
+   ],
+   "qid": "Q8047540",
+   "wikidata": [
+    38.41907778,
+    27.129325
+   ],
+   "arama_ile": false,
+   "mesafe_m": 1,
+   "durum": "uyumlu"
+  },
+  "basdurak-camii": {
+   "osm": [
+    38.418482,
+    27.133471
+   ],
+   "qid": "Q4875350",
+   "wikidata": [
+    38.41847222222222,
+    27.133472222222224
+   ],
+   "arama_ile": false,
+   "mesafe_m": 1,
+   "durum": "uyumlu"
+  },
+  "aydinoglu-mehmet-bey-camii": {
+   "osm": [
+    38.256556,
+    28.067365
+   ],
+   "qid": "Q5995415",
+   "wikidata": [
+    38.256555555556,
+    28.067194444444
+   ],
+   "arama_ile": false,
+   "mesafe_m": 15,
+   "durum": "uyumlu"
+  },
+  "salepcioglu-camii": {
+   "osm": [
+    38.416994,
+    27.132461
+   ],
+   "qid": "Q7404289",
+   "wikidata": [
+    38.41694444444445,
+    27.1325
+   ],
+   "arama_ile": false,
+   "mesafe_m": 6,
+   "durum": "uyumlu"
+  },
+  "kestanepazari-camii": {
+   "osm": [
+    38.419999,
+    27.134876
+   ],
+   "qid": "Q6395213",
+   "wikidata": [
+    38.42,
+    27.135
+   ],
+   "arama_ile": false,
+   "mesafe_m": 11,
+   "durum": "uyumlu"
+  },
+  "bergama-kursunlu-cami": {
+   "osm": [
+    39.118359,
+    27.176815
+   ],
+   "qid": "Q25475872",
+   "wikidata": [
+    39.118371,
+    27.1767989
+   ],
+   "arama_ile": false,
+   "mesafe_m": 2,
+   "durum": "uyumlu"
+  },
+  "bergama-ulu-cami": {
+   "osm": [
+    39.125015,
+    27.179457
+   ],
+   "qid": "Q25475874",
+   "wikidata": [
+    39.12502777777778,
+    27.179472222222223
+   ],
+   "arama_ile": false,
+   "mesafe_m": 2,
+   "durum": "uyumlu"
+  },
+  "tire-ulu-camii": {
+   "osm": [
+    38.083743,
+    27.736412
+   ],
+   "qid": "Q97947314",
+   "wikidata": [
+    38.08375,
+    27.736361111111112
+   ],
+   "arama_ile": false,
+   "mesafe_m": 5,
+   "durum": "uyumlu"
+  },
+  "sadirvanalti-camii": {
+   "osm": [
+    38.421119,
+    27.134935
+   ],
+   "qid": "Q6079323",
+   "wikidata": [
+    38.421166666667,
+    27.135111111111
+   ],
+   "arama_ile": false,
+   "mesafe_m": 16,
+   "durum": "uyumlu"
+  },
+  "meryem-ana-evi": {
+   "osm": [
+    37.911541,
+    27.334018
+   ],
+   "qid": "Q135779",
+   "wikidata": [
+    37.91152777777778,
+    27.333972222222222
+   ],
+   "arama_ile": false,
+   "mesafe_m": 4,
+   "durum": "uyumlu"
+  },
+  "aziz-yuhanna-katedrali": {
+   "osm": [
+    38.428757,
+    27.139651
+   ],
+   "qid": "Q6418951",
+   "wikidata": [
+    38.428666666667,
+    27.139666666667
+   ],
+   "arama_ile": false,
+   "mesafe_m": 10,
+   "durum": "uyumlu"
+  },
+  "aziz-polikarp-kilisesi": {
+   "osm": [
+    38.425677,
+    27.135723
+   ],
+   "qid": "Q54413070",
+   "wikidata": [
+    38.425611111111,
+    27.135694444444
+   ],
+   "arama_ile": false,
+   "mesafe_m": 8,
+   "durum": "uyumlu"
+  },
+  "santa-maria-katolik-kilisesi": {
+   "osm": [
+    38.465659,
+    27.219909
+   ],
+   "qid": "Q5996651",
+   "wikidata": [
+    38.46572222222222,
+    27.21988888888889
+   ],
+   "arama_ile": false,
+   "mesafe_m": 7,
+   "durum": "uyumlu"
+  },
+  "ayios-haralambos-kilisesi": {
+   "osm": [
+    38.325259,
+    26.304324
+   ],
+   "qid": "Q124745043",
+   "wikidata": [
+    38.32525,
+    26.304277777777777
+   ],
+   "arama_ile": false,
+   "mesafe_m": 4,
+   "durum": "uyumlu"
+  },
+  "bet-israel-sinagogu": {
+   "osm": [
+    38.409095,
+    27.116208
+   ],
+   "qid": "Q4897154",
+   "wikidata": [
+    38.409111111111,
+    27.116222222222
+   ],
+   "arama_ile": false,
+   "mesafe_m": 2,
+   "durum": "uyumlu"
+  },
+  "sinyora-giveret-sinagogu": {
+   "osm": [
+    38.420079,
+    27.135583
+   ],
+   "qid": "Q24573783",
+   "wikidata": [
+    38.420055555556,
+    27.135583333333
+   ],
+   "arama_ile": false,
+   "mesafe_m": 3,
+   "durum": "uyumlu"
+  },
+  "etz-hayim-sinagogu": {
+   "osm": [
+    38.419921,
+    27.136237
+   ],
+   "qid": "Q5991880",
+   "wikidata": [
+    38.419916666667,
+    27.136277777778
+   ],
+   "arama_ile": false,
+   "mesafe_m": 4,
+   "durum": "uyumlu"
+  },
+  "algazi-sinagogu": {
+   "osm": [
+    38.420232,
+    27.135892
+   ],
+   "qid": "Q6006724",
+   "wikidata": [
+    38.420222222222,
+    27.135916666667
+   ],
+   "arama_ile": false,
+   "mesafe_m": 2,
+   "durum": "uyumlu"
+  },
+  "latife-hanim-kosku-ani-evi": {
+   "osm": [
+    38.458349,
+    27.113405
+   ],
+   "qid": "Q5995516",
+   "wikidata": [
+    38.458388888889,
+    27.1135
+   ],
+   "arama_ile": false,
+   "mesafe_m": 9,
+   "durum": "uyumlu"
+  },
+  "forbes-kosku": {
+   "osm": [
+    38.384672,
+    27.164743
+   ],
+   "qid": "Q6036071",
+   "wikidata": [
+    38.38472222222222,
+    27.164722222222224
+   ],
+   "arama_ile": false,
+   "mesafe_m": 6,
+   "durum": "uyumlu"
+  },
+  "bizans-sarayi": {
+   "osm": [
+    37.944859,
+    27.34246
+   ],
+   "qid": "Q3360950",
+   "wikidata": [
+    37.9449,
+    27.3425
+   ],
+   "arama_ile": true,
+   "mesafe_m": 6,
+   "durum": "uyumlu"
+  },
+  "v-sarayi": {
+   "osm": [
+    39.132292,
+    27.184753
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "wikidata_yok"
+  },
+  "efes-muzesi": {
+   "osm": [
+    37.948994,
+    27.367854
+   ],
+   "qid": "Q1346784",
+   "wikidata": [
+    37.948994,
+    27.367854
+   ],
+   "arama_ile": false,
+   "mesafe_m": 0,
+   "durum": "uyumlu"
+  },
+  "izmir-arkeoloji-muzesi": {
+   "osm": [
+    38.413935,
+    27.128067
+   ],
+   "qid": "Q6102069",
+   "wikidata": [
+    38.41388888888889,
+    27.128055555555555
+   ],
+   "arama_ile": false,
+   "mesafe_m": 5,
+   "durum": "uyumlu"
+  },
+  "izmir-agorasi": {
+   "osm": [
+    38.419036,
+    27.138741
+   ],
+   "qid": "Q2827071",
+   "wikidata": [
+    38.418888888889,
+    27.137777777778
+   ],
+   "arama_ile": false,
+   "mesafe_m": 85,
+   "durum": "uyumlu"
+  },
+  "tcg-pirireis-s-343": {
+   "osm": [
+    38.412341,
+    27.034766
+   ],
+   "qid": "Q4817276",
+   "wikidata": [
+    38.4124,
+    27.03485
+   ],
+   "arama_ile": false,
+   "mesafe_m": 10,
+   "durum": "uyumlu"
+  },
+  "izmir-kadin-muzesi": {
+   "osm": [
+    38.421097,
+    27.142324
+   ],
+   "qid": "Q21526565",
+   "wikidata": [
+    38.421083333333335,
+    27.142305555555556
+   ],
+   "arama_ile": false,
+   "mesafe_m": 2,
+   "durum": "uyumlu"
+  },
+  "bergama-muzesi": {
+   "osm": [
+    39.116403,
+    27.175829
+   ],
+   "qid": "Q6052546",
+   "wikidata": [
+    39.11666667,
+    27.17583333
+   ],
+   "arama_ile": false,
+   "mesafe_m": 29,
+   "durum": "uyumlu"
+  },
+  "izmir-ataturk-muzesi": {
+   "osm": [
+    38.435693,
+    27.140567
+   ],
+   "qid": "Q24883371",
+   "wikidata": [
+    38.435555555556,
+    27.140555555556
+   ],
+   "arama_ile": false,
+   "mesafe_m": 15,
+   "durum": "uyumlu"
+  },
+  "izmir-etnografya-muzesi": {
+   "osm": [
+    38.413749,
+    27.128484
+   ],
+   "qid": "Q6102072",
+   "wikidata": [
+    38.41372222222222,
+    27.1285
+   ],
+   "arama_ile": false,
+   "mesafe_m": 3,
+   "durum": "uyumlu"
+  },
+  "umran-baradan-oyun-ve-oyuncak-muzesi": {
+   "osm": [
+    38.413502,
+    27.126741
+   ],
+   "qid": "Q6059641",
+   "wikidata": [
+    38.413333333333,
+    27.126944444444
+   ],
+   "arama_ile": false,
+   "mesafe_m": 26,
+   "durum": "uyumlu"
+  },
+  "arkas-sanat-merkezi": {
+   "osm": [
+    38.431923,
+    27.136958
+   ],
+   "qid": "Q5997141",
+   "wikidata": [
+    38.43208333333333,
+    27.136805555555554
+   ],
+   "arama_ile": false,
+   "mesafe_m": 22,
+   "durum": "uyumlu"
+  },
+  "bostanli-acik-hava-arkeoloji-muzesi": {
+   "osm": [
+    38.454858,
+    27.099196
+   ],
+   "qid": "Q20949105",
+   "wikidata": [
+    38.45527778,
+    27.09888889
+   ],
+   "arama_ile": false,
+   "mesafe_m": 54,
+   "durum": "uyumlu"
+  },
+  "cakiraga-konagi": {
+   "osm": [
+    38.256005,
+    28.065383
+   ],
+   "qid": "Q6037478",
+   "wikidata": [
+    38.256,
+    28.065166666666666
+   ],
+   "arama_ile": false,
+   "mesafe_m": 19,
+   "durum": "uyumlu"
+  },
+  "cesme-muzesi": {
+   "osm": [
+    38.323545,
+    26.303197
+   ],
+   "qid": "Q28221105",
+   "wikidata": [
+    38.323611111111,
+    26.303055555556
+   ],
+   "arama_ile": false,
+   "mesafe_m": 14,
+   "durum": "uyumlu"
+  },
+  "odemis-muzesi": {
+   "osm": [
+    38.227881,
+    27.988805
+   ],
+   "qid": "Q28220992",
+   "wikidata": [
+    38.228055555556,
+    27.989166666667
+   ],
+   "arama_ile": false,
+   "mesafe_m": 37,
+   "durum": "uyumlu"
+  },
+  "izmir-tarih-ve-sanat-muzesi": {
+   "osm": [
+    38.436207,
+    27.14816
+   ],
+   "qid": "Q6035320",
+   "wikidata": [
+    38.427444444444,
+    27.142694444444
+   ],
+   "arama_ile": false,
+   "mesafe_m": 1084,
+   "durum": "kontrol"
+  },
+  "ahmet-piristina-kent-arsivi-ve-muzesi": {
+   "osm": [
+    38.424929,
+    27.137932
+   ],
+   "qid": "Q6047798",
+   "wikidata": [
+    38.425,
+    27.138055555556
+   ],
+   "arama_ile": false,
+   "mesafe_m": 13,
+   "durum": "uyumlu"
+  },
+  "key-museum": {
+   "osm": [
+    38.20154,
+    27.348792
+   ],
+   "qid": "Q25472494",
+   "wikidata": [
+    38.20166666666667,
+    27.34888888888889
+   ],
+   "arama_ile": false,
+   "mesafe_m": 16,
+   "durum": "uyumlu"
+  },
+  "kadifekale": {
+   "osm": [
+    38.413784,
+    27.144956
+   ],
+   "qid": "Q4810717",
+   "wikidata": [
+    38.41388888888889,
+    27.145833333333332
+   ],
+   "arama_ile": false,
+   "mesafe_m": 77,
+   "durum": "uyumlu"
+  },
+  "cesme-kalesi": {
+   "osm": [
+    38.323551,
+    26.303561
+   ],
+   "qid": "Q28221175",
+   "wikidata": [
+    38.32361111111111,
+    26.30361111111111
+   ],
+   "arama_ile": false,
+   "mesafe_m": 8,
+   "durum": "uyumlu"
+  },
+  "foca-kalesi": {
+   "osm": [
+    38.66922,
+    26.750843
+   ],
+   "qid": "Q20472767",
+   "wikidata": [
+    38.669218,
+    26.750818
+   ],
+   "arama_ile": false,
+   "mesafe_m": 2,
+   "durum": "uyumlu"
+  },
+  "candarli-kalesi": {
+   "osm": [
+    38.933837,
+    26.933741
+   ],
+   "qid": "Q21523779",
+   "wikidata": [
+    38.933805555556,
+    26.933694444444
+   ],
+   "arama_ile": false,
+   "mesafe_m": 5,
+   "durum": "uyumlu"
+  },
+  "sigacik-kalesi": {
+   "osm": [
+    38.194512,
+    26.784461
+   ],
+   "qid": "Q6045692",
+   "wikidata": [
+    38.194444444444,
+    26.784444444444
+   ],
+   "arama_ile": false,
+   "mesafe_m": 8,
+   "durum": "uyumlu"
+  },
+  "sancakburnu-kalesi": {
+   "osm": [
+    38.417164,
+    27.017889
+   ],
+   "qid": "Q6063376",
+   "wikidata": [
+    38.417222222222,
+    27.017777777778
+   ],
+   "arama_ile": false,
+   "mesafe_m": 12,
+   "durum": "uyumlu"
+  },
+  "ayasuluk-kalesi": {
+   "osm": [
+    37.955505,
+    27.368178
+   ],
+   "qid": "Q206257",
+   "wikidata": [
+    37.95555556,
+    27.36805556
+   ],
+   "arama_ile": false,
+   "mesafe_m": 12,
+   "durum": "uyumlu"
+  },
+  "izmir-saat-kulesi": {
+   "osm": [
+    38.418875,
+    27.128695
+   ],
+   "qid": "Q3696052",
+   "wikidata": [
+    38.41886111111111,
+    27.128666666666668
+   ],
+   "arama_ile": false,
+   "mesafe_m": 3,
+   "durum": "uyumlu"
+  },
+  "izmir-parasut-kulesi": {
+   "osm": [
+    38.427464,
+    27.144173
+   ],
+   "qid": "Q6014111",
+   "wikidata": [
+    38.427444444444,
+    27.144194444444
+   ],
+   "arama_ile": false,
+   "mesafe_m": 3,
+   "durum": "uyumlu"
+  },
+  "tarihi-asansor": {
+   "osm": [
+    38.4092,
+    27.1238
+   ],
+   "qid": "Q4803558",
+   "wikidata": [
+    38.408798,
+    27.117489
+   ],
+   "arama_ile": true,
+   "mesafe_m": 552,
+   "durum": "yaklasik_duzeltildi",
+   "onerilen": [
+    38.408798,
+    27.117489
+   ]
+  },
+  "ataturk-maski": {
+   "osm": [
+    38.406035,
+    27.145592
+   ],
+   "qid": "Q48816032",
+   "wikidata": [
+    38.406055555555554,
+    27.145805555555555
+   ],
+   "arama_ile": false,
+   "mesafe_m": 19,
+   "durum": "uyumlu"
+  },
+  "cumhuriyet-meydani": {
+   "osm": [
+    38.428935,
+    27.134385
+   ],
+   "qid": "Q6034758",
+   "wikidata": [
+    38.428986111111,
+    27.134325
+   ],
+   "arama_ile": false,
+   "mesafe_m": 8,
+   "durum": "uyumlu"
+  },
+  "gundogdu-meydani": {
+   "osm": [
+    38.435592,
+    27.13968
+   ],
+   "qid": "Q12809785",
+   "wikidata": [
+    38.435611111111,
+    27.139555555556
+   ],
+   "arama_ile": false,
+   "mesafe_m": 11,
+   "durum": "uyumlu"
+  },
+  "ilk-kursun-aniti": {
+   "osm": [
+    38.419396,
+    27.128432
+   ],
+   "qid": "Q6058600",
+   "wikidata": [
+    38.419361111111,
+    27.128444444444
+   ],
+   "arama_ile": false,
+   "mesafe_m": 4,
+   "durum": "uyumlu"
+  },
+  "cezayirli-gazi-hasan-pasa-aniti": {
+   "osm": [
+    38.323551,
+    26.302944
+   ],
+   "qid": "Q28220907",
+   "wikidata": [
+    38.32355555555556,
+    26.30302777777778
+   ],
+   "arama_ile": false,
+   "mesafe_m": 7,
+   "durum": "uyumlu"
+  },
+  "kizlaragasi-hani": {
+   "osm": [
+    38.421248,
+    27.133089
+   ],
+   "qid": "Q6091380",
+   "wikidata": [
+    38.42138888888889,
+    27.133055555555554
+   ],
+   "arama_ile": false,
+   "mesafe_m": 16,
+   "durum": "uyumlu"
+  },
+  "sehit-kubilay-aniti": {
+   "osm": [
+    38.600826,
+    27.070265
+   ],
+   "qid": "Q109803722",
+   "wikidata": [
+    38.60080555555555,
+    27.070305555555557
+   ],
+   "arama_ile": false,
+   "mesafe_m": 4,
+   "durum": "uyumlu"
+  },
+  "kemeralti-carsisi": {
+   "osm": [
+    38.4189,
+    27.131
+   ],
+   "qid": "Q25473870",
+   "wikidata": [
+    38.418555555556,
+    27.131777777778
+   ],
+   "arama_ile": true,
+   "mesafe_m": 78,
+   "durum": "yaklasik_duzeltildi",
+   "onerilen": [
+    38.418555555556,
+    27.131777777778
+   ]
+  },
+  "memmius-yapisi": {
+   "osm": [
+    37.937256,
+    27.343308
+   ],
+   "qid": "Q76640593",
+   "wikidata": [
+    37.93721204446248,
+    27.343426317331694
+   ],
+   "arama_ile": false,
+   "mesafe_m": 11,
+   "durum": "uyumlu"
+  },
+  "artemis-tapinagi": {
+   "osm": [
+    37.949849,
+    27.363685
+   ],
+   "qid": "Q43018",
+   "wikidata": [
+    37.949722,
+    27.363889
+   ],
+   "arama_ile": false,
+   "mesafe_m": 23,
+   "durum": "uyumlu"
+  },
+  "efes": {
+   "osm": [
+    37.942419,
+    27.341711
+   ],
+   "qid": "Q47611",
+   "wikidata": [
+    37.94058,
+    27.33939
+   ],
+   "arama_ile": false,
+   "mesafe_m": 289,
+   "durum": "kontrol"
+  },
+  "pergamon": {
+   "osm": [
+    39.131929,
+    27.184135
+   ],
+   "qid": "Q18986",
+   "wikidata": [
+    39.12947,
+    27.18412
+   ],
+   "arama_ile": false,
+   "mesafe_m": 273,
+   "durum": "kontrol"
+  },
+  "celsus-kutuphanesi": {
+   "osm": [
+    37.939197,
+    27.340823
+   ],
+   "qid": "Q744406",
+   "wikidata": [
+    37.939138888889,
+    27.34075
+   ],
+   "arama_ile": false,
+   "mesafe_m": 9,
+   "durum": "uyumlu"
+  },
+  "bergama-zeus-sunagi": {
+   "osm": [
+    39.130789,
+    27.183921
+   ],
+   "qid": "Q158058",
+   "wikidata": [
+    52.521111111111,
+    13.396944444444
+   ],
+   "arama_ile": false,
+   "mesafe_m": 1825806,
+   "durum": "kontrol"
+  },
+  "klazomenai": {
+   "osm": [
+    38.361939,
+    26.770342
+   ],
+   "qid": "Q536598",
+   "wikidata": [
+    38.35816667,
+    26.76758333
+   ],
+   "arama_ile": false,
+   "mesafe_m": 484,
+   "durum": "kontrol"
+  },
+  "kolophon": {
+   "osm": [
+    38.110887,
+    27.144974
+   ],
+   "qid": "Q1142488",
+   "wikidata": [
+    38.11555556,
+    27.14222222
+   ],
+   "arama_ile": false,
+   "mesafe_m": 572,
+   "durum": "kontrol"
+  },
+  "smyrna": {
+   "osm": [
+    38.464208,
+    27.170286
+   ],
+   "qid": "Q1379299",
+   "wikidata": [
+    38.41861111111111,
+    27.142836111111112
+   ],
+   "arama_ile": false,
+   "mesafe_m": 5606,
+   "durum": "kontrol"
+  },
+  "teos": {
+   "osm": [
+    38.179741,
+    26.783073
+   ],
+   "qid": "Q17586",
+   "wikidata": [
+    38.177222222222,
+    26.785
+   ],
+   "arama_ile": false,
+   "mesafe_m": 327,
+   "durum": "kontrol"
+  },
+  "kyme": {
+   "osm": [
+    38.759183,
+    26.935998
+   ],
+   "qid": "Q679305",
+   "wikidata": [
+    38.759166666666665,
+    26.93638888888889
+   ],
+   "arama_ile": false,
+   "mesafe_m": 34,
+   "durum": "uyumlu"
+  },
+  "klaros": {
+   "osm": [
+    38.004277,
+    27.193123
+   ],
+   "qid": "Q1933754",
+   "wikidata": [
+    38.005,
+    27.19305556
+   ],
+   "arama_ile": false,
+   "mesafe_m": 81,
+   "durum": "uyumlu"
+  },
+  "lebedos": {
+   "osm": [
+    38.073517,
+    26.967168
+   ],
+   "qid": "Q302905",
+   "wikidata": [
+    38.07361111111111,
+    26.967222222222222
+   ],
+   "arama_ile": false,
+   "mesafe_m": 11,
+   "durum": "uyumlu"
+  },
+  "meryem-kilisesi": {
+   "osm": [
+    37.945155,
+    27.339124
+   ],
+   "qid": "Q2450228",
+   "wikidata": [
+    37.944939,
+    27.339203
+   ],
+   "arama_ile": false,
+   "mesafe_m": 25,
+   "durum": "uyumlu"
+  },
+  "notion": {
+   "osm": [
+    37.991797,
+    27.197529
+   ],
+   "qid": "Q119771",
+   "wikidata": [
+    37.99277778,
+    27.1975
+   ],
+   "arama_ile": false,
+   "mesafe_m": 109,
+   "durum": "uyumlu"
+  },
+  "kizil-avlu": {
+   "osm": [
+    39.121747,
+    27.183369
+   ],
+   "qid": "Q2168194",
+   "wikidata": [
+    39.12194444,
+    27.18333333
+   ],
+   "arama_ile": false,
+   "mesafe_m": 22,
+   "durum": "uyumlu"
+  },
+  "larissa": {
+   "osm": [
+    38.667944,
+    27.032178
+   ],
+   "qid": "Q628719",
+   "wikidata": [
+    38.667585,
+    27.031388
+   ],
+   "arama_ile": false,
+   "mesafe_m": 79,
+   "durum": "uyumlu"
+  },
+  "metropolis": {
+   "osm": [
+    38.125168,
+    27.324128
+   ],
+   "qid": "Q1497156",
+   "wikidata": [
+    38.125,
+    27.3225
+   ],
+   "arama_ile": false,
+   "mesafe_m": 144,
+   "durum": "uyumlu"
+  },
+  "st-jean-bazilikasi": {
+   "osm": [
+    37.952607,
+    27.367715
+   ],
+   "qid": "Q930613",
+   "wikidata": [
+    37.9525,
+    27.36777778
+   ],
+   "arama_ile": false,
+   "mesafe_m": 13,
+   "durum": "uyumlu"
+  },
+  "belevi-anit-mezari": {
+   "osm": [
+    38.014688,
+    27.472156
+   ],
+   "qid": "Q1911796",
+   "wikidata": [
+    38.01475,
+    27.47213888888889
+   ],
+   "arama_ile": false,
+   "mesafe_m": 7,
+   "durum": "uyumlu"
+  },
+  "yesilova-hoyugu": {
+   "osm": [
+    38.441694,
+    27.213988
+   ],
+   "qid": "Q8053378",
+   "wikidata": [
+    38.44138888888889,
+    27.21472222222222
+   ],
+   "arama_ile": false,
+   "mesafe_m": 72,
+   "durum": "uyumlu"
+  },
+  "efes-tiyatrosu": {
+   "osm": [
+    37.941067,
+    27.342511
+   ],
+   "qid": "Q15723477",
+   "wikidata": [
+    37.94101,
+    27.34273
+   ],
+   "arama_ile": false,
+   "mesafe_m": 20,
+   "durum": "uyumlu"
+  },
+  "yedi-uyurlar-mezarligi": {
+   "osm": [
+    37.943672,
+    27.353725
+   ],
+   "qid": "Q1409276",
+   "wikidata": [
+    37.94373852252145,
+    27.35370557469456
+   ],
+   "arama_ile": false,
+   "mesafe_m": 8,
+   "durum": "uyumlu"
+  },
+  "bergama-kutuphanesi": {
+   "osm": [
+    39.132219,
+    27.183972
+   ],
+   "qid": "Q856590",
+   "wikidata": [
+    39.1325,
+    27.1842
+   ],
+   "arama_ile": false,
+   "mesafe_m": 37,
+   "durum": "kontrol"
+  },
+  "imparatorlar-tapinagi-ve-sunagi-ile-domitianus-terasi": {
+   "osm": [
+    37.936564,
+    27.342603
+   ],
+   "qid": "Q16934218",
+   "wikidata": [
+    37.936522611192125,
+    27.342612788088477
+   ],
+   "arama_ile": false,
+   "mesafe_m": 5,
+   "durum": "uyumlu"
+  },
+  "bouleuterion-odeion": {
+   "osm": [
+    37.93696,
+    27.34494
+   ],
+   "qid": "Q56633101",
+   "wikidata": [
+    37.9369,
+    27.34495
+   ],
+   "arama_ile": false,
+   "mesafe_m": 7,
+   "durum": "uyumlu"
+  },
+  "hadrianus-tapinagi-embolos": {
+   "osm": [
+    37.938507,
+    27.341937
+   ],
+   "qid": "Q2581040",
+   "wikidata": [
+    37.9385,
+    27.34194444
+   ],
+   "arama_ile": false,
+   "mesafe_m": 1,
+   "durum": "uyumlu"
+  },
+  "dionysos-tapinagi-teos": {
+   "osm": [
+    38.177228,
+    26.784878
+   ],
+   "qid": "Q56440191",
+   "wikidata": [
+    38.17722222222222,
+    26.785
+   ],
+   "arama_ile": false,
+   "mesafe_m": 11,
+   "durum": "uyumlu"
+  },
+  "prytaneion-belediye-sarayi": {
+   "osm": [
+    37.937092,
+    27.344448
+   ],
+   "qid": "Q2114503",
+   "wikidata": [
+    37.937390529521764,
+    27.344249005587177
+   ],
+   "arama_ile": false,
+   "mesafe_m": 38,
+   "durum": "kontrol"
+  },
+  "efes-varius-hamami": {
+   "osm": [
+    37.938682,
+    27.342161
+   ],
+   "qid": "Q14540869",
+   "wikidata": [
+    37.9388,
+    27.34213
+   ],
+   "arama_ile": false,
+   "mesafe_m": 13,
+   "durum": "uyumlu"
+  },
+  "pergamon-gymnasium-alani": {
+   "osm": [
+    39.12691,
+    27.186013
+   ],
+   "qid": "Q105232481",
+   "wikidata": [
+    39.12694444444445,
+    27.185833333333335
+   ],
+   "arama_ile": false,
+   "mesafe_m": 16,
+   "durum": "uyumlu"
+  },
+  "traianus-cesmesi": {
+   "osm": [
+    37.938087,
+    27.342479
+   ],
+   "qid": "Q2006145",
+   "wikidata": [
+    37.93808,
+    27.34253
+   ],
+   "arama_ile": false,
+   "mesafe_m": 5,
+   "durum": "uyumlu"
+  },
+  "trajan-tapinagi": {
+   "osm": [
+    39.13278,
+    27.183265
+   ],
+   "qid": "Q2448404",
+   "wikidata": [
+    39.133,
+    27.18322222
+   ],
+   "arama_ile": false,
+   "mesafe_m": 25,
+   "durum": "uyumlu"
+  },
+  "sirince": {
+   "osm": [
+    37.9437,
+    27.4319
+   ],
+   "qid": "Q132682115",
+   "wikidata": [
+    37.9445686,
+    27.4327774
+   ],
+   "arama_ile": true,
+   "mesafe_m": 123,
+   "durum": "yaklasik_duzeltildi",
+   "onerilen": [
+    37.9445686,
+    27.4327774
+   ]
+  },
+  "alacati": {
+   "osm": [
+    38.2829,
+    26.3747
+   ],
+   "qid": "Q941328",
+   "wikidata": [
+    38.281388888889,
+    26.374166666667
+   ],
+   "arama_ile": true,
+   "mesafe_m": 174,
+   "durum": "yaklasik_duzeltildi",
+   "onerilen": [
+    38.281388888889,
+    26.374166666667
+   ]
+  },
+  "birgi": {
+   "osm": [
+    38.2558,
+    28.0656
+   ],
+   "qid": "Q2220449",
+   "wikidata": [
+    38.2545939,
+    28.0654483
+   ],
+   "arama_ile": true,
+   "mesafe_m": 135,
+   "durum": "yaklasik_duzeltildi",
+   "onerilen": [
+    38.2545939,
+    28.0654483
+   ]
+  },
+  "sahin-tepesi": {
+   "osm": [
+    38.408482,
+    27.198746
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "wikidata_yok"
+  },
+  "yamanlar-dagi": {
+   "osm": [
+    38.534605,
+    27.186978
+   ],
+   "qid": "Q962205",
+   "wikidata": [
+    38.5346,
+    27.18697
+   ],
+   "arama_ile": false,
+   "mesafe_m": 1,
+   "durum": "uyumlu"
+  },
+  "gediz-deltasi": {
+   "osm": [
+    38.52261,
+    26.903925
+   ],
+   "qid": "Q6053312",
+   "wikidata": [
+    38.516666666667,
+    26.883333333333
+   ],
+   "arama_ile": false,
+   "mesafe_m": 1909,
+   "durum": "kontrol"
+  },
+  "buyuk-park": {
+   "osm": [
+    38.462922,
+    27.217064
+   ],
+   "qid": "Q34903377",
+   "wikidata": [
+    38.462777777778,
+    27.216666666667
+   ],
+   "arama_ile": false,
+   "mesafe_m": 38,
+   "durum": "uyumlu"
+  },
+  "izmir-kus-cenneti": {
+   "osm": [
+    38.450962,
+    26.929435
+   ],
+   "qid": "Q6043373",
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "wikidata_yok"
+  },
+  "camalti-tuzlasi": {
+   "osm": [
+    38.503754,
+    26.911908
+   ],
+   "qid": "Q6017790",
+   "wikidata": [
+    38.5,
+    26.916666666666668
+   ],
+   "arama_ile": false,
+   "mesafe_m": 588,
+   "durum": "kontrol"
+  },
+  "kulturpark": {
+   "osm": [
+    38.426995,
+    27.145002
+   ],
+   "qid": "Q6067386",
+   "wikidata": [
+    38.427777777778,
+    27.144722222222
+   ],
+   "arama_ile": false,
+   "mesafe_m": 90,
+   "durum": "uyumlu"
+  },
+  "buca-golet": {
+   "osm": [
+    38.347587,
+    27.239723
+   ],
+   "qid": "Q4982337",
+   "wikidata": [
+    38.346944444444,
+    27.240555555556
+   ],
+   "arama_ile": false,
+   "mesafe_m": 102,
+   "durum": "uyumlu"
+  },
+  "susuzdede-parki": {
+   "osm": [
+    38.400054,
+    27.093897
+   ],
+   "qid": "Q5994824",
+   "wikidata": [
+    38.399444444444,
+    27.093611111111
+   ],
+   "arama_ile": false,
+   "mesafe_m": 72,
+   "durum": "uyumlu"
+  },
+  "asik-veysel-rekreasyon-alani": {
+   "osm": [
+    38.467055,
+    27.209635
+   ],
+   "qid": "Q5994960",
+   "wikidata": [
+    38.4675,
+    27.209722222222
+   ],
+   "arama_ile": false,
+   "mesafe_m": 50,
+   "durum": "uyumlu"
+  },
+  "kordon": {
+   "osm": [
+    38.436665,
+    27.139686
+   ],
+   "qid": "Q6013884",
+   "wikidata": [
+    38.435555555556,
+    27.139444444444
+   ],
+   "arama_ile": false,
+   "mesafe_m": 125,
+   "durum": "uyumlu"
+  },
+  "hasanaga-bahcesi": {
+   "osm": [
+    38.382993,
+    27.178821
+   ],
+   "qid": "Q6028430",
+   "wikidata": [
+    38.382777777778,
+    27.179444444444
+   ],
+   "arama_ile": false,
+   "mesafe_m": 59,
+   "durum": "uyumlu"
+  },
+  "ayibaligi-plaji": {
+   "osm": [
+    38.525783,
+    26.62305
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "wikidata_yok"
+  },
+  "badembuku-koyu": {
+   "osm": [
+    38.619773,
+    26.356978
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "wikidata_yok"
+  },
+  "ekmeksiz-plaji": {
+   "osm": [
+    38.174633,
+    26.774571
+   ],
+   "qid": "Q108228169",
+   "wikidata": [
+    38.17472222222222,
+    26.774722222222223
+   ],
+   "arama_ile": true,
+   "mesafe_m": 17,
+   "durum": "uyumlu"
+  },
+  "pamucak-sahili": {
+   "osm": [
+    37.938247,
+    27.273686
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "wikidata_yok"
+  },
+  "akarca-sahili": {
+   "osm": [
+    38.170488,
+    26.803719
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "wikidata_yok"
+  },
+  "alacati-bay-surf-beach": {
+   "osm": [
+    38.24903,
+    26.385602
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "wikidata_yok"
+  },
+  "altinkum-plaji": {
+   "osm": [
+    38.270132,
+    26.259232
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "wikidata_yok"
+  },
+  "dikili-halk-plaji": {
+   "osm": [
+    39.077298,
+    26.887105
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "wikidata_yok"
+  },
+  "uzunada": {
+   "osm": [
+    38.502987,
+    26.721102
+   ],
+   "qid": "Q3084314",
+   "wikidata": [
+    38.501666666667,
+    26.713888888889
+   ],
+   "arama_ile": false,
+   "mesafe_m": 645,
+   "durum": "kontrol"
+  },
+  "garip-adasi": {
+   "osm": [
+    39.006282,
+    26.785254
+   ],
+   "qid": "Q1494288",
+   "wikidata": [
+    39.006944444444,
+    26.785555555556
+   ],
+   "arama_ile": false,
+   "mesafe_m": 78,
+   "durum": "uyumlu"
+  },
+  "karantina-adasi": {
+   "osm": [
+    38.37251,
+    26.787425
+   ],
+   "qid": "Q6027650",
+   "wikidata": [
+    38.373333333333335,
+    26.786666666666665
+   ],
+   "arama_ile": false,
+   "mesafe_m": 113,
+   "durum": "uyumlu"
+  },
+  "cifit-adasi": {
+   "osm": [
+    38.045645,
+    26.855296
+   ],
+   "qid": "Q30640382",
+   "wikidata": [
+    38.046111111111,
+    26.855277777778
+   ],
+   "arama_ile": false,
+   "mesafe_m": 52,
+   "durum": "uyumlu"
+  },
+  "kalem-adasi": {
+   "osm": [
+    39.004598,
+    26.795074
+   ],
+   "qid": "Q30632862",
+   "wikidata": [
+    39.003611111111,
+    26.795
+   ],
+   "arama_ile": false,
+   "mesafe_m": 110,
+   "durum": "uyumlu"
+  },
+  "degirmendere-selalesi": {
+   "osm": [
+    38.105124,
+    27.102065
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "wikidata_yok"
+  },
+  "buyuk-su-ucuran-selalesi": {
+   "osm": [
+    38.735367,
+    27.155575
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "wikidata_yok"
+  },
+  "nebiler": {
+   "osm": [
+    39.16697,
+    26.897165
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "wikidata_yok"
+  }
+ }
+}
