@@ -1,4 +1,4 @@
-# Rozet yüklemesi 2026-11-19T18:36:53Z
+# Rozet yüklemesi 2026-11-19T22:03:25Z
 200 byzantine-traveler.webp {"ok":true,"name":"byzantine-traveler.webp"}
 200 city-helper.webp {"ok":true,"name":"city-helper.webp"}
 200 explorer-10.webp {"ok":true,"name":"explorer-10.webp"}
@@ -17,6 +17,7 @@
 200 nature-explorer.webp {"ok":true,"name":"nature-explorer.webp"}
 200 ottoman-heritage.webp {"ok":true,"name":"ottoman-heritage.webp"}
 200 palace-life.webp {"ok":true,"name":"palace-life.webp"}
+200 photographer.webp {"ok":true,"name":"photographer.webp"}
 200 route-first.webp {"ok":true,"name":"route-first.webp"}
 200 route-master.webp {"ok":true,"name":"route-master.webp"}
 200 streak-4-weeks.webp {"ok":true,"name":"streak-4-weeks.webp"}
