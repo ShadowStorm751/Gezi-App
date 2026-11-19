@@ -1,19 +1,5 @@
-failed
-bitti: 2026-11-19T18:18:57Z
-çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44582228727
---- son satırlar ---
-Traceback (most recent call last):
-  File "/home/runner/work/Gezi-App/Gezi-App/data-pipeline/pipeline.py", line 910, in <module>
-    sys.exit(main())
-             ^^^^^^
-  File "/home/runner/work/Gezi-App/Gezi-App/data-pipeline/pipeline.py", line 875, in main
-    fetch_osm(out, city, args.budget_min * 60, args.cache_dir)
-  File "/home/runner/work/Gezi-App/Gezi-App/data-pipeline/pipeline.py", line 187, in fetch_osm
-    data = fetch_osm_chunked(city, cache_dir or out_dir / "osm_chunks", budget_s)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/Gezi-App/Gezi-App/data-pipeline/pipeline.py", line 268, in fetch_osm_chunked
-    part = get(box_query(sel, box, out, CHUNK_TIMEOUT_S), f"{sel} (out {out}, kutu {box})")
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/Gezi-App/Gezi-App/data-pipeline/pipeline.py", line 241, in get
-    raise BudgetExceeded(f"{exc} — {done}/{total} parça hazır, sonraki çalıştırma devam eder") from exc
-BudgetExceeded: süre sınırı doldu; son hata: The read operation timed out — 6/76 parça hazır, sonraki çalıştırma devam eder
+ok
+bitti: 2026-11-19T18:25:03Z
+kaynak: pbf
+osm_elements=892 wikidata=357 adaylar=249
+çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44586616536
