@@ -4,7 +4,11 @@ React Native / Expo ile İstanbul keşfi. Harita ve kamera aynı WGS84 koordinat
 
 ## Çalıştırma
 
-Node 22.13 veya üzeri ve npm ile bu klasörde `npm install`, ardından `npx expo start` çalıştır. SDK 54 uyumlu istemci veya geliştirme derlemesi kullan. Kamera ve pusula testi fiziksel cihaz gerektirir. `npm test` konum hesaplarını ve API yanıtlarının işlenmesini sınar.
+İlk kurulumda Node.js 22 LTS (22.13+) veya 24 LTS (24.3+) ve npm ile `mobile` klasöründe `npm ci` çalıştır.
+
+Windows’ta paketler kurulduktan sonra `Expo-Go-Baslat.cmd` dosyasına çift tıkla. macOS ve Linux’ta aynı klasörde `npx expo start --go --lan --clear` çalıştır. Telefonu ve bilgisayarı aynı Wi-Fi ağına bağla. QR kodunu Android’de Expo Go SDK 58 içinden, iPhone’da Kamera ile okut. Gezi App açılınca kamera ve konum izinlerini ver. Kamera ve pusulayı fiziksel cihazda dene.
+
+`npm test` konum hesaplarını ve API yanıtlarının işlenmesini sınar.
 
 ## Veri kaynağı
 

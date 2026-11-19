@@ -1,9 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {
-  ActivityIndicator, Alert, Linking, Modal, Platform, Pressable, SafeAreaView,
+  ActivityIndicator, Alert, Linking, Modal, Platform, Pressable,
   ScrollView, StatusBar, StyleSheet, Text, View
 } from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import * as Location from 'expo-location';
 import sample from './places.json';
 import {AsyncStorage, client, demo, lang, project, t} from './client';
@@ -140,7 +141,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.page}>
-      <StatusBar barStyle="dark-content" backgroundColor={paper}/>
+      <StatusBar barStyle="dark-content"/>
       {cameraOpen ? <DiscoveryCamera places={places} trackedId={trackedId}
         onStopTracking={() => setTrackedId(null)} onSelect={openPlace}
         onBack={() => { setCameraOpen(false); setTrackedId(null); }}/> : <>
@@ -244,7 +245,7 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  page:{flex:1, backgroundColor:paper, paddingTop:Platform.OS === 'android' ? StatusBar.currentHeight : 0},
+  page:{flex:1, backgroundColor:paper},
   header:{paddingHorizontal:22, paddingTop:12, paddingBottom:12},
   titleRow:{flexDirection:'row',alignItems:'center',justifyContent:'space-between'},
   eyebrow:{fontSize:11, letterSpacing:1.7, fontWeight:'700', color:'#526D64'},
