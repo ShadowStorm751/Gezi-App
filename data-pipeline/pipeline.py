@@ -37,7 +37,7 @@ OVERPASS_URLS = [
     "https://overpass.private.coffee/api/interpreter",
     "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
 ]
-CHUNK_TIMEOUT_S = 180    # parça başına sunucu zaman aşımı
+CHUNK_TIMEOUT_S = 90     # parça başına sunucu zaman aşımı (kutu sorguları hafif)
 CHUNK_ROUND_WAIT_S = 30   # turlar arası bekleme
 FETCH_BUDGET_S = 20 * 60  # bir şehrin bütün Overpass denemeleri için toplam süre
 WIKIDATA_API = "https://www.wikidata.org/w/api.php"
@@ -194,53 +194,91 @@ def fetch_osm(out_dir: Path, city: Optional[City] = None, budget_s: int = FETCH_
     return path
 
 
+def point_in_rings(lat: float, lng: float, rings: List[List[Tuple[float, float]]]) -> bool:
+    """Nokta, halkalardan (boylam, enlem) birinin içinde mi (çift-tek kuralı)."""
+    for ring in rings:
+        inside = False
+        for (x1, y1), (x2, y2) in zip(ring, ring[1:]):
+            if (y1 > lat) != (y2 > lat) and lng < (x2 - x1) * (lat - y1) / (y2 - y1) + x1:
+                inside = not inside
+        if inside:
+            return True
+    return False
+
+
+def _in_box(lat: float, lng: float, box: Tuple[float, float, float, float]) -> bool:
+    return box[0] <= lat <= box[2] and box[1] <= lng <= box[3]
+
+
 def fetch_osm_chunked(city: City, cache_dir: Optional[Path] = None,
                       budget_s: int = FETCH_BUDGET_S) -> Dict[str, Any]:
-    """Her etiket grubu ayrı sorgu (alan gerekmeyenlerde `out center`, sınırı gerekenlerde kare kare).
+    """Parça parça indirir: il kutusu (area filtresi yok), sonra il sınırıyla yerelde kırpar.
     Toplam süre budget_s ile sınırlı. Biten parçalar cache_dir'e (sorgunun özetiyle) yazılır;
     sonraki çalıştırma kaldığı yerden devam eder."""
     import gzip
     import hashlib
-    from cities import chunk_plan
+    from cities import boundary_query, box_query, chunk_plan, extra_boxes
     deadline = time.monotonic() + budget_s
-    seen: Dict[Tuple[str, int], Dict[str, Any]] = {}
-    plan = chunk_plan(city)
     if cache_dir:
         cache_dir.mkdir(parents=True, exist_ok=True)
+    plan = chunk_plan(city)
+    total = len(plan) + 1
     done = 0
-    for i, (sel, out, tile) in enumerate(plan, start=1):
-        query = overpass_query(city, [sel], out=out, timeout_s=CHUNK_TIMEOUT_S, tile=tile)
-        if "nwr[" not in query:  # kare hiçbir bölgeyle kesişmiyor
-            continue
-        log(f"  [{i}/{len(plan)}] {sel} (out {out}{', kare ' + str(tile) if tile else ''})")
+
+    def get(query: str, label: str) -> Dict[str, Any]:
+        nonlocal done
+        log(f"  [{done + 1}/{total}] {label}")
         cached = cache_dir / f"{hashlib.sha1(query.encode()).hexdigest()[:12]}.json.gz" if cache_dir else None
         if cached and cached.exists():
-            part = json.loads(gzip.decompress(cached.read_bytes()).decode("utf-8"))
+            done += 1
             log("    önbellekten")
-        else:
-            while True:
-                try:
-                    part = _overpass(query, CHUNK_TIMEOUT_S, deadline)
-                    break
-                except BudgetExceeded as exc:
-                    raise BudgetExceeded(f"{exc} — {done}/{len(plan)} parça hazır, sonraki çalıştırma devam eder") from exc
-                except RuntimeError as exc:
-                    if time.monotonic() + CHUNK_ROUND_WAIT_S > deadline:
-                        raise BudgetExceeded(f"süre sınırı ({budget_s // 60} dk) doldu: {exc} — "
-                                             f"{done}/{len(plan)} parça hazır, sonraki çalıştırma devam eder") from exc
-                    log(f"  bütün sunucular başarısız ({exc}); {CHUNK_ROUND_WAIT_S} sn sonra yeniden")
-                    time.sleep(CHUNK_ROUND_WAIT_S)
-            if cached:
-                cached.write_bytes(gzip.compress(json.dumps(part, ensure_ascii=False).encode("utf-8"), mtime=0))
-            time.sleep(3)
+            return json.loads(gzip.decompress(cached.read_bytes()).decode("utf-8"))
+        while True:
+            try:
+                part = _overpass(query, CHUNK_TIMEOUT_S, deadline)
+                break
+            except BudgetExceeded as exc:
+                raise BudgetExceeded(f"{exc} — {done}/{total} parça hazır, sonraki çalıştırma devam eder") from exc
+            except RuntimeError as exc:
+                if time.monotonic() + CHUNK_ROUND_WAIT_S > deadline:
+                    raise BudgetExceeded(f"süre sınırı ({budget_s // 60} dk) doldu: {exc} — "
+                                         f"{done}/{total} parça hazır, sonraki çalıştırma devam eder") from exc
+                log(f"  bütün sunucular başarısız ({exc}); {CHUNK_ROUND_WAIT_S} sn sonra yeniden")
+                time.sleep(CHUNK_ROUND_WAIT_S)
+        if cached:
+            cached.write_bytes(gzip.compress(json.dumps(part, ensure_ascii=False).encode("utf-8"), mtime=0))
         done += 1
+        time.sleep(2)
+        return part
+
+    # 1) İl sınırı (kırpma için)
+    b = get(boundary_query(city, CHUNK_TIMEOUT_S), f"il sınırı: {city.province}")
+    rings: List[List[Tuple[float, float]]] = []
+    for el in b.get("elements", []):
+        segs = [[(g["lon"], g["lat"]) for g in m.get("geometry", []) if g]
+                for m in el.get("members", []) if m.get("type") == "way" and m.get("role") in ("outer", "")]
+        rings.extend(stitch_rings(segs))
+    if not rings:
+        raise RuntimeError(f"il sınırı bulunamadı: {city.province}")
+    extras = extra_boxes(city)
+
+    # 2) Parçalar
+    seen: Dict[Tuple[str, int], Dict[str, Any]] = {}
+    for sel, out, box, clip in plan:
+        part = get(box_query(sel, box, out, CHUNK_TIMEOUT_S), f"{sel} (out {out}, kutu {box})")
         for el in part.get("elements", []):
-            prev = seen.get((el["type"], el["id"]))
+            lat, lng, _ = element_geometry(el)
+            if lat is None or lng is None:
+                continue
+            if not (point_in_rings(lat, lng, rings) or any(_in_box(lat, lng, x) for x in extras)):
+                continue
+            key = (el["type"], el["id"])
+            prev = seen.get(key)
             # Aynı öğe hem center hem geom ile geldiyse geometrisi olanı tut.
             if prev is None or ("geometry" in el or "members" in el) and not ("geometry" in prev or "members" in prev):
-                seen[(el["type"], el["id"])] = el
+                seen[key] = el
     if not seen:
-        raise RuntimeError("hiç öğe gelmedi: bölge adı (area) bulunamamış olabilir")
+        raise RuntimeError("hiç öğe gelmedi")
     return {"elements": list(seen.values()), "chunked": True}
 
 

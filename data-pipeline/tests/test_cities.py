@@ -35,88 +35,110 @@ class QueryTests(unittest.TestCase):
             cities.get_city("ankara-yok")
 
 
+def fake_overpass(calls, fail_first=False, node_lat=38.4, node_lng=27.1):
+    """Sahte Overpass: il sınırı sorgusuna kare bir ilişki, diğerlerine tek düğüm döner."""
+    import json
+    import urllib.parse
+
+    def req(url, data, timeout):
+        calls.append(url)
+        if fail_first and len(calls) == 1:
+            return json.dumps({"elements": [], "remark": "runtime error: Query timed out"}).encode()
+        q = urllib.parse.parse_qs(data.decode())["data"][0]
+        if '"boundary"="administrative"' in q:
+            sq = [{"lat": 37.0, "lon": 26.0}, {"lat": 37.0, "lon": 29.0}, {"lat": 40.0, "lon": 29.0},
+                  {"lat": 40.0, "lon": 26.0}, {"lat": 37.0, "lon": 26.0}]
+            return json.dumps({"elements": [{"type": "relation", "id": 1,
+                                             "members": [{"type": "way", "role": "outer", "geometry": sq}]}]}).encode()
+        els = [{"type": "node", "id": 7, "lat": node_lat, "lon": node_lng, "tags": {"name": "X"}},
+               {"type": "node", "id": 8, "lat": 41.5, "lon": 27.1, "tags": {"name": "İl dışı"}}]
+        return json.dumps({"elements": els}).encode()
+    return req
+
+
 class FetchTests(unittest.TestCase):
-    def test_timeout_remark_is_error_and_chunks_merge(self):
-        import json
+    def setUp(self):
+        self.orig = (p._request, p.time.sleep)
+        p.time.sleep = lambda s: None
+
+    def tearDown(self):
+        p._request, p.time.sleep = self.orig
+
+    def test_timeout_remark_is_error(self):
         calls = []
+        p._request = fake_overpass(calls, fail_first=True)
+        data = p._overpass(cities.box_query('nwr["x"]', (1, 2, 3, 4), "center", 10), 10)
+        self.assertEqual(len(calls), 2)  # zaman aşımı notu hata sayıldı, ikinci sunucuya geçti
+        self.assertEqual(len(data["elements"]), 2)
 
-        def fake_request(url, data, timeout):
-            calls.append(url)
-            if len(calls) == 1:  # ilk yanıt: sunucu zaman aşımı, boş liste
-                return json.dumps({"elements": [], "remark": "runtime error: Query timed out"}).encode()
-            el = {"type": "node", "id": 7, "lat": 38.4, "lon": 27.1, "tags": {"name": "X"}}
-            return json.dumps({"elements": [el]}).encode()
+    def test_chunks_merge_and_clip_to_province(self):
+        calls = []
+        p._request = fake_overpass(calls)
+        merged = p.fetch_osm_chunked(IZMIR)
+        ids = sorted(el["id"] for el in merged["elements"])
+        self.assertEqual(ids, [7])  # il sınırı dışındaki düğüm kırpıldı, aynı öğe tek kez
 
-        orig_req, orig_sleep = p._request, p.time.sleep
-        p._request, p.time.sleep = fake_request, lambda s: None
-        try:
-            data = p._overpass("q", 10)
-            self.assertEqual(len(calls), 2)  # ikinci sunucuya geçti
-            self.assertEqual(len(data["elements"]), 1)
-            merged = p.fetch_osm_chunked(IZMIR)
-            self.assertEqual(len(merged["elements"]), 1)  # aynı öğe tek kez
-        finally:
-            p._request, p.time.sleep = orig_req, orig_sleep
+    def test_extra_boxes_not_clipped(self):
+        calls = []
+        p._request = fake_overpass(calls, node_lat=38.25, node_lng=34.25)  # Ihlara: Nevşehir sınırı dışında
+        merged = p.fetch_osm_chunked(CAPPADOCIA)
+        self.assertEqual([el["id"] for el in merged["elements"]], [7])  # ek kutu kırpılmadı
+
+    def test_cache_resumes(self):
+        import tempfile
+        calls = []
+        p._request = fake_overpass(calls)
+        with tempfile.TemporaryDirectory() as d:
+            first = p.fetch_osm_chunked(IZMIR, Path(d))
+            n = len(calls)
+            second = p.fetch_osm_chunked(IZMIR, Path(d))
+            self.assertEqual(len(calls), n)  # ikinci çalıştırma tamamen önbellekten
+            self.assertEqual(first, second)
+
+    def test_budget_stops_retries(self):
+        def always_fail(url, data, timeout):
+            raise p.urllib.error.URLError("502")
+        p._request = always_fail
+        with self.assertRaises(p.BudgetExceeded):
+            p.fetch_osm_chunked(IZMIR, None, budget_s=0)
 
 
 class ChunkPlanTests(unittest.TestCase):
-    def test_plan_covers_all_selectors_with_light_output(self):
-        full = cities.chunk_plan(IZMIR)
-        plan = {sel: out for sel, out, _ in full}
-        self.assertEqual(len(plan), len(cities.selectors(IZMIR)) + 1)  # historic ikiye bölündü
-        tiles = [t for sel, _, t in full if sel == 'nwr["natural"="wood"]["name"]']
-        self.assertEqual(len(tiles), IZMIR.tiles ** 2)                  # sınırı gereken gruplar kare kare
-        self.assertEqual(tiles[0][:2], IZMIR.bbox[:2])
-        self.assertEqual(tiles[-1][2:], IZMIR.bbox[2:])
-        self.assertEqual(plan['nwr["tourism"="museum"]["name"]'], "center")
-        self.assertEqual(plan['nwr["natural"="wood"]["name"]'], "geom")
-        self.assertEqual(plan['nwr["historic"~"^(ruins|archaeological_site)$"]["name"]'], "geom")
-        self.assertEqual(plan['nwr["place"~"^(island|islet)$"]["name"]'], "geom")
-        self.assertIn("out center;", cities.overpass_query(IZMIR, ['nwr["tourism"="museum"]["name"]'], out="center"))
+    def test_plan_light_first_heavy_tiled(self):
+        plan = cities.chunk_plan(IZMIR)
+        outs = [o for _, o, _, _ in plan]
+        self.assertEqual(outs, sorted(outs, key=lambda o: o != "center"))  # önce center
+        kinds = {sel: o for sel, o, _, _ in plan}
+        self.assertEqual(len(kinds), len(cities.selectors(IZMIR)) + 1)  # historic ikiye bölündü
+        self.assertEqual(kinds['nwr["tourism"="museum"]["name"]'], "center")
+        self.assertEqual(kinds['nwr["natural"="wood"]["name"]'], "geom")
+        self.assertEqual(kinds['nwr["historic"~"^(ruins|archaeological_site)$"]["name"]'], "geom")
+        wood = [b for sel, _, b, _ in plan if sel == 'nwr["natural"="wood"]["name"]']
+        self.assertEqual(len(wood), IZMIR.tiles ** 2)
+        self.assertEqual((wood[0][:2], wood[-1][2:]), (IZMIR.bbox[:2], IZMIR.bbox[2:]))
 
-    def test_tile_query(self):
-        t = (38.25, 34.05, 38.8, 34.625)
-        q = cities.overpass_query(CAPPADOCIA, ['nwr["natural"="valley"]["name"]'], tile=t)
-        self.assertIn('nwr["natural"="valley"]["name"](area.nev)(38.25,34.05,38.8,34.625);', q)
-        self.assertIn('(38.20,34.20,38.33,34.34);', q)       # Ihlara kutusu bu kareyle kesişiyor
-        self.assertNotIn('(38.32,35.04,38.37,35.13);', q)    # Soğanlı kesişmiyor
+    def test_no_area_filter_in_box_queries(self):
+        q = cities.box_query('nwr["tourism"="museum"]["name"]', IZMIR.bbox, "center", 90)
+        self.assertNotIn("area", q)
+        self.assertIn('nwr["tourism"="museum"]["name"](37.75,26.2,39.4,28.5);', q)
+        self.assertIn("out center;", q)
+        self.assertIn('["name"="İzmir"]', cities.boundary_query(IZMIR, 90))
 
-    def test_cache_resumes(self):
-        import json, tempfile
-        calls = []
+    def test_cappadocia_extra_boxes_unclipped(self):
+        plan = cities.chunk_plan(CAPPADOCIA)
+        unclipped = {b for _, _, b, clip in plan if not clip}
+        self.assertEqual(unclipped, {(38.20, 34.20, 38.33, 34.34), (38.32, 35.04, 38.37, 35.13)})
 
-        def ok(url, data, timeout):
-            calls.append(1)
-            return json.dumps({"elements": [{"type": "node", "id": len(calls), "lat": 38.4, "lon": 27.1,
-                                             "tags": {"name": "X"}}]}).encode()
-        orig_req, orig_sleep = p._request, p.time.sleep
-        p._request, p.time.sleep = ok, lambda s: None
-        try:
-            with tempfile.TemporaryDirectory() as d:
-                first = p.fetch_osm_chunked(IZMIR, Path(d))
-                n = len(calls)
-                second = p.fetch_osm_chunked(IZMIR, Path(d))
-                self.assertEqual(len(calls), n)  # ikinci çalıştırma tamamen önbellekten
-                self.assertEqual(len(first["elements"]), len(second["elements"]))
-        finally:
-            p._request, p.time.sleep = orig_req, orig_sleep
+    def test_point_in_rings(self):
+        sq = [(0.0, 0.0), (2.0, 0.0), (2.0, 2.0), (0.0, 2.0), (0.0, 0.0)]
+        self.assertTrue(p.point_in_rings(1.0, 1.0, [sq]))
+        self.assertFalse(p.point_in_rings(3.0, 1.0, [sq]))
 
     def test_center_geometry(self):
         el = {"type": "way", "id": 1, "center": {"lat": 38.4, "lon": 27.1}}
         self.assertEqual(p.element_geometry(el), (38.4, 27.1, None))
         rel = {"type": "relation", "id": 2, "center": {"lat": 38.5, "lon": 27.2}}
         self.assertEqual(p.element_geometry(rel), (38.5, 27.2, None))
-
-    def test_budget_stops_retries(self):
-        def always_fail(url, data, timeout):
-            raise p.urllib.error.URLError("502")
-        orig_req, orig_sleep = p._request, p.time.sleep
-        p._request, p.time.sleep = always_fail, lambda s: None
-        try:
-            with self.assertRaises(p.BudgetExceeded):
-                p.fetch_osm_chunked(IZMIR, None, budget_s=0)
-        finally:
-            p._request, p.time.sleep = orig_req, orig_sleep
 
 
 class ClassifyTests(unittest.TestCase):
