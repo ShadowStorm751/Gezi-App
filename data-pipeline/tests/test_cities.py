@@ -225,3 +225,31 @@ class MigrationTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class CoordsTests(unittest.TestCase):
+    def test_classify(self):
+        import coords
+        base = {"enlem": "37.9394", "boylam": "27.3412"}
+        self.assertEqual(coords.classify(dict(base), (37.9395, 27.3413), "Q1", False)["durum"], "uyumlu")
+        self.assertEqual(coords.classify(dict(base, ana_yer="efes"), (37.9400, 27.3412), "Q1", False)["durum"], "kontrol")
+        self.assertEqual(coords.classify(dict(base), None, "", False)["durum"], "wikidata_yok")
+        r = coords.classify(dict(base, konum_yaklasik=True), (37.95, 27.35), "Q2", True)
+        self.assertEqual((r["durum"], r["onerilen"]), ("yaklasik_duzeltildi", [37.95, 27.35]))
+
+
+class ShortlistTests(unittest.TestCase):
+    def test_city_shortlists_consistent(self):
+        import json as _j
+        for city in ("izmir", "bursa", "kapadokya"):
+            path = HERE.parent / "results" / city / "shortlist.json"
+            if not path.exists():
+                continue
+            items = _j.loads(path.read_text(encoding="utf-8"))
+            slugs = [i["slug"] for i in items]
+            self.assertEqual(len(slugs), len(set(slugs)), city)
+            for i in items:
+                self.assertIn(i["kategori"], p.CATEGORY_KIND)
+                self.assertTrue(i["ad_tr"] and i["ad_en"], i["slug"])
+                if i["ana_yer"]:
+                    self.assertIn(i["ana_yer"], slugs)

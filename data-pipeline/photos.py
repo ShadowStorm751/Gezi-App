@@ -201,11 +201,14 @@ def main(argv: Optional[List[str]] = None) -> int:
     ap = argparse.ArgumentParser(description="Onaylı yerlerin Commons fotoğrafları")
     ap.add_argument("--city", default=DEFAULT_CITY, choices=sorted(CITIES))
     args = ap.parse_args(argv)
-    DROPPED = importlib.import_module(f"{args.city}_descriptions").DROPPED
+    try:
+        DROPPED = importlib.import_module(f"{args.city}_descriptions").DROPPED
+    except ModuleNotFoundError:
+        DROPPED = {}
     rdir = city_results(args.city)
 
     shortlist = json.loads((rdir / "shortlist.json").read_text(encoding="utf-8"))
-    places = [s for s in shortlist if p.slugify(s["ad_tr"]) not in DROPPED]
+    places = [s for s in shortlist if (s.get("slug_override") or p.slugify(s["ad_tr"])) not in DROPPED]
 
     # 1) Wikidata kaydı
     known = sorted({s["wikidata"] for s in places if s.get("wikidata")})
@@ -214,7 +217,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     for s in places:
         if s.get("wikidata"):
             continue
-        slug = p.slugify(s["ad_tr"])
+        slug = (s.get("slug_override") or p.slugify(s["ad_tr"]))
         max_m = SEARCH_MAX_DISTANCE_AREA_M if s["kategori"] in p.AREA_CATEGORIES else SEARCH_MAX_DISTANCE_M
         e = search_entity(s["ad_tr"], float(s["enlem"]), float(s["boylam"]), max_m)
         if e:
@@ -225,7 +228,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     # 2) Görsel dosyaları
     file_for: Dict[str, str] = {}
     for s in places:
-        slug = p.slugify(s["ad_tr"])
+        slug = (s.get("slug_override") or p.slugify(s["ad_tr"]))
         qid = s.get("wikidata") or found_by_search.get(slug)
         img = entity_image(entities.get(qid, {})) if qid else None
         if img:
@@ -243,7 +246,7 @@ def main(argv: Optional[List[str]] = None) -> int:
             lic = ((infos.get(f, {}).get("imageinfo") or [{}])[0].get("extmetadata") or {}).get("LicenseShortName", {})
             rejected[slug] = strip_html(lic.get("value", "")) or "bilgi yok"
 
-    missing = sorted(p.slugify(s["ad_tr"]) for s in places if p.slugify(s["ad_tr"]) not in photos)
+    missing = sorted((s.get("slug_override") or p.slugify(s["ad_tr"])) for s in places if (s.get("slug_override") or p.slugify(s["ad_tr"])) not in photos)
     result = {
         "photos": photos,
         "wikidata_found_by_search": found_by_search,

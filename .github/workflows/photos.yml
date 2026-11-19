@@ -1,4 +1,5 @@
-# Onaylı yerlerin Wikimedia Commons fotoğraf bilgilerini (adres, yazar, lisans) toplar.
+# Onaylı yerlerin Wikimedia Commons fotoğraf bilgilerini (adres, yazar, lisans) toplar;
+# İstanbul dışı şehirlerde önce koordinatları Wikidata ile karşılaştırır (coords.py -> coords.json).
 # Tetikleme: data-pipeline/photos-request.txt değişip main'e (ya da data/* dalına) yüklenince ya da elle.
 # Hangi şehirler: photos-request.txt içindeki "Şehirler:" satırı (yoksa istanbul) ya da elle çalıştırmada "cities".
 # Sonuç: data-pipeline/results/photos.json (İstanbul) ya da results/<şehir>/photos.json olarak commit'lenir.
@@ -41,6 +42,7 @@ jobs:
           cities="$INPUT_CITIES"
           [ -n "$cities" ] || cities=$(sed -n 's/^Şehirler:[[:space:]]*//p' data-pipeline/photos-request.txt | head -1)
           for city in ${cities:-istanbul}; do
+            if [ "$city" != "istanbul" ]; then python data-pipeline/coords.py --city "$city"; fi
             python data-pipeline/photos.py --city "$city"
           done
       - name: Sonucu kaydet
