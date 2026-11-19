@@ -6,6 +6,8 @@
 # Sonuç: İstanbul data-pipeline/results/, diğer şehirler data-pipeline/results/<şehir>/ klasörüne
 # candidates.csv, areas.json ve status.txt olarak, tetikleyen dala commit'lenir.
 # status.txt her çalıştırmada yazılır (başarısız ya da zaman aşımı olsa da): ilk satır ok | failed.
+# Kaynak: run-request.txt içindeki "Kaynak:" satırı. "pbf" = Geofabrik'in Türkiye dosyası + osmium
+# (Overpass'a bağlı değil, önerilen); yoksa "overpass" (İstanbul pilotunda kullanılan).
 name: Veri hattı
 
 on:
@@ -15,6 +17,10 @@ on:
         description: "Şehirler (boşlukla ayrılmış, ör. izmir)"
         required: false
         default: "istanbul"
+      source:
+        description: "Kaynak: pbf (Geofabrik + osmium) ya da overpass"
+        required: false
+        default: "pbf"
   push:
     branches: [main, "data/**"]
     paths: [data-pipeline/run-request.txt]
@@ -45,32 +51,48 @@ jobs:
         id: cities
         env:
           INPUT_CITIES: ${{ github.event.inputs.cities }}
+          INPUT_SOURCE: ${{ github.event.inputs.source }}
         run: |
           if [ -n "$INPUT_CITIES" ]; then
-            cities="$INPUT_CITIES"
+            cities="$INPUT_CITIES"; source="$INPUT_SOURCE"
           else
             cities=$(sed -n 's/^Şehirler:[[:space:]]*//p' data-pipeline/run-request.txt | head -1)
+            source=$(sed -n 's/^Kaynak:[[:space:]]*//p' data-pipeline/run-request.txt | head -1)
           fi
-          cities=${cities:-istanbul}
-          echo "Şehirler: $cities"
+          cities=${cities:-istanbul}; source=${source:-overpass}
+          echo "Şehirler: $cities / Kaynak: $source"
           echo "list=$cities" >> "$GITHUB_OUTPUT"
+          echo "source=$source" >> "$GITHUB_OUTPUT"
+
+      - name: Geofabrik Türkiye dosyası ve osmium
+        if: steps.cities.outputs.source == 'pbf'
+        timeout-minutes: 10
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq osmium-tool
+          osmium --version | head -1
+          mkdir -p data-pipeline/output
+          curl -fL --retry 5 --retry-delay 10 -o data-pipeline/output/turkey.osm.pbf \
+            https://download.geofabrik.de/europe/turkey-latest.osm.pbf
+          ls -lh data-pipeline/output/turkey.osm.pbf
 
       - name: OSM ve Wikidata'dan indir, aday listesini üret
         timeout-minutes: 30
         env:
           CITIES: ${{ steps.cities.outputs.list }}
+          SOURCE: ${{ steps.cities.outputs.source }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           set -o pipefail
           now() { date -u +%Y-%m-%dT%H:%M:%SZ; }
           failed=""
+          if [ "$SOURCE" = "pbf" ]; then src_args="--pbf data-pipeline/output/turkey.osm.pbf"; else src_args=""; fi
           for city in $CITIES; do
             if [ "$city" = "istanbul" ]; then out=data-pipeline/output; res=data-pipeline/results;
             else out=data-pipeline/output/$city; res=data-pipeline/results/$city; fi
             mkdir -p "$out" "$res/raw"
             printf 'running\nbaşladı: %s\nçalıştırma: %s\n' "$(now)" "$RUN_URL" > "$res/status.txt"
             echo "::group::$city"
-            if python data-pipeline/pipeline.py --city "$city" --out "$out" fetch --budget-min 22 --cache-dir "$res/raw/osm_chunks" 2>&1 | tee "$out/log.txt" \
+            if python data-pipeline/pipeline.py --city "$city" --out "$out" fetch --budget-min 22 --cache-dir "$res/raw/osm_chunks" $src_args 2>&1 | tee "$out/log.txt" \
                && python data-pipeline/pipeline.py --city "$city" --out "$out" candidates 2>&1 | tee -a "$out/log.txt"; then
               cp "$out/candidates.csv" "$out/areas.json" "$res/"
               gzip -c "$out/osm_raw.json" > "$res/raw/osm_raw.json.gz"
@@ -79,7 +101,7 @@ jobs:
               wd=$(python -c "import json,sys;print(len(json.load(open(sys.argv[1]))))" "$out/wikidata.json")
               n=$(( $(wc -l < "$out/candidates.csv") - 1 ))
               printf 'osm_elements=%s\nwikidata_entities=%s\n' "$osm" "$wd" > "$res/run-info.txt"
-              printf 'ok\nbitti: %s\nosm_elements=%s wikidata=%s adaylar=%s\nçalıştırma: %s\n' "$(now)" "$osm" "$wd" "$n" "$RUN_URL" > "$res/status.txt"
+              printf 'ok\nbitti: %s\nkaynak: %s\nosm_elements=%s wikidata=%s adaylar=%s\nçalıştırma: %s\n' "$(now)" "$SOURCE" "$osm" "$wd" "$n" "$RUN_URL" > "$res/status.txt"
             else
               { echo "failed"; echo "bitti: $(now)"; echo "çalıştırma: $RUN_URL"; echo "--- son satırlar ---";
                 tail -n 15 "$out/log.txt"; } > "$res/status.txt"
