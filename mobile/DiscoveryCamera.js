@@ -6,6 +6,7 @@ import {DeviceMotion} from 'expo-sensors';
 import * as Location from 'expo-location';
 import {cameraMarkers, cameraTargets, rearCameraPitch, edgeHints, edgeArrows} from './geo';
 import CameraPhotos from './CameraPhotos';
+import CameraCompass from './CameraCompass';
 
 function Control({children, onPress}) {
   return <Pressable accessibilityRole="button" onPress={onPress} style={styles.control}>
@@ -116,8 +117,9 @@ export default function DiscoveryCamera({places, trackedId, onStopTracking, onSe
       <CameraView ref={attachCamera} style={StyleSheet.absoluteFill} facing="back" onCameraReady={() => setReady(true)}
         onMountError={() => setLensError(true)}/>}
     <View style={styles.top}>
-      <Control onPress={onBack}>{t("Keşfet’e dön","Back to Explore")}</Control>
-      {heading !== null && permission?.granted && <Text style={styles.chip}>{Math.round(heading) % 360}°</Text>}
+      <View style={styles.side}><Control onPress={onBack}>{t("Keşfet’e dön","Back to Explore")}</Control></View>
+      {active && permission?.granted && !lensError && <CameraCompass heading={heading}/>}
+      <View style={styles.side}/>
     </View>
     {!permission?.granted || lensError ? <View style={styles.center}>
       <Text style={styles.title}>{t("Kamerayla keşfet","Explore with camera")}</Text>
@@ -150,9 +152,9 @@ export default function DiscoveryCamera({places, trackedId, onStopTracking, onSe
   </View>;
 }
 const styles = StyleSheet.create({
-  screen:{flex:1,backgroundColor:'#112b2c'}, top:{flexDirection:'row',alignItems:'center',justifyContent:'space-between',padding:16},
+  screen:{flex:1,backgroundColor:'#112b2c'}, top:{flexDirection:'row',alignItems:'flex-start',paddingHorizontal:12,paddingTop:6},
+  side:{flex:1,alignItems:'flex-start',paddingTop:6},
   control:{paddingVertical:12,paddingHorizontal:16,backgroundColor:'#173b39ed',borderRadius:24},
-  chip:{backgroundColor:'#173b39dd',padding:10,borderRadius:12,color:'white'},
   center:{margin:24,marginTop:'25%',gap:14}, title:{fontSize:30,color:'white',fontFamily:'serif'},
   light:{fontSize:16,color:'#faf9ef'}, bubble:{position:'absolute',backgroundColor:'#113638ed',borderWidth:1.5,borderColor:'#92e8cb',borderRadius:26,paddingVertical:9,paddingHorizontal:16},
   place:{color:'#fff9e9',fontSize:17,fontWeight:'600'}, bottom:{position:'absolute',bottom:100,left:16,right:16,gap:6,backgroundColor:'#102b2ae8',borderRadius:16,padding:15}
