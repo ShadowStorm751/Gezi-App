@@ -282,6 +282,16 @@ def fetch_osm_chunked(city: City, cache_dir: Optional[Path] = None,
     return {"elements": list(seen.values()), "chunked": True}
 
 
+def fetch_osm_pbf(out_dir: Path, city: City, pbf: Path) -> Path:
+    """Overpass yerine Geofabrik dosyasından (osm_pbf.py). Çıktı biçimi aynı."""
+    import osm_pbf
+    data = osm_pbf.fetch_from_pbf(city, pbf, out_dir / "pbf_work", log, point_in_rings, element_geometry)
+    path = out_dir / "osm_raw.json"
+    path.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+    log(f"  {len(data['elements'])} OSM öğesi -> {path}")
+    return path
+
+
 def fetch_wikidata(out_dir: Path, batch_size: int = 50) -> Path:
     osm = json.loads((out_dir / "osm_raw.json").read_text(encoding="utf-8"))
     qids = sorted({
@@ -859,6 +869,8 @@ def main(argv: Optional[List[str]] = None) -> int:
     f = sub.add_parser("fetch", help="OSM ve Wikidata verisini indir")
     f.add_argument("--budget-min", type=int, default=FETCH_BUDGET_S // 60,
                    help="Overpass denemeleri için toplam süre sınırı, dakika (parça sorguda)")
+    f.add_argument("--pbf", type=Path, default=None,
+                   help="Overpass yerine bu Geofabrik dosyasını kullan (osmium-tool gerekir)")
     f.add_argument("--cache-dir", type=Path, default=None,
                    help="parça önbelleği (varsayılan: <out>/osm_chunks); Actions results/<şehir>/raw/osm_chunks kullanır")
     sub.add_parser("candidates", help="onay için candidates.csv üret")
@@ -872,7 +884,10 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     if args.cmd == "fetch":
         log(f"Şehir: {city.names['tr']}")
-        fetch_osm(out, city, args.budget_min * 60, args.cache_dir)
+        if args.pbf:
+            fetch_osm_pbf(out, city, args.pbf)
+        else:
+            fetch_osm(out, city, args.budget_min * 60, args.cache_dir)
         fetch_wikidata(out)
         log("Tamam. Sıradaki adım: python pipeline.py candidates")
         return 0
