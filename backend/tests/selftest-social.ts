@@ -23,7 +23,8 @@ Deno.serve(async () => {
     const { data, error } = await admin.auth.admin.createUser({ email, password, email_confirm: true });
     if (error) throw new Error("createUser: " + error.message);
     ids.push(data.user.id);
-    const { data: s, error: se } = await anon.auth.signInWithPassword({ email, password });
+    const login = createClient(url, anonKey, { auth: { persistSession: false } });
+    const { data: s, error: se } = await login.auth.signInWithPassword({ email, password });
     if (se) throw new Error("signIn: " + se.message);
     const token = s.session!.access_token;
     const client = createClient(url, anonKey, {
