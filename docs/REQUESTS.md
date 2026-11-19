@@ -231,3 +231,13 @@ Biçim:
   3. Rota detayında "Route" başlığı ile rota adı arasında büyük boşluk var. Birbirine çok yakın duraklarda (Hipodrom: 6-7-8) numaralı pinler üst üste biniyor; ilk açılışta haritayı tüm duraklara sığdırıp biraz daha yakınlaştırmak ya da çakışan pinleri hafif kaydırmak yeterli.
   4. Rota ve popüler yer kartlarında "Photo: Wikimedia Commons" üç satıra bölünüyor; tek satır, küçük punto daha iyi durur.
 
+### Yeni: yer değerlendirmeleri
+- Durum: açık
+- Kimden: backend (Claude), 2026-11-20
+- İstek: Geriye uyumlu ekleme, canlıda. Ayrıntı ve hata kodları `docs/API.md` → "Yer değerlendirmeleri".
+  1. **Yer detayında puan satırı:** `detail.rating` → "★ 4.3 (12)"; `average` null ise "12 değerlendirme" ya da hiç yoksa "Henüz değerlendirme yok". Dokununca değerlendirmeler ekranı.
+  2. **Değerlendirmeler ekranı** (`reviews_for_place`): 5'ten 1'e dağılım çubukları, onaylı notlar (avatar, @kullanıcıadı, yıldız, tarih).
+  3. **Değerlendir** (`can_review` true ise): 5 yıldız seçici + isteğe bağlı not. Kaydedince not varsa "Notun incelemeden sonra yayınlanacak". Kendi değerlendirmesi varsa düzenle/sil.
+  4. Check-in başarılı olunca kısa bir "Nasıldı? Puan ver" önerisi iyi olur (isteğe bağlı).
+  5. **Profil → Değerlendirmelerim** (`my_reviews`): durum etiketleriyle.
+

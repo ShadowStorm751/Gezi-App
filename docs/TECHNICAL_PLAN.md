@@ -139,7 +139,7 @@ Seed'de 20 rozet var (6 genel, 8 tarihi, 6 doğa); türbe ile 21, 'Şehir Gönü
 
 ## Canlıdaki durum (19 Kasım 2026, akşam denetimi)
 
-- Supabase projesi `gezi-app-test` (Frankfurt). 32 migration uygulandı; depodaki `backend/supabase/migrations/` ile birebir aynı.
+- Supabase projesi `gezi-app-test` (Frankfurt). 33 migration uygulandı; depodaki `backend/supabase/migrations/` ile birebir aynı.
 - 156 İstanbul yeri (113 tarihi, 43 doğa, 15'i türbe), TR+EN açıklamalı; 151'inde fotoğraf; 27 rozet, görselleri Storage'da; 11 hazır rota.
 - `checkin` Edge Function'ı yayında; canlı test: girişsiz 401, uzak 'too_far', zayıf GPS 'low_accuracy', doğru konumda kabul + 'first-step' rozeti.
 - Arama tanınırlığa göre sıralı ve Türkçe harfe duyarsız.
@@ -155,6 +155,8 @@ Backend (Claude):
 - [x] Avatar yükleme: yalnızca kendi klasörü, 2 MB, JPEG/PNG/WebP (canlıda, test edildi)
 - [x] Kullanıcı katkısı: hata bildirimi ve yeni yer önerisi, yönetici onay akışı, 'Şehir Gönüllüsü' rozeti (canlıda, test edildi)
 - [x] Şehir listesi: `list_cities` (canlıda)
+- [x] Yer değerlendirmeleri: 1-5 yıldız + onaylı not, puan özeti place_detail'de (canlıda)
+- [x] Kişisel veri envanteri: `docs/VERI_ENVANTERI.md` (KVKK metninin kaynağı; her yeni özellikte güncellenir)
 - [x] Kullanıcı fotoğrafları: yükleme, yönetici onayı, otomatik temizlik, 'Gezi Fotoğrafçısı' rozeti (canlıda; canlı test 28/28)
 - [x] Kişisel öneriler: `recommendations` (gezilmemiş yerler, yarım kalan rotalar, bitmek üzere rozetler; canlıda)
 - [x] Arkadaşlar ve sıralama: istek/kabul, kullanıcı arama, haftalık/aylık/yıllık sıralama, 'Gezi Arkadaşı' ve 'Gezi Ekibi' rozetleri (canlıda)
@@ -173,18 +175,19 @@ Mobil (ChatGPT):
 - [ ] Arkadaşlar ve sıralama ekranları (`docs/REQUESTS.md`)
 - [ ] "Sana önerilenler" bölümü (`docs/REQUESTS.md`)
 - [ ] Fotoğraf ekleme ve "Fotoğraflarım" ekranları (`docs/REQUESTS.md`)
+- [ ] Yer puanı, değerlendirmeler ve "Değerlendir" ekranları (`docs/REQUESTS.md`)
 - [ ] Hesap silme, avatar, "Bir sorun mu var?", "Yer öner" ve "Katkılarım" ekranları (`docs/REQUESTS.md`)
 - [x] Haritada "© OpenStreetMap katkıcıları" atfı (ODbL lisans şartı; `docs/REQUESTS.md`)
 
 Proje sahibi:
 - [ ] Apple Developer hesabı ve Google Cloud ayarı (Apple/Google ile giriş, mağaza yayını)
-- [ ] KVKK aydınlatma metni ve gizlilik politikası (taslağı Claude yazabilir; hukukçu onayı gerekir)
+- [ ] KVKK aydınlatma metni ve gizlilik politikası (özellikler bitince; kaynak `docs/VERI_ENVANTERI.md`; hukukçu onayı gerekir)
 - [ ] Yeni şehir aday listelerinin onayı
 - [x] 'Şehir Gönüllüsü' (city-helper) rozet görseli
 - [x] 'Rotacı' (route-first) ve 'Rota Ustası' (route-master) rozet görselleri
 - [x] 'Gezi Arkadaşı' (first-friend) ve 'Gezi Ekibi' (travel-crew) rozet görselleri
 - [x] 'Gezi Fotoğrafçısı' (photographer) rozet görseli
-- [ ] Yönetici için fotoğraf onay ekranı (şimdilik Supabase SQL editöründen `admin_photo_submissions` / `admin_resolve_photo`)
+- [ ] Yönetici için onay ekranı: fotoğraflar, değerlendirme notları, yer bildirimleri (şimdilik Supabase SQL editöründen)
 - [ ] Canlı (production) projede `app_settings.storage_public_base` değerini yeni proje adresiyle güncellemek
 
 ## Açık konular

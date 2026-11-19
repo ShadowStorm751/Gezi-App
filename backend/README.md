@@ -36,7 +36,8 @@ backend/supabase/
 │   ├── 20261119320000_recommendations.sql    kişisel öneriler (recommendations)
 │   ├── 20261119330000_user_photos.sql        kullanıcı fotoğrafları, onay, 'Gezi Fotoğrafçısı' rozeti
 │   ├── 20261120010000_photographer_badge_path.sql rozet görsel yolu
-│   └── 20261120020000_period_labels_route_covers.sql dönem adı dile göre, rota kapağı en tanınmış duraktan
+│   ├── 20261120020000_period_labels_route_covers.sql dönem adı dile göre, rota kapağı en tanınmış duraktan
+│   └── 20261120030000_place_reviews.sql       yer değerlendirmeleri (yıldız + onaylı not)
 ├── functions/badge-upload/              rozet görsellerini Storage'a yükler (.github/workflows/badges.yml)
 ├── functions/checkin/
 │   ├── index.ts                      Edge Function
@@ -114,11 +115,19 @@ select admin_resolve_submission('<id>', false, 'Zaten listede');         -- ret
 
 Kabul edilen yeni yer `is_published = false` ile eklenir; TR/EN kısa açıklaması yazılıp yayına alınınca uygulamada görünür.
 
-Güvenlik denetçisi `report_place`, `suggest_place`, `admin_submissions`, `admin_resolve_submission` fotoğraf fonksiyonları (`submit_place_photo`, `delete_my_photo`, `admin_photo_submissions`, `admin_resolve_photo`) ve arkadaşlık fonksiyonları (`search_users`, `send_friend_request`, `respond_friend_request`, `remove_friend`, `my_friends`, `friends_leaderboard`) için "SECURITY DEFINER" uyarısı verir: bilinçli. Kullanıcılar tabloya doğrudan yazamaz, yalnızca bu fonksiyonlarla (sınırlar ve doğrulamayla) yazar; yönetici fonksiyonları içeride yetki kontrolü yapar (canlı testte doğrulandı).
+Güvenlik denetçisi `report_place`, `suggest_place`, `admin_submissions`, `admin_resolve_submission` değerlendirme fonksiyonları (`review_place`, `delete_my_review`, `reviews_for_place`, `place_rating`, `admin_review_comments`, `admin_resolve_review`), fotoğraf fonksiyonları (`submit_place_photo`, `delete_my_photo`, `admin_photo_submissions`, `admin_resolve_photo`) ve arkadaşlık fonksiyonları (`search_users`, `send_friend_request`, `respond_friend_request`, `remove_friend`, `my_friends`, `friends_leaderboard`) için "SECURITY DEFINER" uyarısı verir: bilinçli. Kullanıcılar tabloya doğrudan yazamaz, yalnızca bu fonksiyonlarla (sınırlar ve doğrulamayla) yazar; yönetici fonksiyonları içeride yetki kontrolü yapar (canlı testte doğrulandı).
 
 ## Yeni rozet eklemek
 
 Kod değişikliği gerekmez. Admin olarak `achievements` tablosuna kural JSON'u ile satır, `achievement_translations` tablosuna TR ve EN ad ekle. Kural türleri: [`../docs/TECHNICAL_PLAN.md`](../docs/TECHNICAL_PLAN.md#rozet-kuralları).
+
+## Değerlendirme notlarını onaylama (yönetici)
+
+```sql
+select public.admin_review_comments('pending');               -- bekleyen notlar
+select public.admin_resolve_review('<id>', true);             -- yayınla
+select public.admin_resolve_review('<id>', false, 'hakaret'); -- reddet (puan kalır, not görünmez)
+```
 
 ## Kullanıcı fotoğraflarını onaylama (yönetici)
 

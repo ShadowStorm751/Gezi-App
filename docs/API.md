@@ -297,6 +297,7 @@ await supabase.rpc("export_my_data"); // KVKK: kullanıcının tüm verisi tek J
 // visits[].place yayından kalkmış bir yer için null olabilir (place_id yine dolu).
 // friendships: [{ username, direction: "sent"|"received", status, created_at, responded_at }]
 // photos: [{ place, storage_path, caption, status, created_at, resolved_at }]
+// reviews: [{ place, rating, comment, comment_status, created_at, updated_at }]
 ```
 
 Profil yalnızca `update_profile` ile değiştirilmeli. `profiles` tablosuna doğrudan yazma
@@ -394,6 +395,42 @@ Kabul edilen ilk katkıda `city-helper` ("Şehir Gönüllüsü") rozeti verilir;
 `admin_submissions` ve `admin_resolve_submission` yalnızca yönetici içindir; mobil uygulama bunları çağırmaz.
 
 ---
+
+## Yer değerlendirmeleri
+
+Kullanıcı **gezdiği** yere 1-5 yıldız ve isteğe bağlı kısa not (en fazla 300 harf) bırakır. Kişi başı yer başına tek değerlendirme; tekrar göndermek günceller.
+Puan hemen ortalamaya katılır. **Not, yönetici onaylayana kadar yalnızca yazana görünür.** Ortalama en az 3 değerlendirme olunca döner.
+
+```ts
+// Yer detayında özet (place_detail içinde, ek çağrı gerekmez)
+detail.rating  // { count: 12, average: 4.3 }   count < 3 ise average: null
+
+// Değerlendirmeler ekranı (girişsiz de çalışır)
+await supabase.rpc("reviews_for_place", { place_id, lang: "tr", max_results: 20 });
+// -> { ok, rating: { count, average }, distribution: { "1": 0, ..., "5": 7 },
+//      can_review,            // giriş yapmış ve burayı gezmiş mi
+//      my_review,             // { rating, comment, comment_status, admin_note, updated_at } | null
+//      reviews: [{ username, avatar_path, rating, comment, lang, updated_at, is_me }] }  // yalnızca onaylı notlar, önce aynı dildekiler
+
+// Değerlendir / güncelle (giriş gerekli)
+await supabase.rpc("review_place", { place_id, rating: 5, comment: "İsteğe bağlı", lang: "tr" });
+// -> { ok, comment_status: "none" | "pending" | "approved", rating: { count, average } }
+
+await supabase.rpc("delete_my_review", { place_id });
+await supabase.rpc("my_reviews", { lang: "tr" });  // Profil -> Değerlendirmelerim
+```
+
+- `comment_status`: `none` (not yok), `pending` ("Notun inceleniyor"), `approved` (herkese görünür), `rejected` (`admin_note` nedeni). Notu değiştirmek yeniden incelemeye gönderir; yalnızca yıldızı değiştirmek onayı bozmaz.
+- "Değerlendir" düğmesini `can_review` true iken gösterin; değilse "Değerlendirmek için önce burayı gez".
+
+| `error` | Anlamı | Önerilen mesaj (TR) |
+| --- | --- | --- |
+| `not_authenticated` | Oturum yok | "Değerlendirmek için giriş yap." |
+| `invalid_input` | Puan 1-5 değil ya da not 300 harften uzun | – |
+| `place_not_found` | Yer yok | – |
+| `not_visited` | Kullanıcı burayı gezmemiş | "Değerlendirmek için önce burayı gezmelisin." |
+| `rate_limited` | Son 24 saatte 30 yeni değerlendirme | "Bugünlük yeterince değerlendirme yaptın." |
+| `review_not_found` | Silinecek değerlendirme yok | – |
 
 ## Kullanıcı fotoğrafları (giriş gerekli)
 
