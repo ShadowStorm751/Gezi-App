@@ -1,0 +1,173 @@
+{
+  "no_token": {
+    "status": 401,
+    "body": {
+      "ok": false,
+      "error": "not_authenticated"
+    }
+  },
+  "bad_input": {
+    "status": 400,
+    "body": {
+      "ok": false,
+      "error": "invalid_input"
+    }
+  },
+  "too_far": {
+    "status": 200,
+    "body": {
+      "ok": false,
+      "error": "too_far",
+      "distance_m": 1545,
+      "allowed_m": 70
+    }
+  },
+  "low_accuracy": {
+    "status": 200,
+    "body": {
+      "ok": false,
+      "error": "low_accuracy",
+      "accuracy_m": 80,
+      "max_accuracy_m": 50
+    }
+  },
+  "success": {
+    "status": 200,
+    "body": {
+      "ok": true,
+      "visit_id": "6532dce2-aab1-43f6-bbc6-e8a0b6d591b2",
+      "flagged": false,
+      "distance_m": 6,
+      "new_achievements": [
+        {
+          "slug": "first-step",
+          "name": "İlk Adım",
+          "description": "İlk yerini gez.",
+          "badge_path": "first-step.webp"
+        }
+      ],
+      "city_progress": {
+        "city": "istanbul",
+        "total": 156,
+        "by_kind": {
+          "nature": {
+            "total": 43,
+            "visited": 0
+          },
+          "historical": {
+            "total": 113,
+            "visited": 1
+          }
+        },
+        "visited": 1,
+        "by_category": [
+          {
+            "total": 2,
+            "visited": 0,
+            "category": "archaeological_site"
+          },
+          {
+            "total": 4,
+            "visited": 0,
+            "category": "beach"
+          },
+          {
+            "total": 9,
+            "visited": 0,
+            "category": "church"
+          },
+          {
+            "total": 3,
+            "visited": 0,
+            "category": "cistern"
+          },
+          {
+            "total": 9,
+            "visited": 0,
+            "category": "forest"
+          },
+          {
+            "total": 5,
+            "visited": 0,
+            "category": "fortress"
+          },
+          {
+            "total": 3,
+            "visited": 0,
+            "category": "hill"
+          },
+          {
+            "total": 6,
+            "visited": 0,
+            "category": "island"
+          },
+          {
+            "total": 16,
+            "visited": 0,
+            "category": "monument"
+          },
+          {
+            "total": 27,
+            "visited": 0,
+            "category": "mosque"
+          },
+          {
+            "total": 19,
+            "visited": 0,
+            "category": "museum"
+          },
+          {
+            "total": 12,
+            "visited": 0,
+            "category": "palace"
+          },
+          {
+            "total": 14,
+            "visited": 0,
+            "category": "park"
+          },
+          {
+            "total": 3,
+            "visited": 0,
+            "category": "synagogue"
+          },
+          {
+            "total": 15,
+            "visited": 0,
+            "category": "tomb"
+          },
+          {
+            "total": 2,
+            "visited": 1,
+            "category": "tower"
+          },
+          {
+            "total": 6,
+            "visited": 0,
+            "category": "viewpoint"
+          },
+          {
+            "total": 1,
+            "visited": 0,
+            "category": "waterfall"
+          }
+        ]
+      }
+    }
+  },
+  "again": {
+    "status": 200,
+    "body": {
+      "ok": false,
+      "error": "already_visited"
+    }
+  },
+  "earned": [
+    "first-step"
+  ],
+  "my_visits": [
+    "galata-kulesi"
+  ],
+  "cleanup": "deleted",
+  "leftover_visits": 0
+}
