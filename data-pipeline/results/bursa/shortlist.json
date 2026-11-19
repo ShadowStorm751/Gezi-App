@@ -1,0 +1,4022 @@
+[
+ {
+  "enlem": "40.183904",
+  "boylam": "29.061796",
+  "wikidata": "Q32339",
+  "osm": "way/26434413",
+  "yapim_yili": "1396",
+  "donem": "Osmanlı",
+  "wikidata_ipucu_tr": "Bursa'da bir cami",
+  "wikidata_ipucu_en": "mosque in Bursa, northwestern Turkey",
+  "wikipedia_tr": "Bursa Ulu Camii",
+  "wikipedia_en": "Grand Mosque of Bursa",
+  "fotograf": "71 Bursa la Grande Moschea (Edited).jpg",
+  "puan": "68",
+  "slug": "bursa-ulu-camii",
+  "slug_override": "bursa-ulu-camii",
+  "ad_tr": "Bursa Ulu Camii",
+  "ad_en": "Bursa Grand Mosque",
+  "kategori": "mosque",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.429155",
+  "boylam": "29.720271",
+  "wikidata": "Q4430013",
+  "osm": "way/192225327",
+  "yapim_yili": "600",
+  "donem": "Bizans",
+  "wikidata_ipucu_tr": "Bursa'nın İznik ilçesinde camiye çevrilmiş kilise",
+  "wikidata_ipucu_en": "Byzantine-era church in İznik, Turkey",
+  "wikipedia_tr": "Ayasofya (İznik)",
+  "wikipedia_en": "Hagia Sophia, İznik",
+  "fotograf": "Iznik, aya sofia, esterno 01.jpg",
+  "puan": "56",
+  "slug": "ayasofya-camii-iznik",
+  "slug_override": "ayasofya-camii-iznik",
+  "ad_tr": "Ayasofya Camii, İznik",
+  "ad_en": "Hagia Sophia, Iznik",
+  "kategori": "mosque",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "II. İznik Konsili burada toplandı",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.181148",
+  "boylam": "29.081002",
+  "wikidata": "Q1207606",
+  "osm": "way/254312132",
+  "yapim_yili": "1868",
+  "donem": "Osmanlı",
+  "wikidata_ipucu_tr": "Bursa'nın Yıldırım ilçesinde tarihi müze",
+  "wikidata_ipucu_en": "mosque in Bursa, northwestern Turkey",
+  "wikipedia_tr": "Emir Sultan Camii",
+  "wikipedia_en": "Emir Sultan Mosque",
+  "fotograf": "Emir Sultan Camii 7067.jpg",
+  "puan": "55",
+  "slug": "emir-sultan-camii",
+  "slug_override": "emir-sultan-camii",
+  "ad_tr": "Emir Sultan Camii",
+  "ad_en": "Emir Sultan Mosque",
+  "kategori": "mosque",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.183897",
+  "boylam": "29.064086",
+  "wikidata": "Q6038154",
+  "osm": "way/255187109",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "Bursa, Türkiye'de bir cami",
+  "wikidata_ipucu_en": "mosque in Bursa, northwestern Turkey",
+  "wikipedia_tr": "Orhan Gazi Camii (Bursa)",
+  "wikipedia_en": "Orhan Gazi Mosque",
+  "fotograf": "Bursa Orhan Gazi Mosque.jpg",
+  "puan": "54",
+  "slug": "orhan-gazi-camii",
+  "slug_override": "orhan-gazi-camii",
+  "ad_tr": "Orhan Gazi Camii",
+  "ad_en": "Orhan Gazi Mosque",
+  "kategori": "mosque",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.429734",
+  "boylam": "29.726886",
+  "wikidata": "Q8053361",
+  "osm": "way/310108583",
+  "yapim_yili": "1378",
+  "donem": "Osmanlı",
+  "wikidata_ipucu_tr": "Bursa'nın İznik ilçesinde cami",
+  "wikidata_ipucu_en": "mosque in Bursa, northwestern Turkey",
+  "wikipedia_tr": "Yeşil Cami (İznik)",
+  "wikipedia_en": "Green Mosque, İznik",
+  "fotograf": "İznik Yeşil Cami.JPG",
+  "puan": "51",
+  "slug": "iznik-yesil-cami",
+  "slug_override": "iznik-yesil-cami",
+  "ad_tr": "İznik Yeşil Cami",
+  "ad_en": "Yeşil Mosque Iznik",
+  "kategori": "mosque",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.393031",
+  "boylam": "28.79688",
+  "wikidata": "Q5437791",
+  "osm": "way/342544743",
+  "yapim_yili": "701",
+  "donem": "Bizans",
+  "wikidata_ipucu_tr": "Mudanya'da cami",
+  "wikidata_ipucu_en": "mosque and former Byzantine church",
+  "wikipedia_tr": "Fatih Camii (Tirilye)",
+  "wikipedia_en": "Fatih Mosque, Tirilye",
+  "fotograf": "Fatih Cami.JPG",
+  "puan": "46",
+  "slug": "fatih-camii-tirilye",
+  "slug_override": "fatih-camii-tirilye",
+  "ad_tr": "Fatih Camii, Tirilye",
+  "ad_en": "Fatih Mosque",
+  "kategori": "mosque",
+  "aile": "historical",
+  "ana_yer": "tirilye",
+  "not": "Tirilye; eski Hagios Stephanos Kilisesi",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.185031",
+  "boylam": "29.056449",
+  "wikidata": "Q21848538",
+  "osm": "way/407491078",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "Erken dönem Osmanlı camisi",
+  "wikidata_ipucu_en": "Mosque located in Bursa, Turkey",
+  "wikipedia_tr": "Veled-i Yaniç Camii",
+  "wikipedia_en": "Veled-i Yaniç Mosque",
+  "fotograf": "Veledi yaniç kubbe 2.JPG",
+  "puan": "44",
+  "slug": "veled-i-yanic-cami",
+  "slug_override": "veled-i-yanic-cami",
+  "ad_tr": "Veled-i Yaniç Cami",
+  "ad_en": "Veled-i Yaniç Mosque",
+  "kategori": "mosque",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "Bizans kilisesinden dönme",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.187419",
+  "boylam": "29.082436",
+  "wikidata": "Q128256",
+  "osm": "way/247424180",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "Bursa'nın Yıldırım ilçesinde tarihi cami",
+  "wikidata_ipucu_en": "mosque in Bursa, northwestern Turkey",
+  "wikipedia_tr": "",
+  "wikipedia_en": "Bayezid I Mosque",
+  "fotograf": "YILDIRIM,BEYAZIT,KÜLLİYESİ,BURSA - panoramio (6).jpg",
+  "puan": "37",
+  "slug": "yildirim-camii",
+  "slug_override": "yildirim-camii",
+  "ad_tr": "Yıldırım Camii",
+  "ad_en": "Bayezid I Mosque",
+  "kategori": "mosque",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.190977",
+  "boylam": "29.046526",
+  "wikidata": "Q65219967",
+  "osm": "way/397551853",
+  "yapim_yili": "1447",
+  "donem": "Osmanlı",
+  "wikidata_ipucu_tr": "Osmangazi'de cami",
+  "wikidata_ipucu_en": "mosque in Bursa, northwestern Turkey",
+  "wikipedia_tr": "Muradiye Camii (Bursa)",
+  "wikipedia_en": "",
+  "fotograf": "Bursa Muradiye Mosque Exterior 8037.jpg",
+  "puan": "24",
+  "slug": "bursa-muradiye-camii",
+  "slug_override": "bursa-muradiye-camii",
+  "ad_tr": "Muradiye Külliyesi",
+  "ad_en": "Muradiye Complex",
+  "kategori": "mosque",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "Muradiye Külliyesi; şehzade türbeleri aynı bahçede",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.181500",
+  "boylam": "29.073500",
+  "wikidata": "",
+  "osm": "",
+  "arama_adi": "Yeşil Camii",
+  "konum_yaklasik": true,
+  "slug": "yesil-camii",
+  "slug_override": "yesil-camii",
+  "ad_tr": "Yeşil Camii",
+  "ad_en": "Green Mosque",
+  "kategori": "mosque",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "Aday listesinde yoktu (OSM kaydında wikidata yok); Claude ekledi",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.165412",
+  "boylam": "28.677684",
+  "wikidata": "Q133803234",
+  "osm": "way/384327471",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "Nilüfer'de cami",
+  "wikidata_ipucu_en": "mosque in Nilüfer District",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "20251025 Gölyazı Eski Cami.jpg",
+  "puan": "12",
+  "slug": "eski-camii-golyazi",
+  "slug_override": "eski-camii-golyazi",
+  "ad_tr": "Eski Camii (Gölyazı)",
+  "ad_en": "Old Mosque (Gölyazı)",
+  "kategori": "mosque",
+  "aile": "historical",
+  "ana_yer": "golyazi-adasi",
+  "not": "Gölyazı",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.393299",
+  "boylam": "28.795044",
+  "wikidata": "Q16931903",
+  "osm": "way/1320463236",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "Tirilye de bulunan bir kilise",
+  "wikidata_ipucu_en": "church building in Tirilye, Turkey",
+  "wikipedia_tr": "Kemerli Kilise (Tirilye)",
+  "wikipedia_en": "Panagia Pantobasilissa Church, Tirilye",
+  "fotograf": "Tirilye (Zeytinbağı) ,Bursa-Manastır.. - panoramio.jpg",
+  "puan": "39",
+  "slug": "kemerli-kilise-tirilye",
+  "slug_override": "kemerli-kilise-tirilye",
+  "ad_tr": "Kemerli Kilise (Tirilye)",
+  "ad_en": "Panagia Pantobasilissa Church",
+  "kategori": "church",
+  "aile": "historical",
+  "ana_yer": "tirilye",
+  "not": "Tirilye",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.170278",
+  "boylam": "28.680504",
+  "wikidata": "Q136645532",
+  "osm": "way/381003504",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "Nilüfer'de kilise",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "Aziz Panteleimon Kilisesi 02.jpg",
+  "puan": "9",
+  "slug": "aziz-panteleimon-kilisesi",
+  "slug_override": "aziz-panteleimon-kilisesi",
+  "ad_tr": "Aziz Panteleimon Kilisesi",
+  "ad_en": "St. Panteleimon Church",
+  "kategori": "church",
+  "aile": "historical",
+  "ana_yer": "golyazi-adasi",
+  "not": "Gölyazı",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.188641",
+  "boylam": "29.055159",
+  "wikidata": "",
+  "osm": "way/483990654",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "0",
+  "slug": "mayor-sinagogu",
+  "slug_override": "mayor-sinagogu",
+  "ad_tr": "Mayor Sinagogu",
+  "ad_en": "Mayor Synagogue",
+  "kategori": "synagogue",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "Bursa'da kalan tek açık sinagog; İngilizce adı: 'Mayor Synagogue'",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.195895",
+  "boylam": "29.041197",
+  "wikidata": "Q6082814",
+  "osm": "node/2794515664;way/1167096746",
+  "yapim_yili": "1902",
+  "donem": "Osmanlı",
+  "wikidata_ipucu_tr": "Bitinya ve Misya bölgelerinde bulunmuş MÖ 3000’den Bizans devri sonlarına kadar olan devirlere ait eserlerin sergilendiği Bursa müzesi",
+  "wikidata_ipucu_en": "archaeology museum in Çekirge, Bursa",
+  "wikipedia_tr": "Bursa Arkeoloji Müzesi",
+  "wikipedia_en": "Bursa Archaeological Museum",
+  "fotograf": "Bursa Arkeoloji Müzesi (3).jpg",
+  "puan": "50",
+  "slug": "bursa-arkeoloji-muzesi",
+  "slug_override": "bursa-arkeoloji-muzesi",
+  "ad_tr": "Bursa Arkeoloji Müzesi",
+  "ad_en": "Bursa Archaeological Museum",
+  "kategori": "museum",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.195127",
+  "boylam": "29.039873",
+  "wikidata": "Q38251727",
+  "osm": "node/2794515662",
+  "yapim_yili": "1973",
+  "donem": "Cumhuriyet",
+  "wikidata_ipucu_tr": "Osmangazi'de müze",
+  "wikidata_ipucu_en": "historic house museum in Osmangazi, Bursa Turkey",
+  "wikipedia_tr": "Bursa Atatürk Müzesi",
+  "wikipedia_en": "Bursa Atatürk Museum",
+  "fotograf": "Bursa Atatürk Müzesi.JPG",
+  "puan": "48",
+  "slug": "bursa-ataturk-muzesi",
+  "slug_override": "bursa-ataturk-muzesi",
+  "ad_tr": "Bursa Atatürk Müzesi",
+  "ad_en": "Bursa Atatürk Museum",
+  "kategori": "museum",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.379715",
+  "boylam": "28.881735",
+  "wikidata": "Q6042901",
+  "osm": "way/463271712",
+  "yapim_yili": "1937",
+  "donem": "Cumhuriyet",
+  "wikidata_ipucu_tr": "Mudanya'da konut",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "Mudanya Mütareke Evi",
+  "wikipedia_en": "Mudanya Armistice House",
+  "fotograf": "MudanyaMütareke2016.jpg",
+  "puan": "46",
+  "slug": "mudanya-mutareke-evi",
+  "slug_override": "mudanya-mutareke-evi",
+  "ad_tr": "Mudanya Mütareke Evi",
+  "ad_en": "Mudanya Armistice House",
+  "kategori": "museum",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.42408",
+  "boylam": "29.720685",
+  "wikidata": "Q122731621",
+  "osm": "way/1271253817",
+  "yapim_yili": "2023",
+  "donem": "Cumhuriyet",
+  "wikidata_ipucu_tr": "İznik'te müze",
+  "wikidata_ipucu_en": "museum in İznik District",
+  "wikipedia_tr": "İznik Müzesi",
+  "wikipedia_en": "",
+  "fotograf": "İznik Müzesi 20231030.jpg",
+  "puan": "29",
+  "slug": "iznik-muzesi",
+  "slug_override": "iznik-muzesi",
+  "ad_tr": "İznik Müzesi",
+  "ad_en": "İznik Museum",
+  "kategori": "museum",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "Nilüfer Hatun İmareti",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.182387",
+  "boylam": "29.066437",
+  "wikidata": "Q6040943",
+  "osm": "node/1786760093",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "Osmangazi'de müze",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "Bursa Kent Müzesi",
+  "wikipedia_en": "",
+  "fotograf": "ESKİ ADLİYE -ŞEHİR MUZESİ - panoramio.jpg",
+  "puan": "28",
+  "slug": "bursa-kent-muzesi",
+  "slug_override": "bursa-kent-muzesi",
+  "ad_tr": "Bursa Kent Müzesi",
+  "ad_en": "Bursa City Museum",
+  "kategori": "museum",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.191853",
+  "boylam": "29.045857",
+  "wikidata": "Q6023010",
+  "osm": "node/2794629724",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "Osmangazi'de müze",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "Uluumay Osmanlı Halk Kıyafetleri ve Takıları Müzesi",
+  "wikipedia_en": "",
+  "fotograf": "Bursa Ulumay museum 2006 0034.jpg",
+  "puan": "28",
+  "slug": "uluumay-osmanli-halk-kiyafetleri-ve-takilari-muzesi",
+  "slug_override": "uluumay-osmanli-halk-kiyafetleri-ve-takilari-muzesi",
+  "ad_tr": "Uluumay Osmanlı Halk Kıyafetleri ve Takıları Müzesi",
+  "ad_en": "Ulumay Museum of Ottoman Folk Costumes & Jewellery",
+  "kategori": "museum",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.186314",
+  "boylam": "29.075008",
+  "wikidata": "Q85973875",
+  "osm": "way/1148944018",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "Osmangazi'de müze",
+  "wikidata_ipucu_en": "museum in Osmangazi District",
+  "wikipedia_tr": "Panorama 1326 Bursa Fetih Müzesi",
+  "wikipedia_en": "",
+  "fotograf": "Bursa Panorama 1326 Bursa Conquest Museum 2018 0039.jpg",
+  "puan": "25",
+  "slug": "panorama-1326-bursa-fetih-muzesi",
+  "slug_override": "panorama-1326-bursa-fetih-muzesi",
+  "ad_tr": "Panorama 1326 Bursa Fetih Müzesi",
+  "ad_en": "Panorama 1326 Conquest Museum",
+  "kategori": "museum",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "İngilizce adı: 'Panorama 1326 Conquest Museum'",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.199686",
+  "boylam": "29.051572",
+  "wikidata": "",
+  "osm": "node/1786721373",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "8",
+  "slug": "merinos-tekstil-sanayi-muzesi",
+  "slug_override": "merinos-tekstil-sanayi-muzesi",
+  "ad_tr": "Merinos Tekstil Sanayi Müzesi",
+  "ad_en": "Merinos Textile Industry Museum",
+  "kategori": "museum",
+  "aile": "historical",
+  "ana_yer": "merinos-parki",
+  "not": "Merinos Parkı içinde",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.176509",
+  "boylam": "29.071029",
+  "wikidata": "",
+  "osm": "node/6593241586",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "8",
+  "slug": "tofas-anadolu-araclari-muzesi",
+  "slug_override": "tofas-anadolu-araclari-muzesi",
+  "ad_tr": "Tofas Anadolu Araclari Muzesi",
+  "ad_en": "Tofas Anatolian Car Museum",
+  "kategori": "museum",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.191402",
+  "boylam": "29.045744",
+  "wikidata": "",
+  "osm": "node/12875025174",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "5",
+  "slug": "17-yuzyil-osmanli-evi-muzesi",
+  "slug_override": "17-yuzyil-osmanli-evi-muzesi",
+  "ad_tr": "17. Yüzyıl Osmanlı Evi Müzesi",
+  "ad_en": "17th-Century Ottoman House Museum",
+  "kategori": "museum",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "Muradiye",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.175076",
+  "boylam": "29.171915",
+  "wikidata": "",
+  "osm": "way/1187304357",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "5",
+  "slug": "cumalikizik-etnografya-muzesi",
+  "slug_override": "cumalikizik-etnografya-muzesi",
+  "ad_tr": "Cumalıkızık Etnografya Müzesi",
+  "ad_en": "Cumalıkızık Ethnography Museum",
+  "kategori": "museum",
+  "aile": "historical",
+  "ana_yer": "cumalikizik",
+  "not": "Cumalıkızık köyü",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.201783",
+  "boylam": "29.027399",
+  "wikidata": "",
+  "osm": "node/12875025172;way/1474342904",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "5",
+  "slug": "karagoz-muzesi",
+  "slug_override": "karagoz-muzesi",
+  "ad_tr": "Karagöz Müzesi",
+  "ad_en": "Karagöz Museum",
+  "kategori": "museum",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.201094",
+  "boylam": "29.050599",
+  "wikidata": "",
+  "osm": "way/530848643",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "8",
+  "slug": "merinos-enerji-muzesi",
+  "slug_override": "merinos-enerji-muzesi",
+  "ad_tr": "Merinos Enerji Müzesi",
+  "ad_en": "Merinos Energy Museum",
+  "kategori": "museum",
+  "aile": "historical",
+  "ana_yer": "merinos-parki",
+  "not": "Merinos Parkı içinde",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.435700",
+  "boylam": "29.720800",
+  "wikidata": "",
+  "osm": "",
+  "arama_adi": "İznik surları",
+  "konum_yaklasik": true,
+  "slug": "iznik-surlari",
+  "slug_override": "iznik-surlari",
+  "ad_tr": "İznik Surları",
+  "ad_en": "Walls of Nicaea",
+  "kategori": "fortress",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "İstanbul Kapı, Lefke Kapı; Claude ekledi",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.187850",
+  "boylam": "29.057470",
+  "wikidata": "",
+  "osm": "node/1786762169",
+  "arama_adi": "Tophane Saat Kulesi",
+  "konum_yaklasik": false,
+  "slug": "tophane-saat-kulesi",
+  "slug_override": "tophane-saat-kulesi",
+  "ad_tr": "Tophane Saat Kulesi",
+  "ad_en": "Tophane Clock Tower",
+  "kategori": "tower",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "Claude ekledi; OSM'de 'Tophane' adıyla seyir noktası",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.184379",
+  "boylam": "29.063538",
+  "wikidata": "Q6055245",
+  "osm": "relation/1018973",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "Bursa'nın Osmangazi ilçesinde tarihi yapı",
+  "wikidata_ipucu_en": "caravanserai in Bursa, Turkey",
+  "wikipedia_tr": "Koza Han",
+  "wikipedia_en": "Koza Han",
+  "fotograf": "Kozahan -silk bazaar-Main gate - panoramio.jpg",
+  "puan": "44",
+  "slug": "koza-hani",
+  "slug_override": "koza-hani",
+  "ad_tr": "Koza Hanı",
+  "ad_en": "Koza Han",
+  "kategori": "monument",
+  "aile": "historical",
+  "ana_yer": "bursa-kapalicarsi",
+  "not": "",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.182595",
+  "boylam": "29.066882",
+  "wikidata": "Q61072912",
+  "osm": "node/1786760959",
+  "yapim_yili": "1931",
+  "donem": "Cumhuriyet",
+  "wikidata_ipucu_tr": "Osmangazi'de anıt",
+  "wikidata_ipucu_en": "equestrian monument in Turkey",
+  "wikipedia_tr": "Bursa Atatürk Heykeli",
+  "wikipedia_en": "",
+  "fotograf": "ATATÜRK ANITI - panoramio.jpg",
+  "puan": "23",
+  "slug": "bursa-ataturk-aniti",
+  "slug_override": "bursa-ataturk-aniti",
+  "ad_tr": "Bursa Atatürk Anıtı",
+  "ad_en": "Ataturk statue, Bursa",
+  "kategori": "monument",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "Heykel meydanı",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.487571",
+  "boylam": "29.701932",
+  "wikidata": "Q21524994",
+  "osm": "node/3775569054",
+  "yapim_yili": "100",
+  "donem": "Antik",
+  "wikidata_ipucu_tr": "Bursa'nın İznik ilçesine yer alan bir dikilitaş",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "Dikilitaş (İznik)",
+  "wikipedia_en": "",
+  "fotograf": "Iznik Obelisk 01.jpg",
+  "puan": "23",
+  "slug": "dikilitas",
+  "slug_override": "dikilitas",
+  "ad_tr": "Dikilitaş",
+  "ad_en": "Obelisk of Gaius Cassius Philiscus",
+  "kategori": "monument",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "İznik; Beştaş Anıtı",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.184506",
+  "boylam": "29.062328",
+  "wikidata": "",
+  "osm": "relation/3392362",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "0",
+  "slug": "emir-han",
+  "slug_override": "emir-han",
+  "ad_tr": "Emir Han",
+  "ad_en": "Emir Han",
+  "kategori": "monument",
+  "aile": "historical",
+  "ana_yer": "bursa-kapalicarsi",
+  "not": "Ulu Cami'nin yanında",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.184000",
+  "boylam": "29.064000",
+  "wikidata": "",
+  "osm": "",
+  "arama_adi": "Bursa Kapalıçarşı",
+  "konum_yaklasik": true,
+  "slug": "bursa-kapalicarsi",
+  "slug_override": "bursa-kapalicarsi",
+  "ad_tr": "Bursa Kapalıçarşı ve Bedesten",
+  "ad_en": "Bursa Grand Bazaar",
+  "kategori": "monument",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "Aday listesinde yoktu; Claude ekledi",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.183800",
+  "boylam": "29.071000",
+  "wikidata": "",
+  "osm": "",
+  "arama_adi": "Irgandı Köprüsü",
+  "konum_yaklasik": true,
+  "slug": "irgandi-koprusu",
+  "slug_override": "irgandi-koprusu",
+  "ad_tr": "Irgandı Köprüsü",
+  "ad_en": "Irgandı Bridge",
+  "kategori": "monument",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "Üstünde çarşı olan köprü; Claude ekledi",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.184477",
+  "boylam": "29.065732",
+  "wikidata": "Q132752814",
+  "osm": "relation/17033935",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "Osmangazi merkezde kervansaray",
+  "wikidata_ipucu_en": "caravanserai in Osmangazi District",
+  "wikipedia_tr": "Tuz Han",
+  "wikipedia_en": "",
+  "fotograf": "Tuz Han.jpg",
+  "puan": "23",
+  "slug": "tuz-han-bursa",
+  "slug_override": "tuz-han-bursa",
+  "ad_tr": "Tuz Han, Bursa",
+  "ad_en": "Tuz Hanı",
+  "kategori": "monument",
+  "aile": "historical",
+  "ana_yer": "bursa-kapalicarsi",
+  "not": "",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.185147",
+  "boylam": "29.062999",
+  "wikidata": "",
+  "osm": "relation/3417195",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "0",
+  "slug": "geyve-han",
+  "slug_override": "geyve-han",
+  "ad_tr": "Geyve Han",
+  "ad_en": "Geyve Han",
+  "kategori": "monument",
+  "aile": "historical",
+  "ana_yer": "bursa-kapalicarsi",
+  "not": "",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.425818",
+  "boylam": "29.710483",
+  "wikidata": "Q133331",
+  "osm": "node/13388465316",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "325'te gerçekleştirilen ekümenik konsil",
+  "wikidata_ipucu_en": "council of Christian bishops in Nicaea, 325",
+  "wikipedia_tr": "Birinci İznik Konsili",
+  "wikipedia_en": "First Council of Nicaea",
+  "fotograf": "THE FIRST COUNCIL OF NICEA.jpg",
+  "puan": "96",
+  "slug": "iznik-konsil",
+  "slug_override": "iznik-konsil",
+  "ad_tr": "İznik Konsil",
+  "ad_en": "First Council of Nicea",
+  "kategori": "archaeological_site",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "I. Konsil'in toplandığı Senatus Sarayı kalıntısı; göl kıyısında, sular çekilince görünür",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.426642",
+  "boylam": "29.716907",
+  "wikidata": "Q118929560",
+  "osm": "relation/16554896",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "İznik'te antik tiyatro",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "İznik Roma Tiyatrosu",
+  "wikipedia_en": "",
+  "fotograf": "İznik Roma Tiyatrosu .jpg",
+  "puan": "28",
+  "slug": "iznik-roma-tiyatrosu",
+  "slug_override": "iznik-roma-tiyatrosu",
+  "ad_tr": "İznik Roma Tiyatrosu",
+  "ad_en": "Roman theater at Helikore/Nicaea",
+  "kategori": "archaeological_site",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "Alanın her yerinde check-in yapılabilir",
+  "alan_var": "evet",
+  "_ring": [
+   [
+    29.7165954,
+    40.426817
+   ],
+   [
+    29.7163838,
+    40.4268498
+   ],
+   [
+    29.716367,
+    40.4267863
+   ],
+   [
+    29.7163641,
+    40.4267066
+   ],
+   [
+    29.71639,
+    40.4266097
+   ],
+   [
+    29.7164505,
+    40.4265101
+   ],
+   [
+    29.716503,
+    40.426459
+   ],
+   [
+    29.7165795,
+    40.4264048
+   ],
+   [
+    29.7166711,
+    40.4263631
+   ],
+   [
+    29.7167746,
+    40.4263337
+   ],
+   [
+    29.7168688,
+    40.4263236
+   ],
+   [
+    29.7169633,
+    40.4263234
+   ],
+   [
+    29.7170893,
+    40.4263476
+   ],
+   [
+    29.7171966,
+    40.4263845
+   ],
+   [
+    29.7172819,
+    40.426431
+   ],
+   [
+    29.717337,
+    40.426481
+   ],
+   [
+    29.7173888,
+    40.4265462
+   ],
+   [
+    29.7174321,
+    40.4266247
+   ],
+   [
+    29.7174482,
+    40.4266908
+   ],
+   [
+    29.7174503,
+    40.4267681
+   ],
+   [
+    29.7174462,
+    40.4268113
+   ],
+   [
+    29.7174297,
+    40.4268532
+   ],
+   [
+    29.7172015,
+    40.426806
+   ],
+   [
+    29.7170832,
+    40.4267842
+   ],
+   [
+    29.717097,
+    40.4267384
+   ],
+   [
+    29.7170898,
+    40.4266928
+   ],
+   [
+    29.7170622,
+    40.4266509
+   ],
+   [
+    29.7170174,
+    40.4266186
+   ],
+   [
+    29.7169607,
+    40.4265999
+   ],
+   [
+    29.7168992,
+    40.4265971
+   ],
+   [
+    29.7168644,
+    40.4266029
+   ],
+   [
+    29.7168099,
+    40.4266251
+   ],
+   [
+    29.7167687,
+    40.42666
+   ],
+   [
+    29.7167457,
+    40.4267036
+   ],
+   [
+    29.7167437,
+    40.4267505
+   ],
+   [
+    29.7167602,
+    40.4267933
+   ],
+   [
+    29.7165954,
+    40.426817
+   ]
+  ]
+ },
+ {
+  "enlem": "40.173633",
+  "boylam": "28.770857",
+  "wikidata": "Q6099398",
+  "osm": "way/234158577",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "Nilüfer'de höyük",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "Aktopraklık Höyüğü",
+  "wikipedia_en": "",
+  "fotograf": "Aktopraklk Hy 2026-05-23 14.43.10 1782249226.jpeg",
+  "puan": "27",
+  "slug": "aktopraklik-hoyugu",
+  "slug_override": "aktopraklik-hoyugu",
+  "ad_tr": "Aktopraklık Höyüğü",
+  "ad_en": "Aktopraklık Mound",
+  "kategori": "archaeological_site",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "Akçalar; arkeopark. Alanın her yerinde check-in yapılabilir",
+  "alan_var": "evet",
+  "_ring": [
+   [
+    28.7698962,
+    40.1738117
+   ],
+   [
+    28.7701777,
+    40.1727118
+   ],
+   [
+    28.7704327,
+    40.1725332
+   ],
+   [
+    28.7710542,
+    40.1726062
+   ],
+   [
+    28.7716651,
+    40.1728254
+   ],
+   [
+    28.7717766,
+    40.1731704
+   ],
+   [
+    28.771766,
+    40.1735723
+   ],
+   [
+    28.7715748,
+    40.1740877
+   ],
+   [
+    28.7711073,
+    40.1746479
+   ],
+   [
+    28.7706186,
+    40.1747047
+   ],
+   [
+    28.7702255,
+    40.1746073
+   ],
+   [
+    28.7699865,
+    40.1743191
+   ],
+   [
+    28.7698962,
+    40.1738117
+   ]
+  ]
+ },
+ {
+  "enlem": "40.183651",
+  "boylam": "29.053657",
+  "wikidata": "",
+  "osm": "way/1009347298",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "5",
+  "slug": "hisar-arkeopark",
+  "slug_override": "hisar-arkeopark",
+  "ad_tr": "Hisar Arkeopark",
+  "ad_en": "Hisar Archaeopark",
+  "kategori": "archaeological_site",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "Bursa Kalesi (Hisar) içinde",
+  "alan_var": "evet",
+  "_ring": [
+   [
+    29.0532538,
+    40.18346
+   ],
+   [
+    29.0536814,
+    40.1832497
+   ],
+   [
+    29.0541249,
+    40.1832678
+   ],
+   [
+    29.0542007,
+    40.1836892
+   ],
+   [
+    29.0542124,
+    40.1838844
+   ],
+   [
+    29.0538434,
+    40.183921
+   ],
+   [
+    29.0537604,
+    40.1836372
+   ],
+   [
+    29.0535253,
+    40.1837057
+   ],
+   [
+    29.0535911,
+    40.1838698
+   ],
+   [
+    29.0534137,
+    40.1838983
+   ],
+   [
+    29.0533687,
+    40.1836694
+   ],
+   [
+    29.0533076,
+    40.1836826
+   ],
+   [
+    29.0532544,
+    40.1835265
+   ],
+   [
+    29.0532538,
+    40.18346
+   ]
+  ]
+ },
+ {
+  "enlem": "40.169718",
+  "boylam": "28.682594",
+  "wikidata": "",
+  "osm": "node/12888452002",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "0",
+  "slug": "antik-tiyatro",
+  "slug_override": "antik-tiyatro",
+  "ad_tr": "Apollonia Antik Tiyatrosu",
+  "ad_en": "Ancient Theatre of Apollonia",
+  "kategori": "archaeological_site",
+  "aile": "historical",
+  "ana_yer": "golyazi-adasi",
+  "not": "Gölyazı (Apollonia); kalıntı",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.181412",
+  "boylam": "29.074882",
+  "wikidata": "Q8053362",
+  "osm": "way/254313386",
+  "yapim_yili": "1421",
+  "donem": "Osmanlı",
+  "wikidata_ipucu_tr": "Bursa'da bulunan bir türbe",
+  "wikidata_ipucu_en": "mausoleum in Turkey",
+  "wikipedia_tr": "Yeşil Türbe",
+  "wikipedia_en": "Green Tomb",
+  "fotograf": "Turkey-1353 (2216628788).jpg",
+  "puan": "51",
+  "slug": "yesil-turbe",
+  "slug_override": "yesil-turbe",
+  "ad_tr": "Yeşil Türbe",
+  "ad_en": "Green Tomb",
+  "kategori": "tomb",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.186774",
+  "boylam": "29.057323",
+  "wikidata": "Q83100",
+  "osm": "way/325992025",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "3",
+  "slug": "osman-gazi-turbesi",
+  "slug_override": "osman-gazi-turbesi",
+  "ad_tr": "Osman Gazi Türbesi",
+  "ad_en": "Tomb of Osman I",
+  "kategori": "tomb",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "Tophane; Orhan Gazi Türbesi hemen yanında. EN: 'Tomb of Osman I'",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.202118",
+  "boylam": "29.027248",
+  "wikidata": "",
+  "osm": "node/13362217961",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "0",
+  "slug": "hacivat-karagoz-anit-mezari",
+  "slug_override": "hacivat-karagoz-anit-mezari",
+  "ad_tr": "Hacivat ve Karagöz Anıt Mezarı",
+  "ad_en": "Tomb of Hacivat and Karagöz",
+  "kategori": "tomb",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "Karagöz Müzesi'nin yanında",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.186771",
+  "boylam": "29.057694",
+  "wikidata": "",
+  "osm": "way/325992024",
+  "arama_adi": "Orhan Gazi Türbesi",
+  "konum_yaklasik": false,
+  "slug": "orhan-gazi-turbesi",
+  "slug_override": "orhan-gazi-turbesi",
+  "ad_tr": "Orhan Gazi Türbesi",
+  "ad_en": "Tomb of Orhan",
+  "kategori": "tomb",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "Aday listesinde yoktu (puanlama padişahın ününü saymıyor); Tophane",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.190398",
+  "boylam": "29.045771",
+  "wikidata": "Q20587092",
+  "osm": "node/2796344232;way/1352292877",
+  "yapim_yili": "1573",
+  "donem": "Osmanlı",
+  "wikidata_ipucu_tr": "Osmangazi'de türbe",
+  "wikidata_ipucu_en": "mausoleum complex in Osmangazi, Bursa, northwestern Turkey",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "Şehzade Mustafa Türbesi.jpg",
+  "puan": "13",
+  "slug": "sehzade-mustafa-turbesi",
+  "slug_override": "sehzade-mustafa-turbesi",
+  "ad_tr": "Şehzade Mustafa Türbesi",
+  "ad_en": "Türbe of Şehzade Mustafa",
+  "kategori": "tomb",
+  "aile": "historical",
+  "ana_yer": "bursa-muradiye-camii",
+  "not": "Muradiye Külliyesi içinde",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.190555",
+  "boylam": "29.04563",
+  "wikidata": "",
+  "osm": "node/2796344231",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "0",
+  "slug": "cem-sultan-turbesi",
+  "slug_override": "cem-sultan-turbesi",
+  "ad_tr": "Cem Sultan Türbesi",
+  "ad_en": "Tomb of Cem Sultan",
+  "kategori": "tomb",
+  "aile": "historical",
+  "ana_yer": "bursa-muradiye-camii",
+  "not": "Muradiye Külliyesi içinde",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.190582",
+  "boylam": "29.04545",
+  "wikidata": "",
+  "osm": "node/2796344525",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "0",
+  "slug": "ebe-gulbahar-hatun-turbesi",
+  "slug_override": "ebe-gulbahar-hatun-turbesi",
+  "ad_tr": "Gülbahar Hatun Türbesi",
+  "ad_en": "Tomb of Gülbahar Hatun",
+  "kategori": "tomb",
+  "aile": "historical",
+  "ana_yer": "bursa-muradiye-camii",
+  "not": "",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.181373",
+  "boylam": "29.080921",
+  "wikidata": "",
+  "osm": "way/385004428",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "0",
+  "slug": "emirsultan-hz-turbesi",
+  "slug_override": "emirsultan-hz-turbesi",
+  "ad_tr": "Emir Sultan Türbesi",
+  "ad_en": "Tomb of Emir Sultan",
+  "kategori": "tomb",
+  "aile": "historical",
+  "ana_yer": "emir-sultan-camii",
+  "not": "Emir Sultan Camii'nin yanında",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.190647",
+  "boylam": "29.045407",
+  "wikidata": "",
+  "osm": "node/2796344230",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "0",
+  "slug": "gulruh-hatun-turbesi",
+  "slug_override": "gulruh-hatun-turbesi",
+  "ad_tr": "Gülruh Hatun Türbesi",
+  "ad_en": "Tomb of Gülruh Hatun",
+  "kategori": "tomb",
+  "aile": "historical",
+  "ana_yer": "bursa-muradiye-camii",
+  "not": "",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.190252",
+  "boylam": "29.045627",
+  "wikidata": "",
+  "osm": "node/2796344233",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "0",
+  "slug": "gulsah-hatun-turbesi",
+  "slug_override": "gulsah-hatun-turbesi",
+  "ad_tr": "Gülşah Hatun Türbesi",
+  "ad_en": "Tomb of Gülşah Hatun",
+  "kategori": "tomb",
+  "aile": "historical",
+  "ana_yer": "bursa-muradiye-camii",
+  "not": "",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.190802",
+  "boylam": "29.047015",
+  "wikidata": "",
+  "osm": "node/2796344236",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "0",
+  "slug": "huma-hatun-turbesi",
+  "slug_override": "huma-hatun-turbesi",
+  "ad_tr": "Hüma Hatun Türbesi",
+  "ad_en": "Tomb of Hüma Hatun",
+  "kategori": "tomb",
+  "aile": "historical",
+  "ana_yer": "bursa-muradiye-camii",
+  "not": "",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.175000",
+  "boylam": "29.172000",
+  "wikidata": "",
+  "osm": "",
+  "arama_adi": "Cumalıkızık",
+  "konum_yaklasik": true,
+  "slug": "cumalikizik",
+  "slug_override": "cumalikizik",
+  "ad_tr": "Cumalıkızık",
+  "ad_en": "Cumalıkızık",
+  "kategori": "village",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "UNESCO; erken Osmanlı köyü. Yeni kategori; Claude ekledi",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.165599",
+  "boylam": "28.67795",
+  "wikidata": "",
+  "osm": "way/330917299",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "20",
+  "slug": "golyazi-adasi",
+  "slug_override": "golyazi-adasi",
+  "ad_tr": "Gölyazı",
+  "ad_en": "Gölyazı",
+  "kategori": "village",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "Uluabat Gölü'nde yarımada köy; gün batımı ve leylekler. Ada kategorisinden taşındı",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.163000",
+  "boylam": "28.976000",
+  "wikidata": "",
+  "osm": "",
+  "arama_adi": "Misi",
+  "konum_yaklasik": true,
+  "slug": "misi",
+  "slug_override": "misi",
+  "ad_tr": "Misi (Gümüştepe)",
+  "ad_en": "Misi",
+  "kategori": "village",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "Nilüfer Çayı kıyısında taş evler. Claude ekledi",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.392000",
+  "boylam": "28.795000",
+  "wikidata": "",
+  "osm": "",
+  "arama_adi": "Tirilye",
+  "konum_yaklasik": true,
+  "slug": "tirilye",
+  "slug_override": "tirilye",
+  "ad_tr": "Tirilye",
+  "ad_en": "Tirilye",
+  "kategori": "village",
+  "aile": "historical",
+  "ana_yer": null,
+  "not": "Mudanya; Rum köyü, Kemerli Kilise ve Fatih Camii burada. Claude ekledi",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.165424",
+  "boylam": "29.111122",
+  "wikidata": "",
+  "osm": "node/5534516422",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "20",
+  "slug": "zeyniller-koyu-seyir-tepesi",
+  "slug_override": "zeyniller-koyu-seyir-tepesi",
+  "ad_tr": "Zeyniller Seyir Tepesi",
+  "ad_en": "Zeyniller Viewpoint",
+  "kategori": "viewpoint",
+  "aile": "nature",
+  "ana_yer": null,
+  "not": "Şehir manzarası",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.070529",
+  "boylam": "29.22201",
+  "wikidata": "Q925688",
+  "osm": "node/440642722",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "Türkiye'nin Bursa şehrindeki dağ",
+  "wikidata_ipucu_en": "mountain in Bursa, Turkey",
+  "wikipedia_tr": "Uludağ",
+  "wikipedia_en": "Uludağ",
+  "fotograf": "Uludag.JPG",
+  "puan": "94",
+  "slug": "uludag",
+  "slug_override": "uludag",
+  "ad_tr": "Uludağ",
+  "ad_en": "Uludağ",
+  "kategori": "hill",
+  "aile": "nature",
+  "ana_yer": null,
+  "not": "",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.108492",
+  "boylam": "29.185995",
+  "wikidata": "Q6094187",
+  "osm": "way/126629460",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "Türkiye'de millî park",
+  "wikidata_ipucu_en": "national park in Turkey",
+  "wikipedia_tr": "Uludağ Millî Parkı",
+  "wikipedia_en": "",
+  "fotograf": "Above the forest.jpg",
+  "puan": "37",
+  "slug": "uludag-milli-parki",
+  "slug_override": "uludag-milli-parki",
+  "ad_tr": "Uludağ Millî Parkı",
+  "ad_en": "Uludağ National Park",
+  "kategori": "forest",
+  "aile": "nature",
+  "ana_yer": null,
+  "not": "Alanın her yerinde check-in yapılabilir",
+  "alan_var": "evet",
+  "_ring": [
+   [
+    29.0632594,
+    40.1214172
+   ],
+   [
+    29.0691467,
+    40.1176838
+   ],
+   [
+    29.0718749,
+    40.1130718
+   ],
+   [
+    29.0738852,
+    40.107471
+   ],
+   [
+    29.0779057,
+    40.1065924
+   ],
+   [
+    29.0803468,
+    40.1027484
+   ],
+   [
+    29.0856596,
+    40.0992337
+   ],
+   [
+    29.0845109,
+    40.0945106
+   ],
+   [
+    29.088675,
+    40.0939614
+   ],
+   [
+    29.0892494,
+    40.0890181
+   ],
+   [
+    29.0916904,
+    40.086821
+   ],
+   [
+    29.0982956,
+    40.086052
+   ],
+   [
+    29.1138034,
+    40.0869309
+   ],
+   [
+    29.1317713,
+    40.0886796
+   ],
+   [
+    29.139766,
+    40.0887002
+   ],
+   [
+    29.1462591,
+    40.0889988
+   ],
+   [
+    29.1506015,
+    40.0879402
+   ],
+   [
+    29.1588387,
+    40.0859935
+   ],
+   [
+    29.1666454,
+    40.0859
+   ],
+   [
+    29.1711231,
+    40.0855951
+   ],
+   [
+    29.1754039,
+    40.0871506
+   ],
+   [
+    29.1874655,
+    40.0869309
+   ],
+   [
+    29.1957938,
+    40.0807786
+   ],
+   [
+    29.2058451,
+    40.0808885
+   ],
+   [
+    29.2124503,
+    40.0801194
+   ],
+   [
+    29.2158965,
+    40.0748456
+   ],
+   [
+    29.2229325,
+    40.0728678
+   ],
+   [
+    29.2247991,
+    40.0690219
+   ],
+   [
+    29.2326966,
+    40.0674834
+   ],
+   [
+    29.2365736,
+    40.0660549
+   ],
+   [
+    29.2410249,
+    40.0620987
+   ],
+   [
+    29.2494968,
+    40.0589116
+   ],
+   [
+    29.2549532,
+    40.0564937
+   ],
+   [
+    29.2629943,
+    40.055065
+   ],
+   [
+    29.2684508,
+    40.0553947
+   ],
+   [
+    29.274338,
+    40.058472
+   ],
+   [
+    29.2809432,
+    40.0613294
+   ],
+   [
+    29.2899894,
+    40.0624284
+   ],
+   [
+    29.2977433,
+    40.059571
+   ],
+   [
+    29.3086562,
+    40.0641867
+   ],
+   [
+    29.3044921,
+    40.0675933
+   ],
+   [
+    29.3133947,
+    40.0719887
+   ],
+   [
+    29.3191383,
+    40.0814378
+   ],
+   [
+    29.3174152,
+    40.0863816
+   ],
+   [
+    29.3181332,
+    40.092753
+   ],
+   [
+    29.3100921,
+    40.0936318
+   ],
+   [
+    29.3019074,
+    40.0898969
+   ],
+   [
+    29.2960202,
+    40.09495
+   ],
+   [
+    29.2884099,
+    40.0987944
+   ],
+   [
+    29.2813739,
+    40.1050548
+   ],
+   [
+    29.2720405,
+    40.1088987
+   ],
+   [
+    29.2746252,
+    40.1165858
+   ],
+   [
+    29.2724713,
+    40.1192211
+   ],
+   [
+    29.2629943,
+    40.1151582
+   ],
+   [
+    29.2529429,
+    40.114719
+   ],
+   [
+    29.2464814,
+    40.1286637
+   ],
+   [
+    29.2314043,
+    40.1141699
+   ],
+   [
+    29.2281017,
+    40.1062629
+   ],
+   [
+    29.2268094,
+    40.1198799
+   ],
+   [
+    29.2216401,
+    40.1246013
+   ],
+   [
+    29.2114452,
+    40.1192211
+   ],
+   [
+    29.2062759,
+    40.1228446
+   ],
+   [
+    29.1983784,
+    40.1306398
+   ],
+   [
+    29.2013938,
+    40.1377756
+   ],
+   [
+    29.2019682,
+    40.1420567
+   ],
+   [
+    29.1952194,
+    40.1388733
+   ],
+   [
+    29.1853117,
+    40.1359094
+   ],
+   [
+    29.1762654,
+    40.1300909
+   ],
+   [
+    29.1680808,
+    40.1433739
+   ],
+   [
+    29.164491,
+    40.150179
+   ],
+   [
+    29.1657833,
+    40.1602757
+   ],
+   [
+    29.158173,
+    40.161373
+   ],
+   [
+    29.1588909,
+    40.1667499
+   ],
+   [
+    29.155014,
+    40.1683958
+   ],
+   [
+    29.1415164,
+    40.1577516
+   ],
+   [
+    29.1357728,
+    40.1633483
+   ],
+   [
+    29.1298856,
+    40.1665305
+   ],
+   [
+    29.1232804,
+    40.1672986
+   ],
+   [
+    29.1185419,
+    40.1648845
+   ],
+   [
+    29.1180717,
+    40.1606643
+   ],
+   [
+    29.1129419,
+    40.1548983
+   ],
+   [
+    29.1049008,
+    40.1484229
+   ],
+   [
+    29.0945622,
+    40.1445813
+   ],
+   [
+    29.0879571,
+    40.1489717
+   ],
+   [
+    29.0875263,
+    40.152813
+   ],
+   [
+    29.0720185,
+    40.1530325
+   ],
+   [
+    29.0743159,
+    40.1474351
+   ],
+   [
+    29.0710766,
+    40.1415484
+   ],
+   [
+    29.0702954,
+    40.1368974
+   ],
+   [
+    29.0639774,
+    40.1261385
+   ],
+   [
+    29.0632594,
+    40.1214172
+   ]
+  ]
+ },
+ {
+  "enlem": "40.378165",
+  "boylam": "28.431531",
+  "wikidata": "Q105838485",
+  "osm": "relation/17861535",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "Bursa'da subasar ormanı",
+  "wikidata_ipucu_en": "floodplain forest in Bursa",
+  "wikipedia_tr": "Karacabey Longoz Ormanları",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "34",
+  "slug": "karacabey-longoz-ormanlari",
+  "slug_override": "karacabey-longoz-ormanlari",
+  "ad_tr": "Karacabey Longoz Ormanları",
+  "ad_en": "Karacabey Floodplain Forest",
+  "kategori": "forest",
+  "aile": "nature",
+  "ana_yer": null,
+  "not": "Alanın her yerinde check-in yapılabilir",
+  "alan_var": "evet",
+  "_ring": [
+   [
+    28.3897181,
+    40.3918203
+   ],
+   [
+    28.3991961,
+    40.3816609
+   ],
+   [
+    28.4086889,
+    40.37235
+   ],
+   [
+    28.4195816,
+    40.3662149
+   ],
+   [
+    28.4214216,
+    40.3683934
+   ],
+   [
+    28.4251982,
+    40.3678743
+   ],
+   [
+    28.428551,
+    40.3673634
+   ],
+   [
+    28.4315443,
+    40.366546
+   ],
+   [
+    28.4347629,
+    40.3672203
+   ],
+   [
+    28.437295,
+    40.3664846
+   ],
+   [
+    28.4401274,
+    40.3652339
+   ],
+   [
+    28.4432334,
+    40.3651113
+   ],
+   [
+    28.4460175,
+    40.3649233
+   ],
+   [
+    28.4492737,
+    40.3643388
+   ],
+   [
+    28.4518272,
+    40.3631739
+   ],
+   [
+    28.4548473,
+    40.3634927
+   ],
+   [
+    28.4626526,
+    40.363554
+   ],
+   [
+    28.4658176,
+    40.3640977
+   ],
+   [
+    28.4708762,
+    40.3665173
+   ],
+   [
+    28.4644925,
+    40.3655364
+   ],
+   [
+    28.4583235,
+    40.3643592
+   ],
+   [
+    28.4535599,
+    40.3646903
+   ],
+   [
+    28.4505075,
+    40.3651481
+   ],
+   [
+    28.4502929,
+    40.3667299
+   ],
+   [
+    28.4480989,
+    40.3678743
+   ],
+   [
+    28.4491128,
+    40.3667871
+   ],
+   [
+    28.4478253,
+    40.3663048
+   ],
+   [
+    28.4469831,
+    40.3684547
+   ],
+   [
+    28.4451967,
+    40.3689124
+   ],
+   [
+    28.4419352,
+    40.3692026
+   ],
+   [
+    28.4404117,
+    40.3689206
+   ],
+   [
+    28.4384376,
+    40.3685609
+   ],
+   [
+    28.4396392,
+    40.3695664
+   ],
+   [
+    28.4367263,
+    40.3699914
+   ],
+   [
+    28.4352565,
+    40.3698647
+   ],
+   [
+    28.434602,
+    40.3691576
+   ],
+   [
+    28.4331161,
+    40.3686876
+   ],
+   [
+    28.4364635,
+    40.3677885
+   ],
+   [
+    28.4326816,
+    40.3679724
+   ],
+   [
+    28.4296775,
+    40.3682217
+   ],
+   [
+    28.431614,
+    40.3677312
+   ],
+   [
+    28.4298545,
+    40.36711
+   ],
+   [
+    28.4268612,
+    40.367674
+   ],
+   [
+    28.4271187,
+    40.3680419
+   ],
+   [
+    28.4252304,
+    40.3690514
+   ],
+   [
+    28.4256273,
+    40.3694519
+   ],
+   [
+    28.4235138,
+    40.3705554
+   ],
+   [
+    28.4268826,
+    40.3707802
+   ],
+   [
+    28.4289157,
+    40.3701467
+   ],
+   [
+    28.431952,
+    40.370114
+   ],
+   [
+    28.4335774,
+    40.3702489
+   ],
+   [
+    28.4318501,
+    40.3706821
+   ],
+   [
+    28.4296453,
+    40.3715526
+   ],
+   [
+    28.4266841,
+    40.3719858
+   ],
+   [
+    28.4233689,
+    40.3731547
+   ],
+   [
+    28.421663,
+    40.3742377
+   ],
+   [
+    28.4209925,
+    40.3751204
+   ],
+   [
+    28.4190398,
+    40.374205
+   ],
+   [
+    28.41941,
+    40.375431
+   ],
+   [
+    28.4200323,
+    40.37595
+   ],
+   [
+    28.4210086,
+    40.3769104
+   ],
+   [
+    28.4211641,
+    40.3783039
+   ],
+   [
+    28.4232992,
+    40.3788188
+   ],
+   [
+    28.4206974,
+    40.3788597
+   ],
+   [
+    28.4204346,
+    40.3801142
+   ],
+   [
+    28.421309,
+    40.3807231
+   ],
+   [
+    28.4219795,
+    40.3825946
+   ],
+   [
+    28.4206438,
+    40.3826804
+   ],
+   [
+    28.4186643,
+    40.3830441
+   ],
+   [
+    28.4205311,
+    40.3838859
+   ],
+   [
+    28.4222853,
+    40.3839186
+   ],
+   [
+    28.4242326,
+    40.3839839
+   ],
+   [
+    28.4265929,
+    40.3836693
+   ],
+   [
+    28.4246886,
+    40.3842373
+   ],
+   [
+    28.4227627,
+    40.3849033
+   ],
+   [
+    28.4195119,
+    40.3851403
+   ],
+   [
+    28.4165454,
+    40.3855122
+   ],
+   [
+    28.4151238,
+    40.3856021
+   ],
+   [
+    28.4186375,
+    40.3856266
+   ],
+   [
+    28.422516,
+    40.3853324
+   ],
+   [
+    28.4209067,
+    40.3856593
+   ],
+   [
+    28.4180367,
+    40.3859821
+   ],
+   [
+    28.4149092,
+    40.3861292
+   ],
+   [
+    28.4131229,
+    40.3865909
+   ],
+   [
+    28.410843,
+    40.3868973
+   ],
+   [
+    28.4123987,
+    40.3871629
+   ],
+   [
+    28.4178007,
+    40.3873999
+   ],
+   [
+    28.4207028,
+    40.3877023
+   ],
+   [
+    28.4233957,
+    40.3874735
+   ],
+   [
+    28.426196,
+    40.3867298
+   ],
+   [
+    28.4288031,
+    40.3869382
+   ],
+   [
+    28.4313619,
+    40.3863008
+   ],
+   [
+    28.432188,
+    40.3859575
+   ],
+   [
+    28.4341139,
+    40.3853855
+   ],
+   [
+    28.4369677,
+    40.3850709
+   ],
+   [
+    28.4341729,
+    40.385553
+   ],
+   [
+    28.4331375,
+    40.3860679
+   ],
+   [
+    28.4345216,
+    40.3861332
+   ],
+   [
+    28.4363133,
+    40.3861046
+   ],
+   [
+    28.4393173,
+    40.3858758
+   ],
+   [
+    28.4419405,
+    40.3860556
+   ],
+   [
+    28.4426379,
+    40.3861169
+   ],
+   [
+    28.4438664,
+    40.3862068
+   ],
+   [
+    28.4468812,
+    40.3860107
+   ],
+   [
+    28.4491289,
+    40.3869259
+   ],
+   [
+    28.4461355,
+    40.387453
+   ],
+   [
+    28.4426755,
+    40.3875061
+   ],
+   [
+    28.4405941,
+    40.3877431
+   ],
+   [
+    28.4424072,
+    40.3881844
+   ],
+   [
+    28.4435472,
+    40.3882702
+   ],
+   [
+    28.4446549,
+    40.3885889
+   ],
+   [
+    28.4483188,
+    40.3884909
+   ],
+   [
+    28.4500945,
+    40.3882008
+   ],
+   [
+    28.452369,
+    40.3891078
+   ],
+   [
+    28.4561187,
+    40.3895164
+   ],
+   [
+    28.4594017,
+    40.3898555
+   ],
+   [
+    28.4626365,
+    40.3902519
+   ],
+   [
+    28.4642297,
+    40.391257
+   ],
+   [
+    28.4675074,
+    40.3920128
+   ],
+   [
+    28.4638917,
+    40.3916696
+   ],
+   [
+    28.4628457,
+    40.3906441
+   ],
+   [
+    28.459112,
+    40.3901334
+   ],
+   [
+    28.4608823,
+    40.391114
+   ],
+   [
+    28.4572345,
+    40.3903213
+   ],
+   [
+    28.4534043,
+    40.3899372
+   ],
+   [
+    28.4502339,
+    40.3892876
+   ],
+   [
+    28.4484744,
+    40.3891814
+   ],
+   [
+    28.4460765,
+    40.389022
+   ],
+   [
+    28.4425521,
+    40.3890465
+   ],
+   [
+    28.4388453,
+    40.3890261
+   ],
+   [
+    28.4355622,
+    40.3890424
+   ],
+   [
+    28.4322953,
+    40.389165
+   ],
+   [
+    28.4289372,
+    40.3895409
+   ],
+   [
+    28.4262282,
+    40.389308
+   ],
+   [
+    28.42309,
+    40.3892386
+   ],
+   [
+    28.4238249,
+    40.388119
+   ],
+   [
+    28.4176075,
+    40.3892059
+   ],
+   [
+    28.4147859,
+    40.39026
+   ],
+   [
+    28.4134662,
+    40.3906727
+   ],
+   [
+    28.4103602,
+    40.3908034
+   ],
+   [
+    28.4068787,
+    40.390734
+   ],
+   [
+    28.4037459,
+    40.3916002
+   ],
+   [
+    28.4004843,
+    40.3922743
+   ],
+   [
+    28.3980703,
+    40.3926747
+   ],
+   [
+    28.3945513,
+    40.3928381
+   ],
+   [
+    28.3916759,
+    40.3932385
+   ],
+   [
+    28.3904314,
+    40.3923315
+   ],
+   [
+    28.3897181,
+    40.3918203
+   ]
+  ]
+ },
+ {
+  "enlem": "39.867015",
+  "boylam": "28.911235",
+  "wikidata": "",
+  "osm": "way/431791573",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "13",
+  "slug": "sadagi-kanyonu-tabiat-parki",
+  "slug_override": "sadagi-kanyonu-tabiat-parki",
+  "ad_tr": "Sadağı Kanyonu Tabiat Parkı",
+  "ad_en": "Canyon of Sadağı Naturel Park",
+  "kategori": "forest",
+  "aile": "nature",
+  "ana_yer": null,
+  "not": "Alanın her yerinde check-in yapılabilir",
+  "alan_var": "evet",
+  "_ring": [
+   [
+    28.9034297,
+    39.8687856
+   ],
+   [
+    28.9041574,
+    39.8662385
+   ],
+   [
+    28.9054965,
+    39.864641
+   ],
+   [
+    28.9067628,
+    39.8637249
+   ],
+   [
+    28.9071703,
+    39.8625183
+   ],
+   [
+    28.9084366,
+    39.8619262
+   ],
+   [
+    28.908684,
+    39.8603398
+   ],
+   [
+    28.9100376,
+    39.8598817
+   ],
+   [
+    28.9115468,
+    39.8594177
+   ],
+   [
+    28.9146255,
+    39.8595015
+   ],
+   [
+    28.9175842,
+    39.8612615
+   ],
+   [
+    28.9171258,
+    39.8633004
+   ],
+   [
+    28.9176934,
+    39.8644958
+   ],
+   [
+    28.916529,
+    39.865032
+   ],
+   [
+    28.9167473,
+    39.8659034
+   ],
+   [
+    28.9169802,
+    39.8670094
+   ],
+   [
+    28.9161797,
+    39.8694782
+   ],
+   [
+    28.9141129,
+    39.8701261
+   ],
+   [
+    28.9110419,
+    39.8699362
+   ],
+   [
+    28.9140693,
+    39.8732538
+   ],
+   [
+    28.9127593,
+    39.8766048
+   ],
+   [
+    28.9100667,
+    39.8765713
+   ],
+   [
+    28.9095427,
+    39.8751751
+   ],
+   [
+    28.9092662,
+    39.8738458
+   ],
+   [
+    28.9064134,
+    39.8726171
+   ],
+   [
+    28.9056566,
+    39.8708075
+   ],
+   [
+    28.9034297,
+    39.8687856
+   ]
+  ]
+ },
+ {
+  "enlem": "40.16526",
+  "boylam": "28.590293",
+  "wikidata": "Q108228823",
+  "osm": "relation/1715013",
+  "yapim_yili": "1998",
+  "donem": "",
+  "wikidata_ipucu_tr": "RAMSAR Alanları (06.02.01.0009)",
+  "wikidata_ipucu_en": "protected area in Turkey (06.02.01.0009)",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "13",
+  "slug": "uluabat-golu-sulak-alani",
+  "slug_override": "uluabat-golu-sulak-alani",
+  "ad_tr": "Uluabat Gölü Sulak Alanı",
+  "ad_en": "Lake Uluabat Wetland",
+  "kategori": "forest",
+  "aile": "nature",
+  "ana_yer": null,
+  "not": "Alanın her yerinde check-in yapılabilir",
+  "alan_var": "evet",
+  "_ring": [
+   [
+    28.4432288,
+    40.2050482
+   ],
+   [
+    28.4435526,
+    40.202606
+   ],
+   [
+    28.4460682,
+    40.201509
+   ],
+   [
+    28.4524219,
+    40.1941916
+   ],
+   [
+    28.4612594,
+    40.184865
+   ],
+   [
+    28.4685723,
+    40.1822478
+   ],
+   [
+    28.475587,
+    40.1802195
+   ],
+   [
+    28.4838991,
+    40.1775972
+   ],
+   [
+    28.4901442,
+    40.1751113
+   ],
+   [
+    28.493107,
+    40.1720584
+   ],
+   [
+    28.4941659,
+    40.1703331
+   ],
+   [
+    28.4993133,
+    40.1581014
+   ],
+   [
+    28.5010896,
+    40.1546357
+   ],
+   [
+    28.504792,
+    40.1512087
+   ],
+   [
+    28.5078014,
+    40.1485873
+   ],
+   [
+    28.5102838,
+    40.1465774
+   ],
+   [
+    28.5204874,
+    40.1378908
+   ],
+   [
+    28.5240653,
+    40.1368071
+   ],
+   [
+    28.5305256,
+    40.1359923
+   ],
+   [
+    28.5368384,
+    40.1352943
+   ],
+   [
+    28.5402833,
+    40.1356517
+   ],
+   [
+    28.5443408,
+    40.1358856
+   ],
+   [
+    28.5488507,
+    40.135115
+   ],
+   [
+    28.5542656,
+    40.1345433
+   ],
+   [
+    28.5615296,
+    40.1279948
+   ],
+   [
+    28.5617187,
+    40.1236488
+   ],
+   [
+    28.5632861,
+    40.1165787
+   ],
+   [
+    28.5635907,
+    40.1109761
+   ],
+   [
+    28.5653206,
+    40.1089944
+   ],
+   [
+    28.5681445,
+    40.1078427
+   ],
+   [
+    28.571621,
+    40.10745
+   ],
+   [
+    28.5747115,
+    40.107024
+   ],
+   [
+    28.5769879,
+    40.1070698
+   ],
+   [
+    28.5795226,
+    40.1074769
+   ],
+   [
+    28.5822635,
+    40.1081498
+   ],
+   [
+    28.5853549,
+    40.1088371
+   ],
+   [
+    28.5880304,
+    40.1099139
+   ],
+   [
+    28.5908533,
+    40.1104511
+   ],
+   [
+    28.5941842,
+    40.1117492
+   ],
+   [
+    28.5981442,
+    40.1132113
+   ],
+   [
+    28.5991487,
+    40.1144646
+   ],
+   [
+    28.6035832,
+    40.1148256
+   ],
+   [
+    28.6064726,
+    40.114344
+   ],
+   [
+    28.6082355,
+    40.1148763
+   ],
+   [
+    28.6115153,
+    40.1137748
+   ],
+   [
+    28.6127325,
+    40.1123755
+   ],
+   [
+    28.6156016,
+    40.1131611
+   ],
+   [
+    28.6189417,
+    40.1137672
+   ],
+   [
+    28.6221486,
+    40.1140295
+   ],
+   [
+    28.6243119,
+    40.1128856
+   ],
+   [
+    28.6278837,
+    40.1127203
+   ],
+   [
+    28.631313,
+    40.1139199
+   ],
+   [
+    28.6336259,
+    40.1154808
+   ],
+   [
+    28.6362959,
+    40.1162878
+   ],
+   [
+    28.6405893,
+    40.1180509
+   ],
+   [
+    28.6455996,
+    40.1230654
+   ],
+   [
+    28.6643077,
+    40.1267579
+   ],
+   [
+    28.667433,
+    40.1287412
+   ],
+   [
+    28.6737394,
+    40.1324954
+   ],
+   [
+    28.6782618,
+    40.1346073
+   ],
+   [
+    28.6811519,
+    40.1351606
+   ],
+   [
+    28.6835898,
+    40.1366418
+   ],
+   [
+    28.6858357,
+    40.1384522
+   ],
+   [
+    28.6892961,
+    40.1398032
+   ],
+   [
+    28.6898674,
+    40.1416571
+   ],
+   [
+    28.6938087,
+    40.1442297
+   ],
+   [
+    28.6948676,
+    40.1455677
+   ],
+   [
+    28.6942146,
+    40.1474779
+   ],
+   [
+    28.6944841,
+    40.1492594
+   ],
+   [
+    28.6973267,
+    40.1508881
+   ],
+   [
+    28.7001893,
+    40.1513068
+   ],
+   [
+    28.702478,
+    40.1527899
+   ],
+   [
+    28.7059168,
+    40.1548319
+   ],
+   [
+    28.7095992,
+    40.1550079
+   ],
+   [
+    28.714749,
+    40.1548357
+   ],
+   [
+    28.7191927,
+    40.1574192
+   ],
+   [
+    28.7206741,
+    40.159605
+   ],
+   [
+    28.7220341,
+    40.1611399
+   ],
+   [
+    28.7248249,
+    40.1646308
+   ],
+   [
+    28.7284897,
+    40.1650753
+   ],
+   [
+    28.73168,
+    40.1665443
+   ],
+   [
+    28.7352452,
+    40.1689675
+   ],
+   [
+    28.7357616,
+    40.1705724
+   ],
+   [
+    28.734669,
+    40.1733706
+   ],
+   [
+    28.7373576,
+    40.178199
+   ],
+   [
+    28.7338883,
+    40.1874278
+   ],
+   [
+    28.7291896,
+    40.1896867
+   ],
+   [
+    28.7243151,
+    40.1909497
+   ],
+   [
+    28.7207965,
+    40.1937666
+   ],
+   [
+    28.7164102,
+    40.1965387
+   ],
+   [
+    28.7137056,
+    40.1975003
+   ],
+   [
+    28.71093,
+    40.196639
+   ],
+   [
+    28.7071807,
+    40.1974815
+   ],
+   [
+    28.7013224,
+    40.1994876
+   ],
+   [
+    28.6979582,
+    40.1991147
+   ],
+   [
+    28.6919902,
+    40.1987413
+   ],
+   [
+    28.6864948,
+    40.1994551
+   ],
+   [
+    28.6834089,
+    40.2002104
+   ],
+   [
+    28.6794673,
+    40.200786
+   ],
+   [
+    28.6727125,
+    40.200999
+   ],
+   [
+    28.6690343,
+    40.1994587
+   ],
+   [
+    28.6638713,
+    40.2002625
+   ],
+   [
+    28.6608233,
+    40.2015542
+   ],
+   [
+    28.6577019,
+    40.2008694
+   ],
+   [
+    28.6530063,
+    40.1996887
+   ],
+   [
+    28.647256,
+    40.2031304
+   ],
+   [
+    28.6427275,
+    40.2063817
+   ],
+   [
+    28.638939,
+    40.2071074
+   ],
+   [
+    28.6334752,
+    40.2081445
+   ],
+   [
+    28.6269679,
+    40.2082746
+   ],
+   [
+    28.6181541,
+    40.2103948
+   ],
+   [
+    28.6129337,
+    40.2103141
+   ],
+   [
+    28.6053858,
+    40.2090375
+   ],
+   [
+    28.597936,
+    40.2080456
+   ],
+   [
+    28.5941155,
+    40.2085014
+   ],
+   [
+    28.5881786,
+    40.2103301
+   ],
+   [
+    28.5841474,
+    40.2114221
+   ],
+   [
+    28.5777807,
+    40.2133137
+   ],
+   [
+    28.5717385,
+    40.2145286
+   ],
+   [
+    28.5624793,
+    40.2159019
+   ],
+   [
+    28.5585816,
+    40.2158585
+   ],
+   [
+    28.5473777,
+    40.2154329
+   ],
+   [
+    28.5434164,
+    40.2158986
+   ],
+   [
+    28.5364943,
+    40.2176609
+   ],
+   [
+    28.526162,
+    40.2192568
+   ],
+   [
+    28.5183236,
+    40.220627
+   ],
+   [
+    28.5121284,
+    40.2213416
+   ],
+   [
+    28.5073944,
+    40.2210962
+   ],
+   [
+    28.5009652,
+    40.2191639
+   ],
+   [
+    28.4953538,
+    40.2202349
+   ],
+   [
+    28.4902512,
+    40.2209919
+   ],
+   [
+    28.4747313,
+    40.2213635
+   ],
+   [
+    28.4707297,
+    40.221856
+   ],
+   [
+    28.461716,
+    40.2231413
+   ],
+   [
+    28.4553388,
+    40.2235865
+   ],
+   [
+    28.4472226,
+    40.2152888
+   ],
+   [
+    28.4438604,
+    40.2076706
+   ],
+   [
+    28.4432288,
+    40.2050482
+   ]
+  ]
+ },
+ {
+  "enlem": "40.195926",
+  "boylam": "29.044125",
+  "wikidata": "Q6040463",
+  "osm": "way/26434141",
+  "yapim_yili": "1955",
+  "donem": "",
+  "wikidata_ipucu_tr": "Bursa, Türkiye'de bir park",
+  "wikidata_ipucu_en": "urban park in Bursa, Turkey",
+  "wikipedia_tr": "Reşat Oyal Kültür Parkı",
+  "wikipedia_en": "",
+  "fotograf": "KulturParkBursa2017.jpg",
+  "puan": "29",
+  "slug": "resat-oyal-kultur-parki",
+  "slug_override": "resat-oyal-kultur-parki",
+  "ad_tr": "Reşat Oyal Kültür Parkı",
+  "ad_en": "Reşat Oyal Cultural Park",
+  "kategori": "park",
+  "aile": "nature",
+  "ana_yer": null,
+  "not": "Alanın her yerinde check-in yapılabilir",
+  "alan_var": "evet",
+  "_ring": [
+   [
+    29.0387562,
+    40.1971209
+   ],
+   [
+    29.0393173,
+    40.196613
+   ],
+   [
+    29.0399582,
+    40.196298
+   ],
+   [
+    29.0398805,
+    40.1960394
+   ],
+   [
+    29.0396974,
+    40.1959146
+   ],
+   [
+    29.0399064,
+    40.1957484
+   ],
+   [
+    29.040096,
+    40.1958534
+   ],
+   [
+    29.0404196,
+    40.195559
+   ],
+   [
+    29.0401927,
+    40.1953623
+   ],
+   [
+    29.040649,
+    40.1948374
+   ],
+   [
+    29.0413013,
+    40.1942801
+   ],
+   [
+    29.0422706,
+    40.193808
+   ],
+   [
+    29.0432326,
+    40.1934959
+   ],
+   [
+    29.0443392,
+    40.193158
+   ],
+   [
+    29.0460278,
+    40.1926018
+   ],
+   [
+    29.0467585,
+    40.1922832
+   ],
+   [
+    29.046949,
+    40.1922811
+   ],
+   [
+    29.0471092,
+    40.1922334
+   ],
+   [
+    29.0472594,
+    40.1921515
+   ],
+   [
+    29.0473453,
+    40.1920388
+   ],
+   [
+    29.0476913,
+    40.1920818
+   ],
+   [
+    29.0474928,
+    40.1924363
+   ],
+   [
+    29.0470958,
+    40.1926207
+   ],
+   [
+    29.047364,
+    40.1929137
+   ],
+   [
+    29.0471709,
+    40.1930366
+   ],
+   [
+    29.0471065,
+    40.1931513
+   ],
+   [
+    29.0473518,
+    40.1939723
+   ],
+   [
+    29.0471643,
+    40.1946458
+   ],
+   [
+    29.0472067,
+    40.1949218
+   ],
+   [
+    29.0473141,
+    40.1956209
+   ],
+   [
+    29.0473265,
+    40.1957623
+   ],
+   [
+    29.0471978,
+    40.195836
+   ],
+   [
+    29.0472622,
+    40.1969178
+   ],
+   [
+    29.0466935,
+    40.1970571
+   ],
+   [
+    29.0468491,
+    40.1975283
+   ],
+   [
+    29.0474069,
+    40.1974251
+   ],
+   [
+    29.047482,
+    40.1974415
+   ],
+   [
+    29.0476806,
+    40.1979134
+   ],
+   [
+    29.04793,
+    40.1978451
+   ],
+   [
+    29.0480051,
+    40.1979885
+   ],
+   [
+    29.0477557,
+    40.1981019
+   ],
+   [
+    29.046038,
+    40.1986328
+   ],
+   [
+    29.0455597,
+    40.1988748
+   ],
+   [
+    29.0450339,
+    40.1990683
+   ],
+   [
+    29.0443625,
+    40.1992589
+   ],
+   [
+    29.0439404,
+    40.1991589
+   ],
+   [
+    29.0435121,
+    40.1990495
+   ],
+   [
+    29.0427097,
+    40.1989892
+   ],
+   [
+    29.0418318,
+    40.1990035
+   ],
+   [
+    29.0396701,
+    40.1990471
+   ],
+   [
+    29.0398096,
+    40.1982031
+   ],
+   [
+    29.0398203,
+    40.1980125
+   ],
+   [
+    29.0397982,
+    40.197798
+   ],
+   [
+    29.0397271,
+    40.1976054
+   ],
+   [
+    29.0393932,
+    40.1974364
+   ],
+   [
+    29.0389828,
+    40.1974108
+   ],
+   [
+    29.0389426,
+    40.1973391
+   ],
+   [
+    29.0387562,
+    40.1971209
+   ]
+  ]
+ },
+ {
+  "enlem": "40.198785",
+  "boylam": "29.053346",
+  "wikidata": "Q20472214",
+  "osm": "way/189723143",
+  "yapim_yili": "2008",
+  "donem": "",
+  "wikidata_ipucu_tr": "Bursa'da bir park",
+  "wikidata_ipucu_en": "public park in Bursa, Turkey",
+  "wikipedia_tr": "Merinos Parkı",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "19",
+  "slug": "merinos-parki",
+  "slug_override": "merinos-parki",
+  "ad_tr": "Merinos Parkı",
+  "ad_en": "Merinos Park",
+  "kategori": "park",
+  "aile": "nature",
+  "ana_yer": null,
+  "not": "Alanın her yerinde check-in yapılabilir",
+  "alan_var": "evet",
+  "_ring": [
+   [
+    29.0488697,
+    40.2007051
+   ],
+   [
+    29.0490321,
+    40.1991283
+   ],
+   [
+    29.0490736,
+    40.1987015
+   ],
+   [
+    29.0490065,
+    40.1986954
+   ],
+   [
+    29.0490655,
+    40.198216
+   ],
+   [
+    29.0499553,
+    40.1978316
+   ],
+   [
+    29.0508719,
+    40.1975188
+   ],
+   [
+    29.0518763,
+    40.197173
+   ],
+   [
+    29.05205,
+    40.1973229
+   ],
+   [
+    29.0520949,
+    40.1973617
+   ],
+   [
+    29.0522945,
+    40.1973569
+   ],
+   [
+    29.0523346,
+    40.1973191
+   ],
+   [
+    29.052494,
+    40.197144
+   ],
+   [
+    29.0527506,
+    40.1971077
+   ],
+   [
+    29.0530167,
+    40.1971053
+   ],
+   [
+    29.053571,
+    40.197127
+   ],
+   [
+    29.0538434,
+    40.1971803
+   ],
+   [
+    29.0543693,
+    40.1972722
+   ],
+   [
+    29.0546322,
+    40.1973085
+   ],
+   [
+    29.054911,
+    40.1973206
+   ],
+   [
+    29.0553893,
+    40.197294
+   ],
+   [
+    29.0558641,
+    40.197333
+   ],
+   [
+    29.0560499,
+    40.1973681
+   ],
+   [
+    29.0561639,
+    40.19744
+   ],
+   [
+    29.0565011,
+    40.1974851
+   ],
+   [
+    29.0564834,
+    40.1978053
+   ],
+   [
+    29.05641,
+    40.1978819
+   ],
+   [
+    29.0563659,
+    40.1979533
+   ],
+   [
+    29.0563681,
+    40.1980295
+   ],
+   [
+    29.0564314,
+    40.198136
+   ],
+   [
+    29.0564934,
+    40.1981912
+   ],
+   [
+    29.0565708,
+    40.1982182
+   ],
+   [
+    29.0567432,
+    40.1982373
+   ],
+   [
+    29.0568939,
+    40.1982981
+   ],
+   [
+    29.0570966,
+    40.1990143
+   ],
+   [
+    29.0574546,
+    40.1991812
+   ],
+   [
+    29.0573627,
+    40.1999554
+   ],
+   [
+    29.0567275,
+    40.2000229
+   ],
+   [
+    29.0546544,
+    40.2002433
+   ],
+   [
+    29.0541159,
+    40.2002845
+   ],
+   [
+    29.0535058,
+    40.200204
+   ],
+   [
+    29.0533137,
+    40.2002486
+   ],
+   [
+    29.0531705,
+    40.2002819
+   ],
+   [
+    29.0528249,
+    40.200494
+   ],
+   [
+    29.0527896,
+    40.2005216
+   ],
+   [
+    29.0517172,
+    40.2010286
+   ],
+   [
+    29.0505533,
+    40.2014498
+   ],
+   [
+    29.050176,
+    40.2014816
+   ],
+   [
+    29.0498032,
+    40.2014713
+   ],
+   [
+    29.0495993,
+    40.2014611
+   ],
+   [
+    29.049425,
+    40.2014222
+   ],
+   [
+    29.0492238,
+    40.2012685
+   ],
+   [
+    29.0489717,
+    40.2009776
+   ],
+   [
+    29.0488697,
+    40.2007051
+   ]
+  ]
+ },
+ {
+  "enlem": "40.370904",
+  "boylam": "28.893924",
+  "wikidata": "",
+  "osm": "node/6710803286",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "20",
+  "slug": "mudanya-sahili",
+  "slug_override": "mudanya-sahili",
+  "ad_tr": "Mudanya Sahili",
+  "ad_en": "Mudanya Seafront",
+  "kategori": "beach",
+  "aile": "nature",
+  "ana_yer": null,
+  "not": "Adı 'Mudanya Sahili'; kategori Sahil ve Plaj olabilir",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.39671",
+  "boylam": "28.293817",
+  "wikidata": "",
+  "osm": "relation/10458771",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "10",
+  "slug": "kursunlu-plaji",
+  "slug_override": "kursunlu-plaji",
+  "ad_tr": "Kurşunlu Plajı",
+  "ad_en": "Kurşunlu Beach",
+  "kategori": "beach",
+  "aile": "nature",
+  "ana_yer": null,
+  "not": "Gemlik",
+  "alan_var": "evet",
+  "_ring": [
+   [
+    28.2900791,
+    40.3979825
+   ],
+   [
+    28.290106,
+    40.3972464
+   ],
+   [
+    28.2922089,
+    40.3965274
+   ],
+   [
+    28.2929063,
+    40.3959636
+   ],
+   [
+    28.295787,
+    40.3954365
+   ],
+   [
+    28.2975542,
+    40.3960087
+   ],
+   [
+    28.2967342,
+    40.3960719
+   ],
+   [
+    28.295311,
+    40.3963269
+   ],
+   [
+    28.2945214,
+    40.3964108
+   ],
+   [
+    28.2932447,
+    40.3966684
+   ],
+   [
+    28.292484,
+    40.39683
+   ],
+   [
+    28.2915774,
+    40.3971434
+   ],
+   [
+    28.2911168,
+    40.3973388
+   ],
+   [
+    28.2905823,
+    40.3975515
+   ],
+   [
+    28.2902298,
+    40.3977911
+   ],
+   [
+    28.2900791,
+    40.3979825
+   ]
+  ]
+ },
+ {
+  "enlem": "39.90055",
+  "boylam": "28.384244",
+  "wikidata": "Q6018935",
+  "osm": "node/2560346643",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "Bursa'da şelale",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "Suuçtu Şelalesi",
+  "wikipedia_en": "",
+  "fotograf": "Suuçtu Waterfall, Mustafakemalpaşa.jpg",
+  "puan": "35",
+  "slug": "suuctu-selalesi",
+  "slug_override": "suuctu-selalesi",
+  "ad_tr": "Suuçtu Şelalesi",
+  "ad_en": "Suuçtu (Waterfly) Waterfall",
+  "kategori": "waterfall",
+  "aile": "nature",
+  "ana_yer": null,
+  "not": "Mustafakemalpaşa",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "40.147434",
+  "boylam": "29.224991",
+  "wikidata": "",
+  "osm": "node/1791443208",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "13",
+  "slug": "saitabat-selalesi",
+  "slug_override": "saitabat-selalesi",
+  "ad_tr": "Saitabat Şelalesi",
+  "ad_en": "Saitabat Waterfall",
+  "kategori": "waterfall",
+  "aile": "nature",
+  "ana_yer": null,
+  "not": "Uludağ yolu",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
+  "enlem": "39.919066",
+  "boylam": "29.584115",
+  "wikidata": "",
+  "osm": "node/939087952",
+  "yapim_yili": "",
+  "donem": "",
+  "wikidata_ipucu_tr": "",
+  "wikidata_ipucu_en": "",
+  "wikipedia_tr": "",
+  "wikipedia_en": "",
+  "fotograf": "",
+  "puan": "10",
+  "slug": "oylat-selalesi",
+  "slug_override": "oylat-selalesi",
+  "ad_tr": "Oylat Şelalesi",
+  "ad_en": "Oylat Waterfall",
+  "kategori": "waterfall",
+  "aile": "nature",
+  "ana_yer": null,
+  "not": "İnegöl",
+  "alan_var": "",
+  "_ring": null
+ }
+]
