@@ -141,6 +141,7 @@ type CityPack = {
   places: Array<{ id: string; slug: string; name: string; short_desc: string | null;
                   kind: PlaceKind; category: CategorySlug;
                   latitude: number; longitude: number; checkin_radius_m: number;
+                  has_area: boolean;              // true: ada/orman gibi alan; check-in için sınırın içinde olmak yeterli
                   thumb_url: string | null }>;   // ilk fotoğrafın küçük resmi (liste/harita kartı)
 };
 ```

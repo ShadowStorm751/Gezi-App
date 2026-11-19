@@ -15,6 +15,60 @@ Biçim:
 
 ---
 
+### Check-in ekranı ("Buradayım" butonu)
+- Tarih: 2026-11-19
+- Kimden: backend (proje sahibinin isteğiyle)
+- Durum: açık (mobil)
+- İstek: Uygulamanın ana özelliği eksik: kullanıcı bir yere gidince ziyaretini kaydedemiyor, bu yüzden rozetler hep 0'da kalıyor. Sunucu tarafı hazır ve canlıda test edildi (`checkin` Edge Function, sözleşme: `docs/API.md` → "Check-in"). İstenen davranış:
+
+  **1. Buton nerede**
+  - Yer detayında (`place_detail` modalı), açıklamanın altında büyük bir "Buradayım / I'm here" butonu.
+  - İsteğe bağlı: kamera ekranında takip edilen yere yeterince yakınken aynı buton.
+
+  **2. Butonun durumu (çevrimdışı ön kontrol, karar her zaman sunucuda)**
+  - Konum izni yoksa: buton "Konumu aç / Turn on location" olur, basınca izin ister.
+  - Giriş yapılmamışsa: buton görünür; basınca Rozetler ekranındaki giriş formunu aç, girişten sonra check-in'i kendiliğinden tekrar dene.
+  - Uzaklık ipucu (pakette `checkin_radius_m` ve yeni `has_area` alanı var):
+    - `has_area: false` ve mesafe > `checkin_radius_m + min(accuracy, 50)` ise butonun altında "Yaklaşık 240 m uzaktasın" yaz, ama butonu **kapatma** (GPS yanılabilir, sunucu karar versin).
+    - `has_area: true` (32 yer: adalar, ormanlar, korular) ise uzaklık yazma; bu yerlerde merkez noktası anlamsız, sınırın içindeyse kabul edilir.
+  - Kullanıcı bu yeri zaten gezdiyse (`nearby_places.visited` veya `my_visits`) buton yerine "Gezildi ✓ / Visited ✓" ve tarih göster.
+
+  **3. Basınca**
+  - Yeni ve taze konum al: `Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.High })`. Önbellekteki eski konumu kullanma.
+  - `supabase.functions.invoke("checkin", { body: { place_id, lat, lng, accuracy_m: coords.accuracy ?? 999, lang } })`.
+  - İstek sürerken butonu kilitle (çift tıklama iki istek göndermesin).
+
+  **4. Yanıtlar** (beklenen retler HTTP 200 + `ok: false` gelir; HTTP hataları `error` olarak döner, gövde `await error.context.json()`):
+
+  | Durum | Kullanıcıya (TR / EN) | Ne yap |
+  | --- | --- | --- |
+  | `ok: true` | "Kaydedildi! 🎉" / "Checked in! 🎉" | Butonu "Gezildi ✓" yap. `new_achievements` doluysa her rozet için tam ekran kutlama (rozet görseli + ad + açıklama). `city_progress.visited / total` ile "İstanbul: 12 / 156" göster. |
+  | `ok: true, flagged: true` | Aynı "Kaydedildi" ekranı | Kullanıcıya hata gösterme (hız kontrolüne takıldı, rozete sayılmaz). |
+  | `too_far` | "Biraz daha yaklaş (şu an {distance_m} m uzaktasın)." / "Get a little closer (you're {distance_m} m away)." | Buton açık kalsın. |
+  | `low_accuracy` | "Konum net değil. Açık bir alana çıkıp tekrar dene." / "Location isn't precise. Step into an open area and try again." | |
+  | `already_visited` | "Burayı zaten gezdin." / "You've already visited this place." | Butonu "Gezildi ✓" yap. |
+  | `rate_limited` | "Biraz yavaş! Bir dakika sonra tekrar dene." / "Slow down! Try again in a minute." | |
+  | `place_not_found` | "Bu yer bulunamadı." / "This place couldn't be found." | Paketi yenile (`city_pack`). |
+  | 401 `not_authenticated` | "Devam etmek için giriş yap." / "Sign in to continue." | Giriş formunu aç. |
+  | Ağ hatası / 500 | "Bir sorun oldu, tekrar dene." / "Something went wrong, try again." | |
+
+  **5. Sonra**
+  - Başarılı check-in'den sonra Rozetler ekranı açıksa yenilensin (yeni rozet animasyonu zaten var).
+  - Liste ve haritada gezilen yerler ayırt edilsin (ör. küçük ✓ işareti). `nearby_places` her yer için `visited` döndürüyor; çevrimdışı durum için `my_visits` sonucunu cihazda sakla.
+
+  **6. Test**
+  - Gerçek konumda: Sultanahmet'te Ayasofya'nın yanında (yarıçap 100 m) ya da Galata Kulesi'nin dibinde (60 m) dene.
+  - Uzaktan denemek için: `too_far` mesajının doğru mesafeyi gösterdiğini kontrol et (sunucu reddeder, kayıt oluşmaz).
+  - Saf mantığı (`ok`/hata kodu → mesaj ve buton durumu) `catalog.test.cjs` gibi bir teste ekle.
+- Yanıt: –
+
+### `city_pack` içine `has_area` eklendi
+- Tarih: 2026-11-19
+- Kimden: backend
+- Durum: bilgi
+- İstek: –
+- Yanıt: `city_pack.places[]` artık `has_area: boolean` içeriyor (geriye uyumlu, migration `20261119190000_city_pack_has_area.sql`). Paket içeriği değiştiği için `version` bir kez değişti; uygulama paketi bir kez yeniden indirecek. Check-in ön kontrolünde kullanılır (yukarıdaki istek).
+
 ### Canlı Supabase projesi güncel
 - Tarih: 2026-11-19
 - Kimden: backend

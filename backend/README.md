@@ -19,7 +19,8 @@ backend/supabase/
 │   ├── 20261119150000_badge_paths.sql        rozet görsel yolları
 │   ├── 20261119160000_security_fixes.sql     güvenlik denetçisi düzeltmeleri
 │   ├── 20261119170000_islands_tour_fix.sql   Adalar Turu rozet kuralı düzeltmesi
-│   └── 20261119180000_search_ranking.sql     arama sıralaması, tanınırlık puanı
+│   ├── 20261119180000_search_ranking.sql     arama sıralaması, tanınırlık puanı
+│   └── 20261119190000_city_pack_has_area.sql paket: alan tanımlı yer bilgisi
 ├── functions/badge-upload/              rozet görsellerini Storage'a yükler (.github/workflows/badges.yml)
 ├── functions/checkin/
 │   ├── index.ts                      Edge Function
