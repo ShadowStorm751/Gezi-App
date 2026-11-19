@@ -758,4 +758,280 @@ LONG = {
         "bright; it is considered one of Sinan's boldest experiments. Legend links it with the Mihrimah Sultan Mosque in "
         "Üsküdar through a romantic story about the setting of the sun and the rising of the moon. It can be combined with "
         "Chora and Tekfur Palace."),
+
+    "aya-yorgi-patrikhane-kilisesi": (6,
+        "Fener'deki Aya Yorgi Kilisesi, 1601'den bu yana Rum Ortodoks Patrikhanesi'nin merkezidir ve dünyadaki Ortodoks "
+        "Hristiyanlar için özel bir anlam taşır. Bugünkü yapı, 18. yüzyıl başındaki bir yangından sonra yeniden inşa "
+        "edilmiş, dışarıdan bakıldığında oldukça sade, bazilika planlı bir kilisedir.\n\n"
+        "Sade cephesinin aksine iç mekân, altın varaklı ahşap ikonostasisi, eski ikonaları ve patrik tahtıyla son derece "
+        "zengindir; burada bazı azizlerin kutsal emanetleri de saklanır. Kilise ibadete açık bir mekân olduğundan sessiz "
+        "olunmalı ve uygun giyinilmelidir. Fener ve Balat'ın renkli sokaklarıyla birlikte gezilebilir.",
+        "The Church of St George in Fener has been the seat of the Ecumenical Patriarchate since 1601 and holds special "
+        "meaning for Orthodox Christians worldwide. The present building, rebuilt after a fire in the early 18th century, "
+        "is a basilica that looks quite plain from outside.\n\n"
+        "In contrast to its modest façade, the interior is richly furnished with a gilded wooden iconostasis, old icons and "
+        "the patriarchal throne, and it keeps the relics of several saints. As a working place of worship it calls for "
+        "quiet and modest dress. It combines well with the colourful streets of Fener and Balat."),
+
+    "dolmabahce-camii": (6,
+        "Dolmabahçe Sarayı'nın hemen yanında, Boğaz kıyısındaki Dolmabahçe Camii, Sultan Abdülmecid'in annesi Bezmialem "
+        "Valide Sultan tarafından başlatıldı; onun ölümünden sonra Abdülmecid tarafından tamamlanarak 1855'te ibadete "
+        "açıldı. Tasarımı Garabet Balyan'a aittir.\n\n"
+        "Barok ve ampir etkileri taşıyan tek kubbeli yapı, ince uzun minareleri ve büyük pencereleriyle 19. yüzyıl "
+        "Osmanlı mimarisinin Avrupa'ya açılan yüzünü gösterir. Saray ve saat kulesiyle birlikte sahil boyunca yürürken "
+        "kolayca görülebilir; deniz kıyısından cami ile Boğaz'ı aynı karede yakalamak mümkündür.",
+        "Right beside Dolmabahçe Palace on the shore of the Bosphorus, the Dolmabahçe Mosque was begun by Bezmialem Valide "
+        "Sultan, mother of Sultan Abdülmecid, and completed after her death by Abdülmecid himself, opening for worship in "
+        "1855. It was designed by Garabet Balyan.\n\n"
+        "With baroque and Empire influences, its single dome, slender minarets and large windows show the European-facing "
+        "side of 19th-century Ottoman architecture. It is easy to take in while walking along the shore with the palace "
+        "and clock tower, and from the waterfront you can frame the mosque and the Bosphorus in a single shot."),
+
+    "eyup-sultan-camii": (6,
+        "Haliç'in kıyısında, surların dışındaki Eyüp Sultan Camii, Hz. Muhammed'in sahabesi ve sancaktarı Ebu Eyyub "
+        "el-Ensari'nin türbesinin yanında yer alır. Fatih Sultan Mehmed 1458'de burada ilk külliyeyi yaptırdı; bugünkü "
+        "cami 19. yüzyılın başında III. Selim döneminde yeniden inşa edildi. Osmanlı padişahları tahta çıktıklarında "
+        "kılıç kuşanma törenleri burada yapılırdı.\n\n"
+        "İstanbul'un en kutsal sayılan ziyaret yerlerinden biridir; özellikle cuma günleri, bayramlarda ve kandillerde "
+        "çok kalabalık olur. Çinilerle kaplı türbe ziyareti sırasında sessiz ve saygılı olunmalıdır. Çevredeki çarşı ve "
+        "tarihi mezarlıktan Pierre Loti Tepesi'ne çıkılabilir.",
+        "On the shore of the Golden Horn, outside the city walls, the Eyüp Sultan Mosque stands beside the tomb of Abu "
+        "Ayyub al-Ansari, companion and standard-bearer of the Prophet Muhammad. Mehmed II built the first complex here in "
+        "1458; the present mosque was rebuilt in the early 19th century under Selim III. Ottoman sultans were girded with "
+        "the sword here on their accession.\n\n"
+        "It is one of the most sacred places of pilgrimage in Istanbul and gets very busy on Fridays and religious "
+        "holidays. Visitors to the tiled tomb should be quiet and respectful. From the surrounding market and historic "
+        "cemetery you can walk up to Pierre Loti Hill."),
+
+    "istanbul-modern": (6,
+        "2004'te Karaköy'deki eski bir antrepoda açılan İstanbul Modern, Türkiye'nin ilk modern ve çağdaş sanat "
+        "müzesidir. 2023'ten bu yana Galataport'ta, Renzo Piano'nun tasarladığı, Boğaz'a bakan yeni binasında "
+        "hizmet verir.\n\n"
+        "Koleksiyonunda Türkiye'den modern ve çağdaş resim, heykel, fotoğraf ve video eserleri bulunur; dönemsel "
+        "sergiler ve fotoğraf galerisi sık sık yenilenir. Teras ve restorandan tarihi yarımadanın ve Boğaz'ın manzarası "
+        "görülür. Galataport sahili ve Karaköy'ün sokaklarıyla birleştirilebilir.",
+        "Opened in 2004 in a former warehouse in Karaköy, Istanbul Modern is Turkey's first museum of modern and "
+        "contemporary art. Since 2023 it has been housed in a new waterfront building designed by Renzo Piano at "
+        "Galataport.\n\n"
+        "Its collection covers modern and contemporary painting, sculpture, photography and video from Turkey, while its "
+        "temporary exhibitions and photography gallery change often. The terrace and restaurant look out over the "
+        "historic peninsula and the Bosphorus. It combines well with the Galataport promenade and the streets of Karaköy."),
+
+    "pera-muzesi": (6,
+        "Tepebaşı'ndaki Pera Müzesi, Suna ve İnan Kıraç Vakfı tarafından 2005'te açıldı. 1893'te mimar Achilleas Manussos "
+        "tarafından yapılan tarihi Bristol Oteli binasında yer alır ve İstiklal Caddesi'nin hemen yakınındadır.\n\n"
+        "En bilinen eseri Osman Hamdi Bey'in Kaplumbağa Terbiyecisi tablosudur; Oryantalist resim koleksiyonu, Anadolu "
+        "ağırlık ve ölçü aletleri ile Kütahya çini ve seramikleri de sürekli sergilenir. Üst katlardaki dönemsel "
+        "sergiler dünyaca tanınmış sanatçıları ağırlar. Galata Kulesi ve Şişhane'ye yürüme mesafesindedir.",
+        "Pera Museum in Tepebaşı was opened in 2005 by the Suna and İnan Kıraç Foundation. It occupies the historic "
+        "Bristol Hotel, built in 1893 by the architect Achilleas Manussos, just off İstiklal Avenue.\n\n"
+        "Its best-known work is Osman Hamdi Bey's The Tortoise Trainer; its collections of Orientalist painting, Anatolian "
+        "weights and measures, and Kütahya tiles and ceramics are on permanent display. The temporary exhibitions on the "
+        "upper floors host internationally renowned artists. Galata Tower and Şişhane are within walking distance."),
+
+    "camlica-camii": (6,
+        "Üsküdar'daki Çamlıca Tepesi'nde yükselen Büyük Çamlıca Camii, 2019'da açıldı ve Cumhuriyet tarihinin en büyük "
+        "camisidir. Altı minaresi ve klasik Osmanlı mimarisinden esinlenen kubbesiyle şehrin birçok noktasından görülür.\n\n"
+        "Külliyede bir İslam medeniyetleri müzesi, sanat galerisi, kütüphane ve konferans salonu da bulunur. Avlusundan "
+        "ve yakındaki Çamlıca Tepesi'nden Boğaz'ın, köprülerin ve tarihi yarımadanın geniş bir manzarası açılır; gün "
+        "batımında özellikle güzeldir. İbadet saatlerinde ziyaretçilerin saygılı olması beklenir.",
+        "Rising on Çamlıca Hill in Üsküdar, the Grand Çamlıca Mosque opened in 2019 and is the largest mosque built in the "
+        "history of the Republic. With six minarets and a dome inspired by classical Ottoman architecture, it can be seen "
+        "from many parts of the city.\n\n"
+        "The complex also houses a museum of Islamic civilisations, an art gallery, a library and a conference hall. Its "
+        "courtyard and nearby Çamlıca Hill offer sweeping views of the Bosphorus, its bridges and the historic peninsula, "
+        "especially beautiful at sunset. Visitors are expected to be respectful during prayer times."),
+
+    "cemberlitas-sutunu": (6,
+        "Divanyolu üzerindeki Çemberlitaş Sütunu, İmparator I. Konstantin'in 330'da şehri yeni başkent ilan ettiğinde "
+        "kendi adını taşıyan forumun ortasına diktirdiği anıttır. Mısır'dan getirilen mor porfir taş bloklardan "
+        "oluşur; üzerinde bir zamanlar imparatorun heykeli dururdu.\n\n"
+        "Blokları birbirine tutturan demir çemberler sütuna Türkçe adını verir; 18. yüzyıldaki büyük bir yangında "
+        "karardığı için Yanık Sütun diye de anılır. Kapalıçarşı'nın girişine çok yakındır ve tramvayla Sultanahmet'ten "
+        "gelirken kolayca görülür. Hemen yanındaki tarihi Çemberlitaş Hamamı da bilinen bir duraktır.",
+        "On Divanyolu, the Column of Constantine was raised by Emperor Constantine I in 330, when he proclaimed the city "
+        "his new capital, at the centre of the forum bearing his name. It is made of purple porphyry drums brought from "
+        "Egypt and was once topped by a statue of the emperor.\n\n"
+        "The iron hoops binding the drums give it its Turkish name, the 'hooped stone'; blackened in a great 18th-century "
+        "fire, it is also known as the Burnt Column. It is very close to an entrance of the Grand Bazaar and easy to spot "
+        "when coming by tram from Sultanahmet. The historic Çemberlitaş Bath right beside it is a well-known stop too."),
+
+    "miniaturk": (6,
+        "Haliç kıyısında, Sütlüce'de 2003'te açılan Miniatürk, Türkiye'nin ve Osmanlı coğrafyasının önemli yapılarının "
+        "küçültülmüş maketlerinin sergilendiği büyük bir açık hava minyatür parkıdır.\n\n"
+        "Ayasofya, Sümela Manastırı, Efes'teki Celsus Kütüphanesi ve Galata Kulesi gibi yüzden fazla yapının maketleri "
+        "arasında birkaç saatte geniş bir gezi yapılabilir; maketlerin yanındaki bilgi panoları yapıları kısaca anlatır. "
+        "Çocuklu aileler için özellikle keyiflidir. Açılış saatleri mevsime göre değişebileceğinden gitmeden önce "
+        "kontrol edin.",
+        "Opened in 2003 at Sütlüce on the Golden Horn, Miniatürk is a large open-air miniature park displaying scale models "
+        "of landmark buildings from Turkey and the former Ottoman lands.\n\n"
+        "Among more than a hundred models, such as Hagia Sophia, Sumela Monastery, the Library of Celsus at Ephesus and "
+        "Galata Tower, you can make a wide-ranging tour in a few hours, with information panels describing each building. "
+        "It is especially enjoyable for families with children. Opening hours can vary by season, so check before you go."),
+
+    "arap-camii": (6,
+        "Karaköy'ün arka sokaklarındaki Arap Camii, 14. yüzyılda Galata'daki Cenevizliler döneminde Dominiken rahipleri "
+        "tarafından San Domenico (Aziz Paulus) Kilisesi olarak yapıldı ve İstanbul'da günümüze ulaşan tek Gotik "
+        "kilisedir. Fetihten sonra camiye çevrildi; adını 15. yüzyılın sonunda İspanya'dan göç eden ve buraya yerleşen "
+        "Endülüslü Müslümanlardan aldığı anlatılır.\n\n"
+        "Sivri külahlı, kare planlı yüksek kulesi bir kilise çan kulesinden dönüştürülmüş minaredir ve Galata'nın "
+        "sıkışık dokusunda hâlâ kolayca seçilir. İç mekânın ahşap tavanı ve uzun dikdörtgen planı yapının kilise "
+        "geçmişini yansıtır. Galata Kulesi ve Karaköy gezisine kolayca eklenebilir.",
+        "In the backstreets of Karaköy, the Arap Mosque was built in the 14th century by Dominican friars as the Church of "
+        "San Domenico (St Paul), when Galata was a Genoese colony, and it is the only Gothic church in Istanbul to "
+        "survive. It became a mosque after the conquest and is said to take its name from Andalusian Muslims who fled "
+        "Spain and settled here at the end of the 15th century.\n\n"
+        "Its tall, square tower with a pointed roof is a church bell tower turned minaret, still easy to pick out in "
+        "Galata's dense streets. The wooden ceiling and long rectangular plan of the interior reflect its past as a church. "
+        "It is an easy addition to a walk around Galata Tower and Karaköy."),
+
+    "buyuk-saray-mozaikleri-muzesi": (6,
+        "Sultanahmet Camii'nin arkasındaki Arasta Çarşısı'nda bulunan Büyük Saray Mozaikleri Müzesi, Bizans "
+        "imparatorlarının Büyük Saray'ına ait sütunlu bir avlunun mozaik zeminleri üzerine kurulmuştur. Kazılarda "
+        "ortaya çıkan mozaikler yerinde korunarak müzeye dönüştürülmüştür.\n\n"
+        "Geç Roma dönemine tarihlenen mozaiklerde av sahneleri, çobanlar, oyun oynayan çocuklar, gerçek ve hayali "
+        "hayvanlar canlı renklerle anlatılır; bazı sahnelerin ayrıntısı olağanüstüdür. Küçük ve sakin bir müze olduğu "
+        "için Sultanahmet kalabalığından kısa bir mola olarak idealdir. Ziyaret düzenini gitmeden önce kontrol edin.",
+        "In the Arasta Bazaar behind the Blue Mosque, the Great Palace Mosaic Museum is built over the mosaic floors of a "
+        "colonnaded courtyard of the Byzantine emperors' Great Palace. The mosaics uncovered in excavations were preserved "
+        "in place and turned into a museum.\n\n"
+        "Dating from the late Roman period, the mosaics depict hunting scenes, shepherds, children at play, and real and "
+        "fantastic animals in vivid colour, some in remarkable detail. As a small, quiet museum it makes an ideal short "
+        "break from the Sultanahmet crowds. Check visiting arrangements before you go."),
+
+    "ihlamur-kasri": (7,
+        "Beşiktaş ile Nişantaşı arasındaki yeşil vadide bulunan Ihlamur Kasrı, Sultan Abdülmecid'in isteğiyle Nigoğos "
+        "Balyan tarafından 1850'lerde yapıldı. Padişahların gezinti ve dinlenme için kullandığı mesirede, tören için "
+        "kullanılan Merasim Köşkü ile maiyetin kaldığı Maiyet Köşkü olmak üzere iki yapı bulunur.\n\n"
+        "Barok süslemeli kesme taş cepheleri ve zengin döşenmiş salonlarıyla küçük ama zarif bir kasırdır. Adını aldığı "
+        "ıhlamur ağaçlarının gölgelediği bahçe ve havuz, şehrin ortasında sakin bir mola yeri sunar. Milli Saraylar'a "
+        "bağlı müze olarak hizmet verir; ziyaret günlerini gitmeden önce kontrol edin.",
+        "In a green valley between Beşiktaş and Nişantaşı, Ihlamur Pavilion was built in the 1850s by Nigoğos Balyan at the "
+        "request of Sultan Abdülmecid. The sultans' pleasure ground has two buildings: the Ceremonial Pavilion and the "
+        "Retinue Pavilion, where the entourage stayed.\n\n"
+        "With its baroque-decorated cut-stone façades and richly furnished rooms, it is small but elegant. The garden and "
+        "pool, shaded by the linden trees that give it its name, offer a quiet break in the middle of the city. It is run "
+        "as a museum by the National Palaces administration; check opening days before you go."),
+
+    "st-antuan-katolik-kilisesi": (7,
+        "İstiklal Caddesi üzerindeki St. Antuan Kilisesi, İstanbul'un en büyük ve cemaati en kalabalık Katolik "
+        "kilisesidir. Fransisken rahiplerine bağlıdır; bugünkü yapı mimar Giulio Mongeri tarafından 1906-1912 yılları "
+        "arasında Venedik neo-Gotik üslubunda inşa edildi.\n\n"
+        "Kırmızı tuğla cephesi ve avlusuyla caddenin kalabalığı içinde hemen dikkat çeker; içerideki renkli vitraylar ve "
+        "yüksek kemerler sakin bir atmosfer yaratır. Sonradan Papa XXIII. Ioannes olacak Angelo Roncalli, İstanbul'daki "
+        "görevi sırasında burada vaaz vermiştir. Ayinler sırasında ziyaretçilerin sessiz olması beklenir.",
+        "On İstiklal Avenue, the Church of St Anthony of Padua is the largest Catholic church in Istanbul and has the "
+        "biggest congregation. It is run by Franciscan friars; the present building was erected between 1906 and 1912 by "
+        "the architect Giulio Mongeri in Venetian neo-Gothic style.\n\n"
+        "Its red-brick façade and courtyard stand out amid the busy avenue, while the stained glass and tall arches inside "
+        "create a calm atmosphere. Angelo Roncalli, later Pope John XXIII, preached here during his posting in Istanbul. "
+        "Visitors are asked to be quiet during Mass."),
+
+    "ayasofya-turbeleri": (7,
+        "Ayasofya'nın güney tarafındaki bahçede yer alan türbeler, 16. ve 17. yüzyılda beş Osmanlı padişahının ve "
+        "ailelerinin yattığı yapılardır. II. Selim'in türbesi Mimar Sinan'ın eseridir; III. Murad ve III. Mehmed'in "
+        "türbeleri de buradadır. Ayasofya'nın eski vaftizhanesi de I. Mustafa ve Sultan İbrahim için türbeye "
+        "dönüştürülmüştür.\n\n"
+        "Türbelerin iç duvarları Osmanlı çini sanatının en güzel örnekleri arasında sayılan İznik çinileriyle kaplıdır; "
+        "kalem işi kubbeler ve sedef kakmalı kapılar da dikkat çeker. Ayasofya ziyaretiyle birleştirilebilir; giriş "
+        "düzeni değişebildiği için gitmeden önce kontrol edin.",
+        "In the garden on the south side of Hagia Sophia, these tombs hold five Ottoman sultans of the 16th and 17th "
+        "centuries and their families. The tomb of Selim II is the work of Mimar Sinan, and the tombs of Murad III and "
+        "Mehmed III are here too. Hagia Sophia's former baptistery was also turned into a tomb for Mustafa I and Sultan "
+        "İbrahim.\n\n"
+        "Their interiors are lined with İznik tiles counted among the finest examples of Ottoman tile art, and the painted "
+        "domes and mother-of-pearl inlaid doors are striking too. They can be combined with a visit to Hagia Sophia; entry "
+        "arrangements can change, so check before you go."),
+
+    "fatih-sultan-mehmed-turbesi": (7,
+        "İstanbul'u 1453'te fetheden Fatih Sultan Mehmed'in türbesi, Fatih Camii'nin kıble duvarının arkasındaki "
+        "hazirededir. Özgün türbe 1766 depreminde yıkıldı ve III. Mustafa döneminde barok üslupta yeniden yapıldı.\n\n"
+        "Zengin süslemeli iç mekânında padişahın sandukası, kavuğu ve dönemin hat levhaları bulunur. Hemen yanında "
+        "eşi Gülbahar Hatun'un türbesi yer alır. Özellikle cuma günleri ve fetih yıldönümü olan 29 Mayıs'ta çok sayıda "
+        "ziyaretçi gelir; ziyaret sırasında sessiz ve saygılı olunmalıdır. Fatih Camii ziyaretinin doğal bir parçasıdır.",
+        "The tomb of Mehmed II, who conquered Istanbul in 1453, stands in the graveyard behind the qibla wall of the Fatih "
+        "Mosque. The original tomb collapsed in the earthquake of 1766 and was rebuilt in baroque style under "
+        "Mustafa III.\n\n"
+        "Its richly decorated interior holds the sultan's cenotaph, his turban and calligraphic panels. The tomb of his "
+        "consort Gülbahar Hatun stands right beside it. Many visitors come, especially on Fridays and on 29 May, the "
+        "anniversary of the conquest; visitors should be quiet and respectful. It is a natural part of a visit to the "
+        "Fatih Mosque."),
+
+    "hurrem-sultan-turbesi": (7,
+        "Süleymaniye Camii'nin arkasındaki hazirede, Kanuni Sultan Süleyman'ın türbesinin yakınında bulunan Hürrem Sultan "
+        "Türbesi, 1558'de ölen Hürrem Sultan için Mimar Sinan tarafından yapıldı. Kanuni'nin eşi olan Hürrem, Osmanlı "
+        "tarihinin en etkili kadınlarından biri sayılır.\n\n"
+        "Sekizgen planlı türbenin iç duvarları, cennet bahçesini anımsatan çiçek ve ağaç motifli İznik çinileriyle "
+        "kaplıdır ve Kanuni'nin türbesiyle birlikte Sinan'ın en zarif türbelerinden biridir. Süleymaniye Camii "
+        "ziyaretinin ardından avludan kolayca ulaşılır; ziyaret düzenini gitmeden önce kontrol edin.",
+        "In the graveyard behind the Süleymaniye Mosque, near the tomb of Suleiman the Magnificent, the Tomb of Hürrem "
+        "Sultan was built by Mimar Sinan for Hürrem, who died in 1558. Suleiman's wife, known in Europe as Roxelana, is "
+        "counted among the most influential women in Ottoman history.\n\n"
+        "The interior of the octagonal tomb is lined with İznik tiles whose flowers and trees evoke the garden of "
+        "paradise, and together with Suleiman's tomb it is one of Sinan's most graceful. It is easily reached from the "
+        "courtyard after a visit to the Süleymaniye Mosque; check visiting arrangements before you go."),
+
+    "i-abdulhamid-turbesi": (7,
+        "Eminönü'nde, Bahçekapı'daki I. Abdülhamid Türbesi, padişahın 1770'lerde yaptırdığı külliyenin bir parçasıdır. "
+        "Burada 27. Osmanlı padişahı I. Abdülhamid ile oğlu IV. Mustafa yatar.\n\n"
+        "Kesme taştan, barok süslemeli yapı 18. yüzyılda Osmanlı mimarisine giren Avrupa etkilerinin güzel bir örneğidir. "
+        "Sirkeci ile Mısır Çarşısı arasındaki kalabalık ticaret sokaklarının ortasında kalan sakin bir duraktır ve "
+        "bölgede dolaşırken kısa bir ziyaret için uygundur.",
+        "At Bahçekapı in Eminönü, the Tomb of Abdülhamid I is part of the complex the sultan built in the 1770s. It holds "
+        "Abdülhamid I, the 27th Ottoman sultan, and his son Mustafa IV.\n\n"
+        "Built of cut stone with baroque decoration, it is a fine example of the European influences that entered Ottoman "
+        "architecture in the 18th century. It is a quiet stop in the middle of the busy shopping streets between Sirkeci "
+        "and the Spice Bazaar, ideal for a short visit while exploring the area."),
+
+    "ii-mahmud-turbesi": (7,
+        "Divanyolu Caddesi üzerindeki II. Mahmud Türbesi, Sultan Abdülmecid'in 1839'da ölen babası için yaptırdığı ve "
+        "1840'ta tamamlanan anıtsal bir türbedir. Burada II. Mahmud'un yanı sıra Sultan Abdülaziz ve II. Abdülhamid de "
+        "yatar.\n\n"
+        "Sekizgen planlı, ampir üslubundaki türbe büyük pencereleri ve parlak iç süslemesiyle dikkat çeker. Çevresindeki "
+        "hazirede, Osmanlı'nın son döneminden birçok devlet adamı, yazar ve sanatçının mezarı bulunur; işlemeli mezar "
+        "taşları arasında dolaşmak ilginçtir. Çemberlitaş ve Kapalıçarşı'ya birkaç dakika yürüme mesafesindedir.",
+        "On Divanyolu, the Tomb of Mahmud II is a monumental mausoleum built by Sultan Abdülmecid for his father, who died "
+        "in 1839, and completed in 1840. Besides Mahmud II, Sultans Abdülaziz and Abdülhamid II are buried here.\n\n"
+        "Octagonal and in Empire style, the tomb stands out for its large windows and bright interior decoration. The "
+        "surrounding cemetery holds the graves of many statesmen, writers and artists of the late Ottoman period, and "
+        "wandering among the carved headstones is fascinating. The Column of Constantine and the Grand Bazaar are a few "
+        "minutes' walk away."),
+
+    "kanuni-sultan-suleyman-turbesi": (7,
+        "Süleymaniye Camii'nin kıble tarafındaki hazirede bulunan Kanuni Sultan Süleyman Türbesi, 1566'da ölen padişah "
+        "için Mimar Sinan tarafından yapıldı. Türbede Kanuni'nin yanı sıra II. Süleyman ve II. Ahmed de yatar.\n\n"
+        "Sütunlu bir revakla çevrili sekizgen yapının içi, İznik çinileri, kalem işi süslemeler ve kubbeyi süsleyen "
+        "değerli taşlarla Osmanlı'nın klasik döneminin en görkemli türbelerinden biridir. Hemen yakınında Hürrem "
+        "Sultan'ın türbesi bulunur. Süleymaniye ziyaretine eklenmeli; ziyaret düzenini gitmeden önce kontrol edin.",
+        "In the graveyard on the qibla side of the Süleymaniye Mosque, the Tomb of Suleiman the Magnificent was built by "
+        "Mimar Sinan for the sultan, who died in 1566. Besides Suleiman, Suleiman II and Ahmed II are buried here.\n\n"
+        "Surrounded by a colonnaded portico, the octagonal building's interior, with İznik tiles, painted decoration and "
+        "precious stones in the dome, makes it one of the most magnificent tombs of the classical Ottoman era. The tomb of "
+        "Hürrem Sultan is close by. Add it to a visit to the Süleymaniye; check visiting arrangements before you go."),
+
+    "malta-kosku": (7,
+        "Yıldız Parkı'nın içindeki Malta Köşkü, Sultan Abdülaziz döneminde yapıldı ve adını yapımında kullanılan, "
+        "Malta'dan getirildiği anlatılan taşlardan alır. Köşk Osmanlı tarihinin bazı önemli olaylarına sahne oldu; "
+        "1881'de Mithat Paşa'nın yargılandığı Yıldız Mahkemesi köşkün yakınında kurulan bir çadırda toplandı.\n\n"
+        "Bugün kafe ve restoran olarak hizmet veren köşkün terasından park ağaçlarının arasından Boğaz görülür. Yıldız "
+        "Parkı'nda yürüyüş yaparken mola vermek için güzel bir yerdir; Çadır Köşkü de yakındadır.",
+        "Inside Yıldız Park, Malta Pavilion was built in the reign of Sultan Abdülaziz and is said to take its name from "
+        "stone brought from Malta for its construction. It witnessed some important events in Ottoman history; in 1881 "
+        "the Yıldız Court that tried Midhat Pasha sat in a tent set up near the pavilion.\n\n"
+        "Now a café and restaurant, its terrace looks out to the Bosphorus through the park's trees. It is a lovely place "
+        "to stop while walking in Yıldız Park, and Çadır Pavilion is nearby."),
+
+    "sultan-ahmed-turbesi": (7,
+        "Sultanahmet Camii'nin kuzeyinde, Sultanahmet Meydanı'na bakan Sultan Ahmed Türbesi, 1617'de ölen I. Ahmed için "
+        "caminin mimarı Sedefkâr Mehmed Ağa tarafından yapıldı. Burada I. Ahmed'in yanı sıra oğulları Genç Osman ve IV. "
+        "Murad da yatar.\n\n"
+        "Kare planlı, kubbeli türbenin iç duvarları 17. yüzyıl İznik çinileriyle kaplıdır ve sedef kakmalı ahşap işçiliği "
+        "dikkat çeker. Sultanahmet Camii ziyaretinin hemen ardından birkaç dakikada görülebilir; sessiz ve saygılı olmak "
+        "gerekir.",
+        "North of the Blue Mosque, facing Sultanahmet Square, the Tomb of Sultan Ahmed was built for Ahmed I, who died in "
+        "1617, by Sedefkâr Mehmed Agha, the mosque's architect. Besides Ahmed I, his sons Osman II and Murad IV are buried "
+        "here.\n\n"
+        "The interior of the square, domed tomb is lined with 17th-century İznik tiles, and its mother-of-pearl inlaid "
+        "woodwork is striking. It takes only a few minutes to see right after a visit to the Blue Mosque; visitors should "
+        "be quiet and respectful."),
 }
