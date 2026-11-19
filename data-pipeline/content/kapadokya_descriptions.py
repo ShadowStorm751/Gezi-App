@@ -125,6 +125,18 @@ D = {
                   "İlkbahar ve sonbahar", "Spring and autumn"),
 "kizilcukur-vadisi": ("Ortahisar yakınında, kırmızı tonlu kayaları ve gün batımı manzarasıyla Kızılçukur.",
                       "The Red Valley near Ortahisar, with reddish rocks and sunset views.", "Gün batımı", "Sunset"),
+"soganli-karabas-kilisesi": ("Soğanlı'da, 11. yüzyıl freskleriyle bölgenin en zengin süslü kiliselerinden.",
+                             "A church in Soğanlı with 11th-century frescoes, one of the most richly painted in the area."),
+"soganli-kubbeli-kilise": ("Soğanlı'da, bir peribacasının tepesine kubbe biçiminde oyulmuş, benzeri olmayan kilise.",
+                           "A unique church in Soğanlı, its dome carved into the top of a fairy chimney."),
+"soganli-sakli-kilise": ("Soğanlı'da, yamacın içine gizlendiği için uzaktan görülmeyen kaya kilisesi.",
+                         "A rock church in Soğanlı hidden in the slope, so it cannot be seen from afar."),
+"soganli-yilanli-kilise": ("Soğanlı'da, Aziz Georgios'un ejderhayla savaştığı freskiyle bilinen kaya kilisesi.",
+                           "A rock church in Soğanlı known for its fresco of St George fighting the dragon."),
+"soganli-tahtali-kilise": ("Soğanlı'da, Azize Barbara'ya adanmış, freskli kaya kilisesi.",
+                           "A rock church in Soğanlı dedicated to St Barbara, decorated with frescoes."),
+"soganli-geyikli-kilise": ("Soğanlı'da, adını geyikli bir aziz freskinden alan kaya kilisesi.",
+                           "A rock church in Soğanlı named after a fresco of a saint with a deer."),
 "soganli-vadisi": ("Kayseri'de, kayaya oyulmuş kiliseleri ve sakin köyüyle Soğanlı Vadisi.",
                    "The Soğanlı Valley in Kayseri, with rock-cut churches and a quiet village."),
 }
@@ -149,7 +161,8 @@ PERIOD = {
         "yilanli-kilise-aksaray", "aciksaray", "aziz-yuhanna-vaftizci-kilisesi-cavusin", "keslik-manastiri",
         "tokali-kilise", "selime-katedrali", "sumbullu-kilise", "purenli-seki-kilisesi", "azize-barbara-kilisesi",
         "azize-catherine-sapeli", "basil-sapeli", "elmali-kilise", "pantokrator-kilisesi", "yilanli-kilise",
-        "carikli-kilise", "goreme-deki-kiliseler-listesi", "zelve-acik-hava-muzesi", "bahattin-in-samanligi-kilise",
+        "carikli-kilise", "goreme-deki-kiliseler-listesi", "soganli-karabas-kilisesi", "soganli-kubbeli-kilise",
+        "soganli-sakli-kilise", "soganli-yilanli-kilise", "soganli-tahtali-kilise", "soganli-geyikli-kilise", "zelve-acik-hava-muzesi", "bahattin-in-samanligi-kilise",
         "mutfak-ve-kiler", "derinkuyu-yeralti-sehri", "kaymakli", "ozkonak", "mazi-yeralti-sehri", "cavusin-kalesi")},
     **{s: "Selçuklu" for s in ("sarihan-kervansarayi", "altikapi-turbesi", "nevsehir-kalesi")},
     **{s: "Beylikler" for s in ("karamanoglu-camii",)},
@@ -163,6 +176,8 @@ BUILT: dict = {}
 
 RADIUS = {
     "goreme-deki-kiliseler-listesi": 250, "ihlara-vadisi": 1500, "soganli-vadisi": 800,
+    "soganli-karabas-kilisesi": 30, "soganli-kubbeli-kilise": 25, "soganli-sakli-kilise": 25,
+    "soganli-yilanli-kilise": 30, "soganli-tahtali-kilise": 30, "soganli-geyikli-kilise": 30,
     "karanlik-kilise": 25, "tokali-kilise": 30, "elmali-kilise": 20, "carikli-kilise": 20, "yilanli-kilise": 20,
     "azize-barbara-kilisesi": 20, "azize-catherine-sapeli": 20, "basil-sapeli": 20, "pantokrator-kilisesi": 20,
     "mutfak-ve-kiler": 20,
@@ -180,7 +195,7 @@ RADIUS = {
 COORD_FIX = {
     # mustafapasa: Wikidata konumu OSM köy noktasıyla aynı (node/213138728); elle verilen tahmin 700 m güneydeydi.
     "kizilcukur-vadisi": (38.652844, 34.861366, 800),  # OSM 'Kızılçukur Vadisi' yürüyüş yolu (way/32859044)
-    "soganli-vadisi": (38.349736, 34.961323, 900),     # OSM 'Soganli Valley' (node/4629828016); köy 0,9 km güneyde
+    "soganli-vadisi": (38.349736, 34.961323, 900),     # ANA YER; kiliseler 0,4-0,8 km içinde     # OSM 'Soganli Valley' (node/4629828016); köy 0,9 km güneyde
 }
 COORD_OK = {
     "aziz-nikolas-manastiri", "kokar-kilise-aksaray", "yilanli-kilise-aksaray", "purenli-seki-kilisesi",

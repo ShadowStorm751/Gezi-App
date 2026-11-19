@@ -49,6 +49,13 @@ ADDED: Dict[str, Dict[str, Any]] = {
     "kapadokya": {
         "ihlara-vadisi": (38.2450, 34.3000, "Ihlara Vadisi", ""),
         "selime-katedrali": (38.2990, 34.2650, "Selime Katedrali", ""),
+        # Soğanlı'nın kaya kiliseleri: OSM'de var, etiketleri seçicilere uymadığı için aday listesine girmedi
+        "soganli-karabas-kilisesi": (38.348221, 34.970274, "Karabaş Kilisesi", "node/5188164523"),
+        "soganli-kubbeli-kilise": (38.348032, 34.968502, "Kubbeli Kilise", "node/5188164524"),
+        "soganli-sakli-kilise": (38.347703, 34.968801, "Saklı Kilise", "node/5188151823"),
+        "soganli-yilanli-kilise": (38.350922, 34.966764, "Yılanlı Kilise (Soğanlı)", "node/3251854185"),
+        "soganli-tahtali-kilise": (38.345168, 34.962599, "Tahtalı Kilise", "node/6734771286"),
+        "soganli-geyikli-kilise": (38.34492, 34.965489, "Geyikli Kilise", "node/6734775385"),
         "soganli-vadisi": (38.3497, 34.9613, "Soğanlı Vadisi|Soğanlı, Yeşilhisar|Soğanlı", ""),
         "kizilcukur-vadisi": (38.6580, 34.8650, "Kızılçukur|Red Valley Cappadocia|Kızılçukur Vadisi", ""),
         "mustafapasa": (38.5770, 34.8970, "Mustafapaşa", ""),

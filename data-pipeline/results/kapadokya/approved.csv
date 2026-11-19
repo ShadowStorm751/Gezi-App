@@ -54,4 +54,10 @@ passabag-vadisi,Paşabağları,Paşabağ (Monks Valley),valley,,Adı 'Paşabağl
 meskendir-valley-entrance,Meskendir Vadisi,Meskendir Valley,valley,,Adı 'Meskendir Vadisi' olacak
 ihlara-vadisi,Ihlara Vadisi,Ihlara Valley,valley,,Aday listesinde yoktu; Claude ekledi. Aksaray (Kapadokya bölgesi)
 kizilcukur-vadisi,Kızılçukur Vadisi,Red Valley,valley,,Claude ekledi; gün batımı
-soganli-vadisi,Soğanlı Vadisi,Soğanlı Valley,valley,,"Claude ekledi; Kayseri (Kapadokya bölgesi), kaya kiliseleri"
+soganli-vadisi,Soğanlı Vadisi,Soğanlı Valley,valley,,ANA YER: içinde 6 kaya kilisesi. Kayseri (Kapadokya bölgesi)
+soganli-karabas-kilisesi,Karabaş Kilisesi,Karabaş Church,church,soganli-vadisi,Soğanlı Vadisi'nin içinde; OSM'den eklendi (2026-11-20)
+soganli-kubbeli-kilise,Kubbeli Kilise,Domed Church,church,soganli-vadisi,Soğanlı Vadisi'nin içinde; OSM'den eklendi (2026-11-20)
+soganli-sakli-kilise,Saklı Kilise,Hidden Church,church,soganli-vadisi,Soğanlı Vadisi'nin içinde; OSM'den eklendi (2026-11-20)
+soganli-yilanli-kilise,Yılanlı Kilise (Soğanlı),Church of the Snakes (Soğanlı),church,soganli-vadisi,Soğanlı Vadisi'nin içinde; OSM'den eklendi (2026-11-20)
+soganli-tahtali-kilise,Tahtalı Kilise,Tahtalı Church,church,soganli-vadisi,Soğanlı Vadisi'nin içinde; OSM'den eklendi (2026-11-20)
+soganli-geyikli-kilise,Geyikli Kilise,Church of the Deer,church,soganli-vadisi,Soğanlı Vadisi'nin içinde; OSM'den eklendi (2026-11-20)

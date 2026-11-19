@@ -1,4 +1,4 @@
-# Yeni rozetler: İzmir, Bursa, Kapadokya "keşif" rozetleri (14)
+# Yeni rozetler: İzmir, Bursa, Kapadokya "keşif" rozetleri (15)
 
 Durum: **görseller yok**. Rozetler veritabanında hazır (şehir migration'ları, `badge_path` boş); mobil şimdilik yer tutucu gösterir.
 Mevcut 21 rozet Gemini ile çizildi. Aynı görünmeleri için aşağıdaki ortak üslup + her rozetin konusu Gemini'ye verilir.
@@ -28,6 +28,7 @@ Görseller gelince Claude kırpar, arka planı şeffaflaştırır, 512×512 `.we
 | `merinos-parki-kesif` | Merinos Parkı Kâşifi / Merinos Park Explorer | gri-mavi | An old red-brick textile factory with a tall chimney, surrounded by park lawns, a spool of thread. |
 | `goreme-deki-kiliseler-listesi-kesif` | Göreme Açık Hava Müzesi Kâşifi / Göreme Open-Air Museum Explorer | kiremit | Rock-cut cave church entrances in soft tuff cliffs, a Byzantine fresco of a saint glimpsed inside a doorway. |
 | `ihlara-vadisi-kesif` | Ihlara Vadisi Kâşifi / Ihlara Valley Explorer | yosun yeşili | A deep green canyon with a stream and poplar trees, small cave-church doorways in the cliff walls. |
+| `soganli-vadisi-kesif` | Soğanlı Vadisi Kâşifi / Soğanlı Valley Explorer | mor-kahve | A quiet valley with a fairy chimney whose top is carved into a small dome, cave-church doorways in the cliffs, a donkey on the path. |
 | `cavusin-kesif` | Çavuşin Kâşifi / Çavuşin Explorer | bal sarısı | A tall cliff honeycombed with old cave houses, a church carved high in the rock, a hot-air balloon in the sky. |
 
 Not: `mustafapasa`, `teos`, `emir-sultan-camii` ve `cumalikizik` ana yerlerinin içinde yalnızca 1 yer olduğu için rozetleri yok.
