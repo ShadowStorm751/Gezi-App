@@ -1,10 +1,11 @@
 import {lang,t} from './client';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {AppState, BackHandler, Linking, Pressable, StyleSheet, Text, View} from 'react-native';
 import {CameraView, useCameraPermissions} from 'expo-camera';
 import {DeviceMotion} from 'expo-sensors';
 import * as Location from 'expo-location';
 import {cameraMarkers, cameraTargets, rearCameraPitch, edgeHints, edgeArrows} from './geo';
+import CameraPhotos from './CameraPhotos';
 
 function Control({children, onPress}) {
   return <Pressable accessibilityRole="button" onPress={onPress} style={styles.control}>
@@ -14,7 +15,15 @@ function Control({children, onPress}) {
 
 export default function DiscoveryCamera({places, trackedId, onStopTracking, onSelect, onBack}) {
   const [permission, requestCamera] = useCameraPermissions();
-  const [active, setActive] = useState(AppState.currentState !== 'background');
+  const [foreground, setActive] = useState(AppState.currentState !== 'background');
+  const [photosOpen, setPhotosOpen] = useState(false);
+  const active = foreground && !photosOpen;
+  const camera = useRef(null);
+  const [ready, setReady] = useState(false);
+  const attachCamera = useCallback(view => {
+    camera.current = view;
+    if (!view) setReady(false);
+  }, []);
   const [coords, setCoords] = useState(null);
   const [heading, setHeading] = useState(null);
   const [issue, setIssue] = useState('');
@@ -101,7 +110,8 @@ export default function DiscoveryCamera({places, trackedId, onStopTracking, onSe
   const bubbleWidth = Math.min(208, Math.max(0, width - 24));
   return <View style={styles.screen} onLayout={e => setSize(e.nativeEvent.layout)}>
     {active && permission?.granted && !lensError &&
-      <CameraView style={StyleSheet.absoluteFill} facing="back" onMountError={() => setLensError(true)}/>}
+      <CameraView ref={attachCamera} style={StyleSheet.absoluteFill} facing="back" onCameraReady={() => setReady(true)}
+        onMountError={() => setLensError(true)}/>}
     <View style={styles.top}>
       <Control onPress={onBack}>{t("Keşfet’e dön","Back to Explore")}</Control>
       {heading !== null && permission?.granted && <Text style={styles.chip}>{Math.round(heading) % 360}°</Text>}
@@ -130,6 +140,8 @@ export default function DiscoveryCamera({places, trackedId, onStopTracking, onSe
         {!!issue && <Control onPress={() => Linking.openSettings()}>{t("Ayarları aç","Open settings")}</Control>}
       </View>
     </>}
+    <CameraPhotos camera={camera} ready={active && ready && !!permission?.granted && !lensError}
+      onMediaOpen={setPhotosOpen}/>
   </View>;
 }
 const styles = StyleSheet.create({
@@ -138,5 +150,5 @@ const styles = StyleSheet.create({
   chip:{backgroundColor:'#173b39dd',padding:10,borderRadius:12,color:'white'},
   center:{margin:24,marginTop:'25%',gap:14}, title:{fontSize:30,color:'white',fontFamily:'serif'},
   light:{fontSize:16,color:'#faf9ef'}, bubble:{position:'absolute',backgroundColor:'#113638ed',borderWidth:1.5,borderColor:'#92e8cb',borderRadius:26,paddingVertical:9,paddingHorizontal:16},
-  place:{color:'#fff9e9',fontSize:17,fontWeight:'600'}, bottom:{position:'absolute',bottom:16,left:16,right:16,gap:6,backgroundColor:'#102b2ae8',borderRadius:16,padding:15}
+  place:{color:'#fff9e9',fontSize:17,fontWeight:'600'}, bottom:{position:'absolute',bottom:100,left:16,right:16,gap:6,backgroundColor:'#102b2ae8',borderRadius:16,padding:15}
 });

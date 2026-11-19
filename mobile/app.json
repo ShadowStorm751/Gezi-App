@@ -13,6 +13,8 @@
     },
     "plugins": [
       ["expo-sensors", {"motionPermission":"Telefonu eğdiğinde tarihi yer etiketlerini kamera görüntüsünde hizala."}],
+      ["expo-image-picker", {"photosPermission":"Galeriden seçtiğin fotoğrafı Gezi içinde görüntüle.","microphonePermission":false,"cameraPermission":"Çevreni keşfetmek ve fotoğraf çekmek için kamerayı kullan."}],
+      ["expo-media-library", {"photosPermission":"Galeriden seçtiğin fotoğrafı Gezi içinde görüntüle.","savePhotosPermission":"Çektiğin fotoğrafı telefonunun galerisine kaydet.","granularPermissions":[]}],
       ["expo-camera", {"cameraPermission":"Çevrendeki tarihi yerlerin yönünü kamera görüntüsünde göster.", "recordAudioAndroid":false}],
       [
         "expo-location",
