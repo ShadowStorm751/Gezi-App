@@ -1,0 +1,99 @@
+ok
+zaman: 2026-11-19T19:44:01Z
+çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44601282537
+---
+CREATE DATABASE
+ALTER DATABASE
+== Şehir başına yer sayısı (yayında / toplam)
+   slug    | yayinda | toplam | ic_yer | fotografli 
+-----------+---------+--------+--------+------------
+ bursa     |       0 |     69 |     19 |         47
+ istanbul  |     156 |    156 |      0 |        133
+ izmir     |       0 |    123 |     32 |        101
+ kapadokya |       0 |     56 |     21 |         40
+(4 rows)
+
+== TR+EN adı ve kısa açıklaması eksik yer (0 olmalı)
+ slug 
+------
+(0 rows)
+
+== Ana yerler ve iç yer sayıları
+            ana_yer            | ic_yer 
+-------------------------------+--------
+ birgi                         |      2
+ bursa-kapalicarsi             |      4
+ bursa-muradiye-camii          |      6
+ cavusin                       |      2
+ cumalikizik                   |      1
+ efes                          |     11
+ emir-sultan-camii             |      1
+ gediz-deltasi                 |      2
+ golyazi-adasi                 |      3
+ goreme-deki-kiliseler-listesi |     10
+ ihlara-vadisi                 |      8
+ kemeralti-carsisi             |      9
+ kulturpark                    |      2
+ merinos-parki                 |      2
+ mustafapasa                   |      1
+ pergamon                      |      5
+ teos                          |      1
+ tirilye                       |      2
+(18 rows)
+
+== Yeni kategoriler ve keşif rozetleri
+  slug   |    kind    |    name    
+---------+------------+------------
+ village | historical | Tarihi Köy
+ valley  | nature     | Vadi
+(2 rows)
+
+                slug                 | yer |                 name                 
+-------------------------------------+-----+--------------------------------------
+ birgi-kesif                         |   3 | Birgi Kâşifi
+ bursa-kapalicarsi-kesif             |   5 | Bursa Kapalıçarşı ve Bedesten Kâşifi
+ bursa-muradiye-camii-kesif          |   7 | Muradiye Külliyesi Kâşifi
+ cavusin-kesif                       |   3 | Çavuşin Kâşifi
+ efes-kesif                          |  12 | Efes Kâşifi
+ gediz-deltasi-kesif                 |   3 | Gediz Deltası Kâşifi
+ golyazi-adasi-kesif                 |   4 | Gölyazı Kâşifi
+ goreme-deki-kiliseler-listesi-kesif |  11 | Göreme Açık Hava Müzesi Kâşifi
+ ihlara-vadisi-kesif                 |   9 | Ihlara Vadisi Kâşifi
+ kemeralti-carsisi-kesif             |  10 | Kemeraltı Çarşısı Kâşifi
+ kulturpark-kesif                    |   3 | Kültürpark Kâşifi
+ merinos-parki-kesif                 |   3 | Merinos Parkı Kâşifi
+ pergamon-kesif                      |   6 | Pergamon Kâşifi
+ tirilye-kesif                       |   3 | Tirilye Kâşifi
+(14 rows)
+
+== Rozet kurallarındaki slug'lar var mı (0 olmalı)
+ slug | eksik 
+------+-------
+(0 rows)
+
+== Yayınlama denemesi (geri alınır): place_detail ve city_pack
+BEGIN
+UPDATE 248
+ efes_ic_yer | efes_children |   ad    
+-------------+---------------+---------
+ 11          |            11 | Ephesus
+(1 row)
+
+                                 celsus_ana_yer                                 
+--------------------------------------------------------------------------------
+ {"id": "b614d075-7741-483d-bbf6-43ceb8aaa4c6", "name": "Efes", "slug": "efes"}
+(1 row)
+
+   slug    | paket_yer | paket_ana_yer 
+-----------+-----------+---------------
+ bursa     |        69 |             7
+ istanbul  |       156 |             0
+ izmir     |       123 |             7
+ kapadokya |        56 |             4
+(4 rows)
+
+ROLLBACK
+== Tek seviye kuralı (hata beklenir, yakalanır)
+psql:backend/supabase/tests/ci_checks.sql:61: NOTICE:  beklenen hata: place kizil-avlu : ana yerin kendisi başka bir yerin içinde olamaz (tek seviye)
+DO
+TAMAM
