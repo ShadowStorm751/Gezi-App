@@ -2,7 +2,7 @@
 
 ## `badges/` — rozet görselleri
 
-24 rozet, `<rozet slug'ı>.webp`, 512×512, şeffaf arka plan. Gemini ile üretildi (2026-11-19), Claude tarafından kırpılıp şeffaflaştırıldı.
+26 rozet, `<rozet slug'ı>.webp`, 512×512, şeffaf arka plan. Gemini ile üretildi (2026-11-19), Claude tarafından kırpılıp şeffaflaştırıldı.
 
 - Veritabanında `achievements.badge_path` = `<slug>.webp` (migration `20261119150000_badge_paths.sql`). Aynı dosyalar Supabase Storage'daki `badges` bucket'ına yüklenir.
 - Mobil uygulama bu dosyaları paketine de koyabilir (çevrimdışı çalışır, ağ isteği gerekmez). Paketinde olmayan yeni bir rozet gelirse `badge_path` ile Storage'dan çeker, o da yoksa kategoriye göre bir ikon gösterir.

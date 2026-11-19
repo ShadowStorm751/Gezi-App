@@ -1,9 +1,11 @@
 // Rozet görsellerini 'badges' bucket'ına yükler. Gizli anahtar gerektirmez:
-// yalnızca aşağıdaki 24 dosya, içeriği birebir aynıysa (SHA-256) kabul edilir.
+// yalnızca aşağıdaki 26 dosya, içeriği birebir aynıysa (SHA-256) kabul edilir.
 // Başka bir dosya veya değiştirilmiş içerik 403 döner. Kullanan: .github/workflows/badges.yml
 import { createClient } from "npm:@supabase/supabase-js@2";
 
 const ALLOWED: Record<string, string> = {
+  "first-friend.webp": "2189fbbf248daa168267491005befe3926bb79bb1197e87482212998e9ce9ee5",
+  "travel-crew.webp": "beed87cb6a7e74031fce997539cfdc16b1f30402b795734a89f8d61c4e5fcf5f",
   "route-first.webp": "348dfa7f5e2f463b974d8e4611fff29448a3b5ae17d95bad0aa2ffca50803713",
   "route-master.webp": "187e4f077695bdcdbd4439ea3c465350a16600ec84f9f4beae677cd399040ae5",
   "city-helper.webp": "6917bc8864ac26e16d02dd3cb4f0a891c7add2cdb659b785b6bfc42691409730",
