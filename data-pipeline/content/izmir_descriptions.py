@@ -335,3 +335,10 @@ COORD_OK = {
 PHOTO_EXCLUDE = {
     "bergama-zeus-sunagi": "fotoğraf Berlin'deki sunağı gösteriyor; burada yalnızca temeli var",
 }
+
+# Commons yedek aramasında bulunup elle bakınca yanlış çıkan dosyalar (photos.py bir sonrakini dener)
+PHOTO_REJECT_FILES = {
+    "Ephesos Byzantine palace plan.png": "fotoğraf değil, plan çizimi",
+    "Branches of a tree in Ekmeksiz beach.jpg": "yalnızca ağaç dalları",
+    "35930 Alaçatı Belediyesi-Çeşme-İzmir, Turkey - panoramio (39).jpg": "plajı göstermiyor olabilir",
+}

@@ -127,7 +127,7 @@ class ChunkPlanTests(unittest.TestCase):
     def test_cappadocia_extra_boxes_unclipped(self):
         plan = cities.chunk_plan(CAPPADOCIA)
         unclipped = {b for _, _, b, clip in plan if not clip}
-        self.assertEqual(unclipped, {(38.20, 34.20, 38.33, 34.34), (38.32, 35.04, 38.37, 35.13)})
+        self.assertEqual(unclipped, {(38.20, 34.20, 38.33, 34.34), (38.31, 34.92, 38.38, 35.00)})
 
     def test_point_in_rings(self):
         sq = [(0.0, 0.0), (2.0, 0.0), (2.0, 2.0), (0.0, 2.0), (0.0, 0.0)]

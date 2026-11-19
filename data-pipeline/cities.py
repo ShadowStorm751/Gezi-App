@@ -115,9 +115,10 @@ CITIES: Dict[str, City] = {
         slug="kapadokya",
         names={"tr": "Kapadokya", "en": "Cappadocia"},
         # Kapadokya bir il değil: Nevşehir ili + Ihlara Vadisi-Selime (Aksaray) + Soğanlı (Kayseri).
+        # Soğanlı kutusu 2026-11-20 düzeltildi (ilk hali 9 km doğudaydı; osm_lookup.json).
         province="Nevşehir",
         area_defs=_province("Nevşehir", "nev"),
-        regions=("area.nev", "38.20,34.20,38.33,34.34", "38.32,35.04,38.37,35.13"),
+        regions=("area.nev", "38.20,34.20,38.33,34.34", "38.31,34.92,38.38,35.00"),
         extra_selectors=(
             'nwr["natural"="valley"]["name"]',
             'nwr["natural"~"^(rock|stone|cliff|cave_entrance)$"]["name"]',

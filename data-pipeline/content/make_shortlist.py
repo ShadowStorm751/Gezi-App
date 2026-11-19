@@ -49,7 +49,7 @@ ADDED: Dict[str, Dict[str, Any]] = {
     "kapadokya": {
         "ihlara-vadisi": (38.2450, 34.3000, "Ihlara Vadisi", ""),
         "selime-katedrali": (38.2990, 34.2650, "Selime Katedrali", ""),
-        "soganli-vadisi": (38.3450, 35.0750, "Soğanlı Vadisi|Soğanlı, Yeşilhisar|Soğanlı", ""),
+        "soganli-vadisi": (38.3497, 34.9613, "Soğanlı Vadisi|Soğanlı, Yeşilhisar|Soğanlı", ""),
         "kizilcukur-vadisi": (38.6580, 34.8650, "Kızılçukur|Red Valley Cappadocia|Kızılçukur Vadisi", ""),
         "mustafapasa": (38.5770, 34.8970, "Mustafapaşa", ""),
         "cavusin": (38.6700, 34.8400, "Çavuşin", ""),

@@ -219,8 +219,17 @@ COORD_OK = {
     "iznik-konsil",                                   # Wikidata koordinatı kaba (40.43, 29.72); OSM göldeki bazilika
     "uludag-milli-parki", "karacabey-longoz-ormanlari", "sadagi-kanyonu-tabiat-parki",  # alan sınırıyla check-in
 }
-# Misi: Wikidata'daki Gümüştepe kaydı kullanıldı (tahminden 1,9 km kuzeyde); sahada doğrulanmalı.
-RADIUS["misi"] = 500
+# Misi: Wikidata'daki Gümüştepe kaydı; OSM'deki köy noktasıyla aynı (osm_lookup.json, node/4430860411).
 PHOTO_EXCLUDE = {
     "cumalikizik-etnografya-muzesi": "fotoğraf köyün kendisi (Cumalıkızık ile aynı)",
+}
+
+# Commons yedek aramasında bulunup elle bakınca yanlış çıkan dosyalar (photos.py bir sonrakini dener)
+PHOTO_REJECT_FILES = {
+    "Tofaş umurbey bilgi parkı bursa - panoramio (2).jpg": "başka yer (Umurbey Bilgi Parkı)",
+    "Buildings in İznik 6.jpeg": "surları göstermiyor",
+    "GAZİ ORHAN CAMİİ BURSA - panoramio.jpg": "Orhan Gazi Camii, çarşı değil",
+    "Karagöz Müzesi.jpg": "müze, anıt mezar değil",
+    "Şirin Hatun Türbesi 2017-06-30 19.09.10 1791298002.JPG": "başka türbe",
+    "Atatürk Heykeli (Mudanya) 2026-05-25 15.30.08 1783188533.jpeg": "heykel, sahil değil",
 }

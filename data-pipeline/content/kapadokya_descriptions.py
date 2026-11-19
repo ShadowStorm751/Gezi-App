@@ -178,9 +178,9 @@ RADIUS = {
 
 # Koordinat kontrolü (coords.json, 2026-11-19)
 COORD_FIX = {
-    "mustafapasa": (38.577500, 34.896000, 600),        # eski köy merkezi (Aziz Nikolas ve Konstantin-Helena yanı)
-    "kizilcukur-vadisi": (38.658000, 34.865000, 700),  # Wikidata'da bulunamadı; yaklaşık, sahada doğrulanmalı
-    "soganli-vadisi": (38.345000, 35.075000, 900),     # Wikidata'da bulunamadı; yaklaşık, sahada doğrulanmalı
+    # mustafapasa: Wikidata konumu OSM köy noktasıyla aynı (node/213138728); elle verilen tahmin 700 m güneydeydi.
+    "kizilcukur-vadisi": (38.652844, 34.861366, 800),  # OSM 'Kızılçukur Vadisi' yürüyüş yolu (way/32859044)
+    "soganli-vadisi": (38.349736, 34.961323, 900),     # OSM 'Soganli Valley' (node/4629828016); köy 0,9 km güneyde
 }
 COORD_OK = {
     "aziz-nikolas-manastiri", "kokar-kilise-aksaray", "yilanli-kilise-aksaray", "purenli-seki-kilisesi",

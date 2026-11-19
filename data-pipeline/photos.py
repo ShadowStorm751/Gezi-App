@@ -198,6 +198,9 @@ GENERIC_WORDS = {
     "koyu", "tepesi", "tepe", "kalesi", "adasi", "parki", "bahcesi", "turbesi", "hani", "han", "sapeli",
     "seyir", "noktasi", "tarihi", "eski", "antik", "buyuk", "kucuk", "sarayi", "valley", "beach", "church",
     "museum", "the", "and", "yeralti", "sehri", "kenti", "alani", "tabiat", "milli", "acik", "hava",
+    # şehir ve ilçe adları tek başına yerin kendisini göstermez
+    "izmir", "bursa", "iznik", "mudanya", "nevsehir", "kapadokya", "cappadocia", "turkey", "turkiye",
+    "hatun", "sultan", "gazi", "surlari", "grand",
 }
 
 
@@ -241,8 +244,10 @@ def is_photo_file(title: str) -> bool:
     return bool(re.search(r"\.(jpe?g|png|webp)$", title, re.I))
 
 
-def commons_fallback(s: Dict[str, Any], entity: Optional[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
-    """Önce kaydın Commons kategorisi, sonra adı dosya adında geçen yakındaki fotoğraflar."""
+def commons_fallback(s: Dict[str, Any], entity: Optional[Dict[str, Any]],
+                     reject: frozenset = frozenset()) -> Optional[Dict[str, Any]]:
+    """Önce kaydın Commons kategorisi, sonra adı dosya adında geçen yakındaki fotoğraflar.
+    reject: elle bakılıp yanlış bulunan dosya adları (önek olmadan)."""
     kw = name_keywords(s["ad_tr"], s.get("ad_en", ""))
     candidates: List[tuple] = []
     cat = entity_commons_category(entity) if entity else None
@@ -253,6 +258,7 @@ def commons_fallback(s: Dict[str, Any], entity: Optional[Dict[str, Any]]) -> Opt
         hits = sorted(commons_geosearch(float(s["enlem"]), float(s["boylam"]), radius), key=lambda h: h.get("dist", 0))
         candidates += [("commons-yakin", h["title"]) for h in hits
                        if is_photo_file(h["title"]) and title_matches(h["title"], kw)]
+    candidates = [(src, t) for src, t in candidates if t.removeprefix("File:") not in reject]
     p.log(f"  yedek yol {s['ad_tr']}: kategori={cat or '-'} aday={len(candidates)} sözcük={kw}")
     if not candidates:
         return None
@@ -283,9 +289,11 @@ def main(argv: Optional[List[str]] = None) -> int:
                     help="Wikidata'da görseli olmayan yerler için Commons kategorisi ve yakındaki dosyalar")
     args = ap.parse_args(argv)
     try:
-        DROPPED = importlib.import_module(f"{args.city}_descriptions").DROPPED
+        desc = importlib.import_module(f"{args.city}_descriptions")
+        DROPPED = desc.DROPPED
+        REJECT = frozenset(getattr(desc, "PHOTO_REJECT_FILES", {}))
     except ModuleNotFoundError:
-        DROPPED = {}
+        DROPPED, REJECT = {}, frozenset()
     rdir = city_results(args.city)
 
     shortlist = json.loads((rdir / "shortlist.json").read_text(encoding="utf-8"))
@@ -335,7 +343,7 @@ def main(argv: Optional[List[str]] = None) -> int:
             if slug in photos:
                 continue
             qid = s.get("wikidata") or found_by_search.get(slug)
-            info = commons_fallback(s, entities.get(qid) if qid else None)
+            info = commons_fallback(s, entities.get(qid) if qid else None, REJECT)
             if info:
                 photos[slug] = info
                 fallback[slug] = f"{info['kaynak']}: {info['dosya']}"
