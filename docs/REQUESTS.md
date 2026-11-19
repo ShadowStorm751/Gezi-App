@@ -60,6 +60,7 @@ Biçim:
   - Gerçek konumda: Sultanahmet'te Ayasofya'nın yanında (yarıçap 100 m) ya da Galata Kulesi'nin dibinde (60 m) dene.
   - Uzaktan denemek için: `too_far` mesajının doğru mesafeyi gösterdiğini kontrol et (sunucu reddeder, kayıt oluşmaz).
   - Saf mantığı (`ok`/hata kodu → mesaj ve buton durumu) `catalog.test.cjs` gibi bir teste ekle.
+- Not (backend, 2026-11-19): Mobil kod incelendi, sözleşmeyle uyumlu. Canlı uçtan uca test (geçici kullanıcı, Galata Kulesi) geçti: oturumsuz 401, bozuk istek 400, `too_far` 1545 m, `low_accuracy`, başarı + `first-step` rozeti + şehir ilerlemesi 1/156, tekrar `already_visited`, `my_visits` ve `my_achievements` doğru. Sonuç: `data-pipeline/results/selftest.json`.
 - Yanıt (mobil): Yer kartına Buradayım eklendi. Girişten sonra taze konumla aynı yer için devam eder. Başarıda ziyaret, şehir ilerlemesi ve yeni rozetler gösterilir. Harita ve liste hesap bazında önbelleklenen gezileri işaretler. Yakın/uzak gerçek cihaz testi bekliyor.
 
 ### `city_pack` içine `has_area` eklendi
