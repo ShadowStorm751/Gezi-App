@@ -77,7 +77,9 @@ python content/build_city.py izmir --out ../backend/supabase/migrations/<zaman>_
 | `kapadokya` | Nevşehir ili + Ihlara/Selime (Aksaray) + Soğanlı (Kayseri) | Ek etiketler: vadi, kaya oluşumu, kaya kiliseleri, turistik yerler; yeni kategori `valley` |
 
 - Sonuçlar: İstanbul `results/`, diğer şehirler `results/<şehir>/` (candidates.csv, areas.json, ham veri, shortlist.json, photos.json).
-- GitHub'da: `run-request.txt` / `photos-request.txt` içine `Şehirler: izmir bursa kapadokya` satırı yazılır; main ya da `data/*` dalına yüklenince iş çalışır ve sonucu o dala commit'ler.
+- GitHub'da: `run-request.txt` / `photos-request.txt` içine `Şehirler: izmir` satırı yazılır; main ya da `data/*` dalına yüklenince iş çalışır ve sonucu o dala commit'ler. Büyük illeri **tek tek** çalıştır: iş en fazla 40 dakika sürer, aynı dalda yeni istek eskisini iptal eder.
+- Her çalıştırma, başarısız olsa da, `results/<şehir>/status.txt` yazar: ilk satır `ok` ya da `failed`, sonra zaman, sayılar ya da hatanın son satırları ve çalıştırmanın adresi.
+- Büyük illerde (`chunked`) Overpass'a her etiket grubu ayrı sorgulanır; alan sınırı gerekmeyen gruplar `out center` ile gelir. Bütün denemeler için toplam süre sınırı var (`fetch --budget-min`, varsayılan 20).
 - Açıklamalar: `content/<şehir>_descriptions.py` (İstanbul'la aynı biçim; isteğe bağlı `COORD_FIX`, `PHOTO_EXCLUDE`).
 - Migration: `content/build_city.py` şehir kaydı + gerekiyorsa yeni kategori + yerler + fotoğraflar üretir. Yeni şehirlerin yerleri **gizli** eklenir (`is_published = false`); var olan migration dosyasının üzerine yazmaz.
 

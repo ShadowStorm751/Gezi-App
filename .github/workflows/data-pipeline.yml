@@ -2,15 +2,17 @@
 # Tetikleme: data-pipeline/run-request.txt dosyası değişip main'e (ya da data/* dalına) yüklendiğinde
 # ya da GitHub'da Actions -> "Veri hattı" -> "Run workflow" ile.
 # Hangi şehirler: run-request.txt içindeki "Şehirler:" satırı (yoksa istanbul) ya da elle çalıştırmada "cities".
+# Büyük illeri tek tek çalıştır (süre sınırı 40 dk).
 # Sonuç: İstanbul data-pipeline/results/, diğer şehirler data-pipeline/results/<şehir>/ klasörüne
-# candidates.csv ve areas.json olarak, tetikleyen dala commit'lenir.
+# candidates.csv, areas.json ve status.txt olarak, tetikleyen dala commit'lenir.
+# status.txt her çalıştırmada yazılır (başarısız ya da zaman aşımı olsa da): ilk satır ok | failed.
 name: Veri hattı
 
 on:
   workflow_dispatch:
     inputs:
       cities:
-        description: "Şehirler (boşlukla ayrılmış, ör. izmir bursa kapadokya)"
+        description: "Şehirler (boşlukla ayrılmış, ör. izmir)"
         required: false
         default: "istanbul"
   push:
@@ -20,14 +22,15 @@ on:
 permissions:
   contents: write
 
+# Aynı dalda yeni istek eskisini iptal eder.
 concurrency:
   group: data-pipeline-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   candidates:
     runs-on: ubuntu-latest
-    timeout-minutes: 150
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
 
@@ -53,44 +56,55 @@ jobs:
           echo "list=$cities" >> "$GITHUB_OUTPUT"
 
       - name: OSM ve Wikidata'dan indir, aday listesini üret
+        timeout-minutes: 30
         env:
           CITIES: ${{ steps.cities.outputs.list }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
+          set -o pipefail
+          now() { date -u +%Y-%m-%dT%H:%M:%SZ; }
           failed=""
           for city in $CITIES; do
             if [ "$city" = "istanbul" ]; then out=data-pipeline/output; res=data-pipeline/results;
             else out=data-pipeline/output/$city; res=data-pipeline/results/$city; fi
+            mkdir -p "$out" "$res/raw"
+            printf 'running\nbaşladı: %s\nçalıştırma: %s\n' "$(now)" "$RUN_URL" > "$res/status.txt"
             echo "::group::$city"
-            if ! python data-pipeline/pipeline.py --city "$city" --out "$out" fetch \
-               || ! python data-pipeline/pipeline.py --city "$city" --out "$out" candidates; then
-              echo "::error::$city başarısız; diğer şehirlere devam"
-              failed="$failed $city"; echo "::endgroup::"; continue
+            if python data-pipeline/pipeline.py --city "$city" --out "$out" fetch --budget-min 22 2>&1 | tee "$out/log.txt" \
+               && python data-pipeline/pipeline.py --city "$city" --out "$out" candidates 2>&1 | tee -a "$out/log.txt"; then
+              cp "$out/candidates.csv" "$out/areas.json" "$res/"
+              gzip -c "$out/osm_raw.json" > "$res/raw/osm_raw.json.gz"
+              gzip -c "$out/wikidata.json" > "$res/raw/wikidata.json.gz"
+              osm=$(python -c "import json,sys;print(len(json.load(open(sys.argv[1]))['elements']))" "$out/osm_raw.json")
+              wd=$(python -c "import json,sys;print(len(json.load(open(sys.argv[1]))))" "$out/wikidata.json")
+              n=$(( $(wc -l < "$out/candidates.csv") - 1 ))
+              printf 'osm_elements=%s\nwikidata_entities=%s\n' "$osm" "$wd" > "$res/run-info.txt"
+              printf 'ok\nbitti: %s\nosm_elements=%s wikidata=%s adaylar=%s\nçalıştırma: %s\n' "$(now)" "$osm" "$wd" "$n" "$RUN_URL" > "$res/status.txt"
+            else
+              { echo "failed"; echo "bitti: $(now)"; echo "çalıştırma: $RUN_URL"; echo "--- son satırlar ---";
+                tail -n 15 "$out/log.txt"; } > "$res/status.txt"
+              echo "::error::$city başarısız"
+              failed="$failed $city"
             fi
-            mkdir -p "$res/raw"
-            cp "$out/candidates.csv" "$out/areas.json" "$res/"
-            gzip -c "$out/osm_raw.json" > "$res/raw/osm_raw.json.gz"
-            gzip -c "$out/wikidata.json" > "$res/raw/wikidata.json.gz"
-            OUT="$out" RES="$res" python - <<'PY'
-          import json, os, pathlib
-          out, res = pathlib.Path(os.environ["OUT"]), pathlib.Path(os.environ["RES"])
-          osm = json.loads((out / "osm_raw.json").read_text(encoding="utf-8"))
-          wd = json.loads((out / "wikidata.json").read_text(encoding="utf-8"))
-          (res / "run-info.txt").write_text(
-              f"osm_elements={len(osm.get('elements', []))}\nwikidata_entities={len(wd)}\n", encoding="utf-8")
-          PY
             echo "::endgroup::"
-            sleep 30  # Overpass sunucusuna nefes aldır
           done
-          echo "failed=$failed" >> "$GITHUB_ENV"
+          [ -z "$failed" ]
 
       - name: Sonuçları kaydet
+        if: always()
         env:
           CITIES: ${{ steps.cities.outputs.list }}
         run: |
+          # Zaman aşımı ya da iptal: hâlâ "running" diyen durum dosyalarını "failed" yap.
+          for f in data-pipeline/results/status.txt data-pipeline/results/*/status.txt; do
+            [ -f "$f" ] && [ "$(head -1 "$f")" = "running" ] || continue
+            { echo "failed"; echo "bitti: $(date -u +%Y-%m-%dT%H:%M:%SZ)";
+              echo "neden: adım zaman aşımına uğradı ya da iptal edildi"; tail -n +2 "$f"; } > "$f.tmp"
+            mv "$f.tmp" "$f"
+          done
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data-pipeline/results
-          git commit -m "Veri hattı: aday listesi güncellendi ($CITIES)" || echo "Değişiklik yok"
+          git commit -m "Veri hattı: aday listesi ($CITIES)" || echo "Değişiklik yok"
           git pull --rebase
           git push
-          if [ -n "$failed" ]; then echo "::error::Başarısız şehirler:$failed"; exit 1; fi
