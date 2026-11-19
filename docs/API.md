@@ -376,10 +376,10 @@ await supabase.rpc("search_users", { query: "ay", max_results: 10 });
 //    Herkese açık profiller adın başıyla (en az 2 harf) bulunur; gizli profil (is_public=false) yalnızca tam adla.
 
 await supabase.rpc("send_friend_request", { username: "ayse" });
-// -> { ok, status: "pending" }   karşı taraf sana zaten istek gönderdiyse { ok, status: "accepted" }
+// -> { ok, status: "pending" }   karşı taraf sana zaten istek gönderdiyse { ok, status: "accepted", new_achievements }
 
 await supabase.rpc("respond_friend_request", { username: "ayse", accept: true });
-// -> { ok, status: "accepted" | "declined" }
+// -> { ok, status: "accepted" | "declined", new_achievements? }
 
 await supabase.rpc("remove_friend", { username: "ayse" }); // arkadaşlıktan çıkar ya da gönderdiğin isteği geri al
 
@@ -396,6 +396,7 @@ await supabase.rpc("friends_leaderboard", { period: "week", city_slug: null });
 - Avatar: `avatar_path` Storage `avatars` bucket'ındaki yol; herkese açık adresi `supabase.storage.from("avatars").getPublicUrl(avatar_path)`.
 - İstek göndermek için önce kullanıcı adı seçilmiş olmalı (`update_profile`).
 - Sınırlar: günde 30 istek, en fazla 500 arkadaş.
+- Arkadaşlık kabul edilince yanıtta `new_achievements` (rozet slug listesi, ör. `["first-friend"]`) gelir; check-in'deki gibi rozet kutlaması gösterin. Rozetler: `first-friend` (Gezi Arkadaşı, 1 arkadaş), `travel-crew` (Gezi Ekibi, 10 arkadaş). İsteği gönderen taraf rozetini arka planda alır; `my_achievements` ile görür.
 
 | `error` | Anlamı | Önerilen mesaj (TR) |
 | --- | --- | --- |

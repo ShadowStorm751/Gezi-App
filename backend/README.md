@@ -30,7 +30,8 @@ backend/supabase/
 │   ├── 20261119260000_routes.sql             hazır rotalar: tablolar, RPC'ler, rota rozetleri
 │   ├── 20261119270000_istanbul_routes.sql    İstanbul'un 11 rotası (üretilir: content/istanbul_routes.py)
 │   ├── 20261119280000_route_badge_paths.sql  rota rozetlerinin görsel yolları
-│   └── 20261119290000_friends.sql            arkadaşlık, kullanıcı arama, arkadaş sıralaması
+│   ├── 20261119290000_friends.sql            arkadaşlık, kullanıcı arama, arkadaş sıralaması
+│   └── 20261119300000_social_badges.sql      'Gezi Arkadaşı' ve 'Gezi Ekibi' rozetleri
 ├── functions/badge-upload/              rozet görsellerini Storage'a yükler (.github/workflows/badges.yml)
 ├── functions/checkin/
 │   ├── index.ts                      Edge Function

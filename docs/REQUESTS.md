@@ -192,5 +192,6 @@ Biçim:
   1. **Arkadaşlar ekranı:** kullanıcı adıyla arama (`search_users`), sonuçta duruma göre düğme (Ekle / İstek gönderildi / Kabul et / Arkadaş). Üstte gelen istekler (Kabul / Reddet), altta arkadaş listesi (gezilen yer ve rozet sayısıyla).
   2. **Sıralama ekranı:** Bu hafta / Bu ay / Bu yıl / Tüm zamanlar sekmeleri (`friends_leaderboard`); kendi satırın (`is_me`) vurgulu. Hiç arkadaşı yoksa "Arkadaşlarını ekle, kim daha çok geziyor görün" çağrısı.
   3. Kullanıcı adı olmayan kullanıcıya önce kullanıcı adı seçtirin (`username_required`).
-  4. Profil ayarlarındaki "Profilim herkese açık" (`is_public`) açıklaması: kapalıysa başkaları seni yalnızca tam kullanıcı adınla bulabilir.
+  4. Kabul yanıtındaki `new_achievements` için rozet kutlaması. Yeni rozetler `first-friend` (Gezi Arkadaşı) ve `travel-crew` (Gezi Ekibi); görselleri henüz yok, gelene kadar yedek ikon.
+  5. Profil ayarlarındaki "Profilim herkese açık" (`is_public`) açıklaması: kapalıysa başkaları seni yalnızca tam kullanıcı adınla bulabilir.
 
