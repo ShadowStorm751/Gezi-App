@@ -2,8 +2,9 @@
 // App Store ve Google Play, uygulama içinden hesap silmeyi zorunlu tutar.
 //
 // İstemci: supabase.functions.invoke("delete-account", { body: { confirm: "DELETE" } })
-// Silinenler: auth kullanıcısı (-> profiles, visits, user_achievements cascade ile),
-//             avatars/<user_id>/ altındaki dosyalar.
+// Silinenler: auth kullanıcısı (-> profiles, visits, user_achievements, friendships,
+//             photo_submissions ve onaylı fotoğrafları cascade ile),
+//             avatars/<user_id>/ ve user-photos/<user_id>/ altındaki dosyalar.
 // Kalanlar:   place_submissions satırları kimliksiz kalır (user_id = null).
 // Yanıt: 200 { ok: true } | 400 invalid_input | 401 not_authenticated | 500 server_error
 
@@ -46,15 +47,18 @@ Deno.serve(async (req) => {
   }
   if (body?.confirm !== "DELETE") return json(400, { ok: false, error: "invalid_input" });
 
-  // 1. Avatar dosyaları (hata olsa da hesap silmeye devam edilir; dosyalar sahipsiz kalır)
-  const { data: files, error: listError } = await admin.storage.from("avatars").list(user.id, { limit: 1000 });
-  if (listError) {
-    console.error("avatars list", listError);
-  } else if (files && files.length > 0) {
-    const { error: removeError } = await admin.storage
-      .from("avatars")
-      .remove(files.map((f) => `${user.id}/${f.name}`));
-    if (removeError) console.error("avatars remove", removeError);
+  // 1. Avatar ve fotoğraf dosyaları (hata olsa da hesap silmeye devam edilir; kalan dosyaları
+  //    photo-cleanup temizler, avatarlar sahipsiz kalır)
+  for (const bucket of ["avatars", "user-photos"]) {
+    const { data: files, error: listError } = await admin.storage.from(bucket).list(user.id, { limit: 1000 });
+    if (listError) {
+      console.error(`${bucket} list`, listError);
+    } else if (files && files.length > 0) {
+      const { error: removeError } = await admin.storage
+        .from(bucket)
+        .remove(files.map((f) => `${user.id}/${f.name}`));
+      if (removeError) console.error(`${bucket} remove`, removeError);
+    }
   }
 
   // 2. Kullanıcı (profil, ziyaret ve rozetler cascade ile silinir)

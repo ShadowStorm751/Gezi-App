@@ -1,0 +1,2 @@
+Bu dosya değişip main'e yüklenince canlı fotoğraf testi çalışır (.github/workflows/selftest-photos.yml).
+Son istek: 2026-11-20 01:00 — yükleme, onay, ret, temizlik, hesap silme
