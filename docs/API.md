@@ -294,6 +294,7 @@ await supabase.rpc("export_my_data"); // KVKK: kullanıcının tüm verisi tek J
 //      submissions: [{ kind, place, name, category, lat, lng, note, status, admin_note, created_at, resolved_at }] }
 // visits[].place yayından kalkmış bir yer için null olabilir (place_id yine dolu).
 // friendships: [{ username, direction: "sent"|"received", status, created_at, responded_at }]
+// photos: [{ place, storage_path, caption, status, created_at, resolved_at }]
 ```
 
 Profil yalnızca `update_profile` ile değiştirilmeli. `profiles` tablosuna doğrudan yazma
@@ -391,6 +392,47 @@ Kabul edilen ilk katkıda `city-helper` ("Şehir Gönüllüsü") rozeti verilir;
 `admin_submissions` ve `admin_resolve_submission` yalnızca yönetici içindir; mobil uygulama bunları çağırmaz.
 
 ---
+
+## Kullanıcı fotoğrafları (giriş gerekli)
+
+Kullanıcı **gezdiği** (check-in yaptığı) yere fotoğraf ekleyebilir. Yönetici onaylayınca fotoğraf `place_detail.photos` listesinde (`author: "@kullanıcıadı"`, `license: "Gezi App"`) ve fotoğrafsız yerlerde `city_pack` küçük resminde görünür.
+
+```ts
+// 1. Dosyayı yükle: kendi klasörüne, tahmin edilemez bir adla (8-64 harf/rakam/_/-)
+const path = `${user.id}/${randomId()}.jpg`;          // ör. crypto.randomUUID() tiresiz
+await supabase.storage.from("user-photos").upload(path, file, { contentType: "image/jpeg" });
+// Yüklemeden önce uzun kenarı en fazla 1600 px'e küçültüp JPEG (kalite ~0.8) yapın; sınır 5 MB.
+
+// 2. Gönder
+await supabase.rpc("submit_place_photo", { place_id, storage_path: path, caption: "İsteğe bağlı, en fazla 200 harf" });
+// -> { ok, id, status: "pending" }
+
+// Kullanıcının fotoğrafları ("Fotoğraflarım")
+await supabase.rpc("my_photos", { lang: "tr" });
+// -> [{ id, place_id, place_slug, place_name, storage_path, caption, status, admin_note, created_at, resolved_at }]
+//    status: "pending" (inceleniyor) | "approved" (yayında) | "rejected" (admin_note: neden)
+//    Önizleme: supabase.storage.from("user-photos").getPublicUrl(storage_path)
+
+// Sil (onaylıysa yerden de kalkar), sonra dosyayı da sil
+const { data } = await supabase.rpc("delete_my_photo", { photo_id });
+if (data.ok) await supabase.storage.from("user-photos").remove([data.storage_path]);
+```
+
+- Yüklenip gönderilmeyen dosyalar 24 saat sonra, reddedilen dosyalar en geç bir gün içinde otomatik silinir.
+- İlk onaylanan fotoğraf `photographer` ("Gezi Fotoğrafçısı") rozetini verir; rozet sonraki check-in'de değil onay anında kazanılır, `my_achievements` ile görünür.
+- Fotoğraf yükleme ekranında kısa bir onay metni gösterin: "Fotoğrafı kendin çektin; uygulamada adınla yayınlanmasını kabul ediyorsun. Yüzü tanınır kişiler olmamasına dikkat et." (KVKK metninde de yer alacak.)
+
+| `error` | Anlamı | Önerilen mesaj (TR) |
+| --- | --- | --- |
+| `not_authenticated` | Oturum yok | "Fotoğraf eklemek için giriş yap." |
+| `invalid_input` | Yol kendi klasörün değil, ad biçimi ya da açıklama hatalı | – (uygulama hatası) |
+| `place_not_found` | Yer yok ya da yayında değil | "Bu yer bulunamadı." |
+| `file_not_found` | Dosya yüklenmemiş | "Fotoğraf yüklenemedi, tekrar dene." |
+| `already_submitted` | Bu dosya zaten gönderildi | – |
+| `not_visited` | Kullanıcı bu yeri gezmemiş | "Fotoğraf eklemek için önce burayı gezmelisin." |
+| `rate_limited` | Son 24 saatte 10 fotoğraf | "Bugünlük yeterince fotoğraf gönderdin, yarın tekrar dene." |
+| `too_many_pending` | Bu yerde 3 fotoğrafın inceleniyor | "Bu yer için gönderdiğin fotoğraflar hâlâ inceleniyor." |
+| `photo_not_found` | Silinecek fotoğraf yok | – |
 
 ## Arkadaşlar ve sıralama (giriş gerekli)
 

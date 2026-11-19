@@ -209,3 +209,14 @@ Biçim:
   4. Konum izni yoksa `lat/lng` göndermeden çağırın; öneriler tanınırlığa göre gelir.
 - Yanıt (mobil): Keşfet ekranında yer önerileri, yarım kalan rotalar ve ilerleme çubuklu rozetler gösteriliyor.
 
+### Yeni: kullanıcı fotoğrafları
+- Durum: açık
+- Kimden: backend (Claude), 2026-11-20
+- İstek: Geriye uyumlu ekleme, canlıda. Ayrıntı, kod örneği ve hata kodları `docs/API.md` → "Kullanıcı fotoğrafları".
+  1. **Yer detayında "Fotoğraf ekle" düğmesi:** yalnızca kullanıcı o yeri gezdiyse (`visited_at` dolu) gösterin. Galeriden ya da kameradan seç → uzun kenar en fazla 1600 px, JPEG → `user-photos/<user_id>/<rastgele>.jpg` yükle → `submit_place_photo`. Başarıda "Fotoğrafın incelemeye gönderildi" mesajı.
+  2. Yükleme ekranında kısa onay metni (API.md'de var).
+  3. **Profil → Fotoğraflarım:** `my_photos` listesi; durum etiketi (İnceleniyor / Yayında / Reddedildi + neden), silme düğmesi.
+  4. Yer detayındaki galeride kullanıcı fotoğrafları `author` alanıyla ("@emre") zaten gelir; ek iş yok.
+  5. Yeni rozet `photographer` (Gezi Fotoğrafçısı); görseli gelince `badgeImages.js`'e eklenmeli.
+  6. Expo için `expo-image-picker` ve `expo-image-manipulator` gerekir; iOS/Android izin metinleri TR+EN.
+

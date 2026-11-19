@@ -33,7 +33,8 @@ backend/supabase/
 │   ├── 20261119290000_friends.sql            arkadaşlık, kullanıcı arama, arkadaş sıralaması
 │   ├── 20261119300000_social_badges.sql      'Gezi Arkadaşı' ve 'Gezi Ekibi' rozetleri
 │   ├── 20261119310000_social_badge_paths.sql sosyal rozetlerin görsel yolları
-│   └── 20261119320000_recommendations.sql    kişisel öneriler (recommendations)
+│   ├── 20261119320000_recommendations.sql    kişisel öneriler (recommendations)
+│   └── 20261119330000_user_photos.sql        kullanıcı fotoğrafları, onay, 'Gezi Fotoğrafçısı' rozeti
 ├── functions/badge-upload/              rozet görsellerini Storage'a yükler (.github/workflows/badges.yml)
 ├── functions/checkin/
 │   ├── index.ts                      Edge Function
@@ -111,8 +112,24 @@ select admin_resolve_submission('<id>', false, 'Zaten listede');         -- ret
 
 Kabul edilen yeni yer `is_published = false` ile eklenir; TR/EN kısa açıklaması yazılıp yayına alınınca uygulamada görünür.
 
-Güvenlik denetçisi `report_place`, `suggest_place`, `admin_submissions`, `admin_resolve_submission` ve arkadaşlık fonksiyonları (`search_users`, `send_friend_request`, `respond_friend_request`, `remove_friend`, `my_friends`, `friends_leaderboard`) için "SECURITY DEFINER" uyarısı verir: bilinçli. Kullanıcılar tabloya doğrudan yazamaz, yalnızca bu fonksiyonlarla (sınırlar ve doğrulamayla) yazar; yönetici fonksiyonları içeride yetki kontrolü yapar (canlı testte doğrulandı).
+Güvenlik denetçisi `report_place`, `suggest_place`, `admin_submissions`, `admin_resolve_submission` fotoğraf fonksiyonları (`submit_place_photo`, `delete_my_photo`, `admin_photo_submissions`, `admin_resolve_photo`) ve arkadaşlık fonksiyonları (`search_users`, `send_friend_request`, `respond_friend_request`, `remove_friend`, `my_friends`, `friends_leaderboard`) için "SECURITY DEFINER" uyarısı verir: bilinçli. Kullanıcılar tabloya doğrudan yazamaz, yalnızca bu fonksiyonlarla (sınırlar ve doğrulamayla) yazar; yönetici fonksiyonları içeride yetki kontrolü yapar (canlı testte doğrulandı).
 
 ## Yeni rozet eklemek
 
 Kod değişikliği gerekmez. Admin olarak `achievements` tablosuna kural JSON'u ile satır, `achievement_translations` tablosuna TR ve EN ad ekle. Kural türleri: [`../docs/TECHNICAL_PLAN.md`](../docs/TECHNICAL_PLAN.md#rozet-kuralları).
+
+## Kullanıcı fotoğraflarını onaylama (yönetici)
+
+Supabase → SQL Editor:
+
+```sql
+select public.admin_photo_submissions('pending');            -- bekleyenler, url ile
+select public.admin_resolve_photo('<id>', true);             -- onayla
+select public.admin_resolve_photo('<id>', false, 'bulanık'); -- reddet (neden kullanıcıya görünür)
+```
+
+Reddedilen ve 24 saattir gönderilmemiş dosyaları `photo-cleanup` Edge Function'ı siler
+(`.github/workflows/photo-cleanup.yml`, her gün 03:17 UTC). Canlı (production) projeye geçince
+`update public.app_settings set value = 'https://<yeni-ref>.supabase.co/storage/v1/object/public' where key = 'storage_public_base';`
+ve iş akışlarındaki proje adresi güncellenmeli.
+
