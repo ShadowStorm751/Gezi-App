@@ -27,7 +27,7 @@ concurrency:
 jobs:
   candidates:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 150
     steps:
       - uses: actions/checkout@v4
 
@@ -56,13 +56,16 @@ jobs:
         env:
           CITIES: ${{ steps.cities.outputs.list }}
         run: |
-          set -e
+          failed=""
           for city in $CITIES; do
             if [ "$city" = "istanbul" ]; then out=data-pipeline/output; res=data-pipeline/results;
             else out=data-pipeline/output/$city; res=data-pipeline/results/$city; fi
             echo "::group::$city"
-            python data-pipeline/pipeline.py --city "$city" --out "$out" fetch
-            python data-pipeline/pipeline.py --city "$city" --out "$out" candidates
+            if ! python data-pipeline/pipeline.py --city "$city" --out "$out" fetch \
+               || ! python data-pipeline/pipeline.py --city "$city" --out "$out" candidates; then
+              echo "::error::$city başarısız; diğer şehirlere devam"
+              failed="$failed $city"; echo "::endgroup::"; continue
+            fi
             mkdir -p "$res/raw"
             cp "$out/candidates.csv" "$out/areas.json" "$res/"
             gzip -c "$out/osm_raw.json" > "$res/raw/osm_raw.json.gz"
@@ -78,6 +81,7 @@ jobs:
             echo "::endgroup::"
             sleep 30  # Overpass sunucusuna nefes aldır
           done
+          echo "failed=$failed" >> "$GITHUB_ENV"
 
       - name: Sonuçları kaydet
         env:
@@ -89,3 +93,4 @@ jobs:
           git commit -m "Veri hattı: aday listesi güncellendi ($CITIES)" || echo "Değişiklik yok"
           git pull --rebase
           git push
+          if [ -n "$failed" ]; then echo "::error::Başarısız şehirler:$failed"; exit 1; fi

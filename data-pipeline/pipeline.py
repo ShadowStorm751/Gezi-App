@@ -34,7 +34,11 @@ USER_AGENT = "GeziApp-DataPipeline/0.1 (https://github.com/ShadowStorm751/Gezi-A
 OVERPASS_URLS = [
     "https://overpass-api.de/api/interpreter",
     "https://overpass.kumi.systems/api/interpreter",
+    "https://overpass.private.coffee/api/interpreter",
+    "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
 ]
+CHUNK_ROUNDS = 4          # parça sorguda bütün sunucular kaç tur denensin
+CHUNK_ROUND_WAIT_S = 90   # turlar arası bekleme
 WIKIDATA_API = "https://www.wikidata.org/w/api.php"
 DEFAULT_OUT = Path(__file__).resolve().parent / "output"
 CITY_SLUG = "istanbul"
@@ -176,23 +180,41 @@ def fetch_osm(out_dir: Path, city: Optional[City] = None) -> Path:
     except RuntimeError as exc:
         # Büyük il ya da yoğun sunucu: her etiket grubunu ayrı sorgula, sonuçları birleştir.
         log(f"Tek sorgu olmadı ({exc}); etiket grupları tek tek sorgulanacak")
-        data = fetch_osm_chunked(city)
+        data = fetch_osm_chunked(city, out_dir / "osm_chunks")
     path = out_dir / "osm_raw.json"
     path.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
     log(f"  {len(data.get('elements', []))} OSM öğesi -> {path}")
     return path
 
 
-def fetch_osm_chunked(city: City) -> Dict[str, Any]:
+def fetch_osm_chunked(city: City, cache_dir: Optional[Path] = None) -> Dict[str, Any]:
+    """Her etiket grubu ayrı sorgu. Biten parçalar cache_dir'e yazılır; yeniden çalıştırmada atlanır."""
     from cities import selectors
     seen: Dict[Tuple[str, int], Dict[str, Any]] = {}
     sels = selectors(city)
+    if cache_dir:
+        cache_dir.mkdir(parents=True, exist_ok=True)
     for i, sel in enumerate(sels, start=1):
         log(f"  [{i}/{len(sels)}] {sel}")
-        part = _overpass(overpass_query(city, [sel]), city.timeout_s)
+        cached = cache_dir / f"{i:02d}.json" if cache_dir else None
+        if cached and cached.exists():
+            part = json.loads(cached.read_text(encoding="utf-8"))
+        else:
+            part = None
+            for rnd in range(1, CHUNK_ROUNDS + 1):
+                try:
+                    part = _overpass(overpass_query(city, [sel]), city.timeout_s)
+                    break
+                except RuntimeError as exc:
+                    if rnd == CHUNK_ROUNDS:
+                        raise
+                    log(f"  tur {rnd} başarısız ({exc}); {CHUNK_ROUND_WAIT_S} sn sonra yeniden")
+                    time.sleep(CHUNK_ROUND_WAIT_S)
+            if cached:
+                cached.write_text(json.dumps(part, ensure_ascii=False), encoding="utf-8")
+            time.sleep(5)
         for el in part.get("elements", []):
             seen.setdefault((el["type"], el["id"]), el)
-        time.sleep(5)
     return {"elements": list(seen.values()), "chunked": True}
 
 
