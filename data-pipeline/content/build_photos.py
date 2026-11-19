@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 OUT = ROOT / "backend/supabase/migrations/20261119140000_istanbul_photos.sql"
 
 # Elle elenen eşleşmeler: ada göre bulunan kayıt başka bir yapıya ait çıktı.
+# Bu yerlerin doğru fotoğrafı build_photos_extra.py ile (migration 20261119230000) eklenir.
 EXCLUDE = {
     "otagtepe": "bulunan kayıt 'Otağtepe Su Sarnıcı'; fotoğraf manzarayı göstermiyor",
 }

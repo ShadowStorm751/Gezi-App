@@ -15,12 +15,16 @@ backend/supabase/
 │   ├── 20261119110000_reference_data.sql     şehir, kategoriler, rozetler (kalıcı)
 │   ├── 20261119120000_istanbul_places.sql    onaylı 156 İstanbul yeri (üretilir, elle düzenleme)
 │   ├── 20261119130000_photo_urls.sql         fotoğraflar için dış adres alanları
-│   ├── 20261119140000_istanbul_photos.sql    133 yerin Commons fotoğrafı (üretilir)
+│   ├── 20261119140000_istanbul_photos.sql    otomatik eşleşen Commons fotoğrafları (üretilir)
 │   ├── 20261119150000_badge_paths.sql        rozet görsel yolları
 │   ├── 20261119160000_security_fixes.sql     güvenlik denetçisi düzeltmeleri
 │   ├── 20261119170000_islands_tour_fix.sql   Adalar Turu rozet kuralı düzeltmesi
 │   ├── 20261119180000_search_ranking.sql     arama sıralaması, tanınırlık puanı
-│   └── 20261119190000_city_pack_has_area.sql paket: alan tanımlı yer bilgisi
+│   ├── 20261119190000_city_pack_has_area.sql paket: alan tanımlı yer bilgisi
+│   ├── 20261119200000_account_avatar.sql     profil fotoğrafı (avatars bucket)
+│   ├── 20261119210000_place_submissions.sql  kullanıcı bildirimleri ve yer önerileri
+│   ├── 20261119220000_city_helper_badge.sql  Şehir Gönüllüsü rozet görseli
+│   └── 20261119230000_istanbul_photos_extra.sql 18 yer için elle seçilmiş fotoğraf (üretilir)
 ├── functions/badge-upload/              rozet görsellerini Storage'a yükler (.github/workflows/badges.yml)
 ├── functions/checkin/
 │   ├── index.ts                      Edge Function

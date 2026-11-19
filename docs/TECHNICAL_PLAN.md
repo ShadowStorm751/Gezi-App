@@ -153,7 +153,7 @@ Backend (Claude):
 - [x] Kullanıcı katkısı: hata bildirimi ve yeni yer önerisi, yönetici onay akışı, 'Şehir Gönüllüsü' rozeti (canlıda, test edildi)
 - [ ] Çok şehir: şehir listesi RPC'si (`cities`), yeni şehir migration'larının gözden geçirilip uygulanması
 - [ ] Ayrı canlı (production) Supabase projesi; migration'ların GitHub Actions ile uygulanması
-- [ ] Fotoğrafı olmayan 23 yer için fotoğraf
+- [x] Fotoğrafı olmayan 23 yerin 18'ine elle seçilmiş Commons fotoğrafı (151/156). Kalan 5 yerde (Aydos Ormanı, Hacılı Şelalesi, Beykoz Korusu, Telli Baba Türbesi, Yeniköy Seyir Terası) uygun serbest lisanslı fotoğraf yok; ileride kendi çekimimiz ya da kullanıcı fotoğrafı
 
 Mobil (ChatGPT):
 - [ ] Expo SDK 54 → 58 (`docs/REQUESTS.md`)

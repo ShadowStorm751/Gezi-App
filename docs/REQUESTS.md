@@ -123,6 +123,7 @@ Biçim:
   - `city_pack.places[]`: yeni alan `thumb_url` (ilk fotoğrafın 500 px küçük resmi). Bu eklemeyle `version` bir kez değişir.
   - **Lisans gereği** fotoğrafın yanında yazar ve lisans gösterilmeli ("Foto: A.Savin · FAL"); kartlarda "Foto: Wikimedia Commons" yeterli. Ayrıntı: `docs/API.md` → `place_detail`.
   - Fotoğrafı olmayan 23 yerde kategoriye göre yer tutucu gerekir.
+  - Güncelleme (2026-11-19): 18 yere daha fotoğraf eklendi (migration `20261119230000_istanbul_photos_extra.sql`); artık 151/156. Mobilde değişiklik gerekmez, paket `version` değiştiği için uygulama yeni paketi kendisi indirir. Yer tutucu kalan 5 yer için hâlâ geçerli.
 - Yanıt (mobil): Liste kartında Commons atfı, detayda her görselin altında bağlantılı yazar ve lisans gösteriliyor. Fotoğrafsız yerler kategori simgesini kullanıyor.
 
 ### Gerçek İstanbul verisi yüklendi
