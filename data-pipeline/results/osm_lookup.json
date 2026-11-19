@@ -457,6 +457,113 @@
    "enlem": 38.325641,
    "boylam": 35.045496,
    "mesafe_m": 3355
+  },
+  {
+   "osm": "way/536985538",
+   "etiketler": {
+    "amenity": "place_of_worship",
+    "building": "mosque",
+    "name": "Soğanlı Mahallesi Camii"
+   },
+   "enlem": 38.336835,
+   "boylam": 34.992589,
+   "mesafe_m": 7245
+  },
+  {
+   "osm": "way/536985538",
+   "etiketler": {
+    "amenity": "place_of_worship",
+    "building": "mosque",
+    "name": "Soğanlı Mahallesi Camii"
+   },
+   "enlem": 38.336835,
+   "boylam": 34.992589,
+   "mesafe_m": 7245
+  },
+  {
+   "osm": "node/5188164522",
+   "etiketler": {
+    "amenity": "restaurant",
+    "name": "Soğanlı Kapadokya Restaurant",
+    "tourism": "camp_site"
+   },
+   "enlem": 38.34341,
+   "boylam": 34.972549,
+   "mesafe_m": 8937
+  },
+  {
+   "osm": "relation/8066264",
+   "etiketler": {
+    "admin_level": "8",
+    "boundary": "administrative",
+    "name": "Soğanlı Mahallesi",
+    "wikidata": "Q936446"
+   },
+   "enlem": 38.328119,
+   "boylam": 34.974473,
+   "mesafe_m": 8967
+  },
+  {
+   "osm": "node/378716044",
+   "etiketler": {
+    "name": "Soğanlı",
+    "place": "village",
+    "wikidata": "Q936446"
+   },
+   "enlem": 38.345427,
+   "boylam": 34.969425,
+   "mesafe_m": 9207
+  },
+  {
+   "osm": "way/668261381",
+   "etiketler": {
+    "highway": "tertiary",
+    "name": "Orhanlı - Soğanlı yolu"
+   },
+   "enlem": 38.338739,
+   "boylam": 34.96276,
+   "mesafe_m": 9813
+  },
+  {
+   "osm": "node/4629821776",
+   "etiketler": {
+    "name": "Soğanlı Tahtalı Kilise",
+    "natural": "yes"
+   },
+   "enlem": 38.345398,
+   "boylam": 34.962457,
+   "mesafe_m": 9815
+  },
+  {
+   "osm": "node/4629828016",
+   "etiketler": {
+    "name": "Soganli Valley",
+    "natural": "valley",
+    "tourism": "yes"
+   },
+   "enlem": 38.349736,
+   "boylam": 34.961323,
+   "mesafe_m": 9927
+  },
+  {
+   "osm": "node/5190746933",
+   "etiketler": {
+    "name": "Soğanlı Vadisi",
+    "place": "locality"
+   },
+   "enlem": 38.346604,
+   "boylam": 34.949119,
+   "mesafe_m": 10979
+  },
+  {
+   "osm": "way/32986794",
+   "etiketler": {
+    "highway": "tertiary",
+    "name": "Orhanlı - Soğanlı yolu"
+   },
+   "enlem": 38.322968,
+   "boylam": 34.934208,
+   "mesafe_m": 12522
   }
  ],
  "mustafapasa": [
