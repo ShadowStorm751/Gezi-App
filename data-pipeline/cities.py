@@ -145,14 +145,34 @@ def selectors(city: City) -> List[str]:
     return list(BASE_SELECTORS) + list(city.extra_selectors)
 
 
-def overpass_query(city: City, only: Optional[List[str]] = None) -> str:
+# Parça sorguda alan sınırı gerekmeyen gruplar `out center` ile gelir (çok daha hafif).
+# Sınırı gereken: orman, park, ada, plaj, vadi, ören yeri (AREA_CATEGORIES).
+_HISTORIC_AREA = 'nwr["historic"~"^(ruins|archaeological_site)$"]["name"]'
+_HISTORIC_POINT = ('nwr["historic"~"^(castle|fort|citywalls|city_gate|tower|monument|memorial|aqueduct|palace|manor|'
+                   'tomb|fountain|building)$"]["name"]')
+_GEOM_MARKERS = ('"natural"="wood"', '"landuse"="forest"', '"leisure"~"^(park|garden)$"', '"nature_reserve"',
+                 '"natural"="beach"', '"place"~"^(island|islet)$"', '"natural"="valley"', 'ruins|archaeological_site')
+
+
+def chunk_plan(city: City) -> List[Tuple[str, str]]:
+    """Parça sorgu planı: (seçici, çıktı biçimi 'geom' | 'center'). Birleşimi selectors(city) ile aynı öğeleri verir."""
+    plan: List[Tuple[str, str]] = []
+    for sel in selectors(city):
+        parts = [_HISTORIC_AREA, _HISTORIC_POINT] if sel == BASE_SELECTORS[1] else [sel]
+        for part in parts:
+            plan.append((part, "geom" if any(m in part for m in _GEOM_MARKERS) else "center"))
+    return plan
+
+
+def overpass_query(city: City, only: Optional[List[str]] = None, out: str = "geom",
+                   timeout_s: Optional[int] = None) -> str:
     """Şehrin Overpass sorgusu. only: yalnızca bu seçiciler (sorgu parçalara bölünürken)."""
     lines = []
     for sel in (only if only is not None else selectors(city)):
         for region in city.regions:
             lines.append(f"  {sel}({region});")
     return (
-        f"\n[out:json][timeout:{city.timeout_s}];\n"
+        f"\n[out:json][timeout:{timeout_s or city.timeout_s}];\n"
         f"{city.area_defs}\n"
-        "(\n" + "\n".join(lines) + "\n);\nout geom;\n"
+        "(\n" + "\n".join(lines) + f"\n);\nout {out};\n"
     )

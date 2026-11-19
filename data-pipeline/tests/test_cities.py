@@ -59,6 +59,34 @@ class FetchTests(unittest.TestCase):
             p._request, p.time.sleep = orig_req, orig_sleep
 
 
+class ChunkPlanTests(unittest.TestCase):
+    def test_plan_covers_all_selectors_with_light_output(self):
+        plan = dict(cities.chunk_plan(IZMIR))
+        self.assertEqual(len(plan), len(cities.selectors(IZMIR)) + 1)  # historic ikiye bölündü
+        self.assertEqual(plan['nwr["tourism"="museum"]["name"]'], "center")
+        self.assertEqual(plan['nwr["natural"="wood"]["name"]'], "geom")
+        self.assertEqual(plan['nwr["historic"~"^(ruins|archaeological_site)$"]["name"]'], "geom")
+        self.assertEqual(plan['nwr["place"~"^(island|islet)$"]["name"]'], "geom")
+        self.assertIn("out center;", cities.overpass_query(IZMIR, ['nwr["tourism"="museum"]["name"]'], out="center"))
+
+    def test_center_geometry(self):
+        el = {"type": "way", "id": 1, "center": {"lat": 38.4, "lon": 27.1}}
+        self.assertEqual(p.element_geometry(el), (38.4, 27.1, None))
+        rel = {"type": "relation", "id": 2, "center": {"lat": 38.5, "lon": 27.2}}
+        self.assertEqual(p.element_geometry(rel), (38.5, 27.2, None))
+
+    def test_budget_stops_retries(self):
+        def always_fail(url, data, timeout):
+            raise p.urllib.error.URLError("502")
+        orig_req, orig_sleep = p._request, p.time.sleep
+        p._request, p.time.sleep = always_fail, lambda s: None
+        try:
+            with self.assertRaises(p.BudgetExceeded):
+                p.fetch_osm_chunked(IZMIR, None, budget_s=0)
+        finally:
+            p._request, p.time.sleep = orig_req, orig_sleep
+
+
 class ClassifyTests(unittest.TestCase):
     def test_extras_only_when_enabled(self):
         valley = {"natural": "valley", "name": "Güvercinlik Vadisi"}

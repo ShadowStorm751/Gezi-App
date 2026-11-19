@@ -37,8 +37,9 @@ OVERPASS_URLS = [
     "https://overpass.private.coffee/api/interpreter",
     "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
 ]
-CHUNK_ROUNDS = 4          # parça sorguda bütün sunucular kaç tur denensin
-CHUNK_ROUND_WAIT_S = 90   # turlar arası bekleme
+CHUNK_TIMEOUT_S = 180    # parça başına sunucu zaman aşımı
+CHUNK_ROUND_WAIT_S = 30   # turlar arası bekleme
+FETCH_BUDGET_S = 20 * 60  # bir şehrin bütün Overpass denemeleri için toplam süre
 WIKIDATA_API = "https://www.wikidata.org/w/api.php"
 DEFAULT_OUT = Path(__file__).resolve().parent / "output"
 CITY_SLUG = "istanbul"
@@ -151,14 +152,22 @@ def _with_retries(fn, attempts: int = 3, wait_s: int = 20):
             time.sleep(wait_s)
 
 
-def _overpass(query: str, timeout_s: int) -> Dict[str, Any]:
-    """Sorguyu sırayla sunuculara gönderir. Sunucu zaman aşımı ('remark') da hata sayılır."""
+class BudgetExceeded(RuntimeError):
+    pass
+
+
+def _overpass(query: str, timeout_s: int, deadline: Optional[float] = None) -> Dict[str, Any]:
+    """Sorguyu sırayla sunuculara gönderir. Sunucu zaman aşımı ('remark') da hata sayılır.
+    deadline (time.monotonic) geçildiyse yeni deneme yapılmaz."""
     body = urllib.parse.urlencode({"data": query}).encode()
     last_error: Optional[Exception] = None
     for url in OVERPASS_URLS:
+        if deadline is not None and time.monotonic() > deadline:
+            raise BudgetExceeded(f"süre sınırı doldu; son hata: {last_error}")
         log(f"Overpass sorgusu: {url} (birkaç dakika sürebilir)")
         try:
-            raw = _with_retries(lambda: _request(url, body, timeout=timeout_s + 60))
+            raw = _with_retries(lambda: _request(url, body, timeout=timeout_s + 30),
+                                attempts=1 if deadline is not None else 3)
             data = json.loads(raw)
             remark = data.get("remark", "")
             if re.search(r"error|timed out|out of memory", remark, re.I):
@@ -170,51 +179,55 @@ def _overpass(query: str, timeout_s: int) -> Dict[str, Any]:
     raise RuntimeError(f"Overpass sunucularına ulaşılamadı: {last_error}")
 
 
-def fetch_osm(out_dir: Path, city: Optional[City] = None) -> Path:
+def fetch_osm(out_dir: Path, city: Optional[City] = None, budget_s: int = FETCH_BUDGET_S) -> Path:
     city = city or CITIES[DEFAULT_CITY]
-    query = OVERPASS_QUERY if city.slug == DEFAULT_CITY else overpass_query(city)
-    try:
-        if city.chunked:
-            raise RuntimeError("şehir ayarı: parça parça sorgu")
+    if city.chunked:
+        # Büyük il: her etiket grubu ayrı ve hafif sorgu, toplam süre sınırlı.
+        data = fetch_osm_chunked(city, out_dir / "osm_chunks", budget_s)
+    else:
+        query = OVERPASS_QUERY if city.slug == DEFAULT_CITY else overpass_query(city)
         data = _overpass(query, city.timeout_s)
-    except RuntimeError as exc:
-        # Büyük il ya da yoğun sunucu: her etiket grubunu ayrı sorgula, sonuçları birleştir.
-        log(f"Tek sorgu olmadı ({exc}); etiket grupları tek tek sorgulanacak")
-        data = fetch_osm_chunked(city, out_dir / "osm_chunks")
     path = out_dir / "osm_raw.json"
     path.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
     log(f"  {len(data.get('elements', []))} OSM öğesi -> {path}")
     return path
 
 
-def fetch_osm_chunked(city: City, cache_dir: Optional[Path] = None) -> Dict[str, Any]:
-    """Her etiket grubu ayrı sorgu. Biten parçalar cache_dir'e yazılır; yeniden çalıştırmada atlanır."""
-    from cities import selectors
+def fetch_osm_chunked(city: City, cache_dir: Optional[Path] = None,
+                      budget_s: int = FETCH_BUDGET_S) -> Dict[str, Any]:
+    """Her etiket grubu ayrı sorgu (alan gerekmeyenlerde `out center`). Toplam süre budget_s ile sınırlı.
+    Biten parçalar cache_dir'e yazılır; yeniden çalıştırmada atlanır."""
+    from cities import chunk_plan
+    deadline = time.monotonic() + budget_s
     seen: Dict[Tuple[str, int], Dict[str, Any]] = {}
-    sels = selectors(city)
+    plan = chunk_plan(city)
     if cache_dir:
         cache_dir.mkdir(parents=True, exist_ok=True)
-    for i, sel in enumerate(sels, start=1):
-        log(f"  [{i}/{len(sels)}] {sel}")
+    for i, (sel, out) in enumerate(plan, start=1):
+        log(f"  [{i}/{len(plan)}] {sel} (out {out})")
         cached = cache_dir / f"{i:02d}.json" if cache_dir else None
         if cached and cached.exists():
             part = json.loads(cached.read_text(encoding="utf-8"))
         else:
-            part = None
-            for rnd in range(1, CHUNK_ROUNDS + 1):
+            query = overpass_query(city, [sel], out=out, timeout_s=CHUNK_TIMEOUT_S)
+            while True:
                 try:
-                    part = _overpass(overpass_query(city, [sel]), city.timeout_s)
+                    part = _overpass(query, CHUNK_TIMEOUT_S, deadline)
                     break
+                except BudgetExceeded:
+                    raise
                 except RuntimeError as exc:
-                    if rnd == CHUNK_ROUNDS:
-                        raise
-                    log(f"  tur {rnd} başarısız ({exc}); {CHUNK_ROUND_WAIT_S} sn sonra yeniden")
+                    if time.monotonic() + CHUNK_ROUND_WAIT_S > deadline:
+                        raise BudgetExceeded(f"süre sınırı ({budget_s // 60} dk) doldu: {exc}") from exc
+                    log(f"  bütün sunucular başarısız ({exc}); {CHUNK_ROUND_WAIT_S} sn sonra yeniden")
                     time.sleep(CHUNK_ROUND_WAIT_S)
             if cached:
                 cached.write_text(json.dumps(part, ensure_ascii=False), encoding="utf-8")
-            time.sleep(5)
+            time.sleep(3)
         for el in part.get("elements", []):
             seen.setdefault((el["type"], el["id"]), el)
+    if not seen:
+        raise RuntimeError("hiç öğe gelmedi: bölge adı (area) bulunamamış olabilir")
     return {"elements": list(seen.values()), "chunked": True}
 
 
@@ -349,7 +362,8 @@ def element_geometry(el: Dict[str, Any]) -> Tuple[Optional[float], Optional[floa
     def bounds_center() -> Tuple[Optional[float], Optional[float]]:
         b = el.get("bounds")
         if not b:
-            return None, None
+            c = el.get("center")  # `out center` ile gelen yol/ilişki
+            return (c["lat"], c["lon"]) if c else (None, None)
         return (b["minlat"] + b["maxlat"]) / 2, (b["minlon"] + b["maxlon"]) / 2
 
     if el.get("type") == "way":
@@ -791,7 +805,9 @@ def main(argv: Optional[List[str]] = None) -> int:
                     help="çıktı klasörü (varsayılan: output/, İstanbul dışı şehirlerde output/<şehir>/)")
     ap.add_argument("--city", default=DEFAULT_CITY, choices=sorted(CITIES), help="şehir (varsayılan: istanbul)")
     sub = ap.add_subparsers(dest="cmd", required=True)
-    sub.add_parser("fetch", help="OSM ve Wikidata verisini indir")
+    f = sub.add_parser("fetch", help="OSM ve Wikidata verisini indir")
+    f.add_argument("--budget-min", type=int, default=FETCH_BUDGET_S // 60,
+                   help="Overpass denemeleri için toplam süre sınırı, dakika (parça sorguda)")
     sub.add_parser("candidates", help="onay için candidates.csv üret")
     b = sub.add_parser("build", help="onaylı CSV'den SQL üret")
     b.add_argument("csv", type=Path, nargs="?", help="onaylanmış CSV (varsayılan: output/candidates.csv)")
@@ -803,7 +819,7 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     if args.cmd == "fetch":
         log(f"Şehir: {city.names['tr']}")
-        fetch_osm(out, city)
+        fetch_osm(out, city, args.budget_min * 60)
         fetch_wikidata(out)
         log("Tamam. Sıradaki adım: python pipeline.py candidates")
         return 0
