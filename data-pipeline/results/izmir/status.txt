@@ -1,0 +1,19 @@
+failed
+bitti: 2026-11-19T17:28:41Z
+çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44573523450
+--- son satırlar ---
+Traceback (most recent call last):
+  File "/home/runner/work/Gezi-App/Gezi-App/data-pipeline/pipeline.py", line 857, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/runner/work/Gezi-App/Gezi-App/data-pipeline/pipeline.py", line 822, in main
+    fetch_osm(out, city, args.budget_min * 60)
+  File "/home/runner/work/Gezi-App/Gezi-App/data-pipeline/pipeline.py", line 186, in fetch_osm
+    data = fetch_osm_chunked(city, out_dir / "osm_chunks", budget_s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Gezi-App/Gezi-App/data-pipeline/pipeline.py", line 215, in fetch_osm_chunked
+    part = _overpass(query, CHUNK_TIMEOUT_S, deadline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Gezi-App/Gezi-App/data-pipeline/pipeline.py", line 166, in _overpass
+    raise BudgetExceeded(f"süre sınırı doldu; son hata: {last_error}")
+BudgetExceeded: süre sınırı doldu; son hata: HTTP Error 504: Gateway Timeout
