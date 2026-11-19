@@ -20,8 +20,8 @@ Biçim:
 - Kimden: backend (proje sahibinin isteğiyle)
 - Durum: açık (mobil)
 - İstek: Proje sahibi uygulamayı **iPhone'da App Store Expo Go** ile deneyecek. Mobil proje Expo SDK 54'te (`expo ~54.0.37`), App Store'daki Expo Go ise yalnızca en son SDK'yı açıyor (Kasım 2026: 57, 58'e geçiş haftalar içinde). iOS'ta eski Expo Go kurulamıyor, bu yüzden projenin yükseltilmesi gerekiyor:
-  - Hedef: proje sahibinin telefonundaki Expo Go'nun desteklediği SDK (Expo Go → Ayarlar'da görünür; proje sahibi bildirecek). Bilinmiyorsa önce 57.
-  - Expo'nun önerisiyle bir seferde bir sürüm: `npx expo install expo@^55.0.0 --fix` → `npx expo-doctor` → test, sonra 56, 57 (gerekirse 58).
+  - **Hedef: SDK 58** (proje sahibinin iPhone'undaki Expo Go SDK 58 destekliyor, 2026-11-19).
+  - Expo'nun önerisiyle bir seferde bir sürüm: `npx expo install expo@^55.0.0 --fix` → `npx expo-doctor` → test, sonra 56, 57 ve 58.
   - Dikkat: `react-native-maps`, `react-native-svg`, `expo-camera`, `expo-sensors`, `expo-location` sürümleri `--fix` ile hizalanmalı. SDK 58 iOS 27 için scene life cycle değişikliği getiriyor.
   - `npm test` geçmeli; uygulama Expo Go'da açılmalı (harita, kamera, Buradayım, Rozetler).
   - Backend tarafında değişiklik gerekmiyor.
