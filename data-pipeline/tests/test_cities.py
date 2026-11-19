@@ -217,6 +217,10 @@ class MigrationTests(unittest.TestCase):
         self.assertIn("on conflict (slug) do nothing", s)
         self.assertIn("('valley', 'tr', 'Vadi')", bc.categories_sql(["valley", "church"]))
         self.assertEqual(bc.categories_sql(["church"]), "")
+        v = bc.categories_sql(["village"])
+        self.assertIn("('village', 'historical', 'village', 21)", v)
+        self.assertIn("('village', 'en', 'Historic Village')", v)
+        self.assertEqual((p.CATEGORY_KIND["village"], p.DEFAULT_RADIUS_M["village"]), ("historical", 400))
 
 
 if __name__ == "__main__":

@@ -31,6 +31,7 @@ from cities import DEFAULT_CITY, City, get_city  # noqa: E402
 # Pilotta olmayan, yeni şehirlerle gelen kategoriler: slug -> (tür, ikon, sıra, TR, EN)
 NEW_CATEGORIES = {
     "valley": ("nature", "valley", 37, "Vadi", "Valley"),
+    "village": ("historical", "village", 21, "Tarihi Köy", "Historic Village"),
 }
 
 

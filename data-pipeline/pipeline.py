@@ -52,7 +52,7 @@ CATEGORY_KIND = {
     "palace": "historical", "museum": "historical", "fortress": "historical",
     "tower": "historical", "cistern": "historical", "monument": "historical",
     "archaeological_site": "historical", "tomb": "historical",
-    "valley": "nature",
+    "valley": "nature", "village": "historical",
     "viewpoint": "nature", "hill": "nature", "forest": "nature", "park": "nature",
     "beach": "nature", "island": "nature", "waterfall": "nature",
 }
@@ -61,7 +61,7 @@ DEFAULT_RADIUS_M = {
     "viewpoint": 50, "tower": 60, "cistern": 60, "monument": 60, "tomb": 60,
     "mosque": 100, "church": 100, "synagogue": 100, "museum": 100, "hill": 100,
     "palace": 150, "fortress": 150, "archaeological_site": 150, "beach": 150,
-    "park": 200, "waterfall": 100, "forest": 500, "island": 1500, "valley": 300,
+    "park": 200, "waterfall": 100, "forest": 500, "island": 1500, "valley": 300, "village": 400,
 }
 
 # Bu kategorilerde poligon varsa "alanın içinde olmak" check-in için yeterli olur.
