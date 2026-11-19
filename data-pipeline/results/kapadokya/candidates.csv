@@ -61,7 +61,6 @@
 ;5;historical;archaeological_site;Cemel Höyüğü;;;;;;;;150;evet;;;;;;38.800653;34.664044;cemel-hoyugu;;way/982181219
 ;5;historical;museum;Chez Galip;;;;;;;;100;;;;;;;38.719842;34.848605;chez-galip;;node/842223798
 ;5;historical;museum;Coffee museum Cappadocia;;;;;;;;100;;;;;;;38.594223;34.905146;coffee-museum-cappadocia;;node/10880582593
-;5;historical;archaeological_site;Eski Kaleköy;;;;;;;;150;evet;;;;;;38.326981;35.060169;eski-kalekoy;;way/168988639
 ;5;historical;archaeological_site;Gavurhöyüğü;;;;;;;;150;evet;;;;;;38.91011;34.410079;gavurhoyugu;;way/265083609
 ;5;historical;archaeological_site;Gökçe Höyüğü;;;;;;;;150;evet;;;;;;39.249337;34.707622;gokce-hoyugu;;way/168327058
 ;5;historical;museum;Göre Müze / Ören Yeri;;;;;;;;100;;;;;;;38.596428;34.715233;gore-muze-oren-yeri;;way/678104361
@@ -101,6 +100,7 @@
 ;3;historical;archaeological_site;Mutfak ve Kiler;Kitchen and storage rooms;;;;;;;150;;;;;;;38.638398;34.846098;mutfak-ve-kiler;;node/4862240005
 ;3;historical;mosque;Tahta Camii;Tahta Mosque, Nevşehir;;;;;;;100;;Nevşehir merkezde cami;mosque in Nevşehir District;;;;38.621635;34.71058;tahta-camii;Q132134182;way/307157372
 ;3;historical;archaeological_site;Tarihi Kilise;St. Timios Church;;;;;;;150;;;;;;;38.573171;34.873014;tarihi-kilise;;node/11285946844
+;3;historical;archaeological_site;Tatlarin Yeraltı Şehri;Tatlarin Underground City;;;;;;;150;;;;;;;38.637036;34.482234;tatlarin-yeralti-sehri;;node/13114159767
 ;3;historical;monument;Topada Yazılı Kaya Anıtı;Proto-hittite stone carving;;;;;;;60;;;;;;;38.493017;34.480244;topada-yazili-kaya-aniti;;node/800022378
 ;3;historical;mosque;Yunak Camii;Yunak Mosque;;;;;;;100;;Ürgüp, Nevşehir'de cami;mosque in Ürgüp, Nevşehir;;;;38.633538;34.905592;yunak-camii;Q127788372;way/1245161856
 ;3;historical;mosque;Özlüce Köyü Eski Cami;Özlüce Village Old Mosque;;;;;;;100;;Derinkuyu'da cami, kilise ve manastır;mosque, church, and monastery in Derinkuyu District;;;;38.453045;34.678165;ozluce-koyu-eski-cami;Q132134584;way/98590251
@@ -138,6 +138,8 @@
 ;18;nature;valley;Love Valley (Aşıklar Vadisi) Trail;Love Valley (Aşıklar Vadisi) Trail - North Gate;;;;;;;300;;;;;;;38.663398;34.829599;love-valley-asiklar-vadisi-trail;;node/13199843301
 ;18;nature;valley;Pasşabağ Vadisi;Pasabag valley;;;;;;;300;;;;;;;38.677005;34.854906;passabag-vadisi;;node/9382198517
 ;15;nature;valley;Gomeda Valley;;;;;;;;300;;;;;;;38.58186;34.875026;gomeda-valley;;node/4629787630
+;15;nature;valley;Mavrucan Deresi;;;;;;;;300;;;;;;;38.376553;34.963314;mavrucan-deresi;;node/4915273524
+;15;nature;valley;Soganli Valley;;;;;;;;300;;;;;;;38.349736;34.961323;soganli-valley;;node/4629828016
 ;15;nature;valley;meskendir valley entrance;;;;;;;;300;;;;;;;38.636738;34.861173;meskendir-valley-entrance;;node/9395241384
 ;15;nature;valley;Çat vadisi;;;;;;;;300;;;;;;;38.687134;34.658479;cat-vadisi;;node/12590431613
 ;14;nature;hill;Erdaş Dağı;Erdaş Dağı;;;;;;;100;;Türkiye'de dağ;mountain in Turkey;;;;38.452905;34.628261;erdas-dagi;Q31524323;node/314838509

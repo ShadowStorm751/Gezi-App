@@ -1,5 +1,5 @@
 ok
-bitti: 2026-11-19T18:36:38Z
+bitti: 2026-11-19T22:33:18Z
 kaynak: pbf
-osm_elements=401 wikidata=71 adaylar=176
-çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44587645611
+osm_elements=414 wikidata=71 adaylar=178
+çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44629125700
