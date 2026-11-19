@@ -2,9 +2,9 @@
  "ozet": {
   "uyumlu": 28,
   "kontrol": 10,
-  "yaklasik_duzeltildi": 5,
+  "yaklasik_duzeltildi": 6,
   "wikidata_yok": 11,
-  "yaklasik_dogrulanamadi": 2
+  "yaklasik_dogrulanamadi": 1
  },
  "yerler": {
   "karamanoglu-camii": {
@@ -763,14 +763,21 @@
   },
   "soganli-vadisi": {
    "osm": [
-    38.345,
-    35.075
+    38.3497,
+    34.9613
    ],
-   "qid": null,
-   "wikidata": null,
-   "arama_ile": false,
-   "mesafe_m": null,
-   "durum": "yaklasik_dogrulanamadi"
+   "qid": "Q25424230",
+   "wikidata": [
+    38.339166666666664,
+    34.98083333333334
+   ],
+   "arama_ile": true,
+   "mesafe_m": 2067,
+   "durum": "yaklasik_duzeltildi",
+   "onerilen": [
+    38.339166666666664,
+    34.98083333333334
+   ]
   }
  }
 }

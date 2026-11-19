@@ -440,6 +440,17 @@
    "license_url": "https://creativecommons.org/licenses/by/2.0",
    "source_url": "https://commons.wikimedia.org/wiki/File:Ihlara_-_25936870521.jpg"
   },
+  "soganli-vadisi": {
+   "file": "Soganli Valley Cappadocia.JPG",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/02/Soganli_Valley_Cappadocia.JPG/1280px-Soganli_Valley_Cappadocia.JPG",
+   "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/02/Soganli_Valley_Cappadocia.JPG/500px-Soganli_Valley_Cappadocia.JPG",
+   "width": 1280,
+   "height": 854,
+   "author": "This Photo was taken by Wolfgang Moroder . Feel free to use my photos, but please mention me as the author and send me a message . This image is not in the public domain . Please respect the copyright",
+   "license": "CC BY-SA 3.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Soganli_Valley_Cappadocia.JPG"
+  },
   "zelve-acik-hava-muzesi": {
    "file": "Zelve-December.jpg",
    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Zelve-December.jpg/1280px-Zelve-December.jpg",
@@ -579,7 +590,8 @@
   "uc-guzeller": "Q136915104",
   "guvercinlik-vadisi": "Q104596490",
   "passabag-vadisi": "Q133612406",
-  "ihlara-vadisi": "Q1366229"
+  "ihlara-vadisi": "Q1366229",
+  "soganli-vadisi": "Q25424230"
  },
  "rejected_license": {},
  "commons_fallback": {
@@ -599,7 +611,6 @@
   "bahattin-in-samanligi-kilise",
   "guray-muze",
   "ihlara-cam-teras",
-  "mazi-yeralti-sehri",
-  "soganli-vadisi"
+  "mazi-yeralti-sehri"
  ]
 }
