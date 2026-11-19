@@ -189,6 +189,81 @@ def fetch_imageinfo(files: List[str]) -> Dict[str, Dict[str, Any]]:
 
 # ---------------------------------------------------------------------------
 
+# ---------------------------------------------------------------------------
+# Yedek yol: Wikidata'da ana görsel yoksa Commons'ta ara (yalnızca yeni şehirler, --commons-fallback)
+# ---------------------------------------------------------------------------
+
+GENERIC_WORDS = {
+    "plaji", "plaj", "sahili", "camii", "cami", "kilisesi", "kilise", "muzesi", "muze", "selalesi", "vadisi",
+    "koyu", "tepesi", "tepe", "kalesi", "adasi", "parki", "bahcesi", "turbesi", "hani", "han", "sapeli",
+    "seyir", "noktasi", "tarihi", "eski", "antik", "buyuk", "kucuk", "sarayi", "valley", "beach", "church",
+    "museum", "the", "and", "yeralti", "sehri", "kenti", "alani", "tabiat", "milli", "acik", "hava",
+}
+
+
+def name_keywords(*names: str) -> List[str]:
+    """Dosya adında aranacak ayırt edici sözcükler (katlanmış, genel sözcükler hariç)."""
+    out: List[str] = []
+    for n in names:
+        for w in re.split(r"[^a-z0-9]+", p.fold(n or "")):
+            if len(w) >= 4 and w not in GENERIC_WORDS and w not in out:
+                out.append(w)
+    return out
+
+
+def title_matches(title: str, keywords: List[str]) -> bool:
+    t = p.fold(title)
+    return any(k in t for k in keywords)
+
+
+def commons_category_files(category: str, limit: int = 30) -> List[str]:
+    data = _get(COMMONS_API, {"action": "query", "list": "categorymembers", "cmtitle": f"Category:{category}",
+                              "cmtype": "file", "cmlimit": str(limit), "format": "json"})
+    return [m["title"] for m in data.get("query", {}).get("categorymembers", [])]
+
+
+def commons_geosearch(lat: float, lng: float, radius_m: int, limit: int = 50) -> List[Dict[str, Any]]:
+    data = _get(COMMONS_API, {"action": "query", "list": "geosearch", "gscoord": f"{lat}|{lng}",
+                              "gsradius": str(max(10, min(10000, radius_m))), "gsnamespace": "6",
+                              "gslimit": str(limit), "format": "json"})
+    return data.get("query", {}).get("geosearch", [])
+
+
+def entity_commons_category(entity: Dict[str, Any]) -> Optional[str]:
+    claims = (entity or {}).get("claims", {}).get("P373") or []
+    try:
+        return claims[0]["mainsnak"]["datavalue"]["value"]
+    except (KeyError, IndexError, TypeError):
+        return None
+
+
+def is_photo_file(title: str) -> bool:
+    return bool(re.search(r"\.(jpe?g|png|webp)$", title, re.I))
+
+
+def commons_fallback(s: Dict[str, Any], entity: Optional[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
+    """Önce kaydın Commons kategorisi, sonra adı dosya adında geçen yakındaki fotoğraflar."""
+    kw = name_keywords(s["ad_tr"], s.get("ad_en", ""))
+    candidates: List[tuple] = []
+    cat = entity_commons_category(entity) if entity else None
+    if cat:
+        candidates += [("commons-kategori", t) for t in commons_category_files(cat) if is_photo_file(t)]
+    if kw:
+        radius = 80 if s.get("ana_yer") else (1500 if s["kategori"] in p.AREA_CATEGORIES else 400)
+        hits = sorted(commons_geosearch(float(s["enlem"]), float(s["boylam"]), radius), key=lambda h: h.get("dist", 0))
+        candidates += [("commons-yakin", h["title"]) for h in hits
+                       if is_photo_file(h["title"]) and title_matches(h["title"], kw)]
+    if not candidates:
+        return None
+    infos = fetch_imageinfo([t for _, t in candidates[:40]])
+    for source, title in candidates[:40]:
+        info = parse_imageinfo(infos.get(title, {}))
+        if info and (info.get("width") or 0) >= 800:
+            info.update(kaynak=source, dosya=title)
+            return info
+    return None
+
+
 def city_results(slug: str) -> Path:
     """İstanbul: results/, diğer şehirler: results/<şehir>/."""
     return HERE / "results" if slug == DEFAULT_CITY else HERE / "results" / slug
@@ -200,6 +275,8 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     ap = argparse.ArgumentParser(description="Onaylı yerlerin Commons fotoğrafları")
     ap.add_argument("--city", default=DEFAULT_CITY, choices=sorted(CITIES))
+    ap.add_argument("--commons-fallback", action="store_true",
+                    help="Wikidata'da görseli olmayan yerler için Commons kategorisi ve yakındaki dosyalar")
     args = ap.parse_args(argv)
     try:
         DROPPED = importlib.import_module(f"{args.city}_descriptions").DROPPED
@@ -246,11 +323,26 @@ def main(argv: Optional[List[str]] = None) -> int:
             lic = ((infos.get(f, {}).get("imageinfo") or [{}])[0].get("extmetadata") or {}).get("LicenseShortName", {})
             rejected[slug] = strip_html(lic.get("value", "")) or "bilgi yok"
 
+    # 4) Yedek yol (yalnızca istenirse; İstanbul çıktısı değişmesin)
+    fallback: Dict[str, str] = {}
+    if args.commons_fallback:
+        for s in places:
+            slug = s.get("slug_override") or p.slugify(s["ad_tr"])
+            if slug in photos:
+                continue
+            qid = s.get("wikidata") or found_by_search.get(slug)
+            info = commons_fallback(s, entities.get(qid) if qid else None)
+            if info:
+                photos[slug] = info
+                fallback[slug] = f"{info['kaynak']}: {info['dosya']}"
+                p.log(f"  yedek yol: {slug} -> {info['dosya']}")
+
     missing = sorted((s.get("slug_override") or p.slugify(s["ad_tr"])) for s in places if (s.get("slug_override") or p.slugify(s["ad_tr"])) not in photos)
     result = {
         "photos": photos,
         "wikidata_found_by_search": found_by_search,
         "rejected_license": rejected,
+        "commons_fallback": fallback,   # elle gözden geçirilecek
         "missing": missing,
     }
     out = rdir / "photos.json"

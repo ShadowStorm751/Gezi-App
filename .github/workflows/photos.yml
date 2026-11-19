@@ -43,7 +43,8 @@ jobs:
           [ -n "$cities" ] || cities=$(sed -n 's/^Şehirler:[[:space:]]*//p' data-pipeline/photos-request.txt | head -1)
           for city in ${cities:-istanbul}; do
             if [ "$city" != "istanbul" ]; then python data-pipeline/coords.py --city "$city"; fi
-            python data-pipeline/photos.py --city "$city"
+            if [ "$city" = "istanbul" ]; then python data-pipeline/photos.py --city "$city"
+            else python data-pipeline/photos.py --city "$city" --commons-fallback; fi
           done
       - name: Sonucu kaydet
         run: |

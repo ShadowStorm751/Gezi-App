@@ -85,3 +85,22 @@ class SearchPickTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class FallbackTests(unittest.TestCase):
+    def test_keywords_and_match(self):
+        kw = ph.name_keywords("Ayıbalığı Plajı", "Ayıbalığı Beach")
+        self.assertEqual(kw, ["ayibaligi"])
+        self.assertTrue(ph.title_matches("File:Ayıbalığı koyu Karaburun.jpg", kw))
+        self.assertFalse(ph.title_matches("File:Karaburun sahil.jpg", kw))
+        self.assertEqual(ph.name_keywords("Tarihi Asansör"), ["asansor"])
+
+    def test_photo_file(self):
+        self.assertTrue(ph.is_photo_file("File:A.JPG"))
+        self.assertFalse(ph.is_photo_file("File:A.svg"))
+        self.assertFalse(ph.is_photo_file("File:A.pdf"))
+
+    def test_commons_category(self):
+        e = {"claims": {"P373": [{"mainsnak": {"datavalue": {"value": "Şirince"}}}]}}
+        self.assertEqual(ph.entity_commons_category(e), "Şirince")
+        self.assertIsNone(ph.entity_commons_category({}))
