@@ -1,0 +1,68 @@
+{
+ "avatar_own_folder": "ok",
+ "avatar_other_folder_blocked": "ok (engellendi)",
+ "avatar_wrong_type_blocked": "ok (engellendi)",
+ "update_profile_own_path": {
+  "id": "65315a26-6519-4d39-af24-7e8f21f017c8",
+  "username": null,
+  "is_public": true,
+  "avatar_path": "65315a26-6519-4d39-af24-7e8f21f017c8/a.png",
+  "preferred_lang": "tr"
+ },
+ "update_profile_other_path_blocked": "ok (engellendi)",
+ "report_place": {
+  "id": "bc99bd26-096d-4803-8c80-4daa5a574b8a",
+  "ok": true
+ },
+ "report_place_again": {
+  "ok": false,
+  "error": "already_reported"
+ },
+ "suggest_place": {
+  "id": "023f2889-03cc-4ece-8ed8-eceb6b99803c",
+  "ok": true,
+  "possible_duplicates": [
+   {
+    "id": "d4b4cd04-8d79-4a56-a014-0a9128674e4b",
+    "name": "Galata Kulesi",
+    "slug": "galata-kulesi",
+    "distance_m": 10
+   },
+   {
+    "id": "a63ab527-3d70-4544-9c94-efb7bf04e910",
+    "name": "İstanbul Aşkenaz Sinagogu",
+    "slug": "istanbul-askenaz-sinagogu",
+    "distance_m": 149
+   }
+  ]
+ },
+ "suggest_outside": {
+  "ok": false,
+  "error": "outside_service_area"
+ },
+ "my_submissions_count": 2,
+ "admin_list_blocked_for_user": "ok (42501)",
+ "admin_resolve_blocked_for_user": "ok (42501)",
+ "direct_insert_blocked": "ok (engellendi)",
+ "delete_without_confirm": {
+  "status": 400,
+  "body": {
+   "ok": false,
+   "error": "invalid_input"
+  }
+ },
+ "delete_with_confirm": {
+  "status": 200,
+  "body": {
+   "ok": true
+  }
+ },
+ "user_gone": "ok",
+ "avatar_files_left": 0,
+ "submissions_kept_anonymous": [
+  true,
+  true
+ ],
+ "profile_rows_left": 0,
+ "cleanup_submissions": 2
+}
