@@ -232,7 +232,95 @@ await supabase.rpc("update_profile", {
 await supabase.rpc("export_my_data"); // KVKK: kullanıcının tüm verisi tek JSON
 ```
 
-Hesap silme henüz yok (Faz 4'te `delete-account` Edge Function'ı gelecek).
+### Avatar yükleme (giriş gerekli)
+
+Kullanıcı yalnızca kendi klasörüne yazabilir: `avatars/<user_id>/...`. En fazla 2 MB, yalnızca JPEG, PNG, WebP.
+
+```ts
+const { data: { user } } = await supabase.auth.getUser();
+const path = `${user.id}/avatar-${Date.now()}.jpg`;      // yeni ad: önbellek sorunu olmaz
+await supabase.storage.from("avatars").upload(path, file, { contentType: "image/jpeg", upsert: true });
+await supabase.rpc("update_profile", { avatar_path: path });  // başka klasör -> hata (22023)
+const url = supabase.storage.from("avatars").getPublicUrl(path).data.publicUrl;
+```
+
+Yüklemeden önce görseli 512×512'ye küçültmen önerilir (`expo-image-manipulator`).
+
+## Hesap silme (Edge Function, giriş gerekli)
+
+App Store ve Google Play, uygulama içinden hesap silmeyi zorunlu tutar. Ayarlar'da "Hesabımı sil" → onay penceresi → çağrı → oturumu kapat.
+
+```ts
+const { data, error } = await supabase.functions.invoke("delete-account", { body: { confirm: "DELETE" } });
+// data: { ok: true }  -> await supabase.auth.signOut(); yerel verileri (ziyaret önbelleği vb.) temizle
+```
+
+| HTTP | `error` | Anlamı |
+| --- | --- | --- |
+| 200 | – | Silindi: hesap, profil, ziyaretler, rozetler, avatar dosyaları. Kullanıcının bildirimleri kimliksiz kalır. |
+| 400 | `invalid_input` | `confirm: "DELETE"` gönderilmedi |
+| 401 | `not_authenticated` | Oturum yok |
+| 500 | `server_error` | Tekrar dene |
+
+Geri alınamaz; onay penceresinde bunu açıkça yaz.
+
+## Kullanıcı katkısı: bildirim ve yeni yer önerisi (giriş gerekli)
+
+Yanıtlar `{ ok: true, ... }` ya da `{ ok: false, error }`. Bildirimler proje sahibinin onayına düşer.
+
+### `report_place` — mevcut yer için bildirim
+
+```ts
+await supabase.rpc("report_place", {
+  place_id: "<uuid>",
+  kind: "wrong_location",   // "wrong_location" | "wrong_info" | "closed" | "duplicate"
+  note: "Giriş kapısı arka sokakta",   // isteğe bağlı, en fazla 1000 karakter
+  lat: 41.0262, lng: 28.9742,          // isteğe bağlı; wrong_location için doğru konum (ikisi birlikte)
+  lang: "tr",
+});
+// -> { ok: true, id }
+```
+
+Önerilen ekran: yer detayında "Bir sorun mu var?" → 4 seçenek. "Konum yanlış" seçilince haritada iğneyi doğru yere sürükletip `lat/lng` gönder.
+
+### `suggest_place` — listede olmayan yeni yer
+
+```ts
+await supabase.rpc("suggest_place", {
+  name: "Çamlıca Kulesi",   // 2-120 karakter
+  category: "tower",        // CategorySlug
+  lat: 41.0270, lng: 29.0690,
+  note: "Yeni açılan seyir kulesi",   // isteğe bağlı
+  lang: "tr",
+});
+// -> { ok: true, id, possible_duplicates: [{ id, slug, name, distance_m }] }
+```
+
+`possible_duplicates` doluysa (150 m içinde yayındaki yerler) kullanıcıya "Bunlardan biri mi?" diye göster. Öneri yine de kaydedilmiştir; kullanıcı vazgeçerse bir şey yapman gerekmez.
+
+### Hata kodları
+
+| `error` | Anlamı | Önerilen mesaj (TR) |
+| --- | --- | --- |
+| `not_authenticated` | Oturum yok | "Öneri göndermek için giriş yap." |
+| `invalid_input` | Alan eksik/hatalı | "Bilgileri kontrol et." |
+| `place_not_found` | Yer yok ya da yayında değil | "Bu yer bulunamadı." |
+| `unknown_category` | Kategori geçersiz | – (uygulama hatası) |
+| `outside_service_area` | En yakın yer 50 km'den uzak | "Bu bölge henüz uygulamada yok." |
+| `already_reported` | Aynı bildirim/öneri zaten bekliyor | "Bunu zaten bildirdin, inceliyoruz." |
+| `rate_limited` | Son 24 saatte 20 gönderim | "Bugünlük yeterince katkı yaptın, teşekkürler!" |
+
+### `my_submissions` — kullanıcının gönderdikleri
+
+```ts
+await supabase.rpc("my_submissions", { lang: "tr" });
+// -> Array<{ id, kind, status: "open" | "accepted" | "rejected", place_id, place_name,
+//            suggested_name, admin_note, created_at, resolved_at }>
+```
+
+Kabul edilen ilk katkıda `city-helper` ("Şehir Gönüllüsü") rozeti verilir; `my_achievements` içinde görünür. Görseli henüz yok, yer tutucu göster.
+
+`admin_submissions` ve `admin_resolve_submission` yalnızca yönetici içindir; mobil uygulama bunları çağırmaz.
 
 ---
 

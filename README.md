@@ -37,6 +37,7 @@ Yapay zekâ asistanları için ayrıntılı kurallar: [`AGENTS.md`](AGENTS.md).
 - [x] Veri hattı: OSM + Wikidata → onay listesi → SQL
 - [x] Mobil uygulama ilk sürümü (harita, kamera, check-in, rozetler)
 - [ ] Expo SDK 58 yükseltmesi (iPhone'da Expo Go testi için)
-- [ ] Hesap silme, avatar yükleme, yanlış konum bildirme
+- [x] Backend: hesap silme, avatar yükleme, kullanıcı bildirimi ve yeni yer önerisi
+- [ ] Mobil: hesap silme, avatar, bildirim ve öneri ekranları
 - [ ] Apple/Google ile giriş, KVKK metinleri, ayrı canlı proje
 - [ ] Yeni şehirler (veri hazırlanıyor)

@@ -134,8 +134,8 @@ Seed'de 20 rozet var (6 genel, 8 tarihi, 6 doğa); türbe migration'ı ile 21.
 | 1 – Altyapı | 3-4 hf | Şema, okuma RPC'leri, RLS, testler, İstanbul verisi | Tamam; canlıda 156 yer, 133 fotoğraf |
 | 2 – Ziyaret ve başarım | 3-4 hf | Auth (e-posta), `checkin`, rozet motoru, ilerleme | Tamam; canlı uçtan uca test geçti. Apple/Google girişi bekliyor |
 | 3 – Geo-AR | 3-4 hf | `city_pack` (+ `has_area`, `thumb_url`) | Backend tamam; mobil kamera ekranı var, saha testi bekliyor |
-| 4 – Paylaşım ve özet | 2-3 hf | `my_summary` (hazır), hesap silme, avatar yükleme | Hesap silme ve avatar yükleme yapılacak |
-| 5 – Kapalı beta | 3-4 hf | Hata takibi, analitik, "yanlış konum bildir", ayrı canlı (production) proje | Yapılacak |
+| 4 – Paylaşım ve özet | 2-3 hf | `my_summary`, hesap silme, avatar yükleme | Backend tamam; mobil ekranlar bekliyor |
+| 5 – Kapalı beta | 3-4 hf | Hata takibi, analitik, kullanıcı bildirimleri (tamam), ayrı canlı (production) proje | Bildirim akışı tamam; diğerleri yapılacak |
 
 ## Canlıdaki durum (19 Kasım 2026)
 
@@ -143,25 +143,27 @@ Seed'de 20 rozet var (6 genel, 8 tarihi, 6 doğa); türbe migration'ı ile 21.
 - 156 İstanbul yeri (113 tarihi, 43 doğa, 15'i türbe), TR+EN açıklamalı; 133'ünde fotoğraf; 21 rozet, görselleri Storage'da.
 - `checkin` Edge Function'ı yayında; canlı test: girişsiz 401, uzak 'too_far', zayıf GPS 'low_accuracy', doğru konumda kabul + 'first-step' rozeti.
 - Arama tanınırlığa göre sıralı ve Türkçe harfe duyarsız.
+- Hesap silme, avatar yükleme ve kullanıcı bildirim/öneri akışı canlıda; canlı test geçti (19 Kasım akşamı). 22 rozet.
 
 ## Yayına kadar kalanlar
 
 Backend (Claude):
-- [ ] Hesap silme: `delete-account` Edge Function (App Store ve Google Play zorunlu tutuyor)
-- [ ] Avatar yükleme: `avatars` bucket'ına kullanıcının yalnızca kendi klasörüne yazma izni
-- [ ] "Yanlış konum / eksik yer bildir": tablo + RPC + admin onay akışı
+- [x] Hesap silme: `delete-account` Edge Function (canlıda, test edildi)
+- [x] Avatar yükleme: yalnızca kendi klasörü, 2 MB, JPEG/PNG/WebP (canlıda, test edildi)
+- [x] Kullanıcı katkısı: hata bildirimi ve yeni yer önerisi, yönetici onay akışı, 'Şehir Gönüllüsü' rozeti (canlıda, test edildi)
 - [ ] Çok şehir: şehir listesi RPC'si (`cities`), yeni şehir migration'larının gözden geçirilip uygulanması
 - [ ] Ayrı canlı (production) Supabase projesi; migration'ların GitHub Actions ile uygulanması
 - [ ] Fotoğrafı olmayan 23 yer için fotoğraf
 
 Mobil (ChatGPT):
 - [ ] Expo SDK 54 → 58 (`docs/REQUESTS.md`)
-- [ ] Hesap silme ve avatar ekranları (backend hazır olunca)
+- [ ] Hesap silme, avatar, "Bir sorun mu var?", "Yer öner" ve "Katkılarım" ekranları (`docs/REQUESTS.md`)
 
 Proje sahibi:
 - [ ] Apple Developer hesabı ve Google Cloud ayarı (Apple/Google ile giriş, mağaza yayını)
 - [ ] KVKK aydınlatma metni ve gizlilik politikası (taslağı Claude yazabilir; hukukçu onayı gerekir)
 - [ ] Yeni şehir aday listelerinin onayı
+- [ ] 'Şehir Gönüllüsü' (city-helper) rozet görseli (Gemini)
 
 ## Açık konular
 

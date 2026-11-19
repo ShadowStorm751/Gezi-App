@@ -83,6 +83,23 @@ supabase storage cp -r ../assets/badges ss:///badges --experimental
 
 ya da Supabase panelinde **Storage → badges** içine dosyaları sürükle-bırak.
 
+## Kullanıcı önerilerini yönetmek
+
+Kullanıcıların bildirimleri ve yeni yer önerileri `place_submissions` tablosunda bekler. En kolayı: Claude'a "önerilere bak" de; listeyi çıkarır, her biri için kararını sorar.
+
+Elle (Supabase panelinde **SQL Editor**):
+
+```sql
+select * from admin_submissions();                         -- bekleyenler
+select admin_resolve_submission('<id>', true, 'Teşekkürler');            -- kabul (yeni yer: yayında olmayan yer olarak eklenir)
+select admin_resolve_submission('<id>', true, 'Düzeltildi', true);       -- kabul + değişikliği uygula (konum taşı / kapanan yeri gizle)
+select admin_resolve_submission('<id>', false, 'Zaten listede');         -- ret
+```
+
+Kabul edilen yeni yer `is_published = false` ile eklenir; TR/EN kısa açıklaması yazılıp yayına alınınca uygulamada görünür.
+
+Güvenlik denetçisi `report_place`, `suggest_place`, `admin_submissions` ve `admin_resolve_submission` için "SECURITY DEFINER" uyarısı verir: bilinçli. Kullanıcılar tabloya doğrudan yazamaz, yalnızca bu fonksiyonlarla (sınırlar ve doğrulamayla) yazar; yönetici fonksiyonları içeride yetki kontrolü yapar (canlı testte doğrulandı).
+
 ## Yeni rozet eklemek
 
 Kod değişikliği gerekmez. Admin olarak `achievements` tablosuna kural JSON'u ile satır, `achievement_translations` tablosuna TR ve EN ad ekle. Kural türleri: [`../docs/TECHNICAL_PLAN.md`](../docs/TECHNICAL_PLAN.md#rozet-kuralları).

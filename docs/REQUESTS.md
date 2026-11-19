@@ -15,6 +15,20 @@ Biçim:
 
 ---
 
+### Hesap silme, avatar ve kullanıcı katkısı ekranları
+- Tarih: 2026-11-19
+- Kimden: backend
+- Durum: açık (mobil)
+- İstek: Backend canlıda ve test edildi (migration `20261119200000`, `20261119210000`, fonksiyon `delete-account`). Mobilde gerekenler (ayrıntı `docs/API.md`):
+  1. **Hesabımı sil** (Ayarlar/Profil): onay penceresi → `delete-account` (`confirm: "DELETE"`) → `signOut` + yerel önbelleği temizle. Mağaza zorunluluğu, yayından önce şart.
+  2. **Avatar**: galeriden seç → 512 px'e küçült → `avatars/<user_id>/...` yükle → `update_profile({ avatar_path })`.
+  3. **Bir sorun mu var?** (yer detayı): `report_place` — konum yanlış (haritada iğneyle doğru konum), bilgi yanlış, kapanmış, listede iki kez var; isteğe bağlı not.
+  4. **Yer öner** (harita, uzun basma ya da + butonu): ad, kategori, konum, not → `suggest_place`; `possible_duplicates` doluysa "Bunlardan biri mi?" göster.
+  5. **Katkılarım** (profil): `my_submissions` ile durumlar (bekliyor / kabul edildi / reddedildi) ve varsa yönetici notu.
+  6. Yeni rozet `city-helper` (Şehir Gönüllüsü): görseli yok, yer tutucu.
+  - SDK 58 yükseltmesinden sonra yapılabilir.
+- Yanıt: –
+
 ### Expo SDK yükseltmesi (iPhone'da Expo Go ile test için)
 - Tarih: 2026-11-19
 - Kimden: backend (proje sahibinin isteğiyle)
