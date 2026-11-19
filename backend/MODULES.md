@@ -18,7 +18,7 @@ Yeni özellik eklemeden önce bu dosyayı oku ve en alttaki kontrol listesini uy
 | **Sosyal** | `friendships` | `search_users`, `send_friend_request`, `respond_friend_request`, `remove_friend`, `my_friends`, `friends_leaderboard`, `friend_accepted_achievements` | `…290000_friends`, `…300000_social_badges` |
 | **Rotalar** | `routes`, `route_translations`, `route_stops` | `list_routes`, `route_detail`, `route_stops_for`, `route_summary_json` | `…260000_routes`, `…270000_istanbul_routes` |
 | **Keşif** | – (okur) | `recommendations`, `rec_open_badges`, `rec_open_routes`, `my_summary`, `city_progress` | `…320000_recommendations` |
-| **Altyapı** | `app_settings` | Edge `badge-upload`, `can_admin`, `is_admin`, `norm_lang`, `slugify`, `search_norm` | – |
+| **Altyapı** | `app_settings` | Edge `badge-upload`, Edge `content-apply` (içerik migration'ları), `can_admin`, `is_admin`, `norm_lang`, `slugify`, `search_norm` | – |
 
 ## Genişletme noktaları (ortak fonksiyonları yeniden yazma!)
 

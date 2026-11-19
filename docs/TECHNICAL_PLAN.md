@@ -139,7 +139,7 @@ Seed'de 20 rozet var (6 genel, 8 tarihi, 6 doğa); türbe ile 21, 'Şehir Gönü
 
 ## Canlıdaki durum (19 Kasım 2026, akşam denetimi)
 
-- Supabase projesi `gezi-app-test` (Frankfurt). 35 migration uygulandı; depodaki `backend/supabase/migrations/` ile birebir aynı.
+- Supabase projesi `gezi-app-test` (Frankfurt). 36 migration uygulandı; depodaki `backend/supabase/migrations/` ile birebir aynı.
 - 156 İstanbul yeri (113 tarihi, 43 doğa, 15'i türbe), TR+EN açıklamalı; 151'inde fotoğraf; 27 rozet, görselleri Storage'da; 11 hazır rota.
 - `checkin` Edge Function'ı yayında; canlı test: girişsiz 401, uzak 'too_far', zayıf GPS 'low_accuracy', doğru konumda kabul + 'first-step' rozeti.
 - Arama tanınırlığa göre sıralı ve Türkçe harfe duyarsız.
@@ -155,7 +155,7 @@ Backend (Claude):
 - [x] Avatar yükleme: yalnızca kendi klasörü, 2 MB, JPEG/PNG/WebP (canlıda, test edildi)
 - [x] Kullanıcı katkısı: hata bildirimi ve yeni yer önerisi, yönetici onay akışı, 'Şehir Gönüllüsü' rozeti (canlıda, test edildi)
 - [x] Şehir listesi: `list_cities` (canlıda)
-- [ ] İstanbul uzun açıklamaları (TR+EN, 2 paragraf): 10/156 canlıda; partiler halinde sürüyor (`data-pipeline/content/istanbul_long_descriptions.py`)
+- [ ] İstanbul uzun açıklamaları (TR+EN, 2 paragraf): 20/156 canlıda; partiler halinde sürüyor, `content-apply` ile yüklenir (`data-pipeline/content/istanbul_long_descriptions.py`)
 - [x] Modüler yapı: rozet kuralları (`ach_rule_*`) ve KVKK bölümleri (`export_section_*`) parçalara ayrıldı; `backend/MODULES.md` + `backend/tests/audit.sql`
 - [x] Yer değerlendirmeleri: 1-5 yıldız + onaylı not, puan özeti place_detail'de (canlıda)
 - [x] Kişisel veri envanteri: `docs/VERI_ENVANTERI.md` (KVKK metninin kaynağı; her yeni özellikte güncellenir)

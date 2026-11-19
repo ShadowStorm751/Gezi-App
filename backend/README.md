@@ -39,7 +39,8 @@ backend/supabase/
 │   ├── 20261120020000_period_labels_route_covers.sql dönem adı dile göre, rota kapağı en tanınmış duraktan
 │   ├── 20261120030000_place_reviews.sql       yer değerlendirmeleri (yıldız + onaylı not)
 │   ├── 20261120040000_modular_rules_exports.sql rozet kuralları ve KVKK bölümleri parçalara ayrıldı
-│   └── 20261120050000_istanbul_long_desc_1.sql   uzun açıklamalar, 1. parti (üretilir: content/build_long_desc.py)
+│   ├── 20261120050000_istanbul_long_desc_1.sql   uzun açıklamalar, 1. parti (üretilir: content/build_long_desc.py)
+│   └── 2026112006…_istanbul_long_desc_N.sql     sonraki partiler; content-apply ile yüklenir
 ├── functions/badge-upload/              rozet görsellerini Storage'a yükler (.github/workflows/badges.yml)
 ├── functions/checkin/
 │   ├── index.ts                      Edge Function
@@ -147,4 +148,13 @@ Reddedilen ve 24 saattir gönderilmemiş dosyaları `photo-cleanup` Edge Functio
 (`.github/workflows/photo-cleanup.yml`, her gün 03:17 UTC). Canlı (production) projeye geçince
 `update public.app_settings set value = 'https://<yeni-ref>.supabase.co/storage/v1/object/public' where key = 'storage_public_base';`
 ve iş akışlarındaki proje adresi güncellenmeli.
+
+## İçerik migration'larını yükleme (content-apply)
+
+Uzun açıklamalar gibi yalnızca veri içeren migration'lar `content-apply` Edge Function'ı ile yüklenir:
+1. `python data-pipeline/content/build_long_desc.py <parti> <zaman_damgası>` → migration dosyası.
+2. Dosyanın SHA-256'sı `functions/content-apply/index.ts` içindeki `ALLOWED` listesine eklenir ve fonksiyon yeniden yüklenir.
+3. Dosya main'e gönderilince `.github/workflows/content-apply.yml` onu fonksiyona yollar; fonksiyon içerik birebir
+   eşleşirse tek işlemde uygular ve `schema_migrations`'a kaydeder. Sonuç: `data-pipeline/results/content-apply.txt`.
+Şema değişiklikleri bu yolla uygulanmaz.
 
