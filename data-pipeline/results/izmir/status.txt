@@ -1,19 +1,19 @@
 failed
-bitti: 2026-11-19T17:52:27Z
-çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44577863656
+bitti: 2026-11-19T18:18:57Z
+çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44582228727
 --- son satırlar ---
-
-The above exception was the direct cause of the following exception:
-
 Traceback (most recent call last):
-  File "/home/runner/work/Gezi-App/Gezi-App/data-pipeline/pipeline.py", line 872, in <module>
+  File "/home/runner/work/Gezi-App/Gezi-App/data-pipeline/pipeline.py", line 910, in <module>
     sys.exit(main())
              ^^^^^^
-  File "/home/runner/work/Gezi-App/Gezi-App/data-pipeline/pipeline.py", line 837, in main
+  File "/home/runner/work/Gezi-App/Gezi-App/data-pipeline/pipeline.py", line 875, in main
     fetch_osm(out, city, args.budget_min * 60, args.cache_dir)
   File "/home/runner/work/Gezi-App/Gezi-App/data-pipeline/pipeline.py", line 187, in fetch_osm
     data = fetch_osm_chunked(city, cache_dir or out_dir / "osm_chunks", budget_s)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/Gezi-App/Gezi-App/data-pipeline/pipeline.py", line 226, in fetch_osm_chunked
-    raise BudgetExceeded(f"{exc} — {done}/{len(plan)} parça hazır, sonraki çalıştırma devam eder") from exc
-BudgetExceeded: süre sınırı doldu; son hata: HTTP Error 504: Gateway Timeout — 3/75 parça hazır, sonraki çalıştırma devam eder
+  File "/home/runner/work/Gezi-App/Gezi-App/data-pipeline/pipeline.py", line 268, in fetch_osm_chunked
+    part = get(box_query(sel, box, out, CHUNK_TIMEOUT_S), f"{sel} (out {out}, kutu {box})")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Gezi-App/Gezi-App/data-pipeline/pipeline.py", line 241, in get
+    raise BudgetExceeded(f"{exc} — {done}/{total} parça hazır, sonraki çalıştırma devam eder") from exc
+BudgetExceeded: süre sınırı doldu; son hata: The read operation timed out — 6/76 parça hazır, sonraki çalıştırma devam eder
