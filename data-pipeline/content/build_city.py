@@ -154,6 +154,21 @@ on conflict (category_id, lang) do nothing;
 """
 
 
+def foreign_slugs(city: City) -> Dict[str, str]:
+    """Diğer şehirlerin yer slug'ları (slug -> şehir). Migration'lar 'on conflict (slug) do update'
+    kullandığı için çakışan bir slug başka şehirdeki yerin üzerine yazar; bu yüzden engellenir."""
+    from cities import CITIES
+    out: Dict[str, str] = {}
+    for other in CITIES.values():
+        if other.slug == city.slug:
+            continue
+        path = results_dir(other) / "shortlist.json"
+        if path.exists():
+            for s in json.loads(path.read_text(encoding="utf-8")):
+                out[s.get("slug_override") or p.slugify(s["ad_tr"])] = other.slug
+    return out
+
+
 def apply_coords(shortlist: List[Dict[str, Any]], coords: Dict[str, Any]) -> List[str]:
     """coords.json sonucunu uygular: elle eklenen yerlerin yaklaşık konumu Wikidata koordinatıyla
     değişir, aramayla bulunan Wikidata kimliği yazılır. Elle bakılması gerekenleri döndürür."""
@@ -233,6 +248,9 @@ def build_city_migration(city: City, header_date: str) -> Tuple[str, Dict[str, A
     rdir = results_dir(city)
     desc = load_descriptions(city)
     shortlist = json.loads((rdir / "shortlist.json").read_text(encoding="utf-8"))
+    clash = {s["slug"]: foreign_slugs(city)[s["slug"]] for s in shortlist if s["slug"] in foreign_slugs(city)}
+    if clash:
+        raise SystemExit(f"Başka şehirde aynı slug var (üzerine yazar): {clash}")
     coords_path = rdir / "coords.json"
     review = apply_coords(shortlist, json.loads(coords_path.read_text(encoding="utf-8"))["yerler"]) \
         if coords_path.exists() else []

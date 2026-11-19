@@ -69,7 +69,7 @@ D = {
               "An inn built under Bayezid II, centre of the silk cocoon trade, famous for the small mosque in its courtyard."),
 "bursa-ataturk-aniti": ("Heykel meydanında, 1931'de dikilen Atatürk Anıtı.",
                         "The Atatürk Monument on Heykel square, erected in 1931."),
-"dikilitas": ("İznik yakınında, Roma döneminden kalan anıt mezar; Beştaş olarak da bilinir.",
+"iznik-dikilitas": ("İznik yakınında, Roma döneminden kalan anıt mezar; Beştaş olarak da bilinir.",
               "A Roman funerary monument near İznik, also known as Beştaş."),
 "emir-han": ("Ulu Cami'nin yanında, Orhan Gazi döneminde yapılan tarihi han.",
              "A historic inn next to the Great Mosque, built under Orhan Gazi."),
@@ -178,7 +178,7 @@ PERIOD_DEFAULT_HISTORICAL = None
 PERIOD = {
     **{s: "Bizans" for s in ("ayasofya-camii-iznik", "fatih-camii-tirilye", "veled-i-yanic-cami", "kemerli-kilise-tirilye",
                              "iznik-konsil", "hisar-arkeopark")},
-    **{s: "Antik" for s in ("dikilitas", "iznik-roma-tiyatrosu", "antik-tiyatro", "aktopraklik-hoyugu", "iznik-surlari")},
+    **{s: "Antik" for s in ("iznik-dikilitas", "iznik-roma-tiyatrosu", "antik-tiyatro", "aktopraklik-hoyugu", "iznik-surlari")},
     **{s: "Osmanlı" for s in (
         "bursa-ulu-camii", "emir-sultan-camii", "orhan-gazi-camii", "iznik-yesil-cami", "yildirim-camii",
         "bursa-muradiye-camii", "yesil-camii", "eski-camii-golyazi", "aziz-panteleimon-kilisesi", "mayor-sinagogu",

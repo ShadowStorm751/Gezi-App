@@ -439,20 +439,6 @@
    "mesafe_m": 5,
    "durum": "uyumlu"
   },
-  "dikilitas": {
-   "osm": [
-    40.487571,
-    29.701932
-   ],
-   "qid": "Q21524994",
-   "wikidata": [
-    40.487581705042615,
-    29.701904799453615
-   ],
-   "arama_ile": false,
-   "mesafe_m": 3,
-   "durum": "uyumlu"
-  },
   "emir-han": {
    "osm": [
     40.184506,
@@ -974,6 +960,20 @@
    "arama_ile": false,
    "mesafe_m": null,
    "durum": "wikidata_yok"
+  },
+  "iznik-dikilitas": {
+   "osm": [
+    40.487571,
+    29.701932
+   ],
+   "qid": "Q21524994",
+   "wikidata": [
+    40.487581705042615,
+    29.701904799453615
+   ],
+   "arama_ile": false,
+   "mesafe_m": 3,
+   "durum": "uyumlu"
   }
  }
 }

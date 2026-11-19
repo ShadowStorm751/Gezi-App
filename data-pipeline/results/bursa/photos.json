@@ -264,17 +264,6 @@
    "license_url": "https://creativecommons.org/licenses/by/3.0",
    "source_url": "https://commons.wikimedia.org/wiki/File:ATAT%C3%9CRK_ANITI_-_panoramio.jpg"
   },
-  "dikilitas": {
-   "file": "Iznik Obelisk 01.jpg",
-   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Iznik_Obelisk_01.jpg/1280px-Iznik_Obelisk_01.jpg",
-   "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Iznik_Obelisk_01.jpg/500px-Iznik_Obelisk_01.jpg",
-   "width": 1280,
-   "height": 1707,
-   "author": "Kurmanbek",
-   "license": "CC BY-SA 4.0",
-   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
-   "source_url": "https://commons.wikimedia.org/wiki/File:Iznik_Obelisk_01.jpg"
-  },
   "emir-han": {
    "file": "Emir Han.jpg",
    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/Emir_Han.jpg/1280px-Emir_Han.jpg",
@@ -527,6 +516,17 @@
    "license": "Public domain",
    "license_url": null,
    "source_url": "https://commons.wikimedia.org/wiki/File:Suu%C3%A7tu_Waterfall,_Mustafakemalpa%C5%9Fa.jpg"
+  },
+  "iznik-dikilitas": {
+   "file": "Iznik Obelisk 01.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Iznik_Obelisk_01.jpg/1280px-Iznik_Obelisk_01.jpg",
+   "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Iznik_Obelisk_01.jpg/500px-Iznik_Obelisk_01.jpg",
+   "width": 1280,
+   "height": 1707,
+   "author": "Kurmanbek",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Iznik_Obelisk_01.jpg"
   }
  },
  "wikidata_found_by_search": {

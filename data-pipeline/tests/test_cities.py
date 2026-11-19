@@ -239,6 +239,19 @@ class CoordsTests(unittest.TestCase):
 
 
 class ShortlistTests(unittest.TestCase):
+    def test_no_slug_shared_between_cities(self):
+        import json as _j
+        import build_city as bc
+        owner = {}
+        for city in cities.CITIES.values():
+            path = bc.results_dir(city) / "shortlist.json"
+            if not path.exists():
+                continue
+            for i in _j.loads(path.read_text(encoding="utf-8")):
+                slug = i.get("slug_override") or p.slugify(i["ad_tr"])
+                self.assertNotIn(slug, owner, f"{slug}: {owner.get(slug)} ve {city.slug}")
+                owner[slug] = city.slug
+
     def test_city_shortlists_consistent(self):
         import json as _j
         for city in ("izmir", "bursa", "kapadokya"):

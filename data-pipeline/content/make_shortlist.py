@@ -58,6 +58,12 @@ ADDED: Dict[str, Dict[str, Any]] = {
 }
 
 
+# Onayda başka şehirle çakışmasın diye değiştirilen slug'lar: yeni slug -> aday listesindeki slug
+SLUG_FROM_CANDIDATE: Dict[str, Dict[str, str]] = {
+    "bursa": {"iznik-dikilitas": "dikilitas"},   # İstanbul'da da "dikilitas" var
+}
+
+
 def load_candidates(rdir: Path) -> Dict[str, Dict[str, str]]:
     return {r["slug"]: r for r in p.read_csv(rdir / "candidates.csv")}
 
@@ -74,7 +80,7 @@ def build(city_slug: str) -> List[Dict[str, Any]]:
             slug, cat = row["slug"], row["kategori"]
             if cat not in p.CATEGORY_KIND:
                 raise SystemExit(f"{slug}: bilinmeyen kategori {cat}")
-            c = cands.get(slug)
+            c = cands.get(SLUG_FROM_CANDIDATE.get(city.slug, {}).get(slug, slug))
             if c:
                 item = {k: c[k] for k in ("enlem", "boylam", "wikidata", "osm", "yapim_yili", "donem",
                                           "wikidata_ipucu_tr", "wikidata_ipucu_en", "wikipedia_tr",
