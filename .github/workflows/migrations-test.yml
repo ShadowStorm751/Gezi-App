@@ -1,0 +1,77 @@
+# Bütün migration'ları boş bir PostGIS veritabanına sırayla uygular ve yeni şehirleri denetler.
+# Canlı Supabase'e DOKUNMAZ: GitHub'ın makinesinde geçici bir Postgres kurar, iş bitince silinir.
+# Supabase'in hazır şemaları (auth, storage, roller) backend/supabase/tests/ci_stubs.sql ile taklit edilir.
+# Tetikleme: migration ya da test dosyaları değişip main'e veya data/* dalına yüklenince, ya da elle.
+# Sonuç: data-pipeline/results/migrations-test.txt (ilk satır ok | failed), her durumda commit'lenir.
+name: Migration testi
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, "data/**"]
+    paths:
+      - backend/supabase/migrations/**
+      - backend/supabase/tests/ci_*.sql
+      - .github/workflows/migrations-test.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: migrations-test-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      postgres:
+        image: postgis/postgis:16-3.4
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 20
+    env:
+      PGHOST: localhost
+      PGUSER: postgres
+      PGPASSWORD: postgres
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Migration'ları uygula ve denetle
+        id: run
+        run: |
+          set +e -o pipefail   # hata olsa da sonuç dosyası yazılsın
+          out=data-pipeline/results/migrations-test.txt
+          mkdir -p data-pipeline/results
+          {
+            # Temiz bir veritabanı: postgis imajı varsayılan veritabanına uzantıyı public şemasına kuruyor.
+            psql -d postgres -v ON_ERROR_STOP=1 -c "create database gezi template template0"
+            psql -d gezi -v ON_ERROR_STOP=1 -c "alter database gezi set search_path = \"\$user\", public, extensions"
+            psql -d gezi -v ON_ERROR_STOP=1 -q -f backend/supabase/tests/ci_stubs.sql
+            for f in backend/supabase/migrations/*.sql; do
+              echo "-- $f"
+              psql -d gezi -v ON_ERROR_STOP=1 -q -f "$f"
+            done
+            psql -d gezi -v ON_ERROR_STOP=1 -f backend/supabase/tests/ci_checks.sql
+          } > /tmp/log.txt 2>&1
+          status=$?
+          { if [ $status -eq 0 ]; then echo ok; else echo failed; fi
+            echo "zaman: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "çalıştırma: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo "---"
+            grep -v '^-- backend' /tmp/log.txt | tail -n 120; } > "$out"
+          cat "$out"
+          exit $status
+
+      - name: Sonucu kaydet
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data-pipeline/results/migrations-test.txt
+          git commit -m "Migration testi (sonuç)" || echo "Değişiklik yok"
+          git pull --rebase
+          git push
