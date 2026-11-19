@@ -217,6 +217,6 @@ Biçim:
   2. Yükleme ekranında kısa onay metni (API.md'de var).
   3. **Profil → Fotoğraflarım:** `my_photos` listesi; durum etiketi (İnceleniyor / Yayında / Reddedildi + neden), silme düğmesi.
   4. Yer detayındaki galeride kullanıcı fotoğrafları `author` alanıyla ("@emre") zaten gelir; ek iş yok.
-  5. Yeni rozet `photographer` (Gezi Fotoğrafçısı); görseli gelince `badgeImages.js`'e eklenmeli.
+  5. Yeni rozet `photographer` (Gezi Fotoğrafçısı); görseli `assets/badges/photographer.webp` (Storage'da da var), `badgeImages.js`'e eklenmeli.
   6. Expo için `expo-image-picker` ve `expo-image-manipulator` gerekir; iOS/Android izin metinleri TR+EN.
 

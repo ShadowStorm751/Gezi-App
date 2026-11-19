@@ -139,8 +139,8 @@ Seed'de 20 rozet var (6 genel, 8 tarihi, 6 doğa); türbe ile 21, 'Şehir Gönü
 
 ## Canlıdaki durum (19 Kasım 2026, akşam denetimi)
 
-- Supabase projesi `gezi-app-test` (Frankfurt). 30 migration uygulandı; depodaki `backend/supabase/migrations/` ile birebir aynı.
-- 156 İstanbul yeri (113 tarihi, 43 doğa, 15'i türbe), TR+EN açıklamalı; 151'inde fotoğraf; 27 rozet (26'sının görseli Storage'da); 11 hazır rota.
+- Supabase projesi `gezi-app-test` (Frankfurt). 31 migration uygulandı; depodaki `backend/supabase/migrations/` ile birebir aynı.
+- 156 İstanbul yeri (113 tarihi, 43 doğa, 15'i türbe), TR+EN açıklamalı; 151'inde fotoğraf; 27 rozet, görselleri Storage'da; 11 hazır rota.
 - `checkin` Edge Function'ı yayında; canlı test: girişsiz 401, uzak 'too_far', zayıf GPS 'low_accuracy', doğru konumda kabul + 'first-step' rozeti.
 - Arama tanınırlığa göre sıralı ve Türkçe harfe duyarsız.
 - Hesap silme, avatar yükleme ve kullanıcı bildirim/öneri akışı canlıda; canlı test geçti.
@@ -182,7 +182,7 @@ Proje sahibi:
 - [x] 'Şehir Gönüllüsü' (city-helper) rozet görseli
 - [x] 'Rotacı' (route-first) ve 'Rota Ustası' (route-master) rozet görselleri
 - [x] 'Gezi Arkadaşı' (first-friend) ve 'Gezi Ekibi' (travel-crew) rozet görselleri
-- [ ] 'Gezi Fotoğrafçısı' (photographer) rozet görseli (Gemini)
+- [x] 'Gezi Fotoğrafçısı' (photographer) rozet görseli
 - [ ] Yönetici için fotoğraf onay ekranı (şimdilik Supabase SQL editöründen `admin_photo_submissions` / `admin_resolve_photo`)
 - [ ] Canlı (production) projede `app_settings.storage_public_base` değerini yeni proje adresiyle güncellemek
 

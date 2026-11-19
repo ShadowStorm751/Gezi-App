@@ -1,5 +1,5 @@
 # Rozet görsellerini (assets/badges/*.webp) Supabase Storage'daki 'badges' bucket'ına yükler.
-# Gizli anahtar kullanmaz: badge-upload Edge Function'ı yalnızca bilinen 26 dosyayı
+# Gizli anahtar kullanmaz: badge-upload Edge Function'ı yalnızca bilinen 27 dosyayı
 # (içerik özeti birebir aynıysa) kabul eder.
 # Tetikleme: assets/badges/ değişip main'e yüklenince ya da elle.
 # Sonuç: data-pipeline/results/badges-upload.txt olarak commit'lenir.
