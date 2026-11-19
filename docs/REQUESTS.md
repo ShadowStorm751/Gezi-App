@@ -25,24 +25,24 @@ Biçim:
 ### Rozet görselleri hazır
 - Tarih: 2026-11-19
 - Kimden: backend
-- Durum: açık (mobil)
+- Durum: tamamlandı (mobil uygulama kodu)
 - İstek: 21 rozetin görseli `assets/badges/<slug>.webp` (512×512, şeffaf). Öneri:
   - Görselleri uygulama paketine koy; `my_achievements` dönen `slug` ile eşleştir. Pakette yoksa `badge_path` ile `supabase.storage.from("badges").getPublicUrl(badge_path)`, o da yoksa yer tutucu.
   - **Kazanılmamış rozet** için ayrı görsel yok: aynı görseli gri tonlamalı + yarı saydam (~%40) göster, altında `progress/target` (ör. 3/5). Kazanılınca tam renk ve küçük bir kutlama animasyonu.
   - Görsellerde yazı yok; rozet adı ve açıklaması `my_achievements` içinden, cihaz diline göre gelir.
   - `badge_path` canlıda dolu (`<slug>.webp`) ve 21 görselin hepsi `badges` bucket'ında (herkese açık). `getPublicUrl(badge_path)` çalışır.
-- Yanıt: –
+- Yanıt (mobil): 21 paketli görsel Rozetler ekranında slug ile eşleşiyor. Oturum açan kullanıcı için my_achievements okunuyor. Kilitli rozetler gri ve ilerlemeli, yeni kazanımlar yenilemede kısa animasyonla gösteriliyor. Fiziksel cihaz kontrolü bekliyor.
 
 ### Yer fotoğrafları geldi (atıf zorunlu)
 - Tarih: 2026-11-19
 - Kimden: backend
-- Durum: açık (mobil)
+- Durum: tamamlandı (mobil uygulama kodu)
 - İstek: 156 yerin 133'ünde Wikimedia Commons fotoğrafı var (migration `20261119130000_photo_urls.sql` + `20261119140000_istanbul_photos.sql`). Geriye uyumlu eklemeler:
   - `place_detail.photos[]`: yeni alanlar `url`, `thumb_url`, `license_url`; `storage_path` artık boş olabilir.
   - `city_pack.places[]`: yeni alan `thumb_url` (ilk fotoğrafın 500 px küçük resmi). Bu eklemeyle `version` bir kez değişir.
   - **Lisans gereği** fotoğrafın yanında yazar ve lisans gösterilmeli ("Foto: A.Savin · FAL"); kartlarda "Foto: Wikimedia Commons" yeterli. Ayrıntı: `docs/API.md` → `place_detail`.
   - Fotoğrafı olmayan 23 yerde kategoriye göre yer tutucu gerekir.
-- Yanıt: –
+- Yanıt (mobil): Liste kartında Commons atfı, detayda her görselin altında bağlantılı yazar ve lisans gösteriliyor. Fotoğrafsız yerler kategori simgesini kullanıyor.
 
 ### Gerçek İstanbul verisi yüklendi
 - Tarih: 2026-11-19
@@ -54,9 +54,9 @@ Biçim:
 ### Yeni kategori: `tomb` (Türbe)
 - Tarih: 2026-11-19
 - Kimden: backend
-- Durum: açık (mobil)
+- Durum: tamamlandı (mobil uygulama kodu)
 - İstek: Proje sahibinin isteğiyle türbeler ayrı kategori oldu: `tomb`, TR "Türbe", EN "Tomb" (migration `20261119100000_tomb_category.sql`). `catalog.ts` içindeki `categoryNames` listesine eklenmesi gerekiyor; yoksa ekranda "tomb" yazar. Bir de yeni rozet var: `sultans-rest` ("Padişah Türbeleri", 5 türbe). Geriye uyumlu, başka bir şey değişmedi.
-- Yanıt: –
+- Yanıt (mobil): Kategori adı mobil katalogda Türkçe Türbe ve İngilizce Tomb olarak eşlendi.
 
 ### Test projesinde İstanbul verisinin yüklenmesi
 - Tarih: 2026-11-19

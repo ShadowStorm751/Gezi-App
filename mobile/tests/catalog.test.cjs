@@ -5,6 +5,23 @@ const {cameraTargets} = require('../geo');
 const tower = {id:'b490bb1c-9aa3-44a7-8535-300000000001',slug:'galata-kulesi',name:'Galata Kulesi',
   short_desc:null,kind:'historical',category:'tower',latitude:41.0256556,longitude:28.9741556,checkin_radius_m:80};
 const pack = {city:'istanbul',name:'İstanbul',version:'2026-11-18',places:[tower]};
+test('Türbe etiketi her iki dilde ve küçük resim eski paketlerle çalışır',()=>{
+  const row={...tower,category:'tomb',thumb_url:'https://example.org/tomb.jpg'};
+  assert.equal(mapPlace(row,'tr').categoryLabel,'Türbe');
+  assert.equal(mapPlace(row,'en').categoryLabel,'Tomb');
+  assert.equal(mapPlace(row,'tr').thumbnail,row.thumb_url);
+  assert.equal(mapPlace(tower,'tr').thumbnail,null);
+});
+test('Fotoğrafta yazar ve lisans birlikte gerekir, eski depolama yolları ve bağlantılar korunur',async()=>{
+  const photo={url:'https://example.org/photo.jpg',author:'A.Savin',license:'FAL',
+    source_url:'https://commons.wikimedia.org/',license_url:'https://artlibre.org/'};
+  const stored={...photo,url:null,storage_path:'istanbul/photo.jpg'};
+  const data={...tower,category_name:'Kule',photos:[photo,stored,{...photo,license:' '},{...photo,author:null}]};
+  const result=await loadDetail(async()=>({data,error:null}),tower.id,'tr');
+  assert.deepEqual(result.photos,[photo,stored]);
+  delete data.photos;
+  assert.deepEqual((await loadDetail(async()=>({data,error:null}),tower.id,'tr')).photos,[]);
+});
 function memory(){
   const values=new Map();
   return {getItem:async key=>values.get(key)??null,setItem:async(key,value)=>values.set(key,value),values};

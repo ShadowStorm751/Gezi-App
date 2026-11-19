@@ -1,7 +1,7 @@
 export type Lang = 'tr' | 'en';
 type PackPlace = {
   id: string; slug: string; name: string; kind: 'historical' | 'nature'; category: string;
-  latitude: number; longitude: number; short_desc: string | null; checkin_radius_m: number;
+  latitude: number; longitude: number; short_desc: string | null; checkin_radius_m: number; thumb_url?: string | null;
 };
 export type Pack = {city:string; name:string; version:string|null; places:PackPlace[]};
 type Store = {getItem(key:string): Promise<string|null>; setItem(key:string,value:string):Promise<void>};
@@ -34,7 +34,7 @@ export async function loadCity(rpc:Rpc, store:Store, project:string, lang:Lang, 
 }
 
 const categoryNames:Record<string,[string,string]> = {
-  mosque:['Cami','Mosque'], church:['Kilise','Church'], synagogue:['Sinagog','Synagogue'],
+  mosque:['Cami','Mosque'], church:['Kilise','Church'], synagogue:['Sinagog','Synagogue'], tomb:['Türbe','Tomb'],
   palace:['Saray','Palace'], museum:['Müze','Museum'], fortress:['Kale','Fortress'], tower:['Kule','Tower'],
   cistern:['Sarnıç','Cistern'], monument:['Anıt','Monument'], archaeological_site:['Ören yeri','Archaeological site'],
   viewpoint:['Seyir noktası','Viewpoint'], hill:['Tepe','Hill'], forest:['Orman','Forest'], park:['Park','Park'],
@@ -43,7 +43,22 @@ const categoryNames:Record<string,[string,string]> = {
 export function mapPlace(row:Omit<PackPlace,'checkin_radius_m'>, lang:Lang) {
   const categoryLabel = categoryNames[row.category]?.[lang === 'en' ? 1 : 0] ?? row.category;
   return {id:row.id, name:row.name, kind:row.kind, category:row.category, categoryLabel, description:row.short_desc,
-    coordinate:{latitude:row.latitude,longitude:row.longitude}};
+    thumbnail: webUrl(row.thumb_url), coordinate:{latitude:row.latitude,longitude:row.longitude}};
+}
+
+export function webUrl(value:unknown): string | null {
+  return typeof value === 'string' && /^https?:\/\//i.test(value) ? value : null;
+}
+
+type PlacePhoto = {
+  url?:string | null; thumb_url?:string | null; storage_path?:string | null;
+  author:string; license:string; license_url?:string | null; source_url?:string | null;
+};
+
+function creditedPhoto(photo:PlacePhoto) {
+  return photo && typeof photo.author === 'string' && photo.author.trim() &&
+    typeof photo.license === 'string' && photo.license.trim() &&
+    (webUrl(photo.url) || webUrl(photo.thumb_url) || photo.storage_path);
 }
 
 export async function loadNearby(rpc:Rpc, origin:{latitude:number;longitude:number}, lang:Lang) {
@@ -62,7 +77,8 @@ export async function loadDetail(rpc:Rpc, id:string, lang:Lang) {
   if (error) throw new Error('place_detail');
   if (data === null) return null;
   const d = data as {id:string; name:string; category_name:string; period:string|null;
-    long_desc:string|null; short_desc:string|null; best_time:string|null};
+    long_desc:string|null; short_desc:string|null; best_time:string|null; photos?:PlacePhoto[]};
   if (!d || d.id !== id || typeof d.name !== 'string' || typeof d.category_name !== 'string') throw new Error('place_detail');
-  return {name:d.name,category:d.category_name,period:d.period,description:d.long_desc || d.short_desc,bestTime:d.best_time};
+  return {name:d.name,category:d.category_name,period:d.period,description:d.long_desc || d.short_desc,bestTime:d.best_time,
+    photos:Array.isArray(d.photos) ? d.photos.filter(creditedPhoto) : []};
 }

@@ -9,6 +9,8 @@ import sample from './places.json';
 import {AsyncStorage, client, demo, lang, project, t} from './client';
 import {loadCity, loadDetail, loadNearby, mapPlace} from './catalog';
 import DiscoveryCamera from './DiscoveryCamera';
+import {PlaceGallery, PlaceThumbnail} from './PlaceMedia';
+import Badges from './Badges';
 import {distanceMeters} from './geo';
 
 const paper = '#FAF7F0';
@@ -34,6 +36,7 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [detail, setDetail] = useState(null);
   const [cameraOpen, setCameraOpen] = useState(false);
+  const [badgesOpen, setBadgesOpen] = useState(false);
   const [trackedId, setTrackedId] = useState(null);
   const [locationMessage, setLocationMessage] = useState('');
   const [packPlaces,setPlaces] = useState(demo ? demoPlaces : []);
@@ -59,12 +62,12 @@ export default function App() {
     return () => { active = false; };
   }, [refresh]);
   const byId = new Map(packPlaces.map(p => [p.id,p]));
-  serverNearby?.forEach(p => byId.set(p.id,p));
+  serverNearby?.forEach(p => byId.set(p.id,{...p,thumbnail:p.thumbnail ?? byId.get(p.id)?.thumbnail}));
   const places = Array.from(byId.values());
   const nearby = places.map(place => ({
     ...place, distance: distanceMeters(origin ?? pilot, place.coordinate)
   })).sort((a,b) => a.distance - b.distance);
-  const listPlaces = serverNearby ?? nearby.filter(p => p.distance <= 2000);
+  const listPlaces = serverNearby?.map(p => byId.get(p.id)) ?? nearby.filter(p => p.distance <= 2000);
 
   async function useLocation() {
     setLoading(true);
@@ -107,7 +110,7 @@ export default function App() {
     try {
       const info = await loadDetail(rpc,place.id,lang);
       if (detailToken.current !== token) return;
-      if (info) setDetail({...place,...info,categoryLabel:info.category});
+      if (info) setDetail({...place,...info,category:place.category,categoryLabel:info.category});
       setDetailState(info ? '' : 'missing');
     } catch { if (detailToken.current === token) setDetailState('error'); }
   }
@@ -124,7 +127,11 @@ export default function App() {
         onBack={() => { setCameraOpen(false); setTrackedId(null); }}/> : <>
       <View style={styles.header}>
         <Text style={styles.eyebrow}>{demo ? 'İSTANBUL / GALATA' : 'İSTANBUL'}</Text>
-        <Text accessibilityRole="header" style={styles.title}>{t("Keşfet","Explore")}</Text>
+        <View style={styles.titleRow}><Text accessibilityRole="header" style={styles.title}>{t("Keşfet","Explore")}</Text>
+          <Pressable accessibilityRole="button" style={styles.close} onPress={() => setBadgesOpen(true)}>
+            <Text style={styles.distance}>{t('Rozetler','Badges')}</Text>
+          </Pressable>
+        </View>
         <Pressable accessibilityRole="button" disabled={!places.length} style={styles.action} onPress={() => setCameraOpen(true)}>
           <Text style={styles.actionLabel}>{t("Kamerayla keşfet","Explore with camera")}</Text>
         </Pressable>
@@ -154,6 +161,7 @@ export default function App() {
           <Text style={styles.muted}>{t('2 km içinde yer bulunamadı.', 'No places within 2 km.')}</Text>}
         {listPlaces.map(place => (
           <Pressable key={place.id} accessibilityRole="button" style={styles.row} onPress={() => openPlace(place)}>
+            <PlaceThumbnail place={place}/>
             <View style={styles.rowMain}>
               <Text style={styles.eyebrow}>{(place.categoryLabel || place.category).toLocaleUpperCase(lang)}</Text>
               <Text style={styles.place}>{place.name}</Text>
@@ -167,6 +175,7 @@ export default function App() {
         {!!locationMessage && <Text accessibilityLiveRegion="polite" style={styles.muted}>{locationMessage}</Text>}
       </ScrollView>
       </>}
+      {badgesOpen && <Badges onClose={() => setBadgesOpen(false)}/>}
       <Modal visible={!!detail} transparent animationType="slide" onRequestClose={closeDetail}>
         {detail && <View style={styles.overlay}>
           <Pressable accessibilityLabel={t("Yer detayını kapat","Close place details")} accessibilityRole="button" style={styles.backdrop} onPress={closeDetail}/>
@@ -174,6 +183,7 @@ export default function App() {
             <ScrollView contentContainerStyle={styles.detail}>
               <Text style={styles.eyebrow}>{(detail.period || detail.categoryLabel || detail.category).toLocaleUpperCase(lang)}  ·  {formatDistance(detail.distance)}</Text>
               <Text style={styles.title} accessibilityRole="header">{detail.name}</Text>
+              {detailState !== 'loading' && <PlaceGallery place={detail}/>}
               <Text style={styles.story}>{detail.description}</Text>
               {!!detail.bestTime && <Text style={styles.muted}>{t('Önerilen zaman','Best time')} · {detail.bestTime}</Text>}
               {detailState === 'loading' && <ActivityIndicator color={ink}/>}
@@ -204,6 +214,7 @@ export default function App() {
 const styles = StyleSheet.create({
   page:{flex:1, backgroundColor:paper, paddingTop:Platform.OS === 'android' ? StatusBar.currentHeight : 0},
   header:{paddingHorizontal:22, paddingTop:12, paddingBottom:12},
+  titleRow:{flexDirection:'row',alignItems:'center',justifyContent:'space-between'},
   eyebrow:{fontSize:11, letterSpacing:1.7, fontWeight:'700', color:'#526D64'},
   title:{fontFamily:serif, fontSize:40, color:ink, marginTop:4},
   map:{flex:1.1}, sheet:{flex:1}, content:{padding:22, gap:8},
