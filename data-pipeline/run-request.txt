@@ -1,3 +1,3 @@
 Bu dosya değişip main'e (ya da data/* dalına) yüklenince GitHub veri hattını çalıştırır (.github/workflows/data-pipeline.yml).
 Şehirler: izmir
-Son istek: 2026-11-19 20:45 — İzmir (kare kare sorgu, önbellekle devam)
+Son istek: 2026-11-19 21:00 — İzmir (kutu sorgusu + yerel kırpma)
