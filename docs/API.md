@@ -230,7 +230,15 @@ await supabase.rpc("update_profile", {
 // Kullanıcı adı alınmışsa ya da kurala uymuyorsa error döner (Postgres 23505 / 23514).
 
 await supabase.rpc("export_my_data"); // KVKK: kullanıcının tüm verisi tek JSON
+// -> { exported_at, profile, visits: [{ place, place_id, visited_at, method, distance_m, gps_accuracy_m }],
+//      achievements: [{ achievement, earned_at }],
+//      submissions: [{ kind, place, name, category, lat, lng, note, status, admin_note, created_at, resolved_at }] }
+// visits[].place yayından kalkmış bir yer için null olabilir (place_id yine dolu).
 ```
+
+Profil yalnızca `update_profile` ile değiştirilmeli. `profiles` tablosuna doğrudan yazma
+`username`, `avatar_path`, `is_public`, `preferred_lang` ile sınırlıdır; `avatar_path` her
+durumda `<user_id>/...` olmalıdır (aksi halde 23514).
 
 ### Avatar yükleme (giriş gerekli)
 
