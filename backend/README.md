@@ -37,7 +37,8 @@ backend/supabase/
 │   ├── 20261119330000_user_photos.sql        kullanıcı fotoğrafları, onay, 'Gezi Fotoğrafçısı' rozeti
 │   ├── 20261120010000_photographer_badge_path.sql rozet görsel yolu
 │   ├── 20261120020000_period_labels_route_covers.sql dönem adı dile göre, rota kapağı en tanınmış duraktan
-│   └── 20261120030000_place_reviews.sql       yer değerlendirmeleri (yıldız + onaylı not)
+│   ├── 20261120030000_place_reviews.sql       yer değerlendirmeleri (yıldız + onaylı not)
+│   └── 20261120040000_modular_rules_exports.sql rozet kuralları ve KVKK bölümleri parçalara ayrıldı
 ├── functions/badge-upload/              rozet görsellerini Storage'a yükler (.github/workflows/badges.yml)
 ├── functions/checkin/
 │   ├── index.ts                      Edge Function
@@ -45,6 +46,8 @@ backend/supabase/
 │   └── rules.test.ts                 kural testleri
 └── seed.sql                          yalnızca yerel deneme verisi (şimdilik boş)
 ```
+
+> **Yeni özellik eklemeden önce:** [`MODULES.md`](MODULES.md) (modül haritası, genişletme noktaları, kontrol listesi) ve `tests/audit.sql`.
 
 ## İlk kurulum (proje sahibi)
 

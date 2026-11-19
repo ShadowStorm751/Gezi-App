@@ -7,6 +7,7 @@ Bu repoda iki asistan birlikte çalışır: **Claude** (backend, veri hattı) ve
 1. `docs/TECHNICAL_PLAN.md` — kapsam, kararlar, mimari.
 2. `docs/API.md` — backend ↔ mobil sözleşmesi. Burada olmayan bir fonksiyonu kullanma, uydurma.
 3. `docs/REQUESTS.md` — açık istekler.
+4. Backend'e ekleme yapmadan önce: `backend/MODULES.md` (modül haritası, genişletme noktaları) ve `backend/tests/audit.sql`.
 
 ## Sahiplik
 
