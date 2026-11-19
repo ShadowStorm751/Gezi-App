@@ -195,12 +195,17 @@ RADIUS = {
 COORD_FIX = {
     # mustafapasa: Wikidata konumu OSM köy noktasıyla aynı (node/213138728); elle verilen tahmin 700 m güneydeydi.
     "kizilcukur-vadisi": (38.652844, 34.861366, 800),  # OSM 'Kızılçukur Vadisi' yürüyüş yolu (way/32859044)
-    "soganli-vadisi": (38.349736, 34.961323, 900),     # ANA YER; kiliseler 0,4-0,8 km içinde     # OSM 'Soganli Valley' (node/4629828016); köy 0,9 km güneyde
+    "soganli-vadisi": (38.349736, 34.961323, 900),     # ANA YER; kiliseler 0,4-0,8 km içinde. OSM 'Soganli Valley' (node/4629828016)
+    # Tahtalı: OSM (node/6734771286) ile Wikidata 127 m farklı, hangisinin doğru olduğu belirsiz -> ortası, ikisini de kapsayan yarıçap
+    "soganli-tahtali-kilise": (38.345721, 34.962775, 80),
 }
 COORD_OK = {
     "aziz-nikolas-manastiri", "kokar-kilise-aksaray", "yilanli-kilise-aksaray", "purenli-seki-kilisesi",
     "basil-sapeli", "elmali-kilise",                   # OSM yapı konumu; Wikidata ile 29-177 m fark
     "kaymakli", "ozkonak",                             # Wikidata kasaba merkezini veriyor; OSM giriş noktası doğru
     "goreme-tarihi-milli-parki", "guvercinlik-vadisi",
+    "soganli-sakli-kilise", "soganli-geyikli-kilise",  # OSM ile Wikidata 31-34 m fark; yarıçap 45 m ile ikisi de kapsanıyor
 }
+RADIUS["soganli-sakli-kilise"] = 45
+RADIUS["soganli-geyikli-kilise"] = 45
 RADIUS["yilanli-kilise-aksaray"] = 100

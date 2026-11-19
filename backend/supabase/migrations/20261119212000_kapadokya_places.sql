@@ -23,8 +23,8 @@ join public.categories c on c.slug = v.slug
 on conflict (category_id, lang) do nothing;
 
 -- Yerler --------------------------------------------------------------------------
--- Otomatik üretildi: data-pipeline/pipeline.py build (2026-11-20 01:22)
--- 56 yer; hepsi gizli (is_published = false); 56 tanesinin TR+EN kısa açıklaması dolu.
+-- Otomatik üretildi: data-pipeline/pipeline.py build (2026-11-20 01:41)
+-- 62 yer; hepsi gizli (is_published = false); 62 tanesinin TR+EN kısa açıklaması dolu.
 -- Tekrar çalıştırılabilir: aynı slug'lı yerler güncellenir, kopya oluşmaz.
 
 insert into public.places
@@ -89,7 +89,13 @@ from (values
   ('meskendir-valley-entrance', 'valley', 38.636738, 34.861173, 400, null, null, null, 'node/9395241384', null),
   ('ihlara-vadisi', 'valley', 38.240833, 34.306111, 1500, null, null, 'Q1366229', null, null),
   ('kizilcukur-vadisi', 'valley', 38.652844, 34.861366, 800, null, null, null, null, null),
-  ('soganli-vadisi', 'valley', 38.349736, 34.961323, 900, null, null, 'Q25424230', null, null)
+  ('soganli-vadisi', 'valley', 38.349736, 34.961323, 900, null, null, 'Q25424230', null, null),
+  ('soganli-karabas-kilisesi', 'church', 38.348221, 34.970274, 30, 'Bizans', null, null, 'node/5188164523', null),
+  ('soganli-kubbeli-kilise', 'church', 38.348032, 34.968502, 25, 'Bizans', null, null, 'node/5188164524', null),
+  ('soganli-sakli-kilise', 'church', 38.347703, 34.968801, 45, 'Bizans', null, null, 'node/5188151823', null),
+  ('soganli-yilanli-kilise', 'church', 38.350922, 34.966764, 30, 'Bizans', null, null, 'node/3251854185', null),
+  ('soganli-tahtali-kilise', 'church', 38.345721, 34.962775, 80, 'Bizans', null, null, null, null),
+  ('soganli-geyikli-kilise', 'church', 38.344920, 34.965489, 45, 'Bizans', null, null, 'node/6734775385', null)
 ) v(slug, category, lat, lng, radius, period, built_year, wikidata_id, osm_id, area_wkt)
 join public.cities ci on ci.slug = 'kapadokya'
 join public.categories c on c.slug = v.category
@@ -217,7 +223,19 @@ from (values
   ('kizilcukur-vadisi', 'tr', 'Kızılçukur Vadisi', 'Ortahisar yakınında, kırmızı tonlu kayaları ve gün batımı manzarasıyla Kızılçukur.', 'Gün batımı'),
   ('kizilcukur-vadisi', 'en', 'Red Valley', 'The Red Valley near Ortahisar, with reddish rocks and sunset views.', 'Sunset'),
   ('soganli-vadisi', 'tr', 'Soğanlı Vadisi', 'Kayseri''de, kayaya oyulmuş kiliseleri ve sakin köyüyle Soğanlı Vadisi.', null),
-  ('soganli-vadisi', 'en', 'Soğanlı Valley', 'The Soğanlı Valley in Kayseri, with rock-cut churches and a quiet village.', null)
+  ('soganli-vadisi', 'en', 'Soğanlı Valley', 'The Soğanlı Valley in Kayseri, with rock-cut churches and a quiet village.', null),
+  ('soganli-karabas-kilisesi', 'tr', 'Karabaş Kilisesi', 'Soğanlı''da, 11. yüzyıl freskleriyle bölgenin en zengin süslü kiliselerinden.', null),
+  ('soganli-karabas-kilisesi', 'en', 'Karabaş Church', 'A church in Soğanlı with 11th-century frescoes, one of the most richly painted in the area.', null),
+  ('soganli-kubbeli-kilise', 'tr', 'Kubbeli Kilise', 'Soğanlı''da, bir peribacasının tepesine kubbe biçiminde oyulmuş, benzeri olmayan kilise.', null),
+  ('soganli-kubbeli-kilise', 'en', 'Domed Church', 'A unique church in Soğanlı, its dome carved into the top of a fairy chimney.', null),
+  ('soganli-sakli-kilise', 'tr', 'Saklı Kilise', 'Soğanlı''da, yamacın içine gizlendiği için uzaktan görülmeyen kaya kilisesi.', null),
+  ('soganli-sakli-kilise', 'en', 'Hidden Church', 'A rock church in Soğanlı hidden in the slope, so it cannot be seen from afar.', null),
+  ('soganli-yilanli-kilise', 'tr', 'Yılanlı Kilise (Soğanlı)', 'Soğanlı''da, Aziz Georgios''un ejderhayla savaştığı freskiyle bilinen kaya kilisesi.', null),
+  ('soganli-yilanli-kilise', 'en', 'Church of the Snakes (Soğanlı)', 'A rock church in Soğanlı known for its fresco of St George fighting the dragon.', null),
+  ('soganli-tahtali-kilise', 'tr', 'Tahtalı Kilise', 'Soğanlı''da, Azize Barbara''ya adanmış, freskli kaya kilisesi.', null),
+  ('soganli-tahtali-kilise', 'en', 'Tahtalı Church', 'A rock church in Soğanlı dedicated to St Barbara, decorated with frescoes.', null),
+  ('soganli-geyikli-kilise', 'tr', 'Geyikli Kilise', 'Soğanlı''da, adını geyikli bir aziz freskinden alan kaya kilisesi.', null),
+  ('soganli-geyikli-kilise', 'en', 'Church of the Deer', 'A rock church in Soğanlı named after a fresco of a saint with a deer.', null)
 ) v(slug, lang, name, short_desc, best_time)
 join public.places p on p.slug = v.slug
 on conflict (place_id, lang) do update set
@@ -247,6 +265,12 @@ from (values
   ('pantokrator-kilisesi', 'goreme-deki-kiliseler-listesi'),
   ('purenli-seki-kilisesi', 'ihlara-vadisi'),
   ('selime-katedrali', 'ihlara-vadisi'),
+  ('soganli-geyikli-kilise', 'soganli-vadisi'),
+  ('soganli-karabas-kilisesi', 'soganli-vadisi'),
+  ('soganli-kubbeli-kilise', 'soganli-vadisi'),
+  ('soganli-sakli-kilise', 'soganli-vadisi'),
+  ('soganli-tahtali-kilise', 'soganli-vadisi'),
+  ('soganli-yilanli-kilise', 'soganli-vadisi'),
   ('sumbullu-kilise', 'ihlara-vadisi'),
   ('tokali-kilise', 'goreme-deki-kiliseler-listesi'),
   ('yilanli-kilise', 'goreme-deki-kiliseler-listesi'),
@@ -259,7 +283,8 @@ where c.slug = v.child;
 insert into public.achievements (slug, rule, sort_order) values
   ('cavusin-kesif', '{"type": "place_set", "places": ["cavusin", "aziz-yuhanna-vaftizci-kilisesi-cavusin", "cavusin-kalesi"]}'::jsonb, 100),
   ('goreme-deki-kiliseler-listesi-kesif', '{"type": "place_set", "places": ["goreme-deki-kiliseler-listesi", "azize-barbara-kilisesi", "azize-catherine-sapeli", "basil-sapeli", "carikli-kilise", "elmali-kilise", "karanlik-kilise", "mutfak-ve-kiler", "pantokrator-kilisesi", "tokali-kilise", "yilanli-kilise"]}'::jsonb, 101),
-  ('ihlara-vadisi-kesif', '{"type": "place_set", "places": ["ihlara-vadisi", "agacalti-kilisesi", "bahattin-in-samanligi-kilise", "ihlara-cam-teras", "kokar-kilise-aksaray", "purenli-seki-kilisesi", "selime-katedrali", "sumbullu-kilise", "yilanli-kilise-aksaray"]}'::jsonb, 102)
+  ('ihlara-vadisi-kesif', '{"type": "place_set", "places": ["ihlara-vadisi", "agacalti-kilisesi", "bahattin-in-samanligi-kilise", "ihlara-cam-teras", "kokar-kilise-aksaray", "purenli-seki-kilisesi", "selime-katedrali", "sumbullu-kilise", "yilanli-kilise-aksaray"]}'::jsonb, 102),
+  ('soganli-vadisi-kesif', '{"type": "place_set", "places": ["soganli-vadisi", "soganli-geyikli-kilise", "soganli-karabas-kilisesi", "soganli-kubbeli-kilise", "soganli-sakli-kilise", "soganli-tahtali-kilise", "soganli-yilanli-kilise"]}'::jsonb, 103)
 on conflict (slug) do update set rule = excluded.rule;
 
 insert into public.achievement_translations (achievement_id, lang, name, description)
@@ -270,12 +295,14 @@ from (values
   ('goreme-deki-kiliseler-listesi-kesif', 'tr', 'Göreme Açık Hava Müzesi Kâşifi', 'Göreme Açık Hava Müzesi ve içindeki 10 yerin hepsini gez.'),
   ('goreme-deki-kiliseler-listesi-kesif', 'en', 'Göreme Open Air Museum Explorer', 'Visit Göreme Open Air Museum and all 10 places inside it.'),
   ('ihlara-vadisi-kesif', 'tr', 'Ihlara Vadisi Kâşifi', 'Ihlara Vadisi ve içindeki 8 yerin hepsini gez.'),
-  ('ihlara-vadisi-kesif', 'en', 'Ihlara Valley Explorer', 'Visit Ihlara Valley and all 8 places inside it.')
+  ('ihlara-vadisi-kesif', 'en', 'Ihlara Valley Explorer', 'Visit Ihlara Valley and all 8 places inside it.'),
+  ('soganli-vadisi-kesif', 'tr', 'Soğanlı Vadisi Kâşifi', 'Soğanlı Vadisi ve içindeki 6 yerin hepsini gez.'),
+  ('soganli-vadisi-kesif', 'en', 'Soğanlı Valley Explorer', 'Visit Soğanlı Valley and all 6 places inside it.')
 ) v(slug, lang, name, description)
 join public.achievements a on a.slug = v.slug
 on conflict (achievement_id, lang) do update set name = excluded.name, description = excluded.description;
 
--- Kapadokya fotoğrafları: Wikimedia Commons, serbest lisanslı (51 yer).
+-- Kapadokya fotoğrafları: Wikimedia Commons, serbest lisanslı (53 yer).
 -- Üreten: data-pipeline/content/build_city.py (kaynak: data-pipeline/results/kapadokya/photos.json).
 -- Mobil, fotoğrafın altında author ve license bilgisini göstermelidir (lisans koşulu).
 
@@ -283,7 +310,7 @@ delete from public.place_photos ph
 using public.places p
 where ph.place_id = p.id
   and ph.url like 'https://%.wikimedia.org/%'
-  and p.slug in ('aciksaray', 'agacalti-kilisesi', 'altikapi-turbesi', 'aziz-nikolas-manastiri', 'aziz-yuhanna-vaftizci-kilisesi-cavusin', 'azize-barbara-kilisesi', 'azize-catherine-sapeli', 'bagildere-vadisi', 'basil-sapeli', 'carikli-kilise', 'cavusin', 'cavusin-kalesi', 'derinkuyu-yeralti-sehri', 'devrent-vadisi', 'elmali-kilise', 'goreme-deki-kiliseler-listesi', 'goreme-tarihi-milli-parki', 'gul-vadisi', 'guvercinlik-vadisi', 'guzelyurt', 'haci-bektas-i-veli-turbesi', 'ihlara-vadisi', 'karamanoglu-camii', 'karanlik-kilise', 'karsi-kilise', 'kaymakli', 'keslik-manastiri', 'kizilcukur-vadisi', 'kokar-kilise-aksaray', 'meskendir-valley-entrance', 'mustafapasa', 'mutfak-ve-kiler', 'nevsehir-kalesi', 'nevsehir-muzesi', 'ortahisar-kalesi', 'ozkonak', 'pantokrator-kilisesi', 'passabag-vadisi', 'purenli-seki-kilisesi', 'sarihan-kervansarayi', 'selime-katedrali', 'sobesos-antik-kenti', 'soganli-vadisi', 'sumbullu-kilise', 'temenni-tepe', 'tokali-kilise', 'uc-guzeller', 'uchisar-kalesi', 'yilanli-kilise', 'yilanli-kilise-aksaray', 'zelve-acik-hava-muzesi');
+  and p.slug in ('aciksaray', 'agacalti-kilisesi', 'altikapi-turbesi', 'aziz-nikolas-manastiri', 'aziz-yuhanna-vaftizci-kilisesi-cavusin', 'azize-barbara-kilisesi', 'azize-catherine-sapeli', 'bagildere-vadisi', 'basil-sapeli', 'carikli-kilise', 'cavusin', 'cavusin-kalesi', 'derinkuyu-yeralti-sehri', 'devrent-vadisi', 'elmali-kilise', 'goreme-deki-kiliseler-listesi', 'goreme-tarihi-milli-parki', 'gul-vadisi', 'guvercinlik-vadisi', 'guzelyurt', 'haci-bektas-i-veli-turbesi', 'ihlara-vadisi', 'karamanoglu-camii', 'karanlik-kilise', 'karsi-kilise', 'kaymakli', 'keslik-manastiri', 'kizilcukur-vadisi', 'kokar-kilise-aksaray', 'meskendir-valley-entrance', 'mustafapasa', 'mutfak-ve-kiler', 'nevsehir-kalesi', 'nevsehir-muzesi', 'ortahisar-kalesi', 'ozkonak', 'pantokrator-kilisesi', 'passabag-vadisi', 'purenli-seki-kilisesi', 'sarihan-kervansarayi', 'selime-katedrali', 'sobesos-antik-kenti', 'soganli-kubbeli-kilise', 'soganli-vadisi', 'soganli-yilanli-kilise', 'sumbullu-kilise', 'temenni-tepe', 'tokali-kilise', 'uc-guzeller', 'uchisar-kalesi', 'yilanli-kilise', 'yilanli-kilise-aksaray', 'zelve-acik-hava-muzesi');
 
 insert into public.place_photos
   (place_id, url, thumb_url, width, height, license, license_url, author, source_url, sort_order)
@@ -331,7 +358,9 @@ from (values
   ('sarihan-kervansarayi', 'https://upload.wikimedia.org/wikipedia/commons/7/76/Sarihangesamt.jpg', 'https://upload.wikimedia.org/wikipedia/commons/7/76/Sarihangesamt.jpg', 1280, 800, 'CC BY-SA 3.0', 'https://creativecommons.org/licenses/by-sa/3.0', 'Klaus-Peter Simon', 'https://commons.wikimedia.org/wiki/File:Sarihangesamt.jpg'),
   ('selime-katedrali', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Selime_Cathedral.jpg/1280px-Selime_Cathedral.jpg', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Selime_Cathedral.jpg/500px-Selime_Cathedral.jpg', 1280, 811, 'CC BY-SA 4.0', 'https://creativecommons.org/licenses/by-sa/4.0', 'Dudva', 'https://commons.wikimedia.org/wiki/File:Selime_Cathedral.jpg'),
   ('sobesos-antik-kenti', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/Capadoccia_Jul_2023_23_00_16_105000.jpeg/1280px-Capadoccia_Jul_2023_23_00_16_105000.jpeg', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/Capadoccia_Jul_2023_23_00_16_105000.jpeg/500px-Capadoccia_Jul_2023_23_00_16_105000.jpeg', 1280, 960, 'CC BY-SA 4.0', 'https://creativecommons.org/licenses/by-sa/4.0', 'Robot8A', 'https://commons.wikimedia.org/wiki/File:Capadoccia_Jul_2023_23_00_16_105000.jpeg'),
+  ('soganli-kubbeli-kilise', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Kubbeli_Kilise_03.jpg/1280px-Kubbeli_Kilise_03.jpg', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Kubbeli_Kilise_03.jpg/500px-Kubbeli_Kilise_03.jpg', 1280, 1920, 'CC BY-SA 3.0', 'https://creativecommons.org/licenses/by-sa/3.0', 'Bernard Gagnon', 'https://commons.wikimedia.org/wiki/File:Kubbeli_Kilise_03.jpg'),
   ('soganli-vadisi', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/0/02/Soganli_Valley_Cappadocia.JPG/1280px-Soganli_Valley_Cappadocia.JPG', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/0/02/Soganli_Valley_Cappadocia.JPG/500px-Soganli_Valley_Cappadocia.JPG', 1280, 854, 'CC BY-SA 3.0', 'https://creativecommons.org/licenses/by-sa/3.0', 'This Photo was taken by Wolfgang Moroder . Feel free to use my photos, but please mention me as the author and send me a message . This image is not in the public domain . Please respect the copyright', 'https://commons.wikimedia.org/wiki/File:Soganli_Valley_Cappadocia.JPG'),
+  ('soganli-yilanli-kilise', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/38800_So%C4%9Fanl%C4%B1-Ye%C5%9Filhisar-Kayseri%2C_Turkey_-_panoramio_%289%29.jpg/1280px-38800_So%C4%9Fanl%C4%B1-Ye%C5%9Filhisar-Kayseri%2C_Turkey_-_panoramio_%289%29.jpg', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/38800_So%C4%9Fanl%C4%B1-Ye%C5%9Filhisar-Kayseri%2C_Turkey_-_panoramio_%289%29.jpg/500px-38800_So%C4%9Fanl%C4%B1-Ye%C5%9Filhisar-Kayseri%2C_Turkey_-_panoramio_%289%29.jpg', 1280, 720, 'CC BY-SA 3.0', 'https://creativecommons.org/licenses/by-sa/3.0', 'izvarin', 'https://commons.wikimedia.org/wiki/File:38800_So%C4%9Fanl%C4%B1-Ye%C5%9Filhisar-Kayseri,_Turkey_-_panoramio_(9).jpg'),
   ('sumbullu-kilise', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/S%C3%BCmb%C3%BCll%C3%BC_Kilise_Ihlara_Valley_2008_%28cropped%29.jpg/1280px-S%C3%BCmb%C3%BCll%C3%BC_Kilise_Ihlara_Valley_2008_%28cropped%29.jpg', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/S%C3%BCmb%C3%BCll%C3%BC_Kilise_Ihlara_Valley_2008_%28cropped%29.jpg/500px-S%C3%BCmb%C3%BCll%C3%BC_Kilise_Ihlara_Valley_2008_%28cropped%29.jpg', 1280, 937, 'CC BY 2.0', 'https://creativecommons.org/licenses/by/2.0', 'Verity Cridland', 'https://commons.wikimedia.org/wiki/File:S%C3%BCmb%C3%BCll%C3%BC_Kilise_Ihlara_Valley_2008_(cropped).jpg'),
   ('temenni-tepe', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Temenni_Tepesi.jpg/1280px-Temenni_Tepesi.jpg', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Temenni_Tepesi.jpg/500px-Temenni_Tepesi.jpg', 1280, 829, 'CC BY-SA 4.0', 'https://creativecommons.org/licenses/by-sa/4.0', 'Buzancar', 'https://commons.wikimedia.org/wiki/File:Temenni_Tepesi.jpg'),
   ('tokali-kilise', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/J22_235_Tokal%C4%B1_Kilise.jpg/1280px-J22_235_Tokal%C4%B1_Kilise.jpg', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/J22_235_Tokal%C4%B1_Kilise.jpg/500px-J22_235_Tokal%C4%B1_Kilise.jpg', 1280, 853, 'CC BY-SA 4.0', 'https://creativecommons.org/licenses/by-sa/4.0', 'Falk2', 'https://commons.wikimedia.org/wiki/File:J22_235_Tokal%C4%B1_Kilise.jpg'),
