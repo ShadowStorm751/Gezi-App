@@ -1,3 +1,3 @@
 Bu dosya değişip main'e (ya da data/* dalına) yüklenince GitHub fotoğraf bilgilerini toplar (.github/workflows/photos.yml).
-Şehirler: bursa kapadokya
-Son istek: 2026-11-19 23:20 — Bursa, Kapadokya: bulunamayan yerler için alternatif adlarla yeniden
+Şehirler: izmir bursa kapadokya
+Son istek: 2026-11-20 01:20 — üç şehir: eksik fotoğraflar için Commons yedek araması

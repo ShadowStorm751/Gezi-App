@@ -1,0 +1,2 @@
+Bu dosya değişince yaklaşık konumlu yerler OSM'de aranır (.github/workflows/osm-lookup.yml).
+Son istek: 2026-11-20 01:20 — Misi, Kapalıçarşı, İznik surları, Kızılçukur, Soğanlı, Mustafapaşa, Asansör
