@@ -1,6 +1,6 @@
 # Gezi App – MVP Teknik Plan (İstanbul Pilotu)
 
-Son güncelleme: 18 Kasım 2026. Bu dosya projenin ortak referansıdır; Claude, ChatGPT ve proje sahibi buradan okur.
+Son güncelleme: 19 Kasım 2026. Bu dosya projenin ortak referansıdır; Claude, ChatGPT ve proje sahibi buradan okur.
 
 ## Özet ve kapsam
 
@@ -17,7 +17,10 @@ MVP, İstanbul'da 100-150 yeri (yaklaşık %65 tarihi-kültürel, %35 doğa ve m
 | Mobil | React Native (TypeScript) |
 | Backend | Supabase: Postgres + PostGIS, Auth, Storage, Edge Functions |
 | Dil | İlk sürümden TR + EN. Bir yer iki dilde de adı ve kısa açıklaması olmadan yayına alınamaz. |
-| Harita | MapLibre + OSM tabanlı karo servisi (ör. MapTiler) önerilir; mobil tarafla netleşecek |
+| Harita | Mobil `react-native-maps` kullanıyor; çevrimdışı karo indirme ayrı bir özellik |
+| Fotoğraflar | Wikimedia Commons, yalnızca serbest lisans (CC0, kamu malı, CC BY, CC BY-SA, FAL); Wikimedia adresinden gösterilir, yazar ve lisans atfı zorunlu |
+| Mobil test | iPhone'da App Store Expo Go ile; Expo Go SDK 58 istediği için mobil proje SDK 54 → 58 yükseltilecek |
+| Yeni şehirler | Veri ayrı bir sohbette `data/yeni-sehirler` dalında hazırlanıyor (aday adaylar: İzmir, Bursa, Kapadokya); yerler `is_published = false` eklenir, İstanbul testinden sonra açılır. Canlı Supabase'i yalnızca ana sohbet günceller |
 
 ### İş bölümü
 
@@ -127,16 +130,41 @@ Seed'de 20 rozet var (6 genel, 8 tarihi, 6 doğa); türbe migration'ı ile 21.
 
 | Faz | Süre | Backend işleri | Durum |
 | --- | --- | --- | --- |
-| 0 – Hazırlık | 1-2 hf | Supabase projesi, repo ve migration yapısı, veri hattı script'i, yer onayı | Tamam; yalnızca Supabase projesi açılacak |
-| 1 – Altyapı | 3-4 hf | Şema, seed, okuma RPC'leri, RLS, testler, TS tipleri | İlk sürüm hazır |
-| 2 – Ziyaret ve başarım | 3-4 hf | Auth, `checkin`, rozet motoru, ilerleme | İlk sürüm hazır |
-| 3 – Geo-AR | 3-4 hf | `city_pack` (hazır); asıl iş mobilde | – |
-| 4 – Paylaşım ve özet | 2-3 hf | `my_summary` (hazır), hesap silme, avatar yükleme | – |
-| 5 – Kapalı beta | 3-4 hf | Sentry, analitik, "yanlış konum bildir", staging/production | – |
+| 0 – Hazırlık | 1-2 hf | Supabase projesi, repo ve migration yapısı, veri hattı, yer onayı | Tamam |
+| 1 – Altyapı | 3-4 hf | Şema, okuma RPC'leri, RLS, testler, İstanbul verisi | Tamam; canlıda 156 yer, 133 fotoğraf |
+| 2 – Ziyaret ve başarım | 3-4 hf | Auth (e-posta), `checkin`, rozet motoru, ilerleme | Tamam; canlı uçtan uca test geçti. Apple/Google girişi bekliyor |
+| 3 – Geo-AR | 3-4 hf | `city_pack` (+ `has_area`, `thumb_url`) | Backend tamam; mobil kamera ekranı var, saha testi bekliyor |
+| 4 – Paylaşım ve özet | 2-3 hf | `my_summary` (hazır), hesap silme, avatar yükleme | Hesap silme ve avatar yükleme yapılacak |
+| 5 – Kapalı beta | 3-4 hf | Hata takibi, analitik, "yanlış konum bildir", ayrı canlı (production) proje | Yapılacak |
+
+## Canlıdaki durum (19 Kasım 2026)
+
+- Supabase projesi `gezi-app-test` (Frankfurt). 16 migration uygulandı; depodaki `backend/supabase/migrations/` ile birebir aynı. Güvenlik taramasında uyarı yok.
+- 156 İstanbul yeri (113 tarihi, 43 doğa, 15'i türbe), TR+EN açıklamalı; 133'ünde fotoğraf; 21 rozet, görselleri Storage'da.
+- `checkin` Edge Function'ı yayında; canlı test: girişsiz 401, uzak 'too_far', zayıf GPS 'low_accuracy', doğru konumda kabul + 'first-step' rozeti.
+- Arama tanınırlığa göre sıralı ve Türkçe harfe duyarsız.
+
+## Yayına kadar kalanlar
+
+Backend (Claude):
+- [ ] Hesap silme: `delete-account` Edge Function (App Store ve Google Play zorunlu tutuyor)
+- [ ] Avatar yükleme: `avatars` bucket'ına kullanıcının yalnızca kendi klasörüne yazma izni
+- [ ] "Yanlış konum / eksik yer bildir": tablo + RPC + admin onay akışı
+- [ ] Çok şehir: şehir listesi RPC'si (`cities`), yeni şehir migration'larının gözden geçirilip uygulanması
+- [ ] Ayrı canlı (production) Supabase projesi; migration'ların GitHub Actions ile uygulanması
+- [ ] Fotoğrafı olmayan 23 yer için fotoğraf
+
+Mobil (ChatGPT):
+- [ ] Expo SDK 54 → 58 (`docs/REQUESTS.md`)
+- [ ] Hesap silme ve avatar ekranları (backend hazır olunca)
+
+Proje sahibi:
+- [ ] Apple Developer hesabı ve Google Cloud ayarı (Apple/Google ile giriş, mağaza yayını)
+- [ ] KVKK aydınlatma metni ve gizlilik politikası (taslağı Claude yazabilir; hukukçu onayı gerekir)
+- [ ] Yeni şehir aday listelerinin onayı
 
 ## Açık konular
 
-- Supabase projesinin açılması (proje sahibi; anahtarlar repo'ya konmaz).
-- ~~Gerçek İstanbul listesi~~: 156 yer onaylandı ve migration olarak eklendi (113 tarihi, 43 doğa; TR+EN açıklamalı).
-- Rozet görselleri. (Yer fotoğrafları: 156 yerin 133'ünde Wikimedia Commons fotoğrafı var.)
-- Harita sağlayıcısı (mobil tarafla).
+- Kapalı beta için kullanıcı sayısı ve tarih (plan: pilot şehirde 20-50 kişi).
+- Harita karolarının çevrimdışı indirilmesi gerekli mi?
+- Rozetlerin kazanılmamış hâli: ayrı görsel yok, gri ve yarı saydam gösteriliyor; yeterli mi?
