@@ -1,0 +1,38 @@
+# Canlı uçtan uca check-in testi. selftest-checkin Edge Function'ını çağırır
+# (geçici kullanıcı oluşturur, check-in dener, siler) ve sonucu commit'ler.
+# Tetikleme: data-pipeline/selftest-request.txt değişince ya da elle.
+name: Canlı check-in testi
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [data-pipeline/selftest-request.txt]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: data-pipeline
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test
+        run: |
+          curl -sS -m 120 -X POST https://oxzypxygluqnwvtvqpil.supabase.co/functions/v1/selftest-checkin \
+            -o data-pipeline/results/selftest.json -w '%{http_code}\n' || true
+          cat data-pipeline/results/selftest.json || true
+      - name: Sonucu kaydet
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data-pipeline/results/selftest.json
+          git commit -m "Canlı check-in testi (sonuç)" || echo "Değişiklik yok"
+          git pull --rebase
+          git push
