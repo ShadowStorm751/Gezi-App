@@ -385,17 +385,6 @@
    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
    "source_url": "https://commons.wikimedia.org/wiki/File:Temenni_Tepesi.jpg"
   },
-  "uc-guzeller": {
-   "file": "Three beauties of Ürgüp.jpg",
-   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f3/Three_beauties_of_%C3%9Crg%C3%BCp.jpg/1280px-Three_beauties_of_%C3%9Crg%C3%BCp.jpg",
-   "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f3/Three_beauties_of_%C3%9Crg%C3%BCp.jpg/500px-Three_beauties_of_%C3%9Crg%C3%BCp.jpg",
-   "width": 1280,
-   "height": 853,
-   "author": "prilfish",
-   "license": "CC BY 2.0",
-   "license_url": "https://creativecommons.org/licenses/by/2.0",
-   "source_url": "https://commons.wikimedia.org/wiki/File:Three_beauties_of_%C3%9Crg%C3%BCp.jpg"
-  },
   "goreme-tarihi-milli-parki": {
    "file": "Goreme valley.jpg",
    "url": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Goreme_valley.jpg",
@@ -446,12 +435,12 @@
   "cavusin": "Q272689",
   "guzelyurt": "Q1004503",
   "temenni-tepe": "Q136897368",
-  "uc-guzeller": "Q136915104",
   "guvercinlik-vadisi": "Q104596490",
   "passabag-vadisi": "Q133612406",
   "ihlara-vadisi": "Q1366229"
  },
  "rejected_license": {},
+ "commons_fallback": {},
  "missing": [
   "aktepe-hill-sunset-point",
   "altikapi-turbesi",
@@ -468,6 +457,7 @@
   "mustafapasa",
   "mutfak-ve-kiler",
   "soganli-vadisi",
+  "uc-guzeller",
   "zelve-acik-hava-muzesi"
  ]
 }
