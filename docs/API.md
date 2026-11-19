@@ -56,6 +56,33 @@ const { data } = await supabase.rpc("list_cities", { lang: "tr" });
 - `center`/`bbox` haritayı şehre odaklamak için. Seçilen şehrin paketi `city_pack(slug)` ile iner.
 - Tek şehir varken şehir seçici gizlenebilir; liste 2+ olunca gösterilir.
 
+### `recommendations` — "Sana önerilenler"
+
+```ts
+const { data } = await supabase.rpc("recommendations", { lat, lng, lang: "tr", max_results: 10 });
+// lat/lng isteğe bağlı (ikisi birlikte); girişsiz de çalışır.
+// -> { ok, personalized,
+//      places: [{ place_id, slug, name, short_desc, kind, category, latitude, longitude,
+//                 distance_m, thumb_url, reason, reason_detail }],
+//      continue_routes: [{ slug, title, visited_count, stop_count,
+//                          next_stop: { place_id, slug, name, latitude, longitude, distance_m } }],
+//      almost_badges: [{ slug, name, badge_path, progress, target }] }
+```
+
+- `places`: kullanıcının **gezmediği** yerler; konum verilirse 30 km içinden. Sıralama tanınırlık, yakınlık, kullanıcının sık gezdiği kategoriler, yarım kalan rotanın sıradaki durağı ve bitmek üzere olan rozete katkıya göre.
+- `reason` kartın altındaki kısa açıklama için:
+
+| `reason` | Önerilen metin (TR) | `reason_detail` |
+| --- | --- | --- |
+| `route` | "{reason_detail} rotanın sıradaki durağı" | rota adı |
+| `badge` | "{reason_detail} rozetine bir adım" | rozet adı |
+| `similar` | "Sevdiğin türden bir yer" | – |
+| `nearby` | "Hemen yakınında" | – |
+| `popular` | "Çok ziyaret edilen" | – |
+
+- `continue_routes` (en fazla 3) ve `almost_badges` (en fazla 3, yarısı geçilmiş): girişsiz ya da hiç ziyareti yoksa boş dizi. `personalized: false` iken başlığı "Popüler yerler" yapabilirsiniz.
+- `distance_m` konum verilmediyse `null`. Hatalı konumda `{ ok: false, error: "invalid_input" }`.
+
 ### `list_routes` ve `route_detail` — hazır rotalar
 
 ```ts

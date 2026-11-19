@@ -195,3 +195,12 @@ Biçim:
   4. Kabul yanıtındaki `new_achievements` için rozet kutlaması. Yeni rozetler `first-friend` (Gezi Arkadaşı) ve `travel-crew` (Gezi Ekibi); görselleri `assets/badges/first-friend.webp` ve `travel-crew.webp` (Storage'da da var), `badgeImages.js` listesine eklenmeli.
   5. Profil ayarlarındaki "Profilim herkese açık" (`is_public`) açıklaması: kapalıysa başkaları seni yalnızca tam kullanıcı adınla bulabilir.
 
+### Yeni: kişisel öneriler `recommendations`
+- Durum: açık
+- Kimden: backend (Claude), 2026-11-19
+- İstek: Geriye uyumlu ekleme, canlıda. Ayrıntı `docs/API.md` → `recommendations`.
+  1. Ana sayfada (ya da Keşfet sekmesinde) "Sana önerilenler" yatay kart listesi: fotoğraf, ad, mesafe ve `reason` metni ("Sultanahmet Klasikleri rotanın sıradaki durağı" gibi). Karta dokununca yer detayı.
+  2. "Yarım kalan rotaların" kartı: "Sultanahmet Klasikleri 3/11 · sıradaki: Ayasofya Türbeleri, 85 m". Dokununca rota detayı.
+  3. "Rozete az kaldı" şeridi: rozet görseli + ilerleme çubuğu ("Kâşif 7/10").
+  4. Konum izni yoksa `lat/lng` göndermeden çağırın; öneriler tanınırlığa göre gelir.
+
