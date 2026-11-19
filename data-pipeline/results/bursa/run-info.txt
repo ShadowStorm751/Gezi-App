@@ -1,0 +1,2 @@
+osm_elements=0
+wikidata_entities=0
