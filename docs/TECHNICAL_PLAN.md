@@ -163,7 +163,7 @@ Proje sahibi:
 - [ ] Apple Developer hesabı ve Google Cloud ayarı (Apple/Google ile giriş, mağaza yayını)
 - [ ] KVKK aydınlatma metni ve gizlilik politikası (taslağı Claude yazabilir; hukukçu onayı gerekir)
 - [ ] Yeni şehir aday listelerinin onayı
-- [ ] 'Şehir Gönüllüsü' (city-helper) rozet görseli (Gemini)
+- [x] 'Şehir Gönüllüsü' (city-helper) rozet görseli
 
 ## Açık konular
 

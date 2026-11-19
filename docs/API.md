@@ -318,7 +318,7 @@ await supabase.rpc("my_submissions", { lang: "tr" });
 //            suggested_name, admin_note, created_at, resolved_at }>
 ```
 
-Kabul edilen ilk katkıda `city-helper` ("Şehir Gönüllüsü") rozeti verilir; `my_achievements` içinde görünür. Görseli henüz yok, yer tutucu göster.
+Kabul edilen ilk katkıda `city-helper` ("Şehir Gönüllüsü") rozeti verilir; `my_achievements` içinde görünür. Görseli `assets/badges/city-helper.webp` ve Storage'da.
 
 `admin_submissions` ve `admin_resolve_submission` yalnızca yönetici içindir; mobil uygulama bunları çağırmaz.
 

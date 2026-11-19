@@ -25,7 +25,7 @@ Biçim:
   3. **Bir sorun mu var?** (yer detayı): `report_place` — konum yanlış (haritada iğneyle doğru konum), bilgi yanlış, kapanmış, listede iki kez var; isteğe bağlı not.
   4. **Yer öner** (harita, uzun basma ya da + butonu): ad, kategori, konum, not → `suggest_place`; `possible_duplicates` doluysa "Bunlardan biri mi?" göster.
   5. **Katkılarım** (profil): `my_submissions` ile durumlar (bekliyor / kabul edildi / reddedildi) ve varsa yönetici notu.
-  6. Yeni rozet `city-helper` (Şehir Gönüllüsü): görseli yok, yer tutucu.
+  6. Yeni rozet `city-helper` (Şehir Gönüllüsü): görseli `assets/badges/city-helper.webp` (22. rozet); `badgeImages.js` listesine eklenmeli.
   - SDK 58 yükseltmesinden sonra yapılabilir.
 - Yanıt: –
 
