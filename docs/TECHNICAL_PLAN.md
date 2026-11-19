@@ -168,13 +168,13 @@ Backend (Claude):
 - [x] Fotoğrafı olmayan 23 yerin 18'ine elle seçilmiş Commons fotoğrafı (151/156). Kalan 5 yerde (Aydos Ormanı, Hacılı Şelalesi, Beykoz Korusu, Telli Baba Türbesi, Yeniköy Seyir Terası) uygun serbest lisanslı fotoğraf yok; ileride kendi çekimimiz ya da kullanıcı fotoğrafı
 
 Mobil (ChatGPT):
-- [ ] Expo SDK 54 → 58 (`docs/REQUESTS.md`)
+- [x] Expo SDK 54 → 58 (iPhone Expo Go ile çalışıyor)
 - [ ] Rotalar listesi ve rota detayı ekranları (`docs/REQUESTS.md`)
 - [ ] Arkadaşlar ve sıralama ekranları (`docs/REQUESTS.md`)
 - [ ] "Sana önerilenler" bölümü (`docs/REQUESTS.md`)
 - [ ] Fotoğraf ekleme ve "Fotoğraflarım" ekranları (`docs/REQUESTS.md`)
 - [ ] Hesap silme, avatar, "Bir sorun mu var?", "Yer öner" ve "Katkılarım" ekranları (`docs/REQUESTS.md`)
-- [ ] Haritada "© OpenStreetMap katkıcıları" atfı (ODbL lisans şartı; `docs/REQUESTS.md`)
+- [x] Haritada "© OpenStreetMap katkıcıları" atfı (ODbL lisans şartı; `docs/REQUESTS.md`)
 
 Proje sahibi:
 - [ ] Apple Developer hesabı ve Google Cloud ayarı (Apple/Google ile giriş, mağaza yayını)
