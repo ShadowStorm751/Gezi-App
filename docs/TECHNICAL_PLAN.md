@@ -139,8 +139,8 @@ Seed'de 20 rozet var (6 genel, 8 tarihi, 6 doğa); türbe ile 21, 'Şehir Gönü
 
 ## Canlıdaki durum (19 Kasım 2026, akşam denetimi)
 
-- Supabase projesi `gezi-app-test` (Frankfurt). 24 migration uygulandı; depodaki `backend/supabase/migrations/` ile birebir aynı.
-- 156 İstanbul yeri (113 tarihi, 43 doğa, 15'i türbe), TR+EN açıklamalı; 151'inde fotoğraf; 24 rozet (22'sinin görseli Storage'da); 11 hazır rota.
+- Supabase projesi `gezi-app-test` (Frankfurt). 25 migration uygulandı; depodaki `backend/supabase/migrations/` ile birebir aynı.
+- 156 İstanbul yeri (113 tarihi, 43 doğa, 15'i türbe), TR+EN açıklamalı; 151'inde fotoğraf; 24 rozet, görselleri Storage'da; 11 hazır rota.
 - `checkin` Edge Function'ı yayında; canlı test: girişsiz 401, uzak 'too_far', zayıf GPS 'low_accuracy', doğru konumda kabul + 'first-step' rozeti.
 - Arama tanınırlığa göre sıralı ve Türkçe harfe duyarsız.
 - Hesap silme, avatar yükleme ve kullanıcı bildirim/öneri akışı canlıda; canlı test geçti.
@@ -173,7 +173,7 @@ Proje sahibi:
 - [ ] KVKK aydınlatma metni ve gizlilik politikası (taslağı Claude yazabilir; hukukçu onayı gerekir)
 - [ ] Yeni şehir aday listelerinin onayı
 - [x] 'Şehir Gönüllüsü' (city-helper) rozet görseli
-- [ ] 'Rotacı' (route-first) ve 'Rota Ustası' (route-master) rozet görselleri (Gemini)
+- [x] 'Rotacı' (route-first) ve 'Rota Ustası' (route-master) rozet görselleri
 
 ## Açık konular
 

@@ -28,7 +28,8 @@ backend/supabase/
 │   ├── 20261119240000_hardening.sql          yayın öncesi yetki/RLS/indeks sertleştirmesi
 │   ├── 20261119250000_cities_list.sql        şehir listesi (list_cities)
 │   ├── 20261119260000_routes.sql             hazır rotalar: tablolar, RPC'ler, rota rozetleri
-│   └── 20261119270000_istanbul_routes.sql    İstanbul'un 11 rotası (üretilir: content/istanbul_routes.py)
+│   ├── 20261119270000_istanbul_routes.sql    İstanbul'un 11 rotası (üretilir: content/istanbul_routes.py)
+│   └── 20261119280000_route_badge_paths.sql  rota rozetlerinin görsel yolları
 ├── functions/badge-upload/              rozet görsellerini Storage'a yükler (.github/workflows/badges.yml)
 ├── functions/checkin/
 │   ├── index.ts                      Edge Function

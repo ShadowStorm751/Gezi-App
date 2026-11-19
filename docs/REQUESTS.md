@@ -183,5 +183,5 @@ Biçim:
   1. **Rotalar listesi:** kart başına kapak fotoğrafı (`thumb_url`), başlık, süre (`est_minutes` → "4 saat"), mesafe, durak sayısı, ulaşım simgesi (`travel_mode`). Girişliyse ilerleme ("3/8 durak") ve tamamlandı işareti.
   2. **Rota detayı:** özet, haritada durakları sırayla bağlayan çizgi ve numaralı pinler, altında sıralı durak listesi (gezilen durak işaretli). Durağa dokununca mevcut yer detayı açılır.
   3. "Yol tarifi" düğmesi bir sonraki gezilmemiş durağı Apple/Google Haritalar'da açabilir.
-  4. Yeni rozetler `route-first` (Rotacı) ve `route-master` (Rota Ustası). Görselleri henüz yok; gelene kadar `badgeImages.js`'te bulunmayan rozet için mevcut yedek ikon kullanılmalı.
+  4. Yeni rozetler `route-first` (Rotacı) ve `route-master` (Rota Ustası). Görselleri `assets/badges/route-first.webp` ve `route-master.webp` (Storage'da da var); `badgeImages.js` listesine eklenmeli.
 
