@@ -56,6 +56,25 @@ const { data } = await supabase.rpc("list_cities", { lang: "tr" });
 - `center`/`bbox` haritayı şehre odaklamak için. Seçilen şehrin paketi `city_pack(slug)` ile iner.
 - Tek şehir varken şehir seçici gizlenebilir; liste 2+ olunca gösterilir.
 
+### `list_routes` ve `route_detail` — hazır rotalar
+
+```ts
+const { data: routes } = await supabase.rpc("list_routes", { city_slug: "istanbul", lang: "tr" });
+// -> [{ slug, city, title, summary, kind, travel_mode, est_minutes, distance_m, stop_count,
+//       thumb_url, visited_count, completed }]
+
+const { data: route } = await supabase.rpc("route_detail", { route_slug: "adalar", lang: "en" });
+// -> { ...yukarıdaki alanlar, stops: [{ position, place_id, slug, name, kind, category,
+//       latitude, longitude, thumb_url, leg_m, visited }] }   // bulunamazsa null
+```
+
+- `kind`: `historical` | `nature` | `mixed`. `travel_mode`: `walking` | `mixed` (yürüyüş + toplu taşıma) | `ferry` | `driving`.
+- `est_minutes`: gezme dahil yaklaşık toplam süre. `distance_m` ve `leg_m` duraklar arası **kuş uçuşu** mesafe (yol değil); ilk durakta `leg_m = 0`. Ekranda "~3 km" gibi yuvarlak gösterin.
+- `visited_count`, `completed`, `stops[].visited`: girişsizse `null`.
+- Rota için ayrı check-in yok: duraklar normal `checkin` ile gezilir. Bütün duraklar gezilince rota tamamlanır; `checkin` yanıtındaki `new_achievements` içinde `route-first` ("Rotacı", ilk rota) ve `route-master` ("Rota Ustası", 5 rota) gelebilir.
+- Haritada rotayı çizmek için durakları sırayla düz çizgiyle bağlamak yeterli; gerçek yol tarifi için harita uygulamasına yönlendirin.
+- Şimdilik İstanbul'da 11 rota var.
+
 ### `nearby_places` — harita, liste ve geo-AR
 
 Yakından uzağa sıralı. Geo-AR için `bearing_deg` hazır gelir: kullanıcıdan yere pusula açısı (0 = kuzey, 90 = doğu, saat yönünde). Telefonun pusula yönüyle karşılaştırıp etiketi ekranda konumlandır.

@@ -26,7 +26,9 @@ backend/supabase/
 │   ├── 20261119220000_city_helper_badge.sql  Şehir Gönüllüsü rozet görseli
 │   ├── 20261119230000_istanbul_photos_extra.sql 18 yer için elle seçilmiş fotoğraf (üretilir)
 │   ├── 20261119240000_hardening.sql          yayın öncesi yetki/RLS/indeks sertleştirmesi
-│   └── 20261119250000_cities_list.sql        şehir listesi (list_cities)
+│   ├── 20261119250000_cities_list.sql        şehir listesi (list_cities)
+│   ├── 20261119260000_routes.sql             hazır rotalar: tablolar, RPC'ler, rota rozetleri
+│   └── 20261119270000_istanbul_routes.sql    İstanbul'un 11 rotası (üretilir: content/istanbul_routes.py)
 ├── functions/badge-upload/              rozet görsellerini Storage'a yükler (.github/workflows/badges.yml)
 ├── functions/checkin/
 │   ├── index.ts                      Edge Function

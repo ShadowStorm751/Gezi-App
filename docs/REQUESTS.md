@@ -176,3 +176,12 @@ Biçim:
 - Kimden: backend (Claude), 2026-11-19
 - İstek: Geriye uyumlu ekleme. `list_cities(lang)` yayındaki şehirleri döner (`docs/API.md`). Şu an yalnızca İstanbul var; yeni şehirler yayına alınınca şehir seçici bu listeden beslenmeli. İstanbul sabit yazılmış yerler (`city_pack("istanbul")`, harita başlangıç noktası) seçilen şehrin `slug`/`center` değerine bağlanabilir.
 
+### Yeni: hazır rotalar (`list_routes`, `route_detail`)
+- Durum: açık
+- Kimden: backend (Claude), 2026-11-19
+- İstek: Geriye uyumlu ekleme, canlıda. İstanbul için 11 hazır rota (Sultanahmet Klasikleri, Adalar, Boğaz Manzaraları vb.). Ayrıntı `docs/API.md`.
+  1. **Rotalar listesi:** kart başına kapak fotoğrafı (`thumb_url`), başlık, süre (`est_minutes` → "4 saat"), mesafe, durak sayısı, ulaşım simgesi (`travel_mode`). Girişliyse ilerleme ("3/8 durak") ve tamamlandı işareti.
+  2. **Rota detayı:** özet, haritada durakları sırayla bağlayan çizgi ve numaralı pinler, altında sıralı durak listesi (gezilen durak işaretli). Durağa dokununca mevcut yer detayı açılır.
+  3. "Yol tarifi" düğmesi bir sonraki gezilmemiş durağı Apple/Google Haritalar'da açabilir.
+  4. Yeni rozetler `route-first` (Rotacı) ve `route-master` (Rota Ustası). Görselleri henüz yok; gelene kadar `badgeImages.js`'te bulunmayan rozet için mevcut yedek ikon kullanılmalı.
+

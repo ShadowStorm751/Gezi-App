@@ -139,8 +139,8 @@ Seed'de 20 rozet var (6 genel, 8 tarihi, 6 doğa); türbe ile 21, 'Şehir Gönü
 
 ## Canlıdaki durum (19 Kasım 2026, akşam denetimi)
 
-- Supabase projesi `gezi-app-test` (Frankfurt). 22 migration uygulandı; depodaki `backend/supabase/migrations/` ile birebir aynı.
-- 156 İstanbul yeri (113 tarihi, 43 doğa, 15'i türbe), TR+EN açıklamalı; 151'inde fotoğraf; 22 rozet, görselleri Storage'da.
+- Supabase projesi `gezi-app-test` (Frankfurt). 24 migration uygulandı; depodaki `backend/supabase/migrations/` ile birebir aynı.
+- 156 İstanbul yeri (113 tarihi, 43 doğa, 15'i türbe), TR+EN açıklamalı; 151'inde fotoğraf; 24 rozet (22'sinin görseli Storage'da); 11 hazır rota.
 - `checkin` Edge Function'ı yayında; canlı test: girişsiz 401, uzak 'too_far', zayıf GPS 'low_accuracy', doğru konumda kabul + 'first-step' rozeti.
 - Arama tanınırlığa göre sıralı ve Türkçe harfe duyarsız.
 - Hesap silme, avatar yükleme ve kullanıcı bildirim/öneri akışı canlıda; canlı test geçti.
@@ -153,6 +153,7 @@ Backend (Claude):
 - [x] Avatar yükleme: yalnızca kendi klasörü, 2 MB, JPEG/PNG/WebP (canlıda, test edildi)
 - [x] Kullanıcı katkısı: hata bildirimi ve yeni yer önerisi, yönetici onay akışı, 'Şehir Gönüllüsü' rozeti (canlıda, test edildi)
 - [x] Şehir listesi: `list_cities` (canlıda)
+- [x] Hazır rotalar: `list_routes`, `route_detail`, İstanbul'da 11 rota, 'Rotacı' ve 'Rota Ustası' rozetleri (canlıda)
 - [ ] Yeni şehir migration'larının gözden geçirilip uygulanması (`data/yeni-sehirler` dalı bitince)
 - [ ] Ayrı canlı (production) Supabase projesi; migration'ların GitHub Actions ile uygulanması
 - [x] Yayın öncesi güvenlik/performans denetimi ve sertleştirme
@@ -163,6 +164,7 @@ Backend (Claude):
 
 Mobil (ChatGPT):
 - [ ] Expo SDK 54 → 58 (`docs/REQUESTS.md`)
+- [ ] Rotalar listesi ve rota detayı ekranları (`docs/REQUESTS.md`)
 - [ ] Hesap silme, avatar, "Bir sorun mu var?", "Yer öner" ve "Katkılarım" ekranları (`docs/REQUESTS.md`)
 - [ ] Haritada "© OpenStreetMap katkıcıları" atfı (ODbL lisans şartı; `docs/REQUESTS.md`)
 
@@ -171,6 +173,7 @@ Proje sahibi:
 - [ ] KVKK aydınlatma metni ve gizlilik politikası (taslağı Claude yazabilir; hukukçu onayı gerekir)
 - [ ] Yeni şehir aday listelerinin onayı
 - [x] 'Şehir Gönüllüsü' (city-helper) rozet görseli
+- [ ] 'Rotacı' (route-first) ve 'Rota Ustası' (route-master) rozet görselleri (Gemini)
 
 ## Açık konular
 
