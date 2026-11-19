@@ -29,7 +29,8 @@ backend/supabase/
 │   ├── 20261119250000_cities_list.sql        şehir listesi (list_cities)
 │   ├── 20261119260000_routes.sql             hazır rotalar: tablolar, RPC'ler, rota rozetleri
 │   ├── 20261119270000_istanbul_routes.sql    İstanbul'un 11 rotası (üretilir: content/istanbul_routes.py)
-│   └── 20261119280000_route_badge_paths.sql  rota rozetlerinin görsel yolları
+│   ├── 20261119280000_route_badge_paths.sql  rota rozetlerinin görsel yolları
+│   └── 20261119290000_friends.sql            arkadaşlık, kullanıcı arama, arkadaş sıralaması
 ├── functions/badge-upload/              rozet görsellerini Storage'a yükler (.github/workflows/badges.yml)
 ├── functions/checkin/
 │   ├── index.ts                      Edge Function
@@ -107,7 +108,7 @@ select admin_resolve_submission('<id>', false, 'Zaten listede');         -- ret
 
 Kabul edilen yeni yer `is_published = false` ile eklenir; TR/EN kısa açıklaması yazılıp yayına alınınca uygulamada görünür.
 
-Güvenlik denetçisi `report_place`, `suggest_place`, `admin_submissions` ve `admin_resolve_submission` için "SECURITY DEFINER" uyarısı verir: bilinçli. Kullanıcılar tabloya doğrudan yazamaz, yalnızca bu fonksiyonlarla (sınırlar ve doğrulamayla) yazar; yönetici fonksiyonları içeride yetki kontrolü yapar (canlı testte doğrulandı).
+Güvenlik denetçisi `report_place`, `suggest_place`, `admin_submissions`, `admin_resolve_submission` ve arkadaşlık fonksiyonları (`search_users`, `send_friend_request`, `respond_friend_request`, `remove_friend`, `my_friends`, `friends_leaderboard`) için "SECURITY DEFINER" uyarısı verir: bilinçli. Kullanıcılar tabloya doğrudan yazamaz, yalnızca bu fonksiyonlarla (sınırlar ve doğrulamayla) yazar; yönetici fonksiyonları içeride yetki kontrolü yapar (canlı testte doğrulandı).
 
 ## Yeni rozet eklemek
 

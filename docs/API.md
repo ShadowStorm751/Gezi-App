@@ -266,6 +266,7 @@ await supabase.rpc("export_my_data"); // KVKK: kullanıcının tüm verisi tek J
 //      achievements: [{ achievement, earned_at }],
 //      submissions: [{ kind, place, name, category, lat, lng, note, status, admin_note, created_at, resolved_at }] }
 // visits[].place yayından kalkmış bir yer için null olabilir (place_id yine dolu).
+// friendships: [{ username, direction: "sent"|"received", status, created_at, responded_at }]
 ```
 
 Profil yalnızca `update_profile` ile değiştirilmeli. `profiles` tablosuna doğrudan yazma
@@ -363,6 +364,52 @@ Kabul edilen ilk katkıda `city-helper` ("Şehir Gönüllüsü") rozeti verilir;
 `admin_submissions` ve `admin_resolve_submission` yalnızca yönetici içindir; mobil uygulama bunları çağırmaz.
 
 ---
+
+## Arkadaşlar ve sıralama (giriş gerekli)
+
+Tüm fonksiyonlar `{ ok: true, ... }` ya da `{ ok: false, error }` döner. Kişiler **kullanıcı adıyla** tanımlanır; kullanıcı kimliği (uuid) hiç dönmez.
+
+```ts
+await supabase.rpc("search_users", { query: "ay", max_results: 10 });
+// -> { ok, users: [{ username, avatar_path, relation }] }
+//    relation: "none" | "friend" | "request_sent" | "request_received"
+//    Herkese açık profiller adın başıyla (en az 2 harf) bulunur; gizli profil (is_public=false) yalnızca tam adla.
+
+await supabase.rpc("send_friend_request", { username: "ayse" });
+// -> { ok, status: "pending" }   karşı taraf sana zaten istek gönderdiyse { ok, status: "accepted" }
+
+await supabase.rpc("respond_friend_request", { username: "ayse", accept: true });
+// -> { ok, status: "accepted" | "declined" }
+
+await supabase.rpc("remove_friend", { username: "ayse" }); // arkadaşlıktan çıkar ya da gönderdiğin isteği geri al
+
+await supabase.rpc("my_friends");
+// -> { ok, friends: [{ username, avatar_path, since, total_places, badges }],
+//      incoming: [{ username, avatar_path, created_at }], outgoing: [...] }
+
+await supabase.rpc("friends_leaderboard", { period: "week", city_slug: null });
+// period: "week" (pazartesiden beri) | "month" | "year" | "all"; city_slug verilirse yalnızca o şehir
+// -> { ok, period, since, entries: [{ rank, username, avatar_path, places, is_me }] }
+```
+
+- Sıralama puanı: dönemde gezilen **farklı yer** sayısı (işaretli ziyaretler sayılmaz). Eşit puanlılar aynı sırayı paylaşır (1, 1, 3). Listede sen ve kabul edilmiş arkadaşların var; tek başınaysan yalnızca sen.
+- Avatar: `avatar_path` Storage `avatars` bucket'ındaki yol; herkese açık adresi `supabase.storage.from("avatars").getPublicUrl(avatar_path)`.
+- İstek göndermek için önce kullanıcı adı seçilmiş olmalı (`update_profile`).
+- Sınırlar: günde 30 istek, en fazla 500 arkadaş.
+
+| `error` | Anlamı | Önerilen mesaj (TR) |
+| --- | --- | --- |
+| `not_authenticated` | Oturum yok | "Arkadaş eklemek için giriş yap." |
+| `username_required` | Kendi kullanıcı adın yok | "Önce bir kullanıcı adı seç." |
+| `user_not_found` | Böyle kullanıcı yok | "Bu kullanıcı bulunamadı." |
+| `cannot_add_self` | Kendini eklemeye çalıştın | – |
+| `already_friends` | Zaten arkadaşsınız | "Zaten arkadaşsınız." |
+| `already_requested` | İstek zaten gönderildi | "İsteğin bekliyor." |
+| `request_not_found` | Yanıtlanacak istek yok | "Bu istek artık geçerli değil." |
+| `not_friends` | Silinecek arkadaşlık/istek yok | – |
+| `friend_limit` | 500 arkadaş sınırı | "Arkadaş sınırına ulaştın." |
+| `rate_limited` | Son 24 saatte 30 istek | "Bugünlük çok istek gönderdin, yarın tekrar dene." |
+| `invalid_input` | Geçersiz dönem ya da şehir | – (uygulama hatası) |
 
 ## Check-in (Edge Function)
 
