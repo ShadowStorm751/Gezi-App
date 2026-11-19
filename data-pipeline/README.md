@@ -1,6 +1,6 @@
 # Veri hattı
 
-Sahibi: Claude. İstanbul'daki tarihi-kültürel ve doğa/manzara yerlerini OpenStreetMap ve Wikidata'dan toplar, senin onayına sunar ve onayladıklarını veritabanına yüklenecek SQL'e çevirir.
+Sahibi: Claude. Bir şehirdeki (pilot: İstanbul) tarihi-kültürel ve doğa/manzara yerlerini OpenStreetMap ve Wikidata'dan toplar, senin onayına sunar ve onayladıklarını veritabanına yüklenecek SQL'e çevirir.
 
 Yalnızca Python gerekir (3.9 veya üstü), başka kurulum yok. İnternete eriştiği için **kendi bilgisayarında** çalıştırılır.
 
@@ -57,6 +57,29 @@ python pipeline.py build
 ```
 
 `output/places_import.sql` dosyasını yazar. Supabase panelinde **SQL Editor**'a yapıştırıp çalıştır. Dosya tekrar çalıştırılabilir: aynı yer ikinci kez eklenmez, güncellenir. Boş bıraktığın açıklamalar veritabanındaki mevcut açıklamayı silmez.
+
+## Şehirler
+
+Şehir ayarları `cities.py` içinde: Overpass bölgesi, şehre özgü ek OSM etiketleri ve sınıflandırma kuralları, kota, kategori sınırları, dönem eşikleri. Komutlar `--city` alır (varsayılan `istanbul`):
+
+```bash
+python pipeline.py --city izmir fetch        # çıktı: output/izmir/
+python pipeline.py --city izmir candidates
+python photos.py --city izmir                 # results/izmir/photos.json
+python content/build_city.py izmir --out ../backend/supabase/migrations/<zaman>_izmir_places.sql
+```
+
+| Şehir | Bölge | Not |
+| --- | --- | --- |
+| `istanbul` | İstanbul ili | Pilot; ayarlar ve çıktı değişmedi |
+| `izmir` | İzmir ili | Efes/Selçuk, Bergama, Çeşme dahil; dönem: Antik, Bizans, Beylikler, Osmanlı |
+| `bursa` | Bursa ili | Uludağ, İznik, Cumalıkızık dahil; 1326'dan sonrası Osmanlı |
+| `kapadokya` | Nevşehir ili + Ihlara/Selime (Aksaray) + Soğanlı (Kayseri) | Ek etiketler: vadi, kaya oluşumu, kaya kiliseleri, turistik yerler; yeni kategori `valley` |
+
+- Sonuçlar: İstanbul `results/`, diğer şehirler `results/<şehir>/` (candidates.csv, areas.json, ham veri, shortlist.json, photos.json).
+- GitHub'da: `run-request.txt` / `photos-request.txt` içine `Şehirler: izmir bursa kapadokya` satırı yazılır; main ya da `data/*` dalına yüklenince iş çalışır ve sonucu o dala commit'ler.
+- Açıklamalar: `content/<şehir>_descriptions.py` (İstanbul'la aynı biçim; isteğe bağlı `COORD_FIX`, `PHOTO_EXCLUDE`).
+- Migration: `content/build_city.py` şehir kaydı + gerekiyorsa yeni kategori + yerler + fotoğraflar üretir. Yeni şehirlerin yerleri **gizli** eklenir (`is_published = false`); var olan migration dosyasının üzerine yazmaz.
 
 ## İstanbul listesi (onaylandı, 2026-11-19)
 
