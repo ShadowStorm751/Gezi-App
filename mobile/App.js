@@ -19,7 +19,7 @@ import {ContributionForm} from './Contributions';
 import {Recommendations,Routes,RouteDetail} from './Trips';
 import CheckIn from './CheckInPanel';
 import useVisits from './useVisits';
-import {distanceMeters} from './geo';
+import {distanceMeters,galataPreviewOrigin} from './geo';
 
 const paper = '#FAF7F0';
 const ink = '#143C38';
@@ -56,7 +56,9 @@ export default function App() {
   const [origin, setOrigin] = useState(null);
   const [loading, setLoading] = useState(false);
   const [detail, setDetail] = useState(null);
-  const [cameraOpen, setCameraOpen] = useState(false);
+  const [cameraMode, setCameraMode] = useState(null);
+  const cameraOpen = !!cameraMode;
+  const galataPreview = cameraMode === 'galata';
   const [badgesOpen, setBadgesOpen] = useState(false);
   const [trackedId, setTrackedId] = useState(null);
   const [trackedPlace,setTrackedPlace] = useState(null);
@@ -153,7 +155,7 @@ export default function App() {
     if (!cameraOpen) map.current?.animateCamera({center:place.coordinate}, {duration:300});
     setDetail(place);
     setDetailState('');
-    if (demo || !client) return;
+    if (galataPreview || demo || !client) return;
     setDetailState('loading');
     try {
       const info = await loadDetail(rpc,place.id,lang);
@@ -170,6 +172,10 @@ export default function App() {
   function showStop(row) {
     const place = byId.get(row.place_id) || mapPlace({...row,id:row.place_id},lang);
     openPlace({...place,distance:distanceMeters(origin ?? center,place.coordinate)});
+  }
+  function tryGalata() {
+    setTrackedId('galata-kulesi');
+    setCameraMode('galata');
   }
   function openRoute(slug,back) {
     setRouteSlug(slug);
@@ -197,9 +203,10 @@ export default function App() {
   return (
     <SafeAreaView style={styles.page}>
       <StatusBar barStyle="dark-content"/>
-      {cameraOpen ? <DiscoveryCamera places={trackedPlace?.id === trackedId && !byId.has(trackedId) ? [...places,trackedPlace] : places} trackedId={trackedId}
+      {cameraOpen ? <DiscoveryCamera key={cameraMode} previewOrigin={galataPreview ? galataPreviewOrigin : null} onTryDemo={tryGalata}
+        places={galataPreview ? demoPlaces : trackedPlace?.id === trackedId && !byId.has(trackedId) ? [...places,trackedPlace] : places} trackedId={trackedId}
         onStopTracking={() => setTrackedId(null)} onSelect={openPlace}
-        onBack={() => { setCameraOpen(false); setTrackedId(null); }}/> : screen !== 'home' ? <>
+        onBack={() => { setCameraMode(null); setTrackedId(null); }}/> : screen !== 'home' ? <>
         <View style={ui.content}><Action onPress={() => setScreen(screen === 'route' ? routeBack : screen === 'friends' ? 'profile' : 'home')}>
           {t('‹ Geri','‹ Back')}</Action><Text style={ui.title}>{pageTitle[screen]}</Text></View>
         <ScrollView key={screen+':'+(visits.userId || '')} contentContainerStyle={ui.content} keyboardShouldPersistTaps="handled">
@@ -222,9 +229,10 @@ export default function App() {
         {!!client && <View style={ui.row}><Action onPress={() => setScreen('routes')}>{t('Rotalar','Routes')}</Action>
           <Action onPress={() => setScreen('profile')}>{t('Profil','Profile')}</Action>
           <Action onPress={() => suggest(origin ?? center)}>{t('+ Yer öner','+ Suggest place')}</Action></View>}
-        <Pressable accessibilityRole="button" disabled={!places.length} style={styles.action} onPress={() => setCameraOpen(true)}>
+        <Pressable accessibilityRole="button" disabled={!places.length} style={styles.action} onPress={() => setCameraMode('live')}>
           <Text style={styles.actionLabel}>{t("Kamerayla keşfet","Explore with camera")}</Text>
         </Pressable>
+        <Action onPress={tryGalata}>{t('Galata’yı evden dene','Try Galata from home')}</Action>
       </View>
       <MapView key={citySlug+':'+center.latitude+':'+center.longitude} ref={map} style={styles.map} initialRegion={{...region,...center}} showsUserLocation={!!origin}
         onLongPress={client ? e => suggest(e.nativeEvent.coordinate) : undefined}
@@ -279,12 +287,13 @@ export default function App() {
             <ScrollView contentContainerStyle={styles.detail} keyboardShouldPersistTaps="handled">
               <Text style={styles.eyebrow}>{(detail.period || detail.categoryLabel || detail.category).toLocaleUpperCase(lang)}{detail.hasArea || !Number.isFinite(detail.distance) ? '' : '  ·  '+formatDistance(detail.distance)}</Text>
               <Text style={styles.title} accessibilityRole="header">{detail.name}</Text>
+              {galataPreview && <Text style={styles.muted}>{t('Galata denemesi · Örnek konumdan uzaklık','Galata demo · Distance from the sample location')}</Text>}
               {detailState !== 'loading' && <PlaceGallery place={detail}/>}
               <Text style={styles.story}>{detail.description}</Text>
-              {!!client && detailState !== 'missing' && (reporting ?
+              {!!client && !galataPreview && detailState !== 'missing' && (reporting ?
                 <ContributionForm key={detail.id+':'+visits.userId} place={detail} coordinate={detail.coordinate} userId={visits.userId} onClose={() => setReporting(false)}/> :
                 <Action onPress={() => setReporting(true)}>{t('Bir sorun mu var?','Report a problem')}</Action>)}
-              {!demo && detailState !== 'missing' && <CheckIn key={detail.id} place={detail} origin={origin} visits={visits} cities={cities.data}
+              {!demo && !galataPreview && detailState !== 'missing' && <CheckIn key={detail.id} place={detail} origin={origin} visits={visits} cities={cities.data}
                 visited={wasVisited(detail.id)} onMissing={() => setRefresh(n => n+1)}
                 onAwards={(awards,userId) => setCelebration({awards,userId})}/>}
               {!!detail.bestTime && <Text style={styles.muted}>{t('Önerilen zaman','Best time')} · {detail.bestTime}</Text>}
@@ -296,7 +305,7 @@ export default function App() {
                 setTrackedId(detail.id);
                 setTrackedPlace(detail);
                 closeDetail();
-                setCameraOpen(true);
+                setCameraMode(galataPreview ? 'galata' : 'live');
               }}>
                 <Text style={styles.actionLabel}>{t("Kamerada takip et","Track in camera")}</Text>
               </Pressable>

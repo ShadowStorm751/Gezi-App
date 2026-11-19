@@ -2,7 +2,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const {distanceMeters, bearingDegrees, relativeDirection} = require('../geo');
 const tower = require('../places.json')[0].coordinate;
-const {cameraMarkers, cameraTargets, rearCameraPitch} = require('../geo');
+const {cameraMarkers, cameraTargets, rearCameraPitch, galataPreviewOrigin} = require('../geo');
 const places = require('../places.json');
 
 test('Arka kamera dik tutulduğunda ufka, ekran yukarı bakarken yere yönelir', () => {
@@ -40,7 +40,7 @@ test('Takip edilen ikinci yer kadraj dışındayken doğru kenarda kalır', () =
 });
 
 test('Dar sokak demosunda iki yer görünür, dönünce kadrajdan çıkar', () => {
-  const street = {latitude:tower.latitude - 0.009, longitude:tower.longitude};
+  const street = galataPreviewOrigin;
   const north = cameraTargets(places, street, 0);
   assert.equal(north.length, 2);
   assert.ok(north.every(p => p.visible));
@@ -55,7 +55,7 @@ test('Dar sokak demosunda iki yer görünür, dönünce kadrajdan çıkar', () =
 });
 
 test('Kule güneydeki örnek konumdan yaklaşık 1 km uzakta ve kuzey yönünde', () => {
-  const street = {latitude: tower.latitude - 0.009, longitude: tower.longitude};
+  const street = galataPreviewOrigin;
   assert.ok(Math.abs(distanceMeters(street, tower) - 1000) < 2);
   assert.equal(bearingDegrees(street, tower), 0);
   assert.equal(relativeDirection(0, 350), 10);

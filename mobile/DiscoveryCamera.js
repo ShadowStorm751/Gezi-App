@@ -13,7 +13,7 @@ function Control({children, onPress}) {
   </Pressable>;
 }
 
-export default function DiscoveryCamera({places, trackedId, onStopTracking, onSelect, onBack}) {
+export default function DiscoveryCamera({places, trackedId, onStopTracking, onSelect, onBack, previewOrigin, onTryDemo}) {
   const [permission, requestCamera] = useCameraPermissions();
   const [foreground, setActive] = useState(AppState.currentState !== 'background');
   const [photosOpen, setPhotosOpen] = useState(false);
@@ -24,7 +24,8 @@ export default function DiscoveryCamera({places, trackedId, onStopTracking, onSe
     camera.current = view;
     if (!view) setReady(false);
   }, []);
-  const [coords, setCoords] = useState(null);
+  const [gpsCoords, setCoords] = useState(null);
+  const coords = previewOrigin ?? gpsCoords;
   const [heading, setHeading] = useState(null);
   const [issue, setIssue] = useState('');
   const [lensError, setLensError] = useState(false);
@@ -73,11 +74,13 @@ export default function DiscoveryCamera({places, trackedId, onStopTracking, onSe
       const access = await Location.requestForegroundPermissionsAsync();
       if (cancelled) return;
       if (!access.granted) { setIssue(t("Baloncukların yönü için konum iznini aç.","Enable location to see nearby places.")); return; }
-      const position = await Location.watchPositionAsync(
-        {accuracy:Location.Accuracy.High, distanceInterval:3, timeInterval:1500},
-        fix => { if (!cancelled) setCoords(fix.coords); }
-      );
-      keep(position);
+      if (!previewOrigin) {
+        const position = await Location.watchPositionAsync(
+          {accuracy:Location.Accuracy.High, distanceInterval:3, timeInterval:1500},
+          fix => { if (!cancelled) setCoords(fix.coords); }
+        );
+        keep(position);
+      }
       if (cancelled) return;
       keep(await Location.watchHeadingAsync(reading => {
         if (cancelled) return;
@@ -87,7 +90,7 @@ export default function DiscoveryCamera({places, trackedId, onStopTracking, onSe
     }
     start().catch(() => { if (!cancelled) setIssue(t("Konum veya pusula okunamadı. Cihaz ayarlarını kontrol et.","Location or compass unavailable. Check device settings.")); });
     return () => { cancelled = true; subscriptions.forEach(sub => sub.remove()); };
-  }, [active, permission?.granted, retry]);
+  }, [active, permission?.granted, retry, previewOrigin]);
 
   const targets = cameraTargets(places, coords, heading);
   const aspect = height > 0 ? width / height : 0.6;
@@ -133,7 +136,9 @@ export default function DiscoveryCamera({places, trackedId, onStopTracking, onSe
         </Pressable>;
       })}
       <View style={styles.bottom}>
+        {previewOrigin && <Text style={styles.place}>{t('Galata denemesi · Örnek konum','Galata demo · Sample location')}</Text>}
         <Text style={styles.light}>{hint}</Text>
+        {!previewOrigin && coords && heading !== null && !closest && <Control onPress={onTryDemo}>{t('Galata’yı evden dene','Try Galata from home')}</Control>}
         {pitch === null && !!coords && <Text style={styles.light}>{t("Eğim verisi yok · Yatay takip açık","Tilt unavailable · Horizontal tracking active")}</Text>}
         {!!trackedId && <Control onPress={onStopTracking}>{t("Takibi bırak","Stop tracking")}</Control>}
         {!!issue && <Control onPress={() => setRetry(n => n + 1)}>{t("Yeniden dene","Retry")}</Control>}

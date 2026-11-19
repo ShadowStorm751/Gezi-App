@@ -1,4 +1,6 @@
 const radians = degrees => degrees * Math.PI / 180;
+// A fixed viewpoint one kilometre south of Galata Tower, used only in the camera demo.
+const galataPreviewOrigin = {latitude:41.0166556, longitude:28.9741556};
 
 function distanceMeters(from, to) {
   const latitudeChange = radians(to.latitude - from.latitude);
@@ -76,5 +78,5 @@ function cameraMarkers(targets, trackedId, pitch = 0, aspect = 0.6) {
   });
 }
 
-module.exports = { distanceMeters, bearingDegrees, relativeDirection, cameraTargets, cameraMarkers,
+module.exports = { galataPreviewOrigin, distanceMeters, bearingDegrees, relativeDirection, cameraTargets, cameraMarkers,
   rearCameraPitch, edgeHints, edgeArrows };
