@@ -343,3 +343,9 @@ PHOTO_REJECT_FILES = {
     "Branches of a tree in Ekmeksiz beach.jpg": "yalnızca ağaç dalları",
     "35930 Alaçatı Belediyesi-Çeşme-İzmir, Turkey - panoramio (39).jpg": "plajı göstermiyor olabilir",
 }
+
+# Elle seçilen fotoğraflar (photo_search.py adaylarından, temas sayfasına bakılarak; 2026-11-20)
+PHOTO_PICK = {
+    'pamucak-sahili': 'Ephesus beach-2.jpg',
+    'v-sarayi': 'Harabeler... - panoramio.jpg',  # Pergamon akropolünde, sarayın 34 m yakınında; sarayın kendisi olduğu kesin değil
+}

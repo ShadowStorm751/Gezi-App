@@ -235,3 +235,13 @@ PHOTO_REJECT_FILES = {
     "Şirin Hatun Türbesi 2017-06-30 19.09.10 1791298002.JPG": "başka türbe",
     "Atatürk Heykeli (Mudanya) 2026-05-25 15.30.08 1783188533.jpeg": "heykel, sahil değil",
 }
+
+# Elle seçilen fotoğraflar (photo_search.py adaylarından, temas sayfasına bakılarak; 2026-11-20)
+PHOTO_PICK = {
+    'mayor-sinagogu': 'Sinagogamayorbursa.jpg',
+    'iznik-surlari': 'İznik (Nicea) city walls-Bursa - panoramio.jpg',
+    'misi': 'Misi köyü-gümüştepe - panoramio.jpg',
+    'zeyniller-koyu-seyir-tepesi': 'Zeyniler köyü-Bursa - panoramio.jpg',  # Zeyniler köyü; seyir tepesinin kendisi değil
+    'karacabey-longoz-ormanlari': 'Karacabey Longozu - Bahar.jpg',
+    'uluabat-golu-sulak-alani': 'Eskikaraağaç Leylek Köyü.jpg',  # Gölyazı değil, göl kıyısındaki Eskikaraağaç (Leylek Köyü) havadan
+}

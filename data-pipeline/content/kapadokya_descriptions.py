@@ -211,3 +211,11 @@ COORD_OK = {
 RADIUS["soganli-sakli-kilise"] = 45
 RADIUS["soganli-geyikli-kilise"] = 45
 RADIUS["yilanli-kilise-aksaray"] = 100
+
+# Elle seçilen fotoğraflar (photo_search.py adaylarından, temas sayfasına bakılarak; 2026-11-20)
+PHOTO_PICK = {
+    'aktepe-hill-sunset-point': 'CAPPADOCIA Göreme National Park and the Rock Sites. World Heritage List. Turkey. Hot Air Ballooning Cappadocia.jpg',  # Göreme manzarası, noktanın 90 m yakınından
+    'soganli-karabas-kilisesi': 'Capadoccia Jul 2023 22 59 14 257000.jpeg',
+    'soganli-sakli-kilise': 'Three churches domed hidden church.JPG',  # Kubbeli ve Saklı kiliseler birlikte; dosyanın konumu yanlış girilmiş
+    'soganli-tahtali-kilise': 'Tahtalı Church - St. Barbara Church in Soğanlı - 26054091215.jpg',
+}
