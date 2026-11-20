@@ -5,7 +5,7 @@ import {ImageManipulator, SaveFormat} from 'expo-image-manipulator';
 import {Camera,ChevronDown,ChevronRight,ChevronUp,Image as PhotoIcon,MapPinPlus,Settings2,Star,UserRound,UsersRound} from 'lucide-react-native';
 import {client,t} from './client';
 import {Press} from './Motion';
-import {Login} from './Badges';
+import {GuestSignIn} from './Badges';
 import {heading,muted} from './PlaceUI';
 import {panel} from './TabPage';
 import {c,radius,space,type} from './theme';
@@ -29,16 +29,47 @@ function MenuRow({icon:Icon,label,onPress,expanded,disabled=false}) {
   </Press>;
 }
 
-export function GuestProfile({onSuggest}) {
-  return <>
-    <View style={panel}>
-      <View style={styles.avatar}><UserRound size={32} color={c.primary}/></View>
-      <Login prompt={t('Fotoğraflarını, değerlendirmelerini ve arkadaşlarını görmek için giriş yap.',
-        'Sign in to see your photos, reviews and friends.')}/>
-    </View>
+function ProfileMenu({onPhotos,onReviews,onSocial,onSuggest}) {
+  return (
     <View style={styles.menu}>
+      <MenuRow icon={PhotoIcon} label={t('Fotoğraflarım','My photos')} onPress={onPhotos}/>
+      <MenuRow icon={Star} label={t('Değerlendirmelerim','My reviews')} onPress={onReviews}/>
+      <MenuRow icon={UsersRound} label={t('Arkadaşlar ve sıralama','Friends and rankings')} onPress={onSocial}/>
       <MenuRow icon={MapPinPlus} label={t('Yer öner','Suggest a place')} onPress={onSuggest}/>
     </View>
+  );
+}
+
+export function GuestProfile({onSuggest}) {
+  const [section,setSection]=useState(null);
+  const toggle=value=>setSection(current=>current===value ? null : value);
+  const examples={
+    photos:[t('Fotoğraflarım','My photos'),t('İlk ziyaret fotoğrafını yüklediğinde burada görünecek.','Your first visit photo will appear here after you upload it.')],
+    reviews:[t('Örnek değerlendirme','Sample review'),t('Galata Kulesi · 4 / 5','Galata Tower · 4 / 5'),t('Gün batımında Haliç manzarası çok güzeldi.','The view of the Golden Horn at sunset was beautiful.')],
+    social:[t('Örnek arkadaş sıralaması','Sample friends ranking'),t('1. Deniz · 6 ziyaret','1. Deniz · 6 visits'),t('2. Gezgin · 4 ziyaret','2. Explorer · 4 visits')],
+    suggest:[t('Yer öner','Suggest a place'),t('Bağlandığında haritada bir konum seçip yer önerebilirsin.','When connected, you can suggest a place by choosing its location on the map.')],
+  };
+  return <>
+    <View style={styles.identity}>
+      <View style={styles.avatar}><UserRound size={32} color={c.primary}/></View>
+      <View style={styles.identityCopy}>
+        <Text style={styles.name}>{t('Misafir gezgin','Guest explorer')}</Text>
+        <Text style={muted}>{t('Örnek profil','Sample profile')}</Text>
+      </View>
+    </View>
+    <ProfileMenu onPhotos={()=>toggle('photos')} onReviews={()=>toggle('reviews')}
+      onSocial={()=>toggle('social')} onSuggest={onSuggest || (()=>toggle('suggest'))}/>
+    {examples[section] && <View style={panel}>
+      {examples[section].map((line,index)=><Text key={line} style={index===0 ? heading : muted}>{line}</Text>)}
+    </View>}
+    <View style={styles.menu}>
+      <MenuRow icon={Settings2} label={t('Hesap ayarları','Account settings')} expanded={section==='settings'} onPress={()=>toggle('settings')}/>
+      {section==='settings' && <View style={styles.settings}>
+        <Text style={muted}>{t('Giriş yaptığında kullanıcı adını, fotoğrafını ve profil görünürlüğünü buradan değiştirebilirsin.',
+          'After signing in, you can change your username, photo and profile visibility here.')}</Text>
+      </View>}
+    </View>
+    <GuestSignIn prompt={t('Kendi profilini açmak için giriş yap.','Sign in to open your own profile.')}/>
   </>;
 }
 
@@ -99,12 +130,7 @@ export default function Profile({visits,onSocial,onPhotos,onReviews,onSuggest,on
         <Text style={muted}>{profile.is_public ? t('Herkese açık profil','Public profile') : t('Gizli profil','Private profile')}</Text>
       </View>
     </View>}
-    <View style={styles.menu}>
-      <MenuRow icon={PhotoIcon} label={t('Fotoğraflarım','My photos')} onPress={onPhotos}/>
-      <MenuRow icon={Star} label={t('Değerlendirmelerim','My reviews')} onPress={onReviews}/>
-      <MenuRow icon={UsersRound} label={t('Arkadaşlar ve sıralama','Friends and rankings')} onPress={onSocial}/>
-      <MenuRow icon={MapPinPlus} label={t('Yer öner','Suggest a place')} onPress={onSuggest}/>
-    </View>
+    <ProfileMenu onPhotos={onPhotos} onReviews={onReviews} onSocial={onSocial} onSuggest={onSuggest}/>
     <Submissions userId={visits.userId}/>
     <View style={styles.menu}>
       <MenuRow icon={Settings2} label={t('Hesap ayarları','Account settings')} expanded={settings}

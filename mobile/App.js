@@ -18,7 +18,7 @@ import sample from './places.json';
 import {AsyncStorage, client, demo, lang, project, t} from './client';
 import {loadCity, loadDetail, loadNearby, mapPlace, mergeNearbyPlace} from './catalog';
 import DiscoveryCamera from './DiscoveryCamera';
-import {BadgeLogin,Collection,Login} from './Badges';
+import {GuestBadges,Collection,Login} from './Badges';
 import {Action,ui,useQuery} from './ScreenUI';
 import Friends from './Friends';
 import Profile,{GuestProfile} from './Profile';
@@ -222,21 +222,19 @@ export default function App() {
         explore:<Explore places={nearby.map(p=>({...p,distance:origin?p.distance:null}))} nearby={listPlaces} city={city||{slug:citySlug,name:citySlug==='istanbul'?'İstanbul':citySlug}} cities={cities} onCity={chooseCity} origin={origin} permission={permission} onLocation={()=>useLocation()} onDemo={tryGalata} onCamera={()=>setCameraMode('live')} onPlace={openPlace} onRoute={slug=>openRoute(slug)} visited={wasVisited} revision={visits.revision} userId={visits.userId} state={catalogState} onRetry={()=>setRefresh(n=>n+1)} message={locationMessage} loading={loading}/>,
         map:<PlaceMap key={citySlug} places={nearby} mapRef={map} center={center} origin={origin} visited={wasVisited} onLocation={()=>useLocation()} onSuggest={client?suggest:null} onOpen={openPlace} message={locationMessage}/>,
         routes: <TabPage title={t('Rotalar','Routes')} location={city?.name || (citySlug==='istanbul'?'İstanbul':citySlug)}>
-          <Routes city={citySlug} revision={[visits.userId,visits.revision]} onRoute={openRoute}/>
+          <Routes city={citySlug} userId={visits.userId} visitRevision={visits.revision} onRoute={openRoute}/>
         </TabPage>,
         badges: <TabPage title={t('Rozetler','Badges')}>
-          {client ? visits.userId
+          {client && visits.userId
             ? <Collection key={visits.userId} userId={visits.userId} visitRevision={visits.revision}/>
-            : <BadgeLogin/>
-            : <Text style={ui.muted}>{t('Rozetleri görmek için bağlantı gerekli.','Connect to view badges.')}</Text>}
+            : <GuestBadges/>}
         </TabPage>,
         profile: <TabPage title={t('Profil','Profile')}>
-          {!client ? <Text style={ui.muted}>{t('Profil için bağlantı gerekli.','Connect to view your profile.')}</Text>
-            : visits.userId ? <Profile key={visits.userId} visits={visits}
+          {client && visits.userId ? <Profile key={visits.userId} visits={visits}
                 onPhotos={()=>setScreen('photos')} onReviews={()=>setScreen('reviews')}
                 onSocial={()=>setScreen('friends')} onSuggest={()=>suggest(origin ?? center)}
                 onClose={()=>setScreen('home')}/>
-            : <GuestProfile onSuggest={()=>suggest(origin ?? center)}/>}
+            : <GuestProfile onSuggest={client ? ()=>suggest(origin ?? center) : null}/>}
         </TabPage>
       }}/>}
       <Modal visible={!!profileReview && !!visits.userId} onRequestClose={()=>setProfileReview(null)}>{profileReview && visits.userId && <Reviews place={profileReview} visits={visits} onBack={()=>setProfileReview(null)} onChanged={()=>setReviewVersion(n=>n+1)}/>}</Modal>

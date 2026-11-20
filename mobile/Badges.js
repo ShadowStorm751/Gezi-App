@@ -9,6 +9,7 @@ import {ActivityIndicator, KeyboardAvoidingView, Modal, Platform, useWindowDimen
 import Svg, {Defs, FeColorMatrix, Filter, G, Image as SvgImage} from 'react-native-svg';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {AsyncStorage, client, lang, project, t} from './client';
+import {sampleBadges} from './guestPreview';
 import {badgeImages} from './badgeImages';
 
 function Button({label,onPress,disabled,primary=false}) {
@@ -33,8 +34,12 @@ export function Login({onSignedIn, prompt}) {
       if (result.data.session) onSignedIn?.(result.data.session.user.id);
       if (register && !result.data.session) setMessage(t('E-postandaki bağlantıyı onayladıktan sonra giriş yap.',
         'Confirm the link in your email, then sign in.'));
-    } catch {
-      setMessage(register ? t('Kayıt tamamlanamadı. E-postanı ve parolanı kontrol et.','Could not register. Check your email and password.') :
+    } catch (error) {
+      if (error?.code==='email_not_confirmed') {
+        setMessage(t('E-postandaki onay bağlantısını açıp tekrar giriş yap.','Open the confirmation link in your email, then sign in again.'));
+      } else if (error?.code==='invalid_credentials') {
+        setMessage(t('E-posta veya parola hatalı. Bilgilerini kontrol edip tekrar dene.','Incorrect email or password. Check your details and try again.'));
+      } else setMessage(register ? t('Kayıt tamamlanamadı. E-postanı ve parolanı kontrol et.','Could not register. Check your email and password.') :
         t('Giriş yapılamadı. Bilgilerini ve bağlantını kontrol et.','Could not sign in. Check your credentials and connection.'));
     } finally { setBusy(false); }
   }
@@ -71,15 +76,22 @@ export function BadgeArt({badge,size=76}) {
   </View>;
 }
 
-export function BadgeLogin() {
-  return <View style={panel}>
-    <View style={styles.preview} accessible={false} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
-      {['first-step','ottoman-heritage','first-view'].map(slug=><View key={slug} style={styles.previewRing}>
-        <BadgeArt badge={{slug,earned_at:true}} size={48}/>
-      </View>)}
-    </View>
-    <Login/>
+export function GuestSignIn({prompt}) {
+  const [open,setOpen]=useState(false);
+  if (!client) return null;
+  return <View style={styles.stack}>
+    <Button label={open ? t('Girişi kapat','Close sign-in') : t('Hesabımla giriş yap','Sign in to my account')}
+      onPress={()=>setOpen(value=>!value)}/>
+    {open && <Login prompt={prompt}/>}
   </View>;
+}
+
+export function GuestBadges() {
+  return <>
+    <Text style={muted}>{t('Örnek koleksiyon · İlerleme değerleri örnektir.','Sample collection · Progress is illustrative.')}</Text>
+    <BadgeGrid badges={sampleBadges}/>
+    <GuestSignIn/>
+  </>;
 }
 
 function BadgeTile({badge,celebrate,width}) {
@@ -105,8 +117,6 @@ function BadgeTile({badge,celebrate,width}) {
 }
 
 export function Collection({userId,visitRevision}) {
-  const {width,fontScale}=useWindowDimensions();
-  const [filter,setFilter]=useState('all');
   const [version,setVersion] = useState(0);
   const [result,setResult] = useState(null);
   const [failed,setFailed] = useState(false);
@@ -134,15 +144,27 @@ export function Collection({userId,visitRevision}) {
     try { const {error} = await client.auth.signOut({scope:'local'}); setLogoutError(!!error); }
     catch { setLogoutError(true); }
   }
-  const badges=result?.badges || [];
+  return <>
+    {!failed && !result && <Skeleton/>}
+    {failed && <Text accessibilityLiveRegion="polite" style={muted}>{t('Rozetler yüklenemedi.','Could not load badges.')}</Text>}
+    {result && <BadgeGrid badges={result.badges} fresh={result.fresh}/>}
+    <View style={styles.tools}>
+      <Button label={t('Yenile','Refresh')} onPress={()=>setVersion(n=>n+1)}/>
+      <Button label={t('Çıkış yap','Sign out')} onPress={logout}/>
+    </View>
+    {logoutError && <Text style={muted}>{t('Çıkış yapılamadı. Tekrar dene.','Could not sign out. Try again.')}</Text>}
+  </>;
+}
+
+function BadgeGrid({badges,fresh=[]}) {
+  const {width,fontScale}=useWindowDimensions();
+  const [filter,setFilter]=useState('all');
   const earned=badges.filter(b=>b.earned_at).length;
   const visible=badges.filter(b=>filter==='all' || (filter==='earned' ? !!b.earned_at : !b.earned_at));
   const filters=[['all',t('Tümü','All')],['earned',t('Kazanılan','Earned')],['locked',t('Kilitli','Locked')]];
   const tileWidth=width<350 || fontScale>1.35 ? '100%' : width>=720 ? '32%' : '48.5%';
+  if (!badges.length) return <Text style={muted}>{t('Henüz rozet yok.','No badges yet.')}</Text>;
   return <>
-    {!failed && !result && <Skeleton/>}
-    {failed && <Text accessibilityLiveRegion="polite" style={muted}>{t('Rozetler yüklenemedi.','Could not load badges.')}</Text>}
-    {result && (badges.length ? <>
       <Reveal style={styles.collectionSummary}>
         <Text style={styles.count}>{earned} / {badges.length}</Text>
         <Text style={styles.summaryLabel}>{t('Kazanılan rozetler','Badges earned')}</Text>
@@ -150,16 +172,10 @@ export function Collection({userId,visitRevision}) {
       </Reveal>
       <Chips items={filters} value={filter} onChange={setFilter}/>
       {visible.length ? <View style={styles.grid}>{visible.map(badge=>
-        <BadgeTile key={badge.slug} badge={badge} width={tileWidth} celebrate={result.fresh.includes(badge.slug)}/>
+        <BadgeTile key={badge.slug} badge={badge} width={tileWidth} celebrate={fresh.includes(badge.slug)}/>
       )}</View> : <Text style={muted}>{filter==='earned'
         ? t('Henüz rozet kazanmadın.','You haven’t earned a badge yet.')
         : t('Tüm rozetleri kazandın.','You’ve earned every badge.')}</Text>}
-    </> : <Text style={muted}>{t('Henüz rozet yok.','No badges yet.')}</Text>)}
-    <View style={styles.tools}>
-      <Button label={t('Yenile','Refresh')} onPress={()=>setVersion(n=>n+1)}/>
-      <Button label={t('Çıkış yap','Sign out')} onPress={logout}/>
-    </View>
-    {logoutError && <Text style={muted}>{t('Çıkış yapılamadı. Tekrar dene.','Could not sign out. Try again.')}</Text>}
   </>;
 }
 
@@ -175,8 +191,8 @@ export default function Badges({onClose,visitRevision}) {
       <Button label={t('Kapat','Close')} onPress={onClose}/></View>
     <KeyboardAvoidingView style={{flex:1}} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={styles.stack}>
-        {!client ? <Text>{t('Rozetler için Supabase bağlantısı gerekiyor.','Connect to Supabase to view badges.')}</Text> :
-          user === undefined ? <ActivityIndicator/> : user ? <Collection key={user} userId={user} visitRevision={visitRevision}/> : <Login/>}
+        {client && user === undefined ? <ActivityIndicator/> : user
+          ? <Collection key={user} userId={user} visitRevision={visitRevision}/> : <GuestBadges/>}
       </ScrollView>
     </KeyboardAvoidingView>
   </SafeAreaView></Modal>;
@@ -188,8 +204,6 @@ const styles = StyleSheet.create({
   stack:{gap:space[2]}, button:{minHeight:44,padding:space[2],alignItems:'center',justifyContent:'center',borderRadius:radius.md},
   primaryButton:{backgroundColor:c.primary},link:{...type.label,color:c.primary},body:{...type.body,color:c.inkMuted},
   input:{...type.body,backgroundColor:c.surfaceRaised,borderRadius:radius.md,padding:space[3],color:c.ink,borderWidth:1,borderColor:c.line},
-  preview:{flexDirection:'row',justifyContent:'center',gap:space[2],paddingVertical:space[3],backgroundColor:c.goldSoft,borderRadius:radius.md},
-  previewRing:{borderWidth:2,borderColor:c.gold,borderRadius:30,padding:2,backgroundColor:c.surface},
   collectionSummary:{backgroundColor:c.goldSoft,padding:space[5],borderRadius:radius.lg,gap:space[2]},
   count:{...type.display,color:c.goldInk},summaryLabel:{...type.label,color:c.goldInk},
   grid:{flexDirection:'row',flexWrap:'wrap',justifyContent:'space-between',rowGap:space[3]},

@@ -6,6 +6,7 @@ import {client,lang,t} from './client';
 import {Photo, eyebrow, heading, km, muted, upper} from './PlaceUI';
 import {Action,Feedback,ui,useQuery} from './ScreenUI';
 import {Press,Reveal} from './Motion';
+import {sampleRoute} from './guestPreview';
 import {c,radius,shadow,space,type} from './theme';
 
 const modes = {
@@ -40,8 +41,14 @@ function RouteCard({route, featured, onPress}) {
     {!featured && <ChevronRight size={18} color={c.primary}/>}
   </Press>;
 }
-export function Routes({city,revision,onRoute}) {
-  const query = useQuery('list_routes',{city_slug:city,lang},revision);
+export function Routes({city,userId,visitRevision,onRoute}) {
+  const query = useQuery('list_routes',{city_slug:city,lang},[userId,visitRevision]);
+  if (!userId && !query.data?.length) return <>
+    {!!query.error && <Feedback query={query}/>}
+    {query.data && <Text style={muted}>{t('Bu şehirde henüz rota yok.','No routes in this city yet.')}</Text>}
+    <Text style={heading}>{t('Örnek rota · İstanbul','Sample route · Istanbul')}</Text>
+    <RouteCard featured route={sampleRoute} onPress={()=>onRoute(sampleRoute.slug)}/>
+  </>;
   if (!client) return <Text style={muted}>{t('Rotaları görmek için bağlantı gerekli.','Connect to view routes.')}</Text>;
   if (!query.data) return <Feedback query={query}/>;
   if (!query.data.length) return <Text style={muted}>{t('Bu şehirde henüz rota yok.','No routes in this city yet.')}</Text>;
@@ -77,16 +84,18 @@ function directions(stop) {
   Linking.openURL(url).catch(() => Alert.alert(t('Haritalar açılamadı.','Could not open Maps.')));
 }
 export function RouteDetail({slug,revision,onPlace}) {
-  const query = useQuery('route_detail',{route_slug:slug,lang},revision);
-  const route = query.data;
+  const preview=slug === sampleRoute.slug;
+  const query = useQuery(preview ? null : 'route_detail',{route_slug:slug,lang},revision);
+  const route = preview ? sampleRoute : query.data;
+  const openStop = preview ? stop=>Alert.alert(stop.name,stop.description) : onPlace;
   if (!route) return <><Feedback query={query}/>{!query.loading && !query.error && <Text>{t('Rota bulunamadı.','Route not found.')}</Text>}</>;
   const stops = [...route.stops].sort((a,b) => a.position-b.position);
   const points = stops.map(p => ({latitude:p.latitude,longitude:p.longitude}));
   const next = stops.find(p => !p.visited);
-  return <><Text style={ui.title}>{route.title}</Text><Text>{route.summary}</Text>
-    {!!points.length && <RouteMap key={slug} stops={stops} points={points} onPlace={onPlace}/>}
+  return <>{preview && <Text style={eyebrow}>{t('Örnek rota · İstanbul','Sample route · Istanbul')}</Text>}<Text style={ui.title}>{route.title}</Text><Text>{route.summary}</Text>
+    {!!points.length && <RouteMap key={slug} stops={stops} points={points} onPlace={openStop}/>}
     {next && <Action onPress={() => directions(next)}>{t('Yol tarifi','Directions')} · {next.name}</Action>}
-    {stops.map(p => <Action key={p.position} onPress={() => onPlace(p)}>{p.position}. {p.name}{p.visited ? ' ✓' : ''}</Action>)}</>;
+    {stops.map(p => <Action key={p.position} onPress={() => openStop(p)}>{p.position}. {p.name}{p.visited ? ' ✓' : ''}</Action>)}</>;
 }
 function RouteMap({stops,points,onPlace}) {
   const map = React.useRef(null);
