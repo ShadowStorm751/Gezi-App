@@ -40,6 +40,11 @@ select (public.place_detail(p.id, 'tr') ->> 'children_total') as efes_ic_yer,
 from public.places p where p.slug = 'efes';
 select public.place_detail(p.id, 'tr') -> 'parent' as celsus_ana_yer
 from public.places p where p.slug = 'celsus-kutuphanesi';
+-- main'deki alanlar korunuyor mu (rating, dönem etiketi); yeni dönemlerin İngilizcesi
+select p.slug, public.place_detail(p.id, 'en') ? 'rating' as rating_var,
+       public.place_detail(p.id, 'en') ->> 'period' as donem_en,
+       public.place_detail(p.id, 'en') ->> 'period_code' as donem_kodu
+from public.places p where p.slug in ('efes', 'karamanoglu-camii', 'altikapi-turbesi') order by p.slug;
 select ci.slug, jsonb_array_length(public.city_pack(ci.slug, 'tr') -> 'places') as paket_yer,
        (select count(*) from jsonb_array_elements(public.city_pack(ci.slug, 'tr') -> 'places') e
         where (e ->> 'child_count')::int > 0) as paket_ana_yer
