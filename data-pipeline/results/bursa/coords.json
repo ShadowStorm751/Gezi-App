@@ -3,7 +3,8 @@
   "uyumlu": 46,
   "yaklasik_duzeltildi": 7,
   "wikidata_yok": 13,
-  "kontrol": 4
+  "kontrol": 4,
+  "yaklasik_dogrulanamadi": 1
  },
  "yerler": {
   "bursa-ulu-camii": {
@@ -938,6 +939,17 @@
    "arama_ile": false,
    "mesafe_m": null,
    "durum": "wikidata_yok"
+  },
+  "gemlik-kursunlu-plaji": {
+   "osm": [
+    40.3633,
+    29.031
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "yaklasik_dogrulanamadi"
   },
   "suuctu-selalesi": {
    "osm": [
