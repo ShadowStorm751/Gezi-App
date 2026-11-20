@@ -1,5 +1,8 @@
+import Animated,{useSharedValue,useAnimatedStyle,useReducedMotion,withSequence,withSpring,withTiming} from 'react-native-reanimated';
+import {Progress} from './Motion';
+import {c} from './theme';
 import React, {useEffect, useRef, useState} from 'react';
-import {ActivityIndicator, Animated, KeyboardAvoidingView, Modal, Platform, Pressable,
+import {ActivityIndicator, KeyboardAvoidingView, Modal, Platform, Pressable,
   ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
 import Svg, {Defs, FeColorMatrix, Filter, G, Image as SvgImage} from 'react-native-svg';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -46,46 +49,40 @@ export function Login({onSignedIn, prompt}) {
   </View>;
 }
 
-export function BadgeArt({badge}) {
+export function BadgeArt({badge,size=76}) {
   const local = badgeImages[badge.slug];
-  const remote = badge.badge_path && client.storage.from('badges').getPublicUrl(badge.badge_path).data.publicUrl;
+  const remote = badge.badge_path && client?.storage.from('badges').getPublicUrl(badge.badge_path).data.publicUrl;
   const source = local || remote;
   const [loaded,setLoaded] = useState(false);
   const locked = !badge.earned_at;
-  return <View accessible={false} style={[styles.art,locked && {opacity:0.4}]}>
+  return <View accessible={false} style={[styles.art,{width:size,height:size},locked && {opacity:0.4}]}>
     {!loaded && <Text style={styles.star}>✦</Text>}
-    {!!source && <Svg width={76} height={76}>
+    {!!source && <Svg width={size} height={size}>
       <Defs><Filter id="gray" x="0%" y="0%" width="100%" height="100%">
         <FeColorMatrix type="saturate" values="0"/>
       </Filter></Defs>
       <G filter={locked ? 'url(#gray)' : undefined}>
-        <SvgImage href={source} x={0} y={0} width={76} height={76} onLoad={() => setLoaded(true)}/>
+        <SvgImage href={source} x={0} y={0} width={size} height={size} onLoad={() => setLoaded(true)}/>
       </G>
     </Svg>}
   </View>;
 }
 
 function BadgeRow({badge,celebrate}) {
-  const scale = useRef(new Animated.Value(1)).current;
-  useEffect(() => {
-    if (!celebrate) return;
-    const motion = Animated.sequence([
-      Animated.timing(scale,{toValue:1.15,duration:200,useNativeDriver:true}),
-      Animated.spring(scale,{toValue:1,useNativeDriver:true})
-    ]);
-    motion.start();
-    return () => motion.stop();
-  },[celebrate,scale]);
+  const scale=useSharedValue(1),reduce=useReducedMotion();
+  useEffect(()=>{scale.value=celebrate&&!reduce?withSequence(withTiming(1.15,{duration:200}),withSpring(1)):1;},[celebrate,reduce]);
+  const motion=useAnimatedStyle(()=>({transform:[{scale:scale.value}]}));
   return <View style={styles.row}>
-    <Animated.View style={{transform:[{scale}]}}><BadgeArt key={badge.slug + ':' + badge.badge_path} badge={badge}/></Animated.View>
+    <Animated.View style={[{width:84,height:84,borderRadius:42,borderWidth:3,borderColor:badge.earned_at?c.gold:c.line,backgroundColor:c.surfaceSunken,alignItems:"center",justifyContent:"center"},motion]}><BadgeArt key={badge.slug + ':' + badge.badge_path} badge={badge}/></Animated.View>
     <View style={styles.copy}><Text style={styles.name}>{badge.name}</Text>
       {!!badge.description && <Text style={styles.body}>{badge.description}</Text>}
+      {!badge.earned_at && badge.target>0 && <Progress value={badge.progress/badge.target}/>}
       <Text style={styles.progress}>{badge.earned_at ? t('Kazanıldı','Earned') : badge.progress + ' / ' + badge.target}</Text>
     </View>
   </View>;
 }
 
-function Collection({userId,visitRevision}) {
+export function Collection({userId,visitRevision}) {
   const [version,setVersion] = useState(0);
   const [result,setResult] = useState(null);
   const [failed,setFailed] = useState(false);
@@ -144,12 +141,12 @@ export default function Badges({onClose,visitRevision}) {
 }
 
 const styles = StyleSheet.create({
-  page:{flex:1,backgroundColor:'#FAF7F0',padding:18}, header:{flexDirection:'row',justifyContent:'space-between',alignItems:'center'},
-  title:{fontSize:32,color:'#143C38',fontFamily:Platform.select({ios:'Georgia',android:'serif'})},
+  page:{flex:1,backgroundColor:c.surface,padding:18}, header:{flexDirection:'row',justifyContent:'space-between',alignItems:'center'},
+  title:{fontSize:32,color:c.ink,fontFamily:Platform.select({ios:'Georgia',android:'serif'})},
   stack:{padding:10,gap:12}, button:{minHeight:44,padding:10,justifyContent:'center'},
-  link:{color:'#195449',fontWeight:'700',fontSize:16}, body:{color:'#40594F',fontSize:15,lineHeight:21},
-  input:{backgroundColor:'white',borderRadius:8,padding:12,color:'#143C38',borderWidth:1,borderColor:'#BCC8BD'},
-  row:{flexDirection:'row',alignItems:'center',gap:12,paddingVertical:12,borderBottomWidth:1,borderColor:'#D9D8CC'},
-  art:{width:76,height:76,alignItems:'center',justifyContent:'center'}, star:{position:'absolute',fontSize:38,color:'#62776C'},
-  copy:{flex:1,gap:4}, name:{fontSize:18,fontWeight:'700',color:'#143C38'}, progress:{color:'#355C50',fontWeight:'600'}
+  link:{color:c.primary,fontWeight:'700',fontSize:16}, body:{color:c.inkMuted,fontSize:15,lineHeight:21},
+  input:{backgroundColor:c.surfaceRaised,borderRadius:8,padding:12,color:c.ink,borderWidth:1,borderColor:c.line},
+  row:{flexDirection:'row',alignItems:'center',gap:12,paddingVertical:12,borderBottomWidth:1,borderColor:c.line},
+  art:{width:76,height:76,alignItems:'center',justifyContent:'center'}, star:{position:'absolute',fontSize:38,color:c.inkMuted},
+  copy:{flex:1,gap:4}, name:{fontSize:18,fontWeight:'700',color:c.ink}, progress:{color:c.primary,fontWeight:'600'}
 });

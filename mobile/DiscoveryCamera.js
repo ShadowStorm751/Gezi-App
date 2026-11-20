@@ -1,3 +1,4 @@
+import {c} from './theme';
 import {lang,t} from './client';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {AppState, BackHandler, Linking, Pressable, StyleSheet, Text, View} from 'react-native';
@@ -152,10 +153,10 @@ export default function DiscoveryCamera({places, trackedId, onStopTracking, onSe
   </View>;
 }
 const styles = StyleSheet.create({
-  screen:{flex:1,backgroundColor:'#112b2c'}, top:{flexDirection:'row',alignItems:'flex-start',paddingHorizontal:12,paddingTop:6},
+  screen:{flex:1,backgroundColor:c.cameraBackground}, top:{flexDirection:'row',alignItems:'flex-start',paddingHorizontal:12,paddingTop:6},
   side:{flex:1,alignItems:'flex-start',paddingTop:6},
-  control:{paddingVertical:12,paddingHorizontal:16,backgroundColor:'#173b39ed',borderRadius:24},
-  center:{margin:24,marginTop:'25%',gap:14}, title:{fontSize:30,color:'white',fontFamily:'serif'},
-  light:{fontSize:16,color:'#faf9ef'}, bubble:{position:'absolute',backgroundColor:'#113638ed',borderWidth:1.5,borderColor:'#92e8cb',borderRadius:26,paddingVertical:9,paddingHorizontal:16},
-  place:{color:'#fff9e9',fontSize:17,fontWeight:'600'}, bottom:{position:'absolute',bottom:100,left:16,right:16,gap:6,backgroundColor:'#102b2ae8',borderRadius:16,padding:15}
+  control:{paddingVertical:12,paddingHorizontal:16,backgroundColor:c.cameraPanel,borderRadius:24},
+  center:{margin:24,marginTop:'25%',gap:14}, title:{fontSize:30,color:c.surfaceRaised,fontFamily:'serif'},
+  light:{fontSize:16,color:c.surface}, bubble:{position:'absolute',backgroundColor:c.cameraPanel,borderWidth:1.5,borderColor:c.primarySoft,borderRadius:26,paddingVertical:9,paddingHorizontal:16},
+  place:{color:c.surface,fontSize:17,fontWeight:'600'}, bottom:{position:'absolute',bottom:100,left:16,right:16,gap:6,backgroundColor:c.cameraPanel,borderRadius:16,padding:15}
 });

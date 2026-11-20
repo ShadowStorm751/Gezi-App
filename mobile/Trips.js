@@ -1,3 +1,4 @@
+import {c} from './theme';
 import React from 'react';
 import {Alert, Linking, Platform, Pressable, ScrollView, Text, View} from 'react-native';
 import MapView, {Marker,Polyline} from 'react-native-maps';
@@ -44,7 +45,7 @@ export function Recommendations({origin,userId,revision,onPlace,onRoute}) {
     {!!feed?.almost_badges.length && <><Text style={ui.heading}>{t('Rozete az kaldı','Badges within reach')}</Text>
       <ScrollView horizontal contentContainerStyle={{gap:8}}>{feed.almost_badges.map(b => <View style={[ui.card,{width:160}]} key={b.slug}>
         <BadgeArt badge={b}/><Text style={ui.label}>{b.name} · {b.progress}/{b.target}</Text>
-        <View style={{height:5,backgroundColor:'#D2DAD0'}}><View style={{height:5,backgroundColor:'#22514B',width:Math.min(100,100*b.progress/Math.max(1,b.target))+'%'}}/></View>
+        <View style={{height:5,backgroundColor:c.line}}><View style={{height:5,backgroundColor:c.primary,width:Math.min(100,100*b.progress/Math.max(1,b.target))+'%'}}/></View>
       </View>)}</ScrollView></>}
   </>;
 }
@@ -76,10 +77,11 @@ export function RouteDetail({slug,revision,onPlace}) {
 }
 function RouteMap({stops,points,onPlace}) {
   const map = React.useRef(null);
+  const offsets=points.map((p,i)=>{const cluster=points.map((point,index)=>({point,index})).filter(({point})=>Math.hypot((point.latitude-p.latitude)*111000,(point.longitude-p.longitude)*84000)<55);const pos=cluster.findIndex(({index})=>index===i);const angle=2*Math.PI*pos/cluster.length;return cluster.length>1?{x:18*Math.cos(angle),y:18*Math.sin(angle)}:{x:0,y:0};});
   return <MapView ref={map} style={ui.map} initialRegion={{...points[0],latitudeDelta:0.025,longitudeDelta:0.025}}
     onMapReady={() => points.length > 1 && map.current?.fitToCoordinates(points,{edgePadding:{top:35,left:35,bottom:35,right:35},animated:false})}>
-    {points.length > 1 && <Polyline coordinates={points} strokeColor="#B44721" strokeWidth={3}/>}
-    {stops.map((p,i) => <Marker key={p.position} coordinate={points[i]} title={p.name} onPress={() => onPlace(p)}>
-      <View style={{borderRadius:15,padding:6,minWidth:28,backgroundColor:p.visited ? '#22514B' : '#A43C1F'}}>
-        <Text style={{color:'white',fontWeight:'700',textAlign:'center'}}>{p.position}</Text></View></Marker>)}</MapView>;
+    {points.length > 1 && <Polyline coordinates={points} strokeColor={c.accent} strokeWidth={3}/>}
+    {stops.map((p,i) => <Marker key={p.position} coordinate={points[i]} centerOffset={offsets[i]} anchor={{x:.5-offsets[i].x/40,y:.5-offsets[i].y/40}} title={p.name} onPress={() => onPlace(p)}>
+      <View style={{borderRadius:15,padding:6,minWidth:28,backgroundColor:p.visited ? c.primary : c.accent}}>
+        <Text style={{color:c.surfaceRaised,fontWeight:'700',textAlign:'center'}}>{p.position}</Text></View></Marker>)}</MapView>;
 }

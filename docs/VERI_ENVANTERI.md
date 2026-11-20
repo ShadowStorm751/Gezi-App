@@ -41,6 +41,11 @@ Son güncelleme: 2026-11-20 (yer değerlendirmeleri eklendi).
 | Oturum belirteci (giriş) | Girişli kalmak | Çıkış ya da uygulamayı silme |
 | Şehir paketi (yerler, fotoğraf adresleri) | Çevrimdışı kullanım | Uygulamayı silme |
 | Ziyaret tarihleri ve kazanılan rozetler (hesap bazında önbellek) | Hızlı gösterim | Çıkışta / hesap silmede temizlenir |
+| Kaydedilen yer kimlikleri (hesap veya misafir bazında) | Yer detayındaki kalp seçimini hatırlamak | Kaydı kaldırma, hesap silme veya uygulamayı silme |
+
+Ziyaret fotoğrafları açık yayın onayıyla gönderilir. Profil → Fotoğraflarım ekranında inceleme durumu ve yönetici notu görülebilir, gönderi silinebilir.
+
+Yer detayından yıldız ve isteğe bağlı not gönderilir. Puan ortalamaya katılır, not ancak onaylanınca diğer kullanıcılara gösterilir. Profil → Değerlendirmelerim üzerinden düzenleme ve silme yapılır.
 
 ## Cihaz izinleri
 

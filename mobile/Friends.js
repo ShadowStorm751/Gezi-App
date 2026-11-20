@@ -1,3 +1,4 @@
+import {c} from './theme';
 import React, {useState} from 'react';
 import {Alert, Text, TextInput, View} from 'react-native';
 import {t} from './client';
@@ -78,7 +79,7 @@ export default function Friends({onProfile}) {
     </> : <>
       <View style={ui.row}>{Object.entries(periods).map(([id,label]) =>
         <Action key={id} selected={id === period} onPress={() => setPeriod(id)}>{t(...label)}</Action>)}</View><Feedback query={board}/>
-      {board.data?.entries.map((p,i) => <View key={p.username || i} style={[ui.card,p.is_me && {borderColor:'#22514B',borderWidth:2}]}>
+      {board.data?.entries.map((p,i) => <View key={p.username || i} style={[ui.card,p.is_me && {borderColor:c.primary,borderWidth:2}]}>
         <View style={ui.row}><Avatar path={p.avatar_path}/><Text style={ui.label}>{p.rank}. {p.username}{p.is_me ? t(' (sen)',' (you)') : ''}</Text></View>
         <Text>{p.places} {t('yer','places')}</Text></View>)}</>}
     {friends.data?.friends.length === 0 && <Text>{t('Arkadaşlarını ekle, kim daha çok geziyor görün.','Add friends to see who explores the most.')}</Text>}

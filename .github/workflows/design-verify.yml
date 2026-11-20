@@ -15,9 +15,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - run: npm install --package-lock-only --ignore-scripts --no-fund --no-audit
-      - run: |
-          node -e "const f=require('fs'),z=require('zlib');let b=z.gzipSync(f.readFileSync('package-lock.json')).toString('base64');for(let i=0;i<b.length;i+=1800)console.log('LOCKSEG '+b.slice(i,i+1800));"
       - run: npm ci --ignore-scripts --no-fund --no-audit
       - run: npm test
       - run: npx --no-install expo export --platform ios --platform android --output-dir "$RUNNER_TEMP/build"

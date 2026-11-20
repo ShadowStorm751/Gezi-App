@@ -64,7 +64,7 @@ export default function useVisits() {
       setHistory(current => current?.userId === id ? null : current);
     }
     await writes.current;
-    await AsyncStorage.multiRemove(['gezi:visits:'+project+':'+id,'gezi:earned:'+project+':'+id]);
+    await AsyncStorage.multiRemove(['gezi:visits:'+project+':'+id,'gezi:earned:'+project+':'+id,'gezi:saved:'+project+':'+id]);
   }
   return {userId,owner,revision,record,clearLocal,dates:history?.userId === userId ? history.dates : {}};
 }

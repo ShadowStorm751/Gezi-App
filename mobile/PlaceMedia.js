@@ -1,3 +1,4 @@
+import {c} from './theme';
 import React, {useState} from 'react';
 import {Alert, Image, Linking, StyleSheet, Text, View} from 'react-native';
 import {webUrl} from './catalog';
@@ -21,7 +22,7 @@ export function PlaceThumbnail({place}) {
   if (!place.thumbnail || failed === place.thumbnail) return <Placeholder compact place={place}/>;
   return <View style={styles.thumb}>
     <Image source={{uri:place.thumbnail}} style={styles.small} onError={() => setFailed(place.thumbnail)}/>
-    <Text style={styles.smallCredit}>{t('Foto: Wikimedia Commons','Photo: Wikimedia Commons')}</Text>
+    <Text numberOfLines={1} adjustsFontSizeToFit style={styles.smallCredit}>{t('Foto: Wikimedia Commons','Photo: Wikimedia Commons')}</Text>
   </View>;
 }
 
@@ -55,8 +56,8 @@ export function PlaceGallery({place}) {
 
 const styles = StyleSheet.create({
   figure:{gap:5}, thumb:{width:82,gap:3}, small:{width:82,height:58,borderRadius:8},
-  smallCredit:{fontSize:10,lineHeight:12,color:'#455E54'}, credit:{fontSize:13,color:'#455E54'},
-  large:{width:'100%',height:190,borderRadius:12,backgroundColor:'#E6E9DE'},
-  placeholder:{alignItems:'center',justifyContent:'center',backgroundColor:'#E6E9DE',gap:6},
-  link:{textDecorationLine:'underline',color:'#22564D'}
+  smallCredit:{fontSize:10,lineHeight:12,color:c.inkMuted}, credit:{fontSize:13,color:c.inkMuted},
+  large:{width:'100%',height:190,borderRadius:12,backgroundColor:c.surfaceSunken},
+  placeholder:{alignItems:'center',justifyContent:'center',backgroundColor:c.surfaceSunken,gap:6},
+  link:{textDecorationLine:'underline',color:c.primary}
 });
