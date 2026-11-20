@@ -21,8 +21,8 @@ join public.categories c on c.slug = v.slug
 on conflict (category_id, lang) do nothing;
 
 -- Yerler --------------------------------------------------------------------------
--- Otomatik üretildi: data-pipeline/pipeline.py build (2026-11-20 13:53)
--- 123 yer; hepsi gizli (is_published = false); 123 tanesinin TR+EN kısa açıklaması dolu.
+-- Otomatik üretildi: data-pipeline/pipeline.py build (2026-11-20 16:37)
+-- 124 yer; hepsi gizli (is_published = false); 124 tanesinin TR+EN kısa açıklaması dolu.
 -- Tekrar çalıştırılabilir: aynı slug'lı yerler güncellenir, kopya oluşmaz.
 
 insert into public.places
@@ -58,6 +58,7 @@ from (values
   ('v-sarayi', 'palace', 39.132292, 27.184753, 30, 'Antik', null, null, 'node/10788667233', null),
   ('efes-muzesi', 'museum', 37.948994, 27.367854, 100, 'Cumhuriyet', null, 'Q1346784', 'node/785102629', null),
   ('izmir-arkeoloji-muzesi', 'museum', 38.413935, 27.128067, 100, 'Cumhuriyet', null, 'Q6102069', 'node/4815186885', null),
+  ('izmir-kultur-sanat-fabrikasi', 'museum', 38.436078, 27.148340, 80, 'Cumhuriyet', null, null, 'way/1167760456', null),
   ('izmir-agorasi', 'museum', 38.419036, 27.138741, 100, 'Antik', null, 'Q2827071', 'way/256317190', null),
   ('tcg-pirireis-s-343', 'museum', 38.412341, 27.034766, 100, 'Cumhuriyet', null, 'Q4817276', 'way/173066986', null),
   ('izmir-kadin-muzesi', 'museum', 38.421097, 27.142324, 100, 'Cumhuriyet', null, 'Q21526565', 'way/866758590', null),
@@ -70,7 +71,6 @@ from (values
   ('cakiraga-konagi', 'museum', 38.256005, 28.065383, 35, 'Osmanlı', null, 'Q6037478', 'way/1289268763', null),
   ('cesme-muzesi', 'museum', 38.323545, 26.303197, 100, 'Cumhuriyet', null, 'Q28221105', 'node/2435585670', null),
   ('odemis-muzesi', 'museum', 38.227881, 27.988805, 100, 'Cumhuriyet', null, 'Q28220992', 'node/1256873528', null),
-  ('izmir-tarih-ve-sanat-muzesi', 'museum', 38.427444, 27.142694, 60, 'Cumhuriyet', null, 'Q6035320', null, null),
   ('ahmet-piristina-kent-arsivi-ve-muzesi', 'museum', 38.424929, 27.137932, 100, 'Osmanlı', null, 'Q6047798', 'way/955410254', null),
   ('key-museum', 'museum', 38.201540, 27.348792, 100, 'Cumhuriyet', null, 'Q25472494', 'way/155462550', null),
   ('kadifekale', 'fortress', 38.413784, 27.144956, 150, null, null, 'Q4810717', 'node/1936293144', null),
@@ -82,6 +82,7 @@ from (values
   ('ayasuluk-kalesi', 'fortress', 37.955505, 27.368178, 150, 'Bizans', null, 'Q206257', 'way/186411898', null),
   ('izmir-saat-kulesi', 'tower', 38.418875, 27.128695, 60, 'Osmanlı', 1901, 'Q3696052', 'way/863380997', null),
   ('izmir-parasut-kulesi', 'tower', 38.427464, 27.144173, 35, 'Cumhuriyet', null, 'Q6014111', 'node/267643128', null),
+  ('ataturk-acik-hava-tiyatrosu', 'monument', 38.428582, 27.148142, 60, 'Cumhuriyet', null, null, 'way/501242101', null),
   ('tarihi-asansor', 'tower', 38.408798, 27.117489, 60, 'Osmanlı', 1907, 'Q4803558', null, null),
   ('ataturk-maski', 'monument', 38.406035, 27.145592, 60, 'Cumhuriyet', null, 'Q48816032', 'node/8006698029', null),
   ('cumhuriyet-meydani', 'monument', 38.428935, 27.134385, 60, 'Cumhuriyet', 1932, 'Q6034758', 'way/24762381', null),
@@ -211,10 +212,10 @@ from (values
   ('etz-hayim-sinagogu', 'en', 'Etz Hayim Synagogue', 'One of Izmir''s oldest synagogues on Havra Street; its name means ''Tree of Life''.', null),
   ('algazi-sinagogu', 'tr', 'Algazi Sinagogu', 'Havra Sokağı''nda 18. yüzyıldan kalan, restore edilmiş sinagog.', null),
   ('algazi-sinagogu', 'en', 'Algazi Synagogue', 'A restored 18th-century synagogue on Havra Street.', null),
-  ('latife-hanim-kosku-ani-evi', 'tr', 'Latife Hanım Köşkü Anı Evi', 'Göztepe''de, Atatürk''ün 1922''de kaldığı ve Latife Hanım ile tanıştığı köşk; bugün anı evi.', null),
-  ('latife-hanim-kosku-ani-evi', 'en', 'Latife Hanım Memorial House', 'The mansion in Göztepe where Atatürk stayed in 1922 and met Latife Hanım; now a memorial house.', null),
-  ('forbes-kosku', 'tr', 'Forbes Köşkü', 'Buca''da 19. yüzyılda Levanten Forbes ailesi için yapılan, bahçeli büyük köşk.', null),
-  ('forbes-kosku', 'en', 'Forbes Mansion', 'A large 19th-century mansion with gardens in Buca, built for the Levantine Forbes family.', null),
+  ('latife-hanim-kosku-ani-evi', 'tr', 'Latife Hanım Köşkü Anı Evi', 'Karşıyaka''da, Latife Hanım''ın ailesinin yazlık köşkü; Zübeyde Hanım son günlerini burada geçirdi. Bugün anı evi.', null),
+  ('latife-hanim-kosku-ani-evi', 'en', 'Latife Hanım Memorial House', 'The summer mansion of Latife Hanım''s family in Karşıyaka, where Atatürk''s mother spent her last days; now a memorial house.', null),
+  ('forbes-kosku', 'tr', 'Forbes Köşkü', 'Buca''da, Levanten Forbes ailesinin 1908''de yaptırdığı ve 1910''da yangından sonra yeniden inşa edilen köşk.', null),
+  ('forbes-kosku', 'en', 'Forbes Mansion', 'A mansion in Buca built in 1908 for the Levantine Forbes family and rebuilt after a fire in 1910.', null),
   ('bizans-sarayi', 'tr', 'Bizans Sarayı', 'Efes''te, geç dönem Bizans yöneticilerine ait olduğu düşünülen büyük konut kalıntısı.', null),
   ('bizans-sarayi', 'en', 'Byzantine Palace', 'Remains of a large residence in Ephesus, thought to have housed late Byzantine officials.', null),
   ('v-sarayi', 'tr', 'V Sarayı', 'Pergamon akropolünde, Bergama krallarına ait saraylardan birinin kalıntısı.', null),
@@ -223,6 +224,8 @@ from (values
   ('efes-muzesi', 'en', 'Ephesus Archaeological Museum', 'The museum in Selçuk displaying finds from the Ephesus excavations, best known for its statues of Artemis.', null),
   ('izmir-arkeoloji-muzesi', 'tr', 'İzmir Arkeoloji Müzesi', 'Bahribaba''da, İzmir ve çevresindeki antik kentlerden çıkan heykel, lahit ve sikkeleri sergileyen müze.', null),
   ('izmir-arkeoloji-muzesi', 'en', 'İzmir Archaeological Museum', 'A museum in Bahribaba showing statues, sarcophagi and coins from ancient cities around Izmir.', null),
+  ('izmir-kultur-sanat-fabrikasi', 'tr', 'İzmir Kültür Sanat Fabrikası', 'Alsancak''ta, eski tütün fabrikasında açılan; arkeoloji, etnografya ve resim-heykel müzelerini bir araya getiren kültür merkezi.', null),
+  ('izmir-kultur-sanat-fabrikasi', 'en', 'İzmir Culture and Art Factory', 'A cultural complex in a former tobacco factory in Alsancak, bringing together archaeology, ethnography and fine arts museums.', null),
   ('izmir-agorasi', 'tr', 'İzmir Agorası', 'Antik Smyrna''nın agorası; Roma dönemi sütunları ve tonozlu bodrum katı açık hava müzesi olarak gezilebiliyor.', null),
   ('izmir-agorasi', 'en', 'Agora of Smyrna', 'The agora of ancient Smyrna; its Roman colonnades and vaulted basements can be visited as an open-air museum.', null),
   ('tcg-pirireis-s-343', 'tr', 'TCG Pirireis (S-343)', 'İnciraltı''nda, 1940''larda yapılıp Türk Deniz Kuvvetleri''nde hizmet veren ve müze gemisi olan denizaltı.', null),
@@ -247,8 +250,6 @@ from (values
   ('cesme-muzesi', 'en', 'Çeşme Museum', 'A museum inside Çeşme Castle covering local archaeology and the Battle of Çeşme.', null),
   ('odemis-muzesi', 'tr', 'Ödemiş Müzesi', 'Ödemiş''te, antik Hypaipa ve çevresinden çıkan eserleri sergileyen müze.', null),
   ('odemis-muzesi', 'en', 'Ödemiş Museum', 'A museum in Ödemiş showing finds from ancient Hypaipa and the surrounding area.', null),
-  ('izmir-tarih-ve-sanat-muzesi', 'tr', 'İzmir Tarih ve Sanat Müzesi', 'Kültürpark''ın içinde, heykel, seramik ve değerli eserlerin üç ayrı binada sergilendiği müze.', null),
-  ('izmir-tarih-ve-sanat-muzesi', 'en', 'İzmir Museum of History and Art', 'A museum inside Kültürpark with sculpture, ceramics and precious objects in three buildings.', null),
   ('ahmet-piristina-kent-arsivi-ve-muzesi', 'tr', 'Ahmet Piriştina Kent Arşivi ve Müzesi', 'Eski itfaiye binasında, İzmir''in kent tarihini fotoğraf ve belgelerle anlatan arşiv-müze.', null),
   ('ahmet-piristina-kent-arsivi-ve-muzesi', 'en', 'Ahmet Piriştina City Archives and Museum', 'An archive and museum in the old fire station, telling Izmir''s city history through photos and documents.', null),
   ('key-museum', 'tr', 'Key Museum', 'Torbalı''da klasik otomobil, motosiklet ve uçakların sergilendiği büyük ulaşım müzesi.', null),
@@ -271,6 +272,8 @@ from (values
   ('izmir-saat-kulesi', 'en', 'İzmir Clock Tower', 'The clock tower on Konak Square, built in 1901 and the symbol of Izmir.', null),
   ('izmir-parasut-kulesi', 'tr', 'İzmir Paraşüt Kulesi', 'Kültürpark''ta 1930''larda yapılan paraşüt atlama kulesi; şehrin ilginç yapılarından.', null),
   ('izmir-parasut-kulesi', 'en', 'İzmir Parachute Tower', 'A parachute training tower built in Kültürpark in the 1930s, one of the city''s curiosities.', null),
+  ('ataturk-acik-hava-tiyatrosu', 'tr', 'Kültürpark Açıkhava Tiyatrosu', 'Kültürpark''ın içinde, fuar dönemlerinde konserlere ev sahipliği yapan büyük açık hava tiyatrosu.', null),
+  ('ataturk-acik-hava-tiyatrosu', 'en', 'Kültürpark Open-Air Theatre', 'The large open-air theatre in Kültürpark, home to concerts during the fair season.', null),
   ('tarihi-asansor', 'tr', 'Tarihi Asansör', 'Karataş''ta, 1907''de yapılan ve iki mahalleyi bağlayan asansör; üstündeki terastan körfez manzarası.', 'Gün batımı'),
   ('tarihi-asansor', 'en', 'Historical Elevator', 'An elevator built in 1907 in Karataş to link two neighbourhoods; its rooftop terrace overlooks the bay.', 'Sunset'),
   ('ataturk-maski', 'tr', 'Atatürk Maskı', 'Kadifekale yamacında, şehrin birçok yerinden görülen dev Atatürk maskı.', null),
@@ -430,6 +433,7 @@ update public.places c
 set parent_place_id = pp.id
 from (values
   ('algazi-sinagogu', 'kemeralti-carsisi'),
+  ('ataturk-acik-hava-tiyatrosu', 'kulturpark'),
   ('aydinoglu-mehmet-bey-camii', 'birgi'),
   ('basdurak-camii', 'kemeralti-carsisi'),
   ('bergama-kutuphanesi', 'pergamon'),
@@ -448,7 +452,6 @@ from (values
   ('imparatorlar-tapinagi-ve-sunagi-ile-domitianus-terasi', 'efes'),
   ('izmir-kus-cenneti', 'gediz-deltasi'),
   ('izmir-parasut-kulesi', 'kulturpark'),
-  ('izmir-tarih-ve-sanat-muzesi', 'kulturpark'),
   ('kestanepazari-camii', 'kemeralti-carsisi'),
   ('kizlaragasi-hani', 'kemeralti-carsisi'),
   ('memmius-yapisi', 'efes'),
@@ -471,7 +474,7 @@ insert into public.achievements (slug, rule, sort_order) values
   ('efes-kesif', '{"type": "place_set", "places": ["efes", "bizans-sarayi", "bouleuterion-odeion", "celsus-kutuphanesi", "efes-tiyatrosu", "efes-varius-hamami", "hadrianus-tapinagi-embolos", "imparatorlar-tapinagi-ve-sunagi-ile-domitianus-terasi", "memmius-yapisi", "meryem-kilisesi", "prytaneion-belediye-sarayi", "traianus-cesmesi"]}'::jsonb, 101),
   ('gediz-deltasi-kesif', '{"type": "place_set", "places": ["gediz-deltasi", "camalti-tuzlasi", "izmir-kus-cenneti"]}'::jsonb, 102),
   ('kemeralti-carsisi-kesif', '{"type": "place_set", "places": ["kemeralti-carsisi", "algazi-sinagogu", "basdurak-camii", "etz-hayim-sinagogu", "hisar-camii", "kestanepazari-camii", "kizlaragasi-hani", "sadirvanalti-camii", "salepcioglu-camii", "sinyora-giveret-sinagogu"]}'::jsonb, 103),
-  ('kulturpark-kesif', '{"type": "place_set", "places": ["kulturpark", "izmir-parasut-kulesi", "izmir-tarih-ve-sanat-muzesi"]}'::jsonb, 104),
+  ('kulturpark-kesif', '{"type": "place_set", "places": ["kulturpark", "ataturk-acik-hava-tiyatrosu", "izmir-parasut-kulesi"]}'::jsonb, 104),
   ('pergamon-kesif', '{"type": "place_set", "places": ["pergamon", "bergama-kutuphanesi", "bergama-zeus-sunagi", "pergamon-gymnasium-alani", "trajan-tapinagi", "v-sarayi"]}'::jsonb, 105)
 on conflict (slug) do update set rule = excluded.rule;
 
@@ -494,7 +497,7 @@ from (values
 join public.achievements a on a.slug = v.slug
 on conflict (achievement_id, lang) do update set name = excluded.name, description = excluded.description;
 
--- İzmir fotoğrafları: Wikimedia Commons, serbest lisanslı (110 yer).
+-- İzmir fotoğrafları: Wikimedia Commons, serbest lisanslı (111 yer).
 -- Üreten: data-pipeline/content/build_city.py (kaynak: data-pipeline/results/izmir/photos.json).
 -- Mobil, fotoğrafın altında author ve license bilgisini göstermelidir (lisans koşulu).
 
@@ -502,7 +505,7 @@ delete from public.place_photos ph
 using public.places p
 where ph.place_id = p.id
   and ph.url like 'https://%.wikimedia.org/%'
-  and p.slug in ('ahmet-piristina-kent-arsivi-ve-muzesi', 'akarca-sahili', 'alacati', 'alacati-bay-surf-beach', 'algazi-sinagogu', 'altinkum-plaji', 'arkas-sanat-merkezi', 'artemis-tapinagi', 'asik-veysel-rekreasyon-alani', 'ataturk-maski', 'ayasuluk-kalesi', 'aydinoglu-mehmet-bey-camii', 'ayios-haralambos-kilisesi', 'aziz-polikarp-kilisesi', 'aziz-yuhanna-katedrali', 'basdurak-camii', 'belevi-anit-mezari', 'bergama-kursunlu-cami', 'bergama-kutuphanesi', 'bergama-muzesi', 'bergama-ulu-cami', 'bet-israel-sinagogu', 'birgi', 'bizans-sarayi', 'bostanli-acik-hava-arkeoloji-muzesi', 'bouleuterion-odeion', 'buca-golet', 'buyuk-park', 'cakiraga-konagi', 'candarli-kalesi', 'celsus-kutuphanesi', 'cesme-kalesi', 'cesme-muzesi', 'cezayirli-gazi-hasan-pasa-aniti', 'cifit-adasi', 'cumhuriyet-meydani', 'dionysos-tapinagi-teos', 'efes', 'efes-muzesi', 'efes-tiyatrosu', 'efes-varius-hamami', 'etz-hayim-sinagogu', 'foca-kalesi', 'garip-adasi', 'gediz-deltasi', 'gundogdu-meydani', 'hadrianus-tapinagi-embolos', 'hisar-camii', 'ilk-kursun-aniti', 'imparatorlar-tapinagi-ve-sunagi-ile-domitianus-terasi', 'isa-bey-camii', 'izmir-agorasi', 'izmir-arkeoloji-muzesi', 'izmir-ataturk-muzesi', 'izmir-etnografya-muzesi', 'izmir-kadin-muzesi', 'izmir-kus-cenneti', 'izmir-parasut-kulesi', 'izmir-saat-kulesi', 'izmir-tarih-ve-sanat-muzesi', 'kadifekale', 'kalem-adasi', 'karantina-adasi', 'kemeralti-carsisi', 'kestanepazari-camii', 'key-museum', 'kizil-avlu', 'kizlaragasi-hani', 'klaros', 'klazomenai', 'kolophon', 'konak-camii', 'kordon', 'kulturpark', 'kyme', 'larissa', 'latife-hanim-kosku-ani-evi', 'lebedos', 'memmius-yapisi', 'meryem-ana-evi', 'meryem-kilisesi', 'metropolis', 'notion', 'pamucak-sahili', 'pergamon', 'pergamon-gymnasium-alani', 'prytaneion-belediye-sarayi', 'sadirvanalti-camii', 'sahin-tepesi', 'salepcioglu-camii', 'santa-maria-katolik-kilisesi', 'sehit-kubilay-aniti', 'sigacik-kalesi', 'sinyora-giveret-sinagogu', 'sirince', 'smyrna', 'st-jean-bazilikasi', 'susuzdede-parki', 'tarihi-asansor', 'tcg-pirireis-s-343', 'teos', 'tire-ulu-camii', 'traianus-cesmesi', 'trajan-tapinagi', 'umran-baradan-oyun-ve-oyuncak-muzesi', 'uzunada', 'v-sarayi', 'yamanlar-dagi', 'yedi-uyurlar-mezarligi', 'yesilova-hoyugu');
+  and p.slug in ('ahmet-piristina-kent-arsivi-ve-muzesi', 'akarca-sahili', 'alacati', 'alacati-bay-surf-beach', 'algazi-sinagogu', 'altinkum-plaji', 'arkas-sanat-merkezi', 'artemis-tapinagi', 'asik-veysel-rekreasyon-alani', 'ataturk-acik-hava-tiyatrosu', 'ataturk-maski', 'ayasuluk-kalesi', 'aydinoglu-mehmet-bey-camii', 'ayios-haralambos-kilisesi', 'aziz-polikarp-kilisesi', 'aziz-yuhanna-katedrali', 'basdurak-camii', 'belevi-anit-mezari', 'bergama-kursunlu-cami', 'bergama-kutuphanesi', 'bergama-muzesi', 'bergama-ulu-cami', 'bet-israel-sinagogu', 'birgi', 'bizans-sarayi', 'bostanli-acik-hava-arkeoloji-muzesi', 'bouleuterion-odeion', 'buca-golet', 'buyuk-park', 'cakiraga-konagi', 'candarli-kalesi', 'celsus-kutuphanesi', 'cesme-kalesi', 'cesme-muzesi', 'cezayirli-gazi-hasan-pasa-aniti', 'cifit-adasi', 'cumhuriyet-meydani', 'dionysos-tapinagi-teos', 'efes', 'efes-muzesi', 'efes-tiyatrosu', 'efes-varius-hamami', 'etz-hayim-sinagogu', 'foca-kalesi', 'garip-adasi', 'gediz-deltasi', 'gundogdu-meydani', 'hadrianus-tapinagi-embolos', 'hisar-camii', 'ilk-kursun-aniti', 'imparatorlar-tapinagi-ve-sunagi-ile-domitianus-terasi', 'isa-bey-camii', 'izmir-agorasi', 'izmir-arkeoloji-muzesi', 'izmir-ataturk-muzesi', 'izmir-etnografya-muzesi', 'izmir-kadin-muzesi', 'izmir-kultur-sanat-fabrikasi', 'izmir-kus-cenneti', 'izmir-parasut-kulesi', 'izmir-saat-kulesi', 'kadifekale', 'kalem-adasi', 'karantina-adasi', 'kemeralti-carsisi', 'kestanepazari-camii', 'key-museum', 'kizil-avlu', 'kizlaragasi-hani', 'klaros', 'klazomenai', 'kolophon', 'konak-camii', 'kordon', 'kulturpark', 'kyme', 'larissa', 'latife-hanim-kosku-ani-evi', 'lebedos', 'memmius-yapisi', 'meryem-ana-evi', 'meryem-kilisesi', 'metropolis', 'notion', 'pamucak-sahili', 'pergamon', 'pergamon-gymnasium-alani', 'prytaneion-belediye-sarayi', 'sadirvanalti-camii', 'sahin-tepesi', 'salepcioglu-camii', 'santa-maria-katolik-kilisesi', 'sehit-kubilay-aniti', 'sigacik-kalesi', 'sinyora-giveret-sinagogu', 'sirince', 'smyrna', 'st-jean-bazilikasi', 'susuzdede-parki', 'tarihi-asansor', 'tcg-pirireis-s-343', 'teos', 'tire-ulu-camii', 'traianus-cesmesi', 'trajan-tapinagi', 'umran-baradan-oyun-ve-oyuncak-muzesi', 'uzunada', 'v-sarayi', 'yamanlar-dagi', 'yedi-uyurlar-mezarligi', 'yesilova-hoyugu');
 
 insert into public.place_photos
   (place_id, url, thumb_url, width, height, license, license_url, author, source_url, sort_order)
@@ -517,6 +520,7 @@ from (values
   ('arkas-sanat-merkezi', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/ASM_Night.jpg/1280px-ASM_Night.jpg', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/ASM_Night.jpg/500px-ASM_Night.jpg', 1280, 838, 'CC BY-SA 3.0', 'https://creativecommons.org/licenses/by-sa/3.0', 'Giacasso', 'https://commons.wikimedia.org/wiki/File:ASM_Night.jpg'),
   ('artemis-tapinagi', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Ephesos.jpg/1280px-Ephesos.jpg', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Ephesos.jpg/500px-Ephesos.jpg', 1280, 960, 'CC BY-SA 4.0', 'https://creativecommons.org/licenses/by-sa/4.0', 'Arkiyolok', 'https://commons.wikimedia.org/wiki/File:Ephesos.jpg'),
   ('asik-veysel-rekreasyon-alani', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/4/40/A%C5%9F%C4%B1k_Veysel_Rekreasyon_Alan%C4%B1.jpg/1280px-A%C5%9F%C4%B1k_Veysel_Rekreasyon_Alan%C4%B1.jpg', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/4/40/A%C5%9F%C4%B1k_Veysel_Rekreasyon_Alan%C4%B1.jpg/500px-A%C5%9F%C4%B1k_Veysel_Rekreasyon_Alan%C4%B1.jpg', 1280, 949, 'CC BY-SA 4.0', 'https://creativecommons.org/licenses/by-sa/4.0', 'ToprakM', 'https://commons.wikimedia.org/wiki/File:A%C5%9F%C4%B1k_Veysel_Rekreasyon_Alan%C4%B1.jpg'),
+  ('ataturk-acik-hava-tiyatrosu', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/Atat%C3%BCrk_Open_Air_Theatre%2C_May_2019_%283%29.jpg/1280px-Atat%C3%BCrk_Open_Air_Theatre%2C_May_2019_%283%29.jpg', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/Atat%C3%BCrk_Open_Air_Theatre%2C_May_2019_%283%29.jpg/500px-Atat%C3%BCrk_Open_Air_Theatre%2C_May_2019_%283%29.jpg', 1280, 615, 'CC BY-SA 4.0', 'https://creativecommons.org/licenses/by-sa/4.0', 'BSRF', 'https://commons.wikimedia.org/wiki/File:Atat%C3%BCrk_Open_Air_Theatre,_May_2019_(3).jpg'),
   ('ataturk-maski', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Ataturk_in_Izmir.jpg/1280px-Ataturk_in_Izmir.jpg', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Ataturk_in_Izmir.jpg/500px-Ataturk_in_Izmir.jpg', 1280, 725, 'CC BY 2.0', 'https://creativecommons.org/licenses/by/2.0', 'Ed Kohler', 'https://commons.wikimedia.org/wiki/File:Ataturk_in_Izmir.jpg'),
   ('ayasuluk-kalesi', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/SelcukZitadelle.jpg/1280px-SelcukZitadelle.jpg', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/SelcukZitadelle.jpg/500px-SelcukZitadelle.jpg', 1280, 873, 'CC BY 3.0', 'https://creativecommons.org/licenses/by/3.0', 'Klaus-Peter Simon', 'https://commons.wikimedia.org/wiki/File:SelcukZitadelle.jpg'),
   ('aydinoglu-mehmet-bey-camii', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/4/42/Ayd%C4%B1no%C4%9Flu_Mehmet_Bey_Mosque_%283%29.jpg/1280px-Ayd%C4%B1no%C4%9Flu_Mehmet_Bey_Mosque_%283%29.jpg', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/4/42/Ayd%C4%B1no%C4%9Flu_Mehmet_Bey_Mosque_%283%29.jpg/500px-Ayd%C4%B1no%C4%9Flu_Mehmet_Bey_Mosque_%283%29.jpg', 1280, 960, 'CC BY-SA 4.0', 'https://creativecommons.org/licenses/by-sa/4.0', 'BSRF', 'https://commons.wikimedia.org/wiki/File:Ayd%C4%B1no%C4%9Flu_Mehmet_Bey_Mosque_(3).jpg'),
@@ -564,10 +568,10 @@ from (values
   ('izmir-ataturk-muzesi', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/Dis_mekan.jpg/1280px-Dis_mekan.jpg', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/Dis_mekan.jpg/500px-Dis_mekan.jpg', 1280, 903, 'CC BY-SA 4.0', 'https://creativecommons.org/licenses/by-sa/4.0', 'Dilara Zeynep', 'https://commons.wikimedia.org/wiki/File:Dis_mekan.jpg'),
   ('izmir-etnografya-muzesi', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5d/Izmir_Ethnography_Museum.jpg/1280px-Izmir_Ethnography_Museum.jpg', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5d/Izmir_Ethnography_Museum.jpg/500px-Izmir_Ethnography_Museum.jpg', 1280, 960, 'CC BY-SA 3.0', 'https://creativecommons.org/licenses/by-sa/3.0', 'User:Quintucket', 'https://commons.wikimedia.org/wiki/File:Izmir_Ethnography_Museum.jpg'),
   ('izmir-kadin-muzesi', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/%C4%B0zmir_Kad%C4%B1n_M%C3%BCzesi.jpg/1280px-%C4%B0zmir_Kad%C4%B1n_M%C3%BCzesi.jpg', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/%C4%B0zmir_Kad%C4%B1n_M%C3%BCzesi.jpg/500px-%C4%B0zmir_Kad%C4%B1n_M%C3%BCzesi.jpg', 1280, 960, 'CC BY-SA 4.0', 'https://creativecommons.org/licenses/by-sa/4.0', 'Xayala Mammadli', 'https://commons.wikimedia.org/wiki/File:%C4%B0zmir_Kad%C4%B1n_M%C3%BCzesi.jpg'),
+  ('izmir-kultur-sanat-fabrikasi', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/Entrance_of_the_%C4%B0zmir_Culture_and_Arts_Factory_02.jpg/1280px-Entrance_of_the_%C4%B0zmir_Culture_and_Arts_Factory_02.jpg', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/Entrance_of_the_%C4%B0zmir_Culture_and_Arts_Factory_02.jpg/500px-Entrance_of_the_%C4%B0zmir_Culture_and_Arts_Factory_02.jpg', 1280, 853, 'CC BY-SA 4.0', 'https://creativecommons.org/licenses/by-sa/4.0', 'Koray', 'https://commons.wikimedia.org/wiki/File:Entrance_of_the_%C4%B0zmir_Culture_and_Arts_Factory_02.jpg'),
   ('izmir-kus-cenneti', 'https://upload.wikimedia.org/wikipedia/commons/5/5c/Ku%C5%9F_Cenneti_-_panoramio.jpg', 'https://upload.wikimedia.org/wikipedia/commons/5/5c/Ku%C5%9F_Cenneti_-_panoramio.jpg', 1280, 960, 'CC BY-SA 3.0', 'https://creativecommons.org/licenses/by-sa/3.0', 'SADIK YURTMAN', 'https://commons.wikimedia.org/wiki/File:Ku%C5%9F_Cenneti_-_panoramio.jpg'),
   ('izmir-parasut-kulesi', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/%C4%B0zmir_Parachute_Tower.jpg/1280px-%C4%B0zmir_Parachute_Tower.jpg', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/%C4%B0zmir_Parachute_Tower.jpg/500px-%C4%B0zmir_Parachute_Tower.jpg', 1280, 1707, 'CC BY-SA 4.0', 'https://creativecommons.org/licenses/by-sa/4.0', 'BSRF', 'https://commons.wikimedia.org/wiki/File:%C4%B0zmir_Parachute_Tower.jpg'),
   ('izmir-saat-kulesi', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2e/Izmir_square_clock_tower.jpg/1280px-Izmir_square_clock_tower.jpg', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2e/Izmir_square_clock_tower.jpg/500px-Izmir_square_clock_tower.jpg', 1280, 1280, 'CC BY-SA 3.0', 'https://creativecommons.org/licenses/by-sa/3.0', 'User:Sailko', 'https://commons.wikimedia.org/wiki/File:Izmir_square_clock_tower.jpg'),
-  ('izmir-tarih-ve-sanat-muzesi', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/%C4%B0zmir_Tarih_ve_Sanat_M%C3%BCzesi.jpg/1280px-%C4%B0zmir_Tarih_ve_Sanat_M%C3%BCzesi.jpg', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/%C4%B0zmir_Tarih_ve_Sanat_M%C3%BCzesi.jpg/500px-%C4%B0zmir_Tarih_ve_Sanat_M%C3%BCzesi.jpg', 1280, 1707, 'CC BY-SA 4.0', 'https://creativecommons.org/licenses/by-sa/4.0', 'BSRF', 'https://commons.wikimedia.org/wiki/File:%C4%B0zmir_Tarih_ve_Sanat_M%C3%BCzesi.jpg'),
   ('kadifekale', 'https://upload.wikimedia.org/wikipedia/commons/0/0f/Kadifekale_IzmirTurkey_EUnluBlogspot.jpg', 'https://upload.wikimedia.org/wikipedia/commons/0/0f/Kadifekale_IzmirTurkey_EUnluBlogspot.jpg', 1280, 960, 'CC BY 3.0', 'https://creativecommons.org/licenses/by/3.0', 'Mr. E. Unlu', 'https://commons.wikimedia.org/wiki/File:Kadifekale_IzmirTurkey_EUnluBlogspot.jpg'),
   ('kalem-adasi', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Gap_between_Kalem_Island_south_coast_on_right_and_mainland_Bademli%2C_Turkey.jpg/1280px-Gap_between_Kalem_Island_south_coast_on_right_and_mainland_Bademli%2C_Turkey.jpg', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Gap_between_Kalem_Island_south_coast_on_right_and_mainland_Bademli%2C_Turkey.jpg/500px-Gap_between_Kalem_Island_south_coast_on_right_and_mainland_Bademli%2C_Turkey.jpg', 1280, 747, 'CC0', 'http://creativecommons.org/publicdomain/zero/1.0/deed.en', 'Tomhannen', 'https://commons.wikimedia.org/wiki/File:Gap_between_Kalem_Island_south_coast_on_right_and_mainland_Bademli,_Turkey.jpg'),
   ('karantina-adasi', 'https://upload.wikimedia.org/wikipedia/commons/1/18/Urla_KarantinaIsland_Izmir_Turkey.jpg', 'https://upload.wikimedia.org/wikipedia/commons/1/18/Urla_KarantinaIsland_Izmir_Turkey.jpg', 1280, 765, 'CC BY-SA 3.0', 'https://creativecommons.org/licenses/by-sa/3.0', 'Mr. Metin Canbalaban', 'https://commons.wikimedia.org/wiki/File:Urla_KarantinaIsland_Izmir_Turkey.jpg'),

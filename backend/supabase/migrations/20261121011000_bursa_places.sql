@@ -21,7 +21,7 @@ join public.categories c on c.slug = v.slug
 on conflict (category_id, lang) do nothing;
 
 -- Yerler --------------------------------------------------------------------------
--- Otomatik üretildi: data-pipeline/pipeline.py build (2026-11-20 15:29)
+-- Otomatik üretildi: data-pipeline/pipeline.py build (2026-11-20 16:37)
 -- 71 yer; hepsi gizli (is_published = false); 71 tanesinin TR+EN kısa açıklaması dolu.
 -- Tekrar çalıştırılabilir: aynı slug'lı yerler güncellenir, kopya oluşmaz.
 
@@ -38,7 +38,7 @@ from (values
   ('orhan-gazi-camii', 'mosque', 40.183897, 29.064086, 100, 'Osmanlı', 1339, 'Q6038154', 'way/255187109', null),
   ('iznik-yesil-cami', 'mosque', 40.429734, 29.726886, 100, 'Osmanlı', null, 'Q8053361', 'way/310108583', null),
   ('fatih-camii-tirilye', 'mosque', 40.393031, 28.796880, 40, 'Bizans', null, 'Q5437791', 'way/342544743', null),
-  ('veled-i-yanic-cami', 'mosque', 40.185031, 29.056449, 100, 'Bizans', null, 'Q21848538', 'way/407491078', null),
+  ('veled-i-yanic-cami', 'mosque', 40.185031, 29.056449, 100, 'Osmanlı', null, 'Q21848538', 'way/407491078', null),
   ('yildirim-camii', 'mosque', 40.187419, 29.082436, 100, 'Osmanlı', null, 'Q128256', 'way/247424180', null),
   ('bursa-muradiye-camii', 'mosque', 40.190977, 29.046526, 120, 'Osmanlı', null, 'Q65219967', 'way/397551853', null),
   ('yesil-camii', 'mosque', 40.182194, 29.074611, 100, 'Osmanlı', 1419, 'Q1549086', null, null),
@@ -131,8 +131,8 @@ from (values
   ('iznik-yesil-cami', 'en', 'Yeşil Mosque Iznik', 'A 14th-century early Ottoman mosque in İznik, famous for the tiles on its minaret.', null),
   ('fatih-camii-tirilye', 'tr', 'Tirilye Fatih Camii', 'Tirilye''de, Bizans döneminde kilise olarak yapılan ve sonradan camiye çevrilen yapı.', null),
   ('fatih-camii-tirilye', 'en', 'Fatih Mosque, Tirilye', 'A building in Tirilye, built as a Byzantine church and later converted into a mosque.', null),
-  ('veled-i-yanic-cami', 'tr', 'Veled-i Yaniç Cami', 'Bursa''da, Bizans kilisesinden dönüştürülen küçük cami.', null),
-  ('veled-i-yanic-cami', 'en', 'Veled-i Yaniç Mosque', 'A small mosque in Bursa converted from a Byzantine church.', null),
+  ('veled-i-yanic-cami', 'tr', 'Veled-i Yaniç Cami', 'Hisar''da, 1440 tarihli kitabesiyle erken Osmanlı mescidi; minaresi binadan ayrı, bir çeşmenin üzerinde.', null),
+  ('veled-i-yanic-cami', 'en', 'Veled-i Yaniç Mosque', 'An early Ottoman mosque in Hisar dated 1440 by its inscription; its minaret stands apart, on a fountain.', null),
   ('yildirim-camii', 'tr', 'Yıldırım Camii', 'Yıldırım Bayezid''in kurduğu külliyenin camisi; ters T planlı erken Osmanlı mimarisinin güzel örneği.', null),
   ('yildirim-camii', 'en', 'Bayezid I Mosque', 'The mosque of the complex founded by Bayezid I, a fine example of the early Ottoman ''inverted T'' plan.', null),
   ('bursa-muradiye-camii', 'tr', 'Muradiye Külliyesi', 'II. Murad''ın kurduğu külliye; caminin bahçesinde şehzadelerin ve sultan ailesinin türbeleri bulunur.', null),
@@ -145,8 +145,8 @@ from (values
   ('kemerli-kilise-tirilye', 'en', 'Panagia Pantobasilissa Church', 'The Byzantine Church of Panagia Pantobasilissa in Tirilye, one of the village''s oldest buildings.', null),
   ('aziz-panteleimon-kilisesi', 'tr', 'Aziz Panteleimon Kilisesi', 'Gölyazı''da, 19. yüzyılda yapılan Rum Ortodoks kilisesi.', null),
   ('aziz-panteleimon-kilisesi', 'en', 'St. Panteleimon Church', 'A 19th-century Greek Orthodox church in Gölyazı.', null),
-  ('mayor-sinagogu', 'tr', 'Mayor Sinagogu', 'Bursa''nın tarihi Yahudi mahallesinde, şehirde bugün de açık olan sinagog.', null),
-  ('mayor-sinagogu', 'en', 'Mayor Synagogue', 'A synagogue in Bursa''s historic Jewish quarter that is still in use today.', null),
+  ('mayor-sinagogu', 'tr', 'Mayor Sinagogu', 'Arap Şükrü Sokağı''ndaki tarihi Yahudi mahallesinde, Mayorka''dan gelen Yahudilerin kurduğu sinagog; bugün ibadete kapalı.', null),
+  ('mayor-sinagogu', 'en', 'Mayor Synagogue', 'A synagogue in the historic Jewish quarter on Arap Şükrü Street, founded by Jews from Majorca; no longer used for worship.', null),
   ('bursa-arkeoloji-muzesi', 'tr', 'Bursa Arkeoloji Müzesi', 'Kültürpark''ta, Bursa ve çevresindeki antik kentlerden çıkan eserleri sergileyen müze.', null),
   ('bursa-arkeoloji-muzesi', 'en', 'Bursa Archaeological Museum', 'A museum in Kültürpark showing finds from the ancient cities around Bursa.', null),
   ('bursa-ataturk-muzesi', 'tr', 'Bursa Atatürk Müzesi', 'Çekirge''de, Atatürk''ün Bursa ziyaretlerinde kaldığı köşk; bugün müze.', null),

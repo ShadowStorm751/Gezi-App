@@ -68,3 +68,10 @@ end $$;
 
 \echo '== Görseli olmayan rozet (0 olmalı)'
 select slug from public.achievements where badge_path is null order by slug;
+
+\echo '== Uzun açıklaması eksik yer (TR veya EN; 0 olmalı)'
+select ci.slug as sehir, count(*) filter (where t.long_desc is null) as eksik, count(*) as toplam
+from public.places p
+join public.cities ci on ci.id = p.city_id
+join public.place_translations t on t.place_id = p.id
+group by ci.slug order by ci.slug;

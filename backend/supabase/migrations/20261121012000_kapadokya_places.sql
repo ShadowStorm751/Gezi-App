@@ -23,7 +23,7 @@ join public.categories c on c.slug = v.slug
 on conflict (category_id, lang) do nothing;
 
 -- Yerler --------------------------------------------------------------------------
--- Otomatik üretildi: data-pipeline/pipeline.py build (2026-11-20 14:48)
+-- Otomatik üretildi: data-pipeline/pipeline.py build (2026-11-20 16:37)
 -- 63 yer; hepsi gizli (is_published = false); 63 tanesinin TR+EN kısa açıklaması dolu.
 -- Tekrar çalıştırılabilir: aynı slug'lı yerler güncellenir, kopya oluşmaz.
 
