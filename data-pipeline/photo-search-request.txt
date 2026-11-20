@@ -1,0 +1,3 @@
+Fotoğrafı eksik yerler için Commons adayları (photo_search.py)
+Şehirler: izmir bursa kapadokya
+Son istek: 2026-11-20 13:20
