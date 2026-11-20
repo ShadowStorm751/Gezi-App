@@ -21,8 +21,8 @@ join public.categories c on c.slug = v.slug
 on conflict (category_id, lang) do nothing;
 
 -- Yerler --------------------------------------------------------------------------
--- Otomatik üretildi: data-pipeline/pipeline.py build (2026-11-20 14:48)
--- 70 yer; hepsi gizli (is_published = false); 70 tanesinin TR+EN kısa açıklaması dolu.
+-- Otomatik üretildi: data-pipeline/pipeline.py build (2026-11-20 15:29)
+-- 71 yer; hepsi gizli (is_published = false); 71 tanesinin TR+EN kısa açıklaması dolu.
 -- Tekrar çalıştırılabilir: aynı slug'lı yerler güncellenir, kopya oluşmaz.
 
 insert into public.places
@@ -99,6 +99,7 @@ from (values
   ('merinos-parki', 'park', 40.198785, 29.053346, 200, null, null, 'Q20472214', 'way/189723143', 'SRID=4326;POLYGON((29.048870 40.200705, 29.049032 40.199128, 29.049074 40.198701, 29.049007 40.198695, 29.049066 40.198216, 29.049955 40.197832, 29.050872 40.197519, 29.051876 40.197173, 29.052050 40.197323, 29.052095 40.197362, 29.052294 40.197357, 29.052335 40.197319, 29.052494 40.197144, 29.052751 40.197108, 29.053017 40.197105, 29.053571 40.197127, 29.053843 40.197180, 29.054369 40.197272, 29.054632 40.197308, 29.054911 40.197321, 29.055389 40.197294, 29.055864 40.197333, 29.056050 40.197368, 29.056164 40.197440, 29.056501 40.197485, 29.056483 40.197805, 29.056410 40.197882, 29.056366 40.197953, 29.056368 40.198029, 29.056431 40.198136, 29.056493 40.198191, 29.056571 40.198218, 29.056743 40.198237, 29.056894 40.198298, 29.057097 40.199014, 29.057455 40.199181, 29.057363 40.199955, 29.056728 40.200023, 29.054654 40.200243, 29.054116 40.200285, 29.053506 40.200204, 29.053314 40.200249, 29.053171 40.200282, 29.052825 40.200494, 29.052790 40.200522, 29.051717 40.201029, 29.050553 40.201450, 29.050176 40.201482, 29.049803 40.201471, 29.049599 40.201461, 29.049425 40.201422, 29.049224 40.201268, 29.048972 40.200978, 29.048870 40.200705))'),
   ('mudanya-sahili', 'beach', 40.370904, 28.893924, 150, null, null, null, 'node/6710803286', null),
   ('kursunlu-plaji', 'beach', 40.396710, 28.293817, 150, null, null, null, 'relation/10458771', 'SRID=4326;POLYGON((28.290079 40.397982, 28.290106 40.397246, 28.292209 40.396527, 28.292906 40.395964, 28.295787 40.395437, 28.297554 40.396009, 28.296734 40.396072, 28.295311 40.396327, 28.294521 40.396411, 28.293245 40.396668, 28.292484 40.396830, 28.291577 40.397143, 28.291117 40.397339, 28.290582 40.397551, 28.290230 40.397791, 28.290079 40.397982))'),
+  ('gemlik-kursunlu-plaji', 'beach', 40.363300, 29.031000, 700, null, null, null, null, null),
   ('suuctu-selalesi', 'waterfall', 39.900550, 28.384244, 100, null, null, 'Q6018935', 'node/2560346643', null),
   ('saitabat-selalesi', 'waterfall', 40.147434, 29.224991, 100, null, null, null, 'node/1791443208', null),
   ('oylat-selalesi', 'waterfall', 39.919066, 29.584115, 100, null, null, null, 'node/939087952', null)
@@ -250,8 +251,10 @@ from (values
   ('merinos-parki', 'en', 'Merinos Park', 'A city park around the old Merinos factory with museums and wide green spaces.', null),
   ('mudanya-sahili', 'tr', 'Mudanya Sahili', 'Mudanya''nın tarihi evlerinin sıralandığı deniz kıyısı.', 'Gün batımı'),
   ('mudanya-sahili', 'en', 'Mudanya Seafront', 'The seafront of Mudanya lined with historic houses.', 'Sunset'),
-  ('kursunlu-plaji', 'tr', 'Kurşunlu Plajı', 'Karacabey''de, Kurşunlu''daki uzun kumsallı halk plajı.', 'Yaz'),
-  ('kursunlu-plaji', 'en', 'Kurşunlu Beach', 'A long sandy public beach at Kurşunlu, Karacabey.', 'Summer'),
+  ('kursunlu-plaji', 'tr', 'Kurşunlu Plajı (Karacabey)', 'Karacabey''de, Kurşunlu''daki uzun kumsallı halk plajı.', 'Yaz'),
+  ('kursunlu-plaji', 'en', 'Kurşunlu Beach (Karacabey)', 'A long sandy public beach at Kurşunlu, Karacabey.', 'Summer'),
+  ('gemlik-kursunlu-plaji', 'tr', 'Kurşunlu Halk Plajı (Gemlik)', 'Gemlik Körfezi kıyısında, ormanın gölgesindeki 3,5 km''lik ücretsiz halk plajı.', 'Yaz'),
+  ('gemlik-kursunlu-plaji', 'en', 'Kurşunlu Public Beach (Gemlik)', 'A free 3.5 km public beach on the Gulf of Gemlik, shaded by woodland.', 'Summer'),
   ('suuctu-selalesi', 'tr', 'Suuçtu Şelalesi', 'Mustafakemalpaşa''da, ormanın içinde yüksekten dökülen şelale.', 'İlkbahar (su bol)'),
   ('suuctu-selalesi', 'en', 'Suuçtu (Waterfly) Waterfall', 'A tall waterfall in the forest near Mustafakemalpaşa.', 'Spring (most water)'),
   ('saitabat-selalesi', 'tr', 'Saitabat Şelalesi', 'Uludağ yolunda, Saitabat köyü yakınında şelale ve mesire yeri.', 'İlkbahar (su bol)'),
@@ -319,7 +322,7 @@ from (values
 join public.achievements a on a.slug = v.slug
 on conflict (achievement_id, lang) do update set name = excluded.name, description = excluded.description;
 
--- Bursa fotoğrafları: Wikimedia Commons, serbest lisanslı (60 yer).
+-- Bursa fotoğrafları: Wikimedia Commons, serbest lisanslı (61 yer).
 -- Üreten: data-pipeline/content/build_city.py (kaynak: data-pipeline/results/bursa/photos.json).
 -- Mobil, fotoğrafın altında author ve license bilgisini göstermelidir (lisans koşulu).
 
@@ -327,7 +330,7 @@ delete from public.place_photos ph
 using public.places p
 where ph.place_id = p.id
   and ph.url like 'https://%.wikimedia.org/%'
-  and p.slug in ('aktopraklik-hoyugu', 'antik-tiyatro', 'ayasofya-camii-iznik', 'aziz-panteleimon-kilisesi', 'bursa-arkeoloji-muzesi', 'bursa-ataturk-aniti', 'bursa-ataturk-muzesi', 'bursa-kapalicarsi', 'bursa-kent-muzesi', 'bursa-muradiye-camii', 'bursa-ulu-camii', 'cem-sultan-turbesi', 'cumalikizik', 'ebe-gulbahar-hatun-turbesi', 'emir-han', 'emir-sultan-camii', 'emirsultan-hz-turbesi', 'eski-camii-golyazi', 'fatih-camii-tirilye', 'geyve-han', 'golyazi-adasi', 'gulruh-hatun-turbesi', 'gulsah-hatun-turbesi', 'hisar-arkeopark', 'huma-hatun-turbesi', 'irgandi-koprusu', 'iznik-dikilitas', 'iznik-konsil', 'iznik-muzesi', 'iznik-roma-tiyatrosu', 'iznik-surlari', 'iznik-yesil-cami', 'karacabey-longoz-ormanlari', 'karagoz-muzesi', 'kemerli-kilise-tirilye', 'koza-hani', 'mayor-sinagogu', 'merinos-parki', 'misi', 'mudanya-mutareke-evi', 'orhan-gazi-camii', 'orhan-gazi-turbesi', 'osman-gazi-turbesi', 'panorama-1326-bursa-fetih-muzesi', 'resat-oyal-kultur-parki', 'sadagi-kanyonu-tabiat-parki', 'sehzade-mustafa-turbesi', 'suuctu-selalesi', 'tirilye', 'tophane-saat-kulesi', 'tuz-han-bursa', 'uluabat-golu-sulak-alani', 'uludag', 'uludag-milli-parki', 'uluumay-osmanli-halk-kiyafetleri-ve-takilari-muzesi', 'veled-i-yanic-cami', 'yesil-camii', 'yesil-turbe', 'yildirim-camii', 'zeyniller-koyu-seyir-tepesi');
+  and p.slug in ('aktopraklik-hoyugu', 'antik-tiyatro', 'ayasofya-camii-iznik', 'aziz-panteleimon-kilisesi', 'bursa-arkeoloji-muzesi', 'bursa-ataturk-aniti', 'bursa-ataturk-muzesi', 'bursa-kapalicarsi', 'bursa-kent-muzesi', 'bursa-muradiye-camii', 'bursa-ulu-camii', 'cem-sultan-turbesi', 'cumalikizik', 'ebe-gulbahar-hatun-turbesi', 'emir-han', 'emir-sultan-camii', 'emirsultan-hz-turbesi', 'eski-camii-golyazi', 'fatih-camii-tirilye', 'gemlik-kursunlu-plaji', 'geyve-han', 'golyazi-adasi', 'gulruh-hatun-turbesi', 'gulsah-hatun-turbesi', 'hisar-arkeopark', 'huma-hatun-turbesi', 'irgandi-koprusu', 'iznik-dikilitas', 'iznik-konsil', 'iznik-muzesi', 'iznik-roma-tiyatrosu', 'iznik-surlari', 'iznik-yesil-cami', 'karacabey-longoz-ormanlari', 'karagoz-muzesi', 'kemerli-kilise-tirilye', 'koza-hani', 'mayor-sinagogu', 'merinos-parki', 'misi', 'mudanya-mutareke-evi', 'orhan-gazi-camii', 'orhan-gazi-turbesi', 'osman-gazi-turbesi', 'panorama-1326-bursa-fetih-muzesi', 'resat-oyal-kultur-parki', 'sadagi-kanyonu-tabiat-parki', 'sehzade-mustafa-turbesi', 'suuctu-selalesi', 'tirilye', 'tophane-saat-kulesi', 'tuz-han-bursa', 'uluabat-golu-sulak-alani', 'uludag', 'uludag-milli-parki', 'uluumay-osmanli-halk-kiyafetleri-ve-takilari-muzesi', 'veled-i-yanic-cami', 'yesil-camii', 'yesil-turbe', 'yildirim-camii', 'zeyniller-koyu-seyir-tepesi');
 
 insert into public.place_photos
   (place_id, url, thumb_url, width, height, license, license_url, author, source_url, sort_order)
@@ -352,6 +355,7 @@ from (values
   ('emirsultan-hz-turbesi', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e0/Bursa_Emir_Sultan_T%C3%BCrbesi_7095.jpg/1280px-Bursa_Emir_Sultan_T%C3%BCrbesi_7095.jpg', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e0/Bursa_Emir_Sultan_T%C3%BCrbesi_7095.jpg/500px-Bursa_Emir_Sultan_T%C3%BCrbesi_7095.jpg', 1280, 852, 'CC BY-SA 4.0', 'https://creativecommons.org/licenses/by-sa/4.0', 'Dosseman', 'https://commons.wikimedia.org/wiki/File:Bursa_Emir_Sultan_T%C3%BCrbesi_7095.jpg'),
   ('eski-camii-golyazi', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/20251025_G%C3%B6lyaz%C4%B1_Eski_Cami.jpg/1280px-20251025_G%C3%B6lyaz%C4%B1_Eski_Cami.jpg', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/20251025_G%C3%B6lyaz%C4%B1_Eski_Cami.jpg/500px-20251025_G%C3%B6lyaz%C4%B1_Eski_Cami.jpg', 1280, 1280, 'CC BY-SA 4.0', 'https://creativecommons.org/licenses/by-sa/4.0', 'Basak', 'https://commons.wikimedia.org/wiki/File:20251025_G%C3%B6lyaz%C4%B1_Eski_Cami.jpg'),
   ('fatih-camii-tirilye', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/Fatih_Cami.JPG/1280px-Fatih_Cami.JPG', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/Fatih_Cami.JPG/500px-Fatih_Cami.JPG', 1280, 1707, 'CC BY-SA 3.0', 'https://creativecommons.org/licenses/by-sa/3.0', 'Ollios', 'https://commons.wikimedia.org/wiki/File:Fatih_Cami.JPG'),
+  ('gemlik-kursunlu-plaji', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Kur%C5%9Funlu_Bal%C4%B1k%C3%A7%C4%B1_Bar%C4%B1na%C4%9F%C4%B1_-03_May%C4%B1s_2013_-_panoramio.jpg/1280px-Kur%C5%9Funlu_Bal%C4%B1k%C3%A7%C4%B1_Bar%C4%B1na%C4%9F%C4%B1_-03_May%C4%B1s_2013_-_panoramio.jpg', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Kur%C5%9Funlu_Bal%C4%B1k%C3%A7%C4%B1_Bar%C4%B1na%C4%9F%C4%B1_-03_May%C4%B1s_2013_-_panoramio.jpg/500px-Kur%C5%9Funlu_Bal%C4%B1k%C3%A7%C4%B1_Bar%C4%B1na%C4%9F%C4%B1_-03_May%C4%B1s_2013_-_panoramio.jpg', 1280, 765, 'CC BY 3.0', 'https://creativecommons.org/licenses/by/3.0', 'A. Kerim ŞENGEL', 'https://commons.wikimedia.org/wiki/File:Kur%C5%9Funlu_Bal%C4%B1k%C3%A7%C4%B1_Bar%C4%B1na%C4%9F%C4%B1_-03_May%C4%B1s_2013_-_panoramio.jpg'),
   ('geyve-han', 'https://upload.wikimedia.org/wikipedia/commons/8/81/Geyve_Hani.jpg', 'https://upload.wikimedia.org/wikipedia/commons/8/81/Geyve_Hani.jpg', 1280, 960, 'CC BY-SA 3.0', 'http://creativecommons.org/licenses/by-sa/3.0/', 'Ninlil at Turkish Wikipedia', 'https://commons.wikimedia.org/wiki/File:Geyve_Hani.jpg'),
   ('golyazi-adasi', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/G%C3%B6lyaz%C4%B1-1.JPG/1280px-G%C3%B6lyaz%C4%B1-1.JPG', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/G%C3%B6lyaz%C4%B1-1.JPG/500px-G%C3%B6lyaz%C4%B1-1.JPG', 1280, 1707, 'CC BY-SA 3.0', 'https://creativecommons.org/licenses/by-sa/3.0', 'Ollios', 'https://commons.wikimedia.org/wiki/File:G%C3%B6lyaz%C4%B1-1.JPG'),
   ('gulruh-hatun-turbesi', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/G%C3%BClruh_Sultan_T%C3%BCrbesi_in_2003_0731.jpg/1280px-G%C3%BClruh_Sultan_T%C3%BCrbesi_in_2003_0731.jpg', 'https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/G%C3%BClruh_Sultan_T%C3%BCrbesi_in_2003_0731.jpg/500px-G%C3%BClruh_Sultan_T%C3%BCrbesi_in_2003_0731.jpg', 1280, 1707, 'CC BY-SA 4.0', 'https://creativecommons.org/licenses/by-sa/4.0', 'Dosseman', 'https://commons.wikimedia.org/wiki/File:G%C3%BClruh_Sultan_T%C3%BCrbesi_in_2003_0731.jpg'),
