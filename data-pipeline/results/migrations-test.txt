@@ -1,12 +1,7 @@
 ok
-zaman: 2026-11-20T16:18:51Z
-çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44772049737
+zaman: 2026-11-20T16:20:10Z
+çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44772263025
 ---
-
-== TR+EN adı ve kısa açıklaması eksik yer (0 olmalı)
- slug 
-------
-(0 rows)
 
 == Ana yerler ve iç yer sayıları
             ana_yer            | ic_yer 
@@ -74,7 +69,7 @@ UPDATE 258
 
                                  celsus_ana_yer                                 
 --------------------------------------------------------------------------------
- {"id": "8dd91a0a-e7b5-4863-8573-da211465d66f", "name": "Efes", "slug": "efes"}
+ {"id": "b8518125-1ac1-4ec2-afc7-5cd2995ecf63", "name": "Efes", "slug": "efes"}
 (1 row)
 
        slug        | rating_var |     donem_en      | donem_kodu 
@@ -112,10 +107,15 @@ TAMAM
 (4 rows)
 
 == city_pack: main'deki period alanları + ana yer alanları birlikte (Efes)
- slug | donem | ic_yer | ic_sayi 
-------+-------+--------+---------
-(0 rows)
+BEGIN
+UPDATE 2
+        slug        |  donem  | ic_yer | ic_sayi 
+--------------------+---------+--------+---------
+ celsus-kutuphanesi | Ancient | t      | 0
+ efes               | Ancient | f      | 1
+(2 rows)
 
+ROLLBACK
 == Denetim (backend/tests/audit.sql): yalnızca ozet satırı kalmalı
  kontrol |                         sorun                          
 ---------+--------------------------------------------------------
