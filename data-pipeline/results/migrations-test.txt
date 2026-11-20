@@ -1,6 +1,6 @@
 ok
-zaman: 2026-11-20T12:42:45Z
-çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44738018888
+zaman: 2026-11-20T12:54:14Z
+çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44739610744
 ---
 CREATE DATABASE
 ALTER DATABASE
@@ -84,7 +84,7 @@ UPDATE 257
 
                                  celsus_ana_yer                                 
 --------------------------------------------------------------------------------
- {"id": "2c86af20-90fc-4034-9038-dc980b0c2ed0", "name": "Efes", "slug": "efes"}
+ {"id": "bf28e3a5-b279-41de-ba40-35112cbfad2b", "name": "Efes", "slug": "efes"}
 (1 row)
 
        slug        | rating_var |     donem_en      | donem_kodu 
@@ -112,4 +112,11 @@ TAMAM
 -------------------
  mustafapasa-kesif
 (1 row)
+
+== Denetim (backend/tests/audit.sql): yalnızca ozet satırı kalmalı
+      kontrol      |                         sorun                          
+-------------------+--------------------------------------------------------
+ ozet              | 79 fonksiyon, 19 tablo, 12 rozet kuralı, 7 KVKK bölümü
+ rozet_gorseli_yok | mustafapasa-kesif
+(2 rows)
 
