@@ -2,8 +2,8 @@
  "ozet": {
   "uyumlu": 30,
   "kontrol": 13,
+  "wikidata_yok": 13,
   "yaklasik_duzeltildi": 6,
-  "wikidata_yok": 12,
   "yaklasik_dogrulanamadi": 1
  },
  "yerler": {
@@ -48,6 +48,17 @@
    "arama_ile": false,
    "mesafe_m": 29,
    "durum": "kontrol"
+  },
+  "kutsal-hac-kilisesi": {
+   "osm": [
+    38.573171,
+    34.873014
+   ],
+   "qid": null,
+   "wikidata": null,
+   "arama_ile": false,
+   "mesafe_m": null,
+   "durum": "wikidata_yok"
   },
   "agacalti-kilisesi": {
    "osm": [
