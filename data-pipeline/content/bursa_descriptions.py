@@ -16,8 +16,8 @@ D = {
                      "A 14th-century early Ottoman mosque in İznik, famous for the tiles on its minaret."),
 "fatih-camii-tirilye": ("Tirilye'de, Bizans döneminde kilise olarak yapılan ve sonradan camiye çevrilen yapı.",
                         "A building in Tirilye, built as a Byzantine church and later converted into a mosque."),
-"veled-i-yanic-cami": ("Bursa'da, Bizans kilisesinden dönüştürülen küçük cami.",
-                       "A small mosque in Bursa converted from a Byzantine church."),
+"veled-i-yanic-cami": ("Hisar'da, 1440 tarihli kitabesiyle erken Osmanlı mescidi; minaresi binadan ayrı, bir çeşmenin üzerinde.",
+                       "An early Ottoman mosque in Hisar dated 1440 by its inscription; its minaret stands apart, on a fountain."),
 "yildirim-camii": ("Yıldırım Bayezid'in kurduğu külliyenin camisi; ters T planlı erken Osmanlı mimarisinin güzel örneği.",
                    "The mosque of the complex founded by Bayezid I, a fine example of the early Ottoman 'inverted T' plan."),
 "bursa-muradiye-camii": ("II. Murad'ın kurduğu külliye; caminin bahçesinde şehzadelerin ve sultan ailesinin türbeleri bulunur.",
@@ -31,8 +31,8 @@ D = {
                            "The Byzantine Church of Panagia Pantobasilissa in Tirilye, one of the village's oldest buildings."),
 "aziz-panteleimon-kilisesi": ("Gölyazı'da, 19. yüzyılda yapılan Rum Ortodoks kilisesi.",
                               "A 19th-century Greek Orthodox church in Gölyazı."),
-"mayor-sinagogu": ("Bursa'nın tarihi Yahudi mahallesinde, şehirde bugün de açık olan sinagog.",
-                   "A synagogue in Bursa's historic Jewish quarter that is still in use today."),
+"mayor-sinagogu": ("Arap Şükrü Sokağı'ndaki tarihi Yahudi mahallesinde, Mayorka'dan gelen Yahudilerin kurduğu sinagog; bugün ibadete kapalı.",
+                   "A synagogue in the historic Jewish quarter on Arap Şükrü Street, founded by Jews from Majorca; no longer used for worship."),
 # --- Müzeler -----------------------------------------------------------------
 "bursa-arkeoloji-muzesi": ("Kültürpark'ta, Bursa ve çevresindeki antik kentlerden çıkan eserleri sergileyen müze.",
                            "A museum in Kültürpark showing finds from the ancient cities around Bursa."),
@@ -179,11 +179,11 @@ NAMES = {
 
 PERIOD_DEFAULT_HISTORICAL = None
 PERIOD = {
-    **{s: "Bizans" for s in ("ayasofya-camii-iznik", "fatih-camii-tirilye", "veled-i-yanic-cami", "kemerli-kilise-tirilye",
+    **{s: "Bizans" for s in ("ayasofya-camii-iznik", "fatih-camii-tirilye", "kemerli-kilise-tirilye",
                              "iznik-konsil", "hisar-arkeopark")},
     **{s: "Antik" for s in ("iznik-dikilitas", "iznik-roma-tiyatrosu", "antik-tiyatro", "aktopraklik-hoyugu", "iznik-surlari")},
     **{s: "Osmanlı" for s in (
-        "bursa-ulu-camii", "emir-sultan-camii", "orhan-gazi-camii", "iznik-yesil-cami", "yildirim-camii",
+        "bursa-ulu-camii", "veled-i-yanic-cami", "emir-sultan-camii", "orhan-gazi-camii", "iznik-yesil-cami", "yildirim-camii",
         "bursa-muradiye-camii", "yesil-camii", "eski-camii-golyazi", "aziz-panteleimon-kilisesi", "mayor-sinagogu",
         "tophane-saat-kulesi", "koza-hani", "emir-han", "bursa-kapalicarsi", "irgandi-koprusu", "tuz-han-bursa",
         "geyve-han", "yesil-turbe", "osman-gazi-turbesi", "orhan-gazi-turbesi", "sehzade-mustafa-turbesi",
