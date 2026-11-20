@@ -131,3 +131,11 @@ class FallbackFlowTests(unittest.TestCase):
             ph.fetch_imageinfo, ph.commons_geosearch, ph.commons_category_files = orig
         self.assertEqual(seen["files"], ["Sirince village 2019.jpg"])   # önek yok, adı uymayan elendi
         self.assertEqual((info["kaynak"], info["dosya"]), ("commons-yakin", "Sirince village 2019.jpg"))
+
+
+class PhotoSearchHelpersTest(unittest.TestCase):
+    def test_radius_and_distance(self):
+        import photo_search as s
+        self.assertEqual(s.search_radius({"ana_yer": "efes", "kategori": "ruins"}), 150)
+        self.assertEqual(s.search_radius({"ana_yer": "", "kategori": "museum"}), 800)
+        self.assertAlmostEqual(s.dist_m((38.0, 27.0), (38.001, 27.0)), 111, delta=1)

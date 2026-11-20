@@ -292,8 +292,9 @@ def main(argv: Optional[List[str]] = None) -> int:
         desc = importlib.import_module(f"{args.city}_descriptions")
         DROPPED = desc.DROPPED
         REJECT = frozenset(getattr(desc, "PHOTO_REJECT_FILES", {}))
+        PICK = dict(getattr(desc, "PHOTO_PICK", {}))
     except ModuleNotFoundError:
-        DROPPED, REJECT = {}, frozenset()
+        DROPPED, REJECT, PICK = {}, frozenset(), {}
     rdir = city_results(args.city)
 
     shortlist = json.loads((rdir / "shortlist.json").read_text(encoding="utf-8"))
@@ -335,7 +336,20 @@ def main(argv: Optional[List[str]] = None) -> int:
             lic = ((infos.get(f, {}).get("imageinfo") or [{}])[0].get("extmetadata") or {}).get("LicenseShortName", {})
             rejected[slug] = strip_html(lic.get("value", "")) or "bilgi yok"
 
-    # 4) Yedek yol (yalnızca istenirse; İstanbul çıktısı değişmesin)
+    # 4) Elle seçilen dosyalar (photo_search.py adaylarından; PHOTO_PICK). Lisans süzgecinden yine geçer.
+    picked: Dict[str, str] = {}
+    pick_infos = fetch_imageinfo(sorted({f for slug, f in PICK.items() if slug not in photos}))
+    for slug, f in PICK.items():
+        if slug in photos:
+            continue
+        info = parse_imageinfo(pick_infos.get(f, {}))
+        if info:
+            photos[slug] = info
+            picked[slug] = f
+        else:
+            p.log(f"  UYARI: elle seçilen dosya kullanılamadı (lisans/bulunamadı): {slug} -> {f}")
+
+    # 5) Yedek yol (yalnızca istenirse; İstanbul çıktısı değişmesin)
     fallback: Dict[str, str] = {}
     if args.commons_fallback:
         for s in places:
@@ -355,6 +369,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         "wikidata_found_by_search": found_by_search,
         "rejected_license": rejected,
         "commons_fallback": fallback,   # elle gözden geçirilecek
+        "elle_secilen": picked,
         "missing": missing,
     }
     out = rdir / "photos.json"

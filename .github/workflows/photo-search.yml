@@ -1,0 +1,53 @@
+# Fotoğrafı eksik yerler için Commons'ta geniş arama (photo_search.py). Hiçbir şeyi otomatik kabul etmez:
+# aday listesi ve temas sayfaları results/<şehir>/photo_candidates* olarak commit'lenir, seçim elle yapılır.
+# Tetikleme: data-pipeline/photo-search-request.txt değişip data/* dalına yüklenince ya da elle.
+name: Fotoğraf adayları
+
+on:
+  workflow_dispatch:
+    inputs:
+      cities:
+        description: "Şehirler (boşlukla ayrılmış)"
+        required: false
+        default: "izmir bursa kapadokya"
+  push:
+    branches: ["data/**"]
+    paths: [data-pipeline/photo-search-request.txt]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: data-pipeline-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  search:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pillow
+      - name: Adayları ara
+        env:
+          INPUT_CITIES: ${{ github.event.inputs.cities }}
+        run: |
+          set -e
+          cities="$INPUT_CITIES"
+          [ -n "$cities" ] || cities=$(sed -n 's/^Şehirler:[[:space:]]*//p' data-pipeline/photo-search-request.txt | head -1)
+          for city in ${cities:-izmir bursa kapadokya}; do
+            rm -f data-pipeline/results/$city/photo_candidates*
+            python data-pipeline/photo_search.py --city "$city"
+          done
+      - name: Sonucu kaydet
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data-pipeline/results
+          git commit -m "Veri hattı: fotoğraf adayları" || echo "Değişiklik yok"
+          git pull --rebase
+          git push
