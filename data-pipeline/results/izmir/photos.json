@@ -1122,6 +1122,28 @@
    "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
    "source_url": "https://commons.wikimedia.org/wiki/File:Myonnesos1.jpg"
   },
+  "pamucak-sahili": {
+   "file": "Ephesus beach-2.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/Ephesus_beach-2.jpg/1280px-Ephesus_beach-2.jpg",
+   "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/Ephesus_beach-2.jpg/500px-Ephesus_beach-2.jpg",
+   "width": 1280,
+   "height": 854,
+   "author": "Dguendel",
+   "license": "CC BY 3.0",
+   "license_url": "https://creativecommons.org/licenses/by/3.0",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Ephesus_beach-2.jpg"
+  },
+  "v-sarayi": {
+   "file": "Harabeler... - panoramio.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Harabeler..._-_panoramio.jpg/1280px-Harabeler..._-_panoramio.jpg",
+   "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Harabeler..._-_panoramio.jpg/500px-Harabeler..._-_panoramio.jpg",
+   "width": 1280,
+   "height": 960,
+   "author": "Sinan Şahin",
+   "license": "CC BY 3.0",
+   "license_url": "https://creativecommons.org/licenses/by/3.0",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Harabeler..._-_panoramio.jpg"
+  },
   "bizans-sarayi": {
    "file": "Turkey-2821 (2216382697) (2).jpg",
    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/Turkey-2821_%282216382697%29_%282%29.jpg/1280px-Turkey-2821_%282216382697%29_%282%29.jpg",
@@ -1247,6 +1269,10 @@
   "altinkum-plaji": "commons-yakin: Altinkum Beaches 15 (October2009) - panoramio.jpg",
   "kalem-adasi": "commons-kategori: Gap between Kalem Island south coast on right and mainland Bademli, Turkey.jpg"
  },
+ "elle_secilen": {
+  "pamucak-sahili": "Ephesus beach-2.jpg",
+  "v-sarayi": "Harabeler... - panoramio.jpg"
+ },
  "missing": [
   "ayibaligi-plaji",
   "badembuku-koyu",
@@ -1258,8 +1284,6 @@
   "hasanaga-bahcesi",
   "nebiler",
   "odemis-muzesi",
-  "pamucak-sahili",
-  "sancakburnu-kalesi",
-  "v-sarayi"
+  "sancakburnu-kalesi"
  ]
 }

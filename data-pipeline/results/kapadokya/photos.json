@@ -451,6 +451,50 @@
    "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
    "source_url": "https://commons.wikimedia.org/wiki/File:Soganli_Valley_Cappadocia.JPG"
   },
+  "aktepe-hill-sunset-point": {
+   "file": "CAPPADOCIA Göreme National Park and the Rock Sites. World Heritage List. Turkey. Hot Air Ballooning Cappadocia.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/CAPPADOCIA_G%C3%B6reme_National_Park_and_the_Rock_Sites._World_Heritage_List._Turkey._Hot_Air_Ballooning_Cappadocia.jpg/1280px-CAPPADOCIA_G%C3%B6reme_National_Park_and_the_Rock_Sites._World_Heritage_List._Turkey._Hot_Air_Ballooning_Cappadocia.jpg",
+   "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/CAPPADOCIA_G%C3%B6reme_National_Park_and_the_Rock_Sites._World_Heritage_List._Turkey._Hot_Air_Ballooning_Cappadocia.jpg/500px-CAPPADOCIA_G%C3%B6reme_National_Park_and_the_Rock_Sites._World_Heritage_List._Turkey._Hot_Air_Ballooning_Cappadocia.jpg",
+   "width": 1280,
+   "height": 720,
+   "author": "Feridun F. Alkaya",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "source_url": "https://commons.wikimedia.org/wiki/File:CAPPADOCIA_G%C3%B6reme_National_Park_and_the_Rock_Sites._World_Heritage_List._Turkey._Hot_Air_Ballooning_Cappadocia.jpg"
+  },
+  "soganli-karabas-kilisesi": {
+   "file": "Capadoccia Jul 2023 22 59 14 257000.jpeg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Capadoccia_Jul_2023_22_59_14_257000.jpeg/1280px-Capadoccia_Jul_2023_22_59_14_257000.jpeg",
+   "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Capadoccia_Jul_2023_22_59_14_257000.jpeg/500px-Capadoccia_Jul_2023_22_59_14_257000.jpeg",
+   "width": 1280,
+   "height": 960,
+   "author": "Robot8A",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Capadoccia_Jul_2023_22_59_14_257000.jpeg"
+  },
+  "soganli-sakli-kilise": {
+   "file": "Three churches domed hidden church.JPG",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/Three_churches_domed_hidden_church.JPG/1280px-Three_churches_domed_hidden_church.JPG",
+   "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/Three_churches_domed_hidden_church.JPG/500px-Three_churches_domed_hidden_church.JPG",
+   "width": 1280,
+   "height": 854,
+   "author": "This Photo was taken by Wolfgang Moroder . Feel free to use my photos, but please mention me as the author and send me a message . This image is not in the public domain . Please respect the copyright",
+   "license": "CC BY-SA 3.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Three_churches_domed_hidden_church.JPG"
+  },
+  "soganli-tahtali-kilise": {
+   "file": "Tahtalı Church - St. Barbara Church in Soğanlı - 26054091215.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3d/Tahtal%C4%B1_Church_-_St._Barbara_Church_in_So%C4%9Fanl%C4%B1_-_26054091215.jpg/1280px-Tahtal%C4%B1_Church_-_St._Barbara_Church_in_So%C4%9Fanl%C4%B1_-_26054091215.jpg",
+   "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3d/Tahtal%C4%B1_Church_-_St._Barbara_Church_in_So%C4%9Fanl%C4%B1_-_26054091215.jpg/500px-Tahtal%C4%B1_Church_-_St._Barbara_Church_in_So%C4%9Fanl%C4%B1_-_26054091215.jpg",
+   "width": 1280,
+   "height": 853,
+   "author": "prilfish",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Tahtal%C4%B1_Church_-_St._Barbara_Church_in_So%C4%9Fanl%C4%B1_-_26054091215.jpg"
+  },
   "zelve-acik-hava-muzesi": {
    "file": "Zelve-December.jpg",
    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Zelve-December.jpg/1280px-Zelve-December.jpg",
@@ -580,32 +624,6 @@
    "source_url": "https://commons.wikimedia.org/wiki/File:Rose_Valley,_Cappadocia_-_K%C4%B1z%C4%B1l%C3%A7ukur_Vadisi,_Kapadokya_06.jpg",
    "kaynak": "commons-yakin",
    "dosya": "Rose Valley, Cappadocia - Kızılçukur Vadisi, Kapadokya 06.jpg"
-  },
-  "soganli-kubbeli-kilise": {
-   "file": "Kubbeli Kilise 03.jpg",
-   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Kubbeli_Kilise_03.jpg/1280px-Kubbeli_Kilise_03.jpg",
-   "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Kubbeli_Kilise_03.jpg/500px-Kubbeli_Kilise_03.jpg",
-   "width": 1280,
-   "height": 1920,
-   "author": "Bernard Gagnon",
-   "license": "CC BY-SA 3.0",
-   "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
-   "source_url": "https://commons.wikimedia.org/wiki/File:Kubbeli_Kilise_03.jpg",
-   "kaynak": "commons-yakin",
-   "dosya": "Kubbeli Kilise 03.jpg"
-  },
-  "soganli-yilanli-kilise": {
-   "file": "38800 Soğanlı-Yeşilhisar-Kayseri, Turkey - panoramio (9).jpg",
-   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/38800_So%C4%9Fanl%C4%B1-Ye%C5%9Filhisar-Kayseri%2C_Turkey_-_panoramio_%289%29.jpg/1280px-38800_So%C4%9Fanl%C4%B1-Ye%C5%9Filhisar-Kayseri%2C_Turkey_-_panoramio_%289%29.jpg",
-   "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/38800_So%C4%9Fanl%C4%B1-Ye%C5%9Filhisar-Kayseri%2C_Turkey_-_panoramio_%289%29.jpg/500px-38800_So%C4%9Fanl%C4%B1-Ye%C5%9Filhisar-Kayseri%2C_Turkey_-_panoramio_%289%29.jpg",
-   "width": 1280,
-   "height": 720,
-   "author": "izvarin",
-   "license": "CC BY-SA 3.0",
-   "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
-   "source_url": "https://commons.wikimedia.org/wiki/File:38800_So%C4%9Fanl%C4%B1-Ye%C5%9Filhisar-Kayseri,_Turkey_-_panoramio_(9).jpg",
-   "kaynak": "commons-yakin",
-   "dosya": "38800 Soğanlı-Yeşilhisar-Kayseri, Turkey - panoramio (9).jpg"
   }
  },
  "wikidata_found_by_search": {
@@ -635,20 +653,22 @@
   "devrent-vadisi": "commons-yakin: Camel rock,Devrent,デヴレントのラクダ岩 - panoramio.jpg",
   "gul-vadisi": "commons-yakin: Mouth of Rose Valley - 2014.10 - panoramio.jpg",
   "meskendir-valley-entrance": "commons-yakin: Dovecotes in Meskendir Valley - 2014.10 - panoramio.jpg",
-  "kizilcukur-vadisi": "commons-yakin: Rose Valley, Cappadocia - Kızılçukur Vadisi, Kapadokya 06.jpg",
-  "soganli-kubbeli-kilise": "commons-yakin: Kubbeli Kilise 03.jpg",
-  "soganli-yilanli-kilise": "commons-yakin: 38800 Soğanlı-Yeşilhisar-Kayseri, Turkey - panoramio (9).jpg"
+  "kizilcukur-vadisi": "commons-yakin: Rose Valley, Cappadocia - Kızılçukur Vadisi, Kapadokya 06.jpg"
+ },
+ "elle_secilen": {
+  "aktepe-hill-sunset-point": "CAPPADOCIA Göreme National Park and the Rock Sites. World Heritage List. Turkey. Hot Air Ballooning Cappadocia.jpg",
+  "soganli-karabas-kilisesi": "Capadoccia Jul 2023 22 59 14 257000.jpeg",
+  "soganli-sakli-kilise": "Three churches domed hidden church.JPG",
+  "soganli-tahtali-kilise": "Tahtalı Church - St. Barbara Church in Soğanlı - 26054091215.jpg"
  },
  "missing": [
-  "aktepe-hill-sunset-point",
   "bahattin-in-samanligi-kilise",
   "guray-muze",
   "ihlara-cam-teras",
   "kutsal-hac-kilisesi",
   "mazi-yeralti-sehri",
   "soganli-geyikli-kilise",
-  "soganli-karabas-kilisesi",
-  "soganli-sakli-kilise",
-  "soganli-tahtali-kilise"
+  "soganli-kubbeli-kilise",
+  "soganli-yilanli-kilise"
  ]
 }
