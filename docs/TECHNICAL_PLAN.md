@@ -131,7 +131,7 @@ Seed'de 20 rozet var (6 genel, 8 tarihi, 6 doğa); türbe ile 21, 'Şehir Gönü
 | Faz | Süre | Backend işleri | Durum |
 | --- | --- | --- | --- |
 | 0 – Hazırlık | 1-2 hf | Supabase projesi, repo ve migration yapısı, veri hattı, yer onayı | Tamam |
-| 1 – Altyapı | 3-4 hf | Şema, okuma RPC'leri, RLS, testler, İstanbul verisi | Tamam; canlıda 156 yer, 151 fotoğraf |
+| 1 – Altyapı | 3-4 hf | Şema, okuma RPC'leri, RLS, testler, İstanbul verisi | Tamam; canlıda 156 yer, 154 fotoğraf |
 | 2 – Ziyaret ve başarım | 3-4 hf | Auth (e-posta), `checkin`, rozet motoru, ilerleme | Tamam; canlı uçtan uca test geçti. Apple/Google girişi bekliyor |
 | 3 – Geo-AR | 3-4 hf | `city_pack` (+ `has_area`, `thumb_url`) | Backend tamam; mobil kamera ekranı var, saha testi bekliyor |
 | 4 – Paylaşım ve özet | 2-3 hf | `my_summary`, hesap silme, avatar yükleme | Backend tamam; mobil ekranlar bekliyor |
@@ -140,7 +140,7 @@ Seed'de 20 rozet var (6 genel, 8 tarihi, 6 doğa); türbe ile 21, 'Şehir Gönü
 ## Canlıdaki durum (19 Kasım 2026, akşam denetimi)
 
 - Supabase projesi `gezi-app-test` (Frankfurt). 36 migration uygulandı; depodaki `backend/supabase/migrations/` ile birebir aynı.
-- 156 İstanbul yeri (113 tarihi, 43 doğa, 15'i türbe), TR+EN açıklamalı; 151'inde fotoğraf; 27 rozet, görselleri Storage'da; 11 hazır rota.
+- 156 İstanbul yeri (113 tarihi, 43 doğa, 15'i türbe), TR+EN açıklamalı; 154'ünde fotoğraf; 27 rozet, görselleri Storage'da; 11 hazır rota.
 - `checkin` Edge Function'ı yayında; canlı test: girişsiz 401, uzak 'too_far', zayıf GPS 'low_accuracy', doğru konumda kabul + 'first-step' rozeti.
 - Arama tanınırlığa göre sıralı ve Türkçe harfe duyarsız.
 - Hesap silme, avatar yükleme ve kullanıcı bildirim/öneri akışı canlıda; canlı test geçti.
@@ -169,7 +169,7 @@ Backend (Claude):
 - [ ] E-posta gönderimi için özel SMTP (Supabase'in yerleşik e-postası saatte birkaç iletiyle sınırlı; beta öncesi şart)
 - [ ] Apple/Google ile giriş: anahtarlar gelince Supabase Auth sağlayıcı ayarı
 - [ ] Hata takibi ve analitik (kapalı beta için; araç seçimi açık konu)
-- [x] Fotoğrafı olmayan 23 yerin 18'ine elle seçilmiş Commons fotoğrafı (151/156). Kalan 5 yerde (Aydos Ormanı, Hacılı Şelalesi, Beykoz Korusu, Telli Baba Türbesi, Yeniköy Seyir Terası) uygun serbest lisanslı fotoğraf yok; ileride kendi çekimimiz ya da kullanıcı fotoğrafı
+- [x] Fotoğrafı olmayan 23 yerin 21'ine elle seçilmiş Commons fotoğrafı (154/156); son 3'ü (Aydos Ormanı, Hacıllı Şelalesi, Yeniköy Seyir Terası) hedefli aramayla bulundu. Kalan 2 yerde (Beykoz Korusu, Telli Baba Türbesi) yere ait serbest lisanslı fotoğraf yok; kendi çekimimiz ya da onaylı kullanıcı fotoğrafı beklenir
 
 Mobil (ChatGPT):
 - [x] Expo SDK 54 → 58 (iPhone Expo Go ile çalışıyor)

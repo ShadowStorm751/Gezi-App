@@ -40,7 +40,8 @@ backend/supabase/
 │   ├── 20261120030000_place_reviews.sql       yer değerlendirmeleri (yıldız + onaylı not)
 │   ├── 20261120040000_modular_rules_exports.sql rozet kuralları ve KVKK bölümleri parçalara ayrıldı
 │   ├── 20261120050000_istanbul_long_desc_1.sql   uzun açıklamalar, 1. parti (üretilir: content/build_long_desc.py)
-│   └── 2026112006…_istanbul_long_desc_N.sql     sonraki partiler; content-apply ile yüklenir
+│   ├── 2026112006…_istanbul_long_desc_N.sql     2-15. partiler (156/156); content-apply ile yüklenir
+│   └── 20261120200000_istanbul_photos_extra2.sql 3 yer için hedefli aramayla seçilen fotoğraf (üretilir: content/build_photos_extra2.py)
 ├── functions/badge-upload/              rozet görsellerini Storage'a yükler (.github/workflows/badges.yml)
 ├── functions/checkin/
 │   ├── index.ts                      Edge Function
