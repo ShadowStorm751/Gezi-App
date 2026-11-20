@@ -1,6 +1,6 @@
 ok
-zaman: 2026-11-19T22:41:48Z
-çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44630953228
+zaman: 2026-11-20T09:56:47Z
+çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44714936846
 ---
 CREATE DATABASE
 ALTER DATABASE
@@ -83,7 +83,7 @@ UPDATE 255
 
                                  celsus_ana_yer                                 
 --------------------------------------------------------------------------------
- {"id": "aaf1a32c-1996-4581-9f0d-d94a006b033b", "name": "Efes", "slug": "efes"}
+ {"id": "4ea4309e-9281-4e82-a99d-dccd3ec5d879", "name": "Efes", "slug": "efes"}
 (1 row)
 
    slug    | paket_yer | paket_ana_yer 
@@ -99,3 +99,8 @@ ROLLBACK
 psql:backend/supabase/tests/ci_checks.sql:61: NOTICE:  beklenen hata: place kizil-avlu : ana yerin kendisi başka bir yerin içinde olamaz (tek seviye)
 DO
 TAMAM
+== Görseli olmayan rozet (0 olmalı)
+ slug 
+------
+(0 rows)
+
