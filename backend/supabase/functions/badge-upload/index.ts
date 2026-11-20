@@ -1,5 +1,5 @@
 // Rozet görsellerini 'badges' bucket'ına yükler. Gizli anahtar gerektirmez:
-// yalnızca aşağıdaki 42 dosya, içeriği birebir aynıysa (SHA-256) kabul edilir.
+// yalnızca aşağıdaki 43 dosya, içeriği birebir aynıysa (SHA-256) kabul edilir.
 // Başka bir dosya veya değiştirilmiş içerik 403 döner. Kullanan: .github/workflows/badges.yml
 import { createClient } from "npm:@supabase/supabase-js@2";
 
@@ -42,6 +42,7 @@ const ALLOWED: Record<string, string> = {
   "ihlara-vadisi-kesif.webp": "4c9fefabec4c517f6fff4c3b025e4995ee83ff333c2c05e32801b0ae12d152db",
   "kemeralti-carsisi-kesif.webp": "26ccb70952cfed9a1a48eccd470e5c80f25dc12bb95677933d225b6ca4d7ec24",
   "kulturpark-kesif.webp": "f09fb8b49c5a3131def943cd28deda3ca600382b0033a62ebf6151f307c3e2fc",
+  "mustafapasa-kesif.webp": "f397853d23d7a1d43a3b4c7871148617c2fd0b7b884835de949d4df72e94d969",
   "merinos-parki-kesif.webp": "3e1ea7d106a33992a29b5d507a2ed50a8ff0810fdecbeb0c4100ca7964fad826",
   "pergamon-kesif.webp": "72860d86ba8417b52fabf50252cae60a8b4c59453ec883a23eef3004d55105f1",
   "soganli-vadisi-kesif.webp": "eca9744d3af250a05685f41109c0d35e829fbce710c60a0624ac4f7a32624ac7",

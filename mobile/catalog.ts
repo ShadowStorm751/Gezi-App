@@ -1,6 +1,7 @@
 export type Lang = 'tr' | 'en';
 type PackPlace = {
   id: string; slug: string; name: string; kind: 'historical' | 'nature'; category: string;
+  district?: string; period?: string | null; period_code?: string | null;
   latitude: number; longitude: number; short_desc: string | null; checkin_radius_m?: number; has_area?: boolean; thumb_url?: string | null;
 };
 export type Pack = {city:string; name:string; version:string|null; places:PackPlace[]};
@@ -43,8 +44,21 @@ export const categoryNames:Record<string,[string,string]> = {
 export function mapPlace(row:PackPlace, lang:Lang) {
   const categoryLabel = categoryNames[row.category]?.[lang === 'en' ? 1 : 0] ?? row.category;
   return {id:row.id, name:row.name, kind:row.kind, category:row.category, categoryLabel, description:row.short_desc,
+    district:row.district,period:row.period,periodCode:row.period_code,
     radius:row.checkin_radius_m, hasArea:row.has_area,
     thumbnail: webUrl(row.thumb_url), coordinate:{latitude:row.latitude,longitude:row.longitude}};
+}
+
+// Yakınlık sorgusu dönem ve check-in alanlarını içermeyebilir.
+export function mergeNearbyPlace<T extends ReturnType<typeof mapPlace>>(nearby:T, packed?:ReturnType<typeof mapPlace>) {
+  return {
+    ...nearby,
+    period: nearby.period === undefined ? packed?.period : nearby.period,
+    periodCode: nearby.periodCode === undefined ? packed?.periodCode : nearby.periodCode,
+    thumbnail: nearby.thumbnail ?? packed?.thumbnail,
+    radius: packed?.radius ?? nearby.radius,
+    hasArea: packed?.hasArea ?? nearby.hasArea,
+  };
 }
 
 export function webUrl(value:unknown): string | null {
@@ -78,8 +92,11 @@ export async function loadDetail(rpc:Rpc, id:string, lang:Lang) {
   if (error) throw new Error('place_detail');
   if (data === null) return null;
   const d = data as {id:string; name:string; category_name:string; period:string|null;
+    period_code?:string;built_year?:number;rating?:{average:number|null;count:number};visited_at?:string;has_area?:boolean;checkin_radius_m?:number;
     long_desc:string|null; short_desc:string|null; best_time:string|null; photos?:PlacePhoto[]};
   if (!d || d.id !== id || typeof d.name !== 'string' || typeof d.category_name !== 'string') throw new Error('place_detail');
   return {name:d.name,category:d.category_name,period:d.period,description:d.long_desc || d.short_desc,bestTime:d.best_time,
+    periodCode:d.period_code,builtYear:d.built_year,rating:d.rating,visitedAt:d.visited_at,
+    ...(d.has_area!=null?{hasArea:d.has_area}:{}),...(d.checkin_radius_m!=null?{radius:d.checkin_radius_m}:{}),
     photos:Array.isArray(d.photos) ? d.photos.filter(creditedPhoto) : []};
 }

@@ -214,6 +214,8 @@ type CityPack = {
   version: string;   // opak sürüm (32 karakter); yalnızca eşitlikle karşılaştır
   places: Array<{ id: string; slug: string; name: string; short_desc: string | null;
                   kind: PlaceKind; category: CategorySlug;
+                  period: string | null;          // dönem, istenen dilde ("Osmanlı" / "Ottoman"); doğa yerlerinde çoğunlukla null
+                  period_code: string | null;     // ham değer, her zaman Türkçe ("Osmanlı", "Bizans"); rozet eşlemesi için
                   latitude: number; longitude: number; checkin_radius_m: number;
                   has_area: boolean;              // true: ada/orman gibi alan; check-in için sınırın içinde olmak yeterli
                   parent_id: string | null;       // ana yerin id'si (ör. Celsus Kütüphanesi -> Efes); bağımsızsa null

@@ -1,6 +1,6 @@
 # Gezi App – MVP Teknik Plan (İstanbul Pilotu)
 
-Son güncelleme: 19 Kasım 2026. Bu dosya projenin ortak referansıdır; Claude, ChatGPT ve proje sahibi buradan okur.
+Son güncelleme: 20 Kasım 2026 (akşam). Bu dosya projenin ortak referansıdır; Claude, ChatGPT ve proje sahibi buradan okur.
 
 ## Özet ve kapsam
 
@@ -19,7 +19,8 @@ MVP, İstanbul'da 100-150 yeri (yaklaşık %65 tarihi-kültürel, %35 doğa ve m
 | Dil | İlk sürümden TR + EN. Bir yer iki dilde de adı ve kısa açıklaması olmadan yayına alınamaz. |
 | Harita | Mobil `react-native-maps` kullanıyor; çevrimdışı karo indirme ayrı bir özellik |
 | Fotoğraflar | Wikimedia Commons, yalnızca serbest lisans (CC0, kamu malı, CC BY, CC BY-SA, FAL); Wikimedia adresinden gösterilir, yazar ve lisans atfı zorunlu |
-| Mobil test | iPhone'da App Store Expo Go ile; Expo Go SDK 58 istediği için mobil proje SDK 54 → 58 yükseltilecek |
+| Mobil test | iPhone'da App Store Expo Go ile (SDK 58) |
+| Tasarım | "Sıcak keşif": `docs/TASARIM.md` (renk, yazı, boşluk, bileşenler, 5 ana ekran, animasyon zaman çizelgeleri); mobilde `mobile/theme.js` tek kaynak |
 | Yeni şehirler | Veri ayrı bir sohbette `data/yeni-sehirler` dalında hazırlanıyor (aday adaylar: İzmir, Bursa, Kapadokya); yerler `is_published = false` eklenir, İstanbul testinden sonra açılır. Canlı Supabase'i yalnızca ana sohbet günceller |
 
 ### İş bölümü
@@ -133,24 +134,32 @@ Seed'de 20 rozet var (6 genel, 8 tarihi, 6 doğa); türbe ile 21, 'Şehir Gönü
 | 0 – Hazırlık | 1-2 hf | Supabase projesi, repo ve migration yapısı, veri hattı, yer onayı | Tamam |
 | 1 – Altyapı | 3-4 hf | Şema, okuma RPC'leri, RLS, testler, İstanbul verisi | Tamam; canlıda 156 yer, 154 fotoğraf |
 | 2 – Ziyaret ve başarım | 3-4 hf | Auth (e-posta), `checkin`, rozet motoru, ilerleme | Tamam; canlı uçtan uca test geçti. Apple/Google girişi bekliyor |
-| 3 – Geo-AR | 3-4 hf | `city_pack` (+ `has_area`, `thumb_url`) | Backend tamam; mobil kamera ekranı var, saha testi bekliyor |
-| 4 – Paylaşım ve özet | 2-3 hf | `my_summary`, hesap silme, avatar yükleme | Backend tamam; mobil ekranlar bekliyor |
+| 3 – Geo-AR | 3-4 hf | `city_pack` (+ `has_area`, `thumb_url`, `period`) | Backend tamam; mobil kamera ekranı var, saha testi bekliyor |
+| 4 – Paylaşım ve özet | 2-3 hf | `my_summary`, hesap silme, avatar, rotalar, arkadaşlar, öneriler, kullanıcı fotoğrafları, değerlendirmeler | Backend tamam; mobil kodu tamam, iPhone kabul testi bekliyor |
 | 5 – Kapalı beta | 3-4 hf | Hata takibi, analitik, kullanıcı bildirimleri (tamam), ayrı canlı (production) proje | Bildirim akışı tamam; diğerleri yapılacak |
 
-## Canlıdaki durum (19 Kasım 2026, akşam denetimi)
+## Canlıdaki durum (20 Kasım 2026, akşam denetimi)
 
-- Supabase projesi `gezi-app-test` (Frankfurt). 36 migration uygulandı; depodaki `backend/supabase/migrations/` ile birebir aynı.
-- 156 İstanbul yeri (113 tarihi, 43 doğa, 15'i türbe), TR+EN açıklamalı; 154'ünde fotoğraf; 27 rozet, görselleri Storage'da; 11 hazır rota.
-- `checkin` Edge Function'ı yayında; canlı test: girişsiz 401, uzak 'too_far', zayıf GPS 'low_accuracy', doğru konumda kabul + 'first-step' rozeti.
-- Arama tanınırlığa göre sıralı ve Türkçe harfe duyarsız.
-- Hesap silme, avatar yükleme ve kullanıcı bildirim/öneri akışı canlıda; canlı test geçti.
-- iPhone'da Expo Go (SDK 58) ile canlı veriye bağlı ilk deneme başarılı (20 Kasım 01:10).
-- Canlı sosyal ve rota testi (19 Kasım 22:45): 3 geçici kullanıcıyla arkadaşlık, arama, sıralama, sosyal rozetler, rota tamamlama (son durak gerçek check-in) ve KVKK dışa aktarımı; 29 kontrolün hepsi geçti, test verisi silindi.
-- Sertleştirme (migration `20261119240000`): gereksiz tablo yetkileri kaldırıldı, profil yazımı 4 sütunla sınırlı, RLS ilkeleri hızlandırıldı. Performans denetçisinde uyarı yok; güvenlik denetçisinde yalnızca bilinçli 4 SECURITY DEFINER uyarısı var (`backend/README.md`).
+- Supabase projesi `gezi-app-test` (Frankfurt). 51 migration uygulandı; depodaki `backend/supabase/migrations/` ile birebir aynı. Son eklenen: `city_pack` yerlerine `period`/`period_code` (Keşfet kartlarındaki "OSMANLI · CAMİ" satırı için).
+- 156 İstanbul yeri (113 tarihi, 43 doğa), hepsinde TR+EN kısa ve uzun açıklama; 154'ünde fotoğraf; 27 rozet, görselleri Storage'da; 11 hazır rota.
+- Canlıda kayıtlı kullanıcı yok (test kullanıcıları silindi); ilk gerçek hesap iPhone testinde açılacak.
+- `checkin`, `delete-account`, `badge-upload`, `photo-cleanup`, `content-apply` Edge Function'ları yayında; geçici test fonksiyonları 410 dönen boş sürüme çevrildi.
+- Canlı testler: sosyal + rota 29/29, kullanıcı fotoğrafları 28/28; modüler rozet/KVKK yapısı için eşdeğerlik testi geçti; `backend/tests/audit.sql` temiz (77 fonksiyon, 19 tablo).
+- Güvenlik denetçisinde yalnızca bilinçli SECURITY DEFINER uyarıları var (yazma RPC'leri, `backend/README.md`); performans denetçisinde yalnızca "kullanılmayan indeks" bilgileri.
+
+### Mobil durum (20 Kasım, ChatGPT'nin son çalışması incelendi)
+
+- Yeni tasarım uygulandı: `theme.js` + Fraunces/DM Sans, beş alt sekme, Keşfet (arama, çipler, öneri kartları, yakındakiler), tam sayfa yer detayı (galeri, sabit "Buradayım" çubuğu), tam ekran harita ve seçili yer kartı, Buradayım sonuç sayfası, sıralı rozet kutlaması, Reanimated + haptik, "hareketi azalt" desteği.
+- Kullanıcı fotoğrafları (yayın onayıyla), yer değerlendirmeleri (yıldız dağılımı, Değerlendirmelerim), semt araması ve kaydedilen yerler eklendi; `VERI_ENVANTERI.md` güncellendi.
+- Kontrol: kullanılan bütün RPC'ler `API.md`'de ve parametreleri doğru; ekranlarda çıplak renk kodu yok; 33 dosyada sözdizimi hatası yok; mobil testleri 28/28 geçiyor; repoda gizli anahtar ya da `.env` yok.
+- Bulunan ve backend'de düzeltilen: mobil, paketteki yerlerin dönemini okuyordu ama `city_pack` bu alanı vermiyordu; eklendi. Mobil, `period_code` ile rozet eşler ve yakın yerler yüklenirken paketteki dönem bilgisini korur. Semt aramasını `DistrictSearch` yürütür.
+- Bekleyen: fiziksel iPhone kabul testi (yerleşim, haptik, animasyonlar, kamera/galeri, iki hesapla arkadaşlar).
 
 ## Yayına kadar kalanlar
 
 Backend (Claude):
+- [x] `city_pack` yerlerine dönem (`period`, `period_code`); Keşfet kartlarında dönem satırı için
+- [x] Sıcak keşif tasarım sistemi ve ana akış ekran taslakları (Claude Design), `docs/TASARIM.md`
 - [x] Hesap silme: `delete-account` Edge Function (canlıda, test edildi)
 - [x] Avatar yükleme: yalnızca kendi klasörü, 2 MB, JPEG/PNG/WebP (canlıda, test edildi)
 - [x] Kullanıcı katkısı: hata bildirimi ve yeni yer önerisi, yönetici onay akışı, 'Şehir Gönüllüsü' rozeti (canlıda, test edildi)
@@ -173,13 +182,17 @@ Backend (Claude):
 
 Mobil (ChatGPT):
 - [x] Expo SDK 54 → 58 (iPhone Expo Go ile çalışıyor)
-- [ ] Rotalar listesi ve rota detayı ekranları (`docs/REQUESTS.md`)
-- [ ] Arkadaşlar ve sıralama ekranları (`docs/REQUESTS.md`)
-- [ ] "Sana önerilenler" bölümü (`docs/REQUESTS.md`)
-- [ ] Fotoğraf ekleme ve "Fotoğraflarım" ekranları (`docs/REQUESTS.md`)
-- [ ] Yer puanı, değerlendirmeler ve "Değerlendir" ekranları (`docs/REQUESTS.md`)
-- [ ] Hesap silme, avatar, "Bir sorun mu var?", "Yer öner" ve "Katkılarım" ekranları (`docs/REQUESTS.md`)
-- [x] Haritada "© OpenStreetMap katkıcıları" atfı (ODbL lisans şartı; `docs/REQUESTS.md`)
+- [x] Rotalar listesi ve rota detayı ekranları
+- [x] Arkadaşlar ve sıralama ekranları
+- [x] "Sana önerilenler" bölümü
+- [x] Fotoğraf ekleme ve "Fotoğraflarım" ekranları
+- [x] Yer puanı, değerlendirmeler ve "Değerlendir" ekranları
+- [x] Hesap silme, avatar, "Bir sorun mu var?", "Yer öner" ve "Katkılarım" ekranları
+- [x] Haritada "© OpenStreetMap katkıcıları" atfı (ODbL lisans şartı)
+- [x] Sıcak keşif tasarımı ve animasyonlar (`docs/TASARIM.md`)
+- [x] `city_pack.period_code` → `mapPlace` (rozet ilerlemesi listelerde de doğru çalışsın; `docs/REQUESTS.md`)
+- [x] Rotalar, Rozetler ve Profil sekmelerinde sıcak keşif düzeni: fotoğraflı rota listesi, filtrelenebilir rozet koleksiyonu, profil kısayolları ve hesap ayarları. Fiziksel iPhone kontrolü aşağıdaki kabul testinde.
+- [ ] Fiziksel iPhone kabul testi (tüm akış)
 
 Proje sahibi:
 - [ ] Apple Developer hesabı ve Google Cloud ayarı (Apple/Google ile giriş, mağaza yayını)

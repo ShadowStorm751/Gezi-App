@@ -148,7 +148,7 @@ as $$
     and p.is_published;
 $$;
 
--- city_pack: parent_id ve child_count
+-- city_pack: 20261120210000_city_pack_period.sql'deki son tanımın aynısı + parent_id ve child_count.
 create or replace function public.city_pack_places(p_city_id integer, p_lang text)
 returns jsonb
 language sql stable
@@ -161,6 +161,8 @@ as $$
            'short_desc', t.short_desc,
            'kind', p.kind,
            'category', c.slug,
+           'period', public.period_label(p.period, p_lang),
+           'period_code', p.period,
            'latitude', st_y(p.location::geometry),
            'longitude', st_x(p.location::geometry),
            'checkin_radius_m', p.checkin_radius_m,

@@ -15,12 +15,23 @@ Biçim:
 
 ---
 
+### Yeni: city_pack'te dönem alanı
+- Durum: tamamlandı
+- Kimden: backend (Claude), 2026-11-20
+- İstek: Geriye uyumlu ekleme, canlıda (migration `20261120210000`). `city_pack.places[]` artık `period` (istenen dilde: "Osmanlı" / "Ottoman") ve `period_code` (ham, Türkçe) içeriyor; doğa yerlerinde çoğunlukla null.
+  1. `catalog.ts` → `mapPlace` zaten `period`'u okuyor, artık dolu gelecek; paket sürümü değiştiği için uygulama yeni paketi kendisi indirir.
+  2. `mapPlace`'e `periodCode: row.period_code` ekleyin; `badgeForPlace` listelerdeki yerlerde de doğru rozeti bulsun (şu an yalnızca `place_detail`'den gelen yerlerde çalışıyor).
+  3. `district` alanı pakette yok (veritabanında semt bilgisi tutulmuyor). Keşfet aramasındaki `place.district` her zaman boş; semt araması `DistrictSearch` ile zaten çalışıyor, ek iş gerekmiyor. Semt bilgisi istenirse backend'e yazın.
+- Yanıt (mobil): `mapPlace` ham dönem kodunu `periodCode` olarak aktarıyor. `nearby_places` yanıtı geldiğinde paketteki dönem adı ve kodu korunuyor. TR/EN rozet eşlemesi, eski paketler ve dönemi boş doğa yerleri için test eklendi.
+
 ### Yeni tasarım: sıcak keşif (alt sekmeler, yeni ekranlar)
-- Durum: açık
+- Durum: tamamlandı (mobil kodu; cihaz kabul testi bekliyor)
 - Kimden: Claude (proje sahibinin isteğiyle), 2026-11-20
 - Ayrıntı: `docs/TASARIM.md` (token'lar, `mobile/theme.js` içeriği, 5 ekranın tarifi). Ekran görüntülerini proje sahibi paylaşır.
 - Sıra önerisi: 1) `theme.js` + fontlar, 2) alt sekme çubuğu ve Keşfet'teki buton yığınının kaldırılması, 3) Keşfet (çipler, öneri kartları, liste), 4) Yer detayı (tam sayfa, sabit "Buradayım" çubuğu, tek satır atıf), 5) Harita (özel işaretler, alt kart), 6) Buradayım sayfası ve rozet kutlaması.
 - iPhone notlarındaki çakışma, mesafe ve atıf taşması sorunları bu tasarımla birlikte çözülür.
+- Animasyonlar: `docs/TASARIM.md` → "Hareket" bölümü (Reanimated + expo-haptics; Buradayım ve rozet kutlaması zaman çizelgeleri, hareketi azalt desteği).
+- Yanıt (mobil, 2026-11-20): Tema ve yerel fontlar, beş alt sekme, Keşfet, tam sayfa yer detayı, harita kartı, Buradayım sonuçları ve sırayla rozet kutlamaları uygulandı. Hareketi azalt ayarı giriş hareketlerini atlar. Haptik ve ekran yerleşiminin fiziksel iPhone kabul testi bekliyor.
 
 ### Hesap silme, avatar ve kullanıcı katkısı ekranları
 - Tarih: 2026-11-19
@@ -235,7 +246,7 @@ Biçim:
 - Yanıt (mobil): Keşfet ekranında yer önerileri, yarım kalan rotalar ve ilerleme çubuklu rozetler gösteriliyor.
 
 ### Yeni: kullanıcı fotoğrafları
-- Durum: açık
+- Durum: tamamlandı (mobil kodu; cihaz kabul testi bekliyor)
 - Kimden: backend (Claude), 2026-11-20
 - İstek: Geriye uyumlu ekleme, canlıda. Ayrıntı, kod örneği ve hata kodları `docs/API.md` → "Kullanıcı fotoğrafları".
   1. **Yer detayında "Fotoğraf ekle" düğmesi:** yalnızca kullanıcı o yeri gezdiyse (`visited_at` dolu) gösterin. Galeriden ya da kameradan seç → uzun kenar en fazla 1600 px, JPEG → `user-photos/<user_id>/<rastgele>.jpg` yükle → `submit_place_photo`. Başarıda "Fotoğrafın incelemeye gönderildi" mesajı.
@@ -244,9 +255,10 @@ Biçim:
   4. Yer detayındaki galeride kullanıcı fotoğrafları `author` alanıyla ("@emre") zaten gelir; ek iş yok.
   5. Yeni rozet `photographer` (Gezi Fotoğrafçısı); görseli `assets/badges/photographer.webp` (Storage'da da var), `badgeImages.js`'e eklenmeli.
   6. Expo için `expo-image-picker` ve `expo-image-manipulator` gerekir; iOS/Android izin metinleri TR+EN.
+- Yanıt (mobil, 2026-11-20): Gezilmiş yerlerde kamera/galeri, JPEG küçültme, yayın onayı, incelemeye gönderim, Profil → Fotoğraflarım, silme ve Gezi Fotoğrafçısı rozeti bağlandı. Gerçek hesapla yükleme, moderasyon ve silme kabul testi bekliyor.
 
 ### iPhone'da ilk deneme notları (Expo Go, SDK 58, 2026-11-20)
-- Durum: açık
+- Durum: tamamlandı (mobil kodu; cihaz kabul testi bekliyor)
 - Kimden: backend (Claude), Emre'nin ekran görüntülerinden
 - Genel: canlı Supabase'e bağlanıyor, 156 yer, rotalar, yer detayı, fotoğraf atıfları ve OSM atfı çalışıyor. 
 - Backend'de düzeltilenler (mobilde iş yok): `place_detail.period` artık dile göre ("Ottoman"); rota kapak fotoğrafı artık en tanınmış duraktan (Çarşılar → Süleymaniye, Galata → Galata Kulesi).
@@ -255,9 +267,10 @@ Biçim:
   2. Yer detayında üstte "3.5 km", altta "You are about 231251 m away" yazıyor. İki farklı konum kullanılıyor gibi (üstteki eski/demo konum olabilir); ikisi aynı konumdan hesaplanmalı ve 1 km üstü "231 km" biçiminde gösterilmeli.
   3. Rota detayında "Route" başlığı ile rota adı arasında büyük boşluk var. Birbirine çok yakın duraklarda (Hipodrom: 6-7-8) numaralı pinler üst üste biniyor; ilk açılışta haritayı tüm duraklara sığdırıp biraz daha yakınlaştırmak ya da çakışan pinleri hafif kaydırmak yeterli.
   4. Rota ve popüler yer kartlarında "Photo: Wikimedia Commons" üç satıra bölünüyor; tek satır, küçük punto daha iyi durur.
+- Yanıt (mobil, 2026-11-20): Sekme yerleşimi, tek konumdan mesafe ve kilometre biçimi, kompakt rota başlığı, yakın durakların numaraları ve tek satır fotoğraf atıfları güncellendi. Fiziksel iPhone ile yeniden kontrol bekliyor.
 
 ### Yeni: yer değerlendirmeleri
-- Durum: açık
+- Durum: tamamlandı (mobil kodu; cihaz kabul testi bekliyor)
 - Kimden: backend (Claude), 2026-11-20
 - İstek: Geriye uyumlu ekleme, canlıda. Ayrıntı ve hata kodları `docs/API.md` → "Yer değerlendirmeleri".
   1. **Yer detayında puan satırı:** `detail.rating` → "★ 4.3 (12)"; `average` null ise "12 değerlendirme" ya da hiç yoksa "Henüz değerlendirme yok". Dokununca değerlendirmeler ekranı.
@@ -265,9 +278,9 @@ Biçim:
   3. **Değerlendir** (`can_review` true ise): 5 yıldız seçici + isteğe bağlı not. Kaydedince not varsa "Notun incelemeden sonra yayınlanacak". Kendi değerlendirmesi varsa düzenle/sil.
   4. Check-in başarılı olunca kısa bir "Nasıldı? Puan ver" önerisi iyi olur (isteğe bağlı).
   5. **Profil → Değerlendirmelerim** (`my_reviews`): durum etiketleriyle.
+- Yanıt (mobil, 2026-11-20): Yer puanı, yıldız dağılımı, onaylı notlar, ziyaret sonrası değerlendirme düzenleme/silme ve Profil → Değerlendirmelerim bağlandı. Gerçek hesap ve moderasyon kabul testi bekliyor.
 
 ### Bilgi: uzun açıklamalar tamam (156/156)
 - Durum: bilgi
 - Kimden: backend (Claude), 2026-11-20
 - `place_detail.long_desc` 156 yerin hepsinde dolu (TR+EN, 2026-11-20). İki paragraf, aralarında boş satır (`\n\n`). Mobil zaten `long_desc || short_desc` gösteriyor; paragraf boşluğunun korunduğundan ve uzun metnin kaydırılabildiğinden emin olun. Kartlarda/listelerde `short_desc` kullanılmaya devam. Ayrıca 3 yere daha fotoğraf eklendi (154/156); fotoğrafsız 2 yer (Beykoz Korusu, Telli Baba) için yer tutucu görsel düzgün görünmeli.
-

@@ -1,42 +1,39 @@
+import {Reviews,MyReviews} from './PlaceReviews';
+import {AddPhoto,MyPhotos} from './VisitPhotos';
+import {VisitSheet,Ceremony} from './Celebrations';
+import PlaceMap from './PlaceMap';
+import PlaceDetail from './PlaceDetail';
+import Explore from './Explore';
+import {c} from './theme';
+import TabPage from './TabPage';
+import MainTabs from './MainTabs';
 import React, {useEffect, useRef, useState} from 'react';
 import {
-  ActivityIndicator, Alert, Linking, Modal, Platform, Pressable,
-  ScrollView, StatusBar, StyleSheet, Text, View
+  ActivityIndicator, Alert, Linking, Modal,
+  ScrollView, StatusBar, Text, View
 } from 'react-native';
-import MapView, {Marker} from 'react-native-maps';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import * as Location from 'expo-location';
 import sample from './places.json';
 import {AsyncStorage, client, demo, lang, project, t} from './client';
-import {loadCity, loadDetail, loadNearby, mapPlace} from './catalog';
+import {loadCity, loadDetail, loadNearby, mapPlace, mergeNearbyPlace} from './catalog';
 import DiscoveryCamera from './DiscoveryCamera';
-import {PlaceGallery, PlaceThumbnail} from './PlaceMedia';
-import Badges, {BadgeArt, Login} from './Badges';
-import {Action,Feedback,ui,useQuery} from './ScreenUI';
+import {GuestBadges,Collection,Login} from './Badges';
+import {Action,ui,useQuery} from './ScreenUI';
 import Friends from './Friends';
-import Profile from './Profile';
+import Profile,{GuestProfile} from './Profile';
 import {ContributionForm} from './Contributions';
-import {Recommendations,Routes,RouteDetail} from './Trips';
+import {Routes,RouteDetail} from './Trips';
 import CheckIn from './CheckInPanel';
 import useVisits from './useVisits';
 import {distanceMeters,galataPreviewOrigin} from './geo';
 
-const paper = '#FAF7F0';
-const ink = '#143C38';
-const red = '#B44721';
-const serif = Platform.select({ios:'Georgia', android:'serif'});
 const pilot = {latitude:41.0266, longitude:28.9736};
-const region = {...pilot, latitudeDelta:0.009, longitudeDelta:0.009};
 const demoPlaces = lang === 'tr' ? sample : sample.map((p,i) => ({...p,
   name:i ? 'Galata Mevlevi Museum' : 'Galata Tower',category:i ? 'Museum' : 'Tower',
   period:i ? 'Ottoman period' : 'Genoese period',
   description:i ? 'Explore the Mevlevi heritage of Beyoğlu on Galip Dede Street.' : 'Built by the Genoese in the 14th century, the tower once formed part of the Galata walls.'}));
 const rpc = (name, args) => client.rpc(name, args);
-
-function formatDistance(meters) {
-  return meters < 1000 ? Math.round(meters) + ' m' :
-    (meters / 1000).toLocaleString(lang, {maximumFractionDigits:1}) + ' km';
-}
 
 export default function App() {
   const map = useRef(null);
@@ -47,7 +44,6 @@ export default function App() {
   const center = city?.center ? {latitude:city.center.lat,longitude:city.center.lng} : pilot;
   const [screen,setScreen] = useState('home');
   const [routeSlug,setRouteSlug] = useState(null);
-  const [routeBack,setRouteBack] = useState('routes');
   const [suggestPin,setSuggestPin] = useState(null);
   const [reporting,setReporting] = useState(false);
   const locationRequest = useRef(0);
@@ -59,7 +55,13 @@ export default function App() {
   const [cameraMode, setCameraMode] = useState(null);
   const cameraOpen = !!cameraMode;
   const galataPreview = cameraMode === 'galata';
-  const [badgesOpen, setBadgesOpen] = useState(false);
+  const tab=useRef('explore'), navigation=useRef(null);
+  const [profileReview,setProfileReview]=useState(null),[reviewVersion,setReviewVersion]=useState(0);
+  const [subpage,setSubpage]=useState(null);
+  const [result,setResult]=useState(null);
+  const activeResult=result && result.userId===visits.userId?result:null;
+  const [permission,setPermission]=useState(null);
+  useEffect(()=>{Location.getForegroundPermissionsAsync().then(access=>{setPermission(access.granted);if(access.granted) useLocation(false);}).catch(()=>{});},[]);
   const [trackedId, setTrackedId] = useState(null);
   const [trackedPlace,setTrackedPlace] = useState(null);
   const [locationMessage, setLocationMessage] = useState('');
@@ -92,7 +94,7 @@ export default function App() {
   const byId = new Map(packPlaces.map(p => [p.id,p]));
   serverNearby?.forEach(p => {
     const packed = byId.get(p.id);
-    byId.set(p.id,{...p,thumbnail:p.thumbnail ?? packed?.thumbnail, radius:packed?.radius,hasArea:packed?.hasArea});
+    byId.set(p.id,mergeNearbyPlace(p,packed));
   });
   function wasVisited(id) {
     return !!visits.userId && (Object.prototype.hasOwnProperty.call(visits.dates,id) ||
@@ -102,15 +104,16 @@ export default function App() {
   const nearby = places.map(place => ({
     ...place, distance: distanceMeters(origin ?? center, place.coordinate)
   })).sort((a,b) => a.distance - b.distance);
-  const listPlaces = serverNearby?.map(p => byId.get(p.id)) ?? nearby.filter(p => p.distance <= 2000);
+  const listPlaces = nearby.filter(p => p.distance <= 2000);
 
-  async function useLocation() {
+  async function useLocation(ask=true) {
     const request = ++locationRequest.current;
     setLoading(true);
     setNearbyResponse(null);
     try {
-      const permission = await Location.requestForegroundPermissionsAsync();
+      const permission = ask ? await Location.requestForegroundPermissionsAsync() : await Location.getForegroundPermissionsAsync();
       if (request !== locationRequest.current) return;
+      setPermission(permission.granted);
       if (!permission.granted) {
         setOrigin(null);
         setLocationMessage(t("Konum izni kapalı. Örnek konumu kullanıyorsun.","Location access is off. Using the sample location."));
@@ -141,6 +144,8 @@ export default function App() {
 
   function closeDetail() {
     setReporting(false);
+    setSubpage(null);
+    setResult(null);
     detailToken.current++;
     setCelebration(null);
     setDetail(null);
@@ -158,13 +163,15 @@ export default function App() {
     if (galataPreview || demo || !client) return;
     setDetailState('loading');
     try {
+      const detailUser = visits.owner.current;
       const info = await loadDetail(rpc,place.id,lang);
       if (detailToken.current !== token) return;
-      if (info) setDetail({...place,...info,category:place.category,categoryLabel:info.category});
+      if (info) setDetail({...place,...info,detailUser,category:place.category,categoryLabel:info.category});
       setDetailState(info ? '' : 'missing');
     } catch { if (detailToken.current === token) setDetailState('error'); }
   }
 
+  const canAddPhoto=!!detail && !!visits.userId && !galataPreview && !demo && (wasVisited(detail.id)||!!(detail.visitedAt && detail.detailUser===visits.userId));
   function openOfficialPage(url) {
     Linking.openURL(url).catch(() => Alert.alert(t("Ziyaret sayfası açılamadı","Could not open visitor information"), t("Bağlantını kontrol edip tekrar dene.","Check your connection and try again.")));
   }
@@ -177,9 +184,8 @@ export default function App() {
     setTrackedId('galata-kulesi');
     setCameraMode('galata');
   }
-  function openRoute(slug,back) {
+  function openRoute(slug) {
     setRouteSlug(slug);
-    setRouteBack(back);
     setScreen('route');
   }
   function chooseCity(next) {
@@ -197,157 +203,60 @@ export default function App() {
     setSuggestPin(pin);
     setScreen('suggest');
   }
-  const pageTitle = {profile:t('Profil','Profile'),friends:t('Arkadaşlar','Friends'),routes:t('Rotalar','Routes'),
-    route:t('Rota','Route'),suggest:t('Yer öner','Suggest a place')};
 
   return (
-    <SafeAreaView style={styles.page}>
+    <SafeAreaView style={{flex:1,backgroundColor:c.surface}}>
       <StatusBar barStyle="dark-content"/>
       {cameraOpen ? <DiscoveryCamera key={cameraMode} previewOrigin={galataPreview ? galataPreviewOrigin : null} onTryDemo={tryGalata}
         places={galataPreview ? demoPlaces : trackedPlace?.id === trackedId && !byId.has(trackedId) ? [...places,trackedPlace] : places} trackedId={trackedId}
         onStopTracking={() => setTrackedId(null)} onSelect={openPlace}
         onBack={() => { setCameraMode(null); setTrackedId(null); }}/> : screen !== 'home' ? <>
-        <View style={ui.content}><Action onPress={() => setScreen(screen === 'route' ? routeBack : screen === 'friends' ? 'profile' : 'home')}>
-          {t('‹ Geri','‹ Back')}</Action><Text style={ui.title}>{pageTitle[screen]}</Text></View>
-        <ScrollView key={screen+':'+(visits.userId || '')} contentContainerStyle={ui.content} keyboardShouldPersistTaps="handled">
-          {screen === 'routes' && <Routes city={citySlug} revision={[visits.userId,visits.revision]} onRoute={slug => openRoute(slug,'routes')}/>}
-          {screen === 'route' && <RouteDetail slug={routeSlug} revision={[visits.userId,visits.revision]} onPlace={showStop}/>}
-          {screen === 'suggest' && <ContributionForm coordinate={suggestPin} userId={visits.userId} onClose={() => setScreen('home')}/>}
-          {['friends','profile'].includes(screen) && (!visits.userId ? <Login prompt={t('Profilini görmek için giriş yap.','Sign in to view your profile.')}/> :
-            screen === 'profile' ? <Profile visits={visits} onSocial={() => setScreen('friends')} onClose={() => setScreen('home')}/> :
-            <Friends onProfile={() => setScreen('profile')}/>)}
-        </ScrollView></> : <>
-      <View style={styles.header}>
-        <Text style={styles.eyebrow}>{demo ? 'İSTANBUL / GALATA' : (city?.name || citySlug).toLocaleUpperCase(lang)}</Text>
-        {cities.data?.length > 1 && <ScrollView horizontal>{cities.data.map(c =>
-          <Action key={c.slug} selected={c.slug === citySlug} onPress={() => chooseCity(c)}>{c.name}</Action>)}</ScrollView>}
-        <View style={styles.titleRow}><Text accessibilityRole="header" style={styles.title}>{t("Keşfet","Explore")}</Text>
-          <Pressable accessibilityRole="button" style={styles.close} onPress={() => setBadgesOpen(true)}>
-            <Text style={styles.distance}>{t('Rozetler','Badges')}</Text>
-          </Pressable>
-        </View>
-        {!!client && <View style={ui.row}><Action onPress={() => setScreen('routes')}>{t('Rotalar','Routes')}</Action>
-          <Action onPress={() => setScreen('profile')}>{t('Profil','Profile')}</Action>
-          <Action onPress={() => suggest(origin ?? center)}>{t('+ Yer öner','+ Suggest place')}</Action></View>}
-        <Pressable accessibilityRole="button" disabled={!places.length} style={styles.action} onPress={() => setCameraMode('live')}>
-          <Text style={styles.actionLabel}>{t("Kamerayla keşfet","Explore with camera")}</Text>
-        </Pressable>
-        <Action onPress={tryGalata}>{t('Galata’yı evden dene','Try Galata from home')}</Action>
-      </View>
-      <MapView key={citySlug+':'+center.latitude+':'+center.longitude} ref={map} style={styles.map} initialRegion={{...region,...center}} showsUserLocation={!!origin}
-        onLongPress={client ? e => suggest(e.nativeEvent.coordinate) : undefined}
-        toolbarEnabled={false} showsMyLocationButton={false}>
-        {nearby.map(place => (
-          <Marker key={place.id} coordinate={place.coordinate} title={place.name + (wasVisited(place.id) ? ' ✓' : '')}
-            accessibilityLabel={place.name + (wasVisited(place.id) ? t(', gezildi',', visited') : '')}
-            pinColor={wasVisited(place.id) ? ink : red} onPress={() => openPlace(place)}/>
-        ))}
-      </MapView>
-      <Text accessibilityRole="link" style={{color:ink,paddingHorizontal:12,paddingVertical:4}}
-        onPress={() => openOfficialPage('https://www.openstreetmap.org/copyright')}>{t('© OpenStreetMap katkıcıları','© OpenStreetMap contributors')}</Text>
-      <ScrollView style={styles.sheet} contentContainerStyle={styles.content}>
-        {!!client && <><Feedback query={cities}/><Recommendations origin={origin} userId={visits.userId} revision={visits.revision}
-          onPlace={showStop} onRoute={slug => openRoute(slug,'home')}/></>}
-        <Text style={styles.heading} accessibilityRole="header">{t('Yakındaki yerler','Nearby places')}</Text>
-        {catalogState !== 'ready' && <Text style={styles.muted}>{{
-          demo:t('Galata örnek kataloğu','Galata sample catalog'),
-          loading:t('Şehir paketi yükleniyor…','Loading city catalog…'),
-          cached:t('Kayıtlı paket güncelleniyor…','Refreshing the saved catalog…'),
-          offline:t('Kayıtlı şehir paketi gösteriliyor.','Showing the saved city catalog.'),
-          error:t('Şehir paketi alınamadı.','Could not load the city catalog.'),
-          config:t('Supabase bağlantı ayarları eksik veya geçersiz.','Supabase configuration is incomplete or invalid.')
-        }[catalogState]}</Text>}
-        {['error','offline'].includes(catalogState) && <Pressable accessibilityRole="button" style={styles.close} onPress={() => setRefresh(n => n+1)}>
-          <Text style={styles.distance}>{t("Tekrar dene","Try again")}</Text></Pressable>}
-        {catalogState === 'ready' && !places.length && <Text style={styles.muted}>{t('Bu şehirde yayımlanmış yer yok.','No published places in this city yet.')}</Text>}
-        <Text style={styles.muted}>{origin ? t("Konumundan kuş uçuşu uzaklık","Straight-line distance from your location") : t("Örnek konumdan kuş uçuşu uzaklık","Straight-line distance from the sample location")}</Text>
-        {(places.length > 0 || serverNearby !== null) && !listPlaces.length &&
-          <Text style={styles.muted}>{t('2 km içinde yer bulunamadı.', 'No places within 2 km.')}</Text>}
-        {listPlaces.map(place => (
-          <Pressable key={place.id} accessibilityRole="button" style={styles.row} onPress={() => openPlace(place)}>
-            <PlaceThumbnail place={place}/>
-            <View style={styles.rowMain}>
-              <Text style={styles.eyebrow}>{(place.categoryLabel || place.category).toLocaleUpperCase(lang)}</Text>
-              <Text style={styles.place}>{place.name}{wasVisited(place.id) ? ' ✓' : ''}</Text>
-            </View>
-            <Text style={styles.distance}>{formatDistance(place.distance)}  ›</Text>
-          </Pressable>
-        ))}
-        <Pressable accessibilityRole="button" disabled={loading} onPress={useLocation} style={styles.action}>
-          {loading ? <ActivityIndicator color={paper}/> : <Text style={styles.actionLabel}>{origin ? t("Konumumu güncelle","Update my location") : t("Konumumu kullan","Use my location")}</Text>}
-        </Pressable>
-        {!!locationMessage && <Text accessibilityLiveRegion="polite" style={styles.muted}>{locationMessage}</Text>}
-      </ScrollView>
-      </>}
-      {badgesOpen && <Badges visitRevision={visits.revision} onClose={() => setBadgesOpen(false)}/>}
-      <Modal visible={!!detail} transparent animationType="slide" onRequestClose={award ? nextAward : closeDetail}>
-        {detail && <View style={styles.overlay}>
-          <Pressable accessibilityLabel={t("Yer detayını kapat","Close place details")} accessibilityRole="button" style={styles.backdrop} onPress={closeDetail}/>
-          <SafeAreaView style={styles.card} accessibilityElementsHidden={!!award} importantForAccessibility={award ? 'no-hide-descendants' : 'auto'}>
-            <ScrollView contentContainerStyle={styles.detail} keyboardShouldPersistTaps="handled">
-              <Text style={styles.eyebrow}>{(detail.period || detail.categoryLabel || detail.category).toLocaleUpperCase(lang)}{detail.hasArea || !Number.isFinite(detail.distance) ? '' : '  ·  '+formatDistance(detail.distance)}</Text>
-              <Text style={styles.title} accessibilityRole="header">{detail.name}</Text>
-              {galataPreview && <Text style={styles.muted}>{t('Galata denemesi · Örnek konumdan uzaklık','Galata demo · Distance from the sample location')}</Text>}
-              {detailState !== 'loading' && <PlaceGallery place={detail}/>}
-              <Text style={styles.story}>{detail.description}</Text>
-              {!!client && !galataPreview && detailState !== 'missing' && (reporting ?
-                <ContributionForm key={detail.id+':'+visits.userId} place={detail} coordinate={detail.coordinate} userId={visits.userId} onClose={() => setReporting(false)}/> :
-                <Action onPress={() => setReporting(true)}>{t('Bir sorun mu var?','Report a problem')}</Action>)}
-              {!demo && !galataPreview && detailState !== 'missing' && <CheckIn key={detail.id} place={detail} origin={origin} visits={visits} cities={cities.data}
-                visited={wasVisited(detail.id)} onMissing={() => setRefresh(n => n+1)}
-                onAwards={(awards,userId) => setCelebration({awards,userId})}/>}
-              {!!detail.bestTime && <Text style={styles.muted}>{t('Önerilen zaman','Best time')} · {detail.bestTime}</Text>}
-              {detailState === 'loading' && <ActivityIndicator color={ink}/>}
-              {detailState === 'missing' && <Text>{t('Bu yer artık yayında değil.','This place is no longer published.')}</Text>}
-              {detailState === 'error' && <Pressable accessibilityRole="button" style={styles.close} onPress={() => openPlace(detail)}>
-                <Text>{t('Detay yüklenemedi. Tekrar dene.','Details unavailable. Try again.')}</Text></Pressable>}
-              <Pressable accessibilityRole="button" disabled={detailState === 'missing'} style={styles.action} onPress={() => {
-                setTrackedId(detail.id);
-                setTrackedPlace(detail);
-                closeDetail();
-                setCameraMode(galataPreview ? 'galata' : 'live');
-              }}>
-                <Text style={styles.actionLabel}>{t("Kamerada takip et","Track in camera")}</Text>
-              </Pressable>
-              {!!detail.source && <Pressable accessibilityRole="link" style={styles.action} onPress={() => openOfficialPage(detail.source)}>
-                <Text style={styles.actionLabel}>{t("Resmî ziyaret bilgileri ↗","Official visitor information ↗")}</Text>
-              </Pressable>}
-              <Pressable accessibilityRole="button" style={styles.close} onPress={closeDetail}>
-                <Text style={styles.distance}>{cameraOpen ? t("Kameraya dön","Back to camera") : t("Haritaya dön","Back to map")}</Text>
-              </Pressable>
-            </ScrollView>
-          </SafeAreaView>
-          {award && <SafeAreaView accessibilityViewIsModal style={styles.celebration}>
-            <Text style={styles.eyebrow}>{t('YENİ ROZET','NEW BADGE')}</Text>
-            <BadgeArt key={award.slug} badge={{...award,earned_at:true}}/>
-            <Text accessibilityRole="header" style={styles.title}>{award.name}</Text>
-            {!!award.description && <Text style={styles.story}>{award.description}</Text>}
-            <Pressable accessibilityRole="button" style={styles.action} onPress={nextAward}><Text style={styles.actionLabel}>
-              {celebration.awards.length > 1 ? t('Sıradaki rozet','Next badge') : t('Yer kartına dön','Back to place')}
-            </Text></Pressable>
-          </SafeAreaView>}
+      <View style={{paddingHorizontal:16,paddingTop:8}}><Action onPress={()=>setScreen('home')}>{t('‹ Geri','‹ Back')}</Action></View>
+      <ScrollView key={screen+':'+(visits.userId || '')} contentContainerStyle={ui.content} keyboardShouldPersistTaps="handled">
+        {screen==='route' && <RouteDetail slug={routeSlug} revision={[visits.userId,visits.revision]} onPlace={showStop}/>}
+        {screen==='friends' && (visits.userId?<Friends userId={visits.userId} onBadges={()=>{tab.current='badges';setScreen('home');}} onProfile={()=>setScreen('home')}/>:<Login/>)}
+        {screen==='reviews' && visits.userId && <MyReviews visits={visits} revision={reviewVersion} onSelect={setProfileReview}/>}
+        {screen==='photos' && visits.userId && <MyPhotos visits={visits}/>}
+        {screen==='suggest' && <ContributionForm coordinate={suggestPin} userId={visits.userId} onClose={()=>setScreen('home')}/>}
+      </ScrollView></> : <MainTabs navigationRef={navigation} initial={tab.current} onTab={name=>{tab.current=name;}} pages={{
+        explore:<Explore places={nearby.map(p=>({...p,distance:origin?p.distance:null}))} nearby={listPlaces} city={city||{slug:citySlug,name:citySlug==='istanbul'?'İstanbul':citySlug}} cities={cities} onCity={chooseCity} origin={origin} permission={permission} onLocation={()=>useLocation()} onDemo={tryGalata} onCamera={()=>setCameraMode('live')} onPlace={openPlace} onRoute={slug=>openRoute(slug)} visited={wasVisited} revision={visits.revision} userId={visits.userId} state={catalogState} onRetry={()=>setRefresh(n=>n+1)} message={locationMessage} loading={loading}/>,
+        map:<PlaceMap key={citySlug} places={nearby} mapRef={map} center={center} origin={origin} visited={wasVisited} onLocation={()=>useLocation()} onSuggest={client?suggest:null} onOpen={openPlace} message={locationMessage}/>,
+        routes: <TabPage title={t('Rotalar','Routes')} location={city?.name || (citySlug==='istanbul'?'İstanbul':citySlug)}>
+          <Routes city={citySlug} userId={visits.userId} visitRevision={visits.revision} onRoute={openRoute}/>
+        </TabPage>,
+        badges: <TabPage title={t('Rozetler','Badges')}>
+          {client && visits.userId
+            ? <Collection key={visits.userId} userId={visits.userId} visitRevision={visits.revision}/>
+            : <GuestBadges/>}
+        </TabPage>,
+        profile: <TabPage title={t('Profil','Profile')}>
+          {client && visits.userId ? <Profile key={visits.userId} visits={visits}
+                onPhotos={()=>setScreen('photos')} onReviews={()=>setScreen('reviews')}
+                onSocial={()=>setScreen('friends')} onSuggest={()=>suggest(origin ?? center)}
+                onClose={()=>setScreen('home')}/>
+            : <GuestProfile onSuggest={client ? ()=>suggest(origin ?? center) : null}/>}
+        </TabPage>
+      }}/>}
+      <Modal visible={!!profileReview && !!visits.userId} onRequestClose={()=>setProfileReview(null)}>{profileReview && visits.userId && <Reviews place={profileReview} visits={visits} onBack={()=>setProfileReview(null)} onChanged={()=>setReviewVersion(n=>n+1)}/>}</Modal>
+      <Modal visible={!!detail} animationType="none" onRequestClose={subpage?()=>setSubpage(null):award?nextAward:activeResult?()=>setResult(null):closeDetail}>
+        {detail && <View style={{flex:1}}><View style={{flex:1}} accessibilityElementsHidden={!!(subpage||activeResult||award)} importantForAccessibility={subpage||activeResult||award?'no-hide-descendants':'auto'}><PlaceDetail key={detail.id} place={detail} onReviews={detailState==='missing'?undefined:()=>setSubpage('reviews')} userId={visits.userId} revision={visits.revision} live={!!client&&!galataPreview&&!demo}
+          distance={origin&&!galataPreview?distanceMeters(origin,detail.coordinate):null} onBack={closeDetail} onTrack={()=>{setTrackedId(detail.id);setTrackedPlace(detail);closeDetail();setCameraMode(galataPreview?'galata':'live');}}
+          footer={previousBadges=>!demo&&!galataPreview&&detailState!=='missing'?<CheckIn place={detail} origin={origin} onFix={coords=>{setPermission(true);setOrigin(coords);}} visits={visits} cities={cities.data}
+            visited={wasVisited(detail.id)||!!(detail.visitedAt && detail.detailUser===visits.userId)} onMissing={()=>setRefresh(n=>n+1)} onResult={outcome=>setResult({...outcome,previousBadges,cityName:cities.data?.find(item=>item.slug===outcome.progress?.city)?.name})}/>:<Text style={ui.muted}>{t('Önizleme','Preview')}</Text>}>
+          {detailState==='loading' && <ActivityIndicator color={c.primary}/>}
+          {detailState==='missing' && <Text>{t('Bu yer artık yayında değil.','This place is no longer published.')}</Text>}
+          {detailState==='error' && <Action onPress={()=>openPlace(detail)}>{t('Detayı tekrar yükle','Reload details')}</Action>}
+          {!!client && !galataPreview && !demo && detailState!=='missing' && <Action onPress={()=>setSubpage('reviews')}>{t('Değerlendirmeleri gör','Read reviews')}</Action>}
+          {canAddPhoto && <Action onPress={()=>setSubpage('photo')}>{t('Fotoğraf ekle','Add a photo')}</Action>}
+          {!!detail.source && <Action onPress={()=>openOfficialPage(detail.source)}>{t('Resmî ziyaret bilgileri','Official visitor information')}</Action>}
+          {!!client && !galataPreview && detailState!=='missing' && (reporting?<ContributionForm key={detail.id+':'+visits.userId} place={detail} coordinate={detail.coordinate} userId={visits.userId} onClose={()=>setReporting(false)}/>:<Action onPress={()=>setReporting(true)}>{t('Bir sorun mu var?','Report a problem')}</Action>)}
+        </PlaceDetail></View>
+        {activeResult && !subpage && <VisitSheet onPhoto={canAddPhoto?()=>setSubpage('photo'):null} result={activeResult} place={detail} onClose={()=>setResult(null)} onAward={()=>{setCelebration({awards:activeResult.awards,userId:visits.userId});setResult(null);}}/>}
+        {subpage==='reviews' && <Reviews place={detail} visits={visits} onBack={()=>setSubpage(null)} onChanged={rating=>{setReviewVersion(n=>n+1);if(rating)setDetail(d=>d?{...d,rating}:d);else openPlace(detail);}}/>}
+        {subpage==='photo' && canAddPhoto && <AddPhoto key={detail.id+visits.userId} place={detail} visits={visits} onBack={()=>setSubpage(null)}/>}
+        {award && <Ceremony key={award.slug} badge={award} userId={visits.userId} onClose={()=>setCelebration(null)} onNext={nextAward} onBadges={()=>{tab.current='badges';setScreen('home');setCameraMode(null);navigation.current?.navigate('badges');closeDetail();}}/>}
         </View>}
       </Modal>
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  page:{flex:1, backgroundColor:paper},
-  header:{paddingHorizontal:22, paddingTop:12, paddingBottom:12},
-  titleRow:{flexDirection:'row',alignItems:'center',justifyContent:'space-between'},
-  eyebrow:{fontSize:11, letterSpacing:1.7, fontWeight:'700', color:'#526D64'},
-  title:{fontFamily:serif, fontSize:40, color:ink, marginTop:4},
-  map:{flex:1.1}, sheet:{flex:1}, content:{padding:22, gap:8},
-  heading:{fontFamily:serif, fontSize:27, color:ink}, muted:{color:'#56635E', fontSize:14},
-  row:{flexDirection:'row', alignItems:'center', borderBottomColor:'#D9D8CC', borderBottomWidth:1, paddingVertical:13, gap:10},
-  rowMain:{flex:1, gap:5}, place:{fontFamily:serif, fontSize:22, color:ink},
-  distance:{fontSize:15, fontWeight:'600', color:ink},
-  action:{padding:14, borderRadius:13, backgroundColor:ink, alignItems:'center', marginTop:8, minHeight:48},
-  actionLabel:{fontSize:16, fontWeight:'600', color:paper},
-  overlay:{flex:1, justifyContent:'flex-end'}, backdrop:{...StyleSheet.absoluteFillObject, backgroundColor:'#11262166'},
-  celebration:{...StyleSheet.absoluteFillObject,backgroundColor:paper,justifyContent:'center',alignItems:'center',gap:18,padding:28},
-  card:{maxHeight:'85%', backgroundColor:paper, borderTopLeftRadius:24, borderTopRightRadius:24},
-  detail:{padding:24, gap:12}, story:{fontSize:17, lineHeight:26, color:'#304A43'},
-  close:{padding:14, alignItems:'center'}
-});

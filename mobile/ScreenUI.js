@@ -1,3 +1,5 @@
+import {c,type,radius} from './theme';
+import {Press,Skeleton} from './Motion';
 import React, {useEffect, useRef, useState} from 'react';
 import {ActivityIndicator, Pressable, StyleSheet, Text, View} from 'react-native';
 import {client, t} from './client';
@@ -10,6 +12,10 @@ export async function rpc(name, args) {
 }
 
 const errors = {
+  not_visited:['Önce burayı ziyaret etmelisin.','Check in here first.'],
+  too_many_pending:['Bu yer için gönderdiğin fotoğraflar hâlâ inceleniyor.','Your photos for this place are still under review.'],
+  file_not_found:['Fotoğraf yüklenemedi, tekrar dene.','Photo upload not found. Try again.'],
+  photo_not_found:['Fotoğraf bulunamadı.','Photo not found.'],
   username_required:['Önce profilden kullanıcı adını seç.','Choose a username in your profile first.'],
   '23505':['Bu kullanıcı adı alınmış.','This username is taken.'],
   '23514':['Kullanıcı adını kontrol et.','Check your username.'],
@@ -65,23 +71,23 @@ export function useAction() {
 }
 
 export function Action({children,onPress,disabled,selected,danger}) {
-  return <Pressable accessibilityRole="button" accessibilityState={{disabled:!!disabled,selected:!!selected}}
+  return <Press accessibilityRole="button" accessibilityState={{disabled:!!disabled,selected:!!selected}}
     disabled={disabled} onPress={onPress} style={[ui.button,selected && ui.selected,disabled && {opacity:0.5}]}>
-    <Text style={[ui.label,selected && {color:'white'},danger && {color:'#922C20'}]}>{children}</Text>
-  </Pressable>;
+    <Text style={[ui.label,selected && {color:c.surfaceRaised},danger && {color:c.danger}]}>{children}</Text>
+  </Press>;
 }
 export function Feedback({query}) {
-  if (query.loading) return <ActivityIndicator/>;
+  if (query.loading) return <Skeleton/>;
   if (!query.error) return null;
   return <View><Text>{errorText(query.error)}</Text><Action onPress={query.retry}>{t('Tekrar dene','Retry')}</Action></View>;
 }
 export const ui = StyleSheet.create({
-  page:{flex:1,backgroundColor:'#FAF7F0'}, content:{padding:18,gap:12,paddingBottom:40},
-  title:{fontSize:26,fontWeight:'700',color:'#143C38'}, heading:{fontSize:20,fontWeight:'700',color:'#143C38'},
+  page:{flex:1,backgroundColor:c.surface}, content:{padding:18,gap:12,paddingBottom:40},
+  title:{...type.title,color:c.ink}, heading:{...type.heading,color:c.ink},
   row:{flexDirection:'row',flexWrap:'wrap',alignItems:'center',gap:6},
-  card:{backgroundColor:'#F1ECE1',borderRadius:14,padding:14,gap:6},
-  button:{minHeight:42,justifyContent:'center',paddingHorizontal:12,paddingVertical:8,borderRadius:10,backgroundColor:'#E7E9DE'},
-  selected:{backgroundColor:'#22514B'},label:{color:'#143C38',fontWeight:'600'},
-  input:{minHeight:44,borderColor:'#AAB6AA',borderWidth:1,borderRadius:10,padding:10,color:'#153B37',backgroundColor:'white'},
-  map:{height:215,borderRadius:12}, muted:{color:'#52645A'}, notice:{color:'#7B3B21'}
+  card:{backgroundColor:c.surfaceSunken,borderRadius:14,padding:14,gap:6},
+  button:{minHeight:48,justifyContent:'center',paddingHorizontal:12,paddingVertical:8,borderRadius:10,backgroundColor:c.surfaceRaised,borderWidth:1,borderColor:c.line},
+  selected:{backgroundColor:c.primary},label:{...type.label,color:c.ink},
+  input:{minHeight:44,borderColor:c.line,borderWidth:1,borderRadius:10,padding:10,color:c.ink,backgroundColor:c.surfaceRaised},
+  map:{height:215,borderRadius:12}, muted:{color:c.inkMuted}, notice:{color:c.accentInk}
 });
