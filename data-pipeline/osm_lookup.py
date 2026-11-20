@@ -26,6 +26,8 @@ import pipeline as p  # noqa: E402
 # Sonuçları işlenen yerler (2026-11-20): misi, bursa-kapalicarsi, iznik-surlari, kizilcukur-vadisi, mustafapasa,
 # tarihi-asansor. Kalan: soganli-vadisi (ilk aramada ± 0,04° içinde bulunamadı).
 TARGETS: Dict[str, tuple] = {
+    # Gemlik'teki Kurşunlu plajı (listede Karacabey'deki Kurşunlu var; ikisi ayrı yer)
+    "gemlik-kursunlu": ("bursa", 40.360, 29.021, ["kursunlu", "plaj", "beach", "halk", "kadinlar"], 0.03),
     # Soğanlı'nın kaya kiliseleri: aday listesine girmediler (OSM'de çoğu natural=yes ya da etiketsiz)
     "soganli-kiliseleri": ("kapadokya", 38.349, 34.962, ["kilise", "church", "karabas", "kubbeli", "sakli",
                                                          "geyikli", "tahtali", "yilanli", "belli", "manastir"], 0.03),

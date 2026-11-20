@@ -1,2 +1,2 @@
 Bu dosya değişince yaklaşık konumlu yerler OSM'de aranır (.github/workflows/osm-lookup.yml).
-Son istek: 2026-11-20 01:45 — Soğanlı kiliseleri
+Son istek: 2026-11-20 15:30 — Gemlik Kurşunlu plajı
