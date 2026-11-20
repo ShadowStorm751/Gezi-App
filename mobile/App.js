@@ -1,3 +1,4 @@
+import {Reviews,MyReviews} from './PlaceReviews';
 import {AddPhoto,MyPhotos} from './VisitPhotos';
 import {VisitSheet,Ceremony} from './Celebrations';
 import PlaceMap from './PlaceMap';
@@ -69,6 +70,7 @@ export default function App() {
   const cameraOpen = !!cameraMode;
   const galataPreview = cameraMode === 'galata';
   const tab=useRef('explore'), navigation=useRef(null);
+  const [profileReview,setProfileReview]=useState(null),[reviewVersion,setReviewVersion]=useState(0);
   const [subpage,setSubpage]=useState(null);
   const [result,setResult]=useState(null);
   const activeResult=result && result.userId===visits.userId?result:null;
@@ -230,6 +232,7 @@ export default function App() {
       <ScrollView key={screen+':'+(visits.userId || '')} contentContainerStyle={ui.content} keyboardShouldPersistTaps="handled">
         {screen==='route' && <RouteDetail slug={routeSlug} revision={[visits.userId,visits.revision]} onPlace={showStop}/>}
         {screen==='friends' && (visits.userId?<Friends onProfile={()=>setScreen('home')}/>:<Login/>)}
+        {screen==='reviews' && visits.userId && <MyReviews visits={visits} revision={reviewVersion} onSelect={setProfileReview}/>}
         {screen==='photos' && visits.userId && <MyPhotos visits={visits}/>}
         {screen==='suggest' && <ContributionForm coordinate={suggestPin} userId={visits.userId} onClose={()=>setScreen('home')}/>}
       </ScrollView></> : <MainTabs navigationRef={navigation} initial={tab.current} onTab={name=>{tab.current=name;}} pages={{
@@ -238,22 +241,26 @@ export default function App() {
         routes: <ScrollView contentContainerStyle={ui.content}><Text style={ui.title}>{t('Rotalar','Routes')}</Text><Routes city={citySlug} revision={[visits.userId,visits.revision]} onRoute={slug=>openRoute(slug,'routes')}/></ScrollView>,
         badges: <ScrollView contentContainerStyle={ui.content}><Text style={ui.title}>{t('Rozetler','Badges')}</Text>{client ? visits.userId ? <Collection key={visits.userId} userId={visits.userId} visitRevision={visits.revision}/> : <Login/> : <Text>{t('Bağlantı gerekli.','Connection required.')}</Text>}</ScrollView>,
         profile: <ScrollView contentContainerStyle={ui.content}><Text style={ui.title}>{t('Profil','Profile')}</Text>{!!client && <Action onPress={()=>suggest(origin ?? center)}>{t('Yer öner','Suggest a place')}</Action>}
+      {visits.userId && <Action onPress={()=>setScreen('reviews')}>{t('Değerlendirmelerim','My reviews')}</Action>}
       {visits.userId && <Action onPress={()=>setScreen('photos')}>{t('Fotoğraflarım','My photos')}</Action>}
       {!client ? <Text>{t('Profil için bağlantı gerekli.','Connect to view your profile.')}</Text> : visits.userId ? <Profile key={visits.userId} visits={visits} onSocial={()=>setScreen('friends')} onClose={()=>setScreen('home')}/> : <Login/>}</ScrollView>
       }}/>}
+      <Modal visible={!!profileReview && !!visits.userId} onRequestClose={()=>setProfileReview(null)}>{profileReview && visits.userId && <Reviews place={profileReview} visits={visits} onBack={()=>setProfileReview(null)} onChanged={()=>setReviewVersion(n=>n+1)}/>}</Modal>
       <Modal visible={!!detail} animationType="none" onRequestClose={subpage?()=>setSubpage(null):award?nextAward:activeResult?()=>setResult(null):closeDetail}>
-        {detail && <View style={{flex:1}}><PlaceDetail key={detail.id} place={detail} userId={visits.userId} revision={visits.revision} live={!!client&&!galataPreview&&!demo}
+        {detail && <View style={{flex:1}}><PlaceDetail key={detail.id} place={detail} onReviews={()=>setSubpage('reviews')} userId={visits.userId} revision={visits.revision} live={!!client&&!galataPreview&&!demo}
           distance={origin&&!galataPreview?distanceMeters(origin,detail.coordinate):null} onBack={closeDetail} onTrack={()=>{setTrackedId(detail.id);setTrackedPlace(detail);closeDetail();setCameraMode(galataPreview?'galata':'live');}}
           footer={!demo&&!galataPreview&&detailState!=='missing'?<CheckIn place={detail} origin={origin} onFix={setOrigin} visits={visits} cities={cities.data}
             visited={wasVisited(detail.id)||!!(detail.visitedAt && detail.detailUser===visits.userId)} onMissing={()=>setRefresh(n=>n+1)} onResult={setResult}/>:<Text style={ui.muted}>{t('Önizleme','Preview')}</Text>}>
           {detailState==='loading' && <ActivityIndicator color={c.primary}/>}
           {detailState==='missing' && <Text>{t('Bu yer artık yayında değil.','This place is no longer published.')}</Text>}
           {detailState==='error' && <Action onPress={()=>openPlace(detail)}>{t('Detayı tekrar yükle','Reload details')}</Action>}
+          {!!client && !galataPreview && !demo && detailState!=='missing' && <Action onPress={()=>setSubpage('reviews')}>{t('Değerlendirmeleri gör','Read reviews')}</Action>}
           {canAddPhoto && <Action onPress={()=>setSubpage('photo')}>{t('Fotoğraf ekle','Add a photo')}</Action>}
           {!!detail.source && <Action onPress={()=>openOfficialPage(detail.source)}>{t('Resmî ziyaret bilgileri','Official visitor information')}</Action>}
           {!!client && !galataPreview && detailState!=='missing' && (reporting?<ContributionForm key={detail.id+':'+visits.userId} place={detail} coordinate={detail.coordinate} userId={visits.userId} onClose={()=>setReporting(false)}/>:<Action onPress={()=>setReporting(true)}>{t('Bir sorun mu var?','Report a problem')}</Action>)}
         </PlaceDetail>
         {activeResult && !subpage && <VisitSheet onPhoto={canAddPhoto?()=>setSubpage('photo'):null} result={activeResult} place={detail} onClose={()=>setResult(null)} onAward={()=>{setCelebration({awards:activeResult.awards,userId:visits.userId});setResult(null);}}/>}
+        {subpage==='reviews' && <Reviews place={detail} visits={visits} onBack={()=>setSubpage(null)} onChanged={rating=>{setReviewVersion(n=>n+1);if(rating)setDetail(d=>d?{...d,rating}:d);else openPlace(detail);}}/>}
         {subpage==='photo' && canAddPhoto && <AddPhoto key={detail.id+visits.userId} place={detail} visits={visits} onBack={()=>setSubpage(null)}/>}
         {award && <Ceremony key={award.slug} badge={award} userId={visits.userId} onClose={()=>setCelebration(null)} onNext={nextAward} onBadges={()=>{tab.current='badges';setScreen('home');setCameraMode(null);navigation.current?.navigate('badges');closeDetail();}}/>}
         </View>}

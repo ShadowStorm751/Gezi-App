@@ -45,6 +45,8 @@ Son güncelleme: 2026-11-20 (yer değerlendirmeleri eklendi).
 
 Ziyaret fotoğrafları açık yayın onayıyla gönderilir. Profil → Fotoğraflarım ekranında inceleme durumu ve yönetici notu görülebilir, gönderi silinebilir.
 
+Yer detayından yıldız ve isteğe bağlı not gönderilir. Puan ortalamaya katılır, not ancak onaylanınca diğer kullanıcılara gösterilir. Profil → Değerlendirmelerim üzerinden düzenleme ve silme yapılır.
+
 ## Cihaz izinleri
 
 | İzin | Neden | Zorunlu mu |
