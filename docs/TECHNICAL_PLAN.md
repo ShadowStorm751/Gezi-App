@@ -155,7 +155,7 @@ Backend (Claude):
 - [x] Avatar yükleme: yalnızca kendi klasörü, 2 MB, JPEG/PNG/WebP (canlıda, test edildi)
 - [x] Kullanıcı katkısı: hata bildirimi ve yeni yer önerisi, yönetici onay akışı, 'Şehir Gönüllüsü' rozeti (canlıda, test edildi)
 - [x] Şehir listesi: `list_cities` (canlıda)
-- [ ] İstanbul uzun açıklamaları (TR+EN, 2 paragraf): 130/156 canlıda; partiler halinde sürüyor, `content-apply` ile yüklenir (`data-pipeline/content/istanbul_long_descriptions.py`)
+- [x] İstanbul uzun açıklamaları (TR+EN, 2 paragraf): 156/156 canlıda (15 parti), `content-apply` ile yüklendi (`data-pipeline/content/istanbul_long_descriptions.py`). Kaynaksız 4 yer (Anadolu Kavağı ve Yeniköy seyir noktaları, Hacıllı Şelalesi, Telli Baba) temkinli yazıldı; yerinde doğrulanmalı.
 - [x] Modüler yapı: rozet kuralları (`ach_rule_*`) ve KVKK bölümleri (`export_section_*`) parçalara ayrıldı; `backend/MODULES.md` + `backend/tests/audit.sql`
 - [x] Yer değerlendirmeleri: 1-5 yıldız + onaylı not, puan özeti place_detail'de (canlıda)
 - [x] Kişisel veri envanteri: `docs/VERI_ENVANTERI.md` (KVKK metninin kaynağı; her yeni özellikte güncellenir)
