@@ -22,7 +22,7 @@ export function PlaceThumbnail({place}) {
   if (!place.thumbnail || failed === place.thumbnail) return <Placeholder compact place={place}/>;
   return <View style={styles.thumb}>
     <Image source={{uri:place.thumbnail}} style={styles.small} onError={() => setFailed(place.thumbnail)}/>
-    <Text style={styles.smallCredit}>{t('Foto: Wikimedia Commons','Photo: Wikimedia Commons')}</Text>
+    <Text numberOfLines={1} adjustsFontSizeToFit style={styles.smallCredit}>{t('Foto: Wikimedia Commons','Photo: Wikimedia Commons')}</Text>
   </View>;
 }
 

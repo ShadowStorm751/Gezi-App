@@ -1,3 +1,4 @@
+import PlaceMap from './PlaceMap';
 import PlaceDetail from './PlaceDetail';
 import Explore from './Explore';
 import {c,type,shadow} from './theme';
@@ -224,18 +225,7 @@ export default function App() {
         {screen==='suggest' && <ContributionForm coordinate={suggestPin} userId={visits.userId} onClose={()=>setScreen('home')}/>}
       </ScrollView></> : <MainTabs initial={tab.current} onTab={name=>{tab.current=name;}} pages={{
         explore:<Explore places={nearby.map(p=>({...p,distance:origin?p.distance:null}))} nearby={listPlaces} city={city||{slug:citySlug,name:citySlug==='istanbul'?'İstanbul':citySlug}} cities={cities} onCity={chooseCity} origin={origin} permission={permission} onLocation={()=>useLocation()} onDemo={tryGalata} onCamera={()=>setCameraMode('live')} onPlace={openPlace} onRoute={slug=>openRoute(slug,'home')} visited={wasVisited} revision={visits.revision} userId={visits.userId} state={catalogState} onRetry={()=>setRefresh(n=>n+1)} message={locationMessage} loading={loading}/>,
-        map: <>      <MapView key={citySlug+':'+center.latitude+':'+center.longitude} ref={map} style={styles.map} initialRegion={{...region,...center}} showsUserLocation={!!origin}
-        onLongPress={client ? e => suggest(e.nativeEvent.coordinate) : undefined}
-        toolbarEnabled={false} showsMyLocationButton={false}>
-        {nearby.map(place => (
-          <Marker key={place.id} coordinate={place.coordinate} title={place.name + (wasVisited(place.id) ? ' ✓' : '')}
-            accessibilityLabel={place.name + (wasVisited(place.id) ? t(', gezildi',', visited') : '')}
-            pinColor={wasVisited(place.id) ? ink : red} onPress={() => openPlace(place)}/>
-        ))}
-      </MapView>
-      <Text accessibilityRole="link" style={{color:ink,paddingHorizontal:12,paddingVertical:4}}
-        onPress={() => openOfficialPage('https://www.openstreetmap.org/copyright')}>{t('© OpenStreetMap katkıcıları','© OpenStreetMap contributors')}</Text>
-</>,
+        map:<PlaceMap key={citySlug} places={nearby} mapRef={map} center={center} origin={origin} visited={wasVisited} onLocation={()=>useLocation()} onSuggest={client?suggest:null} onOpen={openPlace} message={locationMessage}/>,
         routes: <ScrollView contentContainerStyle={ui.content}><Text style={ui.title}>{t('Rotalar','Routes')}</Text><Routes city={citySlug} revision={[visits.userId,visits.revision]} onRoute={slug=>openRoute(slug,'routes')}/></ScrollView>,
         badges: <ScrollView contentContainerStyle={ui.content}><Text style={ui.title}>{t('Rozetler','Badges')}</Text>{client ? visits.userId ? <Collection key={visits.userId} userId={visits.userId} visitRevision={visits.revision}/> : <Login/> : <Text>{t('Bağlantı gerekli.','Connection required.')}</Text>}</ScrollView>,
         profile: <ScrollView contentContainerStyle={ui.content}><Text style={ui.title}>{t('Profil','Profile')}</Text>{!!client && <Action onPress={()=>suggest(origin ?? center)}>{t('Yer öner','Suggest a place')}</Action>}
