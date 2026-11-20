@@ -1,9 +1,9 @@
 {
  "ozet": {
-  "uyumlu": 92,
+  "uyumlu": 94,
   "wikidata_yok": 13,
-  "kontrol": 13,
-  "yaklasik_duzeltildi": 5
+  "yaklasik_duzeltildi": 5,
+  "kontrol": 12
  },
  "yerler": {
   "isa-bey-camii": {
@@ -367,6 +367,20 @@
    "mesafe_m": 5,
    "durum": "uyumlu"
   },
+  "izmir-kultur-sanat-fabrikasi": {
+   "osm": [
+    38.436078,
+    27.14834
+   ],
+   "qid": "Q117472126",
+   "wikidata": [
+    38.43625,
+    27.148194444444446
+   ],
+   "arama_ile": true,
+   "mesafe_m": 23,
+   "durum": "uyumlu"
+  },
   "izmir-agorasi": {
    "osm": [
     38.419036,
@@ -535,20 +549,6 @@
    "mesafe_m": 37,
    "durum": "uyumlu"
   },
-  "izmir-tarih-ve-sanat-muzesi": {
-   "osm": [
-    38.436207,
-    27.14816
-   ],
-   "qid": "Q6035320",
-   "wikidata": [
-    38.427444444444,
-    27.142694444444
-   ],
-   "arama_ile": false,
-   "mesafe_m": 1084,
-   "durum": "kontrol"
-  },
   "ahmet-piristina-kent-arsivi-ve-muzesi": {
    "osm": [
     38.424929,
@@ -701,6 +701,20 @@
    ],
    "arama_ile": false,
    "mesafe_m": 3,
+   "durum": "uyumlu"
+  },
+  "ataturk-acik-hava-tiyatrosu": {
+   "osm": [
+    38.428582,
+    27.148142
+   ],
+   "qid": "Q106369480",
+   "wikidata": [
+    38.42861111111111,
+    27.148055555555555
+   ],
+   "arama_ile": true,
+   "mesafe_m": 8,
    "durum": "uyumlu"
   },
   "tarihi-asansor": {

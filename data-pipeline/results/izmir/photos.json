@@ -253,6 +253,17 @@
    "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
    "source_url": "https://commons.wikimedia.org/wiki/File:Museo_archeologico_di_izmir,_veduta.JPG"
   },
+  "izmir-kultur-sanat-fabrikasi": {
+   "file": "Entrance of the İzmir Culture and Arts Factory 02.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/Entrance_of_the_%C4%B0zmir_Culture_and_Arts_Factory_02.jpg/1280px-Entrance_of_the_%C4%B0zmir_Culture_and_Arts_Factory_02.jpg",
+   "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/Entrance_of_the_%C4%B0zmir_Culture_and_Arts_Factory_02.jpg/500px-Entrance_of_the_%C4%B0zmir_Culture_and_Arts_Factory_02.jpg",
+   "width": 1280,
+   "height": 853,
+   "author": "Koray",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Entrance_of_the_%C4%B0zmir_Culture_and_Arts_Factory_02.jpg"
+  },
   "izmir-agorasi": {
    "file": "Agora of Smyrna.jpg",
    "url": "https://upload.wikimedia.org/wikipedia/commons/8/88/Agora_of_Smyrna.jpg",
@@ -374,17 +385,6 @@
    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
    "source_url": "https://commons.wikimedia.org/wiki/File:%C3%87e%C5%9Fme_Museum.jpg"
   },
-  "izmir-tarih-ve-sanat-muzesi": {
-   "file": "İzmir Tarih ve Sanat Müzesi.jpg",
-   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/%C4%B0zmir_Tarih_ve_Sanat_M%C3%BCzesi.jpg/1280px-%C4%B0zmir_Tarih_ve_Sanat_M%C3%BCzesi.jpg",
-   "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/%C4%B0zmir_Tarih_ve_Sanat_M%C3%BCzesi.jpg/500px-%C4%B0zmir_Tarih_ve_Sanat_M%C3%BCzesi.jpg",
-   "width": 1280,
-   "height": 1707,
-   "author": "BSRF",
-   "license": "CC BY-SA 4.0",
-   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
-   "source_url": "https://commons.wikimedia.org/wiki/File:%C4%B0zmir_Tarih_ve_Sanat_M%C3%BCzesi.jpg"
-  },
   "ahmet-piristina-kent-arsivi-ve-muzesi": {
    "file": "Ahmet Piriştina City Archives and Museum 01.jpg",
    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/69/Ahmet_Piri%C5%9Ftina_City_Archives_and_Museum_01.jpg/1280px-Ahmet_Piri%C5%9Ftina_City_Archives_and_Museum_01.jpg",
@@ -494,6 +494,17 @@
    "license": "CC BY-SA 4.0",
    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
    "source_url": "https://commons.wikimedia.org/wiki/File:%C4%B0zmir_Parachute_Tower.jpg"
+  },
+  "ataturk-acik-hava-tiyatrosu": {
+   "file": "Atatürk Open Air Theatre, May 2019 (3).jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/Atat%C3%BCrk_Open_Air_Theatre%2C_May_2019_%283%29.jpg/1280px-Atat%C3%BCrk_Open_Air_Theatre%2C_May_2019_%283%29.jpg",
+   "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/Atat%C3%BCrk_Open_Air_Theatre%2C_May_2019_%283%29.jpg/500px-Atat%C3%BCrk_Open_Air_Theatre%2C_May_2019_%283%29.jpg",
+   "width": 1280,
+   "height": 615,
+   "author": "BSRF",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Atat%C3%BCrk_Open_Air_Theatre,_May_2019_(3).jpg"
   },
   "tarihi-asansor": {
    "file": "TR Izmir asv2020-02 img52 Asansör.jpg",
@@ -1251,6 +1262,8 @@
  },
  "wikidata_found_by_search": {
   "bizans-sarayi": "Q3360950",
+  "izmir-kultur-sanat-fabrikasi": "Q117472126",
+  "ataturk-acik-hava-tiyatrosu": "Q106369480",
   "tarihi-asansor": "Q4803558",
   "kemeralti-carsisi": "Q6386921",
   "sirince": "Q132682115",
