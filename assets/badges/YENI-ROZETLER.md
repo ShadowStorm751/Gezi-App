@@ -1,6 +1,6 @@
-# Yeni rozetler: İzmir, Bursa, Kapadokya "keşif" rozetleri (15)
+# Yeni rozetler: İzmir, Bursa, Kapadokya "keşif" rozetleri (16)
 
-Durum: **görseller hazır (2026-11-20)**. 15 görsel `assets/badges/<slug>.webp` (512×512, şeffaf); `badge_path` migration'ı `20261120130000_kesif_badge_paths.sql`.
+Durum: **15 görsel hazır, `mustafapasa-kesif` görseli bekleniyor** (2026-11-20). 15 görsel `assets/badges/<slug>.webp` (512×512, şeffaf); `badge_path` migration'ı `20261120130000_kesif_badge_paths.sql`.
 Not: Gemini halka rengini her rozette aynı petrol mavisi yaptı; set tutarlı göründüğü için olduğu gibi bırakıldı.
 Canlıya alırken: migration uygulanır, `badge-upload` fonksiyonu yeniden deploy edilir, sonra Rozet görselleri iş akışı çalıştırılır.
 Mevcut 21 rozet Gemini ile çizildi. Aynı görünmeleri için aşağıdaki ortak üslup + her rozetin konusu Gemini'ye verilir.
@@ -31,6 +31,7 @@ Görseller gelince Claude kırpar, arka planı şeffaflaştırır, 512×512 `.we
 | `goreme-deki-kiliseler-listesi-kesif` | Göreme Açık Hava Müzesi Kâşifi / Göreme Open-Air Museum Explorer | kiremit | Rock-cut cave church entrances in soft tuff cliffs, a Byzantine fresco of a saint glimpsed inside a doorway. |
 | `ihlara-vadisi-kesif` | Ihlara Vadisi Kâşifi / Ihlara Valley Explorer | yosun yeşili | A deep green canyon with a stream and poplar trees, small cave-church doorways in the cliff walls. |
 | `soganli-vadisi-kesif` | Soğanlı Vadisi Kâşifi / Soğanlı Valley Explorer | mor-kahve | A quiet valley with a fairy chimney whose top is carved into a small dome, cave-church doorways in the cliffs, a donkey on the path. |
+| `mustafapasa-kesif` | Mustafapaşa Kâşifi / Mustafapaşa Explorer | taş kahve | A quiet old Cappadocian village street with cut-stone Greek mansions, carved stone doorways and arched windows, a rock-cut church in the cliff behind. |
 | `cavusin-kesif` | Çavuşin Kâşifi / Çavuşin Explorer | bal sarısı | A tall cliff honeycombed with old cave houses, a church carved high in the rock, a hot-air balloon in the sky. |
 
 Not: `mustafapasa`, `teos`, `emir-sultan-camii` ve `cumalikizik` ana yerlerinin içinde yalnızca 1 yer olduğu için rozetleri yok.

@@ -68,6 +68,7 @@ ADDED: Dict[str, Dict[str, Any]] = {
 # Onayda başka şehirle çakışmasın diye değiştirilen slug'lar: yeni slug -> aday listesindeki slug
 SLUG_FROM_CANDIDATE: Dict[str, Dict[str, str]] = {
     "bursa": {"iznik-dikilitas": "dikilitas"},   # İstanbul'da da "dikilitas" var
+    "kapadokya": {"kutsal-hac-kilisesi": "tarihi-kilise"},  # OSM adı genel ('Tarihi Kilise / St. Timios Church')
 }
 
 

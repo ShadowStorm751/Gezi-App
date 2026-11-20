@@ -8,6 +8,8 @@ D = {
                       "A historic mosque in Ürgüp dating from the Karamanid period."),
 "karsi-kilise": ("Gülşehir'de, 13. yüzyıl fresklerini koruyan kaya oyma kilise.",
                  "A rock-cut church in Gülşehir preserving 13th-century frescoes."),
+"kutsal-hac-kilisesi": ("Mustafapaşa'nın 2 km güneybatısında, Üzengi Vadisi'nde 9. yüzyıldan kalma beş nefli kaya kilisesi.",
+                        "A five-aisled 9th-century rock church in the Üzengi Valley, 2 km southwest of Mustafapaşa."),
 "aziz-nikolas-manastiri": ("Mustafapaşa'da, kayaya oyulmuş Aziz Nikolas Manastırı; bugün kültür merkezi olarak kullanılıyor.",
                            "The rock-cut Monastery of St Nicholas in Mustafapaşa, now used as a cultural centre."),
 "agacalti-kilisesi": ("Ihlara Vadisi'nde, haç planlı ve freskleriyle tanınan kaya kilisesi.",
@@ -157,7 +159,7 @@ NAMES = {
 PERIOD_DEFAULT_HISTORICAL = None
 PERIOD = {
     **{s: "Bizans" for s in (
-        "karsi-kilise", "aziz-nikolas-manastiri", "agacalti-kilisesi", "karanlik-kilise", "kokar-kilise-aksaray",
+        "karsi-kilise", "aziz-nikolas-manastiri", "kutsal-hac-kilisesi", "agacalti-kilisesi", "karanlik-kilise", "kokar-kilise-aksaray",
         "yilanli-kilise-aksaray", "aciksaray", "aziz-yuhanna-vaftizci-kilisesi-cavusin", "keslik-manastiri",
         "tokali-kilise", "selime-katedrali", "sumbullu-kilise", "purenli-seki-kilisesi", "azize-barbara-kilisesi",
         "azize-catherine-sapeli", "basil-sapeli", "elmali-kilise", "pantokrator-kilisesi", "yilanli-kilise",
@@ -183,7 +185,7 @@ RADIUS = {
     "mutfak-ve-kiler": 20,
     "agacalti-kilisesi": 60, "kokar-kilise-aksaray": 60, "yilanli-kilise-aksaray": 60, "sumbullu-kilise": 60,
     "purenli-seki-kilisesi": 100, "bahattin-in-samanligi-kilise": 60, "selime-katedrali": 150, "ihlara-cam-teras": 50,
-    "aziz-yuhanna-vaftizci-kilisesi-cavusin": 50, "cavusin-kalesi": 80, "aziz-nikolas-manastiri": 50,
+    "aziz-yuhanna-vaftizci-kilisesi-cavusin": 50, "cavusin-kalesi": 80, "aziz-nikolas-manastiri": 50, "kutsal-hac-kilisesi": 60,
     "mustafapasa": 500, "cavusin": 400, "guzelyurt": 500,
     "derinkuyu-yeralti-sehri": 80, "kaymakli": 80, "ozkonak": 80, "mazi-yeralti-sehri": 80,
     "uchisar-kalesi": 120, "ortahisar-kalesi": 100, "devrent-vadisi": 400, "passabag-vadisi": 250,
