@@ -214,6 +214,9 @@ RADIUS["yilanli-kilise-aksaray"] = 100
 
 # Elle seçilen fotoğraflar (photo_search.py adaylarından, temas sayfasına bakılarak; 2026-11-20)
 PHOTO_PICK = {
+    # Daha önce yakındaki dosya aramasıyla bulunmuştu; Commons araması her seferinde aynı sonucu vermediği için sabitlendi
+    'soganli-kubbeli-kilise': 'Kubbeli Kilise 03.jpg',
+    'soganli-yilanli-kilise': '38800 Soğanlı-Yeşilhisar-Kayseri, Turkey - panoramio (9).jpg',
     'aktepe-hill-sunset-point': 'CAPPADOCIA Göreme National Park and the Rock Sites. World Heritage List. Turkey. Hot Air Ballooning Cappadocia.jpg',  # Göreme manzarası, noktanın 90 m yakınından
     'soganli-karabas-kilisesi': 'Capadoccia Jul 2023 22 59 14 257000.jpeg',
     'soganli-sakli-kilise': 'Three churches domed hidden church.JPG',  # Kubbeli ve Saklı kiliseler birlikte; dosyanın konumu yanlış girilmiş
