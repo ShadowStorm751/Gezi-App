@@ -1,15 +1,8 @@
 ok
-zaman: 2026-11-20T12:54:14Z
-çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44739610744
+zaman: 2026-11-20T13:38:13Z
+çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44745990707
 ---
-CREATE DATABASE
-ALTER DATABASE
-== Şehir başına yer sayısı (yayında / toplam)
-   slug    | yayinda | toplam | ic_yer | fotografli 
------------+---------+--------+--------+------------
- bursa     |       0 |     71 |     19 |         61
- istanbul  |     156 |    156 |      0 |        154
- izmir     |       0 |    123 |     32 |        110
+ izmir     |       0 |    124 |     32 |        111
  kapadokya |       0 |     63 |     28 |         57
 (4 rows)
 
@@ -76,7 +69,7 @@ ALTER DATABASE
 
 == Yayınlama denemesi (geri alınır): place_detail ve city_pack
 BEGIN
-UPDATE 257
+UPDATE 258
  efes_ic_yer | efes_children |   ad    
 -------------+---------------+---------
  11          |            11 | Ephesus
@@ -84,7 +77,7 @@ UPDATE 257
 
                                  celsus_ana_yer                                 
 --------------------------------------------------------------------------------
- {"id": "bf28e3a5-b279-41de-ba40-35112cbfad2b", "name": "Efes", "slug": "efes"}
+ {"id": "dff1db95-78ef-4c22-9d58-2159b008ce05", "name": "Efes", "slug": "efes"}
 (1 row)
 
        slug        | rating_var |     donem_en      | donem_kodu 
@@ -98,7 +91,7 @@ UPDATE 257
 -----------+-----------+---------------
  bursa     |        71 |             7
  istanbul  |       156 |             0
- izmir     |       123 |             7
+ izmir     |       124 |             7
  kapadokya |        63 |             5
 (4 rows)
 
@@ -112,6 +105,15 @@ TAMAM
 -------------------
  mustafapasa-kesif
 (1 row)
+
+== Uzun açıklaması eksik yer (TR veya EN; 0 olmalı)
+   sehir   | eksik | toplam 
+-----------+-------+--------
+ bursa     |     0 |    142
+ istanbul  |     0 |    312
+ izmir     |     0 |    248
+ kapadokya |     0 |    126
+(4 rows)
 
 == Denetim (backend/tests/audit.sql): yalnızca ozet satırı kalmalı
       kontrol      |                         sorun                          
