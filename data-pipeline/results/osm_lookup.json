@@ -906,5 +906,168 @@
    "boylam": 34.970274,
    "mesafe_m": 727
   }
+ ],
+ "gemlik-kursunlu": [
+  {
+   "osm": "node/8373385058",
+   "etiketler": {
+    "name": "Kurşunlu",
+    "place": "village",
+    "wikidata": "Q109961148"
+   },
+   "enlem": 40.360373,
+   "boylam": 29.023523,
+   "mesafe_m": 218
+  },
+  {
+   "osm": "node/10840565282",
+   "etiketler": {
+    "highway": "bus_stop",
+    "name": "Kurşunlu Pazar Yeri"
+   },
+   "enlem": 40.362634,
+   "boylam": 29.029275,
+   "mesafe_m": 760
+  },
+  {
+   "osm": "node/10840565283",
+   "etiketler": {
+    "highway": "bus_stop",
+    "name": "Kurşunlu Pazar Yeri"
+   },
+   "enlem": 40.362915,
+   "boylam": 29.029468,
+   "mesafe_m": 787
+  },
+  {
+   "osm": "way/1165498006",
+   "etiketler": {
+    "amenity": "cafe",
+    "building": "yes",
+    "name": "One Tea Beach Kafe"
+   },
+   "enlem": 40.36349,
+   "boylam": 29.03036,
+   "mesafe_m": 883
+  },
+  {
+   "osm": "way/1165498006",
+   "etiketler": {
+    "amenity": "cafe",
+    "building": "yes",
+    "name": "One Tea Beach Kafe"
+   },
+   "enlem": 40.36349,
+   "boylam": 29.03036,
+   "mesafe_m": 883
+  },
+  {
+   "osm": "node/10840565278",
+   "etiketler": {
+    "highway": "bus_stop",
+    "name": "Kurşunlu Yat Limanı"
+   },
+   "enlem": 40.363483,
+   "boylam": 29.031628,
+   "mesafe_m": 980
+  },
+  {
+   "osm": "node/10840565277",
+   "etiketler": {
+    "highway": "bus_stop",
+    "name": "Kurşunlu Yat Limanı"
+   },
+   "enlem": 40.363701,
+   "boylam": 29.032307,
+   "mesafe_m": 1043
+  },
+  {
+   "osm": "way/1165497962",
+   "etiketler": {
+    "name": "Kurşunlu Yat Limanı"
+   },
+   "enlem": 40.364479,
+   "boylam": 29.03318,
+   "mesafe_m": 1146
+  },
+  {
+   "osm": "way/1165497962",
+   "etiketler": {
+    "name": "Kurşunlu Yat Limanı"
+   },
+   "enlem": 40.364479,
+   "boylam": 29.03318,
+   "mesafe_m": 1146
+  },
+  {
+   "osm": "node/11455092969",
+   "etiketler": {
+    "amenity": "pharmacy",
+    "name": "Kurşunlu Eczanesi"
+   },
+   "enlem": 40.363872,
+   "boylam": 29.034727,
+   "mesafe_m": 1240
+  },
+  {
+   "osm": "node/10840565276",
+   "etiketler": {
+    "highway": "bus_stop",
+    "name": "Kurşunlu Sağlık Ocağı"
+   },
+   "enlem": 40.364015,
+   "boylam": 29.035274,
+   "mesafe_m": 1289
+  },
+  {
+   "osm": "node/10840565274",
+   "etiketler": {
+    "highway": "bus_stop",
+    "name": "Kurşunlu 14"
+   },
+   "enlem": 40.363855,
+   "boylam": 29.037095,
+   "mesafe_m": 1429
+  },
+  {
+   "osm": "node/10840565273",
+   "etiketler": {
+    "highway": "bus_stop",
+    "name": "Kurşunlu 13"
+   },
+   "enlem": 40.363544,
+   "boylam": 29.03978,
+   "mesafe_m": 1639
+  },
+  {
+   "osm": "node/10840565272",
+   "etiketler": {
+    "highway": "bus_stop",
+    "name": "Kurşunlu 13"
+   },
+   "enlem": 40.363579,
+   "boylam": 29.039893,
+   "mesafe_m": 1649
+  },
+  {
+   "osm": "node/10840565271",
+   "etiketler": {
+    "highway": "bus_stop",
+    "name": "Kurşunlu 12"
+   },
+   "enlem": 40.362993,
+   "boylam": 29.043929,
+   "mesafe_m": 1971
+  },
+  {
+   "osm": "node/10840565269",
+   "etiketler": {
+    "highway": "bus_stop",
+    "name": "Kurşunlu 11"
+   },
+   "enlem": 40.362553,
+   "boylam": 29.047174,
+   "mesafe_m": 2236
+  }
  ]
 }
