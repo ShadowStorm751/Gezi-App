@@ -110,11 +110,12 @@ def candidates_for(s: Dict[str, Any], city_name: str, reject: frozenset, per_pla
         score = (2 if ph.title_matches(t, kw) else 0) + (2 if d is not None and d <= search_radius(s) else 0) \
             + (1 if src.startswith("wikipedia") else 0) - (1 if d is not None and d > 5 * search_radius(s) else 0)
         out.append({"kaynak": src, "dosya": t.removeprefix("File:"), "mesafe_m": d, "puan": score,
-                    "thumb": ph.thumb_from(info["url"], 250)  # Commons yalnızca standart küçük resim boylarını veriyor, "lisans": info["license"], "yazar": info["author"]})
+                    "thumb": ph.thumb_from(info["url"], 250), "lisans": info["license"], "yazar": info["author"]})
     out.sort(key=lambda x: -x["puan"])
     return out[:per_place]
 
 
+# Not: Commons yalnızca standart küçük resim boylarını veriyor (250, 330, 500, 960, 1280 …)
 def contact_sheets(rdir: Path, result: Dict[str, List[Dict[str, Any]]]) -> List[str]:
     """Aday küçük resimlerinden temas sayfaları (satır başına bir yer). Pillow yoksa atlanır."""
     try:
