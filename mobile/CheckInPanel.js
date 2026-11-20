@@ -1,3 +1,4 @@
+import {Press} from './Motion';
 import {km} from './PlaceUI';
 import {c} from './theme';
 import React, {useEffect,useRef,useState} from 'react';
@@ -7,7 +8,7 @@ import {client,lang,t} from './client';
 import {Login} from './Badges';
 import {checkinOutcome,distanceHint,sendCheckin} from './visitLogic';
 
-export default function CheckIn({place,origin,onFix,visits,visited,onMissing,onAwards,cities}) {
+export default function CheckIn({place,origin,onFix,visits,visited,onMissing,onResult,cities}) {
   const [permission,setPermission] = useState(null);
 
   const [busy,setBusy] = useState(false);
@@ -89,10 +90,10 @@ export default function CheckIn({place,origin,onFix,visits,visited,onMissing,onA
         visits.record(id,place.id,outcome.action === 'record' ? new Date().toISOString() : null);
       }
       if (!mounted.current) return;
-      setResult(outcome);
+      if(outcome.action!=='login')onResult({...outcome,userId:id});
       if (outcome.action === 'login') askLogin();
       if (outcome.action === 'refresh') onMissing();
-      if (outcome.awards?.length) onAwards(outcome.awards,id);
+
     } catch {
       if (mounted.current) setResult({message:t('Konum veya bağlantı alınamadı. Tekrar dene.','Location or connection unavailable. Try again.')});
     } finally {
@@ -101,17 +102,17 @@ export default function CheckIn({place,origin,onFix,visits,visited,onMissing,onA
     }
   }
   submitRef.current = submit;
-  const date = visits.dates[place.id];
+  const date = visits.dates[place.id] || place.visitedAt;
   const hint = permission?.granted && !visited ? distanceHint(place,origin) : null;
   return <View style={styles.group}>
     {visited ? <Text style={styles.visited}>{t('Gezildi ✓','Visited ✓')}{date ? ' · '+new Date(date).toLocaleDateString(lang) : ''}</Text> :
       login ? <Login onSignedIn={resume} prompt={t('Devam etmek için giriş yap.','Sign in to continue.')}/> :
-      <Pressable accessibilityRole="button" accessibilityState={{disabled:busy,busy}} disabled={busy}
+      <Press accessibilityRole="button" accessibilityState={{disabled:busy,busy}} disabled={busy}
         onPress={() => submit()} style={styles.button}>
         {busy ? <ActivityIndicator color={c.surfaceRaised}/> : <Text style={styles.buttonText}>
           {permission && !permission.granted ? t('Konumu aç','Turn on location') : t('Buradayım',"I'm here")}
         </Text>}
-      </Pressable>}
+      </Press>}
     {hint !== null && <Text style={styles.note}>
       {t('Yaklaşık '+km(hint)+' uzaktasın.','You are about '+km(hint)+' away.')}
     </Text>}

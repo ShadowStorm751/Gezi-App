@@ -19,8 +19,8 @@ function Item({name,active,onPress}) {
     <Text numberOfLines={1} style={{fontFamily:fonts.semibold,fontSize:11,color}}>{label}</Text>
   </Press>;
 }
-export default function MainTabs({pages,initial,onTab}) {
-  return <NavigationContainer><Tab.Navigator initialRouteName={initial} screenOptions={{headerShown:false,sceneStyle:{backgroundColor:c.surface}}}
+export default function MainTabs({pages,initial,onTab,navigationRef}) {
+  return <NavigationContainer ref={navigationRef}><Tab.Navigator initialRouteName={initial} screenOptions={{headerShown:false,sceneStyle:{backgroundColor:c.surface}}}
     tabBar={({state,navigation})=><View style={styles.bar}>{state.routes.map((r,i)=><Item key={r.key} name={r.name} active={i===state.index}
       onPress={()=>{onTab(r.name);navigation.navigate(r.name);}}/>)}</View>}>
     {Object.keys(tabs).map(name=><Tab.Screen key={name} name={name}>{()=>pages[name]}</Tab.Screen>)}

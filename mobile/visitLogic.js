@@ -26,9 +26,10 @@ function checkinOutcome(data,lang) {
   if (data?.ok === true) return {action:'record',message:label('Kaydedildi! 🎉','Checked in! 🎉'),
     awards:Array.isArray(data.new_achievements) ? data.new_achievements : [],progress:data.city_progress};
   const distance = Number.isFinite(data?.distance_m) ? Math.round(data.distance_m) : null;
+  const formatted=distance>=1000?(distance/1000).toLocaleString(lang,{maximumFractionDigits:1})+' km':distance+' m';
   const messages = {
     too_far:distance === null ? label('Biraz daha yaklaş.','Get a little closer.') :
-      label('Biraz daha yaklaş (şu an '+distance+' m uzaktasın).',"Get a little closer (you're "+distance+" m away)."),
+      label('Biraz daha yaklaş (şu an '+formatted+' uzaktasın).',"Get a little closer (you're "+formatted+" away)."),
     low_accuracy:label('Konum net değil. Açık bir alana çıkıp tekrar dene.',"Location isn't precise. Step into an open area and try again."),
     already_visited:label('Burayı zaten gezdin.',"You've already visited this place."),
     rate_limited:label('Biraz yavaş! Bir dakika sonra tekrar dene.','Slow down! Try again in a minute.'),

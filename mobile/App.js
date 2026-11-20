@@ -1,3 +1,4 @@
+import {VisitSheet,Ceremony} from './Celebrations';
 import PlaceMap from './PlaceMap';
 import PlaceDetail from './PlaceDetail';
 import Explore from './Explore';
@@ -66,7 +67,9 @@ export default function App() {
   const [cameraMode, setCameraMode] = useState(null);
   const cameraOpen = !!cameraMode;
   const galataPreview = cameraMode === 'galata';
-  const tab=useRef('explore');
+  const tab=useRef('explore'), navigation=useRef(null);
+  const [result,setResult]=useState(null);
+  const activeResult=result && result.userId===visits.userId?result:null;
   const [permission,setPermission]=useState(null);
   useEffect(()=>{Location.getForegroundPermissionsAsync().then(access=>{setPermission(access.granted);if(access.granted) useLocation(false);}).catch(()=>{});},[]);
   const [trackedId, setTrackedId] = useState(null);
@@ -151,6 +154,7 @@ export default function App() {
 
   function closeDetail() {
     setReporting(false);
+    setResult(null);
     detailToken.current++;
     setCelebration(null);
     setDetail(null);
@@ -223,7 +227,7 @@ export default function App() {
         {screen==='route' && <RouteDetail slug={routeSlug} revision={[visits.userId,visits.revision]} onPlace={showStop}/>}
         {screen==='friends' && (visits.userId?<Friends onProfile={()=>setScreen('home')}/>:<Login/>)}
         {screen==='suggest' && <ContributionForm coordinate={suggestPin} userId={visits.userId} onClose={()=>setScreen('home')}/>}
-      </ScrollView></> : <MainTabs initial={tab.current} onTab={name=>{tab.current=name;}} pages={{
+      </ScrollView></> : <MainTabs navigationRef={navigation} initial={tab.current} onTab={name=>{tab.current=name;}} pages={{
         explore:<Explore places={nearby.map(p=>({...p,distance:origin?p.distance:null}))} nearby={listPlaces} city={city||{slug:citySlug,name:citySlug==='istanbul'?'İstanbul':citySlug}} cities={cities} onCity={chooseCity} origin={origin} permission={permission} onLocation={()=>useLocation()} onDemo={tryGalata} onCamera={()=>setCameraMode('live')} onPlace={openPlace} onRoute={slug=>openRoute(slug,'home')} visited={wasVisited} revision={visits.revision} userId={visits.userId} state={catalogState} onRetry={()=>setRefresh(n=>n+1)} message={locationMessage} loading={loading}/>,
         map:<PlaceMap key={citySlug} places={nearby} mapRef={map} center={center} origin={origin} visited={wasVisited} onLocation={()=>useLocation()} onSuggest={client?suggest:null} onOpen={openPlace} message={locationMessage}/>,
         routes: <ScrollView contentContainerStyle={ui.content}><Text style={ui.title}>{t('Rotalar','Routes')}</Text><Routes city={citySlug} revision={[visits.userId,visits.revision]} onRoute={slug=>openRoute(slug,'routes')}/></ScrollView>,
@@ -231,18 +235,19 @@ export default function App() {
         profile: <ScrollView contentContainerStyle={ui.content}><Text style={ui.title}>{t('Profil','Profile')}</Text>{!!client && <Action onPress={()=>suggest(origin ?? center)}>{t('Yer öner','Suggest a place')}</Action>}
       {!client ? <Text>{t('Profil için bağlantı gerekli.','Connect to view your profile.')}</Text> : visits.userId ? <Profile key={visits.userId} visits={visits} onSocial={()=>setScreen('friends')} onClose={()=>setScreen('home')}/> : <Login/>}</ScrollView>
       }}/>}
-      <Modal visible={!!detail} animationType="none" onRequestClose={award ? nextAward : closeDetail}>
+      <Modal visible={!!detail} animationType="none" onRequestClose={award?nextAward:activeResult?()=>setResult(null):closeDetail}>
         {detail && <View style={{flex:1}}><PlaceDetail key={detail.id} place={detail} userId={visits.userId} revision={visits.revision} live={!!client&&!galataPreview&&!demo}
           distance={origin&&!galataPreview?distanceMeters(origin,detail.coordinate):null} onBack={closeDetail} onTrack={()=>{setTrackedId(detail.id);setTrackedPlace(detail);closeDetail();setCameraMode(galataPreview?'galata':'live');}}
           footer={!demo&&!galataPreview&&detailState!=='missing'?<CheckIn place={detail} origin={origin} onFix={setOrigin} visits={visits} cities={cities.data}
-            visited={wasVisited(detail.id)||!!(detail.visitedAt && detail.detailUser===visits.userId)} onMissing={()=>setRefresh(n=>n+1)} onAwards={(awards,userId)=>setCelebration({awards,userId})}/>:<Text style={ui.muted}>{t('Önizleme','Preview')}</Text>}>
+            visited={wasVisited(detail.id)||!!(detail.visitedAt && detail.detailUser===visits.userId)} onMissing={()=>setRefresh(n=>n+1)} onResult={setResult}/>:<Text style={ui.muted}>{t('Önizleme','Preview')}</Text>}>
           {detailState==='loading' && <ActivityIndicator color={c.primary}/>}
           {detailState==='missing' && <Text>{t('Bu yer artık yayında değil.','This place is no longer published.')}</Text>}
           {detailState==='error' && <Action onPress={()=>openPlace(detail)}>{t('Detayı tekrar yükle','Reload details')}</Action>}
           {!!detail.source && <Action onPress={()=>openOfficialPage(detail.source)}>{t('Resmî ziyaret bilgileri','Official visitor information')}</Action>}
           {!!client && !galataPreview && detailState!=='missing' && (reporting?<ContributionForm key={detail.id+':'+visits.userId} place={detail} coordinate={detail.coordinate} userId={visits.userId} onClose={()=>setReporting(false)}/>:<Action onPress={()=>setReporting(true)}>{t('Bir sorun mu var?','Report a problem')}</Action>)}
         </PlaceDetail>
-        {award && <SafeAreaView accessibilityViewIsModal style={styles.celebration}><BadgeArt badge={{...award,earned_at:true}}/><Text style={ui.title}>{award.name}</Text><Text>{award.description}</Text><Action onPress={nextAward}>{t('Devam et','Continue')}</Action></SafeAreaView>}
+        {activeResult && <VisitSheet result={activeResult} place={detail} onClose={()=>setResult(null)} onAward={()=>{setCelebration({awards:activeResult.awards,userId:visits.userId});setResult(null);}}/>}
+        {award && <Ceremony key={award.slug} badge={award} userId={visits.userId} onClose={()=>setCelebration(null)} onNext={nextAward} onBadges={()=>{tab.current='badges';setScreen('home');setCameraMode(null);navigation.current?.navigate('badges');closeDetail();}}/>}
         </View>}
       </Modal>
     </SafeAreaView>
