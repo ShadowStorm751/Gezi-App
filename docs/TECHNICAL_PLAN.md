@@ -191,7 +191,7 @@ Mobil (ChatGPT):
 - [x] Haritada "© OpenStreetMap katkıcıları" atfı (ODbL lisans şartı)
 - [x] Sıcak keşif tasarımı ve animasyonlar (`docs/TASARIM.md`)
 - [x] `city_pack.period_code` → `mapPlace` (rozet ilerlemesi listelerde de doğru çalışsın; `docs/REQUESTS.md`)
-- [ ] Rotalar, Rozetler ve Profil sekmelerinin yeni tasarıma göre son rötuşu (tasarımları henüz çizilmedi)
+- [x] Rotalar, Rozetler ve Profil sekmelerinde sıcak keşif düzeni: fotoğraflı rota listesi, filtrelenebilir rozet koleksiyonu, profil kısayolları ve hesap ayarları. Fiziksel iPhone kontrolü aşağıdaki kabul testinde.
 - [ ] Fiziksel iPhone kabul testi (tüm akış)
 
 Proje sahibi:

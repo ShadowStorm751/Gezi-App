@@ -21,7 +21,7 @@ import DiscoveryCamera from './DiscoveryCamera';
 import {BadgeLogin,Collection,Login} from './Badges';
 import {Action,ui,useQuery} from './ScreenUI';
 import Friends from './Friends';
-import Profile from './Profile';
+import Profile,{GuestProfile} from './Profile';
 import {ContributionForm} from './Contributions';
 import {Routes,RouteDetail} from './Trips';
 import CheckIn from './CheckInPanel';
@@ -230,10 +230,14 @@ export default function App() {
             : <BadgeLogin/>
             : <Text style={ui.muted}>{t('Rozetleri görmek için bağlantı gerekli.','Connect to view badges.')}</Text>}
         </TabPage>,
-        profile: <ScrollView contentContainerStyle={ui.content}><Text style={ui.title}>{t('Profil','Profile')}</Text>{!!client && <Action onPress={()=>suggest(origin ?? center)}>{t('Yer öner','Suggest a place')}</Action>}
-      {visits.userId && <Action onPress={()=>setScreen('reviews')}>{t('Değerlendirmelerim','My reviews')}</Action>}
-      {visits.userId && <Action onPress={()=>setScreen('photos')}>{t('Fotoğraflarım','My photos')}</Action>}
-      {!client ? <Text>{t('Profil için bağlantı gerekli.','Connect to view your profile.')}</Text> : visits.userId ? <Profile key={visits.userId} visits={visits} onSocial={()=>setScreen('friends')} onClose={()=>setScreen('home')}/> : <Login/>}</ScrollView>
+        profile: <TabPage title={t('Profil','Profile')}>
+          {!client ? <Text style={ui.muted}>{t('Profil için bağlantı gerekli.','Connect to view your profile.')}</Text>
+            : visits.userId ? <Profile key={visits.userId} visits={visits}
+                onPhotos={()=>setScreen('photos')} onReviews={()=>setScreen('reviews')}
+                onSocial={()=>setScreen('friends')} onSuggest={()=>suggest(origin ?? center)}
+                onClose={()=>setScreen('home')}/>
+            : <GuestProfile onSuggest={()=>suggest(origin ?? center)}/>}
+        </TabPage>
       }}/>}
       <Modal visible={!!profileReview && !!visits.userId} onRequestClose={()=>setProfileReview(null)}>{profileReview && visits.userId && <Reviews place={profileReview} visits={visits} onBack={()=>setProfileReview(null)} onChanged={()=>setReviewVersion(n=>n+1)}/>}</Modal>
       <Modal visible={!!detail} animationType="none" onRequestClose={subpage?()=>setSubpage(null):award?nextAward:activeResult?()=>setResult(null):closeDetail}>
