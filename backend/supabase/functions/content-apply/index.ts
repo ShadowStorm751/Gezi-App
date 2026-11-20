@@ -16,6 +16,8 @@ const ALLOWED: Record<string, string> = {
   "20261120110000_istanbul_long_desc_7.sql": "916684154b059d10016121b82f7c34ba8c268ed8959370f7ade32dfae29eb563",
   "20261120120000_istanbul_long_desc_8.sql": "b8f3fe1b4102e1cf6b3b3108bd30e0fe422339c3e1c6c0efe8ec78c5105f1264",
   "20261120130000_istanbul_long_desc_9.sql": "a344af12a0ce8999585af13911665d2b99a18bc317905999e72ac3b76267a118",
+  "20261120140000_istanbul_long_desc_10.sql": "dbbc36b2fb32e658e5006eb8dfb769ea3c4a75a0eaa790f92968e0167702e867",
+  "20261120150000_istanbul_long_desc_11.sql": "6a039d7d3880c047144ca648241eacb6c67b5526186f5b5b370c657ad40806bc",
 };
 
 async function sha256Hex(text: string): Promise<string> {
