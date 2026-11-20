@@ -96,8 +96,8 @@ D = {
 "guzelyurt": ("Aksaray'da, Ihlara Vadisi yakınında, kaya kiliseleri ve taş evleriyle eski Rum kasabası.",
               "A former Greek town in Aksaray near the Ihlara Valley, with rock churches and stone houses."),
 # --- Doğa ---------------------------------------------------------------------
-"aktepe-hill-sunset-point": ("Göreme'nin üzerinde, gün batımında ve sabah balonlarında en kalabalık seyir noktası.",
-                             "The viewpoint above Göreme, busiest at sunset and when the morning balloons rise.",
+"aktepe-hill-sunset-point": ("Zelve'nin güneyinde, Aktepe'nin üzerinde; Kızılçukur Vadisi'ne bakan gün batımı ve balon seyir noktası.",
+                             "A sunset and balloon viewpoint on Aktepe hill, south of Zelve, overlooking the Red Valley (Kızılçukur).",
                              "Gün doğumu (balonlar) ve gün batımı", "Sunrise (balloons) and sunset"),
 "temenni-tepe": ("Ürgüp'ün ortasında, kasabaya ve vadilere bakan tepe.",
                  "A hill in the middle of Ürgüp overlooking the town and valleys.", "Gün batımı", "Sunset"),

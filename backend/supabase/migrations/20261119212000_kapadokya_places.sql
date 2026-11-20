@@ -23,7 +23,7 @@ join public.categories c on c.slug = v.slug
 on conflict (category_id, lang) do nothing;
 
 -- Yerler --------------------------------------------------------------------------
--- Otomatik üretildi: data-pipeline/pipeline.py build (2026-11-20 13:57)
+-- Otomatik üretildi: data-pipeline/pipeline.py build (2026-11-20 14:48)
 -- 63 yer; hepsi gizli (is_published = false); 63 tanesinin TR+EN kısa açıklaması dolu.
 -- Tekrar çalıştırılabilir: aynı slug'lı yerler güncellenir, kopya oluşmaz.
 
@@ -199,8 +199,8 @@ from (values
   ('cavusin', 'en', 'Çavuşin', 'Çavuşin, between Göreme and Avanos, with its old cliffside village and newer settlement.', null),
   ('guzelyurt', 'tr', 'Güzelyurt', 'Aksaray''da, Ihlara Vadisi yakınında, kaya kiliseleri ve taş evleriyle eski Rum kasabası.', null),
   ('guzelyurt', 'en', 'Güzelyurt', 'A former Greek town in Aksaray near the Ihlara Valley, with rock churches and stone houses.', null),
-  ('aktepe-hill-sunset-point', 'tr', 'Aktepe Seyir Noktası', 'Göreme''nin üzerinde, gün batımında ve sabah balonlarında en kalabalık seyir noktası.', 'Gün doğumu (balonlar) ve gün batımı'),
-  ('aktepe-hill-sunset-point', 'en', 'Aktepe Viewpoint', 'The viewpoint above Göreme, busiest at sunset and when the morning balloons rise.', 'Sunrise (balloons) and sunset'),
+  ('aktepe-hill-sunset-point', 'tr', 'Aktepe Seyir Noktası', 'Zelve''nin güneyinde, Aktepe''nin üzerinde; Kızılçukur Vadisi''ne bakan gün batımı ve balon seyir noktası.', 'Gün doğumu (balonlar) ve gün batımı'),
+  ('aktepe-hill-sunset-point', 'en', 'Aktepe Viewpoint', 'A sunset and balloon viewpoint on Aktepe hill, south of Zelve, overlooking the Red Valley (Kızılçukur).', 'Sunrise (balloons) and sunset'),
   ('temenni-tepe', 'tr', 'Temenni Tepe', 'Ürgüp''ün ortasında, kasabaya ve vadilere bakan tepe.', 'Gün batımı'),
   ('temenni-tepe', 'en', 'Temenni Hill', 'A hill in the middle of Ürgüp overlooking the town and valleys.', 'Sunset'),
   ('uc-guzeller', 'tr', 'Üç Güzeller', 'Ürgüp yakınında, şapkalı üç peribacasından oluşan Kapadokya''nın simgelerinden.', 'Gün batımı'),

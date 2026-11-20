@@ -21,7 +21,7 @@ join public.categories c on c.slug = v.slug
 on conflict (category_id, lang) do nothing;
 
 -- Yerler --------------------------------------------------------------------------
--- Otomatik üretildi: data-pipeline/pipeline.py build (2026-11-20 13:53)
+-- Otomatik üretildi: data-pipeline/pipeline.py build (2026-11-20 14:48)
 -- 70 yer; hepsi gizli (is_published = false); 70 tanesinin TR+EN kısa açıklaması dolu.
 -- Tekrar çalıştırılabilir: aynı slug'lı yerler güncellenir, kopya oluşmaz.
 
@@ -250,8 +250,8 @@ from (values
   ('merinos-parki', 'en', 'Merinos Park', 'A city park around the old Merinos factory with museums and wide green spaces.', null),
   ('mudanya-sahili', 'tr', 'Mudanya Sahili', 'Mudanya''nın tarihi evlerinin sıralandığı deniz kıyısı.', 'Gün batımı'),
   ('mudanya-sahili', 'en', 'Mudanya Seafront', 'The seafront of Mudanya lined with historic houses.', 'Sunset'),
-  ('kursunlu-plaji', 'tr', 'Kurşunlu Plajı', 'Gemlik yakınında, Kurşunlu''daki halk plajı.', 'Yaz'),
-  ('kursunlu-plaji', 'en', 'Kurşunlu Beach', 'A public beach at Kurşunlu near Gemlik.', 'Summer'),
+  ('kursunlu-plaji', 'tr', 'Kurşunlu Plajı', 'Karacabey''de, Kurşunlu''daki uzun kumsallı halk plajı.', 'Yaz'),
+  ('kursunlu-plaji', 'en', 'Kurşunlu Beach', 'A long sandy public beach at Kurşunlu, Karacabey.', 'Summer'),
   ('suuctu-selalesi', 'tr', 'Suuçtu Şelalesi', 'Mustafakemalpaşa''da, ormanın içinde yüksekten dökülen şelale.', 'İlkbahar (su bol)'),
   ('suuctu-selalesi', 'en', 'Suuçtu (Waterfly) Waterfall', 'A tall waterfall in the forest near Mustafakemalpaşa.', 'Spring (most water)'),
   ('saitabat-selalesi', 'tr', 'Saitabat Şelalesi', 'Uludağ yolunda, Saitabat köyü yakınında şelale ve mesire yeri.', 'İlkbahar (su bol)'),
