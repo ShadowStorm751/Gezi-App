@@ -23,8 +23,8 @@ join public.categories c on c.slug = v.slug
 on conflict (category_id, lang) do nothing;
 
 -- Yerler --------------------------------------------------------------------------
--- Otomatik üretildi: data-pipeline/pipeline.py build (2026-11-20 01:41)
--- 62 yer; hepsi gizli (is_published = false); 62 tanesinin TR+EN kısa açıklaması dolu.
+-- Otomatik üretildi: data-pipeline/pipeline.py build (2026-11-20 13:06)
+-- 63 yer; hepsi gizli (is_published = false); 63 tanesinin TR+EN kısa açıklaması dolu.
 -- Tekrar çalıştırılabilir: aynı slug'lı yerler güncellenir, kopya oluşmaz.
 
 insert into public.places
@@ -37,6 +37,7 @@ from (values
   ('karamanoglu-camii', 'mosque', 38.632585, 34.910199, 100, 'Beylikler', null, 'Q98091589', 'way/96870821', null),
   ('karsi-kilise', 'church', 38.740714, 34.634741, 100, 'Bizans', null, 'Q1297810', 'node/800022238', null),
   ('aziz-nikolas-manastiri', 'church', 38.577092, 34.895605, 50, 'Bizans', null, 'Q131523702', 'way/1463219578', null),
+  ('kutsal-hac-kilisesi', 'church', 38.573171, 34.873014, 60, 'Bizans', null, null, 'node/11285946844', null),
   ('agacalti-kilisesi', 'church', 38.253225, 34.303657, 60, 'Bizans', null, 'Q6040759', 'node/2401466689', null),
   ('karanlik-kilise', 'church', 38.638704, 34.846265, 25, 'Bizans', null, 'Q114383869', 'node/316770600', null),
   ('kokar-kilise-aksaray', 'church', 38.253370, 34.307899, 60, 'Bizans', null, 'Q6038736', 'node/1007695845', null),
@@ -118,6 +119,8 @@ from (values
   ('karsi-kilise', 'en', 'St. Jean Church', 'A rock-cut church in Gülşehir preserving 13th-century frescoes.', null),
   ('aziz-nikolas-manastiri', 'tr', 'Aziz Nikolas Manastırı', 'Mustafapaşa''da, kayaya oyulmuş Aziz Nikolas Manastırı; bugün kültür merkezi olarak kullanılıyor.', null),
   ('aziz-nikolas-manastiri', 'en', 'Monastery of St Nicholas', 'The rock-cut Monastery of St Nicholas in Mustafapaşa, now used as a cultural centre.', null),
+  ('kutsal-hac-kilisesi', 'tr', 'Kutsal Haç Kilisesi (Timios Stavros)', 'Mustafapaşa''nın 2 km güneybatısında, Üzengi Vadisi''nde 9. yüzyıldan kalma beş nefli kaya kilisesi.', null),
+  ('kutsal-hac-kilisesi', 'en', 'Holy Cross Church (Timios Stavros)', 'A five-aisled 9th-century rock church in the Üzengi Valley, 2 km southwest of Mustafapaşa.', null),
   ('agacalti-kilisesi', 'tr', 'Ağaçaltı Kilisesi', 'Ihlara Vadisi''nde, haç planlı ve freskleriyle tanınan kaya kilisesi.', null),
   ('agacalti-kilisesi', 'en', 'Ağaçaltı Church', 'A cross-shaped rock church in the Ihlara Valley, known for its frescoes.', null),
   ('karanlik-kilise', 'tr', 'Karanlık Kilise', 'Göreme Açık Hava Müzesi''nde, az ışık aldığı için renkleri canlı kalmış fresklerle dolu kilise.', null),
@@ -261,6 +264,7 @@ from (values
   ('ihlara-cam-teras', 'ihlara-vadisi'),
   ('karanlik-kilise', 'goreme-deki-kiliseler-listesi'),
   ('kokar-kilise-aksaray', 'ihlara-vadisi'),
+  ('kutsal-hac-kilisesi', 'mustafapasa'),
   ('mutfak-ve-kiler', 'goreme-deki-kiliseler-listesi'),
   ('pantokrator-kilisesi', 'goreme-deki-kiliseler-listesi'),
   ('purenli-seki-kilisesi', 'ihlara-vadisi'),
@@ -284,7 +288,8 @@ insert into public.achievements (slug, rule, sort_order) values
   ('cavusin-kesif', '{"type": "place_set", "places": ["cavusin", "aziz-yuhanna-vaftizci-kilisesi-cavusin", "cavusin-kalesi"]}'::jsonb, 100),
   ('goreme-deki-kiliseler-listesi-kesif', '{"type": "place_set", "places": ["goreme-deki-kiliseler-listesi", "azize-barbara-kilisesi", "azize-catherine-sapeli", "basil-sapeli", "carikli-kilise", "elmali-kilise", "karanlik-kilise", "mutfak-ve-kiler", "pantokrator-kilisesi", "tokali-kilise", "yilanli-kilise"]}'::jsonb, 101),
   ('ihlara-vadisi-kesif', '{"type": "place_set", "places": ["ihlara-vadisi", "agacalti-kilisesi", "bahattin-in-samanligi-kilise", "ihlara-cam-teras", "kokar-kilise-aksaray", "purenli-seki-kilisesi", "selime-katedrali", "sumbullu-kilise", "yilanli-kilise-aksaray"]}'::jsonb, 102),
-  ('soganli-vadisi-kesif', '{"type": "place_set", "places": ["soganli-vadisi", "soganli-geyikli-kilise", "soganli-karabas-kilisesi", "soganli-kubbeli-kilise", "soganli-sakli-kilise", "soganli-tahtali-kilise", "soganli-yilanli-kilise"]}'::jsonb, 103)
+  ('mustafapasa-kesif', '{"type": "place_set", "places": ["mustafapasa", "aziz-nikolas-manastiri", "kutsal-hac-kilisesi"]}'::jsonb, 103),
+  ('soganli-vadisi-kesif', '{"type": "place_set", "places": ["soganli-vadisi", "soganli-geyikli-kilise", "soganli-karabas-kilisesi", "soganli-kubbeli-kilise", "soganli-sakli-kilise", "soganli-tahtali-kilise", "soganli-yilanli-kilise"]}'::jsonb, 104)
 on conflict (slug) do update set rule = excluded.rule;
 
 insert into public.achievement_translations (achievement_id, lang, name, description)
@@ -296,6 +301,8 @@ from (values
   ('goreme-deki-kiliseler-listesi-kesif', 'en', 'Göreme Open Air Museum Explorer', 'Visit Göreme Open Air Museum and all 10 places inside it.'),
   ('ihlara-vadisi-kesif', 'tr', 'Ihlara Vadisi Kâşifi', 'Ihlara Vadisi ve içindeki 8 yerin hepsini gez.'),
   ('ihlara-vadisi-kesif', 'en', 'Ihlara Valley Explorer', 'Visit Ihlara Valley and all 8 places inside it.'),
+  ('mustafapasa-kesif', 'tr', 'Mustafapaşa (Sinasos) Kâşifi', 'Mustafapaşa (Sinasos) ve içindeki 2 yerin hepsini gez.'),
+  ('mustafapasa-kesif', 'en', 'Mustafapaşa (Sinasos) Explorer', 'Visit Mustafapaşa (Sinasos) and all 2 places inside it.'),
   ('soganli-vadisi-kesif', 'tr', 'Soğanlı Vadisi Kâşifi', 'Soğanlı Vadisi ve içindeki 6 yerin hepsini gez.'),
   ('soganli-vadisi-kesif', 'en', 'Soğanlı Valley Explorer', 'Visit Soğanlı Valley and all 6 places inside it.')
 ) v(slug, lang, name, description)
