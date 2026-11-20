@@ -1,0 +1,3 @@
+Wikidata konumu olmayan yerlerin bağımsız konum kontrolü (coords_check.py)
+Şehirler: izmir bursa kapadokya
+Son istek: 2026-11-20 14:50
