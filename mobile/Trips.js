@@ -1,28 +1,76 @@
-import {c} from './theme';
 import React from 'react';
-import {Alert, Linking, Platform, Pressable, ScrollView, Text, View} from 'react-native';
+import {Alert, Linking, Platform, StyleSheet, Text, View} from 'react-native';
 import MapView, {Marker,Polyline} from 'react-native-maps';
-import {lang,t} from './client';
-import {Photo} from './PlaceUI';
+import {Check, ChevronRight, Clock, Footprints, Route, Ship, TrainFront, Car} from 'lucide-react-native';
+import {client,lang,t} from './client';
+import {Photo, eyebrow, heading, km, muted, upper} from './PlaceUI';
 import {Action,Feedback,ui,useQuery} from './ScreenUI';
+import {Press,Reveal} from './Motion';
+import {c,radius,shadow,space,type} from './theme';
 
-const modes = {walking:['🚶 Yürüyüş','🚶 Walking'],mixed:['🚶 Yürüyüş + toplu taşıma','🚶 Walk + transit'],ferry:['⛴ Vapur','⛴ Ferry'],driving:['🚗 Araç','🚗 Driving']};
-function distance(m) {
-  if (!Number.isFinite(m)) return '';
-  return m < 1000 ? Math.round(m)+' m' : (m/1000).toLocaleString(lang,{maximumFractionDigits:1})+' km';
-}
+const modes = {
+  walking:[Footprints,t('Yürüyüş','Walking')], mixed:[TrainFront,t('Yürüyüş + toplu taşıma','Walk + transit')],
+  ferry:[Ship,t('Vapur','Ferry')], driving:[Car,t('Araç','Driving')],
+};
 function duration(minutes) {
   const hours = Math.floor(minutes/60);
   return [hours && hours+' '+t('sa','hr'),minutes%60 && minutes%60+' '+t('dk','min')].filter(Boolean).join(' ');
 }
+function RouteCard({route, featured, onPress}) {
+  const [Icon,mode] = modes[route.travel_mode] || modes.walking;
+  const count = route.visited_count == null || route.visited_count === 0
+    ? route.stop_count : route.visited_count+' / '+route.stop_count;
+  const timing = duration(route.est_minutes);
+  const distance = km(route.distance_m);
+  return <Press accessibilityRole="button" onPress={onPress} style={featured ? styles.coverCard : styles.listRow}>
+    <Photo place={{name:route.title,thumbnail:route.thumb_url,kind:route.kind}} credit
+      style={featured ? styles.cover : styles.thumb}/>
+    <View style={featured ? styles.coverCopy : styles.rowCopy}>
+      <View style={styles.meta}><Icon size={15} color={c.primary}/><Text style={eyebrow}>{upper(mode)}</Text></View>
+      <Text style={featured ? styles.title : styles.name}>{route.title}</Text>
+      {featured && !!route.summary && <Text numberOfLines={2} style={muted}>{route.summary}</Text>}
+      <View style={styles.meta}><Route size={15} color={c.inkMuted}/>
+        <Text style={styles.caption}>{count} {t('durak','stops')}</Text>
+        {!!timing && <><Clock size={14} color={c.inkMuted}/><Text style={styles.caption}>{timing}</Text></>}
+        {!!distance && <Text style={styles.caption}>· ~{distance}</Text>}
+      </View>
+      {route.completed && <View style={styles.meta}><Check size={15} color={c.primary}/>
+        <Text style={styles.complete}>{t('Tamamlandı','Completed')}</Text></View>}
+    </View>
+    {!featured && <ChevronRight size={18} color={c.primary}/>}
+  </Press>;
+}
 export function Routes({city,revision,onRoute}) {
   const query = useQuery('list_routes',{city_slug:city,lang},revision);
-  return <><Feedback query={query}/>{query.data?.length === 0 && <Text>{t('Bu şehirde henüz rota yok.','No routes in this city yet.')}</Text>}
-    {query.data?.map(r => <Pressable style={ui.card} accessibilityRole="button" key={r.slug} onPress={() => onRoute(r.slug)}>
-      <Photo place={{name:r.title,thumbnail:r.thumb_url,kind:r.kind}} credit style={{height:144,borderRadius:12}}/><Text style={ui.heading}>{r.title}{r.completed ? ' ✓' : ''}</Text>
-      <Text>{t(...(modes[r.travel_mode] || modes.walking))} · {duration(r.est_minutes)} · ~{distance(r.distance_m)}</Text>
-      <Text>{r.visited_count != null ? r.visited_count+'/' : ''}{r.stop_count} {t('durak','stops')}</Text></Pressable>)}</>;
+  if (!client) return <Text style={muted}>{t('Rotaları görmek için bağlantı gerekli.','Connect to view routes.')}</Text>;
+  if (!query.data) return <Feedback query={query}/>;
+  if (!query.data.length) return <Text style={muted}>{t('Bu şehirde henüz rota yok.','No routes in this city yet.')}</Text>;
+  const routes=query.data;
+  const featured=routes.find(r=>r.visited_count>0 && !r.completed) || routes[0];
+  const others=routes.filter(r=>r.slug!==featured.slug);
+  return <>
+    {featured.visited_count>0 && !featured.completed && <Text style={heading}>{t('Kaldığın yerden','Continue your route')}</Text>}
+    <Reveal><RouteCard featured route={featured} onPress={()=>onRoute(featured.slug)}/></Reveal>
+    {!!others.length && <View><Text style={heading}>{t('Diğer rotalar','More routes')}</Text>
+      {others.map((r,index)=>{
+        const card=<RouteCard key={r.slug} route={r} onPress={()=>onRoute(r.slug)}/>;
+        return index<5 ? <Reveal key={r.slug} delay={(index+1)*40}>{card}</Reveal> : card;
+      })}
+    </View>}
+  </>;
 }
+
+const styles = StyleSheet.create({
+  coverCard:{backgroundColor:c.surfaceRaised,borderRadius:radius.lg,...shadow.card},
+  cover:{width:'100%',height:174,borderTopLeftRadius:radius.lg,borderTopRightRadius:radius.lg},
+  coverCopy:{padding:space[4],gap:space[2]},
+  rowCopy:{flex:1,gap:space[1]},
+  title:{...type.title,color:c.ink}, name:{...type.cardTitle,color:c.ink},
+  listRow:{flexDirection:'row',alignItems:'center',gap:space[3],paddingVertical:space[4],borderBottomColor:c.line,borderBottomWidth:1},
+  thumb:{width:76,height:80,borderRadius:radius.md},
+  meta:{flexDirection:'row',alignItems:'center',flexWrap:'wrap',columnGap:6,rowGap:4},
+  caption:{...type.caption,color:c.inkMuted},complete:{...type.caption,color:c.primary},
+});
 function directions(stop) {
   const coords = stop.latitude+','+stop.longitude;
   const url = Platform.OS === 'ios' ? 'https://maps.apple.com/?daddr='+coords : 'https://www.google.com/maps/dir/?api=1&destination='+coords;

@@ -5,6 +5,7 @@ import PlaceMap from './PlaceMap';
 import PlaceDetail from './PlaceDetail';
 import Explore from './Explore';
 import {c} from './theme';
+import TabPage from './TabPage';
 import MainTabs from './MainTabs';
 import React, {useEffect, useRef, useState} from 'react';
 import {
@@ -220,7 +221,9 @@ export default function App() {
       </ScrollView></> : <MainTabs navigationRef={navigation} initial={tab.current} onTab={name=>{tab.current=name;}} pages={{
         explore:<Explore places={nearby.map(p=>({...p,distance:origin?p.distance:null}))} nearby={listPlaces} city={city||{slug:citySlug,name:citySlug==='istanbul'?'İstanbul':citySlug}} cities={cities} onCity={chooseCity} origin={origin} permission={permission} onLocation={()=>useLocation()} onDemo={tryGalata} onCamera={()=>setCameraMode('live')} onPlace={openPlace} onRoute={slug=>openRoute(slug)} visited={wasVisited} revision={visits.revision} userId={visits.userId} state={catalogState} onRetry={()=>setRefresh(n=>n+1)} message={locationMessage} loading={loading}/>,
         map:<PlaceMap key={citySlug} places={nearby} mapRef={map} center={center} origin={origin} visited={wasVisited} onLocation={()=>useLocation()} onSuggest={client?suggest:null} onOpen={openPlace} message={locationMessage}/>,
-        routes: <ScrollView contentContainerStyle={ui.content}><Text style={ui.title}>{t('Rotalar','Routes')}</Text><Routes city={citySlug} revision={[visits.userId,visits.revision]} onRoute={slug=>openRoute(slug)}/></ScrollView>,
+        routes: <TabPage title={t('Rotalar','Routes')} location={city?.name || (citySlug==='istanbul'?'İstanbul':citySlug)}>
+          <Routes city={citySlug} revision={[visits.userId,visits.revision]} onRoute={openRoute}/>
+        </TabPage>,
         badges: <ScrollView contentContainerStyle={ui.content}><Text style={ui.title}>{t('Rozetler','Badges')}</Text>{client ? visits.userId ? <Collection key={visits.userId} userId={visits.userId} visitRevision={visits.revision}/> : <Login/> : <Text>{t('Bağlantı gerekli.','Connection required.')}</Text>}</ScrollView>,
         profile: <ScrollView contentContainerStyle={ui.content}><Text style={ui.title}>{t('Profil','Profile')}</Text>{!!client && <Action onPress={()=>suggest(origin ?? center)}>{t('Yer öner','Suggest a place')}</Action>}
       {visits.userId && <Action onPress={()=>setScreen('reviews')}>{t('Değerlendirmelerim','My reviews')}</Action>}
