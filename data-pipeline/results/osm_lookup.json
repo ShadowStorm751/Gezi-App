@@ -1069,5 +1069,529 @@
    "boylam": 29.047174,
    "mesafe_m": 2236
   }
+ ],
+ "izmir-kultur-sanat-fabrikasi": [
+  {
+   "osm": "way/865676479",
+   "etiketler": {
+    "building": "yes",
+    "name": "Demiryolu Müzesi",
+    "tourism": "museum"
+   },
+   "enlem": 38.438798,
+   "boylam": 27.147228,
+   "mesafe_m": 201
+  },
+  {
+   "osm": "way/865676479",
+   "etiketler": {
+    "building": "yes",
+    "name": "Demiryolu Müzesi",
+    "tourism": "museum"
+   },
+   "enlem": 38.438798,
+   "boylam": 27.147228,
+   "mesafe_m": 201
+  },
+  {
+   "osm": "way/865651733",
+   "etiketler": {
+    "building": "yes",
+    "name": "Tarihî Havagazı Fabrikası",
+    "wikidata": "Q53844808"
+   },
+   "enlem": 38.440224,
+   "boylam": 27.151696,
+   "mesafe_m": 323
+  },
+  {
+   "osm": "way/865651733",
+   "etiketler": {
+    "building": "yes",
+    "name": "Tarihî Havagazı Fabrikası",
+    "wikidata": "Q53844808"
+   },
+   "enlem": 38.440224,
+   "boylam": 27.151696,
+   "mesafe_m": 323
+  },
+  {
+   "osm": "node/5287461156",
+   "etiketler": {
+    "name": "Tuana Tekel"
+   },
+   "enlem": 38.439103,
+   "boylam": 27.144602,
+   "mesafe_m": 334
+  },
+  {
+   "osm": "node/5287460076",
+   "etiketler": {
+    "name": "gold tekel"
+   },
+   "enlem": 38.439211,
+   "boylam": 27.144232,
+   "mesafe_m": 358
+  },
+  {
+   "osm": "node/5287436722",
+   "etiketler": {
+    "name": "Sezen Tekel"
+   },
+   "enlem": 38.439681,
+   "boylam": 27.143726,
+   "mesafe_m": 383
+  },
+  {
+   "osm": "node/13633432893",
+   "etiketler": {
+    "name": "TEKEL",
+    "tourism": "artwork"
+   },
+   "enlem": 38.436791,
+   "boylam": 27.148363,
+   "mesafe_m": 414
+  },
+  {
+   "osm": "node/12972876695",
+   "etiketler": {
+    "name": "İzmir Tarih ve Sanat Müzesi",
+    "name:en": "İzmir Museum of History and Art",
+    "tourism": "museum",
+    "wikidata": "Q6035320"
+   },
+   "enlem": 38.436207,
+   "boylam": 27.14816,
+   "mesafe_m": 478
+  },
+  {
+   "osm": "way/1167760456",
+   "etiketler": {
+    "amenity": "arts_centre",
+    "landuse": "industrial",
+    "name": "İzmir Kültür Sanat Fabrikası",
+    "name:en": "Izmir Art and Culture Factory",
+    "wikidata": "Q117472126"
+   },
+   "enlem": 38.436078,
+   "boylam": 27.14834,
+   "mesafe_m": 493
+  },
+  {
+   "osm": "way/1167760456",
+   "etiketler": {
+    "amenity": "arts_centre",
+    "landuse": "industrial",
+    "name": "İzmir Kültür Sanat Fabrikası",
+    "name:en": "Izmir Art and Culture Factory",
+    "wikidata": "Q117472126"
+   },
+   "enlem": 38.436078,
+   "boylam": 27.14834,
+   "mesafe_m": 493
+  },
+  {
+   "osm": "node/13546319020",
+   "etiketler": {
+    "name": "Nazlı Tekel & Çerez"
+   },
+   "enlem": 38.436465,
+   "boylam": 27.144656,
+   "mesafe_m": 535
+  },
+  {
+   "osm": "node/685223731",
+   "etiketler": {
+    "highway": "bus_stop",
+    "name": "Tekel"
+   },
+   "enlem": 38.43584,
+   "boylam": 27.146409,
+   "mesafe_m": 536
+  },
+  {
+   "osm": "node/12972876696",
+   "etiketler": {
+    "name": "İzmir Resim ve Heykel Müzesi",
+    "tourism": "museum"
+   },
+   "enlem": 38.435668,
+   "boylam": 27.148497,
+   "mesafe_m": 539
+  },
+  {
+   "osm": "way/182778344",
+   "etiketler": {
+    "building": "yes",
+    "name": "İzmir Resim ve Heykel Müzesi",
+    "tourism": "museum"
+   },
+   "enlem": 38.435638,
+   "boylam": 27.148571,
+   "mesafe_m": 543
+  },
+  {
+   "osm": "way/182778344",
+   "etiketler": {
+    "building": "yes",
+    "name": "İzmir Resim ve Heykel Müzesi",
+    "tourism": "museum"
+   },
+   "enlem": 38.435638,
+   "boylam": 27.148571,
+   "mesafe_m": 543
+  },
+  {
+   "osm": "node/702560289",
+   "etiketler": {
+    "highway": "bus_stop",
+    "name": "Tekel"
+   },
+   "enlem": 38.435654,
+   "boylam": 27.146695,
+   "mesafe_m": 551
+  },
+  {
+   "osm": "way/865651773",
+   "etiketler": {
+    "building": "yes",
+    "name": "Tarihî Elektrik Fabrikası",
+    "wikidata": "Q6024513"
+   },
+   "enlem": 38.439541,
+   "boylam": 27.155907,
+   "mesafe_m": 697
+  },
+  {
+   "osm": "way/865651773",
+   "etiketler": {
+    "building": "yes",
+    "name": "Tarihî Elektrik Fabrikası",
+    "wikidata": "Q6024513"
+   },
+   "enlem": 38.439541,
+   "boylam": 27.155907,
+   "mesafe_m": 697
+  },
+  {
+   "osm": "node/8425783259",
+   "etiketler": {
+    "name": "Mask Müzesi",
+    "tourism": "museum",
+    "wikidata": "Q25474208"
+   },
+   "enlem": 38.435734,
+   "boylam": 27.142121,
+   "mesafe_m": 737
+  },
+  {
+   "osm": "way/1340464738",
+   "etiketler": {
+    "building": "yes",
+    "historic": "building",
+    "name": "Dijital Tarih Müzesi",
+    "wikidata": "Q131393951"
+   },
+   "enlem": 38.436131,
+   "boylam": 27.141123,
+   "mesafe_m": 771
+  },
+  {
+   "osm": "way/1340464738",
+   "etiketler": {
+    "building": "yes",
+    "historic": "building",
+    "name": "Dijital Tarih Müzesi",
+    "wikidata": "Q131393951"
+   },
+   "enlem": 38.436131,
+   "boylam": 27.141123,
+   "mesafe_m": 771
+  },
+  {
+   "osm": "way/872781004",
+   "etiketler": {
+    "building": "yes",
+    "name": "Atatürk Müzesi",
+    "tourism": "museum"
+   },
+   "enlem": 38.435632,
+   "boylam": 27.14064,
+   "mesafe_m": 839
+  },
+  {
+   "osm": "way/872781004",
+   "etiketler": {
+    "building": "yes",
+    "name": "Atatürk Müzesi",
+    "tourism": "museum"
+   },
+   "enlem": 38.435632,
+   "boylam": 27.14064,
+   "mesafe_m": 839
+  },
+  {
+   "osm": "node/4167431689",
+   "etiketler": {
+    "name": "Atatürk Müzesi",
+    "name:en": "Atatürk Museum",
+    "tourism": "museum",
+    "wikidata": "Q24883371"
+   },
+   "enlem": 38.435693,
+   "boylam": 27.140567,
+   "mesafe_m": 840
+  }
+ ],
+ "kulturpark-ic": [
+  {
+   "osm": "way/865968511",
+   "etiketler": {
+    "building": "yes",
+    "name": "Pakistan Pavyonu",
+    "name:en": "Pakistan Pavilion",
+    "wikidata": "Q21526074"
+   },
+   "enlem": 38.430024,
+   "boylam": 27.143317,
+   "mesafe_m": 60
+  },
+  {
+   "osm": "way/865968511",
+   "etiketler": {
+    "building": "yes",
+    "name": "Pakistan Pavyonu",
+    "name:en": "Pakistan Pavilion",
+    "wikidata": "Q21526074"
+   },
+   "enlem": 38.430024,
+   "boylam": 27.143317,
+   "mesafe_m": 60
+  },
+  {
+   "osm": "way/389439163",
+   "etiketler": {
+    "building": "yes",
+    "name": "Atlas Pavyonu"
+   },
+   "enlem": 38.428153,
+   "boylam": 27.144739,
+   "mesafe_m": 215
+  },
+  {
+   "osm": "way/389439163",
+   "etiketler": {
+    "building": "yes",
+    "name": "Atlas Pavyonu"
+   },
+   "enlem": 38.428153,
+   "boylam": 27.144739,
+   "mesafe_m": 215
+  },
+  {
+   "osm": "way/486297631",
+   "etiketler": {
+    "building": "yes",
+    "name": "Rus Pavyonu"
+   },
+   "enlem": 38.429613,
+   "boylam": 27.146585,
+   "mesafe_m": 229
+  },
+  {
+   "osm": "way/486297631",
+   "etiketler": {
+    "building": "yes",
+    "name": "Rus Pavyonu"
+   },
+   "enlem": 38.429613,
+   "boylam": 27.146585,
+   "mesafe_m": 229
+  },
+  {
+   "osm": "way/865765254",
+   "etiketler": {
+    "building": "yes",
+    "name": "Göl Gazinosu",
+    "wikidata": "Q122570997"
+   },
+   "enlem": 38.427581,
+   "boylam": 27.145499,
+   "mesafe_m": 299
+  },
+  {
+   "osm": "way/865765254",
+   "etiketler": {
+    "building": "yes",
+    "name": "Göl Gazinosu",
+    "wikidata": "Q122570997"
+   },
+   "enlem": 38.427581,
+   "boylam": 27.145499,
+   "mesafe_m": 299
+  },
+  {
+   "osm": "way/302123540",
+   "etiketler": {
+    "name": "Göl",
+    "name:en": "Lake",
+    "natural": "water",
+    "wikidata": "Q136454857"
+   },
+   "enlem": 38.427795,
+   "boylam": 27.146094,
+   "mesafe_m": 306
+  },
+  {
+   "osm": "way/302123540",
+   "etiketler": {
+    "name": "Göl",
+    "name:en": "Lake",
+    "natural": "water",
+    "wikidata": "Q136454857"
+   },
+   "enlem": 38.427795,
+   "boylam": 27.146094,
+   "mesafe_m": 306
+  },
+  {
+   "osm": "node/13201429457",
+   "etiketler": {
+    "name": "Mehmet Tüzüm Kızılcan Sanat Galerisi",
+    "tourism": "gallery"
+   },
+   "enlem": 38.427033,
+   "boylam": 27.142971,
+   "mesafe_m": 342
+  },
+  {
+   "osm": "way/865765267",
+   "etiketler": {
+    "building": "yes",
+    "name": "Maarif Vekâleti Kültür Pavyonu",
+    "wikidata": "Q122570988"
+   },
+   "enlem": 38.427002,
+   "boylam": 27.142997,
+   "mesafe_m": 345
+  },
+  {
+   "osm": "way/865765267",
+   "etiketler": {
+    "building": "yes",
+    "name": "Maarif Vekâleti Kültür Pavyonu",
+    "wikidata": "Q122570988"
+   },
+   "enlem": 38.427002,
+   "boylam": 27.142997,
+   "mesafe_m": 345
+  },
+  {
+   "osm": "way/501242101",
+   "etiketler": {
+    "amenity": "theatre",
+    "building": "yes",
+    "name": "Atatürk Açık Hava Tiyatrosu",
+    "wikidata": "Q106369480"
+   },
+   "enlem": 38.428582,
+   "boylam": 27.148142,
+   "mesafe_m": 394
+  },
+  {
+   "osm": "way/501242101",
+   "etiketler": {
+    "amenity": "theatre",
+    "building": "yes",
+    "name": "Atatürk Açık Hava Tiyatrosu",
+    "wikidata": "Q106369480"
+   },
+   "enlem": 38.428582,
+   "boylam": 27.148142,
+   "mesafe_m": 394
+  },
+  {
+   "osm": "way/466734730",
+   "etiketler": {
+    "amenity": "theatre",
+    "building": "yes",
+    "name": "Fuar Gençlik Tiyatrosu"
+   },
+   "enlem": 38.429223,
+   "boylam": 27.148738,
+   "mesafe_m": 422
+  },
+  {
+   "osm": "way/466734730",
+   "etiketler": {
+    "amenity": "theatre",
+    "building": "yes",
+    "name": "Fuar Gençlik Tiyatrosu"
+   },
+   "enlem": 38.429223,
+   "boylam": 27.148738,
+   "mesafe_m": 422
+  },
+  {
+   "osm": "node/5287436068",
+   "etiketler": {
+    "building": "yes",
+    "name": "Galeri Mazhar İş Merkezi"
+   },
+   "enlem": 38.435931,
+   "boylam": 27.142925,
+   "mesafe_m": 666
+  },
+  {
+   "osm": "node/5287436079",
+   "etiketler": {
+    "name": "Golden Rose"
+   },
+   "enlem": 38.435978,
+   "boylam": 27.142993,
+   "mesafe_m": 671
+  },
+  {
+   "osm": "node/5543280722",
+   "etiketler": {
+    "amenity": "restaurant",
+    "name": "Mengoli"
+   },
+   "enlem": 38.426569,
+   "boylam": 27.136751,
+   "mesafe_m": 738
+  },
+  {
+   "osm": "node/12541554493",
+   "etiketler": {
+    "name": "Hollanda Fahri Konsolosluğu",
+    "name:en": "Honorary Consulate of the Netherlands"
+   },
+   "enlem": 38.423765,
+   "boylam": 27.140092,
+   "mesafe_m": 772
+  },
+  {
+   "osm": "relation/12734373",
+   "etiketler": {
+    "name": "İzmir Körfezi",
+    "name:en": "Gulf of İzmir",
+    "natural": "bay",
+    "wikidata": "Q1536377"
+   },
+   "enlem": 38.525844,
+   "boylam": 26.822005,
+   "mesafe_m": 29987
+  },
+  {
+   "osm": "way/702857069",
+   "etiketler": {
+    "name": "Tuzla Gölü",
+    "natural": "coastline"
+   },
+   "enlem": 40.706697,
+   "boylam": 26.053113,
+   "mesafe_m": 269868
+  }
  ]
 }
