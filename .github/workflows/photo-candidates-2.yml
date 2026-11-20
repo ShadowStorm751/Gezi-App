@@ -1,0 +1,40 @@
+# Genel aramada adayı çıkmayan yerler için hedefli Commons'tan aday fotoğraflar (küçük önizlemeler) toplar; seçim elle yapılır.
+# Tetikleme: data-pipeline/photo-candidates-2-request.txt değişip main'e yüklenince ya da elle.
+# Sonuç: data-pipeline/results/photo-candidates-2/ olarak commit'lenir.
+name: Fotoğraf adayları (hedefli)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [data-pipeline/photo-candidates-2-request.txt]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: data-pipeline-main-photos
+  cancel-in-progress: true
+
+jobs:
+  photos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Testler
+        run: python -m unittest discover -s data-pipeline/tests
+      - name: Aday fotoğrafları topla
+        run: python data-pipeline/photo_candidates_targeted.py
+      - name: Sonucu kaydet
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data-pipeline/results/photo-candidates-2
+          git commit -m "Veri hattı: hedefli fotoğraf adayları" || echo "Değişiklik yok"
+          git pull --rebase
+          git push

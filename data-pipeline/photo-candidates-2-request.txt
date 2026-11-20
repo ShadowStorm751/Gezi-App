@@ -1,0 +1,2 @@
+Bu dosya değişip main'e yüklenince genel aramada adayı çıkmayan yerler için hedefli aday fotoğraflar toplanır (.github/workflows/photo-candidates-2.yml).
+Son istek: 2026-11-20 14:55 — 5 yer
