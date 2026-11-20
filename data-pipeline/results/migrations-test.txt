@@ -1,10 +1,7 @@
 ok
-zaman: 2026-11-20T13:38:13Z
-çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44745990707
+zaman: 2026-11-20T16:18:51Z
+çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44772049737
 ---
- izmir     |       0 |    124 |     32 |        111
- kapadokya |       0 |     63 |     28 |         57
-(4 rows)
 
 == TR+EN adı ve kısa açıklaması eksik yer (0 olmalı)
  slug 
@@ -77,7 +74,7 @@ UPDATE 258
 
                                  celsus_ana_yer                                 
 --------------------------------------------------------------------------------
- {"id": "dff1db95-78ef-4c22-9d58-2159b008ce05", "name": "Efes", "slug": "efes"}
+ {"id": "8dd91a0a-e7b5-4863-8573-da211465d66f", "name": "Efes", "slug": "efes"}
 (1 row)
 
        slug        | rating_var |     donem_en      | donem_kodu 
@@ -101,10 +98,9 @@ psql:backend/supabase/tests/ci_checks.sql:66: NOTICE:  beklenen hata: place kizi
 DO
 TAMAM
 == Görseli olmayan rozet (0 olmalı)
-       slug        
--------------------
- mustafapasa-kesif
-(1 row)
+ slug 
+------
+(0 rows)
 
 == Uzun açıklaması eksik yer (TR veya EN; 0 olmalı)
    sehir   | eksik | toplam 
@@ -115,10 +111,14 @@ TAMAM
  kapadokya |     0 |    126
 (4 rows)
 
+== city_pack: main'deki period alanları + ana yer alanları birlikte (Efes)
+ slug | donem | ic_yer | ic_sayi 
+------+-------+--------+---------
+(0 rows)
+
 == Denetim (backend/tests/audit.sql): yalnızca ozet satırı kalmalı
-      kontrol      |                         sorun                          
--------------------+--------------------------------------------------------
- ozet              | 79 fonksiyon, 19 tablo, 12 rozet kuralı, 7 KVKK bölümü
- rozet_gorseli_yok | mustafapasa-kesif
-(2 rows)
+ kontrol |                         sorun                          
+---------+--------------------------------------------------------
+ ozet    | 79 fonksiyon, 19 tablo, 12 rozet kuralı, 7 KVKK bölümü
+(1 row)
 
