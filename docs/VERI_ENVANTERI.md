@@ -43,6 +43,8 @@ Son güncelleme: 2026-11-20 (yer değerlendirmeleri eklendi).
 | Ziyaret tarihleri ve kazanılan rozetler (hesap bazında önbellek) | Hızlı gösterim | Çıkışta / hesap silmede temizlenir |
 | Kaydedilen yer kimlikleri (hesap veya misafir bazında) | Yer detayındaki kalp seçimini hatırlamak | Kaydı kaldırma, hesap silme veya uygulamayı silme |
 
+Ziyaret fotoğrafları açık yayın onayıyla gönderilir. Profil → Fotoğraflarım ekranında inceleme durumu ve yönetici notu görülebilir, gönderi silinebilir.
+
 ## Cihaz izinleri
 
 | İzin | Neden | Zorunlu mu |

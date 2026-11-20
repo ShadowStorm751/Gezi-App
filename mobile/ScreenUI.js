@@ -12,6 +12,10 @@ export async function rpc(name, args) {
 }
 
 const errors = {
+  not_visited:['Önce burayı ziyaret etmelisin.','Check in here first.'],
+  too_many_pending:['Bu yer için gönderdiğin fotoğraflar hâlâ inceleniyor.','Your photos for this place are still under review.'],
+  file_not_found:['Fotoğraf yüklenemedi, tekrar dene.','Photo upload not found. Try again.'],
+  photo_not_found:['Fotoğraf bulunamadı.','Photo not found.'],
   username_required:['Önce profilden kullanıcı adını seç.','Choose a username in your profile first.'],
   '23505':['Bu kullanıcı adı alınmış.','This username is taken.'],
   '23514':['Kullanıcı adını kontrol et.','Check your username.'],

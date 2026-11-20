@@ -1,3 +1,4 @@
+import {AddPhoto,MyPhotos} from './VisitPhotos';
 import {VisitSheet,Ceremony} from './Celebrations';
 import PlaceMap from './PlaceMap';
 import PlaceDetail from './PlaceDetail';
@@ -68,6 +69,7 @@ export default function App() {
   const cameraOpen = !!cameraMode;
   const galataPreview = cameraMode === 'galata';
   const tab=useRef('explore'), navigation=useRef(null);
+  const [subpage,setSubpage]=useState(null);
   const [result,setResult]=useState(null);
   const activeResult=result && result.userId===visits.userId?result:null;
   const [permission,setPermission]=useState(null);
@@ -154,6 +156,7 @@ export default function App() {
 
   function closeDetail() {
     setReporting(false);
+    setSubpage(null);
     setResult(null);
     detailToken.current++;
     setCelebration(null);
@@ -180,6 +183,7 @@ export default function App() {
     } catch { if (detailToken.current === token) setDetailState('error'); }
   }
 
+  const canAddPhoto=!!detail && !!visits.userId && !galataPreview && !demo && (wasVisited(detail.id)||!!(detail.visitedAt && detail.detailUser===visits.userId));
   function openOfficialPage(url) {
     Linking.openURL(url).catch(() => Alert.alert(t("Ziyaret sayfası açılamadı","Could not open visitor information"), t("Bağlantını kontrol edip tekrar dene.","Check your connection and try again.")));
   }
@@ -226,6 +230,7 @@ export default function App() {
       <ScrollView key={screen+':'+(visits.userId || '')} contentContainerStyle={ui.content} keyboardShouldPersistTaps="handled">
         {screen==='route' && <RouteDetail slug={routeSlug} revision={[visits.userId,visits.revision]} onPlace={showStop}/>}
         {screen==='friends' && (visits.userId?<Friends onProfile={()=>setScreen('home')}/>:<Login/>)}
+        {screen==='photos' && visits.userId && <MyPhotos visits={visits}/>}
         {screen==='suggest' && <ContributionForm coordinate={suggestPin} userId={visits.userId} onClose={()=>setScreen('home')}/>}
       </ScrollView></> : <MainTabs navigationRef={navigation} initial={tab.current} onTab={name=>{tab.current=name;}} pages={{
         explore:<Explore places={nearby.map(p=>({...p,distance:origin?p.distance:null}))} nearby={listPlaces} city={city||{slug:citySlug,name:citySlug==='istanbul'?'İstanbul':citySlug}} cities={cities} onCity={chooseCity} origin={origin} permission={permission} onLocation={()=>useLocation()} onDemo={tryGalata} onCamera={()=>setCameraMode('live')} onPlace={openPlace} onRoute={slug=>openRoute(slug,'home')} visited={wasVisited} revision={visits.revision} userId={visits.userId} state={catalogState} onRetry={()=>setRefresh(n=>n+1)} message={locationMessage} loading={loading}/>,
@@ -233,9 +238,10 @@ export default function App() {
         routes: <ScrollView contentContainerStyle={ui.content}><Text style={ui.title}>{t('Rotalar','Routes')}</Text><Routes city={citySlug} revision={[visits.userId,visits.revision]} onRoute={slug=>openRoute(slug,'routes')}/></ScrollView>,
         badges: <ScrollView contentContainerStyle={ui.content}><Text style={ui.title}>{t('Rozetler','Badges')}</Text>{client ? visits.userId ? <Collection key={visits.userId} userId={visits.userId} visitRevision={visits.revision}/> : <Login/> : <Text>{t('Bağlantı gerekli.','Connection required.')}</Text>}</ScrollView>,
         profile: <ScrollView contentContainerStyle={ui.content}><Text style={ui.title}>{t('Profil','Profile')}</Text>{!!client && <Action onPress={()=>suggest(origin ?? center)}>{t('Yer öner','Suggest a place')}</Action>}
+      {visits.userId && <Action onPress={()=>setScreen('photos')}>{t('Fotoğraflarım','My photos')}</Action>}
       {!client ? <Text>{t('Profil için bağlantı gerekli.','Connect to view your profile.')}</Text> : visits.userId ? <Profile key={visits.userId} visits={visits} onSocial={()=>setScreen('friends')} onClose={()=>setScreen('home')}/> : <Login/>}</ScrollView>
       }}/>}
-      <Modal visible={!!detail} animationType="none" onRequestClose={award?nextAward:activeResult?()=>setResult(null):closeDetail}>
+      <Modal visible={!!detail} animationType="none" onRequestClose={subpage?()=>setSubpage(null):award?nextAward:activeResult?()=>setResult(null):closeDetail}>
         {detail && <View style={{flex:1}}><PlaceDetail key={detail.id} place={detail} userId={visits.userId} revision={visits.revision} live={!!client&&!galataPreview&&!demo}
           distance={origin&&!galataPreview?distanceMeters(origin,detail.coordinate):null} onBack={closeDetail} onTrack={()=>{setTrackedId(detail.id);setTrackedPlace(detail);closeDetail();setCameraMode(galataPreview?'galata':'live');}}
           footer={!demo&&!galataPreview&&detailState!=='missing'?<CheckIn place={detail} origin={origin} onFix={setOrigin} visits={visits} cities={cities.data}
@@ -243,10 +249,12 @@ export default function App() {
           {detailState==='loading' && <ActivityIndicator color={c.primary}/>}
           {detailState==='missing' && <Text>{t('Bu yer artık yayında değil.','This place is no longer published.')}</Text>}
           {detailState==='error' && <Action onPress={()=>openPlace(detail)}>{t('Detayı tekrar yükle','Reload details')}</Action>}
+          {canAddPhoto && <Action onPress={()=>setSubpage('photo')}>{t('Fotoğraf ekle','Add a photo')}</Action>}
           {!!detail.source && <Action onPress={()=>openOfficialPage(detail.source)}>{t('Resmî ziyaret bilgileri','Official visitor information')}</Action>}
           {!!client && !galataPreview && detailState!=='missing' && (reporting?<ContributionForm key={detail.id+':'+visits.userId} place={detail} coordinate={detail.coordinate} userId={visits.userId} onClose={()=>setReporting(false)}/>:<Action onPress={()=>setReporting(true)}>{t('Bir sorun mu var?','Report a problem')}</Action>)}
         </PlaceDetail>
-        {activeResult && <VisitSheet result={activeResult} place={detail} onClose={()=>setResult(null)} onAward={()=>{setCelebration({awards:activeResult.awards,userId:visits.userId});setResult(null);}}/>}
+        {activeResult && !subpage && <VisitSheet onPhoto={canAddPhoto?()=>setSubpage('photo'):null} result={activeResult} place={detail} onClose={()=>setResult(null)} onAward={()=>{setCelebration({awards:activeResult.awards,userId:visits.userId});setResult(null);}}/>}
+        {subpage==='photo' && canAddPhoto && <AddPhoto key={detail.id+visits.userId} place={detail} visits={visits} onBack={()=>setSubpage(null)}/>}
         {award && <Ceremony key={award.slug} badge={award} userId={visits.userId} onClose={()=>setCelebration(null)} onNext={nextAward} onBadges={()=>{tab.current='badges';setScreen('home');setCameraMode(null);navigation.current?.navigate('badges');closeDetail();}}/>}
         </View>}
       </Modal>

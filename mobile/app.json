@@ -13,9 +13,9 @@
     },
     "plugins": [
       ["expo-sensors", {"motionPermission":"Telefonu eğdiğinde tarihi yer etiketlerini kamera görüntüsünde hizala."}],
-      ["expo-image-picker", {"photosPermission":"Galeriden seçtiğin fotoğrafı Gezi içinde görüntüle.","microphonePermission":false,"cameraPermission":"Çevreni keşfetmek ve fotoğraf çekmek için kamerayı kullan."}],
-      ["expo-media-library", {"photosPermission":"Galeriden seçtiğin fotoğrafı Gezi içinde görüntüle.","savePhotosPermission":"Çektiğin fotoğrafı telefonunun galerisine kaydet.","granularPermissions":[]}],
-      ["expo-camera", {"cameraPermission":"Çevrendeki tarihi yerlerin yönünü kamera görüntüsünde göster.", "recordAudioAndroid":false}],
+      ["expo-image-picker", {"photosPermission":"Yer veya profil fotoğrafı seçmek için galerine erişim gerekir. / Allow access to choose a place or profile photo.","microphonePermission":false,"cameraPermission":"Keşif ve ziyaret fotoğrafları için kamerayı kullan. / Allow camera access to explore and take visit photos."}],
+      ["expo-media-library", {"photosPermission":"Yer veya profil fotoğrafı seçmek için galerine erişim gerekir. / Allow access to choose a place or profile photo.","savePhotosPermission":"Çektiğin fotoğrafı telefonunun galerisine kaydet.","granularPermissions":[]}],
+      ["expo-camera", {"cameraPermission":"Keşif ve ziyaret fotoğrafları için kamerayı kullan. / Allow camera access to explore and take visit photos.", "recordAudioAndroid":false}],
       [
         "expo-location",
         {
