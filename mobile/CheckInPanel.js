@@ -1,3 +1,4 @@
+import {c} from './theme';
 import React, {useEffect,useRef,useState} from 'react';
 import {ActivityIndicator, AppState, Linking, Pressable, StyleSheet, Text, View} from 'react-native';
 import * as Location from 'expo-location';
@@ -109,7 +110,7 @@ export default function CheckIn({place,origin,visits,visited,onMissing,onAwards,
       login ? <Login onSignedIn={resume} prompt={t('Devam etmek için giriş yap.','Sign in to continue.')}/> :
       <Pressable accessibilityRole="button" accessibilityState={{disabled:busy,busy}} disabled={busy}
         onPress={() => submit()} style={styles.button}>
-        {busy ? <ActivityIndicator color="white"/> : <Text style={styles.buttonText}>
+        {busy ? <ActivityIndicator color={c.surfaceRaised}/> : <Text style={styles.buttonText}>
           {permission && !permission.granted ? t('Konumu aç','Turn on location') : t('Buradayım',"I'm here")}
         </Text>}
       </Pressable>}
@@ -122,7 +123,7 @@ export default function CheckIn({place,origin,visits,visited,onMissing,onAwards,
 }
 
 const styles = StyleSheet.create({
-  group:{gap:7}, button:{backgroundColor:'#143C38',padding:16,borderRadius:14,alignItems:'center',minHeight:50},
-  buttonText:{fontSize:18,fontWeight:'700',color:'#FAF7F0'}, visited:{fontWeight:'700',fontSize:17,color:'#225B4F'},
-  note:{fontSize:15,color:'#40594F'}
+  group:{gap:7}, button:{backgroundColor:c.ink,padding:16,borderRadius:14,alignItems:'center',minHeight:50},
+  buttonText:{fontSize:18,fontWeight:'700',color:c.surface}, visited:{fontWeight:'700',fontSize:17,color:c.primary},
+  note:{fontSize:15,color:c.inkMuted}
 });

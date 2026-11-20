@@ -1,3 +1,4 @@
+import {c} from './theme';
 import React, {useEffect, useRef, useState} from 'react';
 import {
   ActivityIndicator, Alert, Linking, Modal, Platform, Pressable,
@@ -21,9 +22,9 @@ import CheckIn from './CheckInPanel';
 import useVisits from './useVisits';
 import {distanceMeters,galataPreviewOrigin} from './geo';
 
-const paper = '#FAF7F0';
-const ink = '#143C38';
-const red = '#B44721';
+const paper = c.surface;
+const ink = c.ink;
+const red = c.accent;
 const serif = Platform.select({ios:'Georgia', android:'serif'});
 const pilot = {latitude:41.0266, longitude:28.9736};
 const region = {...pilot, latitudeDelta:0.009, longitudeDelta:0.009};
@@ -336,18 +337,18 @@ const styles = StyleSheet.create({
   page:{flex:1, backgroundColor:paper},
   header:{paddingHorizontal:22, paddingTop:12, paddingBottom:12},
   titleRow:{flexDirection:'row',alignItems:'center',justifyContent:'space-between'},
-  eyebrow:{fontSize:11, letterSpacing:1.7, fontWeight:'700', color:'#526D64'},
+  eyebrow:{fontSize:11, letterSpacing:1.7, fontWeight:'700', color:c.inkMuted},
   title:{fontFamily:serif, fontSize:40, color:ink, marginTop:4},
   map:{flex:1.1}, sheet:{flex:1}, content:{padding:22, gap:8},
-  heading:{fontFamily:serif, fontSize:27, color:ink}, muted:{color:'#56635E', fontSize:14},
-  row:{flexDirection:'row', alignItems:'center', borderBottomColor:'#D9D8CC', borderBottomWidth:1, paddingVertical:13, gap:10},
+  heading:{fontFamily:serif, fontSize:27, color:ink}, muted:{color:c.inkMuted, fontSize:14},
+  row:{flexDirection:'row', alignItems:'center', borderBottomColor:c.line, borderBottomWidth:1, paddingVertical:13, gap:10},
   rowMain:{flex:1, gap:5}, place:{fontFamily:serif, fontSize:22, color:ink},
   distance:{fontSize:15, fontWeight:'600', color:ink},
   action:{padding:14, borderRadius:13, backgroundColor:ink, alignItems:'center', marginTop:8, minHeight:48},
   actionLabel:{fontSize:16, fontWeight:'600', color:paper},
-  overlay:{flex:1, justifyContent:'flex-end'}, backdrop:{...StyleSheet.absoluteFillObject, backgroundColor:'#11262166'},
+  overlay:{flex:1, justifyContent:'flex-end'}, backdrop:{...StyleSheet.absoluteFillObject, backgroundColor:c.scrim},
   celebration:{...StyleSheet.absoluteFillObject,backgroundColor:paper,justifyContent:'center',alignItems:'center',gap:18,padding:28},
   card:{maxHeight:'85%', backgroundColor:paper, borderTopLeftRadius:24, borderTopRightRadius:24},
-  detail:{padding:24, gap:12}, story:{fontSize:17, lineHeight:26, color:'#304A43'},
+  detail:{padding:24, gap:12}, story:{fontSize:17, lineHeight:26, color:c.ink},
   close:{padding:14, alignItems:'center'}
 });

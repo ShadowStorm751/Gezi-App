@@ -1,3 +1,4 @@
+import {c} from './theme';
 import React, {useEffect, useRef, useState} from 'react';
 import {ActivityIndicator, Alert, Image, Linking, Modal, Platform, Pressable, StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -91,14 +92,14 @@ export default function CameraPhotos({camera, ready, onMediaOpen}) {
       <Pressable accessibilityRole="button" accessibilityLabel={t('Galeriyi aç','Open gallery')}
         disabled={busy} onPress={openGallery} style={styles.gallery}>
         {lastShot ? <Image source={{uri:lastShot}} style={styles.thumbnail}/> :
-          <Svg width={26} height={26} viewBox="0 0 24 24" fill="none" stroke="#FAF7F0" strokeWidth={1.7}>
+          <Svg width={26} height={26} viewBox="0 0 24 24" fill="none" stroke={c.surface} strokeWidth={1.7}>
             <Rect x={2} y={3} width={20} height={18} rx={3}/><Circle cx={8} cy={9} r={1.5}/><Path d="m3 18 6-6 4 4 3-3 5 5"/>
           </Svg>}
       </Pressable>
       <Pressable accessibilityRole="button" accessibilityLabel={t('Fotoğraf çek','Take photo')}
         accessibilityState={{disabled:!ready || busy}} disabled={!ready || busy} onPress={takePhoto}
         style={[styles.shutter, (!ready || busy) && {opacity:0.55}]}>
-        {busy ? <ActivityIndicator color="white"/> : <View style={styles.disc}/>}
+        {busy ? <ActivityIndicator color={c.surfaceRaised}/> : <View style={styles.disc}/>}
       </Pressable>
     </View>
     <Modal visible={!!photo} animationType="fade" onRequestClose={closePreview}>
@@ -109,7 +110,7 @@ export default function CameraPhotos({camera, ready, onMediaOpen}) {
             <Text style={styles.label}>{t('Kameraya dön','Back to camera')}</Text>
           </Pressable>
           {photo.captured && <Pressable accessibilityRole="button" disabled={busy} onPress={savePhoto} style={styles.save}>
-            {busy ? <ActivityIndicator color="#143C38"/> : <Text style={styles.saveLabel}>{t('Galeriye kaydet','Save to gallery')}</Text>}
+            {busy ? <ActivityIndicator color={c.ink}/> : <Text style={styles.saveLabel}>{t('Galeriye kaydet','Save to gallery')}</Text>}
           </Pressable>}
         </View>
       </SafeAreaView>}
@@ -119,11 +120,11 @@ export default function CameraPhotos({camera, ready, onMediaOpen}) {
 
 const styles = StyleSheet.create({
   controls:{position:'absolute',bottom:16,left:18,right:18,height:72,alignItems:'center',justifyContent:'center'},
-  shutter:{width:70,height:70,borderRadius:35,borderWidth:3,borderColor:'#FAF7F0',alignItems:'center',justifyContent:'center',backgroundColor:'#143C3899'},
-  disc:{width:54,height:54,borderRadius:27,backgroundColor:'#FAF7F0'},
-  gallery:{position:'absolute',left:0,width:50,height:50,borderRadius:13,overflow:'hidden',backgroundColor:'#143C38',alignItems:'center',justifyContent:'center'},
-  thumbnail:{width:'100%',height:'100%'}, preview:{flex:1,backgroundColor:'#101716'}, image:{flex:1,width:'100%'},
+  shutter:{width:70,height:70,borderRadius:35,borderWidth:3,borderColor:c.surface,alignItems:'center',justifyContent:'center',backgroundColor:c.scrim},
+  disc:{width:54,height:54,borderRadius:27,backgroundColor:c.surface},
+  gallery:{position:'absolute',left:0,width:50,height:50,borderRadius:13,overflow:'hidden',backgroundColor:c.ink,alignItems:'center',justifyContent:'center'},
+  thumbnail:{width:'100%',height:'100%'}, preview:{flex:1,backgroundColor:c.cameraBackground}, image:{flex:1,width:'100%'},
   actions:{flexDirection:'row',flexWrap:'wrap',alignItems:'center',justifyContent:'center',gap:12,padding:16},
-  button:{padding:14}, save:{padding:14,borderRadius:16,backgroundColor:'#FAF7F0'}, label:{color:'#FAF7F0',fontWeight:'600'},
-  saveLabel:{color:'#143C38',fontWeight:'700'}
+  button:{padding:14}, save:{padding:14,borderRadius:16,backgroundColor:c.surface}, label:{color:c.surface,fontWeight:'600'},
+  saveLabel:{color:c.ink,fontWeight:'700'}
 });

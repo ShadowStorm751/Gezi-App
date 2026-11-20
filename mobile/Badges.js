@@ -1,3 +1,4 @@
+import {c} from './theme';
 import React, {useEffect, useRef, useState} from 'react';
 import {ActivityIndicator, Animated, KeyboardAvoidingView, Modal, Platform, Pressable,
   ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
@@ -144,12 +145,12 @@ export default function Badges({onClose,visitRevision}) {
 }
 
 const styles = StyleSheet.create({
-  page:{flex:1,backgroundColor:'#FAF7F0',padding:18}, header:{flexDirection:'row',justifyContent:'space-between',alignItems:'center'},
-  title:{fontSize:32,color:'#143C38',fontFamily:Platform.select({ios:'Georgia',android:'serif'})},
+  page:{flex:1,backgroundColor:c.surface,padding:18}, header:{flexDirection:'row',justifyContent:'space-between',alignItems:'center'},
+  title:{fontSize:32,color:c.ink,fontFamily:Platform.select({ios:'Georgia',android:'serif'})},
   stack:{padding:10,gap:12}, button:{minHeight:44,padding:10,justifyContent:'center'},
-  link:{color:'#195449',fontWeight:'700',fontSize:16}, body:{color:'#40594F',fontSize:15,lineHeight:21},
-  input:{backgroundColor:'white',borderRadius:8,padding:12,color:'#143C38',borderWidth:1,borderColor:'#BCC8BD'},
-  row:{flexDirection:'row',alignItems:'center',gap:12,paddingVertical:12,borderBottomWidth:1,borderColor:'#D9D8CC'},
-  art:{width:76,height:76,alignItems:'center',justifyContent:'center'}, star:{position:'absolute',fontSize:38,color:'#62776C'},
-  copy:{flex:1,gap:4}, name:{fontSize:18,fontWeight:'700',color:'#143C38'}, progress:{color:'#355C50',fontWeight:'600'}
+  link:{color:c.primary,fontWeight:'700',fontSize:16}, body:{color:c.inkMuted,fontSize:15,lineHeight:21},
+  input:{backgroundColor:c.surfaceRaised,borderRadius:8,padding:12,color:c.ink,borderWidth:1,borderColor:c.line},
+  row:{flexDirection:'row',alignItems:'center',gap:12,paddingVertical:12,borderBottomWidth:1,borderColor:c.line},
+  art:{width:76,height:76,alignItems:'center',justifyContent:'center'}, star:{position:'absolute',fontSize:38,color:c.inkMuted},
+  copy:{flex:1,gap:4}, name:{fontSize:18,fontWeight:'700',color:c.ink}, progress:{color:c.primary,fontWeight:'600'}
 });
