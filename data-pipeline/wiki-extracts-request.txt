@@ -1,2 +1,3 @@
-Bu dosya değişip main'e yüklenince uzun açıklamalar için kaynak metinler toplanır (.github/workflows/wiki-extracts.yml).
-Son istek: 2026-11-20 01:45 — İstanbul 156 yer
+Bu dosya değişip main'e (ya da data/* dalına) yüklenince uzun açıklamalar için kaynak metinler toplanır (.github/workflows/wiki-extracts.yml).
+Şehirler: izmir bursa kapadokya
+Son istek: 2026-11-20 16:10 — yeni şehirler
