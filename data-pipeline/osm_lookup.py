@@ -26,6 +26,10 @@ import pipeline as p  # noqa: E402
 # Sonuçları işlenen yerler (2026-11-20): misi, bursa-kapalicarsi, iznik-surlari, kizilcukur-vadisi, mustafapasa,
 # tarihi-asansor. Kalan: soganli-vadisi (ilk aramada ± 0,04° içinde bulunamadı).
 TARGETS: Dict[str, tuple] = {
+    # İzmir Tarih ve Sanat Müzesi kapandı (2025); eserler Kültür Sanat Fabrikası'na taşındı (eski Alsancak Tekel)
+    "izmir-kultur-sanat-fabrikasi": ("izmir", 38.4405, 27.1480, ["kultur sanat", "fabrika", "tekel", "tutun", "muze"], 0.012),
+    # Kültürpark'ın içinde ikinci keşif yeri
+    "kulturpark-ic": ("izmir", 38.4300, 27.1440, ["acikhava", "tiyatro", "galeri", "kizilcan", "pavyon", "gol"], 0.008),
     # Gemlik'teki Kurşunlu plajı (listede Karacabey'deki Kurşunlu var; ikisi ayrı yer)
     "gemlik-kursunlu": ("bursa", 40.360, 29.021, ["kursunlu", "plaj", "beach", "halk", "kadinlar"], 0.03),
     # Soğanlı'nın kaya kiliseleri: aday listesine girmediler (OSM'de çoğu natural=yes ya da etiketsiz)
