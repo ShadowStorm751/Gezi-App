@@ -1,6 +1,6 @@
 ok
-zaman: 2026-11-20T12:41:24Z
-çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44737825591
+zaman: 2026-11-20T12:42:45Z
+çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44738018888
 ---
 CREATE DATABASE
 ALTER DATABASE
@@ -84,8 +84,15 @@ UPDATE 257
 
                                  celsus_ana_yer                                 
 --------------------------------------------------------------------------------
- {"id": "417242b4-73a0-4e19-977d-3b57f1c848bb", "name": "Efes", "slug": "efes"}
+ {"id": "2c86af20-90fc-4034-9038-dc980b0c2ed0", "name": "Efes", "slug": "efes"}
 (1 row)
+
+       slug        | rating_var |     donem_en      | donem_kodu 
+-------------------+------------+-------------------+------------
+ altikapi-turbesi  | t          | Seljuk            | Selçuklu
+ efes              | t          | Ancient           | Antik
+ karamanoglu-camii | t          | Anatolian Beyliks | Beylikler
+(3 rows)
 
    slug    | paket_yer | paket_ana_yer 
 -----------+-----------+---------------
@@ -97,7 +104,7 @@ UPDATE 257
 
 ROLLBACK
 == Tek seviye kuralı (hata beklenir, yakalanır)
-psql:backend/supabase/tests/ci_checks.sql:61: NOTICE:  beklenen hata: place kizil-avlu : ana yerin kendisi başka bir yerin içinde olamaz (tek seviye)
+psql:backend/supabase/tests/ci_checks.sql:66: NOTICE:  beklenen hata: place kizil-avlu : ana yerin kendisi başka bir yerin içinde olamaz (tek seviye)
 DO
 TAMAM
 == Görseli olmayan rozet (0 olmalı)
