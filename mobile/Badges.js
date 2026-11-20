@@ -1,17 +1,20 @@
 import Animated,{useSharedValue,useAnimatedStyle,useReducedMotion,withSequence,withSpring,withTiming} from 'react-native-reanimated';
-import {Progress} from './Motion';
-import {c} from './theme';
-import React, {useEffect, useRef, useState} from 'react';
-import {ActivityIndicator, KeyboardAvoidingView, Modal, Platform, Pressable,
+import {Press,Progress,Reveal,Skeleton} from './Motion';
+import {Chips,muted} from './PlaceUI';
+import {panel} from './TabPage';
+import {c,radius,space,type} from './theme';
+import React, {useEffect, useState} from 'react';
+import {ActivityIndicator, KeyboardAvoidingView, Modal, Platform, useWindowDimensions,
   ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
 import Svg, {Defs, FeColorMatrix, Filter, G, Image as SvgImage} from 'react-native-svg';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {AsyncStorage, client, lang, project, t} from './client';
 import {badgeImages} from './badgeImages';
 
-function Button({label,onPress,disabled}) {
-  return <Pressable accessibilityRole="button" onPress={onPress} disabled={disabled} style={styles.button}>
-    <Text style={styles.link}>{label}</Text></Pressable>;
+function Button({label,onPress,disabled,primary=false}) {
+  return <Press accessibilityRole="button" onPress={onPress} disabled={disabled} accessibilityState={{disabled:!!disabled}}
+    style={[styles.button,primary && styles.primaryButton,disabled && {opacity:0.55}]}>
+    <Text style={[styles.link,primary && {color:c.onPrimary}]}>{label}</Text></Press>;
 }
 
 export function Login({onSignedIn, prompt}) {
@@ -42,7 +45,7 @@ export function Login({onSignedIn, prompt}) {
       keyboardType="email-address" autoCapitalize="none" autoCorrect={false} autoComplete="email" style={styles.input}/>
     <TextInput value={password} onChangeText={setPassword} placeholder={t('Parola','Password')} accessibilityLabel={t('Parola','Password')}
       secureTextEntry autoCapitalize="none" style={styles.input}/>
-    <Button label={t('Giriş yap','Sign in')} disabled={disabled} onPress={() => submit(false)}/>
+    <Button primary label={t('Giriş yap','Sign in')} disabled={disabled} onPress={() => submit(false)}/>
     <Button label={t('Hesap oluştur','Create account')} disabled={disabled} onPress={() => submit(true)}/>
     {busy && <ActivityIndicator/>}
     {!!message && <Text accessibilityLiveRegion="polite">{message}</Text>}
@@ -68,21 +71,42 @@ export function BadgeArt({badge,size=76}) {
   </View>;
 }
 
-function BadgeRow({badge,celebrate}) {
+export function BadgeLogin() {
+  return <View style={panel}>
+    <View style={styles.preview} accessible={false} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+      {['first-step','ottoman-heritage','first-view'].map(slug=><View key={slug} style={styles.previewRing}>
+        <BadgeArt badge={{slug,earned_at:true}} size={48}/>
+      </View>)}
+    </View>
+    <Login/>
+  </View>;
+}
+
+function BadgeTile({badge,celebrate,width}) {
   const scale=useSharedValue(1),reduce=useReducedMotion();
-  useEffect(()=>{scale.value=celebrate&&!reduce?withSequence(withTiming(1.15,{duration:200}),withSpring(1)):1;},[celebrate,reduce]);
+  useEffect(()=>{
+    scale.value=celebrate&&!reduce ? withSequence(withTiming(1.12,{duration:200}),withSpring(1)) : 1;
+  },[celebrate,reduce,scale]);
   const motion=useAnimatedStyle(()=>({transform:[{scale:scale.value}]}));
-  return <View style={styles.row}>
-    <Animated.View style={[{width:84,height:84,borderRadius:42,borderWidth:3,borderColor:badge.earned_at?c.gold:c.line,backgroundColor:c.surfaceSunken,alignItems:"center",justifyContent:"center"},motion]}><BadgeArt key={badge.slug + ':' + badge.badge_path} badge={badge}/></Animated.View>
-    <View style={styles.copy}><Text style={styles.name}>{badge.name}</Text>
-      {!!badge.description && <Text style={styles.body}>{badge.description}</Text>}
-      {!badge.earned_at && badge.target>0 && <Progress value={badge.progress/badge.target}/>}
-      <Text style={styles.progress}>{badge.earned_at ? t('Kazanıldı','Earned') : badge.progress + ' / ' + badge.target}</Text>
+  const earned=!!badge.earned_at;
+  return <View style={[styles.tile,{width}]}>
+    <Animated.View style={[styles.medal,earned && styles.earnedMedal,motion]}>
+      <BadgeArt badge={badge}/>
+    </Animated.View>
+    <Text style={styles.name}>{badge.name}</Text>
+    {!!badge.description && <Text style={styles.description}>{badge.description}</Text>}
+    <View style={styles.tileFooter}>
+      {!earned && badge.target>0 && <Progress value={badge.progress/badge.target}/>}
+      <Text style={[styles.status,earned && {color:c.goldInk}]}>
+        {earned ? t('Kazanıldı','Earned') : badge.target>0 ? badge.progress+' / '+badge.target : t('Kilitli','Locked')}
+      </Text>
     </View>
   </View>;
 }
 
 export function Collection({userId,visitRevision}) {
+  const {width,fontScale}=useWindowDimensions();
+  const [filter,setFilter]=useState('all');
   const [version,setVersion] = useState(0);
   const [result,setResult] = useState(null);
   const [failed,setFailed] = useState(false);
@@ -110,14 +134,32 @@ export function Collection({userId,visitRevision}) {
     try { const {error} = await client.auth.signOut({scope:'local'}); setLogoutError(!!error); }
     catch { setLogoutError(true); }
   }
+  const badges=result?.badges || [];
+  const earned=badges.filter(b=>b.earned_at).length;
+  const visible=badges.filter(b=>filter==='all' || (filter==='earned' ? !!b.earned_at : !b.earned_at));
+  const filters=[['all',t('Tümü','All')],['earned',t('Kazanılan','Earned')],['locked',t('Kilitli','Locked')]];
+  const tileWidth=width<350 || fontScale>1.35 ? '100%' : width>=720 ? '32%' : '48.5%';
   return <>
-    {!failed && !result && <ActivityIndicator/>}
-    {failed && <Text>{t('Rozetler yüklenemedi.','Could not load badges.')}</Text>}
-    {!!result && !result.badges.length && <Text>{t('Henüz rozet yok.','No badges yet.')}</Text>}
-    {result?.badges.map(badge => <BadgeRow key={badge.slug} badge={badge} celebrate={result.fresh.includes(badge.slug)}/>)}
-    <Button label={t('Yenile','Refresh')} onPress={() => setVersion(n => n+1)}/>
-    <Button label={t('Çıkış yap','Sign out')} onPress={logout}/>
-    {logoutError && <Text>{t('Çıkış yapılamadı. Tekrar dene.','Could not sign out. Try again.')}</Text>}
+    {!failed && !result && <Skeleton/>}
+    {failed && <Text accessibilityLiveRegion="polite" style={muted}>{t('Rozetler yüklenemedi.','Could not load badges.')}</Text>}
+    {result && (badges.length ? <>
+      <Reveal style={styles.collectionSummary}>
+        <Text style={styles.count}>{earned} / {badges.length}</Text>
+        <Text style={styles.summaryLabel}>{t('Kazanılan rozetler','Badges earned')}</Text>
+        <Progress value={earned/badges.length}/>
+      </Reveal>
+      <Chips items={filters} value={filter} onChange={setFilter}/>
+      {visible.length ? <View style={styles.grid}>{visible.map(badge=>
+        <BadgeTile key={badge.slug} badge={badge} width={tileWidth} celebrate={result.fresh.includes(badge.slug)}/>
+      )}</View> : <Text style={muted}>{filter==='earned'
+        ? t('Henüz rozet kazanmadın.','You haven’t earned a badge yet.')
+        : t('Tüm rozetleri kazandın.','You’ve earned every badge.')}</Text>}
+    </> : <Text style={muted}>{t('Henüz rozet yok.','No badges yet.')}</Text>)}
+    <View style={styles.tools}>
+      <Button label={t('Yenile','Refresh')} onPress={()=>setVersion(n=>n+1)}/>
+      <Button label={t('Çıkış yap','Sign out')} onPress={logout}/>
+    </View>
+    {logoutError && <Text style={muted}>{t('Çıkış yapılamadı. Tekrar dene.','Could not sign out. Try again.')}</Text>}
   </>;
 }
 
@@ -142,11 +184,22 @@ export default function Badges({onClose,visitRevision}) {
 
 const styles = StyleSheet.create({
   page:{flex:1,backgroundColor:c.surface,padding:18}, header:{flexDirection:'row',justifyContent:'space-between',alignItems:'center'},
-  title:{fontSize:32,color:c.ink,fontFamily:Platform.select({ios:'Georgia',android:'serif'})},
-  stack:{padding:10,gap:12}, button:{minHeight:44,padding:10,justifyContent:'center'},
-  link:{color:c.primary,fontWeight:'700',fontSize:16}, body:{color:c.inkMuted,fontSize:15,lineHeight:21},
-  input:{backgroundColor:c.surfaceRaised,borderRadius:8,padding:12,color:c.ink,borderWidth:1,borderColor:c.line},
-  row:{flexDirection:'row',alignItems:'center',gap:12,paddingVertical:12,borderBottomWidth:1,borderColor:c.line},
-  art:{width:76,height:76,alignItems:'center',justifyContent:'center'}, star:{position:'absolute',fontSize:38,color:c.inkMuted},
-  copy:{flex:1,gap:4}, name:{fontSize:18,fontWeight:'700',color:c.ink}, progress:{color:c.primary,fontWeight:'600'}
+  title:{...type.display,color:c.ink},
+  stack:{gap:space[2]}, button:{minHeight:44,padding:space[2],alignItems:'center',justifyContent:'center',borderRadius:radius.md},
+  primaryButton:{backgroundColor:c.primary},link:{...type.label,color:c.primary},body:{...type.body,color:c.inkMuted},
+  input:{...type.body,backgroundColor:c.surfaceRaised,borderRadius:radius.md,padding:space[3],color:c.ink,borderWidth:1,borderColor:c.line},
+  preview:{flexDirection:'row',justifyContent:'center',gap:space[2],paddingVertical:space[3],backgroundColor:c.goldSoft,borderRadius:radius.md},
+  previewRing:{borderWidth:2,borderColor:c.gold,borderRadius:30,padding:2,backgroundColor:c.surface},
+  collectionSummary:{backgroundColor:c.goldSoft,padding:space[5],borderRadius:radius.lg,gap:space[2]},
+  count:{...type.display,color:c.goldInk},summaryLabel:{...type.label,color:c.goldInk},
+  grid:{flexDirection:'row',flexWrap:'wrap',justifyContent:'space-between',rowGap:space[3]},
+  tile:{...panel,alignItems:'center',gap:space[2]},
+  medal:{width:84,height:84,borderRadius:42,borderWidth:3,borderColor:c.line,backgroundColor:c.surfaceSunken,alignItems:'center',justifyContent:'center'},
+  earnedMedal:{borderColor:c.gold,backgroundColor:c.goldSoft},
+  art:{alignItems:'center',justifyContent:'center'},star:{position:'absolute',fontSize:38,color:c.inkMuted},
+  name:{...type.cardTitle,color:c.ink,textAlign:'center'},
+  description:{...type.caption,color:c.inkMuted,textAlign:'center'},
+  tileFooter:{marginTop:'auto',alignSelf:'stretch',paddingTop:4,gap:4},
+  status:{...type.caption,color:c.inkMuted,textAlign:'center'},
+  tools:{flexDirection:'row',justifyContent:'space-between'},
 });

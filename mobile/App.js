@@ -18,7 +18,7 @@ import sample from './places.json';
 import {AsyncStorage, client, demo, lang, project, t} from './client';
 import {loadCity, loadDetail, loadNearby, mapPlace, mergeNearbyPlace} from './catalog';
 import DiscoveryCamera from './DiscoveryCamera';
-import {Collection,Login} from './Badges';
+import {BadgeLogin,Collection,Login} from './Badges';
 import {Action,ui,useQuery} from './ScreenUI';
 import Friends from './Friends';
 import Profile from './Profile';
@@ -224,7 +224,12 @@ export default function App() {
         routes: <TabPage title={t('Rotalar','Routes')} location={city?.name || (citySlug==='istanbul'?'İstanbul':citySlug)}>
           <Routes city={citySlug} revision={[visits.userId,visits.revision]} onRoute={openRoute}/>
         </TabPage>,
-        badges: <ScrollView contentContainerStyle={ui.content}><Text style={ui.title}>{t('Rozetler','Badges')}</Text>{client ? visits.userId ? <Collection key={visits.userId} userId={visits.userId} visitRevision={visits.revision}/> : <Login/> : <Text>{t('Bağlantı gerekli.','Connection required.')}</Text>}</ScrollView>,
+        badges: <TabPage title={t('Rozetler','Badges')}>
+          {client ? visits.userId
+            ? <Collection key={visits.userId} userId={visits.userId} visitRevision={visits.revision}/>
+            : <BadgeLogin/>
+            : <Text style={ui.muted}>{t('Rozetleri görmek için bağlantı gerekli.','Connect to view badges.')}</Text>}
+        </TabPage>,
         profile: <ScrollView contentContainerStyle={ui.content}><Text style={ui.title}>{t('Profil','Profile')}</Text>{!!client && <Action onPress={()=>suggest(origin ?? center)}>{t('Yer öner','Suggest a place')}</Action>}
       {visits.userId && <Action onPress={()=>setScreen('reviews')}>{t('Değerlendirmelerim','My reviews')}</Action>}
       {visits.userId && <Action onPress={()=>setScreen('photos')}>{t('Fotoğraflarım','My photos')}</Action>}
