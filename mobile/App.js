@@ -1,3 +1,4 @@
+import Explore from './Explore';
 import {c,type,shadow} from './theme';
 import {Camera} from 'lucide-react-native';
 import MainTabs from './MainTabs';
@@ -220,43 +221,7 @@ export default function App() {
         {screen==='friends' && (visits.userId?<Friends onProfile={()=>setScreen('home')}/>:<Login/>)}
         {screen==='suggest' && <ContributionForm coordinate={suggestPin} userId={visits.userId} onClose={()=>setScreen('home')}/>}
       </ScrollView></> : <MainTabs initial={tab.current} onTab={name=>{tab.current=name;}} pages={{
-        explore: <><View style={{paddingHorizontal:20,paddingVertical:14,flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}><View><Text style={styles.eyebrow}>{(city?.name || citySlug).toLocaleUpperCase(lang)}</Text><Text style={styles.title}>{t('Keşfet','Explore')}</Text></View>
-    <Press accessibilityRole="button" accessibilityLabel={t('Kamerayla keşfet','Explore with camera')} onPress={()=>setCameraMode('live')} style={{width:52,height:52,borderRadius:26,backgroundColor:c.accent,alignItems:'center',justifyContent:'center',...shadow.card}}><Camera color={c.onAccent}/></Press></View>
-    {cities.data?.length>1 && <ScrollView horizontal>{cities.data.map(item=><Action key={item.slug} selected={item.slug===citySlug} onPress={()=>chooseCity(item)}>{item.name}</Action>)}</ScrollView>}
-    {permission===false && <Action onPress={tryGalata}>{t('Galata’yı evden dene','Try Galata from home')}</Action>}      <ScrollView style={styles.sheet} contentContainerStyle={styles.content}>
-        {!!client && <><Feedback query={cities}/><Recommendations origin={origin} userId={visits.userId} revision={visits.revision}
-          onPlace={showStop} onRoute={slug => openRoute(slug,'home')}/></>}
-        <Text style={styles.heading} accessibilityRole="header">{t('Yakındaki yerler','Nearby places')}</Text>
-        {catalogState !== 'ready' && <Text style={styles.muted}>{{
-          demo:t('Galata örnek kataloğu','Galata sample catalog'),
-          loading:t('Şehir paketi yükleniyor…','Loading city catalog…'),
-          cached:t('Kayıtlı paket güncelleniyor…','Refreshing the saved catalog…'),
-          offline:t('Kayıtlı şehir paketi gösteriliyor.','Showing the saved city catalog.'),
-          error:t('Şehir paketi alınamadı.','Could not load the city catalog.'),
-          config:t('Supabase bağlantı ayarları eksik veya geçersiz.','Supabase configuration is incomplete or invalid.')
-        }[catalogState]}</Text>}
-        {['error','offline'].includes(catalogState) && <Pressable accessibilityRole="button" style={styles.close} onPress={() => setRefresh(n => n+1)}>
-          <Text style={styles.distance}>{t("Tekrar dene","Try again")}</Text></Pressable>}
-        {catalogState === 'ready' && !places.length && <Text style={styles.muted}>{t('Bu şehirde yayımlanmış yer yok.','No published places in this city yet.')}</Text>}
-        <Text style={styles.muted}>{origin ? t("Konumundan kuş uçuşu uzaklık","Straight-line distance from your location") : t("Örnek konumdan kuş uçuşu uzaklık","Straight-line distance from the sample location")}</Text>
-        {(places.length > 0 || serverNearby !== null) && !listPlaces.length &&
-          <Text style={styles.muted}>{t('2 km içinde yer bulunamadı.', 'No places within 2 km.')}</Text>}
-        {listPlaces.map(place => (
-          <Pressable key={place.id} accessibilityRole="button" style={styles.row} onPress={() => openPlace(place)}>
-            <PlaceThumbnail place={place}/>
-            <View style={styles.rowMain}>
-              <Text style={styles.eyebrow}>{(place.categoryLabel || place.category).toLocaleUpperCase(lang)}</Text>
-              <Text style={styles.place}>{place.name}{wasVisited(place.id) ? ' ✓' : ''}</Text>
-            </View>
-            <Text style={styles.distance}>{formatDistance(place.distance)}  ›</Text>
-          </Pressable>
-        ))}
-        <Pressable accessibilityRole="button" disabled={loading} onPress={useLocation} style={styles.action}>
-          {loading ? <ActivityIndicator color={paper}/> : <Text style={styles.actionLabel}>{origin ? t("Konumumu güncelle","Update my location") : t("Konumumu kullan","Use my location")}</Text>}
-        </Pressable>
-        {!!locationMessage && <Text accessibilityLiveRegion="polite" style={styles.muted}>{locationMessage}</Text>}
-      </ScrollView>
-</>,
+        explore:<Explore places={nearby.map(p=>({...p,distance:origin?p.distance:null}))} nearby={listPlaces} city={city||{slug:citySlug,name:citySlug==='istanbul'?'İstanbul':citySlug}} cities={cities} onCity={chooseCity} origin={origin} permission={permission} onLocation={()=>useLocation()} onDemo={tryGalata} onCamera={()=>setCameraMode('live')} onPlace={openPlace} onRoute={slug=>openRoute(slug,'home')} visited={wasVisited} revision={visits.revision} userId={visits.userId} state={catalogState} onRetry={()=>setRefresh(n=>n+1)} message={locationMessage} loading={loading}/>,
         map: <>      <MapView key={citySlug+':'+center.latitude+':'+center.longitude} ref={map} style={styles.map} initialRegion={{...region,...center}} showsUserLocation={!!origin}
         onLongPress={client ? e => suggest(e.nativeEvent.coordinate) : undefined}
         toolbarEnabled={false} showsMyLocationButton={false}>
