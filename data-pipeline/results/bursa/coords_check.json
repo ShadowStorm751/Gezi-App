@@ -1,0 +1,421 @@
+{
+ "ozet": {
+  "dogrulandi": 5,
+  "supheli": 3,
+  "kanit_yok": 5
+ },
+ "yerler": {
+  "mayor-sinagogu": {
+   "ad": "Mayor Sinagogu",
+   "konum": [
+    40.188641,
+    29.055159
+   ],
+   "tolerans_m": 300,
+   "kanitlar": [
+    {
+     "kaynak": "wikipedia-tr (arama): Mayor Sinagogu (Bursa)",
+     "fark_m": 5470
+    },
+    {
+     "kaynak": "commons (1 fotoğraf, orta değer)",
+     "fark_m": 5481,
+     "konum": [
+      40.229218,
+      29.091796
+     ]
+    }
+   ],
+   "osm": {
+    "ad": "Mayor Sinagogu",
+    "ad_en": null,
+    "merkez": [
+     40.188640575,
+     29.05515875
+    ],
+    "etiketler": {
+     "amenity": "place_of_worship",
+     "building": "yes",
+     "historic": "building",
+     "name": "Mayor Sinagogu",
+     "religion": "jewish"
+    },
+    "fark_m": 0
+   },
+   "sonuc": "supheli"
+  },
+  "tofas-anadolu-araclari-muzesi": {
+   "ad": "Tofas Anadolu Araclari Muzesi",
+   "konum": [
+    40.176509,
+    29.071029
+   ],
+   "tolerans_m": 300,
+   "kanitlar": [
+    {
+     "kaynak": "commons (10 fotoğraf, orta değer)",
+     "fark_m": 14,
+     "konum": [
+      40.1766375,
+      29.0710245
+     ]
+    }
+   ],
+   "osm": {
+    "ad": "Tofas Anadolu Araclari Muzesi",
+    "ad_en": "Tofas Anatolian Car Museum",
+    "merkez": [
+     40.1765088,
+     29.0710292
+    ],
+    "etiketler": {
+     "fee": "no",
+     "name": "Tofas Anadolu Araclari Muzesi",
+     "tourism": "museum"
+    },
+    "fark_m": 0
+   },
+   "sonuc": "dogrulandi"
+  },
+  "merinos-enerji-muzesi": {
+   "ad": "Merinos Enerji Müzesi",
+   "konum": [
+    40.201094,
+    29.050599
+   ],
+   "tolerans_m": 100,
+   "kanitlar": [
+    {
+     "kaynak": "wikipedia-tr (arama): Bursa Merinos Enerji Müzesi",
+     "fark_m": 35
+    },
+    {
+     "kaynak": "commons (3 fotoğraf, orta değer)",
+     "fark_m": 261,
+     "konum": [
+      40.19888889,
+      29.05166667
+     ]
+    }
+   ],
+   "osm": {
+    "ad": "Merinos Enerji Müzesi",
+    "ad_en": "Merinos Energy Museum",
+    "merkez": [
+     40.20109371666667,
+     29.050598500000003
+    ],
+    "etiketler": {
+     "addr:city": "Bursa",
+     "building": "museum",
+     "fee": "no",
+     "museum": "technology",
+     "name": "Merinos Enerji Müzesi",
+     "opening_hours": "closed",
+     "tourism": "museum",
+     "website": "https://www.bursamuze.com/merinos-enerji-muzesi"
+    },
+    "fark_m": 0
+   },
+   "ana_yere_m": 347,
+   "sonuc": "dogrulandi"
+  },
+  "antik-tiyatro": {
+   "ad": "Apollonia Antik Tiyatrosu",
+   "konum": [
+    40.169718,
+    28.682594
+   ],
+   "tolerans_m": 100,
+   "kanitlar": [
+    {
+     "kaynak": "commons (10 fotoğraf, orta değer)",
+     "fark_m": 464,
+     "konum": [
+      40.1662115,
+      28.679626499999998
+     ]
+    }
+   ],
+   "osm": {
+    "ad": "Antik Tiyatro",
+    "ad_en": null,
+    "merkez": [
+     40.169718,
+     28.6825941
+    ],
+    "etiketler": {
+     "access": "yes",
+     "historic": "archaeological_site",
+     "historic:civilization": "roman",
+     "name": "Antik Tiyatro"
+    },
+    "fark_m": 0
+   },
+   "ana_yere_m": 605,
+   "sonuc": "supheli"
+  },
+  "osman-gazi-turbesi": {
+   "ad": "Osman Gazi Türbesi",
+   "konum": [
+    40.186774,
+    29.057323
+   ],
+   "tolerans_m": 300,
+   "kanitlar": [
+    {
+     "kaynak": "commons (12 fotoğraf, orta değer)",
+     "fark_m": 22,
+     "konum": [
+      40.186746,
+      29.057577000000002
+     ]
+    }
+   ],
+   "osm": {
+    "ad": "Osman Gazi Türbesi",
+    "ad_en": "Osman Gazi crypt",
+    "merkez": [
+     40.1867736375,
+     29.0573230125
+    ],
+    "etiketler": {
+     "building": "yes",
+     "historic": "tomb",
+     "image": "https://photos.app.goo.gl/a7rnaYf7dH6KJNvX9",
+     "name": "Osman Gazi Türbesi",
+     "tomb": "mausoleum",
+     "wikidata": "Q83100",
+     "wikimedia_commons": "Category:Osman I",
+     "wikipedia": "tr:Osman Gazi"
+    },
+    "fark_m": 0
+   },
+   "sonuc": "dogrulandi"
+  },
+  "hacivat-karagoz-anit-mezari": {
+   "ad": "Hacivat ve Karagöz Anıt Mezarı",
+   "konum": [
+    40.202118,
+    29.027248
+   ],
+   "tolerans_m": 300,
+   "kanitlar": [
+    {
+     "kaynak": "wikipedia-tr (arama): Karagöz Müzesi",
+     "fark_m": 19
+    },
+    {
+     "kaynak": "commons (10 fotoğraf, orta değer)",
+     "fark_m": 40,
+     "konum": [
+      40.2017635,
+      29.0273215
+     ]
+    }
+   ],
+   "osm": {
+    "ad": "Hacivat - Karagöz Anıt Mezarı",
+    "ad_en": null,
+    "merkez": [
+     40.2021185,
+     29.0272478
+    ],
+    "etiketler": {
+     "access": "yes",
+     "historic": "tomb",
+     "name": "Hacivat - Karagöz Anıt Mezarı",
+     "tomb": "mausoleum"
+    },
+    "fark_m": 0
+   },
+   "sonuc": "dogrulandi"
+  },
+  "ebe-gulbahar-hatun-turbesi": {
+   "ad": "Gülbahar Hatun Türbesi",
+   "konum": [
+    40.190582,
+    29.04545
+   ],
+   "tolerans_m": 100,
+   "kanitlar": [
+    {
+     "kaynak": "wikipedia-tr (arama): Muradiye Külliyesi",
+     "fark_m": 63
+    },
+    {
+     "kaynak": "commons (2 fotoğraf, orta değer)",
+     "fark_m": 16,
+     "konum": [
+      40.190725,
+      29.045416
+     ]
+    }
+   ],
+   "osm": {
+    "ad": "Ebe (Gülbahar) Hatun Türbesi",
+    "ad_en": null,
+    "merkez": [
+     40.1905818,
+     29.0454504
+    ],
+    "etiketler": {
+     "historic": "tomb",
+     "name": "Ebe (Gülbahar) Hatun Türbesi"
+    },
+    "fark_m": 0
+   },
+   "ana_yere_m": 101,
+   "sonuc": "dogrulandi"
+  },
+  "zeyniller-koyu-seyir-tepesi": {
+   "ad": "Zeyniller Seyir Tepesi",
+   "konum": [
+    40.165424,
+    29.111122
+   ],
+   "tolerans_m": 300,
+   "kanitlar": [],
+   "osm": {
+    "ad": "Zeyniller Köyü Seyir Tepesi",
+    "ad_en": null,
+    "merkez": [
+     40.1654236,
+     29.1111218
+    ],
+    "etiketler": {
+     "name": "Zeyniller Köyü Seyir Tepesi",
+     "tourism": "viewpoint"
+    },
+    "fark_m": 0
+   },
+   "sonuc": "kanit_yok"
+  },
+  "uluabat-golu-sulak-alani": {
+   "ad": "Uluabat Gölü Sulak Alanı",
+   "konum": [
+    40.16526,
+    28.590293
+   ],
+   "tolerans_m": 1500,
+   "kanitlar": [],
+   "osm": {
+    "ad": "Uluabat Gölü Sulak Alanı",
+    "ad_en": "Lake Uluabat Wetland",
+    "merkez": null,
+    "etiketler": {
+     "boundary": "protected_area",
+     "layer": "-1",
+     "leisure": "nature_reserve",
+     "name": "Uluabat Gölü Sulak Alanı",
+     "network": "Ramsar site",
+     "ramsar": "yes",
+     "ramsar_no": "944",
+     "type": "boundary",
+     "wikidata": "Q108228823"
+    },
+    "fark_m": null
+   },
+   "sonuc": "kanit_yok"
+  },
+  "mudanya-sahili": {
+   "ad": "Mudanya Sahili",
+   "konum": [
+    40.370904,
+    28.893924
+   ],
+   "tolerans_m": 1500,
+   "kanitlar": [],
+   "osm": {
+    "ad": "Mudanya Sahili",
+    "ad_en": null,
+    "merkez": [
+     40.370904,
+     28.8939238
+    ],
+    "etiketler": {
+     "name": "Mudanya Sahili",
+     "tourism": "viewpoint"
+    },
+    "fark_m": 0
+   },
+   "sonuc": "kanit_yok"
+  },
+  "kursunlu-plaji": {
+   "ad": "Kurşunlu Plajı",
+   "konum": [
+    40.39671,
+    28.293817
+   ],
+   "tolerans_m": 1500,
+   "kanitlar": [],
+   "osm": {
+    "ad": "Kurşunlu Plaji",
+    "ad_en": null,
+    "merkez": null,
+    "etiketler": {
+     "name": "Kurşunlu Plaji",
+     "natural": "beach",
+     "type": "multipolygon"
+    },
+    "fark_m": null
+   },
+   "sonuc": "kanit_yok"
+  },
+  "saitabat-selalesi": {
+   "ad": "Saitabat Şelalesi",
+   "konum": [
+    40.147434,
+    29.224991
+   ],
+   "tolerans_m": 300,
+   "kanitlar": [],
+   "osm": {
+    "ad": "Saitabat Şelalesi",
+    "ad_en": "Saitabat Waterfall",
+    "merkez": [
+     40.1474337,
+     29.2249906
+    ],
+    "etiketler": {
+     "name": "Saitabat Şelalesi",
+     "waterway": "waterfall"
+    },
+    "fark_m": 0
+   },
+   "sonuc": "kanit_yok"
+  },
+  "oylat-selalesi": {
+   "ad": "Oylat Şelalesi",
+   "konum": [
+    39.919066,
+    29.584115
+   ],
+   "tolerans_m": 300,
+   "kanitlar": [
+    {
+     "kaynak": "commons (2 fotoğraf, orta değer)",
+     "fark_m": 891,
+     "konum": [
+      39.92693,
+      29.586148
+     ]
+    }
+   ],
+   "osm": {
+    "ad": "Oylat Şelalesi",
+    "ad_en": null,
+    "merkez": [
+     39.9190659,
+     29.5841154
+    ],
+    "etiketler": {
+     "name": "Oylat Şelalesi",
+     "waterway": "waterfall"
+    },
+    "fark_m": 0
+   },
+   "sonuc": "supheli"
+  }
+ }
+}

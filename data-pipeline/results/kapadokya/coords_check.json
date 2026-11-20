@@ -1,0 +1,424 @@
+{
+ "ozet": {
+  "dogrulandi": 6,
+  "supheli": 4,
+  "kanit_yok": 3
+ },
+ "yerler": {
+  "kutsal-hac-kilisesi": {
+   "ad": "Kutsal Haç Kilisesi (Timios Stavros)",
+   "konum": [
+    38.573171,
+    34.873014
+   ],
+   "tolerans_m": 100,
+   "kanitlar": [],
+   "osm": {
+    "ad": "Tarihi Kilise",
+    "ad_en": "St. Timios Church",
+    "merkez": [
+     38.5731713,
+     34.8730138
+    ],
+    "etiketler": {
+     "historic": "ruins",
+     "name": "Tarihi Kilise",
+     "ruins": "church"
+    },
+    "fark_m": 0
+   },
+   "ana_yere_m": 2128,
+   "sonuc": "kanit_yok"
+  },
+  "zelve-acik-hava-muzesi": {
+   "ad": "Zelve Açık Hava Müzesi",
+   "konum": [
+    38.668128,
+    34.86479
+   ],
+   "tolerans_m": 300,
+   "kanitlar": [
+    {
+     "kaynak": "wikipedia-tr (arama): Göreme Tarihî Millî Parkı",
+     "fark_m": 2390
+    },
+    {
+     "kaynak": "commons (20 fotoğraf, orta değer)",
+     "fark_m": 969,
+     "konum": [
+      38.674095109999996,
+      34.856655555
+     ]
+    }
+   ],
+   "osm": {
+    "ad": "Zelve Açık Hava Müzesi",
+    "ad_en": "Zelve Open-Air Museum",
+    "merkez": [
+     38.668128,
+     34.8647905
+    ],
+    "etiketler": {
+     "name": "Zelve Açık Hava Müzesi",
+     "tourism": "museum"
+    },
+    "fark_m": 0
+   },
+   "sonuc": "supheli"
+  },
+  "cavusin-kalesi": {
+   "ad": "Çavuşin Kalesi",
+   "konum": [
+    38.667765,
+    34.842511
+   ],
+   "tolerans_m": 100,
+   "kanitlar": [
+    {
+     "kaynak": "commons (10 fotoğraf, orta değer)",
+     "fark_m": 60,
+     "konum": [
+      38.667476345,
+      34.841932
+     ]
+    }
+   ],
+   "osm": {
+    "ad": "Çavuşin Kalesi",
+    "ad_en": "Çavuşin Castle",
+    "merkez": [
+     38.6677647625,
+     34.84251065
+    ],
+    "etiketler": {
+     "historic": "castle",
+     "name": "Çavuşin Kalesi",
+     "ruins": "yes"
+    },
+    "fark_m": 0
+   },
+   "ana_yere_m": 331,
+   "sonuc": "dogrulandi"
+  },
+  "bahattin-in-samanligi-kilise": {
+   "ad": "Bahattin'in Samanlığı Kilisesi",
+   "konum": [
+    38.265285,
+    34.28971
+   ],
+   "tolerans_m": 100,
+   "kanitlar": [],
+   "osm": {
+    "ad": "Bahattın'ın Samanlığı kilise",
+    "ad_en": null,
+    "merkez": [
+     38.2652855,
+     34.2897105
+    ],
+    "etiketler": {
+     "historic": "monument",
+     "name": "Bahattın'ın Samanlığı kilise"
+    },
+    "fark_m": 0
+   },
+   "ana_yere_m": 2428,
+   "sonuc": "kanit_yok"
+  },
+  "mutfak-ve-kiler": {
+   "ad": "Mutfak ve Kiler",
+   "konum": [
+    38.638398,
+    34.846098
+   ],
+   "tolerans_m": 100,
+   "kanitlar": [
+    {
+     "kaynak": "commons (5 fotoğraf, orta değer)",
+     "fark_m": 3,
+     "konum": [
+      38.638375,
+      34.846071
+     ]
+    }
+   ],
+   "osm": {
+    "ad": "Mutfak ve Kiler",
+    "ad_en": "Kitchen and storage rooms",
+    "merkez": [
+     38.6383978,
+     34.8460976
+    ],
+    "etiketler": {
+     "historic": "ruins",
+     "name": "Mutfak ve Kiler",
+     "ref": "25",
+     "tourism": "attraction",
+     "wikimedia_commons": "File:J22 209 Eingänge unter der Karanlık Kilise.jpg"
+    },
+    "fark_m": 0
+   },
+   "ana_yere_m": 106,
+   "sonuc": "dogrulandi"
+  },
+  "altikapi-turbesi": {
+   "ad": "Altıkapı Türbesi",
+   "konum": [
+    38.633178,
+    34.912546
+   ],
+   "tolerans_m": 300,
+   "kanitlar": [
+    {
+     "kaynak": "commons (2 fotoğraf, orta değer)",
+     "fark_m": 15,
+     "konum": [
+      38.6331225,
+      34.9127025
+     ]
+    }
+   ],
+   "osm": {
+    "ad": "Altıkapı Türbesi",
+    "ad_en": null,
+    "merkez": [
+     38.63317766666667,
+     34.912546
+    ],
+    "etiketler": {
+     "historic": "memorial",
+     "name": "Altıkapı Türbesi"
+    },
+    "fark_m": 0
+   },
+   "sonuc": "dogrulandi"
+  },
+  "aktepe-hill-sunset-point": {
+   "ad": "Aktepe Seyir Noktası",
+   "konum": [
+    38.65332,
+    34.863243
+   ],
+   "tolerans_m": 300,
+   "kanitlar": [
+    {
+     "kaynak": "commons (1 fotoğraf, orta değer)",
+     "fark_m": 862,
+     "konum": [
+      38.660314,
+      34.858953
+     ]
+    }
+   ],
+   "osm": {
+    "ad": "Aktepe hill. Sunset point",
+    "ad_en": null,
+    "merkez": [
+     38.6533202,
+     34.863243
+    ],
+    "etiketler": {
+     "name": "Aktepe hill. Sunset point",
+     "tourism": "viewpoint"
+    },
+    "fark_m": 0
+   },
+   "sonuc": "supheli"
+  },
+  "ihlara-cam-teras": {
+   "ad": "Ihlara Cam Teras",
+   "konum": [
+    38.245182,
+    34.313197
+   ],
+   "tolerans_m": 100,
+   "kanitlar": [
+    {
+     "kaynak": "commons (9 fotoğraf, orta değer)",
+     "fark_m": 393,
+     "konum": [
+      38.246303,
+      34.308929
+     ]
+    }
+   ],
+   "osm": {
+    "ad": "Ihlara Cam Teras",
+    "ad_en": "Ihlara Glass Terrace",
+    "merkez": [
+     38.2451825,
+     34.3131968
+    ],
+    "etiketler": {
+     "direction": "90-0",
+     "name": "Ihlara Cam Teras",
+     "tourism": "viewpoint"
+    },
+    "fark_m": 0
+   },
+   "ana_yere_m": 1153,
+   "sonuc": "supheli"
+  },
+  "bagildere-vadisi": {
+   "ad": "Bağıldere Vadisi",
+   "konum": [
+    38.658938,
+    34.823656
+   ],
+   "tolerans_m": 1500,
+   "kanitlar": [
+    {
+     "kaynak": "commons (20 fotoğraf, orta değer)",
+     "fark_m": 120,
+     "konum": [
+      38.659065275,
+      34.822288889999996
+     ]
+    }
+   ],
+   "osm": {
+    "ad": "Bağıldere Vadisi",
+    "ad_en": "Love Valley",
+    "merkez": [
+     38.658938469999995,
+     34.82365636
+    ],
+    "etiketler": {
+     "alt_name": "Aşk Vadisi",
+     "name": "Love Valley",
+     "natural": "valley",
+     "tourism": "attraction"
+    },
+    "fark_m": 0
+   },
+   "sonuc": "dogrulandi"
+  },
+  "devrent-vadisi": {
+   "ad": "Devrent Vadisi",
+   "konum": [
+    38.672619,
+    34.885509
+   ],
+   "tolerans_m": 1500,
+   "kanitlar": [
+    {
+     "kaynak": "wikipedia-tr (arama): Devrent Hayal Vadisi",
+     "fark_m": 52
+    },
+    {
+     "kaynak": "commons (8 fotoğraf, orta değer)",
+     "fark_m": 23,
+     "konum": [
+      38.672710914999996,
+      34.885269
+     ]
+    }
+   ],
+   "osm": {
+    "ad": "Devrent Vadisi",
+    "ad_en": "Devrent Valley",
+    "merkez": [
+     38.6726194,
+     34.8855094
+    ],
+    "etiketler": {
+     "alt_name": "Imagination Valley;Pink Valley",
+     "image": "https://photos.app.goo.gl/9fM6z9ZQ8mCyy5SUA",
+     "name": "Devrent Vadisi",
+     "tourism": "attraction"
+    },
+    "fark_m": 0
+   },
+   "sonuc": "dogrulandi"
+  },
+  "gul-vadisi": {
+   "ad": "Gül Vadisi",
+   "konum": [
+    38.655325,
+    34.846839
+   ],
+   "tolerans_m": 1500,
+   "kanitlar": [],
+   "osm": {
+    "ad": "Gül Vadisi",
+    "ad_en": "Rose Valley",
+    "merkez": [
+     38.65532546666666,
+     34.8468392
+    ],
+    "etiketler": {
+     "name": "Gül Vadisi",
+     "natural": "valley"
+    },
+    "fark_m": 0
+   },
+   "sonuc": "kanit_yok"
+  },
+  "meskendir-valley-entrance": {
+   "ad": "Meskendir Vadisi",
+   "konum": [
+    38.636738,
+    34.861173
+   ],
+   "tolerans_m": 1500,
+   "kanitlar": [
+    {
+     "kaynak": "commons (1 fotoğraf, orta değer)",
+     "fark_m": 1199,
+     "konum": [
+      38.645417,
+      34.852972
+     ]
+    }
+   ],
+   "osm": {
+    "ad": "meskendir valley entrance",
+    "ad_en": null,
+    "merkez": [
+     38.6367375,
+     34.8611727
+    ],
+    "etiketler": {
+     "name": "meskendir valley entrance",
+     "tourism": "attraction"
+    },
+    "fark_m": 0
+   },
+   "sonuc": "dogrulandi"
+  },
+  "soganli-yilanli-kilise": {
+   "ad": "Yılanlı Kilise (Soğanlı)",
+   "konum": [
+    38.350922,
+    34.966764
+   ],
+   "tolerans_m": 100,
+   "kanitlar": [
+    {
+     "kaynak": "commons (10 fotoğraf, orta değer)",
+     "fark_m": 264,
+     "konum": [
+      38.348819735,
+      34.96817398
+     ]
+    }
+   ],
+   "osm": {
+    "ad": "Yılanlı Kilise",
+    "ad_en": "The Church of the Snakes",
+    "merkez": [
+     38.3509219,
+     34.966764
+    ],
+    "etiketler": {
+     "alt_name": "Snake Church",
+     "amenity": "place_of_worship",
+     "name": "Yılanlı Kilise",
+     "religion": "christian"
+    },
+    "fark_m": 0
+   },
+   "ana_yere_m": 495,
+   "sonuc": "supheli"
+  }
+ }
+}

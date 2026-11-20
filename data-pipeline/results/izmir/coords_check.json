@@ -1,0 +1,398 @@
+{
+ "ozet": {
+  "dogrulandi": 3,
+  "supheli": 6,
+  "kanit_yok": 4
+ },
+ "yerler": {
+  "v-sarayi": {
+   "ad": "V Sarayı",
+   "konum": [
+    39.132292,
+    27.184753
+   ],
+   "tolerans_m": 100,
+   "kanitlar": [],
+   "osm": {
+    "ad": "V Sarayı",
+    "ad_en": "Palace V",
+    "merkez": [
+     39.1322921,
+     27.1847527
+    ],
+    "etiketler": {
+     "historic": "archaeological_site",
+     "name": "V Sarayı"
+    },
+    "fark_m": 0
+   },
+   "ana_yere_m": 67,
+   "sonuc": "kanit_yok"
+  },
+  "sahin-tepesi": {
+   "ad": "Şahin Tepesi",
+   "konum": [
+    38.408482,
+    27.198746
+   ],
+   "tolerans_m": 300,
+   "kanitlar": [
+    {
+     "kaynak": "commons (9 fotoğraf, orta değer)",
+     "fark_m": 793,
+     "konum": [
+      38.4047535,
+      27.1909911
+     ]
+    }
+   ],
+   "osm": {
+    "ad": "Şahin Tepesi",
+    "ad_en": null,
+    "merkez": [
+     38.4084822,
+     27.1987465
+    ],
+    "etiketler": {
+     "name": "Şahin Tepesi",
+     "natural": "peak",
+     "tourism": "viewpoint"
+    },
+    "fark_m": 0
+   },
+   "sonuc": "supheli"
+  },
+  "izmir-kus-cenneti": {
+   "ad": "İzmir Kuş Cenneti",
+   "konum": [
+    38.450962,
+    26.929435
+   ],
+   "tolerans_m": 100,
+   "kanitlar": [
+    {
+     "kaynak": "wikipedia-tr (arama): Çiğli",
+     "fark_m": 12748
+    },
+    {
+     "kaynak": "commons (8 fotoğraf, orta değer)",
+     "fark_m": 9842,
+     "konum": [
+      38.536129,
+      26.8986615
+     ]
+    }
+   ],
+   "osm": {
+    "ad": "İzmir Kuş Cenneti",
+    "ad_en": null,
+    "merkez": [
+     38.4509623,
+     26.9294352
+    ],
+    "etiketler": {
+     "leisure": "nature_reserve",
+     "name": "İzmir Kuş Cenneti",
+     "wikidata": "Q6043373",
+     "wikimedia_commons": "Category:İzmir Bird Paradise",
+     "wikipedia": "tr:İzmir Kuş Cenneti"
+    },
+    "fark_m": 0
+   },
+   "ana_yere_m": 8271,
+   "sonuc": "supheli"
+  },
+  "ayibaligi-plaji": {
+   "ad": "Ayıbalığı Plajı",
+   "konum": [
+    38.525783,
+    26.62305
+   ],
+   "tolerans_m": 1500,
+   "kanitlar": [],
+   "osm": {
+    "ad": "Ayıbalığı Plajı",
+    "ad_en": "Ayıbalığı Beach",
+    "merkez": [
+     38.52578283636364,
+     26.62304960909091
+    ],
+    "etiketler": {
+     "name": "Ayıbalığı Plajı",
+     "natural": "beach"
+    },
+    "fark_m": 0
+   },
+   "sonuc": "kanit_yok"
+  },
+  "badembuku-koyu": {
+   "ad": "Badembükü Koyu",
+   "konum": [
+    38.619773,
+    26.356978
+   ],
+   "tolerans_m": 1500,
+   "kanitlar": [
+    {
+     "kaynak": "wikipedia-tr (arama): Karaburun",
+     "fark_m": 13797
+    }
+   ],
+   "osm": {
+    "ad": "Badembükü Koyu",
+    "ad_en": "Badembuku cove",
+    "merkez": [
+     38.619773244444445,
+     26.356978366666667
+    ],
+    "etiketler": {
+     "name": "Badembükü Koyu",
+     "natural": "beach",
+     "surface": "gravel"
+    },
+    "fark_m": 0
+   },
+   "sonuc": "supheli"
+  },
+  "pamucak-sahili": {
+   "ad": "Pamucak Sahili",
+   "konum": [
+    37.938247,
+    27.273686
+   ],
+   "tolerans_m": 1500,
+   "kanitlar": [
+    {
+     "kaynak": "wikipedia-tr (arama): Selçuk",
+     "fark_m": 8792
+    },
+    {
+     "kaynak": "commons (1 fotoğraf, orta değer)",
+     "fark_m": 2653,
+     "konum": [
+      37.952633,
+      27.297823
+     ]
+    }
+   ],
+   "osm": {
+    "ad": "Pamucak Sahili",
+    "ad_en": "Pamucak Beach",
+    "merkez": [
+     37.93824686459627,
+     27.273686217391305
+    ],
+    "etiketler": {
+     "name": "Pamucak Sahili",
+     "natural": "beach",
+     "surface": "sand"
+    },
+    "fark_m": 0
+   },
+   "sonuc": "supheli"
+  },
+  "akarca-sahili": {
+   "ad": "Akarca Sahili",
+   "konum": [
+    38.170488,
+    26.803719
+   ],
+   "tolerans_m": 1500,
+   "kanitlar": [
+    {
+     "kaynak": "commons (1 fotoğraf, orta değer)",
+     "fark_m": 984,
+     "konum": [
+      38.165504,
+      26.813024
+     ]
+    }
+   ],
+   "osm": {
+    "ad": "Akarca Sahili",
+    "ad_en": null,
+    "merkez": [
+     38.1704882136646,
+     26.80371928819876
+    ],
+    "etiketler": {
+     "name": "Akarca Sahili",
+     "natural": "beach",
+     "surface": "shingle"
+    },
+    "fark_m": 0
+   },
+   "sonuc": "dogrulandi"
+  },
+  "alacati-bay-surf-beach": {
+   "ad": "Alaçatı Sörf Plajı",
+   "konum": [
+    38.24903,
+    26.385602
+   ],
+   "tolerans_m": 1500,
+   "kanitlar": [
+    {
+     "kaynak": "commons (20 fotoğraf, orta değer)",
+     "fark_m": 244,
+     "konum": [
+      38.2482565,
+      26.38298167
+     ]
+    }
+   ],
+   "osm": {
+    "ad": "Alaçatı Bay Surf Beach",
+    "ad_en": null,
+    "merkez": [
+     38.24903020084034,
+     26.38560217815126
+    ],
+    "etiketler": {
+     "name": "Alaçatı Bay Surf Beach",
+     "natural": "beach"
+    },
+    "fark_m": 0
+   },
+   "sonuc": "dogrulandi"
+  },
+  "altinkum-plaji": {
+   "ad": "Altınkum Plajı",
+   "konum": [
+    38.270132,
+    26.259232
+   ],
+   "tolerans_m": 1500,
+   "kanitlar": [
+    {
+     "kaynak": "commons (20 fotoğraf, orta değer)",
+     "fark_m": 980,
+     "konum": [
+      38.268879,
+      26.270338
+     ]
+    }
+   ],
+   "osm": {
+    "ad": "Altınkum Plajı",
+    "ad_en": null,
+    "merkez": [
+     38.270132084,
+     26.259232212
+    ],
+    "etiketler": {
+     "name": "Altınkum Plajı",
+     "natural": "beach"
+    },
+    "fark_m": 0
+   },
+   "sonuc": "dogrulandi"
+  },
+  "dikili-halk-plaji": {
+   "ad": "Dikili Halk Plajı",
+   "konum": [
+    39.077298,
+    26.887105
+   ],
+   "tolerans_m": 1500,
+   "kanitlar": [
+    {
+     "kaynak": "wikipedia-tr (arama): Dikili",
+     "fark_m": 5424
+    }
+   ],
+   "osm": {
+    "ad": "Dikili Halk Plajı",
+    "ad_en": null,
+    "merkez": [
+     39.077297803448275,
+     26.887104734482758
+    ],
+    "etiketler": {
+     "beach": "sand",
+     "name": "Dikili Halk Plajı",
+     "natural": "beach",
+     "surface": "sand"
+    },
+    "fark_m": 0
+   },
+   "sonuc": "supheli"
+  },
+  "degirmendere-selalesi": {
+   "ad": "Değirmendere Şelalesi",
+   "konum": [
+    38.105124,
+    27.102065
+   ],
+   "tolerans_m": 300,
+   "kanitlar": [],
+   "osm": {
+    "ad": "Değirmendere Şelalesi",
+    "ad_en": "Değirmendere Waterfall",
+    "merkez": [
+     38.1051237,
+     27.1020647
+    ],
+    "etiketler": {
+     "name": "Değirmendere Şelalesi",
+     "waterway": "waterfall"
+    },
+    "fark_m": 0
+   },
+   "sonuc": "kanit_yok"
+  },
+  "buyuk-su-ucuran-selalesi": {
+   "ad": "Büyük Su Uçuran Şelalesi",
+   "konum": [
+    38.735367,
+    27.155575
+   ],
+   "tolerans_m": 300,
+   "kanitlar": [],
+   "osm": {
+    "ad": "Büyük Su Uçuran Şelalesi",
+    "ad_en": null,
+    "merkez": [
+     38.7353667,
+     27.1555752
+    ],
+    "etiketler": {
+     "alt_name": "Çukurköy Şelalesi;Turgutlar Şelalesi",
+     "name": "Büyük Su Uçuran Şelalesi",
+     "waterway": "waterfall"
+    },
+    "fark_m": 0
+   },
+   "sonuc": "kanit_yok"
+  },
+  "nebiler": {
+   "ad": "Nebiler Şelalesi",
+   "konum": [
+    39.16697,
+    26.897165
+   ],
+   "tolerans_m": 300,
+   "kanitlar": [
+    {
+     "kaynak": "wikipedia-tr (arama): Dikili",
+     "fark_m": 6916
+    }
+   ],
+   "osm": {
+    "ad": "Nebiler",
+    "ad_en": null,
+    "merkez": [
+     39.16697,
+     26.8971652
+    ],
+    "etiketler": {
+     "alt_name": "Aşıklar",
+     "name": "Nebiler",
+     "waterway": "waterfall"
+    },
+    "fark_m": 0
+   },
+   "sonuc": "supheli"
+  }
+ }
+}
