@@ -83,8 +83,10 @@ D = {
                  "A museum inside Çeşme Castle covering local archaeology and the Battle of Çeşme."),
 "odemis-muzesi": ("Ödemiş'te, antik Hypaipa ve çevresinden çıkan eserleri sergileyen müze.",
                   "A museum in Ödemiş showing finds from ancient Hypaipa and the surrounding area."),
-"izmir-tarih-ve-sanat-muzesi": ("Kültürpark'ın içinde, heykel, seramik ve değerli eserlerin üç ayrı binada sergilendiği müze.",
-                                "A museum inside Kültürpark with sculpture, ceramics and precious objects in three buildings."),
+"izmir-kultur-sanat-fabrikasi": ("Alsancak'ta, eski tütün fabrikasında açılan; arkeoloji, etnografya ve resim-heykel müzelerini bir araya getiren kültür merkezi.",
+                                 "A cultural complex in a former tobacco factory in Alsancak, bringing together archaeology, ethnography and fine arts museums."),
+"ataturk-acik-hava-tiyatrosu": ("Kültürpark'ın içinde, fuar dönemlerinde konserlere ev sahipliği yapan büyük açık hava tiyatrosu.",
+                                "The large open-air theatre in Kültürpark, home to concerts during the fair season."),
 "ahmet-piristina-kent-arsivi-ve-muzesi": ("Eski itfaiye binasında, İzmir'in kent tarihini fotoğraf ve belgelerle anlatan arşiv-müze.",
                                           "An archive and museum in the old fire station, telling Izmir's city history through photos and documents."),
 "key-museum": ("Torbalı'da klasik otomobil, motosiklet ve uçakların sergilendiği büyük ulaşım müzesi.",
@@ -294,7 +296,7 @@ PERIOD = {
     # Cumhuriyet
     **{s: "Cumhuriyet" for s in ("izmir-parasut-kulesi", "ataturk-maski", "cumhuriyet-meydani", "gundogdu-meydani",
                                  "ilk-kursun-aniti", "sehit-kubilay-aniti", "tcg-pirireis-s-343", "izmir-kadin-muzesi",
-                                 "umran-baradan-oyun-ve-oyuncak-muzesi", "key-museum", "izmir-tarih-ve-sanat-muzesi",
+                                 "umran-baradan-oyun-ve-oyuncak-muzesi", "key-museum", "izmir-kultur-sanat-fabrikasi", "ataturk-acik-hava-tiyatrosu",
                                  "efes-muzesi", "izmir-arkeoloji-muzesi", "bergama-muzesi", "cesme-muzesi", "odemis-muzesi",
                                  "bostanli-acik-hava-arkeoloji-muzesi", "cezayirli-gazi-hasan-pasa-aniti")},
     # Çok dönemli: boş
@@ -309,6 +311,7 @@ BUILT = {
 
 # Yarıçap (m): ana yerin içindeki yapılarda küçük; büyük alanlarda geniş.
 RADIUS = {
+    "izmir-kultur-sanat-fabrikasi": 80, "ataturk-acik-hava-tiyatrosu": 60,
     "efes": 400, "pergamon": 300, "kemeralti-carsisi": 300, "kulturpark": 300, "kordon": 400, "teos": 250,
     "celsus-kutuphanesi": 30, "efes-tiyatrosu": 60, "meryem-kilisesi": 50, "bizans-sarayi": 40,
     "memmius-yapisi": 20, "traianus-cesmesi": 20, "hadrianus-tapinagi-embolos": 20, "prytaneion-belediye-sarayi": 30,
@@ -322,7 +325,7 @@ RADIUS = {
 # Koordinat kontrolü (coords.json, 2026-11-19): Wikidata ile farkı eşik üstünde olanlar.
 # COORD_FIX: elle düzeltilen konum (enlem, boylam, yarıçap). COORD_OK: OSM konumu doğru kabul edildi.
 COORD_FIX = {
-    "izmir-tarih-ve-sanat-muzesi": (38.427444, 27.142694, 60),   # OSM kaydı Kültürpark'ın başka köşesindeydi (1,1 km)
+    # izmir-tarih-ve-sanat-muzesi çıkarıldı: müze 2025'te kapandı, eserleri Kültür Sanat Fabrikası'na taşındı
 }
 COORD_OK = {
     "efes", "pergamon", "klazomenai", "kolophon", "teos",        # geniş ören yerleri: alan merkezi farkı normal

@@ -1640,4 +1640,35 @@ LONG = {
         "flowing through a narrow canyon. It is a natural spot where people from nearby villages come to cool off.\n\n"
         "Walking along the canyon you may need to wade in places, so water shoes are useful. The amount of water varies "
         "with the season and is liveliest in spring. In rainy weather the stream can rise suddenly, so be careful."),
+
+    "izmir-kultur-sanat-fabrikasi": (2,
+        "Alsancak'taki İzmir Kültür Sanat Fabrikası, kentin eski Tekel tütün fabrikasının restore edilmesiyle "
+        "oluşturulan büyük bir kültür kompleksidir. İzmir Resim ve Heykel Müzesi 2023'te buraya taşındı; Kültürpark'taki "
+        "İzmir Tarih ve Sanat Müzesi'nin eserleri de buraya aktarıldı ve kompleks içinde bir arkeoloji ve etnografya "
+        "müzesi açıldı.\n\n"
+        "Müze, İzmir ve çevresinin 8.500 yılı aşan tarihini tematik salonlarda anlatır; yanında resim ve heykel "
+        "koleksiyonları, dönemsel sergiler ve konserler yer alır. Endüstri yapısının yüksek tavanlı salonları da "
+        "görülmeye değer. Kültürpark'ın kuzey kenarına ve Alsancak'a yürüme mesafesindedir.",
+        "The İzmir Culture and Art Factory in Alsancak is a large cultural complex created by restoring the city's old "
+        "Tekel tobacco factory. The İzmir Museum of Painting and Sculpture moved here in 2023; the collections of the "
+        "İzmir Museum of History and Art in Kültürpark were also transferred here, and an archaeology and ethnography "
+        "museum opened within the complex.\n\n"
+        "The museum tells more than 8,500 years of the history of İzmir and its region in themed halls, alongside "
+        "painting and sculpture collections, temporary exhibitions and concerts. The high-ceilinged halls of the "
+        "industrial building are worth seeing in themselves. It is within walking distance of the north edge of "
+        "Kültürpark and of Alsancak."),
+
+    "ataturk-acik-hava-tiyatrosu": (3,
+        "Kültürpark'ın içindeki Açıkhava Tiyatrosu, parkın ve İzmir Enternasyonal Fuarı'nın en tanınmış sahnelerinden "
+        "biridir. Kuşaklar boyunca fuar konserleriyle özdeşleşen tiyatro, Türkiye'nin pek çok ünlü sanatçısının "
+        "İzmirlilerle buluştuğu yer oldu.\n\n"
+        "Yaz sonundaki fuar döneminde neredeyse her akşam konser düzenlenir; program ve bilet bilgisini önceden kontrol "
+        "edin. Etkinlik olmayan günlerde sahne ve basamaklar parkın sakin bir köşesidir. Paraşüt Kulesi ve göletle "
+        "birlikte bir Kültürpark yürüyüşüne eklenebilir.",
+        "The Open-Air Theatre in Kültürpark is one of the best-known stages of the park and of the İzmir International "
+        "Fair. Associated for generations with the fair's concerts, it is where many of Turkey's famous performers have "
+        "met audiences in İzmir.\n\n"
+        "During the fair at the end of summer there are concerts almost every evening; check the programme and tickets in "
+        "advance. On days without events, the stage and terraces are a quiet corner of the park. Add it to a Kültürpark "
+        "walk together with the Parachute Tower and the pond."),
 }

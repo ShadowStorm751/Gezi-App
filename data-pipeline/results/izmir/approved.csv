@@ -25,6 +25,7 @@ bizans-sarayi,Bizans Sarayı,Byzantine Palace,palace,efes,Efes ören yerinin iç
 v-sarayi,V Sarayı,Palace V,palace,pergamon,Akropolün içinde
 efes-muzesi,Efes Müzesi,Ephesus Archaeological Museum,museum,,
 izmir-arkeoloji-muzesi,İzmir Arkeoloji Müzesi,İzmir Archaeological Museum,museum,,
+izmir-kultur-sanat-fabrikasi,İzmir Kültür Sanat Fabrikası,İzmir Culture and Art Factory,museum,,Eski Alsancak Tekel tütün fabrikası; İzmir Tarih ve Sanat Müzesi'nin (2025'te kapandı) eserleri buraya taşındı. Proje sahibinin kararıyla eklendi (2026-11-20)
 izmir-agorasi,İzmir Agorası,Agora of Smyrna,museum,,Antik Smyrna agorası; alanın tamamı
 tcg-pirireis-s-343,TCG Pirireis (S-343),TCG Pirireis Museum Submarine,museum,,"Müze gemi, İnciraltı. EN adı yanlış (USS Tang): 'TCG Pirireis Museum Submarine' olacak"
 izmir-kadin-muzesi,İzmir Kadın Müzesi,İzmir Women's Museum,museum,,
@@ -37,7 +38,6 @@ bostanli-acik-hava-arkeoloji-muzesi,Bostanlı Açık Hava Arkeoloji Müzesi,Bost
 cakiraga-konagi,Çakırağa Konağı,Çakırağa Mansion,museum,birgi,Birgi
 cesme-muzesi,Çeşme Müzesi,Çeşme Museum,museum,,
 odemis-muzesi,Ödemiş Müzesi,Ödemiş Museum,museum,,
-izmir-tarih-ve-sanat-muzesi,İzmir Tarih ve Sanat Müzesi,İzmir Museum of History and Art,museum,kulturpark,Kültürpark içinde
 ahmet-piristina-kent-arsivi-ve-muzesi,Ahmet Piriştina Kent Arşivi ve Müzesi,Ahmet Piriştina City Archives and Museum,museum,,
 key-museum,Key Museum,Key Museum,museum,,Torbalı; otomobil ve motosiklet müzesi
 kadifekale,Kadifekale,Kadifekale,fortress,,
@@ -49,6 +49,7 @@ sancakburnu-kalesi,Sancakburnu Kalesi,Sancakburnu Castle,fortress,,
 ayasuluk-kalesi,Ayasuluk Kalesi,The Grand Fortress of Selçuk,fortress,,
 izmir-saat-kulesi,İzmir Saat Kulesi,İzmir Clock Tower,tower,,
 izmir-parasut-kulesi,İzmir Paraşüt Kulesi,İzmir Parachute Tower,tower,kulturpark,Kültürpark
+ataturk-acik-hava-tiyatrosu,Kültürpark Açıkhava Tiyatrosu,Kültürpark Open-Air Theatre,monument,kulturpark,"Kültürpark'ın içinde; kapanan müzenin yerine ikinci iç yer (rozet korunsun diye, proje sahibinin kararı)"
 tarihi-asansor,Tarihi Asansör,Historical Elevator,tower,,Karataş; körfez manzarası. Claude ekledi
 ataturk-maski,Atatürk Maskı,Atatürk Mask,monument,,
 cumhuriyet-meydani,Cumhuriyet Meydanı,Cumhuriyet Square,monument,,Atatürk Anıtı burada

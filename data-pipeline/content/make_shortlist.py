@@ -29,6 +29,9 @@ from cities import get_city  # noqa: E402
 ADDED: Dict[str, Dict[str, Any]] = {
     "izmir": {
         "kemeralti-carsisi": (38.4189, 27.1310, "Kemeraltı", ""),
+        # 2025'te kapanan İzmir Tarih ve Sanat Müzesi'nin yerine (eserler buraya taşındı)
+        "izmir-kultur-sanat-fabrikasi": (38.436078, 27.14834, "İzmir Kültür Sanat Fabrikası", "way/1167760456"),
+        "ataturk-acik-hava-tiyatrosu": (38.428582, 27.148142, "Atatürk Açık Hava Tiyatrosu|Kültürpark Açıkhava Tiyatrosu", "way/501242101"),
         "tarihi-asansor": (38.4092, 27.1238, "Tarihi Asansör", ""),
         "sirince": (37.9437, 27.4319, "Şirince", ""),
         "alacati": (38.2829, 26.3747, "Alaçatı", ""),
