@@ -1,15 +1,14 @@
-import {c} from './theme';
 import React, {useState} from 'react';
-import {Alert, Text, TextInput, View} from 'react-native';
-import {t} from './client';
-import {BadgeArt} from './Badges';
+import {Alert, Modal, Text, TextInput, View} from 'react-native';
+import {lang,t} from './client';
+import {Ceremony} from './Celebrations';
 import {Avatar} from './Profile';
 import {Action,Feedback,rpc,ui,useAction,useQuery} from './ScreenUI';
 
 const periods = {week:['Bu hafta','This week'],month:['Bu ay','This month'],year:['Bu yıl','This year'],all:['Tüm zamanlar','All time']};
 const awardNames = {'first-friend':['Gezi Arkadaşı','Travel Buddy'],'travel-crew':['Gezi Ekibi','Travel Crew']};
 
-export default function Friends({onProfile}) {
+export default function Friends({onProfile,onBadges,userId}) {
   const [tab,setTab] = useState('friends');
   const [period,setPeriod] = useState('week');
   const [input,setInput] = useState('');
@@ -57,9 +56,11 @@ export default function Friends({onProfile}) {
       {person.total_places != null && <Text>{person.total_places} {t('yer','places')} · {person.badges} {t('rozet','badges')}</Text>}
       {actions(person,relation)}</View>;
   }
-  if (badge) return <View style={ui.card}><Text style={ui.heading}>{t('Yeni rozet kazandın!','New badge earned!')}</Text>
-    <BadgeArt key={badge} badge={{slug:badge,earned_at:true}}/><Text>{awardNames[badge] ? t(...awardNames[badge]) : badge}</Text>
-    <Action onPress={() => setAwards(a => a.slice(1))}>{t('Devam','Continue')}</Action></View>;
+  const collection=useQuery(badge?'my_achievements':null,{lang},[userId,revision]);
+  if (badge) {
+    const earned=collection.data?.find(entry=>entry.slug===badge) || {slug:badge,name:awardNames[badge]?t(...awardNames[badge]):badge};
+    return <Modal visible onRequestClose={()=>setAwards([])}><Ceremony key={badge} badge={earned} userId={userId} onNext={()=>setAwards(list=>list.slice(1))} onClose={()=>setAwards([])} onBadges={onBadges}/></Modal>;
+  }
   return <><View style={ui.row}><Action selected={tab === 'friends'} onPress={() => setTab('friends')}>{t('Arkadaşlar','Friends')}</Action>
     <Action selected={tab === 'rank'} onPress={() => setTab('rank')}>{t('Sıralama','Rankings')}</Action></View>
     {!!action.message && <Text accessibilityLiveRegion="polite">{action.message}</Text>}

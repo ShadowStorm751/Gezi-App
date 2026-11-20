@@ -1,3 +1,4 @@
+import {badgeForPlace} from './badgeProgress';
 import React,{useEffect} from 'react';
 import {Pressable,ScrollView,Share,StyleSheet,Text,View,useWindowDimensions} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -35,20 +36,23 @@ function Seal({success}) {
 }
 export function VisitSheet({result,place,onClose,onAward,onPhoto}) {
   const {height}=useWindowDimensions(),success=result.action==='record',award=result.awards?.[0];
-  const query=useQuery(award?'my_achievements':null,{lang},result.userId);
-  const badge=query.data?.find(b=>b.slug===award?.slug);
+  const query=useQuery(success&&result.userId?'my_achievements':null,{lang},result.userId);
+  const slug=award?.slug || badgeForPlace(place);
+  const badge=query.data?.find(b=>b.slug===slug);
+  const oldBadge=result.previousBadges?.find(b=>b.slug===slug);
   const progress=badge||result.progress;
   const value=badge?badge.progress:progress?.visited,target=badge?badge.target:progress?.total;
+  const previous=badge?(oldBadge?.progress??value):value;
   useEffect(()=>{haptic(success);if(!award)return;const timer=setTimeout(()=>Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(()=>{}),1480);return ()=>clearTimeout(timer);},[success,award]);
   return <View accessibilityViewIsModal style={[StyleSheet.absoluteFill,{justifyContent:'flex-end'}]}>
     <Reveal duration={220} offset={0} style={[StyleSheet.absoluteFill,{backgroundColor:c.scrim}]}><Pressable accessibilityLabel={t('Kapat','Close')} onPress={onClose} style={{flex:1}}/></Reveal>
     <Reveal offset={height*.75} duration={320} style={{maxHeight:'92%',backgroundColor:c.surfaceRaised,borderTopLeftRadius:28,borderTopRightRadius:28}}><SafeAreaView edges={['bottom']}><ScrollView contentContainerStyle={{padding:20,gap:14}}>
       <View style={{alignSelf:'center',width:40,height:5,borderRadius:3,backgroundColor:c.line}}/><Seal success={success}/>
-      <Reveal delay={success?640:0} offset={10} duration={260}><Text style={{...type.title,color:c.ink,textAlign:'center'}}>{success?t('Buradasın','You’re here'):t('Ziyaret bilgisi','Visit update')}</Text><Text style={copy}>{success?t(place.name+' ziyaretin kaydedildi.','Your visit to '+place.name+' was saved.'):result.message}</Text></Reveal>
+      <Reveal delay={success?640:0} offset={10} duration={260}><Text style={{...type.title,color:c.ink,textAlign:'center'}}>{success?t('Buradasın','You’re here'):t('Ziyaret bilgisi','Visit update')}</Text><Text style={copy}>{success?t(place.name+' ziyaretin kaydedildi.','Your visit to '+place.name+' was saved.'):result.message}</Text>{success && result.progress && (badge||award) && <Text style={copy}>{result.cityName||t('Şehir ilerlemesi','City progress')} · {result.progress.visited}/{result.progress.total}</Text>}</Reveal>
       {success && (progress||award) && <Reveal delay={760} offset={10} style={{backgroundColor:c.goldSoft,borderRadius:20,padding:16,flexDirection:'row',alignItems:'center',gap:12}}>
-        {award && <View style={center}><Pulse size={52} delay={1480} count={1}/><BadgeArt badge={{...award,earned_at:true}} size={52}/></View>}
-        <View style={{flex:1,gap:7}}><Text style={{...type.label,color:c.goldInk}}>{award?.name||t('Şehir ilerlemesi','City progress')}{target && (!award||badge)?' · '+value+' / '+target:''}</Text>
-        {!!target && (!award||badge) && <Progress from={(value-1)/target} value={value/target} delay={960}/>}
+        {(award||badge) && <View style={center}>{award && <Pulse size={52} delay={1480} count={1}/>}<BadgeArt badge={badge||{...award,earned_at:true}} size={52}/></View>}
+        <View style={{flex:1,gap:7}}><Text style={{...type.label,color:c.goldInk}}>{award?.name||badge?.name||result.cityName||t('Şehir ilerlemesi','City progress')}{target && (!award||badge)?' · '+value+' / '+target:''}</Text>
+        {!!target && (!award||badge) && <Progress key={badge?.slug||'city'} from={previous/target} value={value/target} delay={960}/>}
         {!!award && <Text style={{...type.caption,color:c.goldInk}}>{t('Yeni rozet kazandın.','You earned a badge.')}</Text>}</View></Reveal>}
       <Reveal delay={success?1100:0} style={{gap:4}}><Btn label={award?t('Rozeti gör','View badge'):t('Devam et','Continue')} onPress={award?onAward:onClose}/>{success && onPhoto && <Btn label={t('Bu ziyarete fotoğraf ekle','Add a visit photo')} icon={Camera} color={c.primary} bg={c.surfaceRaised} onPress={onPhoto}/>}</Reveal>
     </ScrollView></SafeAreaView></Reveal></View>;

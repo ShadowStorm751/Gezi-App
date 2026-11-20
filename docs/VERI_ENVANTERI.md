@@ -47,6 +47,8 @@ Ziyaret fotoğrafları açık yayın onayıyla gönderilir. Profil → Fotoğraf
 
 Yer detayından yıldız ve isteğe bağlı not gönderilir. Puan ortalamaya katılır, not ancak onaylanınca diğer kullanıcılara gösterilir. Profil → Değerlendirmelerim üzerinden düzenleme ve silme yapılır.
 
+Konum izniyle seçili şehirde semt başlığı için sistemin adres çözümlemesi kullanılır. Arama klavyeden gönderilirse şehir ve arama metni cihazın harita sağlayıcısına iletilerek 2 km çevresi bulunur. Bu sorgular uygulamada saklanmaz.
+
 ## Cihaz izinleri
 
 | İzin | Neden | Zorunlu mu |

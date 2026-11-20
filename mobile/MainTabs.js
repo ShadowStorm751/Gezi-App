@@ -13,9 +13,10 @@ const tabs={explore:[Compass,t('Keşfet','Explore')],map:[Map,t('Harita','Map')]
 function Item({name,active,onPress}) {
   const [Icon,label]=tabs[name], reduce=useReducedMotion();
   const motion=useAnimatedStyle(()=>({transform:[{scaleX:withTiming(active?1:0,{duration:reduce?0:200})}]}));
+  const tint=useAnimatedStyle(()=>({opacity:withTiming(active?1:0,{duration:reduce?0:200})}));
   const color=active?c.primary:c.inkMuted;
   return <Press accessibilityRole="tab" accessibilityState={{selected:active}} onPress={onPress} style={styles.item}>
-    <View style={styles.icon}><Animated.View style={[styles.pill,motion]}/><Icon size={24} strokeWidth={1.8} color={color}/></View>
+    <View style={styles.icon}><Animated.View style={[styles.pill,motion]}/><Icon size={24} strokeWidth={1.8} color={c.inkMuted}/><Animated.View style={[{position:'absolute'},tint]}><Icon size={24} strokeWidth={1.8} color={c.primary}/></Animated.View></View>
     <Text numberOfLines={1} style={{fontFamily:fonts.semibold,fontSize:11,color}}>{label}</Text>
   </Press>;
 }

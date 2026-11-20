@@ -45,12 +45,16 @@ export function AddPhoto({place,visits,onBack}) {
       if(bytes.byteLength>5*1024*1024){action.setMessage(t('Fotoğraf 5 MB sınırını aşıyor. Daha küçük bir fotoğraf seç.','Photo exceeds 5 MB. Choose a smaller photo.'));return;}
       if(visits.owner.current!==id)return;
       const upload=await bucket.upload(staged.path,bytes.buffer,{contentType:'image/jpeg',upsert:false});
-      if(upload.error && !['409','Duplicate'].includes(String(upload.error.statusCode||upload.error.error)))throw upload.error;
+      if(upload.error && String(upload.error.statusCode)!=='409' && upload.error.error!=='Duplicate')throw upload.error;
       staged.uploaded=true;
     }
     if(visits.owner.current!==id)return;
     try{await rpc('submit_place_photo',{place_id:place.id,storage_path:staged.path,caption:caption.trim()||null});}
-    catch(e){if(e.code!=='already_submitted')throw e;}
+    catch(e){
+      if(e.code==='file_not_found')pending.current=null;
+      if(e.code==='rate_limited'){action.setMessage(t('Bugünlük yeterince fotoğraf gönderdin. Yarın tekrar dene.','Daily photo limit reached. Try again tomorrow.'));return;}
+      if(e.code!=='already_submitted')throw e;
+    }
     if(visits.owner.current===id)setDone(true);
   }
   return <ContributionPage title={t('Fotoğraf ekle','Add a photo')} onBack={onBack}><Text style={heading}>{place.name}</Text>

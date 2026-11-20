@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import {Image,ScrollView,Text,TextInput,View} from 'react-native';
-import {Check,Landmark,Search,Trees} from 'lucide-react-native';
+import {Landmark,Search,Trees} from 'lucide-react-native';
 import {lang,t} from './client';
 import {Press} from './Motion';
 import {c,type,radius,shadow} from './theme';
@@ -24,9 +24,9 @@ export function Circle({icon:Icon,label,onPress,accent=false,active=false,size=4
   return <Press accessibilityRole="button" accessibilityLabel={label} onPress={onPress} style={{width:size,height:size,borderRadius:size/2,alignItems:'center',justifyContent:'center',backgroundColor:accent?c.accent:c.surfaceRaised,...shadow.card}}>
     <Icon size={size>44?24:20} color={accent?c.onAccent:active?c.accent:c.ink} fill={active?c.accent:c.clear}/></Press>;
 }
-export function SearchBox({value,onChangeText,label,floating}) {
+export function SearchBox({value,onChangeText,onSubmitEditing,label,floating}) {
   return <View style={[row,{height:48,paddingHorizontal:16,borderRadius:floating?radius.pill:radius.md,backgroundColor:floating?c.surfaceRaised:c.surfaceSunken},floating&&shadow.card]}>
-    <Search size={19} color={c.inkMuted}/><TextInput accessibilityLabel={label} placeholder={label} placeholderTextColor={c.inkMuted} value={value} onChangeText={onChangeText} returnKeyType="search" clearButtonMode="while-editing" style={{...type.body,flex:1,color:c.ink}}/></View>;
+    <Search size={19} color={c.inkMuted}/><TextInput accessibilityLabel={label} placeholder={label} placeholderTextColor={c.inkMuted} value={value} onChangeText={onChangeText} returnKeyType="search" onSubmitEditing={onSubmitEditing} clearButtonMode="while-editing" style={{...type.body,flex:1,color:c.ink}}/></View>;
 }
 export function Chips({items,value,onChange}) {
   return <ScrollView horizontal showsHorizontalScrollIndicator={false} keyboardShouldPersistTaps="handled" contentContainerStyle={{gap:8}}>
