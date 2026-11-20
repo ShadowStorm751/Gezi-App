@@ -1,5 +1,5 @@
 // Rozet görsellerini 'badges' bucket'ına yükler. Gizli anahtar gerektirmez:
-// yalnızca aşağıdaki 21 dosya, içeriği birebir aynıysa (SHA-256) kabul edilir.
+// yalnızca aşağıdaki 36 dosya, içeriği birebir aynıysa (SHA-256) kabul edilir.
 // Başka bir dosya veya değiştirilmiş içerik 403 döner. Kullanan: .github/workflows/badges.yml
 import { createClient } from "npm:@supabase/supabase-js@2";
 
@@ -24,6 +24,22 @@ const ALLOWED: Record<string, string> = {
   "sultans-rest.webp": "17b58a50144215dc444902cbe2fee7631d7ba2a82f56382d73cb11fcc99d3a72",
   "sunset-collector.webp": "4ccbf2388673a3a592756a1fd08f0b39a9fd6be56db32c7f22d4f43d8030b698",
   "view-hunter.webp": "115c11df37cf0aa04be6afc424b9dca1e6468954d465df5b09326165c228c6df",
+  // İzmir, Bursa, Kapadokya keşif rozetleri (2026-11-20)
+  "birgi-kesif.webp": "90dffd37cbf5e48d4b52b1d79e1ff0a19582c1aa02f3ed91a5351b3dcd310463",
+  "bursa-kapalicarsi-kesif.webp": "e8b501d0307bae193302de70867556b61fb3d42fbe04dc0dcb2f53bc2e3277fc",
+  "bursa-muradiye-camii-kesif.webp": "cf4447421555fbad2702db65d80b3946a5fa8e474ff87f276230fcb93b888e59",
+  "cavusin-kesif.webp": "66e96d540b2ee21d4478e31952848e7b8f082245a9c23069c9b6d03ab857948e",
+  "efes-kesif.webp": "58c96714a9a6c0b32e1ed460e736f3c437734baba084cb89391074a8984b443b",
+  "gediz-deltasi-kesif.webp": "bf1a0d8bb0eb9dfb5aa4ae1f0bc1d1550b2edf398951510dee9723ad854fd6e0",
+  "golyazi-adasi-kesif.webp": "6635a0f6f88788f33bb99aae93a51f83f495dce3aea51d9c87db02b6e41ff5f5",
+  "goreme-deki-kiliseler-listesi-kesif.webp": "bd915e9675719d5887102d26b4a463c28a3b903f1345248e3fa2077491f4c695",
+  "ihlara-vadisi-kesif.webp": "4c9fefabec4c517f6fff4c3b025e4995ee83ff333c2c05e32801b0ae12d152db",
+  "kemeralti-carsisi-kesif.webp": "26ccb70952cfed9a1a48eccd470e5c80f25dc12bb95677933d225b6ca4d7ec24",
+  "kulturpark-kesif.webp": "f09fb8b49c5a3131def943cd28deda3ca600382b0033a62ebf6151f307c3e2fc",
+  "merinos-parki-kesif.webp": "3e1ea7d106a33992a29b5d507a2ed50a8ff0810fdecbeb0c4100ca7964fad826",
+  "pergamon-kesif.webp": "72860d86ba8417b52fabf50252cae60a8b4c59453ec883a23eef3004d55105f1",
+  "soganli-vadisi-kesif.webp": "eca9744d3af250a05685f41109c0d35e829fbce710c60a0624ac4f7a32624ac7",
+  "tirilye-kesif.webp": "774f3373afc8372c37cffab8d2f20fae88044274b216847257437ab3e326e761",
   "wall-keeper.webp": "99c1743686dc0d0ad8dae821d67d5896dffceb67fabd62074020df70c13ad2b5",
 };
 

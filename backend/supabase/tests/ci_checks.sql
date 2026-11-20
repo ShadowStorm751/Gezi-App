@@ -60,3 +60,6 @@ exception when others then
   end if;
 end $$;
 \echo 'TAMAM'
+
+\echo '== Görseli olmayan rozet (0 olmalı)'
+select slug from public.achievements where badge_path is null order by slug;

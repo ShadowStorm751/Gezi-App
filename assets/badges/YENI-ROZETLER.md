@@ -1,6 +1,8 @@
 # Yeni rozetler: İzmir, Bursa, Kapadokya "keşif" rozetleri (15)
 
-Durum: **görseller yok**. Rozetler veritabanında hazır (şehir migration'ları, `badge_path` boş); mobil şimdilik yer tutucu gösterir.
+Durum: **görseller hazır (2026-11-20)**. 15 görsel `assets/badges/<slug>.webp` (512×512, şeffaf); `badge_path` migration'ı `20261120130000_kesif_badge_paths.sql`.
+Not: Gemini halka rengini her rozette aynı petrol mavisi yaptı; set tutarlı göründüğü için olduğu gibi bırakıldı.
+Canlıya alırken: migration uygulanır, `badge-upload` fonksiyonu yeniden deploy edilir, sonra Rozet görselleri iş akışı çalıştırılır.
 Mevcut 21 rozet Gemini ile çizildi. Aynı görünmeleri için aşağıdaki ortak üslup + her rozetin konusu Gemini'ye verilir.
 Görseller gelince Claude kırpar, arka planı şeffaflaştırır, 512×512 `.webp` yapar ve `badge_path` için yeni bir migration ekler.
 
