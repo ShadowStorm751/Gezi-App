@@ -110,7 +110,7 @@ def candidates_for(s: Dict[str, Any], city_name: str, reject: frozenset, per_pla
         score = (2 if ph.title_matches(t, kw) else 0) + (2 if d is not None and d <= search_radius(s) else 0) \
             + (1 if src.startswith("wikipedia") else 0) - (1 if d is not None and d > 5 * search_radius(s) else 0)
         out.append({"kaynak": src, "dosya": t.removeprefix("File:"), "mesafe_m": d, "puan": score,
-                    "thumb": ph.thumb_from(info["url"], 240), "lisans": info["license"], "yazar": info["author"]})
+                    "thumb": ph.thumb_from(info["url"], 250)  # Commons yalnızca standart küçük resim boylarını veriyor, "lisans": info["license"], "yazar": info["author"]})
     out.sort(key=lambda x: -x["puan"])
     return out[:per_place]
 
@@ -142,7 +142,7 @@ def contact_sheets(rdir: Path, result: Dict[str, List[Dict[str, Any]]]) -> List[
             for ci, c in enumerate(cands[:COLS]):
                 x = LABEL + ci * W
                 try:
-                    raw = p._with_retries(lambda: p._request(c["thumb"], None, timeout=60))
+                    raw = p._request(c["thumb"], None, timeout=20)  # tekrar denemeden; olmazsa hücre boş kalır
                     im = Image.open(io.BytesIO(raw)).convert("RGB")
                     im.thumbnail((W - 6, H - 6))
                     sheet.paste(im, (x + 3, y + 3))
