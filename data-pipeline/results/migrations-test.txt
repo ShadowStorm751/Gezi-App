@@ -1,24 +1,9 @@
 ok
-zaman: 2026-11-20T12:40:00Z
-çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44737603857
+zaman: 2026-11-20T12:41:24Z
+çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44737825591
 ---
 CREATE DATABASE
 ALTER DATABASE
-psql:backend/supabase/migrations/20261119200000_account_avatar.sql:11: ERROR:  column "file_size_limit" of relation "buckets" does not exist
-LINE 2: set file_size_limit = 2097152,
-            ^
-psql:backend/supabase/migrations/20261119240000_hardening.sql:73: ERROR:  column "file_size_limit" of relation "buckets" does not exist
-LINE 2:    set file_size_limit = 1048576, allowed_mime_types = array...
-               ^
-psql:backend/supabase/migrations/20261119330000_user_photos.sql:26: ERROR:  column "file_size_limit" of relation "buckets" does not exist
-LINE 1: insert into storage.buckets (id, name, public, file_size_lim...
-                                                       ^
-psql:backend/supabase/migrations/20261120030000_place_reviews.sql:392: ERROR:  relation "public.photo_submissions" does not exist
-LINE 59:       from public.photo_submissions s
-                    ^
-psql:backend/supabase/migrations/20261120040000_modular_rules_exports.sql:154: ERROR:  relation "public.photo_submissions" does not exist
-LINE 5:   from public.photo_submissions s
-               ^
 == Şehir başına yer sayısı (yayında / toplam)
    slug    | yayinda | toplam | ic_yer | fotografli 
 -----------+---------+--------+--------+------------
@@ -99,7 +84,7 @@ UPDATE 257
 
                                  celsus_ana_yer                                 
 --------------------------------------------------------------------------------
- {"id": "d2e365cd-5a87-4d0a-945e-419e4f0a5161", "name": "Efes", "slug": "efes"}
+ {"id": "417242b4-73a0-4e19-977d-3b57f1c848bb", "name": "Efes", "slug": "efes"}
 (1 row)
 
    slug    | paket_yer | paket_ana_yer 
