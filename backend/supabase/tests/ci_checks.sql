@@ -77,6 +77,10 @@ join public.place_translations t on t.place_id = p.id
 group by ci.slug order by ci.slug;
 
 \echo '== city_pack: main''deki period alanları + ana yer alanları birlikte (Efes)'
+begin;
+update public.places set is_published = true
+where slug in ('efes', 'celsus-kutuphanesi') and city_id = (select id from public.cities where slug='izmir');
 select e->>'slug' as slug, e->>'period' as donem, e->>'parent_id' is not null as ic_yer, e->>'child_count' as ic_sayi
 from jsonb_array_elements(public.city_pack_places((select id from public.cities where slug='izmir'), 'en')) e
 where e->>'slug' in ('efes', 'celsus-kutuphanesi');
+rollback;
