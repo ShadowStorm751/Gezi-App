@@ -1,6 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const {loadDetail} = require('../catalog.ts');
+const {loadDetail, mapPlace, mergeNearbyPlace} = require('../catalog.ts');
 const {checkinOutcome} = require('../visitLogic');
 const {badgeForPlace} = require('../badgeProgress');
 
@@ -22,4 +22,29 @@ test('yer detayı ziyaret, kullanıcı fotoğrafı, puan ve dönem bilgisini kor
   assert.equal(badgeForPlace(detail),'ottoman-heritage');
   assert.equal(badgeForPlace({category:'tomb'}),'sultans-rest');
   assert.equal(badgeForPlace({category:'beach'}),undefined);
+});
+
+test('şehir paketi ve yakındaki yer birleşince dönem rozeti her iki dilde korunur', () => {
+  const row = {id:'bazaar', name:'Bazaar', category:'market', kind:'historical', latitude:41, longitude:29};
+  const nearby = {...mapPlace(row,'en'), distance:150, visited:true};
+  for (const [code,en,badge] of [['Osmanlı','Ottoman','ottoman-heritage'],['Bizans','Byzantine','byzantine-traveler']]) {
+    for (const [lang,period] of [['tr',code],['en',en]]) {
+      const packed = mapPlace({...row,period,period_code:code},lang);
+      const merged = mergeNearbyPlace(nearby,packed);
+      assert.equal(badgeForPlace(packed),badge);
+      assert.equal(merged.period,period);
+      assert.equal(badgeForPlace(merged),badge);
+      assert.equal(merged.distance,150);
+      assert.equal(merged.visited,true);
+    }
+  }
+});
+
+test('dönemsiz doğa yeri ve eski paket dönem rozeti üretmez', () => {
+  const row = {category:'park',kind:'nature',latitude:41,longitude:29};
+  const legacy = mapPlace(row,'tr');
+  const park = mapPlace({...row,period:null,period_code:null},'tr');
+  assert.equal(mergeNearbyPlace(legacy,park).periodCode,null);
+  assert.equal(badgeForPlace(park),undefined);
+  assert.equal(badgeForPlace(mergeNearbyPlace(legacy)),undefined);
 });

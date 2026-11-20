@@ -15,7 +15,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import * as Location from 'expo-location';
 import sample from './places.json';
 import {AsyncStorage, client, demo, lang, project, t} from './client';
-import {loadCity, loadDetail, loadNearby, mapPlace} from './catalog';
+import {loadCity, loadDetail, loadNearby, mapPlace, mergeNearbyPlace} from './catalog';
 import DiscoveryCamera from './DiscoveryCamera';
 import {Collection,Login} from './Badges';
 import {Action,ui,useQuery} from './ScreenUI';
@@ -93,7 +93,7 @@ export default function App() {
   const byId = new Map(packPlaces.map(p => [p.id,p]));
   serverNearby?.forEach(p => {
     const packed = byId.get(p.id);
-    byId.set(p.id,{...p,thumbnail:p.thumbnail ?? packed?.thumbnail, radius:packed?.radius,hasArea:packed?.hasArea});
+    byId.set(p.id,mergeNearbyPlace(p,packed));
   });
   function wasVisited(id) {
     return !!visits.userId && (Object.prototype.hasOwnProperty.call(visits.dates,id) ||

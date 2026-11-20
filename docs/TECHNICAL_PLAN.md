@@ -152,7 +152,7 @@ Seed'de 20 rozet var (6 genel, 8 tarihi, 6 doğa); türbe ile 21, 'Şehir Gönü
 - Yeni tasarım uygulandı: `theme.js` + Fraunces/DM Sans, beş alt sekme, Keşfet (arama, çipler, öneri kartları, yakındakiler), tam sayfa yer detayı (galeri, sabit "Buradayım" çubuğu), tam ekran harita ve seçili yer kartı, Buradayım sonuç sayfası, sıralı rozet kutlaması, Reanimated + haptik, "hareketi azalt" desteği.
 - Kullanıcı fotoğrafları (yayın onayıyla), yer değerlendirmeleri (yıldız dağılımı, Değerlendirmelerim), semt araması ve kaydedilen yerler eklendi; `VERI_ENVANTERI.md` güncellendi.
 - Kontrol: kullanılan bütün RPC'ler `API.md`'de ve parametreleri doğru; ekranlarda çıplak renk kodu yok; 33 dosyada sözdizimi hatası yok; mobil testleri 28/28 geçiyor; repoda gizli anahtar ya da `.env` yok.
-- Bulunan ve backend'de düzeltilen: mobil, paketteki yerlerin dönemini okuyordu ama `city_pack` bu alanı vermiyordu; eklendi. Mobilde küçük iş: paketteki `period_code`'u da `mapPlace`'e eklemek (rozet eşlemesi için) ve semt (`district`) alanının pakette olmadığını bilmek (`REQUESTS.md`).
+- Bulunan ve backend'de düzeltilen: mobil, paketteki yerlerin dönemini okuyordu ama `city_pack` bu alanı vermiyordu; eklendi. Mobil, `period_code` ile rozet eşler ve yakın yerler yüklenirken paketteki dönem bilgisini korur. Semt aramasını `DistrictSearch` yürütür.
 - Bekleyen: fiziksel iPhone kabul testi (yerleşim, haptik, animasyonlar, kamera/galeri, iki hesapla arkadaşlar).
 
 ## Yayına kadar kalanlar
@@ -190,7 +190,7 @@ Mobil (ChatGPT):
 - [x] Hesap silme, avatar, "Bir sorun mu var?", "Yer öner" ve "Katkılarım" ekranları
 - [x] Haritada "© OpenStreetMap katkıcıları" atfı (ODbL lisans şartı)
 - [x] Sıcak keşif tasarımı ve animasyonlar (`docs/TASARIM.md`)
-- [ ] `city_pack.period_code` → `mapPlace` (rozet ilerlemesi listelerde de doğru çalışsın; `docs/REQUESTS.md`)
+- [x] `city_pack.period_code` → `mapPlace` (rozet ilerlemesi listelerde de doğru çalışsın; `docs/REQUESTS.md`)
 - [ ] Rotalar, Rozetler ve Profil sekmelerinin yeni tasarıma göre son rötuşu (tasarımları henüz çizilmedi)
 - [ ] Fiziksel iPhone kabul testi (tüm akış)
 
