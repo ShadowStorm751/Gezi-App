@@ -1,4 +1,7 @@
-import {c} from './theme';
+import {c,type,shadow} from './theme';
+import {Camera} from 'lucide-react-native';
+import MainTabs from './MainTabs';
+import {Press} from './Motion';
 import React, {useEffect, useRef, useState} from 'react';
 import {
   ActivityIndicator, Alert, Linking, Modal, Platform, Pressable,
@@ -12,7 +15,7 @@ import {AsyncStorage, client, demo, lang, project, t} from './client';
 import {loadCity, loadDetail, loadNearby, mapPlace} from './catalog';
 import DiscoveryCamera from './DiscoveryCamera';
 import {PlaceGallery, PlaceThumbnail} from './PlaceMedia';
-import Badges, {BadgeArt, Login} from './Badges';
+import {Collection,BadgeArt, Login} from './Badges';
 import {Action,Feedback,ui,useQuery} from './ScreenUI';
 import Friends from './Friends';
 import Profile from './Profile';
@@ -60,7 +63,9 @@ export default function App() {
   const [cameraMode, setCameraMode] = useState(null);
   const cameraOpen = !!cameraMode;
   const galataPreview = cameraMode === 'galata';
-  const [badgesOpen, setBadgesOpen] = useState(false);
+  const tab=useRef('explore');
+  const [permission,setPermission]=useState(null);
+  useEffect(()=>{Location.getForegroundPermissionsAsync().then(access=>{setPermission(access.granted);if(access.granted) useLocation(false);}).catch(()=>{});},[]);
   const [trackedId, setTrackedId] = useState(null);
   const [trackedPlace,setTrackedPlace] = useState(null);
   const [locationMessage, setLocationMessage] = useState('');
@@ -105,13 +110,14 @@ export default function App() {
   })).sort((a,b) => a.distance - b.distance);
   const listPlaces = serverNearby?.map(p => byId.get(p.id)) ?? nearby.filter(p => p.distance <= 2000);
 
-  async function useLocation() {
+  async function useLocation(ask=true) {
     const request = ++locationRequest.current;
     setLoading(true);
     setNearbyResponse(null);
     try {
-      const permission = await Location.requestForegroundPermissionsAsync();
+      const permission = ask ? await Location.requestForegroundPermissionsAsync() : await Location.getForegroundPermissionsAsync();
       if (request !== locationRequest.current) return;
+      setPermission(permission.granted);
       if (!permission.granted) {
         setOrigin(null);
         setLocationMessage(t("Konum izni kapalı. Örnek konumu kullanıyorsun.","Location access is off. Using the sample location."));
@@ -208,45 +214,16 @@ export default function App() {
         places={galataPreview ? demoPlaces : trackedPlace?.id === trackedId && !byId.has(trackedId) ? [...places,trackedPlace] : places} trackedId={trackedId}
         onStopTracking={() => setTrackedId(null)} onSelect={openPlace}
         onBack={() => { setCameraMode(null); setTrackedId(null); }}/> : screen !== 'home' ? <>
-        <View style={ui.content}><Action onPress={() => setScreen(screen === 'route' ? routeBack : screen === 'friends' ? 'profile' : 'home')}>
-          {t('‹ Geri','‹ Back')}</Action><Text style={ui.title}>{pageTitle[screen]}</Text></View>
-        <ScrollView key={screen+':'+(visits.userId || '')} contentContainerStyle={ui.content} keyboardShouldPersistTaps="handled">
-          {screen === 'routes' && <Routes city={citySlug} revision={[visits.userId,visits.revision]} onRoute={slug => openRoute(slug,'routes')}/>}
-          {screen === 'route' && <RouteDetail slug={routeSlug} revision={[visits.userId,visits.revision]} onPlace={showStop}/>}
-          {screen === 'suggest' && <ContributionForm coordinate={suggestPin} userId={visits.userId} onClose={() => setScreen('home')}/>}
-          {['friends','profile'].includes(screen) && (!visits.userId ? <Login prompt={t('Profilini görmek için giriş yap.','Sign in to view your profile.')}/> :
-            screen === 'profile' ? <Profile visits={visits} onSocial={() => setScreen('friends')} onClose={() => setScreen('home')}/> :
-            <Friends onProfile={() => setScreen('profile')}/>)}
-        </ScrollView></> : <>
-      <View style={styles.header}>
-        <Text style={styles.eyebrow}>{demo ? 'İSTANBUL / GALATA' : (city?.name || citySlug).toLocaleUpperCase(lang)}</Text>
-        {cities.data?.length > 1 && <ScrollView horizontal>{cities.data.map(c =>
-          <Action key={c.slug} selected={c.slug === citySlug} onPress={() => chooseCity(c)}>{c.name}</Action>)}</ScrollView>}
-        <View style={styles.titleRow}><Text accessibilityRole="header" style={styles.title}>{t("Keşfet","Explore")}</Text>
-          <Pressable accessibilityRole="button" style={styles.close} onPress={() => setBadgesOpen(true)}>
-            <Text style={styles.distance}>{t('Rozetler','Badges')}</Text>
-          </Pressable>
-        </View>
-        {!!client && <View style={ui.row}><Action onPress={() => setScreen('routes')}>{t('Rotalar','Routes')}</Action>
-          <Action onPress={() => setScreen('profile')}>{t('Profil','Profile')}</Action>
-          <Action onPress={() => suggest(origin ?? center)}>{t('+ Yer öner','+ Suggest place')}</Action></View>}
-        <Pressable accessibilityRole="button" disabled={!places.length} style={styles.action} onPress={() => setCameraMode('live')}>
-          <Text style={styles.actionLabel}>{t("Kamerayla keşfet","Explore with camera")}</Text>
-        </Pressable>
-        <Action onPress={tryGalata}>{t('Galata’yı evden dene','Try Galata from home')}</Action>
-      </View>
-      <MapView key={citySlug+':'+center.latitude+':'+center.longitude} ref={map} style={styles.map} initialRegion={{...region,...center}} showsUserLocation={!!origin}
-        onLongPress={client ? e => suggest(e.nativeEvent.coordinate) : undefined}
-        toolbarEnabled={false} showsMyLocationButton={false}>
-        {nearby.map(place => (
-          <Marker key={place.id} coordinate={place.coordinate} title={place.name + (wasVisited(place.id) ? ' ✓' : '')}
-            accessibilityLabel={place.name + (wasVisited(place.id) ? t(', gezildi',', visited') : '')}
-            pinColor={wasVisited(place.id) ? ink : red} onPress={() => openPlace(place)}/>
-        ))}
-      </MapView>
-      <Text accessibilityRole="link" style={{color:ink,paddingHorizontal:12,paddingVertical:4}}
-        onPress={() => openOfficialPage('https://www.openstreetmap.org/copyright')}>{t('© OpenStreetMap katkıcıları','© OpenStreetMap contributors')}</Text>
-      <ScrollView style={styles.sheet} contentContainerStyle={styles.content}>
+      <View style={{paddingHorizontal:16,paddingTop:8}}><Action onPress={()=>setScreen('home')}>{t('‹ Geri','‹ Back')}</Action></View>
+      <ScrollView key={screen+':'+(visits.userId || '')} contentContainerStyle={ui.content} keyboardShouldPersistTaps="handled">
+        {screen==='route' && <RouteDetail slug={routeSlug} revision={[visits.userId,visits.revision]} onPlace={showStop}/>}
+        {screen==='friends' && (visits.userId?<Friends onProfile={()=>setScreen('home')}/>:<Login/>)}
+        {screen==='suggest' && <ContributionForm coordinate={suggestPin} userId={visits.userId} onClose={()=>setScreen('home')}/>}
+      </ScrollView></> : <MainTabs initial={tab.current} onTab={name=>{tab.current=name;}} pages={{
+        explore: <><View style={{paddingHorizontal:20,paddingVertical:14,flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}><View><Text style={styles.eyebrow}>{(city?.name || citySlug).toLocaleUpperCase(lang)}</Text><Text style={styles.title}>{t('Keşfet','Explore')}</Text></View>
+    <Press accessibilityRole="button" accessibilityLabel={t('Kamerayla keşfet','Explore with camera')} onPress={()=>setCameraMode('live')} style={{width:52,height:52,borderRadius:26,backgroundColor:c.accent,alignItems:'center',justifyContent:'center',...shadow.card}}><Camera color={c.onAccent}/></Press></View>
+    {cities.data?.length>1 && <ScrollView horizontal>{cities.data.map(item=><Action key={item.slug} selected={item.slug===citySlug} onPress={()=>chooseCity(item)}>{item.name}</Action>)}</ScrollView>}
+    {permission===false && <Action onPress={tryGalata}>{t('Galata’yı evden dene','Try Galata from home')}</Action>}      <ScrollView style={styles.sheet} contentContainerStyle={styles.content}>
         {!!client && <><Feedback query={cities}/><Recommendations origin={origin} userId={visits.userId} revision={visits.revision}
           onPlace={showStop} onRoute={slug => openRoute(slug,'home')}/></>}
         <Text style={styles.heading} accessibilityRole="header">{t('Yakındaki yerler','Nearby places')}</Text>
@@ -279,8 +256,24 @@ export default function App() {
         </Pressable>
         {!!locationMessage && <Text accessibilityLiveRegion="polite" style={styles.muted}>{locationMessage}</Text>}
       </ScrollView>
-      </>}
-      {badgesOpen && <Badges visitRevision={visits.revision} onClose={() => setBadgesOpen(false)}/>}
+</>,
+        map: <>      <MapView key={citySlug+':'+center.latitude+':'+center.longitude} ref={map} style={styles.map} initialRegion={{...region,...center}} showsUserLocation={!!origin}
+        onLongPress={client ? e => suggest(e.nativeEvent.coordinate) : undefined}
+        toolbarEnabled={false} showsMyLocationButton={false}>
+        {nearby.map(place => (
+          <Marker key={place.id} coordinate={place.coordinate} title={place.name + (wasVisited(place.id) ? ' ✓' : '')}
+            accessibilityLabel={place.name + (wasVisited(place.id) ? t(', gezildi',', visited') : '')}
+            pinColor={wasVisited(place.id) ? ink : red} onPress={() => openPlace(place)}/>
+        ))}
+      </MapView>
+      <Text accessibilityRole="link" style={{color:ink,paddingHorizontal:12,paddingVertical:4}}
+        onPress={() => openOfficialPage('https://www.openstreetmap.org/copyright')}>{t('© OpenStreetMap katkıcıları','© OpenStreetMap contributors')}</Text>
+</>,
+        routes: <ScrollView contentContainerStyle={ui.content}><Text style={ui.title}>{t('Rotalar','Routes')}</Text><Routes city={citySlug} revision={[visits.userId,visits.revision]} onRoute={slug=>openRoute(slug,'routes')}/></ScrollView>,
+        badges: <ScrollView contentContainerStyle={ui.content}><Text style={ui.title}>{t('Rozetler','Badges')}</Text>{client ? visits.userId ? <Collection key={visits.userId} userId={visits.userId} visitRevision={visits.revision}/> : <Login/> : <Text>{t('Bağlantı gerekli.','Connection required.')}</Text>}</ScrollView>,
+        profile: <ScrollView contentContainerStyle={ui.content}><Text style={ui.title}>{t('Profil','Profile')}</Text>{!!client && <Action onPress={()=>suggest(origin ?? center)}>{t('Yer öner','Suggest a place')}</Action>}
+      {!client ? <Text>{t('Profil için bağlantı gerekli.','Connect to view your profile.')}</Text> : visits.userId ? <Profile key={visits.userId} visits={visits} onSocial={()=>setScreen('friends')} onClose={()=>setScreen('home')}/> : <Login/>}</ScrollView>
+      }}/>}
       <Modal visible={!!detail} transparent animationType="slide" onRequestClose={award ? nextAward : closeDetail}>
         {detail && <View style={styles.overlay}>
           <Pressable accessibilityLabel={t("Yer detayını kapat","Close place details")} accessibilityRole="button" style={styles.backdrop} onPress={closeDetail}/>

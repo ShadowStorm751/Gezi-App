@@ -86,7 +86,7 @@ function BadgeRow({badge,celebrate}) {
   </View>;
 }
 
-function Collection({userId,visitRevision}) {
+export function Collection({userId,visitRevision}) {
   const [version,setVersion] = useState(0);
   const [result,setResult] = useState(null);
   const [failed,setFailed] = useState(false);
