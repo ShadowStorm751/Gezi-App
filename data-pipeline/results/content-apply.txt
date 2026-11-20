@@ -9,5 +9,7 @@
 200 20261120130000_istanbul_long_desc_9.sql {"ok":true,"skipped":true,"name":"20261120130000_istanbul_long_desc_9.sql"}
 200 20261120140000_istanbul_long_desc_10.sql {"ok":true,"skipped":true,"name":"20261120140000_istanbul_long_desc_10.sql"}
 200 20261120150000_istanbul_long_desc_11.sql {"ok":true,"skipped":true,"name":"20261120150000_istanbul_long_desc_11.sql"}
-200 20261120160000_istanbul_long_desc_12.sql {"ok":true,"applied":"20261120160000_istanbul_long_desc_12.sql"}
-200 20261120170000_istanbul_long_desc_13.sql {"ok":true,"applied":"20261120170000_istanbul_long_desc_13.sql"}
+200 20261120160000_istanbul_long_desc_12.sql {"ok":true,"skipped":true,"name":"20261120160000_istanbul_long_desc_12.sql"}
+200 20261120170000_istanbul_long_desc_13.sql {"ok":true,"skipped":true,"name":"20261120170000_istanbul_long_desc_13.sql"}
+200 20261120180000_istanbul_long_desc_14.sql {"ok":true,"applied":"20261120180000_istanbul_long_desc_14.sql"}
+200 20261120190000_istanbul_long_desc_15.sql {"ok":true,"applied":"20261120190000_istanbul_long_desc_15.sql"}
