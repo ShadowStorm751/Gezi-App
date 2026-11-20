@@ -1,16 +1,16 @@
 ok
-zaman: 2026-11-20T10:07:17Z
-çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44716436114
+zaman: 2026-11-20T10:53:55Z
+çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44723018176
 ---
 CREATE DATABASE
 ALTER DATABASE
 == Şehir başına yer sayısı (yayında / toplam)
    slug    | yayinda | toplam | ic_yer | fotografli 
 -----------+---------+--------+--------+------------
- bursa     |       0 |     70 |     19 |         54
+ bursa     |       0 |     70 |     19 |         60
  istanbul  |     156 |    156 |      0 |        133
- izmir     |       0 |    123 |     32 |        108
- kapadokya |       0 |     63 |     28 |         53
+ izmir     |       0 |    123 |     32 |        110
+ kapadokya |       0 |     63 |     28 |         55
 (4 rows)
 
 == TR+EN adı ve kısa açıklaması eksik yer (0 olmalı)
@@ -84,7 +84,7 @@ UPDATE 256
 
                                  celsus_ana_yer                                 
 --------------------------------------------------------------------------------
- {"id": "0b0f2569-f093-476a-b5a4-b74524eea104", "name": "Efes", "slug": "efes"}
+ {"id": "894e649f-63c1-41d4-8c21-d02afa947e60", "name": "Efes", "slug": "efes"}
 (1 row)
 
    slug    | paket_yer | paket_ana_yer 
