@@ -15,6 +15,14 @@ Biçim:
 
 ---
 
+### Yeni: city_pack'te dönem alanı
+- Durum: açık
+- Kimden: backend (Claude), 2026-11-20
+- İstek: Geriye uyumlu ekleme, canlıda (migration `20261120210000`). `city_pack.places[]` artık `period` (istenen dilde: "Osmanlı" / "Ottoman") ve `period_code` (ham, Türkçe) içeriyor; doğa yerlerinde çoğunlukla null.
+  1. `catalog.ts` → `mapPlace` zaten `period`'u okuyor, artık dolu gelecek; paket sürümü değiştiği için uygulama yeni paketi kendisi indirir.
+  2. `mapPlace`'e `periodCode: row.period_code` ekleyin; `badgeForPlace` listelerdeki yerlerde de doğru rozeti bulsun (şu an yalnızca `place_detail`'den gelen yerlerde çalışıyor).
+  3. `district` alanı pakette yok (veritabanında semt bilgisi tutulmuyor). Keşfet aramasındaki `place.district` her zaman boş; semt araması `DistrictSearch` ile zaten çalışıyor, ek iş gerekmiyor. Semt bilgisi istenirse backend'e yazın.
+
 ### Yeni tasarım: sıcak keşif (alt sekmeler, yeni ekranlar)
 - Durum: tamamlandı (mobil kodu; cihaz kabul testi bekliyor)
 - Kimden: Claude (proje sahibinin isteğiyle), 2026-11-20
