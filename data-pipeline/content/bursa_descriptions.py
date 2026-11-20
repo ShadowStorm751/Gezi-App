@@ -150,6 +150,8 @@ D = {
                   "A city park around the old Merinos factory with museums and wide green spaces."),
 "mudanya-sahili": ("Mudanya'nın tarihi evlerinin sıralandığı deniz kıyısı.",
                    "The seafront of Mudanya lined with historic houses.", "Gün batımı", "Sunset"),
+"gemlik-kursunlu-plaji": ("Gemlik Körfezi kıyısında, ormanın gölgesindeki 3,5 km'lik ücretsiz halk plajı.",
+                          "A free 3.5 km public beach on the Gulf of Gemlik, shaded by woodland.", "Yaz", "Summer"),
 "kursunlu-plaji": ("Karacabey'de, Kurşunlu'daki uzun kumsallı halk plajı.",
                    "A long sandy public beach at Kurşunlu, Karacabey.", "Yaz", "Summer"),
 "suuctu-selalesi": ("Mustafakemalpaşa'da, ormanın içinde yüksekten dökülen şelale.",
@@ -164,6 +166,7 @@ D = {
 DROPPED: dict = {}
 
 NAMES = {
+    "kursunlu-plaji": ("Kurşunlu Plajı (Karacabey)", "Kurşunlu Beach (Karacabey)"),   # Gemlik'teki Kurşunlu'dan ayırmak için
     "ayasofya-camii-iznik": ("İznik Ayasofya Camii", "Hagia Sophia, İznik"),
     "fatih-camii-tirilye": ("Tirilye Fatih Camii", "Fatih Mosque, Tirilye"),
     "eski-camii-golyazi": ("Gölyazı Eski Camii", "Old Mosque, Gölyazı"),
@@ -213,6 +216,7 @@ RADIUS = {
 
 # Koordinat kontrolü (coords.json, 2026-11-19)
 COORD_FIX = {
+    "gemlik-kursunlu-plaji": (40.3633, 29.0310, 700),  # OSM'de adlı plaj yok; uzun kordonun ortası, Kurşunlu köy noktası (node/8373385058) 0,7 km batıda
     "iznik-surlari": (40.422861, 29.718028, 1100),   # surla çevrili kent merkezi; içinde olmak yeterli
 }
 COORD_OK = {

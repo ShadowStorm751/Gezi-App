@@ -3948,6 +3948,24 @@
   ]
  },
  {
+  "enlem": "40.363300",
+  "boylam": "29.031000",
+  "wikidata": "",
+  "osm": "",
+  "arama_adi": "Kurşunlu Halk Plajı|Kurşunlu Plajı Gemlik",
+  "konum_yaklasik": true,
+  "slug": "gemlik-kursunlu-plaji",
+  "slug_override": "gemlik-kursunlu-plaji",
+  "ad_tr": "Kurşunlu Halk Plajı (Gemlik)",
+  "ad_en": "Kurşunlu Public Beach (Gemlik)",
+  "kategori": "beach",
+  "aile": "nature",
+  "ana_yer": null,
+  "not": "Gemlik; proje sahibinin isteğiyle eklendi (2026-11-20). OSM'de adlı plaj yok, kıyıdaki yaklaşık konum",
+  "alan_var": "",
+  "_ring": null
+ },
+ {
   "enlem": "39.90055",
   "boylam": "28.384244",
   "wikidata": "Q6018935",

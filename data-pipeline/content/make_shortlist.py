@@ -36,6 +36,8 @@ ADDED: Dict[str, Dict[str, Any]] = {
     },
     "bursa": {
         "yesil-camii": (40.1815, 29.0735, "Yeşil Camii", ""),
+        # OSM'de adlı plaj öğesi yok; Kurşunlu (Gemlik) kıyısı, kordonun ortası
+        "gemlik-kursunlu-plaji": (40.3633, 29.0310, "Kurşunlu Halk Plajı|Kurşunlu Plajı Gemlik", ""),
         # OSM'de var; Wikidata bağlantısı padişahın kendisine gidiyor, o yüzden aday listesine girmedi.
         "orhan-gazi-turbesi": (40.186771, 29.057694, "Orhan Gazi Türbesi", "way/325992024"),
         "tophane-saat-kulesi": (40.18785, 29.05747, "Tophane Saat Kulesi", "node/1786762169"),
