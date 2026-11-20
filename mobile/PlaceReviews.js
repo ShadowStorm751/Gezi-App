@@ -14,7 +14,9 @@ function Editor({placeId,mine,visits,onRefresh}) {
   const action=useAction(),id=visits.userId;
   async function save(){
     if(!id||visits.owner.current!==id)return;
-    const res=await rpc('review_place',{place_id:placeId,rating,comment:note.trim()||null,lang});
+    let res;
+    try {res=await rpc('review_place',{place_id:placeId,rating,comment:note.trim()||null,lang});}
+    catch(e){if(e.code!=='rate_limited')throw e;action.setMessage(t('Bugünlük yeterince değerlendirme yaptın.','Daily rating limit reached.'));return;}
     if(visits.owner.current!==id)return;
     Alert.alert(res.comment_status==='pending'?t('Notun incelemeden sonra yayınlanacak.','Your note will appear after review.'):t('Puanın kaydedildi.','Your rating was saved.'));
     onRefresh(res.rating);

@@ -1,3 +1,4 @@
+import {badgeForPlace} from './badgeProgress';
 import React,{useEffect,useRef,useState} from 'react';
 import {Alert,KeyboardAvoidingView,Linking,Platform,ScrollView,Share,Text,View,useWindowDimensions} from 'react-native';
 import {SafeAreaView,useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -13,7 +14,7 @@ function HeroPhoto({photo,place,width}) {
   const [index,setIndex]=useState(0);
   const bucket=photo?.license==='Gezi App'?'user-photos':'place-photos';
   const storage=photo?.storage_path && client?.storage.from(bucket).getPublicUrl(photo.storage_path).data.publicUrl;
-  const choices=[...new Set([photo?.url,photo?.thumb_url,storage,place.thumbnail].map(webUrl).filter(Boolean))];
+  const choices=[...new Set([photo?.url,photo?.thumb_url,storage,photo?null:place.thumbnail].map(webUrl).filter(Boolean))];
   return <Photo place={place} uri={choices[index]||null} onError={()=>setIndex(i=>i+1)} style={{width,height:320}}/>;
 }
 function Credit({photo}) {
@@ -29,7 +30,7 @@ export default function PlaceDetail({place,distance,userId,onBack,onTrack,footer
   const {width}=useWindowDimensions(),insets=useSafeAreaInsets(), [index,setIndex]=useState(0),[saved,setSaved]=useState(null);
   const key='gezi:saved:'+project+':'+(userId||'guest'),lock=useRef(false);
   const badges=useQuery(userId && live?'my_achievements':null,{lang},[userId,revision]);
-  const badgeSlug=place.periodCode==='Osmanlı'?'ottoman-heritage':place.periodCode==='Bizans'?'byzantine-traveler':({tomb:'sultans-rest',mosque:'mosque-wanderer',museum:'museum-lover',palace:'palace-life'})[place.category];
+  const badgeSlug=badgeForPlace(place);
   const badge=badges.data?.find(b=>b.slug===badgeSlug);
   useEffect(()=>{let active=true;setSaved(null);AsyncStorage.getItem(key).then(raw=>{if(active)setSaved((JSON.parse(raw)||[]).includes(place.id));}).catch(()=>{if(active)setSaved(false);});return ()=>{active=false;};},[key,place.id]);
   async function toggle() {
@@ -50,10 +51,10 @@ export default function PlaceDetail({place,distance,userId,onBack,onTrack,footer
       <View style={[row,{flexWrap:'wrap'}]}>{Number.isFinite(distance)&&!place.hasArea && <View style={row}><Footprints size={16} color={c.ink}/><Text style={muted}>{km(distance)} · ~{Math.max(1,Math.round(distance/80))} {t('dk','min')}</Text></View>}
       {live && <Press onPress={onReviews} disabled={!onReviews} accessibilityRole={onReviews?'button':'text'} style={row}><Star size={16} color={c.gold}/><Text style={muted}>{ratingLabel(place.rating)}</Text></Press>}
       {!!place.bestTime && <View style={row}><Clock size={16} color={c.inkMuted}/><Text style={muted}>{place.bestTime}</Text></View>}</View>
-      <View style={[row,{flexWrap:'wrap'}]}>{century && <Text style={{...type.eyebrow,color:c.accentInk,backgroundColor:c.accentSoft,padding:7,borderRadius:12,overflow:'hidden'}}>{lang==='tr'?century+'. YÜZYIL':t('','CENTURY ')+century}</Text>}{!!badge && <Text style={{...type.caption,color:c.goldInk,backgroundColor:c.goldSoft,padding:7,borderRadius:12,overflow:'hidden'}}>{badge.name} {badge.progress}/{badge.target}</Text>}</View>
+      <View style={[row,{flexWrap:'wrap'}]}>{century && <Text style={{...type.eyebrow,color:c.accentInk,backgroundColor:c.accentSoft,padding:7,borderRadius:12,overflow:'hidden'}}>{lang==='tr'?century+'. YÜZYIL':'CENTURY '+century}</Text>}{!!badge && <Text style={{...type.caption,color:c.goldInk,backgroundColor:c.goldSoft,padding:7,borderRadius:12,overflow:'hidden'}}>{badge.name} {badge.progress}/{badge.target}</Text>}</View>
       {!!place.description && <><Text style={heading}>{t('Hakkında','About')}</Text>{place.description.split(/\n\s*\n/).map((p,i)=><Text key={i} style={{...type.bodyLg,color:c.ink,marginBottom:2}}>{p.trim()}</Text>)}</>}
       {children}</View></ScrollView>
     <SafeAreaView edges={['bottom']} style={{backgroundColor:c.surfaceRaised,...shadow.sheet}}><View style={[row,{paddingHorizontal:16,paddingVertical:10,alignItems:'flex-start'}]}>
-      <Circle size={52} icon={Camera} label={t('Kamerada takip et','Track in camera')} onPress={onTrack}/><View style={{flex:1}}>{footer}</View></View></SafeAreaView>
+      <Circle size={52} icon={Camera} label={t('Kamerada takip et','Track in camera')} onPress={onTrack}/><View style={{flex:1}}>{footer(badges.data)}</View></View></SafeAreaView>
   </KeyboardAvoidingView>;
 }

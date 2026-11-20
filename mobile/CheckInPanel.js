@@ -1,6 +1,7 @@
 import {Press} from './Motion';
 import {km} from './PlaceUI';
-import {c} from './theme';
+import {MapPin} from 'lucide-react-native';
+import {c,type} from './theme';
 import React, {useEffect,useRef,useState} from 'react';
 import {ActivityIndicator, AppState, Linking, Pressable, StyleSheet, Text, View} from 'react-native';
 import * as Location from 'expo-location';
@@ -8,7 +9,7 @@ import {client,lang,t} from './client';
 import {Login} from './Badges';
 import {checkinOutcome,distanceHint,sendCheckin} from './visitLogic';
 
-export default function CheckIn({place,origin,onFix,visits,visited,onMissing,onResult,cities}) {
+export default function CheckIn({place,origin,onFix,visits,visited,onMissing,onResult}) {
   const [permission,setPermission] = useState(null);
 
   const [busy,setBusy] = useState(false);
@@ -109,20 +110,19 @@ export default function CheckIn({place,origin,onFix,visits,visited,onMissing,onR
       login ? <Login onSignedIn={resume} prompt={t('Devam etmek için giriş yap.','Sign in to continue.')}/> :
       <Press accessibilityRole="button" accessibilityState={{disabled:busy,busy}} disabled={busy}
         onPress={() => submit()} style={styles.button}>
-        {busy ? <ActivityIndicator color={c.surfaceRaised}/> : <Text style={styles.buttonText}>
+        {busy ? <ActivityIndicator color={c.surfaceRaised}/> : <><MapPin size={18} color={c.onPrimary}/><Text style={styles.buttonText}>
           {permission && !permission.granted ? t('Konumu aç','Turn on location') : t('Buradayım',"I'm here")}
-        </Text>}
+        </Text></>}
       </Press>}
     {hint !== null && <Text style={styles.note}>
       {t('Yaklaşık '+km(hint)+' uzaktasın.','You are about '+km(hint)+' away.')}
     </Text>}
     {!!result?.message && <Text accessibilityLiveRegion="polite" style={styles.note}>{result.message}</Text>}
-    {!!result?.progress && <Text style={styles.visited}>{cities?.find(c => c.slug === result.progress.city)?.name || t('Şehir ilerlemesi','City progress')} · {result.progress.visited} / {result.progress.total}</Text>}
   </View>;
 }
 
 const styles = StyleSheet.create({
-  group:{gap:7}, button:{backgroundColor:c.primary,padding:16,borderRadius:14,alignItems:'center',minHeight:50},
-  buttonText:{fontSize:18,fontWeight:'700',color:c.surface}, visited:{fontWeight:'700',fontSize:17,color:c.primary},
+  group:{gap:7}, button:{flexDirection:'row',justifyContent:'center',gap:8,backgroundColor:c.primary,padding:16,borderRadius:14,alignItems:'center',minHeight:50},
+  buttonText:{...type.label,fontSize:15,color:c.onPrimary}, visited:{fontWeight:'700',fontSize:17,color:c.primary},
   note:{fontSize:15,color:c.inkMuted}
 });
