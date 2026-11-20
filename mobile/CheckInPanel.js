@@ -1,3 +1,4 @@
+import {km} from './PlaceUI';
 import {c} from './theme';
 import React, {useEffect,useRef,useState} from 'react';
 import {ActivityIndicator, AppState, Linking, Pressable, StyleSheet, Text, View} from 'react-native';
@@ -6,9 +7,9 @@ import {client,lang,t} from './client';
 import {Login} from './Badges';
 import {checkinOutcome,distanceHint,sendCheckin} from './visitLogic';
 
-export default function CheckIn({place,origin,visits,visited,onMissing,onAwards,cities}) {
+export default function CheckIn({place,origin,onFix,visits,visited,onMissing,onAwards,cities}) {
   const [permission,setPermission] = useState(null);
-  const [fix,setFix] = useState(null);
+
   const [busy,setBusy] = useState(false);
   const [login,setLogin] = useState(false);
   const [result,setResult] = useState(null);
@@ -27,10 +28,7 @@ export default function CheckIn({place,origin,visits,visited,onMissing,onAwards,
         const access = await Location.getForegroundPermissionsAsync();
         if (!mounted.current || generation !== read) return;
         setPermission(access);
-        if (access.granted) {
-          const last = await Location.getLastKnownPositionAsync({maxAge:60000});
-          if (mounted.current && generation === read && last) setFix(last.coords);
-        }
+
       } catch { /* The button can request a fresh reading. */ }
     }
     inspectPermission();
@@ -83,7 +81,7 @@ export default function CheckIn({place,origin,visits,visited,onMissing,onAwards,
       if (!id) { askLogin(); return; }
       const {coords} = await Location.getCurrentPositionAsync({accuracy:Location.Accuracy.High});
       if (!mounted.current || visits.owner.current !== id) return;
-      setFix(coords);
+      onFix(coords);
       const data = await sendCheckin((name,args) => client.functions.invoke(name,args),place.id,coords,lang);
       if (visits.owner.current !== id) return;
       const outcome = checkinOutcome(data,lang);
@@ -104,7 +102,7 @@ export default function CheckIn({place,origin,visits,visited,onMissing,onAwards,
   }
   submitRef.current = submit;
   const date = visits.dates[place.id];
-  const hint = permission?.granted && !visited ? distanceHint(place,fix || origin) : null;
+  const hint = permission?.granted && !visited ? distanceHint(place,origin) : null;
   return <View style={styles.group}>
     {visited ? <Text style={styles.visited}>{t('Gezildi ✓','Visited ✓')}{date ? ' · '+new Date(date).toLocaleDateString(lang) : ''}</Text> :
       login ? <Login onSignedIn={resume} prompt={t('Devam etmek için giriş yap.','Sign in to continue.')}/> :
@@ -115,7 +113,7 @@ export default function CheckIn({place,origin,visits,visited,onMissing,onAwards,
         </Text>}
       </Pressable>}
     {hint !== null && <Text style={styles.note}>
-      {t('Yaklaşık '+hint+' m uzaktasın.','You are about '+hint+' m away.')}
+      {t('Yaklaşık '+km(hint)+' uzaktasın.','You are about '+km(hint)+' away.')}
     </Text>}
     {!!result?.message && <Text accessibilityLiveRegion="polite" style={styles.note}>{result.message}</Text>}
     {!!result?.progress && <Text style={styles.visited}>{cities?.find(c => c.slug === result.progress.city)?.name || t('Şehir ilerlemesi','City progress')} · {result.progress.visited} / {result.progress.total}</Text>}
@@ -123,7 +121,7 @@ export default function CheckIn({place,origin,visits,visited,onMissing,onAwards,
 }
 
 const styles = StyleSheet.create({
-  group:{gap:7}, button:{backgroundColor:c.ink,padding:16,borderRadius:14,alignItems:'center',minHeight:50},
+  group:{gap:7}, button:{backgroundColor:c.primary,padding:16,borderRadius:14,alignItems:'center',minHeight:50},
   buttonText:{fontSize:18,fontWeight:'700',color:c.surface}, visited:{fontWeight:'700',fontSize:17,color:c.primary},
   note:{fontSize:15,color:c.inkMuted}
 });

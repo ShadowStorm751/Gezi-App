@@ -1,3 +1,4 @@
+import PlaceDetail from './PlaceDetail';
 import Explore from './Explore';
 import {c,type,shadow} from './theme';
 import {Camera} from 'lucide-react-native';
@@ -166,9 +167,10 @@ export default function App() {
     if (galataPreview || demo || !client) return;
     setDetailState('loading');
     try {
+      const detailUser = visits.owner.current;
       const info = await loadDetail(rpc,place.id,lang);
       if (detailToken.current !== token) return;
-      if (info) setDetail({...place,...info,category:place.category,categoryLabel:info.category});
+      if (info) setDetail({...place,...info,detailUser,category:place.category,categoryLabel:info.category});
       setDetailState(info ? '' : 'missing');
     } catch { if (detailToken.current === token) setDetailState('error'); }
   }
@@ -239,52 +241,18 @@ export default function App() {
         profile: <ScrollView contentContainerStyle={ui.content}><Text style={ui.title}>{t('Profil','Profile')}</Text>{!!client && <Action onPress={()=>suggest(origin ?? center)}>{t('Yer öner','Suggest a place')}</Action>}
       {!client ? <Text>{t('Profil için bağlantı gerekli.','Connect to view your profile.')}</Text> : visits.userId ? <Profile key={visits.userId} visits={visits} onSocial={()=>setScreen('friends')} onClose={()=>setScreen('home')}/> : <Login/>}</ScrollView>
       }}/>}
-      <Modal visible={!!detail} transparent animationType="slide" onRequestClose={award ? nextAward : closeDetail}>
-        {detail && <View style={styles.overlay}>
-          <Pressable accessibilityLabel={t("Yer detayını kapat","Close place details")} accessibilityRole="button" style={styles.backdrop} onPress={closeDetail}/>
-          <SafeAreaView style={styles.card} accessibilityElementsHidden={!!award} importantForAccessibility={award ? 'no-hide-descendants' : 'auto'}>
-            <ScrollView contentContainerStyle={styles.detail} keyboardShouldPersistTaps="handled">
-              <Text style={styles.eyebrow}>{(detail.period || detail.categoryLabel || detail.category).toLocaleUpperCase(lang)}{detail.hasArea || !Number.isFinite(detail.distance) ? '' : '  ·  '+formatDistance(detail.distance)}</Text>
-              <Text style={styles.title} accessibilityRole="header">{detail.name}</Text>
-              {galataPreview && <Text style={styles.muted}>{t('Galata denemesi · Örnek konumdan uzaklık','Galata demo · Distance from the sample location')}</Text>}
-              {detailState !== 'loading' && <PlaceGallery place={detail}/>}
-              <Text style={styles.story}>{detail.description}</Text>
-              {!!client && !galataPreview && detailState !== 'missing' && (reporting ?
-                <ContributionForm key={detail.id+':'+visits.userId} place={detail} coordinate={detail.coordinate} userId={visits.userId} onClose={() => setReporting(false)}/> :
-                <Action onPress={() => setReporting(true)}>{t('Bir sorun mu var?','Report a problem')}</Action>)}
-              {!demo && !galataPreview && detailState !== 'missing' && <CheckIn key={detail.id} place={detail} origin={origin} visits={visits} cities={cities.data}
-                visited={wasVisited(detail.id)} onMissing={() => setRefresh(n => n+1)}
-                onAwards={(awards,userId) => setCelebration({awards,userId})}/>}
-              {!!detail.bestTime && <Text style={styles.muted}>{t('Önerilen zaman','Best time')} · {detail.bestTime}</Text>}
-              {detailState === 'loading' && <ActivityIndicator color={ink}/>}
-              {detailState === 'missing' && <Text>{t('Bu yer artık yayında değil.','This place is no longer published.')}</Text>}
-              {detailState === 'error' && <Pressable accessibilityRole="button" style={styles.close} onPress={() => openPlace(detail)}>
-                <Text>{t('Detay yüklenemedi. Tekrar dene.','Details unavailable. Try again.')}</Text></Pressable>}
-              <Pressable accessibilityRole="button" disabled={detailState === 'missing'} style={styles.action} onPress={() => {
-                setTrackedId(detail.id);
-                setTrackedPlace(detail);
-                closeDetail();
-                setCameraMode(galataPreview ? 'galata' : 'live');
-              }}>
-                <Text style={styles.actionLabel}>{t("Kamerada takip et","Track in camera")}</Text>
-              </Pressable>
-              {!!detail.source && <Pressable accessibilityRole="link" style={styles.action} onPress={() => openOfficialPage(detail.source)}>
-                <Text style={styles.actionLabel}>{t("Resmî ziyaret bilgileri ↗","Official visitor information ↗")}</Text>
-              </Pressable>}
-              <Pressable accessibilityRole="button" style={styles.close} onPress={closeDetail}>
-                <Text style={styles.distance}>{cameraOpen ? t("Kameraya dön","Back to camera") : t("Haritaya dön","Back to map")}</Text>
-              </Pressable>
-            </ScrollView>
-          </SafeAreaView>
-          {award && <SafeAreaView accessibilityViewIsModal style={styles.celebration}>
-            <Text style={styles.eyebrow}>{t('YENİ ROZET','NEW BADGE')}</Text>
-            <BadgeArt key={award.slug} badge={{...award,earned_at:true}}/>
-            <Text accessibilityRole="header" style={styles.title}>{award.name}</Text>
-            {!!award.description && <Text style={styles.story}>{award.description}</Text>}
-            <Pressable accessibilityRole="button" style={styles.action} onPress={nextAward}><Text style={styles.actionLabel}>
-              {celebration.awards.length > 1 ? t('Sıradaki rozet','Next badge') : t('Yer kartına dön','Back to place')}
-            </Text></Pressable>
-          </SafeAreaView>}
+      <Modal visible={!!detail} animationType="none" onRequestClose={award ? nextAward : closeDetail}>
+        {detail && <View style={{flex:1}}><PlaceDetail key={detail.id} place={detail} userId={visits.userId} revision={visits.revision} live={!!client&&!galataPreview&&!demo}
+          distance={origin&&!galataPreview?distanceMeters(origin,detail.coordinate):null} onBack={closeDetail} onTrack={()=>{setTrackedId(detail.id);setTrackedPlace(detail);closeDetail();setCameraMode(galataPreview?'galata':'live');}}
+          footer={!demo&&!galataPreview&&detailState!=='missing'?<CheckIn place={detail} origin={origin} onFix={setOrigin} visits={visits} cities={cities.data}
+            visited={wasVisited(detail.id)||!!(detail.visitedAt && detail.detailUser===visits.userId)} onMissing={()=>setRefresh(n=>n+1)} onAwards={(awards,userId)=>setCelebration({awards,userId})}/>:<Text style={ui.muted}>{t('Önizleme','Preview')}</Text>}>
+          {detailState==='loading' && <ActivityIndicator color={c.primary}/>}
+          {detailState==='missing' && <Text>{t('Bu yer artık yayında değil.','This place is no longer published.')}</Text>}
+          {detailState==='error' && <Action onPress={()=>openPlace(detail)}>{t('Detayı tekrar yükle','Reload details')}</Action>}
+          {!!detail.source && <Action onPress={()=>openOfficialPage(detail.source)}>{t('Resmî ziyaret bilgileri','Official visitor information')}</Action>}
+          {!!client && !galataPreview && detailState!=='missing' && (reporting?<ContributionForm key={detail.id+':'+visits.userId} place={detail} coordinate={detail.coordinate} userId={visits.userId} onClose={()=>setReporting(false)}/>:<Action onPress={()=>setReporting(true)}>{t('Bir sorun mu var?','Report a problem')}</Action>)}
+        </PlaceDetail>
+        {award && <SafeAreaView accessibilityViewIsModal style={styles.celebration}><BadgeArt badge={{...award,earned_at:true}}/><Text style={ui.title}>{award.name}</Text><Text>{award.description}</Text><Action onPress={nextAward}>{t('Devam et','Continue')}</Action></SafeAreaView>}
         </View>}
       </Modal>
     </SafeAreaView>

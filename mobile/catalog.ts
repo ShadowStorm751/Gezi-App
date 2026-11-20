@@ -78,8 +78,11 @@ export async function loadDetail(rpc:Rpc, id:string, lang:Lang) {
   if (error) throw new Error('place_detail');
   if (data === null) return null;
   const d = data as {id:string; name:string; category_name:string; period:string|null;
+    period_code?:string;built_year?:number;rating?:{average:number|null;count:number};visited_at?:string;has_area?:boolean;checkin_radius_m?:number;
     long_desc:string|null; short_desc:string|null; best_time:string|null; photos?:PlacePhoto[]};
   if (!d || d.id !== id || typeof d.name !== 'string' || typeof d.category_name !== 'string') throw new Error('place_detail');
   return {name:d.name,category:d.category_name,period:d.period,description:d.long_desc || d.short_desc,bestTime:d.best_time,
+    periodCode:d.period_code,builtYear:d.built_year,rating:d.rating,visitedAt:d.visited_at,
+    ...(d.has_area!=null?{hasArea:d.has_area}:{}),...(d.checkin_radius_m!=null?{radius:d.checkin_radius_m}:{}),
     photos:Array.isArray(d.photos) ? d.photos.filter(creditedPhoto) : []};
 }
