@@ -46,17 +46,19 @@ jobs:
           set +e -o pipefail   # hata olsa da sonuç dosyası yazılsın
           out=data-pipeline/results/migrations-test.txt
           mkdir -p data-pipeline/results
-          {
+          (
             # Temiz bir veritabanı: postgis imajı varsayılan veritabanına uzantıyı public şemasına kuruyor.
             psql -d postgres -v ON_ERROR_STOP=1 -c "create database gezi template template0"
             psql -d gezi -v ON_ERROR_STOP=1 -c "alter database gezi set search_path = \"\$user\", public, extensions"
             psql -d gezi -v ON_ERROR_STOP=1 -q -f backend/supabase/tests/ci_stubs.sql
+            fail=0
             for f in backend/supabase/migrations/*.sql; do
               echo "-- $f"
-              psql -d gezi -v ON_ERROR_STOP=1 -q -f "$f"
+              psql -d gezi -v ON_ERROR_STOP=1 -q -f "$f" || { echo "HATA: $f"; fail=1; }
             done
-            psql -d gezi -v ON_ERROR_STOP=1 -f backend/supabase/tests/ci_checks.sql
-          } > /tmp/log.txt 2>&1
+            psql -d gezi -v ON_ERROR_STOP=1 -f backend/supabase/tests/ci_checks.sql || fail=1
+            exit $fail
+          ) > /tmp/log.txt 2>&1
           status=$?
           { if [ $status -eq 0 ]; then echo ok; else echo failed; fi
             echo "zaman: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
