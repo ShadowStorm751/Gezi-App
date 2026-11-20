@@ -1,6 +1,6 @@
 ok
-zaman: 2026-11-20T10:57:34Z
-çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44723518913
+zaman: 2026-11-20T11:48:42Z
+çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44730570913
 ---
 CREATE DATABASE
 ALTER DATABASE
@@ -84,7 +84,7 @@ UPDATE 256
 
                                  celsus_ana_yer                                 
 --------------------------------------------------------------------------------
- {"id": "e4852d39-8d04-43f7-9529-6f5b7156e63b", "name": "Efes", "slug": "efes"}
+ {"id": "7cc91e69-ba1c-4a80-90e7-abc1f86c7370", "name": "Efes", "slug": "efes"}
 (1 row)
 
    slug    | paket_yer | paket_ana_yer 
