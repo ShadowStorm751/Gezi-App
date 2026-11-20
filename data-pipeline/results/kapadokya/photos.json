@@ -451,6 +451,28 @@
    "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
    "source_url": "https://commons.wikimedia.org/wiki/File:Soganli_Valley_Cappadocia.JPG"
   },
+  "soganli-kubbeli-kilise": {
+   "file": "Kubbeli Kilise 03.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Kubbeli_Kilise_03.jpg/1280px-Kubbeli_Kilise_03.jpg",
+   "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Kubbeli_Kilise_03.jpg/500px-Kubbeli_Kilise_03.jpg",
+   "width": 1280,
+   "height": 1920,
+   "author": "Bernard Gagnon",
+   "license": "CC BY-SA 3.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Kubbeli_Kilise_03.jpg"
+  },
+  "soganli-yilanli-kilise": {
+   "file": "38800 Soğanlı-Yeşilhisar-Kayseri, Turkey - panoramio (9).jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/38800_So%C4%9Fanl%C4%B1-Ye%C5%9Filhisar-Kayseri%2C_Turkey_-_panoramio_%289%29.jpg/1280px-38800_So%C4%9Fanl%C4%B1-Ye%C5%9Filhisar-Kayseri%2C_Turkey_-_panoramio_%289%29.jpg",
+   "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/38800_So%C4%9Fanl%C4%B1-Ye%C5%9Filhisar-Kayseri%2C_Turkey_-_panoramio_%289%29.jpg/500px-38800_So%C4%9Fanl%C4%B1-Ye%C5%9Filhisar-Kayseri%2C_Turkey_-_panoramio_%289%29.jpg",
+   "width": 1280,
+   "height": 720,
+   "author": "izvarin",
+   "license": "CC BY-SA 3.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "source_url": "https://commons.wikimedia.org/wiki/File:38800_So%C4%9Fanl%C4%B1-Ye%C5%9Filhisar-Kayseri,_Turkey_-_panoramio_(9).jpg"
+  },
   "aktepe-hill-sunset-point": {
    "file": "CAPPADOCIA Göreme National Park and the Rock Sites. World Heritage List. Turkey. Hot Air Ballooning Cappadocia.jpg",
    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/CAPPADOCIA_G%C3%B6reme_National_Park_and_the_Rock_Sites._World_Heritage_List._Turkey._Hot_Air_Ballooning_Cappadocia.jpg/1280px-CAPPADOCIA_G%C3%B6reme_National_Park_and_the_Rock_Sites._World_Heritage_List._Turkey._Hot_Air_Ballooning_Cappadocia.jpg",
@@ -656,6 +678,8 @@
   "kizilcukur-vadisi": "commons-yakin: Rose Valley, Cappadocia - Kızılçukur Vadisi, Kapadokya 06.jpg"
  },
  "elle_secilen": {
+  "soganli-kubbeli-kilise": "Kubbeli Kilise 03.jpg",
+  "soganli-yilanli-kilise": "38800 Soğanlı-Yeşilhisar-Kayseri, Turkey - panoramio (9).jpg",
   "aktepe-hill-sunset-point": "CAPPADOCIA Göreme National Park and the Rock Sites. World Heritage List. Turkey. Hot Air Ballooning Cappadocia.jpg",
   "soganli-karabas-kilisesi": "Capadoccia Jul 2023 22 59 14 257000.jpeg",
   "soganli-sakli-kilise": "Three churches domed hidden church.JPG",
@@ -667,8 +691,6 @@
   "ihlara-cam-teras",
   "kutsal-hac-kilisesi",
   "mazi-yeralti-sehri",
-  "soganli-geyikli-kilise",
-  "soganli-kubbeli-kilise",
-  "soganli-yilanli-kilise"
+  "soganli-geyikli-kilise"
  ]
 }
