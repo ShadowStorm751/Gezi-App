@@ -158,3 +158,54 @@ Kalkanlar: Keşfet'in üstündeki buton yığını (Rotalar, Profil, + Yer öner
 | BadgeTile | 84px daire, 3px `gold` halka; kilitli: gri, `surfaceSunken`, altında ilerleme çubuğu |
 
 Fotoğrafı olmayan yerde `surfaceSunken` zemin ve kategori ikonu (`accent`), asla boş gri kutu.
+
+## Hareket (animasyon)
+
+Tasarım sayfasındaki "4 · Buradayım" ve "5 · Rozet kutlaması" ekranları animasyonlu taslaklardır (Oynat ile izlenir); süreler aşağıdakiyle birebir aynı.
+
+**Araçlar** (Expo Go'da hazır): `react-native-reanimated` (tüm animasyonlar, `withTiming`/`withSpring`/`withDelay`/`withSequence`, `entering` animasyonları), `expo-haptics` (dokunsal geri bildirim). Lottie şimdilik yok.
+
+**Genel kurallar**
+- Süre: dokunma tepkisi 120 ms, geçişler 200–320 ms, kutlama en fazla ~1,5 sn (sonra ekran sakin kalır).
+- Eğri: giriş `Easing.bezier(0.2, 0.8, 0.2, 1)`; zıplamalı öğeler `withSpring({damping: 12, stiffness: 180})`.
+- Yalnızca `transform` ve `opacity` canlandırılır (genişlik/konum değil); ilerleme çubuğu `scaleX` ile (`transformOrigin` sol).
+- Hareketi azalt: `useReducedMotion()` (Reanimated) true ise tüm giriş animasyonları atlanır, son hal hemen gösterilir; titreşim kalır.
+- Animasyon hiçbir zaman bir eylemi bekletmez: buton hemen tıklanabilir.
+
+**Her yerde**
+| Ne | Hareket | Süre |
+| --- | --- | --- |
+| Buton, kart, satır basılı | ölçek 1 → 0,97, bırakınca geri | 120 ms |
+| Seçili sekme | `primarySoft` hap genişliği 0 → 52, ikon rengi geçişi | 200 ms |
+| Alt sayfa / harita kartı açılış | aşağıdan kayar (`translateY` %100 → 0), arka plan karartması 0 → 1 | 320 ms / 220 ms |
+| Harita işareti seçildi | ölçek 1 → 1,25 → 1 (yay), yer kartı alttan gelir | yay + 320 ms |
+| Yükleniyor | gri iskelet kartlar, soldan sağa hafif parlama döngüsü | 1200 ms döngü |
+| Liste ilk açılış | satırlar 40 ms arayla aşağıdan 8 px kayarak belirir (en fazla 6 satır) | 220 ms |
+
+**Buradayım (check-in başarılı)**, `t = 0` sonuç geldiği an:
+| t (ms) | Ne olur |
+| --- | --- |
+| 0 | Karartma 0 → 1 (220 ms); alt sayfa alttan kayar (320 ms); `Haptics.notificationAsync(Success)` |
+| 260 | Yeşil daire ölçek 0,4 → 1,12 → 1 (yay, ~420 ms) |
+| 560 | ✓ çizilerek belirir (SVG `strokeDashoffset` 24 → 0, 300 ms; `react-native-svg` + `useAnimatedProps`) |
+| 640 | Başlık ve açıklama 10 px aşağıdan, opaklık 0 → 1 (260 ms) |
+| 760 | Rozet ilerleme kartı aynı şekilde gelir |
+| 960 | İlerleme çubuğu eski değerden yeni değere dolar (520 ms) |
+| 1480 | Rozet tamamlandıysa: rozet halkasından dışa doğru altın parıltı (700 ms) + `Haptics.impactAsync(Medium)` |
+| 1100 | Butonlar belirir |
+
+Hata durumunda (uzak, hız, bekleme): daire yay yerine kısa yatay sallanma (±6 px, 3 kez, 300 ms) ve `Haptics.notificationAsync(Warning)`.
+
+**Rozet kutlaması**
+| t (ms) | Ne olur |
+| --- | --- |
+| 0 | Koyu zemin belirir (300 ms); `Haptics.notificationAsync(Success)` |
+| 150 | Rozet ölçek 0,3 → 1,08 → 0,97 → 1 ve dönüş -12° → 3° → 0° (650 ms, yay) |
+| 200 | Altın ışınlar belirir (600 ms), sonra 40 sn'de bir tur dönmeye devam eder (sonsuz, çok yavaş) |
+| 350 | İki ince halka ölçek 0,6 → 1 (600 ms) |
+| 650–980 | "YENİ ROZET", ad, açıklama, haplar sırayla (110 ms arayla) 12 px aşağıdan belirir |
+| 700–850 | Renkli noktalar hafifçe yukarı süzülerek belirir |
+| 800 | Rozetin etrafında altın parıltı halkası dışa yayılır, iki kez (1200 ms) |
+| 1150 | Butonlar belirir |
+
+Birden fazla rozet kazanıldıysa "Devam et" bir sonraki rozeti aynı animasyonla getirir; son rozette yer kartına döner.
