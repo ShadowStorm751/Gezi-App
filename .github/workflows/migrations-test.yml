@@ -12,6 +12,7 @@ on:
     paths:
       - backend/supabase/migrations/**
       - backend/supabase/tests/ci_*.sql
+      - backend/tests/audit.sql
       - .github/workflows/migrations-test.yml
 
 permissions:
@@ -57,6 +58,8 @@ jobs:
               psql -d gezi -v ON_ERROR_STOP=1 -q -f "$f" || { echo "HATA: $f"; fail=1; }
             done
             psql -d gezi -v ON_ERROR_STOP=1 -f backend/supabase/tests/ci_checks.sql || fail=1
+            echo "== Denetim (backend/tests/audit.sql): yalnızca ozet satırı kalmalı"
+            psql -d gezi -v ON_ERROR_STOP=1 -f backend/tests/audit.sql || fail=1
             exit $fail
           ) > /tmp/log.txt 2>&1
           status=$?

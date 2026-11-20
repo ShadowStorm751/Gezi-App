@@ -44,8 +44,56 @@ create trigger places_check_parent
   before insert or update of parent_place_id on public.places
   for each row execute function public.places_check_parent();
 
--- place_detail: ana yer ve içindeki yerler.
--- Temel: 20261120030000_place_reviews.sql'deki son tanım (period etiketi, rating); yalnızca parent/children alanları eklendi.
+-- Yer detayındaki ana yer / iç yer alanları (MODULES.md: "yer detayına yeni alan = yardımcı fonksiyon + tek satır")
+create or replace function public.place_hierarchy(place_id uuid, lang text default 'tr')
+returns jsonb
+language sql stable
+set search_path = public, extensions
+as $$
+  select jsonb_build_object(
+    'parent', (
+      select jsonb_build_object('id', pp.id, 'slug', pp.slug, 'name', pt.name)
+      from public.places pp
+      join public.place_translations pt
+        on pt.place_id = pp.id and pt.lang = public.norm_lang(place_hierarchy.lang)
+      where pp.id = x.parent_place_id and pp.is_published),
+    'children', coalesce((
+      select jsonb_agg(jsonb_build_object(
+               'id', ch.id,
+               'slug', ch.slug,
+               'name', cht.name,
+               'category', chc.slug,
+               'latitude', st_y(ch.location::geometry),
+               'longitude', st_x(ch.location::geometry),
+               'checkin_radius_m', ch.checkin_radius_m,
+               'thumb_url', (
+                 select coalesce(ph.thumb_url, ph.url) from public.place_photos ph
+                 where ph.place_id = ch.id and ph.url is not null
+                 order by ph.sort_order limit 1),
+               'visited', exists (
+                 select 1 from public.visits v
+                 where v.place_id = ch.id and v.user_id = auth.uid())) order by cht.name)
+      from public.places ch
+      join public.categories chc on chc.id = ch.category_id
+      join public.place_translations cht
+        on cht.place_id = ch.id and cht.lang = public.norm_lang(place_hierarchy.lang)
+      where ch.parent_place_id = x.id and ch.is_published), '[]'::jsonb),
+    'children_total', (
+      select count(*) from public.places ch
+      where ch.parent_place_id = x.id and ch.is_published),
+    'children_visited', (
+      select count(*) from public.places ch
+      join public.visits v on v.place_id = ch.id and v.user_id = auth.uid()
+      where ch.parent_place_id = x.id and ch.is_published and not v.flagged)
+  )
+  from public.places x
+  where x.id = place_hierarchy.place_id;
+$$;
+
+grant execute on function public.place_hierarchy(uuid, text) to anon, authenticated;
+
+-- place_detail: 20261120030000_place_reviews.sql'deki son tanımın aynısı + tek satır (place_hierarchy).
+-- Canlıya uygularken MODULES.md gereği canlıdaki son tanımla karşılaştırın (pg_get_functiondef).
 create or replace function public.place_detail(place_id uuid, lang text default 'tr')
 returns jsonb
 language sql
@@ -87,42 +135,8 @@ as $$
       where ph.place_id = p.id), '[]'::jsonb),
     'visited_at', (
       select v.visited_at from public.visits v
-      where v.place_id = p.id and v.user_id = auth.uid()),
-    'parent', (
-      select jsonb_build_object('id', pp.id, 'slug', pp.slug, 'name', pt.name)
-      from public.places pp
-      join public.place_translations pt
-        on pt.place_id = pp.id and pt.lang = public.norm_lang(place_detail.lang)
-      where pp.id = p.parent_place_id and pp.is_published),
-    'children', coalesce((
-      select jsonb_agg(jsonb_build_object(
-               'id', ch.id,
-               'slug', ch.slug,
-               'name', cht.name,
-               'category', chc.slug,
-               'latitude', st_y(ch.location::geometry),
-               'longitude', st_x(ch.location::geometry),
-               'checkin_radius_m', ch.checkin_radius_m,
-               'thumb_url', (
-                 select coalesce(ph.thumb_url, ph.url) from public.place_photos ph
-                 where ph.place_id = ch.id and ph.url is not null
-                 order by ph.sort_order limit 1),
-               'visited', exists (
-                 select 1 from public.visits v
-                 where v.place_id = ch.id and v.user_id = auth.uid())) order by cht.name)
-      from public.places ch
-      join public.categories chc on chc.id = ch.category_id
-      join public.place_translations cht
-        on cht.place_id = ch.id and cht.lang = public.norm_lang(place_detail.lang)
-      where ch.parent_place_id = p.id and ch.is_published), '[]'::jsonb),
-    'children_total', (
-      select count(*) from public.places ch
-      where ch.parent_place_id = p.id and ch.is_published),
-    'children_visited', (
-      select count(*) from public.places ch
-      join public.visits v on v.place_id = ch.id and v.user_id = auth.uid()
-      where ch.parent_place_id = p.id and ch.is_published and not v.flagged)
-  )
+      where v.place_id = p.id and v.user_id = auth.uid())
+  ) || public.place_hierarchy(p.id, place_detail.lang)
   from public.places p
   join public.cities ci on ci.id = p.city_id
   join public.categories c on c.id = p.category_id
