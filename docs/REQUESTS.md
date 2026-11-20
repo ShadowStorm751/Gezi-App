@@ -15,6 +15,13 @@ Biçim:
 
 ---
 
+### Yeni tasarım: sıcak keşif (alt sekmeler, yeni ekranlar)
+- Durum: açık
+- Kimden: Claude (proje sahibinin isteğiyle), 2026-11-20
+- Ayrıntı: `docs/TASARIM.md` (token'lar, `mobile/theme.js` içeriği, 5 ekranın tarifi). Ekran görüntülerini proje sahibi paylaşır.
+- Sıra önerisi: 1) `theme.js` + fontlar, 2) alt sekme çubuğu ve Keşfet'teki buton yığınının kaldırılması, 3) Keşfet (çipler, öneri kartları, liste), 4) Yer detayı (tam sayfa, sabit "Buradayım" çubuğu, tek satır atıf), 5) Harita (özel işaretler, alt kart), 6) Buradayım sayfası ve rozet kutlaması.
+- iPhone notlarındaki çakışma, mesafe ve atıf taşması sorunları bu tasarımla birlikte çözülür.
+
 ### Hesap silme, avatar ve kullanıcı katkısı ekranları
 - Tarih: 2026-11-19
 - Kimden: backend
