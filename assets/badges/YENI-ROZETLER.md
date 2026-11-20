@@ -1,7 +1,7 @@
 # Yeni rozetler: İzmir, Bursa, Kapadokya "keşif" rozetleri (16)
 
 Durum: **16 görselin hepsi hazır** (2026-11-20). 16 görsel `assets/badges/<slug>.webp` (512×512, şeffaf); `badge_path` migration'ı `20261121020000_kesif_badge_paths.sql`.
-Not: Gemini halka rengini her rozette aynı petrol mavisi yaptı; set tutarlı göründüğü için olduğu gibi bırakıldı.
+Halka rengi şehre göre (2026-11-20): **İzmir Ege mavisi `#1F5AA6`**, **Bursa yeşil `#2E7A48`**, **Kapadokya kiremit `#B05028`**. Gemini'nin çizdiği petrol mavisi (Mustafapaşa'da kahve) halkalar, gölge ve kenar yumuşatması korunarak bu renklere boyandı; aşağıdaki tablodaki "Halka rengi" sütunu ilk istemdeki öneridir, kullanılmadı.
 Canlıya alırken: migration uygulanır, `badge-upload` fonksiyonu yeniden deploy edilir, sonra Rozet görselleri iş akışı çalıştırılır.
 Mevcut 21 rozet Gemini ile çizildi. Aynı görünmeleri için aşağıdaki ortak üslup + her rozetin konusu Gemini'ye verilir.
 Görseller gelince Claude kırpar, arka planı şeffaflaştırır, 512×512 `.webp` yapar ve `badge_path` için yeni bir migration ekler.
