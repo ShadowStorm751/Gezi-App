@@ -41,7 +41,13 @@ backend/supabase/
 │   ├── 20261120040000_modular_rules_exports.sql rozet kuralları ve KVKK bölümleri parçalara ayrıldı
 │   ├── 20261120050000_istanbul_long_desc_1.sql   uzun açıklamalar, 1. parti (üretilir: content/build_long_desc.py)
 │   ├── 2026112006…_istanbul_long_desc_N.sql     2-15. partiler (156/156); content-apply ile yüklenir
-│   └── 20261120200000_istanbul_photos_extra2.sql 3 yer için hedefli aramayla seçilen fotoğraf (üretilir: content/build_photos_extra2.py)
+│   ├── 20261120200000_istanbul_photos_extra2.sql 3 yer için hedefli aramayla seçilen fotoğraf (üretilir: content/build_photos_extra2.py)
+│   ├── 20261121000000_place_hierarchy.sql    ana yer / iç yer (places.parent_place_id, place_hierarchy(), place_detail'e tek satır), yeni dönem etiketleri
+│   ├── 20261121010000_izmir_places.sql       İzmir: şehir, yeni kategoriler, 123 yer (gizli), fotoğraflar, keşif rozetleri (üretilir: content/build_city.py)
+│   ├── 20261121011000_bursa_places.sql       Bursa: 71 yer (gizli)
+│   ├── 20261121012000_kapadokya_places.sql   Kapadokya: 63 yer (gizli)
+│   ├── 20261121020000_kesif_badge_paths.sql  keşif rozetlerinin görsel yolları
+│   └── 2026112110xxxx_<şehir>_long_desc_<n>.sql yeni şehirlerin uzun açıklamaları (üretilir: content/build_long_desc.py --city)
 ├── functions/badge-upload/              rozet görsellerini Storage'a yükler (.github/workflows/badges.yml)
 ├── functions/checkin/
 │   ├── index.ts                      Edge Function

@@ -8,7 +8,7 @@ Yeni özellik eklemeden önce bu dosyayı oku ve en alttaki kontrol listesini uy
 
 | Modül | Tablolar | RPC / Edge Function | Migration'lar |
 | --- | --- | --- | --- |
-| **İçerik** (şehir, yer, fotoğraf) | `cities`, `categories`, `category_translations`, `places`, `place_translations`, `place_photos` | `city_pack`, `city_pack_version`, `city_pack_places`, `nearby_places`, `places_in_bbox`, `place_detail`, `search_places`, `list_cities`, `period_label` | `…18120000_schema`, `…120200_read_api`, `…19090000`–`…190000`, `…250000_cities_list`, `…20020000` |
+| **İçerik** (şehir, yer, fotoğraf) | `cities`, `categories`, `category_translations`, `places`, `place_translations`, `place_photos` | `city_pack`, `city_pack_version`, `city_pack_places`, `nearby_places`, `places_in_bbox`, `place_detail`, `search_places`, `list_cities`, `period_label`, `place_hierarchy` | `…18120000_schema`, `…120200_read_api`, `…19090000`–`…190000`, `…250000_cities_list`, `…20020000`, `…21000000_place_hierarchy`, `…2101x000_<şehir>_places` |
 | **Ziyaret / check-in** | `visits` | Edge `checkin` (+ `rules.ts`), `checkin_context`, `record_visit`, `my_visits` | `…120300_checkin` |
 | **Rozetler** | `achievements`, `achievement_translations`, `user_achievements` | `evaluate_achievements`, `achievement_progress` (dağıtıcı), `ach_rule_*`, `my_achievements` | `…120300`, `…20040000_modular_rules_exports` |
 | **Profil / hesap** | `profiles`, Storage `avatars` | `update_profile`, Edge `delete-account`, `export_my_data` (birleştirici), `export_section_*` | `…200000_account_avatar`, `…20040000` |
