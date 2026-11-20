@@ -1,6 +1,6 @@
 ok
-zaman: 2026-11-20T09:56:47Z
-çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44714936846
+zaman: 2026-11-20T10:07:17Z
+çalıştırma: https://github.com/ShadowStorm751/Gezi-App/actions/runs/44716436114
 ---
 CREATE DATABASE
 ALTER DATABASE
@@ -10,7 +10,7 @@ ALTER DATABASE
  bursa     |       0 |     70 |     19 |         54
  istanbul  |     156 |    156 |      0 |        133
  izmir     |       0 |    123 |     32 |        108
- kapadokya |       0 |     62 |     27 |         53
+ kapadokya |       0 |     63 |     28 |         53
 (4 rows)
 
 == TR+EN adı ve kısa açıklaması eksik yer (0 olmalı)
@@ -35,7 +35,7 @@ ALTER DATABASE
  kemeralti-carsisi             |      9
  kulturpark                    |      2
  merinos-parki                 |      2
- mustafapasa                   |      1
+ mustafapasa                   |      2
  pergamon                      |      5
  soganli-vadisi                |      6
  teos                          |      1
@@ -63,10 +63,11 @@ ALTER DATABASE
  kemeralti-carsisi-kesif             |  10 | Kemeraltı Çarşısı Kâşifi
  kulturpark-kesif                    |   3 | Kültürpark Kâşifi
  merinos-parki-kesif                 |   3 | Merinos Parkı Kâşifi
+ mustafapasa-kesif                   |   3 | Mustafapaşa (Sinasos) Kâşifi
  pergamon-kesif                      |   6 | Pergamon Kâşifi
  soganli-vadisi-kesif                |   7 | Soğanlı Vadisi Kâşifi
  tirilye-kesif                       |   3 | Tirilye Kâşifi
-(15 rows)
+(16 rows)
 
 == Rozet kurallarındaki slug'lar var mı (0 olmalı)
  slug | eksik 
@@ -75,7 +76,7 @@ ALTER DATABASE
 
 == Yayınlama denemesi (geri alınır): place_detail ve city_pack
 BEGIN
-UPDATE 255
+UPDATE 256
  efes_ic_yer | efes_children |   ad    
 -------------+---------------+---------
  11          |            11 | Ephesus
@@ -83,7 +84,7 @@ UPDATE 255
 
                                  celsus_ana_yer                                 
 --------------------------------------------------------------------------------
- {"id": "4ea4309e-9281-4e82-a99d-dccd3ec5d879", "name": "Efes", "slug": "efes"}
+ {"id": "0b0f2569-f093-476a-b5a4-b74524eea104", "name": "Efes", "slug": "efes"}
 (1 row)
 
    slug    | paket_yer | paket_ana_yer 
@@ -91,7 +92,7 @@ UPDATE 255
  bursa     |        70 |             7
  istanbul  |       156 |             0
  izmir     |       123 |             7
- kapadokya |        62 |             5
+ kapadokya |        63 |             5
 (4 rows)
 
 ROLLBACK
@@ -100,7 +101,8 @@ psql:backend/supabase/tests/ci_checks.sql:61: NOTICE:  beklenen hata: place kizi
 DO
 TAMAM
 == Görseli olmayan rozet (0 olmalı)
- slug 
-------
-(0 rows)
+       slug        
+-------------------
+ mustafapasa-kesif
+(1 row)
 
