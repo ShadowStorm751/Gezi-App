@@ -1,0 +1,38 @@
+# Canlı uçtan uca sosyal ve rota testi. selftest-social Edge Function'ını çağırır
+# (3 geçici kullanıcıyla arkadaşlık, sıralama, rozet ve rota akışını dener, siler) ve sonucu commit'ler.
+# Tetikleme: data-pipeline/selftest-social-request.txt değişince ya da elle.
+name: Canlı sosyal ve rota testi
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [data-pipeline/selftest-social-request.txt]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: data-pipeline
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test
+        run: |
+          curl -sS -m 150 -X POST https://oxzypxygluqnwvtvqpil.supabase.co/functions/v1/selftest-social \
+            -o data-pipeline/results/selftest-social.json -w '%{http_code}\n' || true
+          cat data-pipeline/results/selftest-social.json || true
+      - name: Sonucu kaydet
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data-pipeline/results/selftest-social.json
+          git commit -m "Canlı sosyal ve rota testi (sonuç)" || echo "Değişiklik yok"
+          git pull --rebase
+          git push

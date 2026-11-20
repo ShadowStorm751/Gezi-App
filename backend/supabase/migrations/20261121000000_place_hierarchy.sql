@@ -44,13 +44,12 @@ create trigger places_check_parent
   before insert or update of parent_place_id on public.places
   for each row execute function public.places_check_parent();
 
--- place_detail: ana yer ve içindeki yerler
-create or replace function public.place_detail(
-  place_id uuid,
-  lang text default 'tr'
-)
+-- place_detail: ana yer ve içindeki yerler.
+-- Temel: 20261120030000_place_reviews.sql'deki son tanım (period etiketi, rating); yalnızca parent/children alanları eklendi.
+create or replace function public.place_detail(place_id uuid, lang text default 'tr')
 returns jsonb
-language sql stable
+language sql
+stable
 set search_path = public, extensions
 as $$
   select jsonb_build_object(
@@ -64,13 +63,15 @@ as $$
     'short_desc', t.short_desc,
     'long_desc', t.long_desc,
     'best_time', t.best_time,
-    'period', p.period,
+    'period', public.period_label(p.period, place_detail.lang),
+    'period_code', p.period,
     'built_year', p.built_year,
     'opening_hours', p.opening_hours,
     'latitude', st_y(p.location::geometry),
     'longitude', st_x(p.location::geometry),
     'checkin_radius_m', p.checkin_radius_m,
     'has_area', p.area is not null,
+    'rating', public.place_rating(p.id),
     'photos', coalesce((
       select jsonb_agg(jsonb_build_object(
                'storage_path', ph.storage_path,
@@ -165,4 +166,25 @@ as $$
   join public.place_translations t
     on t.place_id = p.id and t.lang = public.norm_lang(p_lang)
   where p.city_id = p_city_id and p.is_published;
+$$;
+
+-- Yeni şehirlerde kullanılan dönemler için İngilizce etiketler (geri kalanı 20261120020000 ile aynı)
+create or replace function public.period_label(p_period text, p_lang text)
+returns text
+language sql
+immutable
+set search_path = public
+as $$
+  select case when public.norm_lang(p_lang) = 'tr' or p_period is null then p_period
+         else coalesce(case p_period
+           when 'Osmanlı'    then 'Ottoman'
+           when 'Bizans'     then 'Byzantine'
+           when 'Ceneviz'    then 'Genoese'
+           when 'Roma'       then 'Roman'
+           when 'Cumhuriyet' then 'Republican'
+           when 'Antik Mısır' then 'Ancient Egyptian'
+           when 'Antik'      then 'Ancient'
+           when 'Beylikler'  then 'Anatolian Beyliks'
+           when 'Selçuklu'   then 'Seljuk'
+           end, p_period) end;
 $$;

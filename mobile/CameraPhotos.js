@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {ActivityIndicator, Alert, Image, Linking, Modal, Platform, Pressable, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {ActivityIndicator, Alert, Image, Linking, Modal, Platform, Pressable, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import Svg, {Circle, Path, Rect} from 'react-native-svg';
 import * as ImagePicker from 'expo-image-picker';
 import * as MediaLibrary from 'expo-media-library';
@@ -76,7 +77,7 @@ export default function CameraPhotos({camera, ready, onMediaOpen}) {
           return;
         }
       }
-      await MediaLibrary.saveToLibraryAsync(photo.uri);
+      await MediaLibrary.Asset.create(photo.uri);
       if (!mounted.current) return;
       setLastShot(photo.uri);
       setPhoto(null);

@@ -1,0 +1,2 @@
+Bu dosya değişip main'e yüklenince canlı hesap/bildirim testi çalışır (.github/workflows/selftest-account.yml).
+Son istek: 2026-11-19 19:25 — avatar, bildirim/öneri, hesap silme

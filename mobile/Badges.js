@@ -1,7 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {ActivityIndicator, Animated, KeyboardAvoidingView, Modal, Platform, Pressable, SafeAreaView,
+import {ActivityIndicator, Animated, KeyboardAvoidingView, Modal, Platform, Pressable,
   ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
 import Svg, {Defs, FeColorMatrix, Filter, G, Image as SvgImage} from 'react-native-svg';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import {AsyncStorage, client, lang, project, t} from './client';
 import {badgeImages} from './badgeImages';
 

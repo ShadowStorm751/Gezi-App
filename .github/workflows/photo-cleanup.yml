@@ -1,0 +1,23 @@
+# Kullanıcı fotoğrafları temizliği: reddedilen ve 24 saattir gönderilmemiş dosyaları siler.
+# photo-cleanup Edge Function'ını günde bir kez (03:17 UTC) çağırır; elle de çalıştırılabilir.
+# Fonksiyon gizli anahtar gerektirmez, yalnızca kurala uyan dosyaları siler.
+name: Fotoğraf temizliği
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Temizle
+        run: |
+          curl -sS -m 120 -X POST https://oxzypxygluqnwvtvqpil.supabase.co/functions/v1/photo-cleanup \
+            -w '\n%{http_code}\n' | tee out.txt
+          tail -1 out.txt | grep -q '^200$'

@@ -1,0 +1,38 @@
+# Canlı uçtan uca fotoğraf testi. selftest-photos Edge Function'ını çağırır
+# (geçici kullanıcılarla fotoğraf yükleme, onay, ret, temizlik ve hesap silmeyi dener, siler) ve sonucu commit'ler.
+# Tetikleme: data-pipeline/selftest-photos-request.txt değişince ya da elle.
+name: Canlı fotoğraf testi
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [data-pipeline/selftest-photos-request.txt]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: data-pipeline
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test
+        run: |
+          curl -sS -m 150 -X POST https://oxzypxygluqnwvtvqpil.supabase.co/functions/v1/selftest-photos \
+            -o data-pipeline/results/selftest-photos.json -w '%{http_code}\n' || true
+          cat data-pipeline/results/selftest-photos.json || true
+      - name: Sonucu kaydet
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data-pipeline/results/selftest-photos.json
+          git commit -m "Canlı fotoğraf testi (sonuç)" || echo "Değişiklik yok"
+          git pull --rebase
+          git push

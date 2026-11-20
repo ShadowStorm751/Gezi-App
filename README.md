@@ -32,6 +32,12 @@ Yapay zekâ asistanları için ayrıntılı kurallar: [`AGENTS.md`](AGENTS.md).
 - [x] Veritabanı şeması, erişim kuralları, okuma fonksiyonları
 - [x] Check-in Edge Function'ı ve rozet motoru
 - [x] İstanbul listesi: 156 yer (113 tarihi, 43 doğa), TR+EN açıklamalar, 21 rozet
-- [ ] Supabase projesinin açılması
+- [x] Supabase test projesi açıldı ve güncel; canlı check-in testi geçti
+- [x] 133 yer fotoğrafı ve 21 rozet görseli
 - [x] Veri hattı: OSM + Wikidata → onay listesi → SQL
-- [ ] Mobil uygulama
+- [x] Mobil uygulama ilk sürümü (harita, kamera, check-in, rozetler)
+- [ ] Expo SDK 58 yükseltmesi (iPhone'da Expo Go testi için)
+- [x] Backend: hesap silme, avatar yükleme, kullanıcı bildirimi ve yeni yer önerisi
+- [ ] Mobil: hesap silme, avatar, bildirim ve öneri ekranları
+- [ ] Apple/Google ile giriş, KVKK metinleri, ayrı canlı proje
+- [ ] Yeni şehirler (veri hazırlanıyor)

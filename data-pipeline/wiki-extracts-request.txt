@@ -1,0 +1,2 @@
+Bu dosya değişip main'e yüklenince uzun açıklamalar için kaynak metinler toplanır (.github/workflows/wiki-extracts.yml).
+Son istek: 2026-11-20 01:45 — İstanbul 156 yer

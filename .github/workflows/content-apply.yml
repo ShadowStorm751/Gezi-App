@@ -1,0 +1,44 @@
+# İçerik migration'larını (uzun açıklamalar vb.) canlıya uygular: content-apply Edge Function'ına gönderir.
+# Fonksiyon yalnızca adı ve SHA-256'sı onaylı listede olan dosyaları çalıştırır; uygulanmış olanları atlar.
+# Tetikleme: *_istanbul_long_desc_*.sql dosyaları değişip main'e yüklenince ya da elle.
+# Sonuç: data-pipeline/results/content-apply.txt
+name: İçerik yükleme
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["backend/supabase/migrations/*_istanbul_long_desc_*.sql"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: content-apply
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Uygula
+        run: |
+          : > data-pipeline/results/content-apply.txt
+          for f in backend/supabase/migrations/*_istanbul_long_desc_*.sql; do
+            name=$(basename "$f")
+            code=$(curl -sS -m 120 -o /tmp/out.json -w '%{http_code}' -X POST \
+              "https://oxzypxygluqnwvtvqpil.supabase.co/functions/v1/content-apply?name=$name" \
+              -H 'content-type: text/plain' --data-binary @"$f" || echo 000)
+            echo "$code $name $(cat /tmp/out.json)" | tee -a data-pipeline/results/content-apply.txt
+          done
+      - name: Sonucu kaydet
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data-pipeline/results/content-apply.txt
+          git commit -m "İçerik yükleme (sonuç)" || echo "Değişiklik yok"
+          git pull --rebase
+          git push

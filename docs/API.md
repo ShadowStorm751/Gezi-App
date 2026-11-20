@@ -44,6 +44,66 @@ export type CategorySlug =
 
 ## Okuma fonksiyonları
 
+### `list_cities` — şehir listesi (şehir seçici)
+
+```ts
+const { data } = await supabase.rpc("list_cities", { lang: "tr" });
+// -> [{ slug, name, timezone, place_count, historical_count, nature_count,
+//       center: { lat, lng }, bbox: { min_lat, min_lng, max_lat, max_lng },
+//       visited_count }]   // visited_count: girişsizse null
+```
+
+- Yalnızca yayında yeri olan şehirler döner, en çok yeri olan önce. Şimdilik yalnızca `istanbul`.
+- `center`/`bbox` haritayı şehre odaklamak için. Seçilen şehrin paketi `city_pack(slug)` ile iner.
+- Tek şehir varken şehir seçici gizlenebilir; liste 2+ olunca gösterilir.
+
+### `recommendations` — "Sana önerilenler"
+
+```ts
+const { data } = await supabase.rpc("recommendations", { lat, lng, lang: "tr", max_results: 10 });
+// lat/lng isteğe bağlı (ikisi birlikte); girişsiz de çalışır.
+// -> { ok, personalized,
+//      places: [{ place_id, slug, name, short_desc, kind, category, latitude, longitude,
+//                 distance_m, thumb_url, reason, reason_detail }],
+//      continue_routes: [{ slug, title, visited_count, stop_count,
+//                          next_stop: { place_id, slug, name, latitude, longitude, distance_m } }],
+//      almost_badges: [{ slug, name, badge_path, progress, target }] }
+```
+
+- `places`: kullanıcının **gezmediği** yerler; konum verilirse 30 km içinden. Sıralama tanınırlık, yakınlık, kullanıcının sık gezdiği kategoriler, yarım kalan rotanın sıradaki durağı ve bitmek üzere olan rozete katkıya göre.
+- `reason` kartın altındaki kısa açıklama için:
+
+| `reason` | Önerilen metin (TR) | `reason_detail` |
+| --- | --- | --- |
+| `route` | "{reason_detail} rotanın sıradaki durağı" | rota adı |
+| `badge` | "{reason_detail} rozetine bir adım" | rozet adı |
+| `similar` | "Sevdiğin türden bir yer" | – |
+| `nearby` | "Hemen yakınında" | – |
+| `popular` | "Çok ziyaret edilen" | – |
+
+- `continue_routes` (en fazla 3) ve `almost_badges` (en fazla 3, yarısı geçilmiş): girişsiz ya da hiç ziyareti yoksa boş dizi. `personalized: false` iken başlığı "Popüler yerler" yapabilirsiniz.
+- `distance_m` konum verilmediyse `null`. Hatalı konumda `{ ok: false, error: "invalid_input" }`.
+
+### `list_routes` ve `route_detail` — hazır rotalar
+
+```ts
+const { data: routes } = await supabase.rpc("list_routes", { city_slug: "istanbul", lang: "tr" });
+// -> [{ slug, city, title, summary, kind, travel_mode, est_minutes, distance_m, stop_count,
+//       thumb_url, visited_count, completed }]
+
+const { data: route } = await supabase.rpc("route_detail", { route_slug: "adalar", lang: "en" });
+// -> { ...yukarıdaki alanlar, stops: [{ position, place_id, slug, name, kind, category,
+//       latitude, longitude, thumb_url, leg_m, visited }] }   // bulunamazsa null
+```
+
+- `thumb_url`: rotadaki fotoğrafı olan en tanınmış durağın küçük resmi (kapak). Duraklarda ayrıca `popularity` (0-100+) var.
+- `kind`: `historical` | `nature` | `mixed`. `travel_mode`: `walking` | `mixed` (yürüyüş + toplu taşıma) | `ferry` | `driving`.
+- `est_minutes`: gezme dahil yaklaşık toplam süre. `distance_m` ve `leg_m` duraklar arası **kuş uçuşu** mesafe (yol değil); ilk durakta `leg_m = 0`. Ekranda "~3 km" gibi yuvarlak gösterin.
+- `visited_count`, `completed`, `stops[].visited`: girişsizse `null`.
+- Rota için ayrı check-in yok: duraklar normal `checkin` ile gezilir. Bütün duraklar gezilince rota tamamlanır; `checkin` yanıtındaki `new_achievements` içinde `route-first` ("Rotacı", ilk rota) ve `route-master` ("Rota Ustası", 5 rota) gelebilir.
+- Haritada rotayı çizmek için durakları sırayla düz çizgiyle bağlamak yeterli; gerçek yol tarifi için harita uygulamasına yönlendirin.
+- Şimdilik İstanbul'da 11 rota var.
+
 ### `nearby_places` — harita, liste ve geo-AR
 
 Yakından uzağa sıralı. Geo-AR için `bearing_deg` hazır gelir: kullanıcıdan yere pusula açısı (0 = kuzey, 90 = doğu, saat yönünde). Telefonun pusula yönüyle karşılaştırıp etiketi ekranda konumlandır.
@@ -90,7 +150,8 @@ type PlaceDetail = {
   city: string;                     // "istanbul"
   name: string; short_desc: string | null; long_desc: string | null;
   best_time: string | null;         // doğa yerleri: "Sunset", "April (tulip season)"
-  period: string | null;            // tarihi yerler: "Bizans", "Osmanlı", "Ceneviz"
+  period: string | null;            // dönem, istenen dilde: "Osmanlı" / "Ottoman", "Bizans" / "Byzantine"
+  period_code: string | null;       // ham değer (her zaman Türkçe): "Osmanlı", "Bizans", "Ceneviz"
   built_year: number | null;
   opening_hours: unknown | null;    // biçimi henüz sabit değil; MVP'de gösterme
   latitude: number; longitude: number;
@@ -107,7 +168,7 @@ type PlaceDetail = {
     source_url: string | null;    // Commons sayfası
   }>;
   visited_at: string | null;        // ISO tarih; giriş yapılmamışsa ya da gezilmemişse null
-  // Ana yer ve içindeki yerler (migration 20261119200000_place_hierarchy.sql). Ör. Efes'in içinde 11 yer.
+  // Ana yer ve içindeki yerler (migration 20261121000000_place_hierarchy.sql). Ör. Efes'in içinde 11 yer.
   parent: { id: string; slug: string; name: string } | null;   // bu yer bir ana yerin içindeyse
   children: Array<{                  // bu yer bir ana yerse içindeki yerler (ada göre sıralı); değilse []
     id: string; slug: string; name: string; category: CategorySlug;
@@ -245,11 +306,234 @@ await supabase.rpc("update_profile", {
 // Kullanıcı adı alınmışsa ya da kurala uymuyorsa error döner (Postgres 23505 / 23514).
 
 await supabase.rpc("export_my_data"); // KVKK: kullanıcının tüm verisi tek JSON
+// -> { exported_at, profile, visits: [{ place, place_id, visited_at, method, distance_m, gps_accuracy_m }],
+//      achievements: [{ achievement, earned_at }],
+//      submissions: [{ kind, place, name, category, lat, lng, note, status, admin_note, created_at, resolved_at }] }
+// visits[].place yayından kalkmış bir yer için null olabilir (place_id yine dolu).
+// friendships: [{ username, direction: "sent"|"received", status, created_at, responded_at }]
+// photos: [{ place, storage_path, caption, status, created_at, resolved_at }]
+// reviews: [{ place, rating, comment, comment_status, created_at, updated_at }]
 ```
 
-Hesap silme henüz yok (Faz 4'te `delete-account` Edge Function'ı gelecek).
+Profil yalnızca `update_profile` ile değiştirilmeli. `profiles` tablosuna doğrudan yazma
+`username`, `avatar_path`, `is_public`, `preferred_lang` ile sınırlıdır; `avatar_path` her
+durumda `<user_id>/...` olmalıdır (aksi halde 23514).
+
+### Avatar yükleme (giriş gerekli)
+
+Kullanıcı yalnızca kendi klasörüne yazabilir: `avatars/<user_id>/...`. En fazla 2 MB, yalnızca JPEG, PNG, WebP.
+
+```ts
+const { data: { user } } = await supabase.auth.getUser();
+const path = `${user.id}/avatar-${Date.now()}.jpg`;      // yeni ad: önbellek sorunu olmaz
+await supabase.storage.from("avatars").upload(path, file, { contentType: "image/jpeg", upsert: true });
+await supabase.rpc("update_profile", { avatar_path: path });  // başka klasör -> hata (22023)
+const url = supabase.storage.from("avatars").getPublicUrl(path).data.publicUrl;
+```
+
+Yüklemeden önce görseli 512×512'ye küçültmen önerilir (`expo-image-manipulator`).
+
+## Hesap silme (Edge Function, giriş gerekli)
+
+App Store ve Google Play, uygulama içinden hesap silmeyi zorunlu tutar. Ayarlar'da "Hesabımı sil" → onay penceresi → çağrı → oturumu kapat.
+
+```ts
+const { data, error } = await supabase.functions.invoke("delete-account", { body: { confirm: "DELETE" } });
+// data: { ok: true }  -> await supabase.auth.signOut(); yerel verileri (ziyaret önbelleği vb.) temizle
+```
+
+| HTTP | `error` | Anlamı |
+| --- | --- | --- |
+| 200 | – | Silindi: hesap, profil, ziyaretler, rozetler, avatar dosyaları. Kullanıcının bildirimleri kimliksiz kalır. |
+| 400 | `invalid_input` | `confirm: "DELETE"` gönderilmedi |
+| 401 | `not_authenticated` | Oturum yok |
+| 500 | `server_error` | Tekrar dene |
+
+Geri alınamaz; onay penceresinde bunu açıkça yaz.
+
+## Kullanıcı katkısı: bildirim ve yeni yer önerisi (giriş gerekli)
+
+Yanıtlar `{ ok: true, ... }` ya da `{ ok: false, error }`. Bildirimler proje sahibinin onayına düşer.
+
+### `report_place` — mevcut yer için bildirim
+
+```ts
+await supabase.rpc("report_place", {
+  place_id: "<uuid>",
+  kind: "wrong_location",   // "wrong_location" | "wrong_info" | "closed" | "duplicate"
+  note: "Giriş kapısı arka sokakta",   // isteğe bağlı, en fazla 1000 karakter
+  lat: 41.0262, lng: 28.9742,          // isteğe bağlı; wrong_location için doğru konum (ikisi birlikte)
+  lang: "tr",
+});
+// -> { ok: true, id }
+```
+
+Önerilen ekran: yer detayında "Bir sorun mu var?" → 4 seçenek. "Konum yanlış" seçilince haritada iğneyi doğru yere sürükletip `lat/lng` gönder.
+
+### `suggest_place` — listede olmayan yeni yer
+
+```ts
+await supabase.rpc("suggest_place", {
+  name: "Çamlıca Kulesi",   // 2-120 karakter
+  category: "tower",        // CategorySlug
+  lat: 41.0270, lng: 29.0690,
+  note: "Yeni açılan seyir kulesi",   // isteğe bağlı
+  lang: "tr",
+});
+// -> { ok: true, id, possible_duplicates: [{ id, slug, name, distance_m }] }
+```
+
+`possible_duplicates` doluysa (150 m içinde yayındaki yerler) kullanıcıya "Bunlardan biri mi?" diye göster. Öneri yine de kaydedilmiştir; kullanıcı vazgeçerse bir şey yapman gerekmez.
+
+### Hata kodları
+
+| `error` | Anlamı | Önerilen mesaj (TR) |
+| --- | --- | --- |
+| `not_authenticated` | Oturum yok | "Öneri göndermek için giriş yap." |
+| `invalid_input` | Alan eksik/hatalı | "Bilgileri kontrol et." |
+| `place_not_found` | Yer yok ya da yayında değil | "Bu yer bulunamadı." |
+| `unknown_category` | Kategori geçersiz | – (uygulama hatası) |
+| `outside_service_area` | En yakın yer 50 km'den uzak | "Bu bölge henüz uygulamada yok." |
+| `already_reported` | Aynı bildirim/öneri zaten bekliyor | "Bunu zaten bildirdin, inceliyoruz." |
+| `rate_limited` | Son 24 saatte 20 gönderim | "Bugünlük yeterince katkı yaptın, teşekkürler!" |
+
+### `my_submissions` — kullanıcının gönderdikleri
+
+```ts
+await supabase.rpc("my_submissions", { lang: "tr" });
+// -> Array<{ id, kind, status: "open" | "accepted" | "rejected", place_id, place_name,
+//            suggested_name, admin_note, created_at, resolved_at }>
+```
+
+Kabul edilen ilk katkıda `city-helper` ("Şehir Gönüllüsü") rozeti verilir; `my_achievements` içinde görünür. Görseli `assets/badges/city-helper.webp` ve Storage'da.
+
+`admin_submissions` ve `admin_resolve_submission` yalnızca yönetici içindir; mobil uygulama bunları çağırmaz.
 
 ---
+
+## Yer değerlendirmeleri
+
+Kullanıcı **gezdiği** yere 1-5 yıldız ve isteğe bağlı kısa not (en fazla 300 harf) bırakır. Kişi başı yer başına tek değerlendirme; tekrar göndermek günceller.
+Puan hemen ortalamaya katılır. **Not, yönetici onaylayana kadar yalnızca yazana görünür.** Ortalama en az 3 değerlendirme olunca döner.
+
+```ts
+// Yer detayında özet (place_detail içinde, ek çağrı gerekmez)
+detail.rating  // { count: 12, average: 4.3 }   count < 3 ise average: null
+
+// Değerlendirmeler ekranı (girişsiz de çalışır)
+await supabase.rpc("reviews_for_place", { place_id, lang: "tr", max_results: 20 });
+// -> { ok, rating: { count, average }, distribution: { "1": 0, ..., "5": 7 },
+//      can_review,            // giriş yapmış ve burayı gezmiş mi
+//      my_review,             // { rating, comment, comment_status, admin_note, updated_at } | null
+//      reviews: [{ username, avatar_path, rating, comment, lang, updated_at, is_me }] }  // yalnızca onaylı notlar, önce aynı dildekiler
+
+// Değerlendir / güncelle (giriş gerekli)
+await supabase.rpc("review_place", { place_id, rating: 5, comment: "İsteğe bağlı", lang: "tr" });
+// -> { ok, comment_status: "none" | "pending" | "approved", rating: { count, average } }
+
+await supabase.rpc("delete_my_review", { place_id });
+await supabase.rpc("my_reviews", { lang: "tr" });  // Profil -> Değerlendirmelerim
+```
+
+- `comment_status`: `none` (not yok), `pending` ("Notun inceleniyor"), `approved` (herkese görünür), `rejected` (`admin_note` nedeni). Notu değiştirmek yeniden incelemeye gönderir; yalnızca yıldızı değiştirmek onayı bozmaz.
+- "Değerlendir" düğmesini `can_review` true iken gösterin; değilse "Değerlendirmek için önce burayı gez".
+
+| `error` | Anlamı | Önerilen mesaj (TR) |
+| --- | --- | --- |
+| `not_authenticated` | Oturum yok | "Değerlendirmek için giriş yap." |
+| `invalid_input` | Puan 1-5 değil ya da not 300 harften uzun | – |
+| `place_not_found` | Yer yok | – |
+| `not_visited` | Kullanıcı burayı gezmemiş | "Değerlendirmek için önce burayı gezmelisin." |
+| `rate_limited` | Son 24 saatte 30 yeni değerlendirme | "Bugünlük yeterince değerlendirme yaptın." |
+| `review_not_found` | Silinecek değerlendirme yok | – |
+
+## Kullanıcı fotoğrafları (giriş gerekli)
+
+Kullanıcı **gezdiği** (check-in yaptığı) yere fotoğraf ekleyebilir. Yönetici onaylayınca fotoğraf `place_detail.photos` listesinde (`author: "@kullanıcıadı"`, `license: "Gezi App"`) ve fotoğrafsız yerlerde `city_pack` küçük resminde görünür.
+
+```ts
+// 1. Dosyayı yükle: kendi klasörüne, tahmin edilemez bir adla (8-64 harf/rakam/_/-)
+const path = `${user.id}/${randomId()}.jpg`;          // ör. crypto.randomUUID() tiresiz
+await supabase.storage.from("user-photos").upload(path, file, { contentType: "image/jpeg" });
+// Yüklemeden önce uzun kenarı en fazla 1600 px'e küçültüp JPEG (kalite ~0.8) yapın; sınır 5 MB.
+
+// 2. Gönder
+await supabase.rpc("submit_place_photo", { place_id, storage_path: path, caption: "İsteğe bağlı, en fazla 200 harf" });
+// -> { ok, id, status: "pending" }
+
+// Kullanıcının fotoğrafları ("Fotoğraflarım")
+await supabase.rpc("my_photos", { lang: "tr" });
+// -> [{ id, place_id, place_slug, place_name, storage_path, caption, status, admin_note, created_at, resolved_at }]
+//    status: "pending" (inceleniyor) | "approved" (yayında) | "rejected" (admin_note: neden)
+//    Önizleme: supabase.storage.from("user-photos").getPublicUrl(storage_path)
+
+// Sil (onaylıysa yerden de kalkar), sonra dosyayı da sil
+const { data } = await supabase.rpc("delete_my_photo", { photo_id });
+if (data.ok) await supabase.storage.from("user-photos").remove([data.storage_path]);
+```
+
+- Yüklenip gönderilmeyen dosyalar 24 saat sonra, reddedilen dosyalar en geç bir gün içinde otomatik silinir.
+- İlk onaylanan fotoğraf `photographer` ("Gezi Fotoğrafçısı") rozetini verir; rozet sonraki check-in'de değil onay anında kazanılır, `my_achievements` ile görünür.
+- Fotoğraf yükleme ekranında kısa bir onay metni gösterin: "Fotoğrafı kendin çektin; uygulamada adınla yayınlanmasını kabul ediyorsun. Yüzü tanınır kişiler olmamasına dikkat et." (KVKK metninde de yer alacak.)
+
+| `error` | Anlamı | Önerilen mesaj (TR) |
+| --- | --- | --- |
+| `not_authenticated` | Oturum yok | "Fotoğraf eklemek için giriş yap." |
+| `invalid_input` | Yol kendi klasörün değil, ad biçimi ya da açıklama hatalı | – (uygulama hatası) |
+| `place_not_found` | Yer yok ya da yayında değil | "Bu yer bulunamadı." |
+| `file_not_found` | Dosya yüklenmemiş | "Fotoğraf yüklenemedi, tekrar dene." |
+| `already_submitted` | Bu dosya zaten gönderildi | – |
+| `not_visited` | Kullanıcı bu yeri gezmemiş | "Fotoğraf eklemek için önce burayı gezmelisin." |
+| `rate_limited` | Son 24 saatte 10 fotoğraf | "Bugünlük yeterince fotoğraf gönderdin, yarın tekrar dene." |
+| `too_many_pending` | Bu yerde 3 fotoğrafın inceleniyor | "Bu yer için gönderdiğin fotoğraflar hâlâ inceleniyor." |
+| `photo_not_found` | Silinecek fotoğraf yok | – |
+
+## Arkadaşlar ve sıralama (giriş gerekli)
+
+Tüm fonksiyonlar `{ ok: true, ... }` ya da `{ ok: false, error }` döner. Kişiler **kullanıcı adıyla** tanımlanır; kullanıcı kimliği (uuid) hiç dönmez.
+
+```ts
+await supabase.rpc("search_users", { query: "ay", max_results: 10 });
+// -> { ok, users: [{ username, avatar_path, relation }] }
+//    relation: "none" | "friend" | "request_sent" | "request_received"
+//    Herkese açık profiller adın başıyla (en az 2 harf) bulunur; gizli profil (is_public=false) yalnızca tam adla.
+
+await supabase.rpc("send_friend_request", { username: "ayse" });
+// -> { ok, status: "pending" }   karşı taraf sana zaten istek gönderdiyse { ok, status: "accepted", new_achievements }
+
+await supabase.rpc("respond_friend_request", { username: "ayse", accept: true });
+// -> { ok, status: "accepted" | "declined", new_achievements? }
+
+await supabase.rpc("remove_friend", { username: "ayse" }); // arkadaşlıktan çıkar ya da gönderdiğin isteği geri al
+
+await supabase.rpc("my_friends");
+// -> { ok, friends: [{ username, avatar_path, since, total_places, badges }],
+//      incoming: [{ username, avatar_path, created_at }], outgoing: [...] }
+
+await supabase.rpc("friends_leaderboard", { period: "week", city_slug: null });
+// period: "week" (pazartesiden beri) | "month" | "year" | "all"; city_slug verilirse yalnızca o şehir
+// -> { ok, period, since, entries: [{ rank, username, avatar_path, places, is_me }] }
+```
+
+- Sıralama puanı: dönemde gezilen **farklı yer** sayısı (işaretli ziyaretler sayılmaz). Eşit puanlılar aynı sırayı paylaşır (1, 1, 3). Listede sen ve kabul edilmiş arkadaşların var; tek başınaysan yalnızca sen.
+- Avatar: `avatar_path` Storage `avatars` bucket'ındaki yol; herkese açık adresi `supabase.storage.from("avatars").getPublicUrl(avatar_path)`.
+- İstek göndermek için önce kullanıcı adı seçilmiş olmalı (`update_profile`).
+- Sınırlar: günde 30 istek, en fazla 500 arkadaş.
+- Arkadaşlık kabul edilince yanıtta `new_achievements` (rozet slug listesi, ör. `["first-friend"]`) gelir; check-in'deki gibi rozet kutlaması gösterin. Rozetler: `first-friend` (Gezi Arkadaşı, 1 arkadaş), `travel-crew` (Gezi Ekibi, 10 arkadaş). İsteği gönderen taraf rozetini arka planda alır; `my_achievements` ile görür.
+
+| `error` | Anlamı | Önerilen mesaj (TR) |
+| --- | --- | --- |
+| `not_authenticated` | Oturum yok | "Arkadaş eklemek için giriş yap." |
+| `username_required` | Kendi kullanıcı adın yok | "Önce bir kullanıcı adı seç." |
+| `user_not_found` | Böyle kullanıcı yok | "Bu kullanıcı bulunamadı." |
+| `cannot_add_self` | Kendini eklemeye çalıştın | – |
+| `already_friends` | Zaten arkadaşsınız | "Zaten arkadaşsınız." |
+| `already_requested` | İstek zaten gönderildi | "İsteğin bekliyor." |
+| `request_not_found` | Yanıtlanacak istek yok | "Bu istek artık geçerli değil." |
+| `not_friends` | Silinecek arkadaşlık/istek yok | – |
+| `friend_limit` | 500 arkadaş sınırı | "Arkadaş sınırına ulaştın." |
+| `rate_limited` | Son 24 saatte 30 istek | "Bugünlük çok istek gönderdin, yarın tekrar dene." |
+| `invalid_input` | Geçersiz dönem ya da şehir | – (uygulama hatası) |
 
 ## Check-in (Edge Function)
 

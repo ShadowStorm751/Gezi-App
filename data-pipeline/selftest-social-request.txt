@@ -1,0 +1,2 @@
+Bu dosya değişip main'e yüklenince canlı sosyal/rota testi çalışır (.github/workflows/selftest-social.yml).
+Son istek: 2026-11-20 01:40 — modüler rozet kuralları sonrası yeniden test
