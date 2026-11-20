@@ -56,8 +56,12 @@ def extract(lang: str, title: str) -> Optional[Dict[str, str]]:
             "lat": coords[0]["lat"] if coords else None, "lng": coords[0]["lon"] if coords else None}
 
 
-def search_title(lang: str, name: str, lat: float, lng: float) -> Optional[str]:
-    data = api(lang, {"action": "query", "list": "search", "srsearch": f"{name} İstanbul", "srlimit": "5"})
+SEARCH_SUFFIX = {"istanbul": "İstanbul", "izmir": "İzmir", "bursa": "Bursa", "kapadokya": "Kapadokya"}
+
+
+def search_title(lang: str, name: str, lat: float, lng: float, city: str = "istanbul") -> Optional[str]:
+    data = api(lang, {"action": "query", "list": "search", "srsearch": f"{name} {SEARCH_SUFFIX.get(city, '')}".strip(),
+                      "srlimit": "5"})
     for hit in data.get("query", {}).get("search", []):
         title = hit["title"]
         info = api(lang, {"action": "query", "prop": "coordinates", "titles": title})
@@ -109,25 +113,37 @@ def sitelinks(qids: List[str]) -> Dict[str, Dict[str, Any]]:
     return out
 
 
-def main() -> int:
-    from istanbul_descriptions import DROPPED
-    rows = [r for r in json.loads((HERE / "results/shortlist.json").read_text(encoding="utf-8"))
-            if p.slugify(r["ad_tr"]) not in DROPPED]
+def place_slug(r: Dict[str, Any], city: str) -> str:
+    return p.slugify(r["ad_tr"]) if city == "istanbul" else (r.get("slug_override") or r["slug"])
+
+
+def main(argv: Optional[List[str]] = None) -> int:
+    import argparse
+    import importlib
+    ap = argparse.ArgumentParser(description="Uzun açıklamalar için Vikipedi kaynak metinleri")
+    ap.add_argument("--city", default="istanbul")
+    args = ap.parse_args(argv)
+    city = args.city
+    DROPPED = importlib.import_module(f"{city}_descriptions").DROPPED
+    rdir = HERE / "results" if city == "istanbul" else HERE / "results" / city
+    out_path = OUT if city == "istanbul" else rdir / "wiki-extracts.json.gz"
+    rows = [r for r in json.loads((rdir / "shortlist.json").read_text(encoding="utf-8"))
+            if place_slug(r, city) not in DROPPED]
     qids = sorted({r["wikidata"] for r in rows if r.get("wikidata")})
     links = sitelinks(qids)
     result: Dict[str, Any] = {}
     for r in rows:
-        slug = p.slugify(r["ad_tr"])
+        slug = place_slug(r, city)
         lat, lng = float(r["enlem"]), float(r["boylam"])
-        entry: Dict[str, Any] = {"name_tr": r["ad_tr"], "name_en": r["ad_en"], "qid": r.get("wikidata") or None}
+        entry: Dict[str, Any] = {"name_tr": r["ad_tr"], "name_en": r.get("ad_en"), "qid": r.get("wikidata") or None}
         wdi = links.get(r.get("wikidata") or "", {})
         entry["wikidata"] = wdi.get("facts", {})
-        for lang, field, name in (("tr", "wikipedia_tr", r["ad_tr"]), ("en", "wikipedia_en", r["ad_en"])):
+        for lang, field, name in (("tr", "wikipedia_tr", r["ad_tr"]), ("en", "wikipedia_en", r.get("ad_en") or r["ad_tr"])):
             title = r.get(field) or wdi.get(f"{lang}wiki")
             source = "shortlist/wikidata"
             try:
                 if not title:
-                    title = search_title(lang, name, lat, lng)
+                    title = search_title(lang, name, lat, lng, city)
                     source = "search"
                 ex = extract(lang, title) if title else None
             except Exception as exc:  # bir yer başarısız olursa diğerlerine devam
@@ -141,8 +157,8 @@ def main() -> int:
             time.sleep(0.3)
         result[slug] = entry
         p.log(f"{slug}: tr={'+' if entry['tr'] else '-'} en={'+' if entry['en'] else '-'}")
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    with gzip.open(OUT, "wt", encoding="utf-8") as f:
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    with gzip.open(out_path, "wt", encoding="utf-8") as f:
         json.dump(result, f, ensure_ascii=False)
     have = sum(1 for e in result.values() if e["tr"] or e["en"])
     p.log(f"{have}/{len(result)} yer için kaynak metin")

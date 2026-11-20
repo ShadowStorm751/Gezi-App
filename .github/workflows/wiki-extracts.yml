@@ -1,12 +1,12 @@
 # Uzun açıklamalar için Vikipedi (TR/EN) ve Wikidata kaynak metinlerini toplar (yalnızca bilgi kontrolü).
-# Tetikleme: data-pipeline/wiki-extracts-request.txt değişip main'e yüklenince ya da elle.
-# Sonuç: data-pipeline/results/wiki-extracts.json.gz olarak commit'lenir.
+# Tetikleme: data-pipeline/wiki-extracts-request.txt değişip main'e ya da data/* dalına yüklenince, ya da elle. Şehirler: istekteki "Şehirler:" satırı (yoksa istanbul).
+# Sonuç: results/wiki-extracts.json.gz (İstanbul) ya da results/<şehir>/wiki-extracts.json.gz olarak commit'lenir.
 name: Vikipedi kaynak metinleri
 
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [main, "data/**"]
     paths: [data-pipeline/wiki-extracts-request.txt]
 
 permissions:
@@ -28,13 +28,15 @@ jobs:
       - name: Testler
         run: python -m unittest discover -s data-pipeline/tests
       - name: Kaynak metinleri topla
-        run: python data-pipeline/wiki_extracts.py
+        run: |
+          cities=$(sed -n 's/^Şehirler:[[:space:]]*//p' data-pipeline/wiki-extracts-request.txt | head -1)
+          for city in ${cities:-istanbul}; do python data-pipeline/wiki_extracts.py --city "$city"; done
       - name: Sonucu kaydet
         if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data-pipeline/results/wiki-extracts.json.gz
+          git add data-pipeline/results
           git commit -m "Veri hattı: Vikipedi kaynak metinleri" || echo "Değişiklik yok"
           git pull --rebase
           git push
