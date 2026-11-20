@@ -139,3 +139,10 @@ class PhotoSearchHelpersTest(unittest.TestCase):
         self.assertEqual(s.search_radius({"ana_yer": "efes", "kategori": "ruins"}), 150)
         self.assertEqual(s.search_radius({"ana_yer": "", "kategori": "museum"}), 800)
         self.assertAlmostEqual(s.dist_m((38.0, 27.0), (38.001, 27.0)), 111, delta=1)
+
+
+class CoordsCheckTest(unittest.TestCase):
+    def test_tolerance(self):
+        import coords_check as c
+        self.assertEqual(c.tolerance_m({"ana_yer": "efes", "kategori": "ruins"}), 100)
+        self.assertEqual(c.tolerance_m({"ana_yer": "", "kategori": "museum"}), 300)
